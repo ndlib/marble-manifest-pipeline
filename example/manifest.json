@@ -1,0 +1,101 @@
+{
+  "@context": "http://iiif.io/api/presentation/2/context.json",
+  "@type": "sc:Manifest",
+  "@id": "https://server.com/iiif/identifer_name/manifest",
+
+  "label": "Label",
+  "metadata": [{
+      "label": "Title",
+      "value": "Wunder der Vererbung"
+    },
+    {
+      "label": "Author(s)",
+      "value": "Bolle, Fritz"
+    },
+    {
+      "label": "Publication date",
+      "value": "[1951]"
+    },
+    {
+      "label": "Attribution",
+      "value": "Wellcome Library<br/>License: CC-BY-NC"
+    }
+  ],
+  "description": "Description",
+
+  "license": "rights",
+  "attribution": "attribution",
+
+  "sequences": [
+    {
+      "@id": "https://server.com/iiif/identifer_name/sequence/normal",
+      "@type": "sc:Sequence",
+      "label": "sequency",
+
+      "viewingDirection": "left-to-right",
+      "viewingHint": "paged",
+
+      "canvases": [
+        {
+          "@id": "https://server.com/iiif/identifer_name/canvas/p1",
+          "@type": "sc:Canvas",
+          "label": "File 1",
+          "height": 100,
+          "width": 100,
+          "images": [{
+              "@id": "https://server.com/iiif/identifer_name/image/file1.jpg",
+              "@type": "oa:Annotation",
+              "resources": [{
+                "@id": "https://server.com/serverpath_to_file1.tiff/full/full/0/default.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "service": [{
+                  "@id": "https://server.com/serverpath_to_file1.tiff",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }]
+              }]
+          }],
+        },
+        {
+          "@id": "https://server.com/iiif/identifer_name/canvas/p2",
+          "@type": "sc:Canvas",
+          "label": "File 2",
+          "height": 100,
+          "width": 100,
+          "images": [{
+              "@id": "https://server.com/iiif/identifer_name/image/file2.jpg",
+              "@type": "oa:Annotation",
+              "resources": [{
+                "@id": "https://server.com/serverpath_to_file2.tiff/full/full/0/default.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "service": [{
+                  "@id": "https://server.com/serverpath_to_file2.tiff",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }]
+              }]
+          }],
+        },
+        {
+          "@id": "https://server.com/iiif/identifer_name/canvas/p3",
+          "@type": "sc:Canvas",
+          "label": "File 3",
+          "height": 100,
+          "width": 100,
+          "images": [{
+              "@id": "https://server.com/iiif/identifer_name/image/file3.jpg",
+              "@type": "oa:Annotation",
+              "resources": [{
+                "@id": "https://server.com/serverpath_to_file3.tiff/full/full/0/default.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "service": [{
+                  "@id": "https://server.com/serverpath_to_file3.tiff",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }]
+              }]
+          }],
+        }
+      ]
+  }]
+}
