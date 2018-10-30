@@ -1,0 +1,44 @@
+{
+  "label": "Label",
+  "description": "Description",
+  "rights": "rights",
+  "attribution": "attribution",
+  "metadata": [{
+      "label": "Title",
+      "value": "Wunder der Vererbung"
+    },
+    {
+      "label": "Author(s)",
+      "value": "Bolle, Fritz"
+    },
+    {
+      "label": "Publication date",
+      "value": "[1951]"
+    },
+    {
+      "label": "Attribution",
+      "value": "Wellcome Library<br/>License: CC-BY-NC"
+    }
+  ],
+  "sequences": [{
+    "label": "sequency",
+    "viewingHint": "paged",
+    "pages": [{
+        "label": "Title",
+        "file": "file.tiff",
+        "iiif-server": "https://server.com/serverpath.tiff"
+      },
+      {
+        "label": "File2",
+        "file": "file.jpg",
+        "iiif-server": "https://server.com/serverpath.tiff"
+      },
+      {
+        "label": "File3",
+        "file": "file.jpg",
+        "iiif-server": "https://server.com/serverpath.tiff"
+      }
+    ]
+  }],
+  "errors": []
+}
