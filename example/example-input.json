@@ -3,6 +3,7 @@
   "description": "Description",
   "rights": "rights",
   "attribution": "attribution",
+  "creator": "creator@email.com",
   "metadata": [{
       "label": "Title",
       "value": "Wunder der Vererbung"
