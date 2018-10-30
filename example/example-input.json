@@ -26,17 +26,17 @@
     "viewingHint": "paged",
     "pages": [{
         "label": "Title",
-        "file": "file.tiff",
+        "file": "file53.tiff",
         "iiif-server": "https://server.com/serverpath.tiff"
       },
       {
         "label": "File2",
-        "file": "file.jpg",
+        "file": "file42.jpg",
         "iiif-server": "https://server.com/serverpath.tiff"
       },
       {
         "label": "File3",
-        "file": "file.jpg",
+        "file": "file1.jpg",
         "iiif-server": "https://server.com/serverpath.tiff"
       }
     ]
