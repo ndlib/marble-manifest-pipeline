@@ -27,17 +27,17 @@
     "pages": [{
         "label": "Title",
         "file": "file53.tiff",
-        "iiif-server": "https://server.com/serverpath.tiff"
+        "iiif-server": "https://image-server.library.nd.edu:8182/iif/2/2018_example_001/"
       },
       {
         "label": "File2",
         "file": "file42.jpg",
-        "iiif-server": "https://server.com/serverpath.tiff"
+        "iiif-server": "https://image-server.library.nd.edu:8182/iif/2/2018_example_001/"
       },
       {
         "label": "File3",
         "file": "file1.jpg",
-        "iiif-server": "https://server.com/serverpath.tiff"
+        "iiif-server": "https://image-server.library.nd.edu:8182/iif/2/2018_example_001/"
       }
     ]
   }],
