@@ -1,6 +1,7 @@
 {
   "label": "Label",
   "description": "Description",
+  "unique-identifier": "2018_example_001",
   "rights": "rights",
   "attribution": "attribution",
   "creator": "creator@email.com",
@@ -26,18 +27,18 @@
     "viewingHint": "paged",
     "pages": [{
         "label": "Title",
-        "file": "file.tiff",
-        "iiif-server": "https://server.com/serverpath.tiff"
+        "file": "file53.tiff",
+        "iiif-server": "https://image-server.library.nd.edu:8182/iif/2"
       },
       {
         "label": "File2",
-        "file": "file.jpg",
-        "iiif-server": "https://server.com/serverpath.tiff"
+        "file": "file42.jpg",
+        "iiif-server": "https://image-server.library.nd.edu:8182/iif/2"
       },
       {
         "label": "File3",
-        "file": "file.jpg",
-        "iiif-server": "https://server.com/serverpath.tiff"
+        "file": "file1.jpg",
+        "iiif-server": "https://image-server.library.nd.edu:8182/iif/2"
       }
     ]
   }],
