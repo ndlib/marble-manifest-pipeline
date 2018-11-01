@@ -2,8 +2,8 @@
 
 import json, csv, os
 
-main_csv = "/Users/msuhovec/repos/mellon-manifest-pipeline/example/example-main.csv"
-sequence_csv = "/Users/msuhovec/repos/mellon-manifest-pipeline/example/example-sequence.csv"
+main_csv = "../example/example-main.csv"
+sequence_csv = "../example/example-sequence.csv"
 
 #start with an empty result json
 
