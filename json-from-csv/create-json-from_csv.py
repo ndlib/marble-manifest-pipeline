@@ -28,12 +28,13 @@ def set_json_skeleton( ):
 
 # process first data row of main CSV
 def get_attr_from_main_firstline( first_line ):
-    global result_json
+    global result_json, config
     result_json['label'] = first_line['Label']
     result_json['description'] = first_line['Description']
     result_json['attribution'] = first_line['Attribution']
     result_json['rights'] = first_line['Rights']
     result_json['unique-identifier'] = first_line['unique_identifier']
+    result_json['iiif-server'] = config['server_url'] + config['path_prefix']
     result_json['sequences'][0]['viewingHint'] = first_line['Sequence_viewing_experience']
     result_json['sequences'][0]['label'] = first_line['Sequence_label']
 
@@ -47,12 +48,11 @@ def get_metadata_attr( this_line ):
 
 # process data rows from sequence CSV to create pages within default sequence
 def add_pages_to_sequence( this_line ):
-    global result_json, config
+    global result_json
     print(this_line)
     this_item={}
     this_item['file']= this_line['Filenames']
     this_item['label']= this_line['Label']
-    this_item['iiif-server'] = config['server_url'] + config['path_prefix']
     result_json['sequences'][0]['pages'].append(this_item)
 
 
