@@ -1,5 +1,4 @@
 {
-  "unique_identifier": "identifier_name",
   "label": "Label",
   "description": "Description",
   "unique-identifier": "2018_example_001",
@@ -29,7 +28,6 @@
     "viewingDirection": "left-to-right",
     "viewingHint": "paged",
     "pages": [{
-<<<<<<< HEAD
         "label": "009",
         "file": "009_output.tif",
         "iiif-server": "https://image-server.library.nd.edu:8182/iif/2"
@@ -48,21 +46,6 @@
         "label": "2018 049 004",
         "file": "2018_049_009.jpg",
         "iiif-server": "https://image-server.library.nd.edu:8182/iif/2"
-=======
-        "label": "File 1",
-        "file": "file1.jpg",
-        "iiif-server": "https://server.com/serverpath_to_file1.tiff"
-      },
-      {
-        "label": "File 2",
-        "file": "file2.jpg",
-        "iiif-server": "https://server.com/serverpath_to_file2.tiff"
-      },
-      {
-        "label": "File 3",
-        "file": "file3.jpg",
-        "iiif-server": "https://server.com/serverpath_to_file3.tiff"
->>>>>>> Update example-input.json
       }
     ]
   }],
