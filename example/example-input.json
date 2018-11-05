@@ -2,6 +2,7 @@
   "label": "Label",
   "description": "Description",
   "unique-identifier": "2018_example_001",
+  "iiif-server": "https://image-server.library.nd.edu:8182/iif/2",
   "rights": "rights",
   "attribution": "attribution",
   "creator": "creator@email.com",
@@ -28,23 +29,17 @@
     "viewingHint": "paged",
     "pages": [{
         "label": "009",
-        "file": "009_output.tif",
-        "iiif-server": "https://image-server.library.nd.edu:8182/iif/2"
+        "file": "009_output.tif"
       },
       {
         "label": "046",
-        "file": "046_output.tif",
-        "iiif-server": "https://image-server.library.nd.edu:8182/iif/2"
-      },
+        "file": "046_output.tif"      },
       {
         "label": "2018 009",
-        "file": "2018_009.jpg",
-        "iiif-server": "https://image-server.library.nd.edu:8182/iif/2"
-      },
+        "file": "2018_009.jpg"      },
       {
         "label": "2018 049 004",
-        "file": "2018_049_009.jpg",
-        "iiif-server": "https://image-server.library.nd.edu:8182/iif/2"
+        "file": "2018_049_009.jpg"
       }
     ]
   }],
