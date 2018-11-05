@@ -6,6 +6,7 @@
   "rights": "rights",
   "attribution": "attribution",
   "creator": "creator@email.com",
+  "manifest-base-url": "https://manifest.nd.edu/",
   "metadata": [{
       "label": "Title",
       "value": "Wunder der Vererbung"
@@ -27,16 +28,18 @@
     "label": "sequency",
     "viewingHint": "paged",
     "pages": [{
-        "label": "Title",
-        "file": "file53.tiff"
+        "label": "009",
+        "file": "009_output.tif"
       },
       {
-        "label": "File2",
-        "file": "file42.jpg"
-      },
+        "label": "046",
+        "file": "046_output.tif"      },
       {
-        "label": "File3",
-        "file": "file1.jpg"
+        "label": "2018 009",
+        "file": "2018_009.jpg"      },
+      {
+        "label": "2018 049 004",
+        "file": "2018_049_009.jpg"
       }
     ]
   }],
