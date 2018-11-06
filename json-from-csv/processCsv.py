@@ -1,20 +1,23 @@
-import json, csv, os
-
-
-#start with an empty result json
-
+import json, csv, os, glob
 
 class processCsv():
     # class constructor
     def __init__(self):
+        #start with an empty result json and config
         self.result_json = {}
         self.config = {}
+        # get config information
         self._get_config_param()
+        # population json info that is not csv-dependent
         self._set_json_skeleton()
+        # set some default values for the input files
+        # in case verifyCsvExist is not called
         self.main_csv = "../example/example-main.csv"
         self.sequence_csv = "../example/example-sequence.csv"
+        self.error = ''
 
     def _get_config_param(self):
+        # get these from wherever
         self.config['server_url']='https://image-server.library.nd.edu:8182'
         self.config['path_prefix']='/iiif/2'
 
@@ -26,6 +29,27 @@ class processCsv():
         self.result_json['sequences']=[]
         self.result_json['sequences'].append({})
         self.result_json['sequences'][0]['pages']=[]
+
+    # returns True if main and sequence csv fles found, false otherwise
+    def verifyCsvExist(self,  csvDirectory = '.'):
+        csvDirectory
+        main_match = glob.glob(csvDirectory + '/*main.csv') 
+        seq_match = glob.glob(csvDirectory + '/*sequence.csv') 
+        if not main_match:
+            self.error = 'Error: ' + csvDirectory + '/*main.csv' + ' Not Found'
+            return False
+        if not seq_match:
+            self.error = 'Error: ' + csvDirectory + '/*sequence.csv' + ' Not Found'
+            return False
+        # if by chnace there is more that one of each, take the first 
+        self.main_csv = main_match[0]
+        self.sequence_csv = seq_match[0]
+        return True
+
+
+    # returns error string
+    def printCsvError(self):
+        return self.error
 
     # process first data row of main CSV
     def _get_attr_from_main_firstline( self, first_line ):
