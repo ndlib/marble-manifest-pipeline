@@ -1,0 +1,4 @@
+Label,Description,Rights,Attribution,Sequence_filename,Sequence_label,Sequence_viewing_experience,unique_identifier,Metadata_label,Metadata_value
+TestLabel,"This is a Test",whatever,msuhovec,,test_sequence,paged,test_01,,
+,,,,,,,,Title,"Test for Basic CSV to JSON conversion"
+,,,,,,,,"Test creation date","[2018-11-07]"

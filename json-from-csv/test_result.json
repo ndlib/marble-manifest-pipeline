@@ -1,0 +1,36 @@
+{
+  "errors": [], 
+  "attribution": "msuhovec", 
+  "description": "This is a Test", 
+  "iiif-server": "https://image-server.library.nd.edu:8182/iiif/2", 
+  "creator": "creator@email.com", 
+  "rights": "whatever", 
+  "unique-identifier": "test_01", 
+  "label": "TestLabel", 
+  "sequences": [
+    {
+      "viewingHint": "paged", 
+      "pages": [
+        {
+          "file": "009_file1", 
+          "label": "009"
+        }, 
+        {
+          "file": "046_test.tif", 
+          "label": "046"
+        }
+      ], 
+      "label": "test_sequence"
+    }
+  ], 
+  "metadata": [
+    {
+      "value": "Test for Basic CSV to JSON conversion", 
+      "label": "Title"
+    }, 
+    {
+      "value": "[2018-11-07]", 
+      "label": "Test creation date"
+    }
+  ]
+}

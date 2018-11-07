@@ -17,7 +17,7 @@ csvDirectory = '.'
 if len(sys.argv) > 1:
     csvDirectory = sys.argv[1]
 
-# verify that the main and sequnces files exist- exit on error
+# verify that the main and sequences files exist- exit on error
 if csvSet.verifyCsvExist(csvDirectory) == False:
     print('%s \n' % csvSet.printCsvError())
     sys.exit(1)
