@@ -16,9 +16,9 @@ The following labels are expected:
 **Sequence_filename** **Not Used**
 **Sequence_label** The name of the image sequence array in the metadata JSON
 **Sequence_viewing_experience** the value should be *paged*
-**unique_identifier** id used for generatiing IIIF manifest
-**Metadata_label** on second and subsequent lines, and be used to specify metadata common to all inages in the sequence
-**Metadata_value** on second and subsequent lines, and be used to specify metadata common to all inages in the sequence
+**unique_identifier** id used for generating IIIF manifest
+**Metadata_label** on second and subsequent lines, and be used to specify metadata common to all images in the sequence
+**Metadata_value** on second and subsequent lines, and be used to specify metadata common to all images in the sequence
 
 An example file, *example-main.csv*, looks like this:
 
@@ -36,13 +36,13 @@ Label,Description,rights,attribution,,sequency,paged,2018_example_001,,
 ### Second CSV file
 The first CSV file contains the image sequence  metadata. It should end with *sequence.csv*
 
-The following lables are expected:
+The following labels are expected:
 
 **Filenames** the actual file name under the image directory
 **Label** This file's Label
 **Description** a file-specific description
 
-THe order in which the files are entered, by row, demotes their order in the image seuence.
+The order in which the files are entered, by row, demotes their order in the image sequence.
 
 An example:
 
@@ -55,17 +55,16 @@ Filenames,Label,Description
 2018_049_009.jpg,2018 049 009,"Look, a JPG file"
 
 ```
+
 ### CSV conversion script
 
-The **create-json-from_csv** script will look for a main and sequence CSV located in a directory together, and use them to generate a JSON file to standard ou (the commandline). By default, it looks in the current directory. If an argument is provided on the command line, it will look for the files in that directory instead.
+The `create-json-from_csv` script will look for a main and sequence CSV located in a directory together, and use them to generate a JSON file to standard out (the commandline). By default, it looks in the current directory. If an argument is provided on the command line, it will look for the files in that directory instead.
 
 An example:
 
 Let's say that the directory *myCsvFiles* contains the above example main and sequence files, named *mycsv-main.csv* and  *mycsv-sequence.csv*.
 
-The command
-
-**create-json-from_csv myCsvFiles**
+The command: `create-json-from_csv myCsvFiles`
 
 would produce the following output:
 
