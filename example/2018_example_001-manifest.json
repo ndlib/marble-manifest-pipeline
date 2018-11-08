@@ -1,0 +1,150 @@
+{
+  "@context": "http://iiif.io/api/presentation/2/context.json",
+  "@type": "sc:Manifest",
+  "@id": "https://manifest.nd.edu/iiif2018_example_001/manifest",
+  "label": "Label",
+  "metadata": [
+    {
+      "label": "Title",
+      "value": "Wunder der Vererbung"
+    },
+    {
+      "label": "Author(s)",
+      "value": "Bolle, Fritz"
+    },
+    {
+      "label": "Publication date",
+      "value": "[1951]"
+    },
+    {
+      "label": "Attribution",
+      "value": "Wellcome Library<br/>License: CC-BY-NC"
+    }
+  ],
+  "description": "Description",
+  "license": "rights",
+  "attribution": "attribution",
+  "sequences": [
+    {
+      "@id": "https://manifest.nd.edu/iiif2018_example_001/sequence/normal",
+      "@type": "sc:Sequence",
+      "label": "sequency",
+      "viewingDirection": "left-to-right",
+      "viewingHint": "paged",
+      "canvases": [
+        {
+          "@id": "https://manifest.nd.edu/iiif2018_example_001/canvas/p1",
+          "@type": "sc:Canvas",
+          "label": "009",
+          "height": 1000,
+          "width": 1000,
+          "images": [
+            {
+              "@id": "https://manifest.nd.edu/iiif2018_example_001/images/009_output.tif",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "https://manifest.nd.edu/iiif2018_example_001/canvas/p1",
+              "resources": [
+                {
+                  "@id": "https://image-server.library.nd.edu:8182/iif/2/009_output.tif/full/full/0/default.jpg",
+                  "@type": "dctypes:Image",
+                  "format": "image/jpeg",
+                  "service": [
+                    {
+                      "@id": "https://manifest.nd.edu/iiif2018_example_001/images/",
+                      "profile": "http://iiif.io/api/image/2/level2.json"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://manifest.nd.edu/iiif2018_example_001/canvas/p2",
+          "@type": "sc:Canvas",
+          "label": "046",
+          "height": 1000,
+          "width": 1000,
+          "images": [
+            {
+              "@id": "https://manifest.nd.edu/iiif2018_example_001/images/046_output.tif",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "https://manifest.nd.edu/iiif2018_example_001/canvas/p2",
+              "resources": [
+                {
+                  "@id": "https://image-server.library.nd.edu:8182/iif/2/046_output.tif/full/full/0/default.jpg",
+                  "@type": "dctypes:Image",
+                  "format": "image/jpeg",
+                  "service": [
+                    {
+                      "@id": "https://manifest.nd.edu/iiif2018_example_001/images/",
+                      "profile": "http://iiif.io/api/image/2/level2.json"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://manifest.nd.edu/iiif2018_example_001/canvas/p3",
+          "@type": "sc:Canvas",
+          "label": "2018 009",
+          "height": 1000,
+          "width": 1000,
+          "images": [
+            {
+              "@id": "https://manifest.nd.edu/iiif2018_example_001/images/2018_009.jpg",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "https://manifest.nd.edu/iiif2018_example_001/canvas/p3",
+              "resources": [
+                {
+                  "@id": "https://image-server.library.nd.edu:8182/iif/2/2018_009.jpg/full/full/0/default.jpg",
+                  "@type": "dctypes:Image",
+                  "format": "image/jpeg",
+                  "service": [
+                    {
+                      "@id": "https://manifest.nd.edu/iiif2018_example_001/images/",
+                      "profile": "http://iiif.io/api/image/2/level2.json"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://manifest.nd.edu/iiif2018_example_001/canvas/p4",
+          "@type": "sc:Canvas",
+          "label": "2018 049 004",
+          "height": 1000,
+          "width": 1000,
+          "images": [
+            {
+              "@id": "https://manifest.nd.edu/iiif2018_example_001/images/2018_049_009.jpg",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "https://manifest.nd.edu/iiif2018_example_001/canvas/p4",
+              "resources": [
+                {
+                  "@id": "https://image-server.library.nd.edu:8182/iif/2/2018_049_009.jpg/full/full/0/default.jpg",
+                  "@type": "dctypes:Image",
+                  "format": "image/jpeg",
+                  "service": [
+                    {
+                      "@id": "https://manifest.nd.edu/iiif2018_example_001/images/",
+                      "profile": "http://iiif.io/api/image/2/level2.json"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
