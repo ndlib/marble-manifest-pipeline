@@ -14,7 +14,7 @@ class processJson():
         self.output_file_suffix = '-manifest.json'
 
     def _load_global_data( self, input_json ):
-        self.global_data['id-base'] = input_json['manifest-base-url'] + 'iiif' + input_json['unique-identifier'] + '/'
+        self.global_data['id-base'] = input_json['manifest-base-url'] + 'iiif' + '/' + input_json['unique-identifier'] + '/'
         self.global_data['output-file'] = self.output_base_url + input_json['unique-identifier'] + self.output_file_suffix
         self.global_data['iiif-server'] = input_json['iiif-server']
         self.global_data['@context'] = 'http://iiif.io/api/presentation/2/context.json'
