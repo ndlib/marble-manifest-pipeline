@@ -26,20 +26,22 @@
   ],
   "sequences": [{
     "label": "sequency",
-    "viewingHint": "paged",
+    "viewingHint": "individuals",
     "pages": [{
         "label": "009",
         "file": "009_output.tif"
       },
       {
         "label": "046",
-        "file": "046_output.tif"      },
+        "file": "046_output.tif"
+      },
       {
         "label": "2018 009",
-        "file": "2018_009.jpg"      },
+        "file": "2018_009.jpg"
+      },
       {
         "label": "2018 049 004",
-        "file": "2018_049_009.jpg"
+        "file": "2018_049_004.jpg"
       }
     ]
   }],
