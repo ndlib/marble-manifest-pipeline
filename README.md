@@ -1,6 +1,6 @@
 # mellon-manifest-pipeline
 
-## Generating a JSON file from CSV fles
+## Step 1: Generating a JSON file from CSV fles
 
 The initial input to the manifest pipeline is two CSV files.
 
@@ -15,7 +15,7 @@ The following labels are expected:
 **Attribution** Artist attribution
 **Sequence_filename** **Not Used**
 **Sequence_label** The name of the image sequence array in the metadata JSON
-**Sequence_viewing_experience** the value should be *paged*
+**Sequence_viewing_experience** the value should be *paged* or *individuals*
 **unique_identifier** id used for generating IIIF manifest
 **Metadata_label** on second and subsequent lines, and be used to specify metadata common to all images in the sequence
 **Metadata_value** on second and subsequent lines, and be used to specify metadata common to all images in the sequence
@@ -122,3 +122,16 @@ would produce the following output:
   ]
 }
 ```
+## Step 2: Generating a manifest from the JSON output of step 1
+
+The `create_manifest.py` script receives three attributes, and creates a JSON manifest file based on appropriately structured input JSON file.
+
+Parameters:
+* input directory (../example/)
+* file to process (example-input.json)
+* output directory (optional) - if not included, file is created in the input directory
+
+To run using the example file, navigate to directory /manifest-from-input-json and execute command
+```python3 create_manifest.py ../example/ example-input.json ./```
+
+A JSON manifest file will be created in the output directory, and the JSON output will also be printed.

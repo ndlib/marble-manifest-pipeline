@@ -14,12 +14,12 @@ class processJson():
         self.output_file_suffix = '-manifest.json'
 
     def _load_global_data( self, input_json ):
-        self.global_data['id-base'] = input_json['manifest-base-url'] + 'iiif' + input_json['unique-identifier'] + '/'
+        self.global_data['id-base'] = input_json['manifest-base-url'] + 'iiif' + '/' + input_json['unique-identifier'] + '/'
         self.global_data['output-file'] = self.output_base_url + input_json['unique-identifier'] + self.output_file_suffix
         self.global_data['iiif-server'] = input_json['iiif-server']
         self.global_data['@context'] = 'http://iiif.io/api/presentation/2/context.json'
-        self.global_data['default-height'] = 1000
-        self.global_data['default-width'] = 1000
+        self.global_data['default-height'] = 2000
+        self.global_data['default-width'] = 2000
         self.global_data['viewingDirection'] = 'left-to-right'
 
     # build results_json
@@ -80,20 +80,19 @@ class processJson():
         self._add_resource_to_image(page_data, i)
 
     def _add_resource_to_image( self, page_data, i ):
-        self.result_json['sequences'][0]['canvases'][i]['images'][0]['resources'] = []
         this_item = {}
         this_item['@id'] = self.global_data['iiif-server'] + '/' + page_data['file'] + '/full/full/0/default.jpg'
         this_item['@type'] = 'dctypes:Image'
         this_item['format'] = 'image/jpeg'
-        self.result_json['sequences'][0]['canvases'][i]['images'][0]['resources'].append(this_item)
-        self._add_service_to_resource( i )
+        self.result_json['sequences'][0]['canvases'][i]['images'][0]['resource'] = this_item
+        self._add_service_to_resource(page_data, i)
 
-    def _add_service_to_resource(self, i):
-        self.result_json['sequences'][0]['canvases'][i]['images'][0]['resources'][0]['service'] = []
+    def _add_service_to_resource( self, page_data, i ):
         this_item = {}
-        this_item['@id'] = self.global_data['id-base'] + 'images/'
+        this_item['@id'] = self.global_data['iiif-server'] + '/' + page_data['file']
         this_item['profile'] = "http://iiif.io/api/image/2/level2.json"
-        self.result_json['sequences'][0]['canvases'][i]['images'][0]['resources'][0]['service'].append(this_item)
+        this_item['@context'] = "http://iiif.io/api/image/2/context.json"
+        self.result_json['sequences'][0]['canvases'][i]['images'][0]['resource']['service'] = this_item
 
     # returns True if input file found, false otherwise
     def verifyInput(self, inputDirectory, inputFile, outputDirectory):
