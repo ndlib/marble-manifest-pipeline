@@ -1,0 +1,43 @@
+Service: ManifestPipeline
+
+# PreDeploy: preDeploy.py
+
+Stacks:
+  Global:
+    Tags:
+      Name: $SERVICE-$STAGE
+      Owner: jon hartzler
+      Contact: jhartzle@nd.edu
+  Single:
+    - Name: $SERVICE-$STAGE
+      Template: resources.yml
+      Tags:
+        Description: API to get class information
+      Parameters:
+        ServiceName: $SERVICE-$STAGE
+        Stage: $STAGE
+        TemplateBucket: $DEPLOY_BUCKET
+        TemplateFolder: $DEPLOY_FOLDER
+        Version: ${GIT_VERSION}
+
+Artifacts:
+  Templates:
+    - resources.yml
+
+  Zips:
+    -
+      Name: code
+      Files:
+        - ../json-from-csv/handler.py
+        - ../json-from-csv/processCsv.py
+        - ../example/example-main.csv
+        - ../example/example-sequence.csv
+
+#  Zips:
+#    -
+#      Name: code
+#      Files:
+#        - ../utils/
+#        - ../passthrough.js
+#        - ../node_modules/
+#        - ../testdata/

@@ -12,8 +12,8 @@ class processCsv():
         self._set_json_skeleton()
         # set some default values for the input files
         # in case verifyCsvExist is not called
-        self.main_csv = "../example/example-main.csv"
-        self.sequence_csv = "../example/example-sequence.csv"
+        self.main_csv = "example/example-main.csv"
+        self.sequence_csv = "example/example-sequence.csv"
         self.error = ''
 
     def _get_config_param(self):
@@ -21,7 +21,7 @@ class processCsv():
         self.config['server_url']='https://image-server.library.nd.edu:8182'
         self.config['path_prefix']='/iiif/2'
 
-    # set up framework of an empty results_json 
+    # set up framework of an empty results_json
     def _set_json_skeleton(self):
         self.result_json['errors']=[]
         self.result_json['creator']='creator@email.com'
@@ -33,15 +33,15 @@ class processCsv():
     # returns True if main and sequence csv fles found, false otherwise
     def verifyCsvExist(self,  csvDirectory = '.'):
         csvDirectory
-        main_match = glob.glob(csvDirectory + '/*main.csv') 
-        seq_match = glob.glob(csvDirectory + '/*sequence.csv') 
+        main_match = glob.glob(csvDirectory + '/*main.csv')
+        seq_match = glob.glob(csvDirectory + '/*sequence.csv')
         if not main_match:
             self.error = 'Error: ' + csvDirectory + '/*main.csv' + ' Not Found'
             return False
         if not seq_match:
             self.error = 'Error: ' + csvDirectory + '/*sequence.csv' + ' Not Found'
             return False
-        # if by chnace there is more that one of each, take the first 
+        # if by chnace there is more that one of each, take the first
         self.main_csv = main_match[0]
         self.sequence_csv = seq_match[0]
         return True
@@ -99,7 +99,7 @@ class processCsv():
                 else:
                     self._get_metadata_attr(this_row)
 
-         #Sequence CSV File next, add to pages 
+         #Sequence CSV File next, add to pages
         with open(self.sequence_csv, 'r') as sequence_file:
             reader = csv.DictReader(sequence_file)
             for this_row in reader:

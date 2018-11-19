@@ -1,0 +1,95 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Manifest Pipeline"
+
+Parameters:
+  ServiceName:
+    Type: String
+    Description: The name of the service
+  Stage:
+    Type: String
+    Description: The deployed stage
+  TemplateBucket:
+    Type: String
+    Description: Bucket this (and code) is deployed in
+  TemplateFolder:
+    Type: String
+    Description: Location of template files
+  Version:
+    Type: String
+    Description: The github version of this deployment
+
+Outputs:
+  StateMachine:
+    Value: !Ref StateMachine
+
+Resources:
+
+  LambdaExecutionRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: "sts:AssumeRole"
+
+  LambdaFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Handler: json-from-csv/handler.run
+      Role: !GetAtt [ LambdaExecutionRole, Arn ]
+      Runtime: python2.7
+      Timeout: "25"
+      Code:
+        S3Bucket: !Ref TemplateBucket
+        S3Key: !Sub ${TemplateFolder}/code.zip
+
+  LambdaFunctionLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${LambdaFunction}
+      RetentionInDays: 7
+
+  StatesExecutionRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - !Sub states.${AWS::Region}.amazonaws.com
+            Action: "sts:AssumeRole"
+      Path: "/"
+      Policies:
+        - PolicyName: StatesExecutionPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - "lambda:InvokeFunction"
+                Resource: "*"
+
+  StateMachine:
+    Type: "AWS::StepFunctions::StateMachine"
+    Properties:
+      DefinitionString:
+        !Sub
+          - |-
+            {
+              "Comment": "Manifest Pipeline",
+              "StartAt": "ProcessInput",
+              "States": {
+                "ProcessInput": {
+                  "Type": "Task",
+                  "Resource": "${lambdaArn}",
+                  "End": true
+                }
+              }
+            }
+          - {lambdaArn: !GetAtt [ LambdaFunction, Arn ]}
+      RoleArn: !GetAtt [ StatesExecutionRole, Arn ]
