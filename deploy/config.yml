@@ -26,12 +26,18 @@ Artifacts:
 
   Zips:
     -
-      Name: code
+      Name: indexInput
       Files:
         - ../json-from-csv/handler.py
         - ../json-from-csv/processCsv.py
         - ../example/example-main.csv
         - ../example/example-sequence.csv
+    -
+      Name: manifest
+      Files:
+        - ../manifest-from-input-json/handler.py
+        - ../manifest-from-input-json/processJson.py
+
 
 #  Zips:
 #    -

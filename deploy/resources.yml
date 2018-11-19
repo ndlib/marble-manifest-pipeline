@@ -35,7 +35,7 @@ Resources:
               Service: lambda.amazonaws.com
             Action: "sts:AssumeRole"
 
-  LambdaFunction:
+  IndexInputLambdaFunction:
     Type: "AWS::Lambda::Function"
     Properties:
       Handler: json-from-csv/handler.run
@@ -44,12 +44,29 @@ Resources:
       Timeout: "25"
       Code:
         S3Bucket: !Ref TemplateBucket
-        S3Key: !Sub ${TemplateFolder}/code.zip
+        S3Key: !Sub ${TemplateFolder}/indexInput.zip
 
-  LambdaFunctionLogs:
+  IndexInputLambdaFunctionLogs:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: !Sub /aws/lambda/${LambdaFunction}
+      LogGroupName: !Sub /aws/lambda/${IndexInputLambdaFunction}
+      RetentionInDays: 7
+
+  ManifestLambdaFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Handler: manifest-from-input-json/handler.run
+      Role: !GetAtt [ LambdaExecutionRole, Arn ]
+      Runtime: python2.7
+      Timeout: "25"
+      Code:
+        S3Bucket: !Ref TemplateBucket
+        S3Key: !Sub ${TemplateFolder}/manifest.zip
+
+  ManifestLambdaFunctionLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ManifestLambdaFunction}
       RetentionInDays: 7
 
   StatesExecutionRole:
@@ -86,10 +103,15 @@ Resources:
               "States": {
                 "ProcessInput": {
                   "Type": "Task",
-                  "Resource": "${lambdaArn}",
+                  "Resource": "${indexInputLambdaArn}",
+                  "Next": "ProcessManifest"
+                },
+                "ProcessManifest": {
+                  "Type": "Task",
+                  "Resource": "${manifestLambdaArn}",
                   "End": true
                 }
               }
             }
-          - {lambdaArn: !GetAtt [ LambdaFunction, Arn ]}
+          - { indexInputLambdaArn: !GetAtt [ IndexInputLambdaFunction, Arn ], manifestLambdaArn: !GetAtt [ ManifestLambdaFunction, Arn ] }
       RoleArn: !GetAtt [ StatesExecutionRole, Arn ]

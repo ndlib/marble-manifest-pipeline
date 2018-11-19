@@ -19,6 +19,7 @@ class processCsv():
     def _get_config_param(self):
         # get these from wherever
         self.config['server_url']='https://image-server.library.nd.edu:8182'
+        self.config["manifest-base-url"] = "https://manifest.nd.edu/"
         self.config['path_prefix']='/iiif/2'
 
     # set up framework of an empty results_json
@@ -59,6 +60,7 @@ class processCsv():
         self.result_json['rights'] = first_line['Rights']
         self.result_json['unique-identifier'] = first_line['unique_identifier']
         self.result_json['iiif-server'] = self.config['server_url'] + self.config['path_prefix']
+        self.result_json['manifest-base-url'] = self.config['manifest-base-url']
         self.result_json['sequences'][0]['viewingHint'] = first_line['Sequence_viewing_experience']
         self.result_json['sequences'][0]['label'] = first_line['Sequence_label']
 

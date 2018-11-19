@@ -7,6 +7,6 @@ from processCsv import processCsv
 def run(event, context):
     csvSet = processCsv()
     csvSet.buildJson()
-    event.update( { "data": csvSet.dumpJson() })
+    event.update( { "data": csvSet.result_json })
     #print resulting json to STDOUT
     return event
