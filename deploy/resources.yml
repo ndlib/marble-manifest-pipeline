@@ -69,6 +69,23 @@ Resources:
       LogGroupName: !Sub /aws/lambda/${ManifestLambdaFunction}
       RetentionInDays: 7
 
+  PyramidGeneratorLambdaFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Handler: pyramid-generator/handler.run
+      Role: !GetAtt [ LambdaExecutionRole, Arn ]
+      Runtime: python2.7
+      Timeout: "25"
+      Code:
+        S3Bucket: !Ref TemplateBucket
+        S3Key: !Sub ${TemplateFolder}/pyramid.zip
+
+  ManifestLambdaFunctionLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ManifestLambdaFunction}
+      RetentionInDays: 7
+
   StatesExecutionRole:
     Type: "AWS::IAM::Role"
     Properties:
@@ -109,6 +126,17 @@ Resources:
                 "ProcessManifest": {
                   "Type": "Task",
                   "Resource": "${manifestLambdaArn}",
+                  "Next": "PyramidGenerator"
+                },
+                "PyramidGenerator": {
+                  "Type": "Task",
+                  "Resource": "arn:aws:states:::ecs:runTask.sync",
+                  "Parameters": {
+                    "Cluster": "qa-testing",
+                    "Count": 1,
+                    "LaunchType": "FARGATE",
+                    "TaskDefinition": "qa_tests_task:10"
+                  },
                   "End": true
                 }
               }

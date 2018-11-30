@@ -37,7 +37,10 @@ Artifacts:
       Files:
         - ../manifest-from-input-json/handler.py
         - ../manifest-from-input-json/processJson.py
-
+    -
+      Name: pyramid
+      Files:
+        - ../pyramid-generator/handler.py
 
 #  Zips:
 #    -

@@ -8,19 +8,28 @@ import boto3
 import botocore
 import datetime
 
+print "This is the name of the script: ", sys.argv[0]
+print "Number of arguments: ", len(sys.argv)
+print "The arguments are: " , str(sys.argv)
+
+if len(sys.argv) < 2:
+    sys.exit("Required param with s3 key to process")
+
 #https://s3-us-west-2.amazonaws.com/mellon-data-broker-dev-publicbucket-856nkug1cnvl/2018_049_004.tif
-BUCKET_NAME = 'mellon-data-broker-publicbucket-wtci53auglzt'
-KEY = '2018_049_004' # s3 object without extension
+IMAGE_FROM_BUCKET_NAME = os.environ["IMAGE_FROM_BUCKET_NAME"]
+IMAGE_TO_BUCKET_NAME = os.environ["IMAGE_TO_BUCKET_NAME"]
+
+KEY = sys.argv[1] # s3 object without extension
 
 s3 = boto3.resource('s3', region_name='us-west-2')
 
 print(datetime.datetime.now())
 try:
     print 'Retrieving file: ' + KEY + '.jpg'
-    s3.Bucket(BUCKET_NAME).download_file(KEY + '.jpg', KEY + '.jpg')
+    s3.Bucket(IMAGE_FROM_BUCKET_NAME).download_file(KEY + '.jpg', KEY + '.jpg')
 except botocore.exceptions.ClientError as e:
     if e.response['Error']['Code'] == "404":
-        print("The object does not exist.")
+        sys.exit("The object does not exist.")
     else:
         raise
 print 'File retrieved'
@@ -39,12 +48,12 @@ for file in files:
     print vips_error[file]
 print(datetime.datetime.now())
 
-
 print(datetime.datetime.now())
 try:
    print 'Putting file: ' + KEY + '.tif'
-   s3.Bucket(BUCKET_NAME).upload_file(KEY + '_DEFLATE.tif','redTest/' + KEY + '.tif')
+   s3.Bucket(IMAGE_TO_BUCKET_NAME).upload_file(KEY + '.tif','test/' + KEY + '.tif')
 except botocore.exceptions.ClientError as e:
-   print e
+   sys.exit(e)
+
 print 'File pushed'
 print(datetime.datetime.now())
