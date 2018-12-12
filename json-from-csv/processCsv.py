@@ -14,6 +14,8 @@ class processCsv():
         # in case verifyCsvExist is not called
         self.main_csv = "example/example-main.csv"
         self.sequence_csv = "example/example-sequence.csv"
+        self.process_bucket = "manifestpipeline-dev-processbucket-1vtt3jhjtkg21"
+        self.id = "example"
         self.error = ''
 
     def _get_config_param(self):

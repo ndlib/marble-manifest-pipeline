@@ -22,7 +22,17 @@ Outputs:
   StateMachine:
     Value: !Ref StateMachine
 
+  ProcessBucket:
+    Value: !Ref ProcessBucket
+
 Resources:
+
+  ProcessBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      LoggingConfiguration:
+        DestinationBucketName: !ImportValue wse-web-logs
+        LogFilePrefix: s3/manifest-pipeline/
 
   LambdaExecutionRole:
     Type: "AWS::IAM::Role"
@@ -34,6 +44,26 @@ Resources:
             Principal:
               Service: lambda.amazonaws.com
             Action: "sts:AssumeRole"
+      Policies:
+        - PolicyName: ImageDerivativeCacheBucketPermissions
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              -
+                Action:
+                  - "s3:GetObject"
+                  - "s3:PutObject"
+                  - "s3:ListBucket"
+                Effect: "Allow"
+                Resource:
+                  # This one is the base bucket name for the ListBucket permission
+                  - !GetAtt ProcessBucket.Arn
+                  # This one is for the Get/Put permissions to all objects in the bucket
+                  - Fn::Join:
+                      - ""
+                      -
+                        - !GetAtt ProcessBucket.Arn
+                        - "/*"
 
   IndexInputLambdaFunction:
     Type: "AWS::Lambda::Function"
@@ -45,6 +75,9 @@ Resources:
       Code:
         S3Bucket: !Ref TemplateBucket
         S3Key: !Sub ${TemplateFolder}/indexInput.zip
+      Environment:
+        Variables:
+          PROCESS_BUCKET: !Ref ProcessBucket
 
   IndexInputLambdaFunctionLogs:
     Type: AWS::Logs::LogGroup
@@ -126,17 +159,6 @@ Resources:
                 "ProcessManifest": {
                   "Type": "Task",
                   "Resource": "${manifestLambdaArn}",
-                  "Next": "PyramidGenerator"
-                },
-                "PyramidGenerator": {
-                  "Type": "Task",
-                  "Resource": "arn:aws:states:::ecs:runTask.sync",
-                  "Parameters": {
-                    "Cluster": "qa-testing",
-                    "Count": 1,
-                    "LaunchType": "FARGATE",
-                    "TaskDefinition": "qa_tests_task:10"
-                  },
                   "End": true
                 }
               }
