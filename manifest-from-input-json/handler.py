@@ -6,7 +6,7 @@ from processJson import processJson
 
 
 def run(event, context):
-    processSet = processJson()    
+    processSet = processJson()
     processSet._set_file_data("unused", "unused", "unused")
     processSet._create_manifest_json(event.get("data"))
     event.update( { "manifest": processSet.result_json })
