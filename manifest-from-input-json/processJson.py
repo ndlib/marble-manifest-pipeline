@@ -1,11 +1,15 @@
 import json, glob
+import boto3
+
 
 class processJson():
     def __init__(self):
         self.result_json = {}
         self.config = {}
         self.global_data = {}
+        self.process_bucket = "manifestpipeline-dev-processbucket-1vtt3jhjtkg21"
         self.error = ''
+        self.id = "example"
 
     def _set_file_data(self, inputDirectory, inputFile, outputDirectory):
         self.input_file = inputDirectory + inputFile
@@ -121,6 +125,9 @@ class processJson():
 
     # write data to manifest json file
     def dumpManifest(self):
-        with open(self.global_data['output-file'], 'w') as output_file:
-            json.dump(self.result_json, output_file, indent=2)
-        output_file.close()
+        s3 = boto3.resource('s3')
+        key = "finished/" + self.id + "/manifest.json"
+        #k.content_type = "application/json+ld"
+        #k.set_contents_from_string(json.dumps(self.result_json))
+
+        s3.Object(self.process_bucket, key).put(Body=json.dumps(self.result_json))
