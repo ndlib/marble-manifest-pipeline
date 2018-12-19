@@ -1,5 +1,6 @@
 import json, csv, os, glob
 import boto3
+from botocore.errorfactory import ClientError
 
 class processCsv():
     # class constructor
@@ -18,7 +19,7 @@ class processCsv():
         self.process_bucket = "manifestpipeline-dev-processbucket-1vtt3jhjtkg21"
         self.source_directory = "process"
         self.id = id
-        self.error = ''
+        self.error = []
 
     def _get_config_param(self):
         # get these from wherever
@@ -37,19 +38,21 @@ class processCsv():
 
     # returns True if main and sequence csv fles found, false otherwise
     def verifyCsvExist(self,  csvDirectory = '.'):
-        csvDirectory
-        main_match = glob.glob(csvDirectory + '/*main.csv')
-        seq_match = glob.glob(csvDirectory + '/*sequence.csv')
-        if not main_match:
-            self.error = 'Error: ' + csvDirectory + '/*main.csv' + ' Not Found'
-            return False
-        if not seq_match:
-            self.error = 'Error: ' + csvDirectory + '/*sequence.csv' + ' Not Found'
-            return False
-        # if by chnace there is more that one of each, take the first
-        self.main_csv = main_match[0]
-        self.sequence_csv = seq_match[0]
-        return True
+        s3 = boto3.client('s3')
+
+        try:
+            s3.head_object(Bucket=self.process_bucket, Key=self.source_directory + "/" + self.id + "/" + self.main_csv)
+        except ClientError as err:
+            self.error.append(err)
+            pass
+
+        try:
+            s3.head_object(Bucket=self.process_bucket, Key=self.source_directory + "/" + self.id + "/" + self.sequence_csv)
+        except ClientError:
+            self.error.append(err)
+            pass
+
+        return (len(self.error) == 0)
 
 
     # returns error string

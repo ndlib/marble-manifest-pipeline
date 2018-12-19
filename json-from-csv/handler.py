@@ -6,6 +6,9 @@ from processCsv import processCsv
 
 def run(event, context):
     csvSet = processCsv(event.get("id"))
+    if not csvSet.verifyCsvExist():
+        raise Exception(csvSet.error)
+
     csvSet.buildJson()
     event.update( { "data": csvSet.result_json })
     #print resulting json to STDOUT
