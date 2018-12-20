@@ -1,8 +1,10 @@
 import json, csv, os, glob
+import boto3
+from botocore.errorfactory import ClientError
 
 class processCsv():
     # class constructor
-    def __init__(self):
+    def __init__(self, id):
         #start with an empty result json and config
         self.result_json = {}
         self.config = {}
@@ -12,11 +14,12 @@ class processCsv():
         self._set_json_skeleton()
         # set some default values for the input files
         # in case verifyCsvExist is not called
-        self.main_csv = "example/example-main.csv"
-        self.sequence_csv = "example/example-sequence.csv"
+        self.main_csv = "main.csv"
+        self.sequence_csv = "sequence.csv"
         self.process_bucket = "manifestpipeline-dev-processbucket-1vtt3jhjtkg21"
-        self.id = "example"
-        self.error = ''
+        self.source_directory = "process"
+        self.id = id
+        self.error = []
 
     def _get_config_param(self):
         # get these from wherever
@@ -35,19 +38,21 @@ class processCsv():
 
     # returns True if main and sequence csv fles found, false otherwise
     def verifyCsvExist(self,  csvDirectory = '.'):
-        csvDirectory
-        main_match = glob.glob(csvDirectory + '/*main.csv')
-        seq_match = glob.glob(csvDirectory + '/*sequence.csv')
-        if not main_match:
-            self.error = 'Error: ' + csvDirectory + '/*main.csv' + ' Not Found'
-            return False
-        if not seq_match:
-            self.error = 'Error: ' + csvDirectory + '/*sequence.csv' + ' Not Found'
-            return False
-        # if by chnace there is more that one of each, take the first
-        self.main_csv = main_match[0]
-        self.sequence_csv = seq_match[0]
-        return True
+        s3 = boto3.client('s3')
+
+        try:
+            s3.head_object(Bucket=self.process_bucket, Key=self.source_directory + "/" + self.id + "/" + self.main_csv)
+        except ClientError as err:
+            self.error.append(err)
+            pass
+
+        try:
+            s3.head_object(Bucket=self.process_bucket, Key=self.source_directory + "/" + self.id + "/" + self.sequence_csv)
+        except ClientError:
+            self.error.append(err)
+            pass
+
+        return (len(self.error) == 0)
 
 
     # returns error string
@@ -92,7 +97,10 @@ class processCsv():
     # is used only to provide global metadata
 
     def buildJson(self):
-        with open(self.main_csv, 'r') as csv_file:
+        s3 = boto3.resource('s3')
+        obj = s3.Object(self.process_bucket, self.source_directory + "/" + self.id + "/" + self.main_csv).download_file('/tmp/' + self.main_csv)
+
+        with open('/tmp/' + self.main_csv, 'r') as csv_file:
             reader = csv.DictReader(csv_file)
             for this_row in reader:
                 if reader.line_num == 1:
@@ -104,7 +112,9 @@ class processCsv():
                     self._get_metadata_attr(this_row)
 
          #Sequence CSV File next, add to pages
-        with open(self.sequence_csv, 'r') as sequence_file:
+        obj = s3.Object(self.process_bucket, self.source_directory + "/" + self.id + "/" + self.sequence_csv).download_file('/tmp/' + self.sequence_csv)
+
+        with open('/tmp/' + self.sequence_csv, 'r') as sequence_file:
             reader = csv.DictReader(sequence_file)
             for this_row in reader:
                 if reader.line_num == 1:
