@@ -22,7 +22,6 @@ def test():
         data = json.load(input_source)
     input_source.close()
 
-    print(data)
     data = {
       "id": "example",
       "data": data
