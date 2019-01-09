@@ -3,13 +3,14 @@ import boto3
 
 
 class processJson():
-    def __init__(self):
+    def __init__(self, id, eventData):
         self.result_json = {}
         self.config = {}
-        self.global_data = {}
+        self.global_data = eventData
         self.process_bucket = "manifestpipeline-dev-processbucket-1vtt3jhjtkg21"
         self.error = ''
-        self.id = "example"
+        self.id = id
+        self.manifest_id_url = self.global_data['manifest-base-url'] + '/' + self.id
 
     def _set_file_data(self, inputDirectory, inputFile, outputDirectory):
         self.input_file = inputDirectory + inputFile
@@ -18,8 +19,8 @@ class processJson():
         self.output_file_suffix = '-manifest.json'
 
     def _load_global_data( self, input_json ):
-        self.global_data['id-base'] = input_json['manifest-base-url'] + 'iiif' + '/' + input_json['unique-identifier'] + '/'
-        self.global_data['output-file'] = self.output_base_url + input_json['unique-identifier'] + self.output_file_suffix
+        self.global_data['id-base'] = self.global_data['config']['manifest-base-url'] + '/' + self.global_data['unique-identifier'] + '/'
+        #self.global_data['output-file'] = self.output_base_url + input_json['unique-identifier'] + self.output_file_suffix
         self.global_data['iiif-server'] = input_json['iiif-server']
         self.global_data['@context'] = 'http://iiif.io/api/presentation/2/context.json'
         self.global_data['default-height'] = 2000
