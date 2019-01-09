@@ -2,11 +2,24 @@
   "label": "Label",
   "description": "Description",
   "unique-identifier": "2018_example_001",
-  "iiif-server": "https://image-server.library.nd.edu:8182/iiif/2",
   "rights": "rights",
   "attribution": "attribution",
   "creator": "creator@email.com",
-  "manifest-base-url": "https://manifest.nd.edu/",
+  "viewingDirection": "left-to-right",
+  "config": {
+    "image-server-base-url": "https://image-server.library.nd.edu:8182/iiif/2",
+    "manifest-server-base-url": "https://manifest.nd.edu/",
+    "process-bucket": "inprocess-bucket",
+    "process-bucket-read-basepath": "process",
+    "process-bucket-write-basepath": "finished",
+    "image-server-bucket": "image-server-bucket",
+    "image-server-bucket-basepath": "",
+    "manifest-server-bucket": "manifest-server-bucket",
+    "manifest-server-bucket-basepath": "",
+    "notify-on-finished": "notify@email.com",
+    "canvas-default-height": 2000,
+    "canvas-default-width": 2000
+  },
   "metadata": [{
       "label": "Title",
       "value": "Wunder der Vererbung"

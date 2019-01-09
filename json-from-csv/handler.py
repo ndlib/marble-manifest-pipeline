@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 from processCsv import processCsv
 
 def run(event, context):
-    csvSet = processCsv(event.get("id"))
+    csvSet = processCsv(event.get("id"), os.environ['PROCESS_BUCKET'])
     if not csvSet.verifyCsvExist():
         raise Exception(csvSet.error)
 
