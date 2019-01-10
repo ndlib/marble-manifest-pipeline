@@ -102,6 +102,26 @@ Resources:
       LogGroupName: !Sub /aws/lambda/${ManifestLambdaFunction}
       RetentionInDays: 7
 
+  FinalizeLambdaFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Handler: finalize/handler.run
+      Role: !GetAtt [ LambdaExecutionRole, Arn ]
+      Runtime: python3.7
+      Timeout: "25"
+      Code:
+        S3Bucket: !Ref TemplateBucket
+        S3Key: !Sub ${TemplateFolder}/finalize.zip
+      Environment:
+        Variables:
+          PROCESS_BUCKET: !Ref ProcessBucket
+
+  IndexInputLambdaFunctionLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${FinalizeLambdaFunction}
+      RetentionInDays: 7
+
   PyramidGeneratorLambdaFunction:
     Type: "AWS::Lambda::Function"
     Properties:
@@ -159,9 +179,14 @@ Resources:
                 "ProcessManifest": {
                   "Type": "Task",
                   "Resource": "${manifestLambdaArn}",
+                  "Next": "Finalize"
+                },
+                "Finalize": {
+                  "Type": "Task",
+                  "Resource": "${finalizeLambdaArn}",
                   "End": true
                 }
               }
             }
-          - { indexInputLambdaArn: !GetAtt [ IndexInputLambdaFunction, Arn ], manifestLambdaArn: !GetAtt [ ManifestLambdaFunction, Arn ] }
+          - { indexInputLambdaArn: !GetAtt [ IndexInputLambdaFunction, Arn ], manifestLambdaArn: !GetAtt [ ManifestLambdaFunction, Arn ], finalizeLambdaArn: !GetAtt [ FinalizeLambdaFunction, Arn ] }
       RoleArn: !GetAtt [ StatesExecutionRole, Arn ]
