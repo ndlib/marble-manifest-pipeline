@@ -11,7 +11,7 @@ class finalizeStep():
         self.error = []
 
     def run(self):
-        if self.success:
+        if self.success():
             self.movePyramids()
             self.moveManifest()
 
@@ -19,9 +19,9 @@ class finalizeStep():
 
     def success(self):
         if len(self.manifestMetadata["errors"]) > 0:
-            return false
+            return False
 
-        return true
+        return True
 
     def movePyramids(self):
         print("movePyramids")
@@ -52,10 +52,16 @@ class finalizeStep():
         }
 
         bucket = s3.Bucket(self.manifestMetadata["config"]["manifest-server-bucket"])
-        bucket.copy(copy_source, self.manifestMetadata["config"]["manifest-server-bucket-basepath"] + "/" + self.id + "/manifest/index.json")
+        bucket.copy(copy_source, self.test_basepath(self.manifestMetadata["config"]["manifest-server-bucket-basepath"]) + self.id + "/manifest/index.json")
 
         return
 
     def notify(self):
         print("nofify")
         return
+
+    def test_basepath(self, basepath):
+        if (basepath):
+            return basepath + "/"
+
+        return ""

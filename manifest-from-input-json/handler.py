@@ -11,7 +11,6 @@ def run(event, context):
     # if there are errors add them in
 
     processSet.dumpManifest()
-    event.update( { "manifest": processSet.result_json })
 
     #print resulting json to STDOUT
     return event
