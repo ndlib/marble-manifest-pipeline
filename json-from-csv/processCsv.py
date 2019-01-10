@@ -1,8 +1,13 @@
 import json, csv, os, glob
+import boto3
+from botocore.errorfactory import ClientError
 
 class processCsv():
     # class constructor
-    def __init__(self):
+    def __init__(self, id, process_bucket):
+        self.id = id
+        self.process_bucket = process_bucket
+        self.error = []
         #start with an empty result json and config
         self.result_json = {}
         self.config = {}
@@ -10,21 +15,31 @@ class processCsv():
         self._get_config_param()
         # population json info that is not csv-dependent
         self._set_json_skeleton()
-        # set some default values for the input files
-        # in case verifyCsvExist is not called
-        self.main_csv = "../example/example-main.csv"
-        self.sequence_csv = "../example/example-sequence.csv"
-        self.error = ''
+
 
     def _get_config_param(self):
         # get these from wherever
-        self.config['server_url']='https://image-server.library.nd.edu:8182'
-        self.config['path_prefix']='/iiif/2'
+        self.config['image-server-base-url']='https://image-server.library.nd.edu:8182/iiif/2'
+        self.config["manifest-server-base-url"] = "https://manifest.nd.edu/"
+        self.config['process-bucket'] = self.process_bucket
+        self.config['process-bucket-read-basepath'] = 'process'
+        self.config['process-bucket-write-basepath'] = 'finished'
+        self.config['image-server-bucket'] = 'image-server-bucket'
+        self.config['image-server-bucket-basepath'] = ''
+        self.config['manifest-server-bucket'] = 'manifest-server-bucket'
+        self.config['manifest-server-bucket-basepath'] = ''
+        self.config['sequence-csv'] = 'sequence.csv'
+        self.config['main-csv'] = 'main.csv'
+        self.config['canvas-default-height'] = 2000
+        self.config['canvas-default-width'] = 2000
+        self.config["notify-on-finished"] = "notify@email.com"
 
-    # set up framework of an empty results_json 
+    # set up framework of an empty results_json
     def _set_json_skeleton(self):
         self.result_json['errors']=[]
         self.result_json['creator']='creator@email.com'
+        self.result_json['viewingDirection']='left-to-right'
+        self.result_json['config'] = self.config
         self.result_json['metadata']=[]
         self.result_json['sequences']=[]
         self.result_json['sequences'].append({})
@@ -32,19 +47,21 @@ class processCsv():
 
     # returns True if main and sequence csv fles found, false otherwise
     def verifyCsvExist(self,  csvDirectory = '.'):
-        csvDirectory
-        main_match = glob.glob(csvDirectory + '/*main.csv') 
-        seq_match = glob.glob(csvDirectory + '/*sequence.csv') 
-        if not main_match:
-            self.error = 'Error: ' + csvDirectory + '/*main.csv' + ' Not Found'
-            return False
-        if not seq_match:
-            self.error = 'Error: ' + csvDirectory + '/*sequence.csv' + ' Not Found'
-            return False
-        # if by chnace there is more that one of each, take the first 
-        self.main_csv = main_match[0]
-        self.sequence_csv = seq_match[0]
-        return True
+        s3 = boto3.client('s3')
+
+        try:
+            s3.head_object(Bucket=self.config['process-bucket'], Key=self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config['main-csv'])
+        except ClientError as err:
+            self.error.append(err)
+            pass
+
+        try:
+            s3.head_object(Bucket=self.config['process-bucket'], Key=self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config['sequence-csv'])
+        except ClientError as err:
+            self.error.append(err)
+            pass
+
+        return (len(self.error) == 0)
 
 
     # returns error string
@@ -58,7 +75,6 @@ class processCsv():
         self.result_json['attribution'] = first_line['Attribution']
         self.result_json['rights'] = first_line['Rights']
         self.result_json['unique-identifier'] = first_line['unique_identifier']
-        self.result_json['iiif-server'] = self.config['server_url'] + self.config['path_prefix']
         self.result_json['sequences'][0]['viewingHint'] = first_line['Sequence_viewing_experience']
         self.result_json['sequences'][0]['label'] = first_line['Sequence_label']
 
@@ -88,7 +104,10 @@ class processCsv():
     # is used only to provide global metadata
 
     def buildJson(self):
-        with open(self.main_csv, 'r') as csv_file:
+        s3 = boto3.resource('s3')
+        obj = s3.Object(self.config['process-bucket'], self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config['main-csv']).download_file('/tmp/' + self.config['main-csv'])
+
+        with open('/tmp/' + self.config['main-csv'], 'r') as csv_file:
             reader = csv.DictReader(csv_file)
             for this_row in reader:
                 if reader.line_num == 1:
@@ -99,8 +118,10 @@ class processCsv():
                 else:
                     self._get_metadata_attr(this_row)
 
-         #Sequence CSV File next, add to pages 
-        with open(self.sequence_csv, 'r') as sequence_file:
+         #Sequence CSV File next, add to pages
+        obj = s3.Object(self.config['process-bucket'], self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config['sequence-csv']).download_file('/tmp/' + self.config['sequence-csv'])
+
+        with open('/tmp/' + self.config['sequence-csv'], 'r') as sequence_file:
             reader = csv.DictReader(sequence_file)
             for this_row in reader:
                 if reader.line_num == 1:

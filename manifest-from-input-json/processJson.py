@@ -1,11 +1,14 @@
 import json, glob
+import boto3
+
 
 class processJson():
-    def __init__(self):
+    def __init__(self, id, eventData):
         self.result_json = {}
         self.config = {}
-        self.global_data = {}
-        self.error = ''
+        self.global_data = eventData
+        self.error = []
+        self.id = id
 
     def _set_file_data(self, inputDirectory, inputFile, outputDirectory):
         self.input_file = inputDirectory + inputFile
@@ -13,29 +16,27 @@ class processJson():
         self.output_base_url = outputDirectory
         self.output_file_suffix = '-manifest.json'
 
-    def _load_global_data( self, input_json ):
-        self.global_data['id-base'] = input_json['manifest-base-url'] + 'iiif' + '/' + input_json['unique-identifier'] + '/'
-        self.global_data['output-file'] = self.output_base_url + input_json['unique-identifier'] + self.output_file_suffix
-        self.global_data['iiif-server'] = input_json['iiif-server']
-        self.global_data['@context'] = 'http://iiif.io/api/presentation/2/context.json'
-        self.global_data['default-height'] = 2000
-        self.global_data['default-width'] = 2000
-        self.global_data['viewingDirection'] = 'left-to-right'
+    def _load_global_data( self ):
+        self.global_data['id-base'] = self.global_data['config']['manifest-server-base-url'] + '/' + self.id + '/'
+        #self.global_data['output-file'] = self.output_base_url + input_json['unique-identifier'] + self.output_file_suffix
+        #self.global_data['config']['default-height'] = 2000
+        #self.global_data['config']['default-width'] = 2000
+        #self.global_data['config']['viewingDirection'] = 'left-to-right'
 
     # build results_json
-    def _create_manifest_json( self, input_json ):
-        self._load_global_data( input_json )
+    def _create_manifest_json( self ):
+        self._load_global_data()
 
-        self.result_json['@context'] = self.global_data['@context']
+        self.result_json['@context'] = 'http://iiif.io/api/presentation/2/context.json'
         self.result_json['@type'] = 'sc:Manifest'
         self.result_json['@id'] = self.global_data['id-base'] + 'manifest'
-        self.result_json['label'] = input_json['label']
-        self.result_json['metadata'] = input_json['metadata']
-        self.result_json['description'] = input_json['description']
-        self.result_json['license'] = input_json['rights']
-        self.result_json['attribution'] = input_json['attribution']
+        self.result_json['label'] = self.global_data['label']
+        self.result_json['metadata'] = self.global_data['metadata']
+        self.result_json['description'] = self.global_data['description']
+        self.result_json['license'] = self.global_data['rights']
+        self.result_json['attribution'] = self.global_data['attribution']
         # currently, one sequence is allowed per manifest
-        sequence_data = input_json['sequences'][0]
+        sequence_data = self.global_data['sequences'][0]
         self._add_sequence( sequence_data)
 
     def _add_sequence( self, sequence_data ):
@@ -64,8 +65,8 @@ class processJson():
         this_item['@id'] = self.global_data['id-base'] + 'canvas/p' + str(i + 1)
         this_item['@type'] = 'sc:Canvas'
         this_item['label'] = page_data['label']
-        this_item['height'] = self.global_data['default-height']
-        this_item['width'] = self.global_data['default-width']
+        this_item['height'] = self.global_data['config']['canvas-default-height']
+        this_item['width'] = self.global_data['config']['canvas-default-width']
         self.result_json['sequences'][0]['canvases'].append(this_item)
         self._add_image_to_canvas(page_data, i)
 
@@ -81,7 +82,7 @@ class processJson():
 
     def _add_resource_to_image( self, page_data, i ):
         this_item = {}
-        this_item['@id'] = self.global_data['iiif-server'] + '/' + page_data['file'] + '/full/full/0/default.jpg'
+        this_item['@id'] = self.global_data['config']['image-server-base-url'] + '/' + page_data['file'] + '/full/full/0/default.jpg'
         this_item['@type'] = 'dctypes:Image'
         this_item['format'] = 'image/jpeg'
         self.result_json['sequences'][0]['canvases'][i]['images'][0]['resource'] = this_item
@@ -89,7 +90,7 @@ class processJson():
 
     def _add_service_to_resource( self, page_data, i ):
         this_item = {}
-        this_item['@id'] = self.global_data['iiif-server'] + '/' + page_data['file']
+        this_item['@id'] = self.global_data['config']['image-server-base-url'] + '/' + page_data['file']
         this_item['profile'] = "http://iiif.io/api/image/2/level2.json"
         this_item['@context'] = "http://iiif.io/api/image/2/context.json"
         self.result_json['sequences'][0]['canvases'][i]['images'][0]['resource']['service'] = this_item
@@ -99,7 +100,7 @@ class processJson():
         self._set_file_data(inputDirectory, inputFile, outputDirectory)
         main_match = glob.glob(self.input_file)
         if not main_match:
-            self.error = 'Error: ' + self.input_file + ' not found'
+            self.error.append('Error: ' + self.input_file + ' not found')
             return False
         return True
 
@@ -121,6 +122,9 @@ class processJson():
 
     # write data to manifest json file
     def dumpManifest(self):
-        with open(self.global_data['output-file'], 'w') as output_file:
-            json.dump(self.result_json, output_file, indent=2)
-        output_file.close()
+        s3 = boto3.resource('s3')
+        key = self.global_data["config"]["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
+        #k.content_type = "application/json+ld"
+        #k.set_contents_from_string(json.dumps(self.result_json))
+
+        s3.Object(self.global_data["config"]["process-bucket"], key).put(Body=json.dumps(self.result_json))
