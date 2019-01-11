@@ -4,9 +4,10 @@ from botocore.errorfactory import ClientError
 
 class processCsv():
     # class constructor
-    def __init__(self, id, process_bucket):
+    def __init__(self, id, process_bucket, manifest_bucket):
         self.id = id
         self.process_bucket = process_bucket
+        self.manifest_bucket = manifest_bucket
         self.error = []
         #start with an empty result json and config
         self.result_json = {}
@@ -24,9 +25,9 @@ class processCsv():
         self.config['process-bucket'] = self.process_bucket
         self.config['process-bucket-read-basepath'] = 'process'
         self.config['process-bucket-write-basepath'] = 'finished'
-        self.config['image-server-bucket'] = 'image-server-bucket'
-        self.config['image-server-bucket-basepath'] = ''
-        self.config['manifest-server-bucket'] = 'manifest-server-bucket'
+        self.config['image-server-bucket'] = self.process_bucket
+        self.config['image-server-bucket-basepath'] = 'images'
+        self.config['manifest-server-bucket'] = self.manifest_bucket
         self.config['manifest-server-bucket-basepath'] = ''
         self.config['sequence-csv'] = 'sequence.csv'
         self.config['main-csv'] = 'main.csv'
