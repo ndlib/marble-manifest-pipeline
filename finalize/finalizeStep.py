@@ -33,7 +33,7 @@ class finalizeStep():
         from_bucket = s3.Bucket(self.manifestMetadata["config"]["process-bucket"])
         to_bucket = s3.Bucket(self.manifestMetadata["config"]["image-server-bucket"])
 
-        from_path = self.manifestMetadata["config"]["process-bucket-write-basepath"] + "/" + self.id + "/pyramid/"
+        from_path = self.manifestMetadata["config"]["process-bucket-write-basepath"] + "/" + self.id + "/images/"
         all_objects = from_bucket.object_versions.filter(Prefix=from_path, Delimiter="/")
 
         for o in all_objects:
