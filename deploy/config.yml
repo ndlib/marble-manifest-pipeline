@@ -38,7 +38,7 @@ Artifacts:
     -
       Name: pyramid
       Files:
-        - ../pyramid-generator/handler.py
+        - ../pyramid-generator
 
 #  Zips:
 #    -

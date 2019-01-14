@@ -26,13 +26,12 @@ Outputs:
     Value: !Ref ProcessBucket
 
 Resources:
-
   ProcessBucket:
     Type: AWS::S3::Bucket
     Properties:
       LoggingConfiguration:
         DestinationBucketName: !ImportValue wse-web-logs
-        LogFilePrefix: s3/manifest-pipeline/
+        LogFilePrefix: s3/manifest-pipeline/process/
 
   LambdaExecutionRole:
     Type: "AWS::IAM::Role"
@@ -102,21 +101,68 @@ Resources:
       LogGroupName: !Sub /aws/lambda/${ManifestLambdaFunction}
       RetentionInDays: 7
 
-  PyramidGeneratorLambdaFunction:
+  # PYRAMID GENERATOR PROCESSING
+  PGCounterLambdaFunction:
     Type: "AWS::Lambda::Function"
     Properties:
-      Handler: pyramid-generator/handler.run
+      Handler: pyramid-generator/pgcounter.counter
       Role: !GetAtt [ LambdaExecutionRole, Arn ]
-      Runtime: python2.7
-      Timeout: "25"
+      Runtime: nodejs8.10
+      Timeout: 120
+      MemorySize: 256
       Code:
         S3Bucket: !Ref TemplateBucket
         S3Key: !Sub ${TemplateFolder}/pyramid.zip
+      Environment:
+        Variables:
+          PROCESS_BUCKET: !Ref ProcessBucket
 
-  ManifestLambdaFunctionLogs:
+  PGCounterLambdaFunctionLogs:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: !Sub /aws/lambda/${ManifestLambdaFunction}
+      LogGroupName: !Sub /aws/lambda/${PGCounterLambdaFunction}
+      RetentionInDays: 7
+
+  PGIteratorLambdaFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Handler: pyramid-generator/pgiterator.iterator
+      Role: !GetAtt [ LambdaExecutionRole, Arn ]
+      Runtime: nodejs8.10
+      Timeout: 120
+      MemorySize: 256
+      Code:
+        S3Bucket: !Ref TemplateBucket
+        S3Key: !Sub ${TemplateFolder}/pyramid.zip
+      Environment:
+        Variables:
+          PROCESS_BUCKET: !Ref ProcessBucket
+
+  PGIteratorLambdaFunctionLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${PGIteratorLambdaFunction}
+      RetentionInDays: 7
+
+  PGImgProcLambdaFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Handler: pyramid-generator/pgimgproc.processor
+      Role: !GetAtt [ LambdaExecutionRole, Arn ]
+      Runtime: nodejs8.10
+      Timeout: 120
+      MemorySize: 256
+      Code:
+        S3Bucket: !Ref TemplateBucket
+        S3Key: !Sub ${TemplateFolder}/pyramid.zip
+      Environment:
+        Variables:
+          PROCESS_BUCKET: !Ref ProcessBucket
+
+  PGImgProcLambdaFunctionLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${PGImgProcLambdaFunction}
       RetentionInDays: 7
 
   StatesExecutionRole:
@@ -159,9 +205,42 @@ Resources:
                 "ProcessManifest": {
                   "Type": "Task",
                   "Resource": "${manifestLambdaArn}",
-                  "End": true
+                  "Next": "PGCount"
+                },
+                "PGCount": {
+                  "Type": "Task",
+                  "Resource": "${pgCountLambdaArn}",
+                  "ResultPath": "$.data",
+                  "Next": "PGIterator"
+                },
+                "PGIterator": {
+                    "Type": "Task",
+                    "Resource": "${pgIteratorLambdaArn}",
+                    "ResultPath": "$.data",
+                    "Next": "PGIsCountReached"
+                },
+                "PGIsCountReached": {
+                    "Type": "Choice",
+                    "Choices": [
+                        {
+                            "Variable": "$.data.iterator.continue",
+                            "BooleanEquals": true,
+                            "Next": "PGImgProcessor"
+                        }
+                    ],
+                    "Default": "Done"
+                },
+                "PGImgProcessor": {
+                    "Type": "Task",
+                    "Resource": "${pgImgProcLambdaArn}",
+                    "ResultPath": "$.data",
+                    "Next": "PGIterator"
+                },
+                "Done": {
+                    "Type": "Pass",
+                    "End": true
                 }
               }
             }
-          - { indexInputLambdaArn: !GetAtt [ IndexInputLambdaFunction, Arn ], manifestLambdaArn: !GetAtt [ ManifestLambdaFunction, Arn ] }
+          - { indexInputLambdaArn: !GetAtt [ IndexInputLambdaFunction, Arn ], manifestLambdaArn: !GetAtt [ ManifestLambdaFunction, Arn ], pgCountLambdaArn: !GetAtt [ PGCounterLambdaFunction, Arn], pgIteratorLambdaArn: !GetAtt [ PGIteratorLambdaFunction, Arn], pgImgProcLambdaArn: !GetAtt [ PGImgProcLambdaFunction, Arn] }
       RoleArn: !GetAtt [ StatesExecutionRole, Arn ]
