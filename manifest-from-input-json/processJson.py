@@ -1,7 +1,6 @@
 import json, glob
 import boto3
 
-
 class processJson():
     def __init__(self, id, eventData):
         self.result_json = {}
