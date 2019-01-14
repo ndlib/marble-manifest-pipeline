@@ -17,6 +17,15 @@ Parameters:
   Version:
     Type: String
     Description: The github version of this deployment
+  ImageSourceBucket:
+    Type: 'AWS::SSM::Parameter::Value<String>'
+    Description: The name of the source bucket that the IIIF service will read from for its assets.
+    Default: '/all/stacks/mellon-data-broker-dev/publicbucket'
+  InfrastructureStackName:
+    Type: String
+    Default: "mellon-app-infrastructure"
+    Description: The name of the parent infrastructure/networking stack that you created. Necessary
+                 to locate and reference resources created by that stack.    
 
 Outputs:
   StateMachine:
@@ -31,16 +40,18 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       LoggingConfiguration:
-        DestinationBucketName: !ImportValue wse-web-logs
-        LogFilePrefix: s3/manifest-pipeline/
+        DestinationBucketName:
+          Fn::ImportValue: !Join [':', [!Ref InfrastructureStackName, 'LogBucket']]
+        LogFilePrefix: s3/data-broker/
 
   ManifestBucket:
     Type: AWS::S3::Bucket
     Properties:
       AccessControl: PublicRead
       LoggingConfiguration:
-        DestinationBucketName: !ImportValue wse-web-logs
-        LogFilePrefix: s3/manifest-pipeline/
+        DestinationBucketName:
+          Fn::ImportValue: !Join [':', [!Ref InfrastructureStackName, 'LogBucket']]
+        LogFilePrefix: s3/data-broker/
       WebsiteConfiguration:
         IndexDocument: index.json
         ErrorDocument: index.json
@@ -89,6 +100,12 @@ Resources:
                       -
                         - !GetAtt ManifestBucket.Arn
                         - "/*"
+                  - Fn::Join:
+                    - ""
+                    -
+                      - !Sub "arn:aws:s3:::"
+                      - !Ref ImageSourceBucket
+                      - "/*"
 
 
   IndexInputLambdaFunction:
@@ -105,6 +122,7 @@ Resources:
         Variables:
           PROCESS_BUCKET: !Ref ProcessBucket
           MANIFEST_BUCKET: !Ref ManifestBucket
+          IMAGE_BUCKET: !Ref ImageSourceBucket
 
   IndexInputLambdaFunctionLogs:
     Type: AWS::Logs::LogGroup

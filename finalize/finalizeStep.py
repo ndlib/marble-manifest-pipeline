@@ -41,7 +41,7 @@ class finalizeStep():
                 'Bucket': self.manifestMetadata["config"]["process-bucket"],
                 'Key': o.object_key
             }
-            to_bucket.copy(copy_source, self.manifestMetadata["config"]["image-server-bucket-basepath"] + "/" + self.id + "/" + os.path.basename(o.object_key))
+            to_bucket.copy(copy_source, self.manifestMetadata["config"]["image-server-bucket-basepath"] + self.id + "/" + os.path.basename(o.object_key))
         return
 
     def moveManifest(self):
