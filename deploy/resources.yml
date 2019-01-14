@@ -33,6 +33,27 @@ Resources:
         DestinationBucketName: !ImportValue wse-web-logs
         LogFilePrefix: s3/manifest-pipeline/process/
 
+  ManifestBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      LoggingConfiguration:
+        DestinationBucketName: !ImportValue wse-web-logs
+        LogFilePrefix: s3/manifest-pipeline/
+      WebsiteConfiguration:
+        IndexDocument: index.json
+        ErrorDocument: index.json
+      CorsConfiguration:
+        CorsRules:
+          - Id: DefaultCorsHeader
+            AllowedHeaders:
+              - Authorization
+            AllowedMethods:
+              - GET
+            AllowedOrigins:
+              - '*'
+            MaxAge: 3000
+
   LambdaExecutionRole:
     Type: "AWS::IAM::Role"
     Properties:
@@ -55,14 +76,19 @@ Resources:
                   - "s3:ListBucket"
                 Effect: "Allow"
                 Resource:
-                  # This one is the base bucket name for the ListBucket permission
                   - !GetAtt ProcessBucket.Arn
-                  # This one is for the Get/Put permissions to all objects in the bucket
                   - Fn::Join:
                       - ""
                       -
                         - !GetAtt ProcessBucket.Arn
                         - "/*"
+                  - !GetAtt ManifestBucket.Arn
+                  - Fn::Join:
+                      - ""
+                      -
+                        - !GetAtt ManifestBucket.Arn
+                        - "/*"
+
 
   IndexInputLambdaFunction:
     Type: "AWS::Lambda::Function"
@@ -77,6 +103,7 @@ Resources:
       Environment:
         Variables:
           PROCESS_BUCKET: !Ref ProcessBucket
+          MANIFEST_BUCKET: !Ref ManifestBucket
 
   IndexInputLambdaFunctionLogs:
     Type: AWS::Logs::LogGroup
@@ -101,6 +128,26 @@ Resources:
       LogGroupName: !Sub /aws/lambda/${ManifestLambdaFunction}
       RetentionInDays: 7
 
+  FinalizeLambdaFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Handler: finalize/handler.run
+      Role: !GetAtt [ LambdaExecutionRole, Arn ]
+      Runtime: python3.7
+      Timeout: "25"
+      Code:
+        S3Bucket: !Ref TemplateBucket
+        S3Key: !Sub ${TemplateFolder}/finalize.zip
+      Environment:
+        Variables:
+          PROCESS_BUCKET: !Ref ProcessBucket
+
+  FinalizeLambdaFunctionLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${FinalizeLambdaFunction}
+      RetentionInDays: 7
+ 
   # PYRAMID GENERATOR PROCESSING
   PGCounterLambdaFunction:
     Type: "AWS::Lambda::Function"
@@ -228,7 +275,7 @@ Resources:
                             "Next": "PGImgProcessor"
                         }
                     ],
-                    "Default": "Done"
+                    "Default": "Finalize"
                 },
                 "PGImgProcessor": {
                     "Type": "Task",
@@ -236,11 +283,12 @@ Resources:
                     "ResultPath": "$.data",
                     "Next": "PGIterator"
                 },
-                "Done": {
-                    "Type": "Pass",
-                    "End": true
+                "Finalize": {
+                  "Type": "Task",
+                  "Resource": "${finalizeLambdaArn}",
+                  "End": true
                 }
               }
             }
-          - { indexInputLambdaArn: !GetAtt [ IndexInputLambdaFunction, Arn ], manifestLambdaArn: !GetAtt [ ManifestLambdaFunction, Arn ], pgCountLambdaArn: !GetAtt [ PGCounterLambdaFunction, Arn], pgIteratorLambdaArn: !GetAtt [ PGIteratorLambdaFunction, Arn], pgImgProcLambdaArn: !GetAtt [ PGImgProcLambdaFunction, Arn] }
+          - { indexInputLambdaArn: !GetAtt [ IndexInputLambdaFunction, Arn ], manifestLambdaArn: !GetAtt [ ManifestLambdaFunction, Arn ], pgCountLambdaArn: !GetAtt [ PGCounterLambdaFunction, Arn], pgIteratorLambdaArn: !GetAtt [ PGIteratorLambdaFunction, Arn], pgImgProcLambdaArn: !GetAtt [ PGImgProcLambdaFunction, Arn], finalizeLambdaArn: !GetAtt [ FinalizeLambdaFunction, Arn ] }
       RoleArn: !GetAtt [ StatesExecutionRole, Arn ]

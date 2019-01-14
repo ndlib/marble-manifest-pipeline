@@ -36,6 +36,11 @@ Artifacts:
         - ../manifest-from-input-json/handler.py
         - ../manifest-from-input-json/processJson.py
     -
+      Name: finalize
+      Files:
+        - ../finalize/handler.py
+        - ../finalize/finalizeStep.py        
+    -
       Name: pyramid
       Files:
         - ../pyramid-generator
