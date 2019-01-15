@@ -34,9 +34,21 @@ class processJson():
         self.result_json['description'] = self.global_data['description']
         self.result_json['license'] = self.global_data['rights']
         self.result_json['attribution'] = self.global_data['attribution']
+
         # currently, one sequence is allowed per manifest
         sequence_data = self.global_data['sequences'][0]
+        self._add_thumbnail(sequence_data)
         self._add_sequence( sequence_data)
+
+
+    def _add_thumbnail(self, sequence_data):
+        file_name = sequence_data['pages'][0]['file']
+        thumbnail = {}
+        thumbnail['@id'] = self.global_data['config']['image-server-base-url'] + '/' + self.id + '/' + file_name + '/full/80,100/0/default.jpg'
+        thumbnail['service'] = {}
+        thumbnail['@context'] = "http://iiif.io/api/image/2/context.json"
+        thumbnail['@id'] = self.global_data['config']['image-server-base-url'] + '/' + self.id
+        thumbnail['profile'] = "http://iiif.io/api/image/2/level1.json"
 
     def _add_sequence( self, sequence_data ):
         self.result_json['sequences'] = []
