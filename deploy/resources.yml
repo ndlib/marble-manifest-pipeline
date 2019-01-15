@@ -19,7 +19,7 @@ Parameters:
     Description: The github version of this deployment
   ImageSourceBucket:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Description: The name of the source bucket that the IIIF service will read from for its assets.
+    Description: The name of the source bucket that the IIIF Image service will read from for its assets.
     Default: '/all/stacks/mellon-data-broker-dev/publicbucket'
   InfrastructureStackName:
     Type: String
@@ -33,6 +33,9 @@ Outputs:
 
   ProcessBucket:
     Value: !Ref ProcessBucket
+
+  ManifestBucket:
+    Value: !Ref ManifestBucket
 
 Resources:
   ProcessBucket:
@@ -107,6 +110,11 @@ Resources:
                     -
                       - !Sub "arn:aws:s3:::"
                       - !Ref ImageSourceBucket
+                  - Fn::Join:
+                    - ""
+                    -
+                      - !Sub "arn:aws:s3:::"
+                      - !Ref ImageSourceBucket
                       - "/*"
 
 
@@ -125,6 +133,12 @@ Resources:
           PROCESS_BUCKET: !Ref ProcessBucket
           MANIFEST_BUCKET: !Ref ManifestBucket
           IMAGE_BUCKET: !Ref ImageSourceBucket
+          MANIFEST_URL: Fn::Join:
+            - ""
+            -
+              - !Ref ManifestBucket
+              - ".s3-website-us-east-1.amazonaws.com/"
+
 
   IndexInputLambdaFunctionLogs:
     Type: AWS::Logs::LogGroup
