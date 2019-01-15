@@ -22,7 +22,7 @@ class processCsv():
     def _get_config_param(self):
         # get these from wherever
         self.config['image-server-base-url']='https://image-server.library.nd.edu:8182/iiif/2'
-        self.config["manifest-server-base-url"] = "https://manifest.nd.edu/"
+        self.config["manifest-server-base-url"] = "https://manifest.nd.edu"
         self.config['process-bucket'] = self.process_bucket
         self.config['process-bucket-read-basepath'] = 'process'
         self.config['process-bucket-write-basepath'] = 'finished'
