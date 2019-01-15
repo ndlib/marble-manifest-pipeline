@@ -54,7 +54,8 @@ class finalizeStep():
         }
 
         bucket = s3.Bucket(self.manifestMetadata["config"]["manifest-server-bucket"])
-        bucket.copy(copy_source, self.test_basepath(self.manifestMetadata["config"]["manifest-server-bucket-basepath"]) + self.id + "/manifest/index.json")
+        print(copy_source)
+        bucket.copy(copy_source, self.test_basepath(self.manifestMetadata["config"]["manifest-server-bucket-basepath"]) + self.id + "/manifest/index.json", ExtraArgs={'ACL':'public-read'})
 
         return
 
