@@ -133,11 +133,12 @@ Resources:
           PROCESS_BUCKET: !Ref ProcessBucket
           MANIFEST_BUCKET: !Ref ManifestBucket
           IMAGE_BUCKET: !Ref ImageSourceBucket
-          MANIFEST_URL: Fn::Join:
-            - ""
-            -
-              - !Ref ManifestBucket
-              - ".s3-website-us-east-1.amazonaws.com/"
+          MANIFEST_URL:
+            Fn::Join:
+              - ""
+              -
+                - !Ref ManifestBucket
+                - ".s3-website-us-east-1.amazonaws.com/"
 
 
   IndexInputLambdaFunctionLogs:
