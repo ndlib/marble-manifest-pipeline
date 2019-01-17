@@ -134,14 +134,14 @@ class processJson():
     def printManifest(self):
         print(json.dumps(self.result_json, indent=2))
 
-    def _write_json_s3(self, key, data):
+    def _write_json_s3(self):
         s3 = boto3.resource('s3')
+        key = self.global_data["config"]["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
         s3.Object(self.global_data["config"]["process-bucket"], key).put(Body=json.dumps(data))
 
     # write data to manifest json file
     def dumpManifest(self):
-        key = self.global_data["config"]["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
-        self._write_json_s3(key, json.dumps(self.result_json))
+        self._write_json_s3(key)
 
     # store event data
     def writeEventData(self, event):
