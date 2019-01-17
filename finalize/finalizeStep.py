@@ -5,12 +5,12 @@ from botocore.errorfactory import ClientError
 class finalizeStep():
     # class constructor
 
-    def __init__(self, id, event):
+    def __init__(self, id, eventConfig):
         self.id = id
         self.config = {}
-        self.config['process-bucket-read-basepath'] = event['process-bucket-read-basepath']
-        self.config['event-file'] = event["event-file"]
-        self.config['process-bucket'] = event["process-bucket"]
+        self.config['process-bucket-read-basepath'] = eventConfig['process-bucket-read-basepath']
+        self.config['event-file'] = eventConfig["event-file"]
+        self.config['process-bucket'] = eventConfig["process-bucket"]
         self.manifestMetadata = self.readEventData(id)
         self.error = []
 

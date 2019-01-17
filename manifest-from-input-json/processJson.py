@@ -2,12 +2,12 @@ import json, glob
 import boto3
 
 class processJson():
-    def __init__(self, id, event):
+    def __init__(self, id, eventConfig):
         self.result_json = {}
         self.config = {}
-        self.config['process-bucket-read-basepath'] = event['process-bucket-read-basepath']
-        self.config['event-file'] = event["event-file"]
-        self.config['process-bucket'] = event["process-bucket"]
+        self.config['process-bucket-read-basepath'] = eventConfig['process-bucket-read-basepath']
+        self.config['event-file'] = eventConfig["event-file"]
+        self.config['process-bucket'] = eventConfig["process-bucket"]
         self.global_data = self.readEventData(id)
         self.error = []
         self.id = id

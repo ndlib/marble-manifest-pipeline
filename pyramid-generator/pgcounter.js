@@ -2,7 +2,6 @@ const AWS = require('aws-sdk')
 
 exports.counter = async (event, context, callback) => {
 //async function foo() {
-  console.log(event)
   const eventId = event["event-config"]["process-bucket-read-basepath"]
    + "/" + event["id"] + "/"
   const imagesFolder = 'images/'
@@ -40,7 +39,6 @@ exports.counter = async (event, context, callback) => {
 
   event.pgimage = { "iterator": { "images": images } }
   //event.pgimage.iterator = { "images": images }
-  console.log(event)
   callback(null, event)
 }
 
