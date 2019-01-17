@@ -47,7 +47,7 @@ class processJson():
     def _add_thumbnail(self, sequence_data):
         file_name = sequence_data['pages'][0]['file']
         thumbnail = {}
-        thumbnail['@id'] = self.global_data['config']['image-server-base-url'] + '/' + self.id + '/' + file_name + '/full/80,100/0/default.jpg'
+        thumbnail['@id'] = self.global_data['config']['image-server-base-url'] + '/' + self.id + '%2F' + file_name + '/full/80,100/0/default.jpg'
         thumbnail['service'] = {}
         thumbnail['@context'] = "http://iiif.io/api/image/2/context.json"
         thumbnail['@id'] = self.global_data['config']['image-server-base-url'] + '/' + self.id
@@ -96,7 +96,7 @@ class processJson():
 
     def _add_resource_to_image( self, page_data, i ):
         this_item = {}
-        this_item['@id'] = self.global_data['config']['image-server-base-url'] + '/' + self.id + '/' + page_data['file'] + '/full/full/0/default.jpg'
+        this_item['@id'] = self.global_data['config']['image-server-base-url'] + '/' + self.id + '%2F' + page_data['file'] + '/full/full/0/default.jpg'
         this_item['@type'] = 'dctypes:Image'
         this_item['format'] = 'image/jpeg'
         self.result_json['sequences'][0]['canvases'][i]['images'][0]['resource'] = this_item
@@ -104,7 +104,7 @@ class processJson():
 
     def _add_service_to_resource( self, page_data, i ):
         this_item = {}
-        this_item['@id'] = self.global_data['config']['image-server-base-url'] + '/' + self.id + '/' + page_data['file']
+        this_item['@id'] = self.global_data['config']['image-server-base-url'] + '/' + self.id + '%2F' + page_data['file']
         this_item['profile'] = "http://iiif.io/api/image/2/level2.json"
         this_item['@context'] = "http://iiif.io/api/image/2/context.json"
         self.result_json['sequences'][0]['canvases'][i]['images'][0]['resource']['service'] = this_item
