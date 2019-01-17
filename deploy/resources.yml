@@ -139,8 +139,7 @@ Resources:
               - ""
               -
                 - !Ref ManifestBucket
-                - ".s3-website-us-east-1.amazonaws.com
-
+                - ".s3-website-us-east-1.amazonaws.com"
 
   IndexInputLambdaFunctionLogs:
     Type: AWS::Logs::LogGroup
