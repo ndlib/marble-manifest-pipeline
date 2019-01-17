@@ -4,7 +4,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 from finalizeStep import finalizeStep
 
 def run(event, context):
-    step = finalizeStep(event.get("id"), event.get("data"))
+    step = finalizeStep(event.get("id"),event.get('event-config'))
     step.run()
 
     return event

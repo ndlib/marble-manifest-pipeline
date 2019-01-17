@@ -293,20 +293,18 @@ Resources:
                 "PGCount": {
                   "Type": "Task",
                   "Resource": "${pgCountLambdaArn}",
-                  "ResultPath": "$.data",
                   "Next": "PGIterator"
                 },
                 "PGIterator": {
                     "Type": "Task",
                     "Resource": "${pgIteratorLambdaArn}",
-                    "ResultPath": "$.data",
                     "Next": "PGIsCountReached"
                 },
                 "PGIsCountReached": {
                     "Type": "Choice",
                     "Choices": [
                         {
-                            "Variable": "$.data.iterator.continue",
+                          "Variable": "$.pgimage.iterator.continue",
                             "BooleanEquals": true,
                             "Next": "PGImgProcessor"
                         }
@@ -316,7 +314,6 @@ Resources:
                 "PGImgProcessor": {
                     "Type": "Task",
                     "Resource": "${pgImgProcLambdaArn}",
-                    "ResultPath": "$.data",
                     "Next": "PGIterator"
                 },
                 "Finalize": {

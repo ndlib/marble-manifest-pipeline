@@ -1,9 +1,9 @@
 const AWS = require('aws-sdk')
 
 exports.counter = async (event, context, callback) => {
-
-  const eventId = event["data"]["config"]["process-bucket-read-basepath"]
-   + "/" + event["data"]["unique-identifier"] + "/"
+//async function foo() {
+  const eventId = event["event-config"]["process-bucket-read-basepath"]
+   + "/" + event["id"] + "/"
   const imagesFolder = 'images/'
   let images = []
   try {
@@ -23,7 +23,6 @@ exports.counter = async (event, context, callback) => {
     while(params.ContinuationToken || attempt === 0) {
       attempt++
       const objs = await s3.listObjectsV2(params).promise()
-      console.log(objs)
       objs.Contents.forEach(function (content) {
         //images.push(content.Key.replace(eventId + imagesFolder,''))
         images.push(content.Key)
@@ -38,6 +37,9 @@ exports.counter = async (event, context, callback) => {
     console.log(err, err.message)
   }
 
-  event.data.iterator = { "images": images }
-  callback(null, event.data)
+  event.pgimage = { "iterator": { "images": images } }
+  //event.pgimage.iterator = { "images": images }
+  callback(null, event)
 }
+
+//foo()

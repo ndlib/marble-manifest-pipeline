@@ -2,10 +2,13 @@ import json, glob
 import boto3
 
 class processJson():
-    def __init__(self, id, eventData):
+    def __init__(self, id, eventConfig):
         self.result_json = {}
         self.config = {}
-        self.global_data = eventData
+        self.config['process-bucket-read-basepath'] = eventConfig['process-bucket-read-basepath']
+        self.config['event-file'] = eventConfig["event-file"]
+        self.config['process-bucket'] = eventConfig["process-bucket"]
+        self.global_data = self.readEventData(id)
         self.error = []
         self.id = id
 
@@ -131,11 +134,23 @@ class processJson():
     def printManifest(self):
         print(json.dumps(self.result_json, indent=2))
 
+    def _write_json_s3(self, key, data):
+        s3 = boto3.resource('s3')
+        s3.Object(self.global_data["config"]["process-bucket"], key).put(Body=json.dumps(data))
+
     # write data to manifest json file
     def dumpManifest(self):
-        s3 = boto3.resource('s3')
         key = self.global_data["config"]["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
-        #k.content_type = "application/json+ld"
-        #k.set_contents_from_string(json.dumps(self.result_json))
+        self._write_json_s3(key, json.dumps(self.result_json))
 
-        s3.Object(self.global_data["config"]["process-bucket"], key).put(Body=json.dumps(self.result_json))
+    # store event data
+    def writeEventData(self, event):
+        key = self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config["event-file"]
+        self._write_json_s3(key, json.dumps(event))
+
+    # read event data
+    def readEventData(self, event_id):
+        remote_file = self.config['process-bucket-read-basepath'] + "/" + event_id + "/" + self.config["event-file"]
+        content_object = boto3.resource('s3').Object(self.config['process-bucket'], remote_file)
+        file_content = content_object.get()['Body'].read().decode('utf-8')
+        return json.loads(file_content).get('data')

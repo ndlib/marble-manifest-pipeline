@@ -10,8 +10,15 @@ def run(event, context):
         raise Exception(csvSet.error)
 
     csvSet.buildJson()
-    event.update( { "data": csvSet.result_json })
-    #print resulting json to STDOUT
+    csvSet.writeEventData({ "data": csvSet.result_json })
+    event.update({ "event-config": 
+        {
+            "process-bucket": csvSet.config['process-bucket'],
+            "process-bucket-read-basepath": csvSet.config['process-bucket-read-basepath'],
+            "process-bucket-write-basepath": csvSet.config['process-bucket-write-basepath'],
+            "event-file": csvSet.config['event-file']
+        }
+    })
     return event
 
 # python -c 'from handler import *; test()'
