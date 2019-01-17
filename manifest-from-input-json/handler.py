@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 from processJson import processJson
 
 def run(event, context):
-    processSet = processJson(event.get('id'),event.get('event-config'))
+    processSet = processJson(event.get('id'),event.get('config'))
     processSet._create_manifest_json()
     #if there are errors add them in
 

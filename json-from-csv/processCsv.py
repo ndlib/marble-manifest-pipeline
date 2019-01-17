@@ -4,46 +4,20 @@ from botocore.errorfactory import ClientError
 
 class processCsv():
     # class constructor
-    def __init__(self, id, process_bucket, manifest_bucket, image_bucket, manifest_url):
+    def __init__(self, id, eventConfig):
         self.id = id
-        self.process_bucket = process_bucket
-        self.manifest_bucket = manifest_bucket
-        self.image_bucket = image_bucket
-        self.manifest_url = manifest_url
         self.error = []
         #start with an empty result json and config
         self.result_json = {}
-        self.config = {}
-        # get config information
-        self._get_config_param()
+        self.config = eventConfig
         # population json info that is not csv-dependent
         self._set_json_skeleton()
-
-
-    def _get_config_param(self):
-        # get these from wherever
-        self.config['image-server-base-url']='https://image-server.library.nd.edu:8182/iiif/2'
-        self.config["manifest-server-base-url"] = self.manifest_url
-        self.config['process-bucket'] = self.process_bucket
-        self.config['process-bucket-read-basepath'] = 'process'
-        self.config['process-bucket-write-basepath'] = 'finished'
-        self.config['image-server-bucket'] = self.image_bucket
-        self.config['image-server-bucket-basepath'] = ''
-        self.config['manifest-server-bucket'] = self.manifest_bucket
-        self.config['manifest-server-bucket-basepath'] = ''
-        self.config['sequence-csv'] = 'sequence.csv'
-        self.config['main-csv'] = 'main.csv'
-        self.config['canvas-default-height'] = 2000
-        self.config['canvas-default-width'] = 2000
-        self.config["notify-on-finished"] = "notify@email.com"
-        self.config["event-file"] = "event.json"
 
     # set up framework of an empty results_json
     def _set_json_skeleton(self):
         self.result_json['errors']=[]
         self.result_json['creator']='creator@email.com'
         self.result_json['viewingDirection']='left-to-right'
-        self.result_json['config'] = self.config
         self.result_json['metadata']=[]
         self.result_json['sequences']=[]
         self.result_json['sequences'].append({})
@@ -109,7 +83,7 @@ class processCsv():
 
     def buildJson(self):
         s3 = boto3.resource('s3')
-        obj = s3.Object(self.config['process-bucket'], self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config['main-csv']).download_file('/tmp/' + self.config['main-csv'])
+        s3.Object(self.config['process-bucket'], self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config['main-csv']).download_file('/tmp/' + self.config['main-csv'])
 
         with open('/tmp/' + self.config['main-csv'], 'r') as csv_file:
             reader = csv.DictReader(csv_file)
@@ -123,7 +97,7 @@ class processCsv():
                     self._get_metadata_attr(this_row)
 
          #Sequence CSV File next, add to pages
-        obj = s3.Object(self.config['process-bucket'], self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config['sequence-csv']).download_file('/tmp/' + self.config['sequence-csv'])
+        s3.Object(self.config['process-bucket'], self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config['sequence-csv']).download_file('/tmp/' + self.config['sequence-csv'])
 
         with open('/tmp/' + self.config['sequence-csv'], 'r') as sequence_file:
             reader = csv.DictReader(sequence_file)

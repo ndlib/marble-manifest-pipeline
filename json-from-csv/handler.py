@@ -5,20 +5,31 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 from processCsv import processCsv
 
 def run(event, context):
-    csvSet = processCsv(event.get("id"), os.environ['PROCESS_BUCKET'], os.environ['MANIFEST_BUCKET'], os.environ['IMAGE_BUCKET'], os.environ['MANIFEST_URL'])
+    event.update({ "config": 
+        {
+            "image-server-base-url": 'https://image-server.library.nd.edu:8182/iiif/2',
+            "manifest-server-base-url": os.environ['MANIFEST_URL'],
+            "process-bucket": os.environ['PROCESS_BUCKET'],
+            "process-bucket-read-basepath": 'process',
+            "process-bucket-write-basepath": 'finished',
+            "image-server-bucket": os.environ['IMAGE_BUCKET'],
+            "image-server-bucket-basepath": '',
+            "manifest-server-bucket": os.environ['MANIFEST_BUCKET'],
+            "manifest-server-bucket-basepath": '',
+            "sequence-csv": 'sequence.csv',
+            "main-csv": 'main.csv',
+            "canvas-default-height": 2000,
+            "canvas-default-width": 2000,
+            "notify-on-finished": "notify@email.com",
+            "event-file": "event.json"
+        }
+    })
+    csvSet = processCsv(event.get("id"), event.get("config"))
     if not csvSet.verifyCsvExist():
         raise Exception(csvSet.error)
 
     csvSet.buildJson()
     csvSet.writeEventData({ "data": csvSet.result_json })
-    event.update({ "event-config": 
-        {
-            "process-bucket": csvSet.config['process-bucket'],
-            "process-bucket-read-basepath": csvSet.config['process-bucket-read-basepath'],
-            "process-bucket-write-basepath": csvSet.config['process-bucket-write-basepath'],
-            "event-file": csvSet.config['event-file']
-        }
-    })
     return event
 
 # python -c 'from handler import *; test()'

@@ -4,10 +4,7 @@ import boto3
 class processJson():
     def __init__(self, id, eventConfig):
         self.result_json = {}
-        self.config = {}
-        self.config['process-bucket-read-basepath'] = eventConfig['process-bucket-read-basepath']
-        self.config['event-file'] = eventConfig["event-file"]
-        self.config['process-bucket'] = eventConfig["process-bucket"]
+        self.config = eventConfig
         self.global_data = self.readEventData(id)
         self.error = []
         self.id = id
@@ -19,11 +16,11 @@ class processJson():
         self.output_file_suffix = '-manifest.json'
 
     def _load_global_data( self ):
-        self.global_data['id-base'] = self.global_data['config']['manifest-server-base-url'] + '/' + self.id + '/'
+        self.global_data['id-base'] = self.config['manifest-server-base-url'] + '/' + self.id + '/'
         #self.global_data['output-file'] = self.output_base_url + input_json['unique-identifier'] + self.output_file_suffix
-        #self.global_data['config']['default-height'] = 2000
-        #self.global_data['config']['default-width'] = 2000
-        #self.global_data['config']['viewingDirection'] = 'left-to-right'
+        #self.config['default-height'] = 2000
+        #self.config['default-width'] = 2000
+        #self.config['viewingDirection'] = 'left-to-right'
 
     # build results_json
     def _create_manifest_json( self ):
@@ -47,10 +44,10 @@ class processJson():
     def _add_thumbnail(self, sequence_data):
         file_name = sequence_data['pages'][0]['file']
         thumbnail = {}
-        thumbnail['@id'] = self.global_data['config']['image-server-base-url'] + '/' + self.id + '%2F' + file_name + '/full/80,100/0/default.jpg'
+        thumbnail['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + file_name + '/full/80,100/0/default.jpg'
         thumbnail['service'] = {}
         thumbnail['@context'] = "http://iiif.io/api/image/2/context.json"
-        thumbnail['@id'] = self.global_data['config']['image-server-base-url'] + '/' + self.id
+        thumbnail['@id'] = self.config['image-server-base-url'] + '/' + self.id
         thumbnail['profile'] = "http://iiif.io/api/image/2/level1.json"
 
     def _add_sequence( self, sequence_data ):
@@ -79,8 +76,8 @@ class processJson():
         this_item['@id'] = self.global_data['id-base'] + 'canvas/p' + str(i + 1)
         this_item['@type'] = 'sc:Canvas'
         this_item['label'] = page_data['label']
-        this_item['height'] = self.global_data['config']['canvas-default-height']
-        this_item['width'] = self.global_data['config']['canvas-default-width']
+        this_item['height'] = self.config['canvas-default-height']
+        this_item['width'] = self.config['canvas-default-width']
         self.result_json['sequences'][0]['canvases'].append(this_item)
         self._add_image_to_canvas(page_data, i)
 
@@ -96,7 +93,7 @@ class processJson():
 
     def _add_resource_to_image( self, page_data, i ):
         this_item = {}
-        this_item['@id'] = self.global_data['config']['image-server-base-url'] + '/' + self.id + '%2F' + page_data['file'] + '/full/full/0/default.jpg'
+        this_item['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + page_data['file'] + '/full/full/0/default.jpg'
         this_item['@type'] = 'dctypes:Image'
         this_item['format'] = 'image/jpeg'
         self.result_json['sequences'][0]['canvases'][i]['images'][0]['resource'] = this_item
@@ -104,7 +101,7 @@ class processJson():
 
     def _add_service_to_resource( self, page_data, i ):
         this_item = {}
-        this_item['@id'] = self.global_data['config']['image-server-base-url'] + '/' + self.id + '%2F' + page_data['file']
+        this_item['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + page_data['file']
         this_item['profile'] = "http://iiif.io/api/image/2/level2.json"
         this_item['@context'] = "http://iiif.io/api/image/2/context.json"
         self.result_json['sequences'][0]['canvases'][i]['images'][0]['resource']['service'] = this_item
@@ -136,11 +133,11 @@ class processJson():
 
     def _write_json_s3(self, key, data):
         s3 = boto3.resource('s3')
-        s3.Object(self.global_data["config"]["process-bucket"], key).put(Body=json.dumps(data))
+        s3.Object(self.config["process-bucket"], key).put(Body=json.dumps(data))
 
     # write data to manifest json file
     def dumpManifest(self):
-        key = self.global_data["config"]["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
+        key = self.config["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
         self._write_json_s3(key, json.dumps(self.result_json))
 
     # store event data

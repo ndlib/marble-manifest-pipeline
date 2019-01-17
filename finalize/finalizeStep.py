@@ -7,10 +7,7 @@ class finalizeStep():
 
     def __init__(self, id, eventConfig):
         self.id = id
-        self.config = {}
-        self.config['process-bucket-read-basepath'] = eventConfig['process-bucket-read-basepath']
-        self.config['event-file'] = eventConfig["event-file"]
-        self.config['process-bucket'] = eventConfig["process-bucket"]
+        self.config = eventConfig
         self.manifestMetadata = self.readEventData(id)
         self.error = []
 
@@ -34,18 +31,18 @@ class finalizeStep():
 
         s3 = boto3.resource('s3')
 
-        from_bucket = s3.Bucket(self.manifestMetadata["config"]["process-bucket"])
-        to_bucket = s3.Bucket(self.manifestMetadata["config"]["image-server-bucket"])
+        from_bucket = s3.Bucket(self.config["process-bucket"])
+        to_bucket = s3.Bucket(self.config["image-server-bucket"])
 
-        from_path = self.manifestMetadata["config"]["process-bucket-write-basepath"] + "/" + self.id + "/images/"
+        from_path = self.config["process-bucket-write-basepath"] + "/" + self.id + "/images/"
         all_objects = from_bucket.object_versions.filter(Prefix=from_path, Delimiter="/")
 
         for o in all_objects:
             copy_source = {
-                'Bucket': self.manifestMetadata["config"]["process-bucket"],
+                'Bucket': self.config["process-bucket"],
                 'Key': o.object_key
             }
-            to_bucket.copy(copy_source, self.manifestMetadata["config"]["image-server-bucket-basepath"] + self.id + "/" + os.path.basename(o.object_key))
+            to_bucket.copy(copy_source, self.config["image-server-bucket-basepath"] + self.id + "/" + os.path.basename(o.object_key))
         return
 
     def moveManifest(self):
@@ -53,13 +50,13 @@ class finalizeStep():
 
         s3 = boto3.resource('s3')
         copy_source = {
-          'Bucket': self.manifestMetadata["config"]["process-bucket"],
-          'Key': self.manifestMetadata["config"]["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
+          'Bucket': self.config["process-bucket"],
+          'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
         }
 
-        bucket = s3.Bucket(self.manifestMetadata["config"]["manifest-server-bucket"])
+        bucket = s3.Bucket(self.config["manifest-server-bucket"])
         print(copy_source)
-        bucket.copy(copy_source, self.test_basepath(self.manifestMetadata["config"]["manifest-server-bucket-basepath"]) + self.id + "/manifest/index.json", ExtraArgs={'ACL':'public-read'})
+        bucket.copy(copy_source, self.test_basepath(self.config["manifest-server-bucket-basepath"]) + self.id + "/manifest/index.json", ExtraArgs={'ACL':'public-read'})
 
         return
 
@@ -67,27 +64,27 @@ class finalizeStep():
         print("Save Last Run")
         s3 = boto3.resource('s3')
 
-        from_bucket = s3.Bucket(self.manifestMetadata["config"]["process-bucket"])
-        to_bucket = s3.Bucket(self.manifestMetadata["config"]["process-bucket"])
+        from_bucket = s3.Bucket(self.config["process-bucket"])
+        to_bucket = s3.Bucket(self.config["process-bucket"])
 
-        from_path = self.manifestMetadata["config"]["process-bucket-read-basepath"] + "/" + self.id + "/"
+        from_path = self.config["process-bucket-read-basepath"] + "/" + self.id + "/"
         # all the items in the process directory for the id
         all_objects = from_bucket.object_versions.filter(Prefix=from_path, Delimiter="/")
 
         for o in all_objects:
             copy_source = {
-                'Bucket': self.manifestMetadata["config"]["process-bucket"],
+                'Bucket': self.config["process-bucket"],
                 'Key': o.object_key
             }
-            to_bucket.copy(copy_source, self.manifestMetadata["config"]["process-bucket-write-basepath"] + "/" + self.id + "/lastSuccessfullRun/" + os.path.basename(o.object_key))
+            to_bucket.copy(copy_source, self.config["process-bucket-write-basepath"] + "/" + self.id + "/lastSuccessfullRun/" + os.path.basename(o.object_key))
         return
 
     def saveIndexMetadata(self):
         print("Save Index Metadata")
         s3 = boto3.resource('s3')
 
-        bucket = self.manifestMetadata["config"]["process-bucket"]
-        key = self.manifestMetadata["config"]["process-bucket-write-basepath"] + "/" + self.id + "/stepFunctionsRunMetadata.json"
+        bucket = self.config["process-bucket"]
+        key = self.config["process-bucket-write-basepath"] + "/" + self.id + "/stepFunctionsRunMetadata.json"
         s3.Object(bucket, key).put(Body=json.dumps(self.manifestMetadata))
 
         return

@@ -3,7 +3,7 @@ const AWS = require('aws-sdk')
 
 exports.processor = async (event, context, callback) => {
 //async function foo() {
-  const eventId = event["event-config"]["process-bucket-write-basepath"]
+  const eventId = event["config"]["process-bucket-write-basepath"]
    + "/" + event["id"] + "/"
   const imagesFolder = 'images/'
   try {
