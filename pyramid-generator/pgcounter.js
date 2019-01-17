@@ -2,7 +2,7 @@ const AWS = require('aws-sdk')
 
 exports.counter = async (event, context, callback) => {
 //async function foo() {
-  const eventId = event["event-config"]["process-bucket-read-basepath"]
+  const eventId = event["config"]["process-bucket-read-basepath"]
    + "/" + event["id"] + "/"
   const imagesFolder = 'images/'
   let images = []
