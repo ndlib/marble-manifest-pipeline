@@ -5,13 +5,13 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 from processCsv import processCsv
 
 def run(event, context):
-    csvSet = processCsv(event.get("id"), os.environ['PROCESS_BUCKET'], os.environ['MANIFEST_BUCKET'], os.environ['IMAGE_BUCKET'], os.environ['MANIFEST_URL'])
+    csvSet = processCsv(event.get("id"), os.environ['PROCESS_BUCKET'], os.environ['MANIFEST_BUCKET'], os.environ['IMAGE_BUCKET'], os.environ['MANIFEST_URL'], os.environ['IMAGE_SERVER_URL'])
     if not csvSet.verifyCsvExist():
         raise Exception(csvSet.error)
 
     csvSet.buildJson()
     csvSet.writeEventData({ "data": csvSet.result_json })
-    event.update({ "event-config": 
+    event.update({ "event-config":
         {
             "process-bucket": csvSet.config['process-bucket'],
             "process-bucket-read-basepath": csvSet.config['process-bucket-read-basepath'],
