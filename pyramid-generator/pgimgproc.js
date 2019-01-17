@@ -3,11 +3,11 @@ const AWS = require('aws-sdk')
 
 exports.processor = async (event, context, callback) => {
 //async function foo() {
-  const eventId = event["data"]["config"]["process-bucket-write-basepath"]
-   + "/" + event["data"]["unique-identifier"] + "/"
+  const eventId = event["event-config"]["process-bucket-write-basepath"]
+   + "/" + event["id"] + "/"
   const imagesFolder = 'images/'
   try {
-    const img = event.data.iterator.imageToProcess
+    const img = event.pgimage.iterator.imageToProcess
     const getParams = {
       Bucket: process.env.PROCESS_BUCKET,
       Key: img
@@ -39,7 +39,7 @@ exports.processor = async (event, context, callback) => {
     console.error(err, err.message)
   }
 
-  callback(null, event.data)
+  callback(null, event)
 }
 
 //foo()

@@ -5,9 +5,13 @@ from botocore.errorfactory import ClientError
 class finalizeStep():
     # class constructor
 
-    def __init__(self, id, manifestMetadata):
+    def __init__(self, id, event):
         self.id = id
-        self.manifestMetadata = manifestMetadata
+        self.config = {}
+        self.config['process-bucket-read-basepath'] = event['process-bucket-read-basepath']
+        self.config['event-file'] = event["event-file"]
+        self.config['process-bucket'] = event["process-bucket"]
+        self.manifestMetadata = self.readEventData(id)
         self.error = []
 
     def run(self):
@@ -157,3 +161,10 @@ class finalizeStep():
             return basepath + "/"
 
         return ""
+
+    # read event data
+    def readEventData(self, event_id):
+        remote_file = self.config['process-bucket-read-basepath'] + "/" + event_id + "/" + self.config["event-file"]
+        content_object = boto3.resource('s3').Object(self.config['process-bucket'], remote_file)
+        file_content = content_object.get()['Body'].read().decode('utf-8')
+        return json.loads(file_content).get('data')

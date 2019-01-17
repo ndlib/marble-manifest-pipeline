@@ -1,4 +1,4 @@
-import json, csv, os, glob
+import json, csv, os, glob, io
 import boto3
 from botocore.errorfactory import ClientError
 
@@ -36,6 +36,7 @@ class processCsv():
         self.config['canvas-default-height'] = 2000
         self.config['canvas-default-width'] = 2000
         self.config["notify-on-finished"] = "notify@email.com"
+        self.config["event-file"] = "event.json"
 
     # set up framework of an empty results_json
     def _set_json_skeleton(self):
@@ -49,7 +50,7 @@ class processCsv():
         self.result_json['sequences'][0]['pages']=[]
 
     # returns True if main and sequence csv fles found, false otherwise
-    def verifyCsvExist(self,  csvDirectory = '.'):
+    def verifyCsvExist(self):
         s3 = boto3.client('s3')
 
         try:
@@ -132,3 +133,19 @@ class processCsv():
                     pass
                 else:
                     self._add_pages_to_sequence(this_row)
+
+    # store event data
+    def writeEventData(self, event):
+        local_file = '/tmp/' + self.config["event-file"]
+        with io.open(local_file, 'w', encoding='utf-8') as f:
+            f.write(json.dumps(event, ensure_ascii=False))
+        s3_file = self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config["event-file"]
+        boto3.resource('s3').Bucket(self.config['process-bucket']).upload_file(local_file, s3_file)
+        os.remove(local_file)
+
+    # read event data
+    def readEventData(self, filename):
+        remote_file = self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config["event-file"]
+        content_object = boto3.resource('s3').Object(self.config['process-bucket'], remote_file)
+        file_content = content_object.get()['Body'].read().decode('utf-8')
+        return json.loads(file_content)
