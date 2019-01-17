@@ -133,12 +133,13 @@ Resources:
           PROCESS_BUCKET: !Ref ProcessBucket
           MANIFEST_BUCKET: !Ref ManifestBucket
           IMAGE_BUCKET: !Ref ImageSourceBucket
+          IMAGE_SERVER_URL: !ImportValue mellon-image-service-dev:URL
           MANIFEST_URL:
             Fn::Join:
               - ""
               -
                 - !Ref ManifestBucket
-                - ".s3-website-us-east-1.amazonaws.com/"
+                - ".s3-website-us-east-1.amazonaws.com
 
 
   IndexInputLambdaFunctionLogs:
