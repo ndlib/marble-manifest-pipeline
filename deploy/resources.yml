@@ -21,6 +21,10 @@ Parameters:
     Type: 'AWS::SSM::Parameter::Value<String>'
     Description: The name of the source bucket that the IIIF Image service will read from for its assets.
     Default: '/all/stacks/mellon-data-broker-dev/publicbucket'
+  ImageServerUrl:
+    Type: 'AWS::SSM::Parameter::Value<String>'
+    Description: The url of the IIIF Image Server
+    Default: '/all/stacks/mellon-image-service-dev/url'
   InfrastructureStackName:
     Type: String
     Default: "mellon-app-infrastructure"
@@ -133,7 +137,7 @@ Resources:
           PROCESS_BUCKET: !Ref ProcessBucket
           MANIFEST_BUCKET: !Ref ManifestBucket
           IMAGE_BUCKET: !Ref ImageSourceBucket
-          IMAGE_SERVER_URL: !ImportValue mellon-image-service-dev:URL
+          IMAGE_SERVER_URL: !Ref ImageServerUrl
           MANIFEST_URL:
             Fn::Join:
               - ""
