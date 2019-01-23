@@ -42,13 +42,18 @@ class processJson():
 
 
     def _add_thumbnail(self, sequence_data):
-        file_name = sequence_data['pages'][0]['file']
+        file_name = sequence_data['pages'][0]['file'].split('.')[0] + ".tif"
         thumbnail = {}
         thumbnail['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + file_name + '/full/80,100/0/default.jpg'
-        thumbnail['service'] = {}
+        thumbnail['service'] = {
+            '@id': self.config['image-server-base-url'] + '/' + self.id + '%2F' + file_name,
+            'profile': "http://iiif.io/api/image/2/level2.json",
+            '@context': "http://iiif.io/api/image/2/context.json"
+        }
         thumbnail['@context'] = "http://iiif.io/api/image/2/context.json"
         thumbnail['@id'] = self.config['image-server-base-url'] + '/' + self.id
         thumbnail['profile'] = "http://iiif.io/api/image/2/level1.json"
+        self.result_json['thumbnail'] = thumbnail
 
     def _add_sequence( self, sequence_data ):
         self.result_json['sequences'] = []
@@ -93,7 +98,8 @@ class processJson():
 
     def _add_resource_to_image( self, page_data, i ):
         this_item = {}
-        this_item['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + page_data['file'] + '/full/full/0/default.jpg'
+        file = page_data['file'].split('.')[0] + ".tif"
+        this_item['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + file + '/full/full/0/default.jpg'
         this_item['@type'] = 'dctypes:Image'
         this_item['format'] = 'image/jpeg'
         self.result_json['sequences'][0]['canvases'][i]['images'][0]['resource'] = this_item
@@ -101,7 +107,8 @@ class processJson():
 
     def _add_service_to_resource( self, page_data, i ):
         this_item = {}
-        this_item['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + page_data['file']
+        file = page_data['file'].split('.')[0] + ".tif"
+        this_item['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + file
         this_item['profile'] = "http://iiif.io/api/image/2/level2.json"
         this_item['@context'] = "http://iiif.io/api/image/2/context.json"
         self.result_json['sequences'][0]['canvases'][i]['images'][0]['resource']['service'] = this_item
@@ -138,12 +145,12 @@ class processJson():
     # write data to manifest json file
     def dumpManifest(self):
         key = self.config["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
-        self._write_json_s3(key, json.dumps(self.result_json))
+        self._write_json_s3(key, self.result_json)
 
     # store event data
     def writeEventData(self, event):
         key = self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config["event-file"]
-        self._write_json_s3(key, json.dumps(event))
+        self._write_json_s3(key, event)
 
     # read event data
     def readEventData(self, event_id):

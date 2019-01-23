@@ -13,6 +13,7 @@ class processCsv():
         # population json info that is not csv-dependent
         self._set_json_skeleton()
 
+
     # set up framework of an empty results_json
     def _set_json_skeleton(self):
         self.result_json['errors']=[]

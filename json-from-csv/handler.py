@@ -5,10 +5,10 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 from processCsv import processCsv
 
 def run(event, context):
-    event.update({ "config": 
+    event.update({ "config":
         {
-            "image-server-base-url": 'https://image-server.library.nd.edu:8182/iiif/2',
-            "manifest-server-base-url": os.environ['MANIFEST_URL'],
+            "image-server-base-url": 'https://' + os.environ['IMAGE_SERVER_URL'] + ':8182/iiif/2',
+            "manifest-server-base-url": 'https://' + os.environ['MANIFEST_URL'],
             "process-bucket": os.environ['PROCESS_BUCKET'],
             "process-bucket-read-basepath": 'process',
             "process-bucket-write-basepath": 'finished',
@@ -20,7 +20,7 @@ def run(event, context):
             "main-csv": 'main.csv',
             "canvas-default-height": 2000,
             "canvas-default-width": 2000,
-            "notify-on-finished": "notify@email.com",
+            "notify-on-finished": "jhartzle@nd.edu",
             "event-file": "event.json"
         }
     })
