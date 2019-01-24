@@ -135,3 +135,10 @@ To run using the example file, navigate to directory /manifest-from-input-json a
 ```python3 create_manifest.py ../example/ example-input.json ./```
 
 A JSON manifest file will be created in the output directory, and the JSON output will also be printed.
+
+
+## aws deployement temp
+
+aws cloudformation deploy --template-file /Users/jhartzle/Workspace/mellon-manifest-pipeline/output.yml --stack-name manifest-pipeline-dev1
+
+aws cloudformation deploy --template-file /Users/jhartzle/Workspace/mellon-manifest-pipeline/output.yml --stack-name manifest-pipeline-dev1 --capabilities CAPABILITY_IAM

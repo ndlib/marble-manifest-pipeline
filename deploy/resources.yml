@@ -1,22 +1,7 @@
-AWSTemplateFormatVersion: "2010-09-09"
+Transform: 'AWS::Serverless-2016-10-31'
 Description: "Manifest Pipeline"
 
 Parameters:
-  ServiceName:
-    Type: String
-    Description: The name of the service
-  Stage:
-    Type: String
-    Description: The deployed stage
-  TemplateBucket:
-    Type: String
-    Description: Bucket this (and code) is deployed in
-  TemplateFolder:
-    Type: String
-    Description: Location of template files
-  Version:
-    Type: String
-    Description: The github version of this deployment
   ImageSourceBucket:
     Type: 'AWS::SSM::Parameter::Value<String>'
     Description: The name of the source bucket that the IIIF Image service will read from for its assets.
@@ -123,15 +108,13 @@ Resources:
 
 
   IndexInputLambdaFunction:
-    Type: "AWS::Lambda::Function"
+    Type: AWS::Serverless::Function
     Properties:
-      Handler: json-from-csv/handler.run
+      Handler: handler.run
       Role: !GetAtt [ LambdaExecutionRole, Arn ]
       Runtime: python3.7
-      Timeout: "25"
-      Code:
-        S3Bucket: !Ref TemplateBucket
-        S3Key: !Sub ${TemplateFolder}/indexInput.zip
+      Timeout: 25
+      CodeUri: ../json-from-csv/
       Environment:
         Variables:
           PROCESS_BUCKET: !Ref ProcessBucket
@@ -145,112 +128,66 @@ Resources:
                 - !Ref ManifestBucket
                 - ".s3-website-us-east-1.amazonaws.com"
 
-  IndexInputLambdaFunctionLogs:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub /aws/lambda/${IndexInputLambdaFunction}
-      RetentionInDays: 7
-
   ManifestLambdaFunction:
-    Type: "AWS::Lambda::Function"
+    Type: AWS::Serverless::Function
     Properties:
-      Handler: manifest-from-input-json/handler.run
+      Handler: handler.run
       Role: !GetAtt [ LambdaExecutionRole, Arn ]
       Runtime: python3.7
-      Timeout: "25"
-      Code:
-        S3Bucket: !Ref TemplateBucket
-        S3Key: !Sub ${TemplateFolder}/manifest.zip
-
-  ManifestLambdaFunctionLogs:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub /aws/lambda/${ManifestLambdaFunction}
-      RetentionInDays: 7
+      Timeout: 25
+      CodeUri: ../manifest-from-input-json/
 
   FinalizeLambdaFunction:
-    Type: "AWS::Lambda::Function"
+    Type: AWS::Serverless::Function
     Properties:
-      Handler: finalize/handler.run
+      Handler: handler.run
       Role: !GetAtt [ LambdaExecutionRole, Arn ]
       Runtime: python3.7
-      Timeout: "25"
-      Code:
-        S3Bucket: !Ref TemplateBucket
-        S3Key: !Sub ${TemplateFolder}/finalize.zip
+      Timeout: 25
+      CodeUri: ../finalize/
       Environment:
         Variables:
           PROCESS_BUCKET: !Ref ProcessBucket
 
-  FinalizeLambdaFunctionLogs:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub /aws/lambda/${FinalizeLambdaFunction}
-      RetentionInDays: 7
-
   # PYRAMID GENERATOR PROCESSING
   PGCounterLambdaFunction:
-    Type: "AWS::Lambda::Function"
+    Type: AWS::Serverless::Function
     Properties:
-      Handler: pyramid-generator/pgcounter.counter
+      Handler: pgcounter.counter
       Role: !GetAtt [ LambdaExecutionRole, Arn ]
       Runtime: nodejs8.10
       Timeout: 120
       MemorySize: 256
-      Code:
-        S3Bucket: !Ref TemplateBucket
-        S3Key: !Sub ${TemplateFolder}/pyramid.zip
+      CodeUri: ../pyramid-generator/
       Environment:
         Variables:
           PROCESS_BUCKET: !Ref ProcessBucket
 
-  PGCounterLambdaFunctionLogs:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub /aws/lambda/${PGCounterLambdaFunction}
-      RetentionInDays: 7
-
   PGIteratorLambdaFunction:
-    Type: "AWS::Lambda::Function"
+    Type: AWS::Serverless::Function
     Properties:
       Handler: pyramid-generator/pgiterator.iterator
       Role: !GetAtt [ LambdaExecutionRole, Arn ]
       Runtime: nodejs8.10
       Timeout: 120
       MemorySize: 256
-      Code:
-        S3Bucket: !Ref TemplateBucket
-        S3Key: !Sub ${TemplateFolder}/pyramid.zip
+      CodeUri: ../pyramid-generator/
       Environment:
         Variables:
           PROCESS_BUCKET: !Ref ProcessBucket
 
-  PGIteratorLambdaFunctionLogs:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub /aws/lambda/${PGIteratorLambdaFunction}
-      RetentionInDays: 7
-
   PGImgProcLambdaFunction:
-    Type: "AWS::Lambda::Function"
+    Type: AWS::Serverless::Function
     Properties:
-      Handler: pyramid-generator/pgimgproc.processor
+      Handler: pgimgproc.processor
       Role: !GetAtt [ LambdaExecutionRole, Arn ]
       Runtime: nodejs8.10
       Timeout: 120
       MemorySize: 256
-      Code:
-        S3Bucket: !Ref TemplateBucket
-        S3Key: !Sub ${TemplateFolder}/pyramid.zip
+      CodeUri: ../pyramid-generator/
       Environment:
         Variables:
           PROCESS_BUCKET: !Ref ProcessBucket
-
-  PGImgProcLambdaFunctionLogs:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub /aws/lambda/${PGImgProcLambdaFunction}
-      RetentionInDays: 7
 
   StatesExecutionRole:
     Type: "AWS::IAM::Role"
