@@ -3,7 +3,7 @@ const AWS = require('aws-sdk')
 exports.counter = async (event, context, callback) => {
 //async function foo() {
   const eventId = event["config"]["process-bucket-read-basepath"]
-   + "/" + event["id"] + "/"
+    + "/" + event["id"] + "/"
   const imagesFolder = 'images/'
   let images = []
   try {
@@ -12,7 +12,7 @@ exports.counter = async (event, context, callback) => {
       * StartAfter: do not include this events 'folder' in the results
     */
     let params = {
-      Bucket: process.env.PROCESS_BUCKET,
+      Bucket: event["config"]["process-bucket"],
       Prefix: eventId + imagesFolder,
       Delimiter: '/', 
       StartAfter: eventId + imagesFolder,
