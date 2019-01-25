@@ -135,3 +135,32 @@ To run using the example file, navigate to directory /manifest-from-input-json a
 ```python3 create_manifest.py ../example/ example-input.json ./```
 
 A JSON manifest file will be created in the output directory, and the JSON output will also be printed.
+
+## Rerunning Processed Data
+The script rerun.py will allow you to run processed data again.
+
+### Prerequisites
+1. an AWS bucket[sample-bucket]
+1. CSV files in this directory structure in [sample-bucket]
+    1. finished/[event]/lastSuccessfullRun/main.csv
+    1. finished/[event]/lastSuccessfullRun/sequence.csv
+    1. finished/[event]/lastSuccessfullRun/images/[image files here]
+1. Step Function ARN for manifest processing[sample-steps]
+
+### How to
+Last but not least you'll need to create a text file with one event line you'd like to process again.
+
+        events.txt
+                TheJollyRoger
+                RuinsOfBabylon
+                Firefly
+                EventHorizon
+                SomeOtherEvent
+
+Now to run the script:
+
+```python3 rerun.py --bucket <BucketId> -s arn:aws:states:us-east-1:<AWS ID>:stateMachine:<StateMachineId> -e events.txt```
+
+EX:
+
+```python3 rerun.py --bucket mybucket -s arn:aws:states:us-east-1:1234567890:stateMachine:StateMachine-IH8SMHeRe -e events.txt```
