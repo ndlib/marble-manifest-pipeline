@@ -152,12 +152,20 @@ Resources:
       PolicyDocument:
         Statement:
           - Action:
-              - 's3:GetObject'
-              - 's3:GetObjectVersion'
-              - 's3:GetBucketVersioning'
               - 's3:CreateBucket'
               - 's3:DeleteBucket'
               - 's3:PutBucketLogging'
+            Resource:
+              - 'arn:aws:s3:::mellon-manifest-pipeline*'
+            Effect: 'Allow'
+          - Action:
+              - 's3:GetObject'
+              - 's3:GetObjectVersion'
+              - 's3:GetBucketVersioning'
+            Resource:
+              - 'arn:aws:s3:::mellon-manifest-pipeline*/*'
+            Effect: 'Allow'
+          - Action:
               - 'ssm:GetParameters'
             Resource: '*'
             Effect: Allow
