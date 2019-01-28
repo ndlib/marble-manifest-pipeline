@@ -2,6 +2,9 @@ Transform: 'AWS::Serverless-2016-10-31'
 Description: "Manifest Pipeline"
 
 Parameters:
+  EnvType:
+    Type: String
+    Default: 'test'
   ImageSourceBucket:
     Type: 'AWS::SSM::Parameter::Value<String>'
     Description: The name of the source bucket that the IIIF Image service will read from for its assets.
@@ -117,6 +120,7 @@ Resources:
       CodeUri: ../json-from-csv/
       Environment:
         Variables:
+          EnvType: !Ref EnvType
           PROCESS_BUCKET: !Ref ProcessBucket
           MANIFEST_BUCKET: !Ref ManifestBucket
           IMAGE_BUCKET: !Ref ImageSourceBucket
