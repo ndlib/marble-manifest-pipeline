@@ -132,7 +132,7 @@ Resources:
       Roles:
         - !Ref CodeBuildTrustRole
   CloudFormationTrustRole:
-    Description: Creating service role in IAM for AWS CloudFormation
+    Description: Creating service role in IAM for AWS CloudFormation HERE
     Type: 'AWS::IAM::Role'
     Properties:
       AssumeRolePolicyDocument:
@@ -152,9 +152,19 @@ Resources:
       PolicyDocument:
         Statement:
           - Action:
+              - 'States:CreateStateMachine'
+              - 'States:DeleteStateMachine'
+            Resource: '*'
+            Effect: 'Allow'
+          - Action:
               - 's3:CreateBucket'
               - 's3:DeleteBucket'
               - 's3:PutBucketLogging'
+              - 's3:GetBucketCORS'
+              - 's3:PutBucketCORS'
+              - 's3:PutBucketAcl'
+              - 's3:GetBucketAcl'
+              - 's3:PutBucketWebsite'
             Resource:
               - 'arn:aws:s3:::mellon-manifest-pipeline*'
             Effect: 'Allow'
@@ -228,13 +238,20 @@ Resources:
       PolicyDocument:
         Statement:
           - Action:
+              - 's3:CreateBucket'
+              - 's3:DeleteBucket'
+              - 's3:PutBucketLogging'
+            Resource:
+              - 'arn:aws:s3:::mellon-manifest-pipeline*'
+            Effect: 'Allow'
+          - Action:
               - 's3:GetObject'
               - 's3:GetObjectVersion'
               - 's3:GetBucketVersioning'
-              - 's3:CreateBucket'
-              - 's3:DeleteBucket'
-            Resource: '*'
-            Effect: Allow
+            Resource:
+              - 'arn:aws:s3:::mellon-manifest-pipeline*/*'
+              - 'arn:aws:s3:::codepipeline*'
+            Effect: 'Allow'
           - Action:
               - 's3:PutObject'
             Resource:
@@ -448,7 +465,7 @@ Resources:
               RoleArn: !GetAtt
                 - CloudFormationTrustRole
                 - Arn
-              StackName: !Sub "${AppName}"
+              StackName: !Sub "${AppName}-prod"
               ChangeSetName: ProdChangeSetName
               TemplateConfiguration: !Sub "BuildFromRepo::${ProdStackConfig}"
               TemplatePath: !Sub "BuildFromRepo::${SAMOutputFile}"
@@ -465,7 +482,7 @@ Resources:
               RoleArn: !GetAtt
                 - CloudFormationTrustRole
                 - Arn
-              StackName: !Sub "${AppName}"
+              StackName: !Sub "${AppName}-prod"
             RunOrder: '2'
 
       ArtifactStore:
