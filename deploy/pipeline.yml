@@ -155,7 +155,10 @@ Resources:
               - 's3:GetObject'
               - 's3:GetObjectVersion'
               - 's3:GetBucketVersioning'
-              - 'ssm:*'
+              - 's3:CreateBucket'
+              - 's3:DeleteBucket'
+              - 's3:PutBucketLogging'
+              - 'ssm:GetParameters'
             Resource: '*'
             Effect: Allow
           - Action:
@@ -180,6 +183,8 @@ Resources:
           - Action:
               - 'iam:AttachRolePolicy'
               - 'iam:DetachRolePolicy'
+              - 'iam:DeleteRolePolicy'
+              - 'iam:PutRolePolicy'
             Resource: !Sub 'arn:aws:iam::${AWS::AccountId}:role/${AppName}-*'
             Effect: Allow
           - Action:
@@ -218,6 +223,8 @@ Resources:
               - 's3:GetObject'
               - 's3:GetObjectVersion'
               - 's3:GetBucketVersioning'
+              - 's3:CreateBucket'
+              - 's3:DeleteBucket'
             Resource: '*'
             Effect: Allow
           - Action:
@@ -365,6 +372,7 @@ Resources:
               - Name: BuildFromRepo
             Configuration:
               ActionMode: CHANGE_SET_REPLACE
+              Capabilities: CAPABILITY_IAM
               RoleArn: !GetAtt
                 - CloudFormationTrustRole
                 - Arn
@@ -381,6 +389,7 @@ Resources:
               Version: '1'
             Configuration:
               ActionMode: CHANGE_SET_EXECUTE
+              Capabilities: CAPABILITY_IAM
               ChangeSetName: TestChangeSetName
               RoleArn: !GetAtt
                 - CloudFormationTrustRole
@@ -427,6 +436,7 @@ Resources:
               - Name: BuildFromRepo
             Configuration:
               ActionMode: CHANGE_SET_REPLACE
+              Capabilities: CAPABILITY_IAM
               RoleArn: !GetAtt
                 - CloudFormationTrustRole
                 - Arn
