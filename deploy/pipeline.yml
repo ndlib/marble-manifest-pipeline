@@ -84,6 +84,10 @@ Outputs:
     Description: The name of this stack
     Value: !Ref 'AWS::StackName'
 
+  PipelineS3Bucket:
+    Description: The bucket that codepipeline uses
+    Value: !Ref S3Bucket
+
 Resources:
   CodeBuildTrustRole:
     Description: Creating service role in IAM for AWS CodeBuild
@@ -558,7 +562,7 @@ Resources:
   PipelineGenericEventRule:
     Type: AWS::Events::Rule
     Properties:
-      Description: "Sends generic pipeline state change messages to the pipeline events topic."
+      Description: "Sends gene  ric pipeline state change messages to the pipeline events topic."
       EventPattern:
         source:
           - aws.codepipeline
