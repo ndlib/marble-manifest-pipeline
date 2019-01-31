@@ -4,7 +4,7 @@ phases:
     commands:
       # Use Install phase to install packages or any pre-reqs you may need throughout the build (e.g. dev deps, security checks, etc.)
       - echo "[Install phase]"
-      - chmod -R 755 ${BuildScriptsDir}/*
+      - chmod -R 755 ./scripts/codebuild/*
       - ./scripts/codebuild/install.sh
   pre_build:
     commands:
