@@ -1,6 +1,6 @@
 #!/bin/bash
+echo "[Install phase] `date` in `pwd`"
 
-echo "Installing packages"
 cd pyramid-generator
 npm install
 

@@ -2,31 +2,16 @@ version: 0.2
 phases:
   install:
     commands:
-      # Use Install phase to install packages or any pre-reqs you may need throughout the build (e.g. dev deps, security checks, etc.)
-      - echo "[Install phase]"
       - chmod -R 755 ./scripts/codebuild/*
       - ./scripts/codebuild/install.sh
   pre_build:
     commands:
-      # Use Pre-Build phase to run tests, install any code deps or any other customization before build
-      - echo "[Pre-Build phase]"
-      - echo Get S3_BUCKET
-      - echo $CODEBUILD_SOURCE_VERSION | cut -d/ -f 1 | cut -d ":" -f 6
       - ./scripts/codebuild/pre_build.sh
   build:
     commands:
-      # Use Build phase to build your artifacts (compile, package, etc.)
-      - echo "[Build phase]"
-
-      # We package the SAM template and create `packaged.yaml` file that will be used in our pipeline for deployment
-      ## Here we separate Build from Deployment and segregate permissions for different steps
-      - echo "Starting SAM packaging `date` in `pwd`"
       - ./scripts/codebuild/build.sh
   post_build:
     commands:
-      # Use Post Build for notifications, git tags and any further customization after build
-      - echo "[Post-Build phase]"
-      - echo "SAM packaging completed on `date`"
       - ./scripts/codebuild/post_build.sh
 
 ##################################
