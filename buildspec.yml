@@ -1,19 +1,17 @@
 version: 0.2
-environment_variables:
-    plaintext:
-        "INPUT_FILE": "deploy/resources.yml"
 phases:
   install:
     commands:
       # Use Install phase to install packages or any pre-reqs you may need throughout the build (e.g. dev deps, security checks, etc.)
       - echo "[Install phase]"
+      - ./scripts/codebuild/install.sh
   pre_build:
     commands:
       # Use Pre-Build phase to run tests, install any code deps or any other customization before build
       - echo "[Pre-Build phase]"
       - echo Get S3_BUCKET
       - echo $CODEBUILD_SOURCE_VERSION | cut -d/ -f 1 | cut -d ":" -f 6
-      - S3_BUCKET=`echo $CODEBUILD_SOURCE_VERSION | cut -d/ -f 1 | cut -d ":" -f 6`
+      - ./scripts/codebuild/pre_build.sh
   build:
     commands:
       # Use Build phase to build your artifacts (compile, package, etc.)
@@ -22,12 +20,13 @@ phases:
       # We package the SAM template and create `packaged.yaml` file that will be used in our pipeline for deployment
       ## Here we separate Build from Deployment and segregate permissions for different steps
       - echo "Starting SAM packaging `date` in `pwd`"
-      - aws cloudformation package --template-file $INPUT_FILE --s3-bucket $S3_BUCKET --output-template-file output.yml
+      - ./scripts/codebuild/build.sh
   post_build:
     commands:
       # Use Post Build for notifications, git tags and any further customization after build
       - echo "[Post-Build phase]"
       - echo "SAM packaging completed on `date`"
+      - ./scripts/codebuild/post_build.sh
 
 ##################################
 # Build Artifacts to be uploaded #
