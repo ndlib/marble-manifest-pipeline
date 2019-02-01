@@ -83,6 +83,15 @@ Resources:
               Service: lambda.amazonaws.com
             Action: "sts:AssumeRole"
       Policies:
+        - PolicyName: ManifestPipelineSsmPermissions
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              -
+                Action:
+                  - "ssm:Get*"
+                Effect: "Allow"
+                Resource: "*"
         - PolicyName: ImageDerivativeCacheBucketPermissions
           PolicyDocument:
             Version: 2012-10-17
