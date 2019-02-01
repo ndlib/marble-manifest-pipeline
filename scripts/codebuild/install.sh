@@ -2,7 +2,7 @@
 echo "[Install phase] `date` in `pwd`"
 
 cd pyramid-generator
-npm install
+npm install --only=prod
 
 echo "Installing LINUX sharp/libvips packages"
 export SHARP_IGNORE_GLOBAL_LIBVIPS=true
