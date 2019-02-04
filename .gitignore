@@ -1,4 +1,4 @@
 *.pyc
 node_modules
 output.yml
-resources.yml
+manifest-pipeline.yml
