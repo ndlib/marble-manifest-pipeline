@@ -148,7 +148,7 @@ Resources:
       Role: !GetAtt [ LambdaExecutionRole, Arn ]
       Runtime: python3.7
       Timeout: 25
-      CodeUri: ../finalize/
+      CodeUri: finalize/
       Environment:
         Variables:
           PROCESS_BUCKET: !Ref ProcessBucket
@@ -162,7 +162,7 @@ Resources:
       Runtime: nodejs8.10
       Timeout: 120
       MemorySize: 256
-      CodeUri: ../pyramid-generator/
+      CodeUri: pyramid-generator/
       Environment:
         Variables:
           PROCESS_BUCKET: !Ref ProcessBucket
@@ -188,7 +188,7 @@ Resources:
       Runtime: nodejs8.10
       Timeout: 120
       MemorySize: 3008
-      CodeUri: ../pyramid-generator/
+      CodeUri: pyramid-generator/
       Environment:
         Variables:
           PROCESS_BUCKET: !Ref ProcessBucket

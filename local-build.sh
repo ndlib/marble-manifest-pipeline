@@ -24,4 +24,4 @@ export S3_BUCKET=mellon-manifest-pipeline-dev2-s3bucket-1urf7wn3aoy37
 ./scripts/codebuild/build.sh
 ./scripts/codebuild/post_build.sh
 
-aws cloudformation deploy --template-file output.yml --stack-name mellon-manifest-pipeline-$stage
+# aws cloudformation deploy --template-file output.yml --stack-name mellon-manifest-pipeline-$stage
