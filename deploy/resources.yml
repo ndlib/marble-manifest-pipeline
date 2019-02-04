@@ -170,7 +170,7 @@ Resources:
   PGIteratorLambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: pyramid-generator/pgiterator.iterator
+      Handler: pgiterator.iterator
       Role: !GetAtt [ LambdaExecutionRole, Arn ]
       Runtime: nodejs8.10
       Timeout: 120
