@@ -178,9 +178,6 @@ Resources:
       Code:
         S3Bucket: !Ref TemplateBucket
         S3Key: !Sub ${TemplateFolder}/finalize.zip
-      Environment:
-        Variables:
-          PROCESS_BUCKET: !Ref ProcessBucket
 
   FinalizeLambdaFunctionLogs:
     Type: AWS::Logs::LogGroup
@@ -200,9 +197,6 @@ Resources:
       Code:
         S3Bucket: !Ref TemplateBucket
         S3Key: !Sub ${TemplateFolder}/pyramid.zip
-      Environment:
-        Variables:
-          PROCESS_BUCKET: !Ref ProcessBucket
 
   PGCounterLambdaFunctionLogs:
     Type: AWS::Logs::LogGroup
@@ -221,9 +215,6 @@ Resources:
       Code:
         S3Bucket: !Ref TemplateBucket
         S3Key: !Sub ${TemplateFolder}/pyramid.zip
-      Environment:
-        Variables:
-          PROCESS_BUCKET: !Ref ProcessBucket
 
   PGIteratorLambdaFunctionLogs:
     Type: AWS::Logs::LogGroup
@@ -242,9 +233,6 @@ Resources:
       Code:
         S3Bucket: !Ref TemplateBucket
         S3Key: !Sub ${TemplateFolder}/pyramid.zip
-      Environment:
-        Variables:
-          PROCESS_BUCKET: !Ref ProcessBucket
 
   PGImgProcLambdaFunctionLogs:
     Type: AWS::Logs::LogGroup
