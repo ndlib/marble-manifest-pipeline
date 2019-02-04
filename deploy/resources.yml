@@ -89,9 +89,9 @@ Resources:
             Statement:
               -
                 Action:
-                  - "ssm:Get*"
+                  - "ssm:GetParametersByPath"
                 Effect: "Allow"
-                Resource: "*"
+                Resource: "arn:aws:ssm:us-east-1:*:parameter/all/stacks/mellon-manifest*"
         - PolicyName: ImageDerivativeCacheBucketPermissions
           PolicyDocument:
             Version: 2012-10-17
