@@ -318,6 +318,30 @@ Resources:
         - Key: app-name
           Value: !Ref AppName
       TimeoutInMinutes: 5
+      Source:
+        Type: CODEPIPELINE
+        BuildSpec: !Sub |
+          version: 0.2
+          phases:
+            install:
+              commands:
+                - echo "Ensure that the codebuild directory is executable"
+                - chmod -R 755 ./scripts/codebuild/*
+                - ./scripts/codebuild/install.sh
+            pre_build:
+              commands:
+                - ./scripts/codebuild/pre_build.sh
+            build:
+              commands:
+                - ./scripts/codebuild/build.sh
+            post_build:
+              commands:
+                - ./scripts/codebuild/post_build.sh
+          artifacts:
+            files:
+              - output.yml
+              - test-stack-configuration.json
+              - prod-stack-configuration.json
 
   S3Bucket:
     Description: Creating Amazon S3 bucket for AWS CodePipeline artifacts
