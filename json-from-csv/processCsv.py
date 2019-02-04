@@ -59,17 +59,19 @@ class processCsv():
 
     # process a metadata lable/value only row from the main CSV (any line after 2)
     def _get_metadata_attr(self, this_line ):
-        this_item = {}
-        this_item['label'] = this_line['Metadata_label']
-        this_item['value'] = this_line['Metadata_value']
-        self.result_json['metadata'].append(this_item)
+        if this_line['Metadata_label'] and this_line['Metadata_value']:
+            this_item = {}
+            this_item['label'] = this_line['Metadata_label']
+            this_item['value'] = this_line['Metadata_value']
+            self.result_json['metadata'].append(this_item)
 
     # process data rows from sequence CSV to create pages within default sequence
     def _add_pages_to_sequence(self, this_line ):
-        this_item={}
-        this_item['file']= this_line['Filenames']
-        this_item['label']= this_line['Label']
-        self.result_json['sequences'][0]['pages'].append(this_item)
+        if this_line['Filenames'] and this_line['Label']:
+            this_item={}
+            this_item['file']= this_line['Filenames']
+            this_item['label']= this_line['Label']
+            self.result_json['sequences'][0]['pages'].append(this_item)
 
     # print out our constructed json
     def dumpJson(self):
