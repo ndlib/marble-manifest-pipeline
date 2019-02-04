@@ -52,7 +52,7 @@ class processCsv():
         self.result_json['label'] = first_line['Label']
         self.result_json['description'] = first_line['Description']
         self.result_json['attribution'] = first_line['Attribution']
-        self.result_json['rights'] = first_line['Rights']
+        self.result_json['license'] = first_line['License']
         self.result_json['unique-identifier'] = first_line['unique_identifier']
         self.result_json['sequences'][0]['viewingHint'] = first_line['Sequence_viewing_experience']
         self.result_json['sequences'][0]['label'] = first_line['Sequence_label']

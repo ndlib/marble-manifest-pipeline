@@ -11,7 +11,7 @@ The following labels are expected:
 
 **Label** The label for the image sequence
 **Description**  A short description of the image sequence
-**Rights**  Licensing or Copyright information
+**License**  Licensing or Copyright information
 **Attribution** Artist attribution
 **Sequence_filename** **Not Used**
 **Sequence_label** The name of the image sequence array in the metadata JSON
@@ -24,8 +24,8 @@ An example file, *example-main.csv*, looks like this:
 
 ```
 
-Label,Description,Rights,Attribution,Sequence_filename,Sequence_label,Sequence_viewing_experience,unique_identifier,Metadata_label,Metadata_value
-Label,Description,rights,attribution,,sequency,paged,2018_example_001,,
+Label,Description,License,Attribution,Sequence_filename,Sequence_label,Sequence_viewing_experience,unique_identifier,Metadata_label,Metadata_value
+Label,Description,license,attribution,,sequency,paged,2018_example_001,,
 ,,,,,,,,Title,"Wunder der Verenbung"
 ,,,,,,,,Author(s),"Bolle, Fritz"
 ,,,,,,,,"Publication date","[1951]"
@@ -75,7 +75,7 @@ would produce the following output:
   "description": "Description",
   "iiif-server": "https://image-server.library.nd.edu:8182/iiif/2",
   "creator": "creator@email.com",
-  "rights": "rights",
+  "license": "license info",
   "unique-identifier": "2018_example_001",
   "label": "Label",
   "sequences": [

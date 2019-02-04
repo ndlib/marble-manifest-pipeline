@@ -32,7 +32,7 @@ class processJson():
         self.result_json['label'] = self.global_data['label']
         self.result_json['metadata'] = self.global_data['metadata']
         self.result_json['description'] = self.global_data['description']
-        self.result_json['license'] = self.global_data['rights']
+        self.result_json['license'] = self.global_data['license']
         self.result_json['attribution'] = self.global_data['attribution']
 
         # currently, one sequence is allowed per manifest
