@@ -42,6 +42,94 @@ Outputs:
     Value: !Ref ManifestBucket
 
 Resources:
+  CanvasDefaultWidth:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: String
+      Name: !Sub "/all/stacks/mellon-manifest-pipeline/config/${Stage}/canvas-default-width"
+      Value: "2000"
+      Description: Canvas default width
+
+  CanvasDefaultHeight:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: String
+      Name: !Sub "/all/stacks/mellon-manifest-pipeline/config/${Stage}/canvas-default-height"
+      Value: "2000"
+      Description: Canvas default height
+
+  ImageServerBaseUrl:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: String
+      Name: !Sub "/all/stacks/mellon-manifest-pipeline/config/${Stage}/image-server-base-url"
+      Value: "https://STUB:8182/iiif/2"
+      Description: Image server base url
+
+  MainCsv:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: String
+      Name: !Sub "/all/stacks/mellon-manifest-pipeline/config/${Stage}/main-csv"
+      Value: "main.csv"
+      Description: CSV name
+
+  SequenceCsv:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: String
+      Name: !Sub "/all/stacks/mellon-manifest-pipeline/config/${Stage}/sequence-csv"
+      Value: "sequence.csv"
+      Description: CSV name
+
+  ManifestServerBaseUrl:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: String
+      Name: !Sub "/all/stacks/mellon-manifest-pipeline/config/${Stage}/manifest-server-base-url"
+      Value: "https://"
+      Description: CSV name
+
+  ProcessBucketReadBasepath:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: String
+      Name: !Sub "/all/stacks/mellon-manifest-pipeline/config/${Stage}/process-bucket-read-basepath"
+      Value: "process"
+      Description: S3 bucket read base path
+
+  ProcessBucketWriteBasepath:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: String
+      Name: !Sub "/all/stacks/mellon-manifest-pipeline/config/${Stage}/process-bucket-write-basepath"
+      Value: "finished"
+      Description: S3 bucket write base path
+
+  ImageServerBucketBasepath:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: String
+      Name: !Sub "/all/stacks/mellon-manifest-pipeline/config/${Stage}/image-server-bucket-basepath"
+      Value: "images"
+      Description: S3 bucket images base path
+
+  ManifestServerBucketBasepath:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: String
+      Name: !Sub "/all/stacks/mellon-manifest-pipeline/config/${Stage}/manifest-server-bucket-basepath"
+      Value: "manifest"
+      Description: S3 bucket images base path
+
+  EventFile:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: String
+      Name: !Sub "/all/stacks/mellon-manifest-pipeline/config/${Stage}/event-file"
+      Value: "event.json"
+      Description: S3 event filename
+
   ProcessBucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -143,6 +231,7 @@ Resources:
         S3Key: !Sub ${TemplateFolder}/indexInput.zip
       Environment:
         Variables:
+          STAGE: !Ref Stage
           PROCESS_BUCKET: !Ref ProcessBucket
           MANIFEST_BUCKET: !Ref ManifestBucket
           IMAGE_BUCKET: !Ref ImageSourceBucket
@@ -183,7 +272,7 @@ Resources:
       Handler: finalize/handler.run
       Role: !GetAtt [ LambdaExecutionRole, Arn ]
       Runtime: python3.7
-      Timeout: "25"
+      Timeout: "300"
       Code:
         S3Bucket: !Ref TemplateBucket
         S3Key: !Sub ${TemplateFolder}/finalize.zip
@@ -226,7 +315,7 @@ Resources:
       Role: !GetAtt [ LambdaExecutionRole, Arn ]
       Runtime: nodejs8.10
       Timeout: 120
-      MemorySize: 256
+      MemorySize: 3008
       Code:
         S3Bucket: !Ref TemplateBucket
         S3Key: !Sub ${TemplateFolder}/pyramid.zip

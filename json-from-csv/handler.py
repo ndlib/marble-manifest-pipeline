@@ -20,7 +20,7 @@ def run(event, context):
 def get_config():
     client = boto3.client('ssm')
     paginator = client.get_paginator('get_parameters_by_path')
-    path = '/all/stacks/mellon-manifest-pipeline/'
+    path = '/all/stacks/mellon-manifest-pipeline/config/' + os.environ['STAGE'] + '/'
     page_iterator = paginator.paginate(
         Path = path,
         Recursive=True,
