@@ -2,7 +2,7 @@
   "label": "Label",
   "description": "Description",
   "unique-identifier": "2018_example_001",
-  "rights": "rights",
+  "license": "license info",
   "attribution": "attribution",
   "creator": "creator@email.com",
   "viewingDirection": "left-to-right",
