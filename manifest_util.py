@@ -10,6 +10,7 @@ errors = { 'validation': {}, 'process': {} }
 
 def _get_config(args):
     return {
+            "local-dir": '/tmp/',
             "process-bucket": args.bucket,
             "process-bucket-read-basepath": 'process',
             "process-bucket-write-basepath": 'finished',
@@ -66,9 +67,22 @@ def _verify_lastrun_files(args, events):
                             + ": " + e.response['Error']['Message']
                 _add_validation_error(err_msg,event)
 
+def _verify_local_files(args, events):
+    cfg = _get_config(args)
+    for event in events:
+        main_csv = cfg['local-dir'] + event + '/' + cfg['main-csv']
+        seq_csv = cfg['local-dir'] + event + '/' + cfg['sequence-csv']
+        files = [main_csv,seq_csv]
+        for filename in files:
+            if not os.path.isfile(filename):
+                _add_validation_error('Local file not found - ' + filename, event)
+
 def _verify_args(args):
     events = _verify_events(args.events)
-    _verify_lastrun_files(args, events)
+    if args.rerun:
+        _verify_lastrun_files(args, events)
+    else:
+        _verify_local_files(args, events)
 
 def _get_events(file):
     try:
@@ -140,6 +154,23 @@ def _copy_files_to_rerun(event, objects, args):
     except Exception as e:
         _add_process_error(e,event)
 
+def _copy_local_to_s3(event, args):
+    client = boto3.client('s3')
+    cfg = _get_config(args)
+    local_directory = cfg['local-dir'] + event + '/'
+    destination = cfg['process-bucket-read-basepath'] + "/" + event + "/"
+    for root, dirs, files in os.walk(local_directory):
+        for filename in files:
+            local_path = os.path.join(root, filename)
+            relative_path = os.path.relpath(local_path, local_directory)
+            s3_path = os.path.join(destination, relative_path)
+            try:
+                client.upload_file(local_path, args.bucket, s3_path)
+            except Exception as e:
+                # if ANY file fails, add err msg, and move onto next event
+                _add_process_error(e,event)
+                return
+
 def rerun(args):
     _verify_args(args)
     if _validation_errors_exist():
@@ -168,17 +199,50 @@ def rerun(args):
             _print_process_errors()
             print("The above event errors were caught during processing.")
 
+def run(args):
+    _verify_args(args)
+    if _validation_errors_exist():
+        _print_validation_errors()
+        print("Fix the above errors and resubmit.")
+        return
+    else:
+        for event in _get_events(args.events):
+            try:
+                print('Copying ' + event + ' files to s3')
+                _copy_local_to_s3(event, args)
+                # dont attempt to launch steps on events with errors
+                if event in errors['process']:
+                    continue
+                print('Starting to process ' + event + '...')
+                params = {
+                    'stateMachineArn': args.stepfn,
+                    'input': "{\"id\" : \"" + event + "\"}"
+                }
+                boto3.client('stepfunctions').start_execution(**params)
+            except Exception as e:
+                _add_process_error(e, event)
+        print('All events have been launched.')
+        if _process_errors_exist():
+            _print_process_errors()
+            print("The above event errors were caught during processing.")
+
 def main():
     parser = argparse.ArgumentParser()
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('--rerun', action='store_true')
+    group.add_argument('--run', action='store_false')
     parser.add_argument('--bucket', '-b', type=str, required=True,
         help="Bucket where event data(cvs, images) live")
     parser.add_argument('--stepfn', '-s', type=str, required=True,
         help="Step function state machine name")
     parser.add_argument('--events', '-e', type=str, required=True,
         help="Text file with an event on each row")
-    args = parser.parse_args()
 
-    rerun(args)
+    args = parser.parse_args()
+    if args.rerun:
+        rerun(args)
+    else:
+        run(args)
 
 if __name__ == "__main__":
     main()

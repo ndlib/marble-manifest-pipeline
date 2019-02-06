@@ -136,18 +136,26 @@ To run using the example file, navigate to directory /manifest-from-input-json a
 
 A JSON manifest file will be created in the output directory, and the JSON output will also be printed.
 
-## Rerunning Processed Data
-The script rerun.py will allow you to run processed data again.
 
-### Prerequisites
+## Manifest Utility Script
+This utility script will allow the user to do two specific task.
+1. deploy local files to an s3 bucket and have the manifest pipeline process them
+1. run an already processed manifest again
+
+The details for starting each of these task is below
+
+### Initial Running of Data
+The script will take csv files and images and deploy them to s3 where they will be sent down the manifest pipeline for processing.
+
+#### Prerequisites
 1. an AWS bucket[sample-bucket]
-1. CSV files in this directory structure in [sample-bucket]
-    1. finished/[event]/lastSuccessfullRun/main.csv
-    1. finished/[event]/lastSuccessfullRun/sequence.csv
-    1. finished/[event]/lastSuccessfullRun/images/[image files here]
+1. CSV files in this directory structure in /tmp on the local machine
+    1. tmp/[event]/main.csv
+    1. tmp/[event]/sequence.csv
+    1. tmp/[event]/images/[image files here]
 1. Step Function ARN for manifest processing[sample-steps]
 
-### How to
+#### How to
 Last but not least you'll need to create a text file with one event line you'd like to process again.
 
         events.txt
@@ -159,8 +167,37 @@ Last but not least you'll need to create a text file with one event line you'd l
 
 Now to run the script:
 
-```python3 rerun.py --bucket <BucketId> -s arn:aws:states:us-east-1:<AWS ID>:stateMachine:<StateMachineId> -e events.txt```
+```python3 manifest_util.py --run --bucket <BucketId> -s arn:aws:states:us-east-1:<AWS ID>:stateMachine:<StateMachineId> -e events.txt```
 
 EX:
 
-```python3 rerun.py --bucket mybucket -s arn:aws:states:us-east-1:1234567890:stateMachine:StateMachine-IH8SMHeRe -e events.txt```
+```python3 manifest_util.py --run --bucket mybucket -s arn:aws:states:us-east-1:1234567890:stateMachine:StateMachine-IH8SMHeRe -e events.txt```
+
+### Rerunning Processed Data
+The python script manifest_util.py will allow you to run processed data again.
+
+#### Prerequisites
+1. an AWS bucket[sample-bucket]
+1. CSV files in this directory structure in [sample-bucket]
+    1. finished/[event]/lastSuccessfullRun/main.csv
+    1. finished/[event]/lastSuccessfullRun/sequence.csv
+    1. finished/[event]/lastSuccessfullRun/images/[image files here]
+1. Step Function ARN for manifest processing[sample-steps]
+
+#### How to
+Last but not least you'll need to create a text file with one event line you'd like to process again.
+
+        events.txt
+                TheJollyRoger
+                RuinsOfBabylon
+                Firefly
+                EventHorizon
+                SomeOtherEvent
+
+Now to run the script:
+
+```python3 manifest_util.py --rerun --bucket <BucketId> -s arn:aws:states:us-east-1:<AWS ID>:stateMachine:<StateMachineId> -e events.txt```
+
+EX:
+
+```python3 manifest_util.py --rerun --bucket mybucket -s arn:aws:states:us-east-1:1234567890:stateMachine:StateMachine-IH8SMHeRe -e events.txt```
