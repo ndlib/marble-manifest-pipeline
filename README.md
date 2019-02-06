@@ -201,3 +201,13 @@ Now to run the script:
 EX:
 
 ```python3 manifest_util.py --rerun --bucket mybucket -s arn:aws:states:us-east-1:1234567890:stateMachine:StateMachine-IH8SMHeRe -e events.txt```
+
+
+# Local Deploy
+
+Run the script local-deploy providing the name of the stack you want to deploy and the
+path to the mellon-blueprints repo
+
+```bash
+./local-deploy.sh manifest-pipeline-jon ../mellon-blueprints/
+```
