@@ -4,12 +4,12 @@ const AWS = require('aws-sdk')
 exports.processor = async (event, context, callback) => {
 //async function foo() {
   const eventId = event["config"]["process-bucket-write-basepath"]
-   + "/" + event["id"] + "/"
+    + "/" + event["id"] + "/"
   const imagesFolder = 'images/'
   try {
     const img = event.pgimage.iterator.imageToProcess
     const getParams = {
-      Bucket: process.env.PROCESS_BUCKET,
+      Bucket: event["config"]["process-bucket"],
       Key: img
     }
     const s3 = new AWS.S3()
@@ -29,13 +29,16 @@ exports.processor = async (event, context, callback) => {
     imageName = imageName.substr(0, imageName.lastIndexOf('.'))
     const putParams = {
       Body: processedImg,
-      Bucket: process.env.PROCESS_BUCKET,
+      Bucket: event["config"]["process-bucket"],
       Key: eventId + imagesFolder + imageName + '.tif'
     }
     await s3.putObject(putParams).promise()
   } catch (err) {
+    if(!('errors' in event)) {
+      event.errors = []
+    }
     const ruhroh = { 'image': event.id, 'error': err.message }
-    event.data.errors.push(ruhroh)
+    event.errors.push(ruhroh)
     console.error(err, err.message)
   }
 

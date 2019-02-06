@@ -11,7 +11,7 @@ The following labels are expected:
 
 **Label** The label for the image sequence
 **Description**  A short description of the image sequence
-**Rights**  Licensing or Copyright information
+**License**  Licensing or Copyright information
 **Attribution** Artist attribution
 **Sequence_filename** **Not Used**
 **Sequence_label** The name of the image sequence array in the metadata JSON
@@ -24,8 +24,8 @@ An example file, *example-main.csv*, looks like this:
 
 ```
 
-Label,Description,Rights,Attribution,Sequence_filename,Sequence_label,Sequence_viewing_experience,unique_identifier,Metadata_label,Metadata_value
-Label,Description,rights,attribution,,sequency,paged,2018_example_001,,
+Label,Description,License,Attribution,Sequence_filename,Sequence_label,Sequence_viewing_experience,unique_identifier,Metadata_label,Metadata_value
+Label,Description,license,attribution,,sequency,paged,2018_example_001,,
 ,,,,,,,,Title,"Wunder der Verenbung"
 ,,,,,,,,Author(s),"Bolle, Fritz"
 ,,,,,,,,"Publication date","[1951]"
@@ -75,7 +75,7 @@ would produce the following output:
   "description": "Description",
   "iiif-server": "https://image-server.library.nd.edu:8182/iiif/2",
   "creator": "creator@email.com",
-  "rights": "rights",
+  "license": "license info",
   "unique-identifier": "2018_example_001",
   "label": "Label",
   "sequences": [
@@ -135,3 +135,69 @@ To run using the example file, navigate to directory /manifest-from-input-json a
 ```python3 create_manifest.py ../example/ example-input.json ./```
 
 A JSON manifest file will be created in the output directory, and the JSON output will also be printed.
+
+
+## Manifest Utility Script
+This utility script will allow the user to do two specific task.
+1. deploy local files to an s3 bucket and have the manifest pipeline process them
+1. run an already processed manifest again
+
+The details for starting each of these task is below
+
+### Initial Running of Data
+The script will take csv files and images and deploy them to s3 where they will be sent down the manifest pipeline for processing.
+
+#### Prerequisites
+1. an AWS bucket[sample-bucket]
+1. CSV files in this directory structure in /tmp on the local machine
+    1. tmp/[event]/main.csv
+    1. tmp/[event]/sequence.csv
+    1. tmp/[event]/images/[image files here]
+1. Step Function ARN for manifest processing[sample-steps]
+
+#### How to
+Last but not least you'll need to create a text file with one event line you'd like to process again.
+
+        events.txt
+                TheJollyRoger
+                RuinsOfBabylon
+                Firefly
+                EventHorizon
+                SomeOtherEvent
+
+Now to run the script:
+
+```python3 manifest_util.py --run --bucket <BucketId> -s arn:aws:states:us-east-1:<AWS ID>:stateMachine:<StateMachineId> -e events.txt```
+
+EX:
+
+```python3 manifest_util.py --run --bucket mybucket -s arn:aws:states:us-east-1:1234567890:stateMachine:StateMachine-IH8SMHeRe -e events.txt```
+
+### Rerunning Processed Data
+The python script manifest_util.py will allow you to run processed data again.
+
+#### Prerequisites
+1. an AWS bucket[sample-bucket]
+1. CSV files in this directory structure in [sample-bucket]
+    1. finished/[event]/lastSuccessfullRun/main.csv
+    1. finished/[event]/lastSuccessfullRun/sequence.csv
+    1. finished/[event]/lastSuccessfullRun/images/[image files here]
+1. Step Function ARN for manifest processing[sample-steps]
+
+#### How to
+Last but not least you'll need to create a text file with one event line you'd like to process again.
+
+        events.txt
+                TheJollyRoger
+                RuinsOfBabylon
+                Firefly
+                EventHorizon
+                SomeOtherEvent
+
+Now to run the script:
+
+```python3 manifest_util.py --rerun --bucket <BucketId> -s arn:aws:states:us-east-1:<AWS ID>:stateMachine:<StateMachineId> -e events.txt```
+
+EX:
+
+```python3 manifest_util.py --rerun --bucket mybucket -s arn:aws:states:us-east-1:1234567890:stateMachine:StateMachine-IH8SMHeRe -e events.txt```
