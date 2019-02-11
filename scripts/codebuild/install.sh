@@ -12,5 +12,5 @@ npm install --arch=x64 --platform=linux --target=8.10.0 sharp
 # fixes incorrect created files from the extract.
 find ./node_modules -mtime +10950 -exec touch {} \;
 
-# copy the cloudformation into the project 
-cp $CODEBUILD_SRC_DIR_ConfigCode/deploy/cloudformation/manifest-pipeline.yml $CODEBUILD_SRC_DIR/
+# copy the cloudformation into the project
+cp $BLUEPRINTS_DIR/deploy/cloudformation/manifest-pipeline.yml ./

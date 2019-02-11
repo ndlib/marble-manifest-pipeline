@@ -16,15 +16,12 @@ EOF
 }
 ``
 stackname=$1
-blueprints_path=$2
+export BLUEPRINTS_DIR=$2
 
 if [ -z ${S3_BUCKET+x} ]; then
   usage
   exit 1
 fi
-
-export CODEBUILD_SRC_DIR=`pwd`
-export CODEBUILD_SRC_DIR_ConfigCode=`pwd`/$blueprints_path
 
 ./scripts/codebuild/install.sh
 ./scripts/codebuild/pre_build.sh
@@ -34,4 +31,4 @@ export CODEBUILD_SRC_DIR_ConfigCode=`pwd`/$blueprints_path
 aws cloudformation deploy --template-file output.yml --stack-name $stackname \
   --capabilities CAPABILITY_IAM
 
-rm -rf $CODEBUILD_SRC_DIR/output.yml
+rm -rf output.yml
