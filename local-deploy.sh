@@ -29,6 +29,6 @@ fi
 ./scripts/codebuild/post_build.sh
 
 aws cloudformation deploy --template-file output.yml --stack-name $stackname \
-  --capabilities CAPABILITY_IAM
+  --capabilities CAPABILITY_NAMED_IAM
 
 rm -rf output.yml
