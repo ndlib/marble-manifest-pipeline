@@ -18,8 +18,10 @@ def write_file(dict, path):
         s3 = boto3.resource('s3')
         s3.Object(manifest_bucket, path).put(Body=json.dumps(dict), ACL='public-read')
 
+
 manifest_baseurl = 'http://mellon-manifest-pipeline-manifestbucket-kel2eht9shpj.s3-website-us-east-1.amazonaws.com/'
 
+# these are the top level collection manifests created.
 groups = [
     {
         "id": "website",
@@ -41,6 +43,7 @@ groups = [
     }
 ]
 
+# create on collection manifest for each collection
 collections = {
     "le-rossignol": {
         "id": "le-rossignol",
@@ -100,6 +103,7 @@ collections = {
     }
 }
 
+# when i get the manifest for the item from the server copy these fields
 copyFields = ['@id', '@type', 'label', 'metadata', 'thumbnail', 'description', "license"]
 
 
