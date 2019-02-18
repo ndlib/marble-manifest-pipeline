@@ -27,17 +27,16 @@ class processCsv():
     # returns True if main and sequence csv fles found, false otherwise
     def verifyCsvExist(self):
         s3 = boto3.client('s3')
-
         try:
             s3.head_object(Bucket=self.config['process-bucket'], Key=self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config['main-csv'])
         except ClientError as err:
-            self.error.append(err)
+            self.error.append("main.csv does not exist in the process bucket for id, " + self.id)
             pass
 
         try:
             s3.head_object(Bucket=self.config['process-bucket'], Key=self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config['sequence-csv'])
         except ClientError as err:
-            self.error.append(err)
+            self.error.append("sequence.csv does not exist in the process bucket for id, " + self.id)
             pass
 
         return (len(self.error) == 0)
