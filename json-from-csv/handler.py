@@ -18,45 +18,44 @@ def run(event, context):
 
 # retrieve configuration from parameter store
 def get_config():
+    config =  {
+        "process-bucket-read-basepath": 'process',
+        "process-bucket-write-basepath": 'finished',
+        "image-server-bucket-basepath": '',
+        "manifest-server-bucket-basepath": '',
+        "sequence-csv": 'sequence.csv',
+        "main-csv": 'main.csv',
+        "canvas-default-height": 2000,
+        "canvas-default-width": 2000,
+        "notify-on-finished": "jhartzle@nd.edu",
+        "event-file": "event.json"
+    }
+
+    # read the keys we want out of ssm
     client = boto3.client('ssm')
     paginator = client.get_paginator('get_parameters_by_path')
     path = '/all/stacks/' + os.environ['SSM_KEY_BASE'] + '/config/'
     page_iterator = paginator.paginate(
         Path = path,
         Recursive=True,
-        WithDecryption=False,
-        MaxResults=4,)
+        WithDecryption=False,)
 
     response = []
     for page in page_iterator:
         response.extend(page['Parameters'])
 
-    config = {}
     for ps in response:
         value = ps['Value']
-        # change height/width values from strings to numeric
-        if(ps['Name'].endswith('canvas-default-height') or
-            ps['Name'].endswith('canvas-default-width')):
-                value = int(ps['Value'])
-        # complete the partial value in parameter store with OS value
-        if(ps['Name'].endswith('image-server-base-url')):
-            value = ps['Value'].replace('STUB', os.environ['IMAGE_SERVER_URL'])
-        # complete the partial value in parameter store with OS value
-        if(ps['Name'].endswith('manifest-server-base-url')):
-            value = ps['Value'] + os.environ['MANIFEST_URL']
         # change /all/stacks/mellon-manifest-pipeline/<key> to <key>
         key = ps['Name'].replace(path,'')
         # add the key/value pair
         config[key] = value
 
-    config['process-bucket'] = os.environ['PROCESS_BUCKET']
-    config['image-server-bucket'] = os.environ['IMAGE_BUCKET']
-    config['manifest-server-bucket'] = os.environ['MANIFEST_BUCKET']
-    config['notify-on-finished']: os.environ['NOTIFY_EMAILS']
+    config['image-server-base-url'] = "https://" + config['image-server-base-url'] + '/iiif/2/'
 
     return config
 
 # python -c 'from handler import *; test()'
 def test():
-    data = { "id": "example"}
+    data = { "id": "2018_example_001"}
     print(run(data, {}))
