@@ -38,8 +38,7 @@ def get_config():
     page_iterator = paginator.paginate(
         Path = path,
         Recursive=True,
-        WithDecryption=False,
-        MaxResults=4,)
+        WithDecryption=False,)
 
     response = []
     for page in page_iterator:
