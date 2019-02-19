@@ -126,7 +126,7 @@ for group in groups:
         collection["@type"] = "sc:Collection"
         collection["label"] = data["label"]
         collection["description"] = data["description"]
-        collection["thumbnail"] = { "@id": data["thumbnail"], "service": {"@id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "@context": "http://iiif.io/api/image/2/context.json" } }
+        collection["thumbnail"] = { "@id": data["thumbnail"] + "/full/250,/0/default.jpg", "service": {"@id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "@context": "http://iiif.io/api/image/2/context.json" } }
 
         collection["metadata"]=data["metadata"]
         collection["license"]=data["license"]
