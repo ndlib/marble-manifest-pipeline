@@ -44,14 +44,13 @@ class processJson():
     def _add_thumbnail(self, sequence_data):
         file_name = sequence_data['pages'][0]['file'].split('.')[0] + ".tif"
         thumbnail = {}
-        thumbnail['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + file_name + '/full/80,100/0/default.jpg'
+        thumbnail['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + file_name + '/full/250,/0/default.jpg'
         thumbnail['service'] = {
             '@id': self.config['image-server-base-url'] + '/' + self.id + '%2F' + file_name,
             'profile': "http://iiif.io/api/image/2/level2.json",
             '@context': "http://iiif.io/api/image/2/context.json"
         }
         thumbnail['@context'] = "http://iiif.io/api/image/2/context.json"
-        thumbnail['@id'] = self.config['image-server-base-url'] + '/' + self.id
         thumbnail['profile'] = "http://iiif.io/api/image/2/level1.json"
         self.result_json['thumbnail'] = thumbnail
 
