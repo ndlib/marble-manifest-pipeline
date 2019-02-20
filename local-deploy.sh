@@ -29,6 +29,7 @@ fi
 ./scripts/codebuild/post_build.sh
 
 aws cloudformation deploy --template-file output.yml --stack-name $stackname \
-  --capabilities CAPABILITY_NAMED_IAM
+  --capabilities CAPABILITY_NAMED_IAM \
+  --parameter-overrides AppConfigPath="/all/$stackname"
 
 rm -rf output.yml
