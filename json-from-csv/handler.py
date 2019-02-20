@@ -34,7 +34,7 @@ def get_config():
     # read the keys we want out of ssm
     client = boto3.client('ssm')
     paginator = client.get_paginator('get_parameters_by_path')
-    path = '/all/stacks/' + os.environ['SSM_KEY_BASE'] + '/config/'
+    path = os.environ['SSM_KEY_BASE'] + '/'
     page_iterator = paginator.paginate(
         Path = path,
         Recursive=True,
@@ -51,7 +51,7 @@ def get_config():
         # add the key/value pair
         config[key] = value
 
-    config['image-server-base-url'] = "https://" + config['image-server-base-url'] + '/iiif/2/'
+    config['image-server-base-url'] = "https://" + config['image-server-base-url'] + ':8182/iiif/2'
 
     return config
 

@@ -91,6 +91,8 @@ def _get_events(file):
     except IOError:
         _add_validation_error('Cannot open ' + file)
         return []
+
+    lines = list(filter(None, lines))
     return lines
 
 def _setup_event(args):
@@ -107,7 +109,7 @@ def _setup_event(args):
         except Exception as e:
             _add_process_error(e,event)
             return
-            
+
 
 def _get_last_run_objects(event, args):
     cfg = _get_config(args)
