@@ -4,7 +4,6 @@ from botocore.errorfactory import ClientError
 
 class finalizeStep():
     # class constructor
-
     def __init__(self, id, eventConfig):
         self.id = id
         self.config = eventConfig
@@ -18,7 +17,8 @@ class finalizeStep():
             self.saveLastRun()
             self.saveIndexMetadata()
 
-        self.notify()
+        if self.config['notify-on-finished']:
+            self.notify()
 
     def success(self):
         if len(self.manifestMetadata["errors"]) > 0:
@@ -112,41 +112,33 @@ class finalizeStep():
         return
 
     def notify(self):
-        print("nofify")
-        RECIPIENT = "jhartzle@nd.edu"
-        SENDER = "jon.hartzler@gmail.com"
+        # emails must be verified or whitelisted by SES
+        RECIPIENTS = self.config['notify-on-finished'].split(",")
+        SENDER = "noreply@nd.edu"
         AWS_REGION = "us-east-1"
 
         # The subject line for the email.
-        SUBJECT = "Amazon SES Test (SDK for Python)"
+        SUBJECT = "Manifest Pipeline Complete"
 
         # The email body for recipients with non-HTML email clients.
-        BODY_TEXT = ("Amazon SES Test (Python)\r\n"
-                     "This email was sent with Amazon SES using the "
-                     "AWS SDK for Python (Boto)."
-                    )
+        BODY_TEXT = ("The manifest pipeline has completed processing " + self.id)
 
         # The HTML body of the email.
         BODY_HTML = """<html>
         <head></head>
         <body>
-          <h1>Amazon SES Test (SDK for Python)</h1>
-          <p>This email was sent with
-            <a href='https://aws.amazon.com/ses/'>Amazon SES</a> using the
-            <a href='https://aws.amazon.com/sdk-for-python/'>
-              AWS SDK for Python (Boto)</a>.</p>
+          <h1>""" + self.id + """ manifest pipeline has completed</h1>
+          <p>CSVs and images have been processed through the pipeline.</p>
         </body>
-        </html>
-                    """
+        </html>"""
+
         CHARSET = "UTF-8"
         client = boto3.client('ses',region_name=AWS_REGION)
         try:
             #Provide the contents of the email.
             response = client.send_email(
                 Destination={
-                    'ToAddresses': [
-                        RECIPIENT,
-                    ],
+                    'ToAddresses': RECIPIENTS,
                 },
                 Message={
                     'Body': {

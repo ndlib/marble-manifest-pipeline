@@ -56,6 +56,8 @@ class processCsv():
         self.result_json['sequences'][0]['viewingHint'] = first_line['Sequence_viewing_experience']
         self.result_json['sequences'][0]['label'] = first_line['Sequence_label']
 
+        self.config['notify-on-finished'] = first_line['Notify']
+
     # process a metadata lable/value only row from the main CSV (any line after 2)
     def _get_metadata_attr(self, this_line ):
         if this_line['Metadata_label'] and this_line['Metadata_value']:
