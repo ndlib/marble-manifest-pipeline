@@ -19,7 +19,7 @@ def write_file(dict, path):
         s3.Object(manifest_bucket, path).put(Body=json.dumps(dict), ACL='public-read')
 
 
-manifest_baseurl = 'http://mellon-manifest-pipeline-manifestbucket-kel2eht9shpj.s3-website-us-east-1.amazonaws.com/'
+manifest_baseurl = 'https://d1v1nx8kcr1acm.cloudfront.net/'
 
 # these are the top level collection manifests created.
 groups = [
