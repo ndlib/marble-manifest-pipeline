@@ -136,11 +136,7 @@ for group in groups:
             m = {}
             r = json.load(urlopen(manifest_baseurl + id + '/manifest/index.json'))
             for key in copyFields:
-                # hack until the cloudfront is added to the manifet bucket.
-                if isinstance(r[key], str):
-                    m[key] = r[key].replace("https://", "http://")
-                else:
-                    m[key] = r[key]
+                m[key] = r[key]
 
             collection["manifests"].append(m)
 
