@@ -56,7 +56,7 @@ class finalizeStep():
 
         bucket = s3.Bucket(self.config["manifest-server-bucket"])
         print(copy_source)
-        bucket.copy(copy_source, self.test_basepath(self.config["manifest-server-bucket-basepath"]) + self.id + "/manifest", ExtraArgs={'ACL':'public-read'})
+        bucket.copy(copy_source, self.test_basepath(self.config["manifest-server-bucket-basepath"]) + self.id + "/manifest/index.json")
 
         return
 
