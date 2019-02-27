@@ -16,7 +16,7 @@ def write_file(dict, path):
         f.write(json.dumps(dict))
 
         s3 = boto3.resource('s3')
-        s3.Object(manifest_bucket, path).put(Body=json.dumps(dict), ACL='public-read')
+        s3.Object(manifest_bucket, path).put(Body=json.dumps(dict), ACL='public-read', ContentType='text/json')
 
 
 manifest_baseurl = 'https://d1v1nx8kcr1acm.cloudfront.net/'
@@ -134,6 +134,7 @@ for group in groups:
 
         for id in data["manifest_ids"]:
             m = {}
+            print(manifest_baseurl + id + '/manifest/index.json')
             r = json.load(urlopen(manifest_baseurl + id + '/manifest/index.json'))
             for key in copyFields:
                 m[key] = r[key]

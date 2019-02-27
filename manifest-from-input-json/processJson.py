@@ -37,12 +37,14 @@ class processJson():
 
         # currently, one sequence is allowed per manifest
         sequence_data = self.global_data['sequences'][0]
-        self._add_thumbnail(sequence_data)
+        file_name = sequence_data['pages'][0]['file']
+        self.result_json['thumbnail'] = self._add_thumbnail(file_name)
+
         self._add_sequence( sequence_data)
 
 
-    def _add_thumbnail(self, sequence_data):
-        file_name = sequence_data['pages'][0]['file'].split('.')[0] + ".tif"
+    def _add_thumbnail(self, file_name):
+        file_name = file_name.split('.')[0] + ".tif"
         thumbnail = {}
         thumbnail['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + file_name + '/full/250,/0/default.jpg'
         thumbnail['service'] = {
@@ -52,7 +54,7 @@ class processJson():
         }
         thumbnail['@context'] = "http://iiif.io/api/image/2/context.json"
         thumbnail['profile'] = "http://iiif.io/api/image/2/level1.json"
-        self.result_json['thumbnail'] = thumbnail
+        return thumbnail
 
     def _add_sequence( self, sequence_data ):
         self.result_json['sequences'] = []
@@ -83,6 +85,9 @@ class processJson():
         this_item['height'] = self.config['canvas-default-height']
         this_item['width'] = self.config['canvas-default-width']
         self.result_json['sequences'][0]['canvases'].append(this_item)
+
+        file_name = page_data['file']
+        this_item['thumbnail'] = self._add_thumbnail(file_name)
         self._add_image_to_canvas(page_data, i)
 
     def _add_image_to_canvas( self, page_data, i ):
@@ -139,7 +144,7 @@ class processJson():
 
     def _write_json_s3(self, key, data):
         s3 = boto3.resource('s3')
-        s3.Object(self.config["process-bucket"], key).put(Body=json.dumps(data))
+        s3.Object(self.config["process-bucket"], key).put(Body=json.dumps(data), ContentType='text/json')
 
     # write data to manifest json file
     def dumpManifest(self):
