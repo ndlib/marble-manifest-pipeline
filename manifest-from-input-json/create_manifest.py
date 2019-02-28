@@ -10,10 +10,12 @@
 from processJson import processJson
 import sys
 
+
 def handleError(errorMessage):
     sys.exit(errorMessage)
 
-#start of main execution
+
+# start of main execution
 
 # instantiate a processing object
 processSet = processJson()
@@ -31,12 +33,12 @@ if len(sys.argv) > 3:
     outputDirectory = sys.argv[3]
 
 # verify that the input file exists - exit on error
-if processSet.verifyInput(inputDirectory, inputFile, outputDirectory) == False:
+if processSet.verifyInput(inputDirectory, inputFile, outputDirectory) is False:
     handleError(processSet.error)
 
 # generate json manifest
 processSet.buildManifest()
 
 # output manifest
-processSet.printManifest() # print to STDOUT
-processSet.dumpManifest() # create file in output directory
+processSet.printManifest()  # print to STDOUT
+processSet.dumpManifest()  # create file in output directory

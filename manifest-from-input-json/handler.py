@@ -1,18 +1,21 @@
-import os, json
+import os
+import json
 import sys
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 from processJson import processJson
 
+
 def run(event, context):
-    processSet = processJson(event.get('id'),event.get('config'))
+    processSet = processJson(event.get('id'), event.get('config'))
     processSet._create_manifest_json()
-    #if there are errors add them in
+    # if there are errors add them in
 
     processSet.dumpManifest()
 
-    #print resulting json to STDOUT
+    # print resulting json to STDOUT
     return event
+
 
 # python -c 'from handler import *; test()'
 def test():

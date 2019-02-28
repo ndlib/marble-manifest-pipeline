@@ -1,6 +1,8 @@
-import json, csv, os, glob
+import json
+import os
 import boto3
 from botocore.errorfactory import ClientError
+
 
 class finalizeStep():
     # class constructor
@@ -42,21 +44,23 @@ class finalizeStep():
                 'Bucket': self.config["process-bucket"],
                 'Key': o.object_key
             }
-            to_bucket.copy(copy_source, self.config["image-server-bucket-basepath"] + self.id + "/" + os.path.basename(o.object_key))
+            other_key = self.config["image-server-bucket-basepath"] + self.id + "/" + os.path.basename(o.object_key)
+            to_bucket.copy(copy_source, other_key)
         return
 
     def moveManifest(self):
-        print("moveManifest")
-
         s3 = boto3.resource('s3')
         copy_source = {
-          'Bucket': self.config["process-bucket"],
-          'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
+            'Bucket': self.config["process-bucket"],
+            'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
         }
 
         bucket = s3.Bucket(self.config["manifest-server-bucket"])
         print(copy_source)
-        bucket.copy(copy_source, self.test_basepath(self.config["manifest-server-bucket-basepath"]) + self.id + "/manifest/index.json", ExtraArgs={'ACL':'public-read'})
+
+        other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
+            + self.id + "/manifest/index.json"
+        bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
 
         return
 
@@ -67,13 +71,13 @@ class finalizeStep():
         from_path = self.config["process-bucket-read-basepath"] + "/" + self.id + "/"
         # all the items in the process directory for the id
         try:
-            objects = self._list_s3_obj_by_dir(from_path,self.config["process-bucket"])
+            objects = self._list_s3_obj_by_dir(from_path, self.config["process-bucket"])
 
             for s3obj in objects:
-                copy_src = {'Bucket':self.config["process-bucket"],'Key':s3obj}
+                copy_src = {'Bucket': self.config["process-bucket"], 'Key': s3obj}
                 dest_key = self.config["process-bucket-write-basepath"] + "/" \
-                            + self.id + "/lastSuccessfullRun/" + s3obj[len(from_path):]
-                s3.Object(self.config["process-bucket"],dest_key).copy_from(CopySource=copy_src)
+                    + self.id + "/lastSuccessfullRun/" + s3obj[len(from_path):]
+                s3.Object(self.config["process-bucket"], dest_key).copy_from(CopySource=copy_src)
         except Exception as e:
             print(e)
 
@@ -123,8 +127,7 @@ class finalizeStep():
         # The email body for recipients with non-HTML email clients.
         BODY_TEXT = ("Amazon SES Test (Python)\r\n"
                      "This email was sent with Amazon SES using the "
-                     "AWS SDK for Python (Boto)."
-                    )
+                     "AWS SDK for Python (Boto).")
 
         # The HTML body of the email.
         BODY_HTML = """<html>
@@ -139,9 +142,9 @@ class finalizeStep():
         </html>
                     """
         CHARSET = "UTF-8"
-        client = boto3.client('ses',region_name=AWS_REGION)
+        client = boto3.client('ses', region_name=AWS_REGION)
         try:
-            #Provide the contents of the email.
+            # Provide the contents of the email.
             response = client.send_email(
                 Destination={
                     'ToAddresses': [
@@ -165,7 +168,7 @@ class finalizeStep():
                     },
                 },
                 Source=SENDER
-        )
+            )
         # Display an error if something goes wrong.
         except ClientError as e:
             print(e.response['Error']['Message'])

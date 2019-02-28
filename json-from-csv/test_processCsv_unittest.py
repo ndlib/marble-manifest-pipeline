@@ -1,13 +1,15 @@
-import unittest, json, os, boto3
+import unittest
+import os
+import boto3
 from processCsv import processCsv
-from collections import OrderedDict
+
 
 class TestProcessCsv(unittest.TestCase):
     def setUp(self):
         event_id = 'sample'
         process_bucket = os.environ['PROCESS_BUCKET']
         manifest_bucket = os.environ['MANIFEST_BUCKET']
-        self.csvSet = processCsv(event_id,process_bucket,manifest_bucket)
+        self.csvSet = processCsv(event_id, process_bucket, manifest_bucket)
         pass
 
     def test_noCsvFound(self):
@@ -19,13 +21,13 @@ class TestProcessCsv(unittest.TestCase):
 
     def test_writeEventData(self):
         # write event to S3
-        event = { 'event': { 'data': 'sample' } }
+        event = {'event': {'data': 'sample'}}
         self.csvSet.writeEventData(event)
         # verify file exist in S3
         s3 = boto3.resource('s3')
         remote_file = self.csvSet.config['process-bucket-read-basepath'] \
-                             + '/' + self.csvSet.id + '/' \
-                             + self.csvSet.config['event-file']
+            + '/' + self.csvSet.id + '/' \
+            + self.csvSet.config['event-file']
         for s3_obj in s3.Bucket(self.csvSet.config['process-bucket']).objects.filter(Prefix=remote_file):
             self.assertTrue(s3_obj.key == remote_file)
         # delete file from S3
@@ -33,7 +35,7 @@ class TestProcessCsv(unittest.TestCase):
 
     def test_readEventData(self):
         # write event to S3
-        event = { 'event': { 'data': 'sample' } }
+        event = {'event': {'data': 'sample'}}
         self.csvSet.writeEventData(event)
         # verify file exist in S3
         json_data = self.csvSet.readEventData(event)
@@ -41,8 +43,8 @@ class TestProcessCsv(unittest.TestCase):
         # delete file from S3
         s3 = boto3.resource('s3')
         remote_file = self.csvSet.config['process-bucket-read-basepath'] \
-                             + '/' + self.csvSet.id + '/' \
-                             + self.csvSet.config['event-file']
+            + '/' + self.csvSet.id + '/' \
+            + self.csvSet.config['event-file']
         s3.Object(self.csvSet.config['process-bucket'], remote_file).delete()
 
     # def test_buildJson(self):
@@ -62,6 +64,7 @@ class TestProcessCsv(unittest.TestCase):
     #     print self.csvSet.dumpJson()
     #     print empty_json
     #     self.assertEqual(self.csvSet.dumpJson(), json.dumps(empty_json, indent=2))
+
 
 if __name__ == '__main__':
     unittest.main()

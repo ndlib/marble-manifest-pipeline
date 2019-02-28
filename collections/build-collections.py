@@ -1,14 +1,15 @@
-
-import json, csv, os, glob, io
+import json
+import os
 from urllib.request import urlopen
 import boto3
+
 
 def write_file(dict, path):
     manifest_bucket = "mellon-manifest-pipeline-manifestbucket-kel2eht9shpj"
     if not os.path.exists(os.path.dirname(path)):
         try:
             os.makedirs(os.path.dirname(path))
-        except OSError as exc: # Guard against race condition
+        except OSError as exc:  # Guard against race condition
             if exc.errno != errno.EEXIST:
                 raise
 
@@ -26,7 +27,7 @@ groups = [
     {
         "id": "website",
         "label": "All Manifests",
-        "collections": [ "le-rossignol" ],
+        "collections": ["le-rossignol"],
         "description": "All the manifests!!",
         "viewingHint": "multi-part",
         "metadata": {},
@@ -35,7 +36,7 @@ groups = [
     {
         "id": "timeperiods",
         "label": "All the Timeperiod Manifests",
-        "collections": [ "early-time-period", "middle-time-period", "late-time-period" ],
+        "collections": ["early-time-period", "middle-time-period", "late-time-period"],
         "description": "All the manifests!!",
         "viewingHint": "multi-part",
         "metadata": {},
@@ -126,10 +127,10 @@ for group in groups:
         collection["@type"] = "sc:Collection"
         collection["label"] = data["label"]
         collection["description"] = data["description"]
-        collection["thumbnail"] = { "@id": data["thumbnail"] + "/full/250,/0/default.jpg", "service": {"@id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "@context": "http://iiif.io/api/image/2/context.json" } }
+        collection["thumbnail"] = {"@id": data["thumbnail"] + "/full/250,/0/default.jpg", "service": {"@id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "@context": "http://iiif.io/api/image/2/context.json"}}
 
-        collection["metadata"]=data["metadata"]
-        collection["license"]=data["license"]
+        collection["metadata"] = data["metadata"]
+        collection["license"] = data["license"]
         collection["manifests"] = []
 
         for id in data["manifest_ids"]:
@@ -147,4 +148,4 @@ for group in groups:
         write_file(collection, 'collection/' + data["id"] + '/index.json')
         manifest["collections"].append(collection)
 
-    write_file(manifest, 'collection/' + group["id"] +'/index.json')
+    write_file(manifest, 'collection/' + group["id"] + '/index.json')
