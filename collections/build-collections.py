@@ -26,7 +26,7 @@ groups = [
     {
         "id": "website",
         "label": "All Manifests",
-        "collections": [ "le-rossignol" ],
+        "collections": [ "le-rossignol", "dante", "theophilus" ],
         "description": "All the manifests!!",
         "viewingHint": "multi-part",
         "metadata": {},
@@ -59,6 +59,34 @@ collections = {
             {"label": "Collection Finding Aid", "value": "<a href=\"https://archivesspace.library.nd.edu/repositories/3/resources/1392\">https://archivesspace.library.nd.edu/repositories/3/resources/1392</a>"}
         ]
     },
+    "dante": {
+        "id": "dante",
+        "manifest_ids": ['dante-comento-1487', 'dante-comento-1493', 'dante-comento-1497', 'dante-dc-1544'],
+        "label": "Dante",
+        "description": "Lots of Dante",
+        "thumbnail": "https://image-service-testlibnd-dev.library.nd.edu:8182/iiif/2/dante-comento-1487%2FBOO_000909884-1-inf-02a.tif",
+        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "metadata": [
+            {"label": "Dates", "value": "1914-1919"},
+            {"label": "Creator", "value": "Le Rossignol, Arthur Stanley, 1875-? (Person)"},
+            {"label": "Language of Materials", "value": "English"},
+            {"label": "Collection Finding Aid", "value": "<a href=\"https://archivesspace.library.nd.edu/repositories/3/resources/1392\">https://archivesspace.library.nd.edu/repositories/3/resources/1392</a>"}
+        ]
+    },
+    "theophilus": {
+        "id": "theophilus",
+        "manifest_ids": ['theophilus-journal-v1', 'theophilus-journal-v2'],
+        "label": "Theophilus Journal",
+        "description": "Journal of Theophilus",
+        "thumbnail": "https://image-service-testlibnd-dev.library.nd.edu:8182/iiif/2/theophilus-journal-v1%2FMSN-EA_8011-01-B-000a.tif",
+        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "metadata": [
+            {"label": "Dates", "value": "1914-1919"},
+            {"label": "Creator", "value": "Le Rossignol, Arthur Stanley, 1875-? (Person)"},
+            {"label": "Language of Materials", "value": "English"},
+            {"label": "Collection Finding Aid", "value": "<a href=\"https://archivesspace.library.nd.edu/repositories/3/resources/1392\">https://archivesspace.library.nd.edu/repositories/3/resources/1392</a>"}
+        ]
+    },
     "early-time-period": {
         "id": "early-time-period",
         "manifest_ids": ['le-rossignol-01', 'le-rossignol-02', 'le-rossignol-03', 'le-rossignol-04'],
@@ -75,7 +103,7 @@ collections = {
     },
     "middle-time-period": {
         "id": "middle-time-period",
-        "manifest_ids": ['le-rossignol-05', 'le-rossignol-06', 'le-rossignol-07', 'le-rossignol-08'],
+        "manifest_ids": ['le-rossignol-05', 'le-rossignol-06', 'le-rossignol-07', 'le-rossignol-08', 'dante-comento-1487'],
         "label": "Middle Time Period",
         "description": "All The \"Middle\" items",
         "thumbnail": "https://image-service-testlibnd-dev.library.nd.edu:8182/iiif/2/le-rossignol-81%2FMSE-MD_3821-081_00a.tif",
