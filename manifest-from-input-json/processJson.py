@@ -1,4 +1,4 @@
-import json, glob
+import json, glob, os
 import boto3
 
 class processJson():
@@ -44,7 +44,7 @@ class processJson():
 
 
     def _add_thumbnail(self, file_name):
-        file_name = file_name.split('.')[0] + ".tif"
+        file_name = filename_without_extension(file_name) + ".tif"
         thumbnail = {}
         thumbnail['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + file_name + '/full/250,/0/default.jpg'
         thumbnail['service'] = {
@@ -102,7 +102,7 @@ class processJson():
 
     def _add_resource_to_image( self, page_data, i ):
         this_item = {}
-        file = page_data['file'].split('.')[0] + ".tif"
+        file = filename_without_extension(page_data['file']) + ".tif"
         this_item['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + file + '/full/full/0/default.jpg'
         this_item['@type'] = 'dctypes:Image'
         this_item['format'] = 'image/jpeg'
@@ -111,7 +111,7 @@ class processJson():
 
     def _add_service_to_resource( self, page_data, i ):
         this_item = {}
-        file = page_data['file'].split('.')[0] + ".tif"
+        file = filename_without_extension(page_data['file']) + ".tif"
         this_item['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + file
         this_item['profile'] = "http://iiif.io/api/image/2/level2.json"
         this_item['@context'] = "http://iiif.io/api/image/2/context.json"
@@ -162,3 +162,6 @@ class processJson():
         content_object = boto3.resource('s3').Object(self.config['process-bucket'], remote_file)
         file_content = content_object.get()['Body'].read().decode('utf-8')
         return json.loads(file_content).get('data')
+
+    def filename_without_extension(self, file):
+        return os.path.splitext(file)[0]
