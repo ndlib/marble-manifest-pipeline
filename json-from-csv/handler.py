@@ -54,6 +54,7 @@ def get_config():
         config[key] = value
 
     config['image-server-base-url'] = "https://" + config['image-server-base-url'] + ':8182/iiif/2'
+    config['manifest-server-base-url'] = "https://" + config['manifest-server-base-url']
 
     return config
 
