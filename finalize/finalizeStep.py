@@ -44,21 +44,23 @@ class finalizeStep():
                 'Bucket': self.config["process-bucket"],
                 'Key': o.object_key
             }
-            to_bucket.copy(copy_source, self.config["image-server-bucket-basepath"] + self.id + "/" + os.path.basename(o.object_key))
+            other_key = self.config["image-server-bucket-basepath"] + self.id + "/" + os.path.basename(o.object_key)
+            to_bucket.copy(copy_source, other_key)
         return
 
     def moveManifest(self):
-        print("moveManifest")
-
         s3 = boto3.resource('s3')
         copy_source = {
-          'Bucket': self.config["process-bucket"],
-          'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
+            'Bucket': self.config["process-bucket"],
+            'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
         }
 
         bucket = s3.Bucket(self.config["manifest-server-bucket"])
         print(copy_source)
-        bucket.copy(copy_source, self.test_basepath(self.config["manifest-server-bucket-basepath"]) + self.id + "/manifest/index.json", ExtraArgs={'ACL':'public-read'})
+
+        other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
+            + self.id + "/manifest/index.json"
+        bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
 
         return
 

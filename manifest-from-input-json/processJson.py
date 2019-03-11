@@ -1,5 +1,8 @@
-import json, glob
+import json
+import glob
+import os
 import boto3
+
 
 class processJson():
     def __init__(self, id, eventConfig):
@@ -15,15 +18,11 @@ class processJson():
         self.output_base_url = outputDirectory
         self.output_file_suffix = '-manifest.json'
 
-    def _load_global_data( self ):
+    def _load_global_data(self):
         self.global_data['id-base'] = self.config['manifest-server-base-url'] + '/' + self.id + '/'
-        #self.global_data['output-file'] = self.output_base_url + input_json['unique-identifier'] + self.output_file_suffix
-        #self.config['default-height'] = 2000
-        #self.config['default-width'] = 2000
-        #self.config['viewingDirection'] = 'left-to-right'
 
     # build results_json
-    def _create_manifest_json( self ):
+    def _create_manifest_json(self):
         self._load_global_data()
 
         self.result_json['@context'] = 'http://iiif.io/api/presentation/2/context.json'
@@ -37,14 +36,16 @@ class processJson():
 
         # currently, one sequence is allowed per manifest
         sequence_data = self.global_data['sequences'][0]
-        self._add_thumbnail(sequence_data)
+        file_name = sequence_data['pages'][0]['file']
+        self.result_json['thumbnail'] = self._add_thumbnail(file_name)
+
         self._add_sequence( sequence_data)
 
-
-    def _add_thumbnail(self, sequence_data):
-        file_name = sequence_data['pages'][0]['file'].split('.')[0] + ".tif"
+    def _add_thumbnail(self, file_name):
+        file_name = self.filename_without_extension(file_name) + ".tif"
         thumbnail = {}
-        thumbnail['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + file_name + '/full/250,/0/default.jpg'
+        thumbnail['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' \
+            + file_name + '/full/250,/0/default.jpg'
         thumbnail['service'] = {
             '@id': self.config['image-server-base-url'] + '/' + self.id + '%2F' + file_name,
             'profile': "http://iiif.io/api/image/2/level2.json",
@@ -52,9 +53,9 @@ class processJson():
         }
         thumbnail['@context'] = "http://iiif.io/api/image/2/context.json"
         thumbnail['profile'] = "http://iiif.io/api/image/2/level1.json"
-        self.result_json['thumbnail'] = thumbnail
+        return thumbnail
 
-    def _add_sequence( self, sequence_data ):
+    def _add_sequence(self, sequence_data):
         self.result_json['sequences'] = []
 
         this_item = {}
@@ -75,7 +76,7 @@ class processJson():
                 self._add_new_canvas_data(page_data, i)
                 i = i + 1
 
-    def _add_new_canvas_data( self, page_data, i ):
+    def _add_new_canvas_data(self, page_data, i):
         this_item = {}
         this_item['@id'] = self.global_data['id-base'] + 'canvas/p' + str(i + 1)
         this_item['@type'] = 'sc:Canvas'
@@ -83,9 +84,12 @@ class processJson():
         this_item['height'] = self.config['canvas-default-height']
         this_item['width'] = self.config['canvas-default-width']
         self.result_json['sequences'][0]['canvases'].append(this_item)
+
+        file_name = page_data['file']
+        this_item['thumbnail'] = self._add_thumbnail(file_name)
         self._add_image_to_canvas(page_data, i)
 
-    def _add_image_to_canvas( self, page_data, i ):
+    def _add_image_to_canvas(self, page_data, i):
         self.result_json['sequences'][0]['canvases'][i]['images'] = []
         this_item = {}
         this_item['@id'] = self.global_data['id-base'] + 'images/' + page_data['file']
@@ -95,18 +99,19 @@ class processJson():
         self.result_json['sequences'][0]['canvases'][i]['images'].append(this_item)
         self._add_resource_to_image(page_data, i)
 
-    def _add_resource_to_image( self, page_data, i ):
+    def _add_resource_to_image(self, page_data, i):
         this_item = {}
-        file = page_data['file'].split('.')[0] + ".tif"
-        this_item['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + file + '/full/full/0/default.jpg'
+        file = self.filename_without_extension(page_data['file']) + ".tif"
+        this_item['@id'] = self.config['image-server-base-url'] + '/' \
+            + self.id + '%2F' + file + '/full/full/0/default.jpg'
         this_item['@type'] = 'dctypes:Image'
         this_item['format'] = 'image/jpeg'
         self.result_json['sequences'][0]['canvases'][i]['images'][0]['resource'] = this_item
         self._add_service_to_resource(page_data, i)
 
-    def _add_service_to_resource( self, page_data, i ):
+    def _add_service_to_resource(self, page_data, i):
         this_item = {}
-        file = page_data['file'].split('.')[0] + ".tif"
+        file = self.filename_without_extension(page_data['file']) + ".tif"
         this_item['@id'] = self.config['image-server-base-url'] + '/' + self.id + '%2F' + file
         this_item['profile'] = "http://iiif.io/api/image/2/level2.json"
         this_item['@context'] = "http://iiif.io/api/image/2/context.json"
@@ -133,13 +138,13 @@ class processJson():
         input_source.close()
         self._create_manifest_json(input_json)
 
-    #print resulting json to STDOUT
+    # print resulting json to STDOUT
     def printManifest(self):
         print(json.dumps(self.result_json, indent=2))
 
     def _write_json_s3(self, key, data):
         s3 = boto3.resource('s3')
-        s3.Object(self.config["process-bucket"], key).put(Body=json.dumps(data))
+        s3.Object(self.config["process-bucket"], key).put(Body=json.dumps(data), ContentType='text/json')
 
     # write data to manifest json file
     def dumpManifest(self):
@@ -157,3 +162,6 @@ class processJson():
         content_object = boto3.resource('s3').Object(self.config['process-bucket'], remote_file)
         file_content = content_object.get()['Body'].read().decode('utf-8')
         return json.loads(file_content).get('data')
+
+    def filename_without_extension(self, file):
+        return os.path.splitext(file)[0]

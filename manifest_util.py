@@ -5,8 +5,9 @@ import os.path
 import pprint
 
 # global variables
-#errors = { 'validation': { 'event1': [err1,err2,err3],'event2':[err1]}, 'process': {} }
-errors = { 'validation': {}, 'process': {} }
+# errors = { 'validation': { 'event1': [err1,err2,err3],'event2':[err1]}, 'process': {} }
+errors = {'validation': {}, 'process': {}}
+
 
 def _get_config(args):
     return {
@@ -19,8 +20,10 @@ def _get_config(args):
             "main-csv": 'main.csv'
         }
 
+
 def _print_errors(etype):
     pprint.pprint(errors[etype])
+
 
 def _add_error(etype, event, msg):
     if event in errors[etype]:
@@ -28,26 +31,34 @@ def _add_error(etype, event, msg):
     else:
         errors[etype][event] = [msg]
 
+
 def _print_validation_errors():
     _print_errors('validation')
+
 
 def _print_process_errors():
     _print_errors('process')
 
+
 def _add_validation_error(msg, event='SYSTEM'):
-    _add_error('validation',event, msg)
+    _add_error('validation', event, msg)
+
 
 def _add_process_error(msg, event='SYSTEM'):
-    _add_error('process',event, msg)
+    _add_error('process', event, msg)
+
 
 def _validation_errors_exist():
     return bool(errors['validation'])
 
+
 def _process_errors_exist():
     return bool(errors['process'])
 
+
 def _verify_events(file):
     return _get_events(file)
+
 
 def _verify_lastrun_files(args, events):
     s3 = boto3.resource('s3')
@@ -59,23 +70,25 @@ def _verify_lastrun_files(args, events):
         seq_csv = cfg["process-bucket-write-basepath"] + "/" \
             + event + "/" + cfg["process-bucket-last-basepath"] + "/" \
             + cfg["sequence-csv"]
-        for csv in [main_csv,seq_csv]:
+        for csv in [main_csv, seq_csv]:
             try:
-                s3.Object(cfg["process-bucket"],csv).load()
+                s3.Object(cfg["process-bucket"], csv).load()
             except botocore.exceptions.ClientError as e:
                 err_msg = csv + " - " + e.response['Error']['Code'] \
                             + ": " + e.response['Error']['Message']
-                _add_validation_error(err_msg,event)
+                _add_validation_error(err_msg, event)
+
 
 def _verify_local_files(args, events):
     cfg = _get_config(args)
     for event in events:
         main_csv = cfg['local-dir'] + event + '/' + cfg['main-csv']
         seq_csv = cfg['local-dir'] + event + '/' + cfg['sequence-csv']
-        files = [main_csv,seq_csv]
+        files = [main_csv, seq_csv]
         for filename in files:
             if not os.path.isfile(filename):
                 _add_validation_error('Local file not found - ' + filename, event)
+
 
 def _verify_args(args):
     events = _verify_events(args.events)
@@ -83,6 +96,7 @@ def _verify_args(args):
         _verify_lastrun_files(args, events)
     else:
         _verify_local_files(args, events)
+
 
 def _get_events(file):
     try:
@@ -94,6 +108,7 @@ def _get_events(file):
 
     lines = list(filter(None, lines))
     return lines
+
 
 def _setup_event(args):
     cfg = _get_config(args)
@@ -107,15 +122,16 @@ def _setup_event(args):
             objects = _get_last_run_objects(event, args)
             _copy_files_to_rerun(event, objects, args)
         except Exception as e:
-            _add_process_error(e,event)
+            _add_process_error(e, event)
             return
 
 
 def _get_last_run_objects(event, args):
     cfg = _get_config(args)
     last_run_path = cfg['process-bucket-write-basepath'] + '/' \
-                    + event + '/' + cfg['process-bucket-last-basepath']
-    return _list_s3_obj_by_dir(last_run_path,args)
+        + event + '/' + cfg['process-bucket-last-basepath']
+    return _list_s3_obj_by_dir(last_run_path, args)
+
 
 def _list_s3_obj_by_dir(s3dir, args):
     s3 = boto3.client('s3')
@@ -141,20 +157,22 @@ def _list_s3_obj_by_dir(s3dir, args):
             params.pop('ContinuationToken', None)
     return keys
 
+
 def _copy_files_to_rerun(event, objects, args):
     cfg = _get_config(args)
     s3 = boto3.resource('s3')
     last_run_path = cfg['process-bucket-write-basepath'] + '/' \
-                        + event + '/' + cfg['process-bucket-last-basepath'] + '/'
+        + event + '/' + cfg['process-bucket-last-basepath'] + '/'
     try:
         for s3obj in objects:
-            copy_src = {'Bucket':cfg['process-bucket'],'Key':s3obj}
+            copy_src = {'Bucket': cfg['process-bucket'], 'Key': s3obj}
             dest_key = cfg['process-bucket-read-basepath'] + '/' \
-                            + event + '/' + s3obj[len(last_run_path):]
-            s3.Object(cfg['process-bucket'],dest_key).copy_from(CopySource=copy_src)
+                + event + '/' + s3obj[len(last_run_path):]
+            s3.Object(cfg['process-bucket'], dest_key).copy_from(CopySource=copy_src)
         # s3.Object('my_bucket','my_file_old').delete()
     except Exception as e:
-        _add_process_error(e,event)
+        _add_process_error(e, event)
+
 
 def _copy_local_to_s3(event, args):
     client = boto3.client('s3')
@@ -170,8 +188,9 @@ def _copy_local_to_s3(event, args):
                 client.upload_file(local_path, args.bucket, s3_path)
             except Exception as e:
                 # if ANY file fails, add err msg, and move onto next event
-                _add_process_error(e,event)
+                _add_process_error(e, event)
                 return
+
 
 def rerun(args):
     _verify_args(args)
@@ -201,6 +220,7 @@ def rerun(args):
             _print_process_errors()
             print("The above event errors were caught during processing.")
 
+
 def run(args):
     _verify_args(args)
     if _validation_errors_exist():
@@ -228,23 +248,25 @@ def run(args):
             _print_process_errors()
             print("The above event errors were caught during processing.")
 
+
 def main():
     parser = argparse.ArgumentParser()
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('--rerun', action='store_true')
     group.add_argument('--run', action='store_false')
     parser.add_argument('--bucket', '-b', type=str, required=True,
-        help="Bucket where event data(cvs, images) live")
+                        help="Bucket where event data(cvs, images) live")
     parser.add_argument('--stepfn', '-s', type=str, required=True,
-        help="Step function state machine name")
+                        help="Step function state machine name")
     parser.add_argument('--events', '-e', type=str, required=True,
-        help="Text file with an event on each row")
+                        help="Text file with an event on each row")
 
     args = parser.parse_args()
     if args.rerun:
         rerun(args)
     else:
         run(args)
+
 
 if __name__ == "__main__":
     main()

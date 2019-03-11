@@ -202,9 +202,26 @@ EX:
 
 ```python3 manifest_util.py --rerun --bucket mybucket -s arn:aws:states:us-east-1:1234567890:stateMachine:StateMachine-IH8SMHeRe -e events.txt```
 
+# Local Development
+## Prerequisites
+For consistent coding standards install [flake8](http://flake8.pycqa.org/en/latest/index.html) via [pip](https://pypi.org/project/pip/)
 
-# Local Deploy
+`pip install -r dev-requirements.txt`
 
+To run [flake8](http://flake8.pycqa.org/en/latest/index.html) manually
+
+`flake8 json-from-csv/handler.py`
+
+The projects custom linter configurations can be found in .flake8
+
+Additional options can be found [here](http://flake8.pycqa.org/en/latest/user/options.html)
+
+Various Editors and IDEs have plugins that work with this linter.
+ * In ATOM install [linter-flake8](https://atom.io/packages/linter-flake8)
+ * In Sublime install [SublimeLinter-flake8](https://github.com/SublimeLinter/SublimeLinter-flake8)
+ * In VS Code modify these [config settings](https://code.visualstudio.com/docs/python/settings-reference#_flake8)
+
+## Deployment
 Run the script local-deploy providing the name of the stack you want to deploy and the
 path to the mellon-blueprints repo
 
