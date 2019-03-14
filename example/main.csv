@@ -1,6 +1,6 @@
-Label,Description,License,Attribution,Sequence_filename,Sequence_label,Sequence_viewing_experience,unique_identifier,Metadata_label,Metadata_value
-Label,Description,license,attribution,,sequency,paged,2018_example_001,,
-,,,,,,,,"Title","Wunder der Verenbung"
-,,,,,,,,"Author(s)","Bolle, Fritz"
-,,,,,,,,"Publication date","[1951]"
-,,,,,,,,"Attribution","Welcome Library<br/>License: CC-BY-NC"
+Label,Description,License,Attribution,Sequence_filename,Sequence_label,Sequence_viewing_experience,unique_identifier,Notify,Metadata_label,Metadata_value
+Label,Description,license,attribution,,sequency,paged,2018_example_001,sample.email@nd.edu,,
+,,,,,,,,,"Title","Wunder der Verenbung"
+,,,,,,,,,"Author(s)","Bolle, Fritz"
+,,,,,,,,,"Publication date","[1951]"
+,,,,,,,,,"Attribution","Welcome Library<br/>License: CC-BY-NC"

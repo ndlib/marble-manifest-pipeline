@@ -29,7 +29,6 @@ def get_config():
         "main-csv": 'main.csv',
         "canvas-default-height": 2000,
         "canvas-default-width": 2000,
-        "notify-on-finished": "jhartzle@nd.edu",
         "event-file": "event.json"
     }
 
