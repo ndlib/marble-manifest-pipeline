@@ -1,10 +1,11 @@
-import json, csv, os, glob
+import json
+import os
 import boto3
 from botocore.errorfactory import ClientError
 
+
 class finalizeStep():
     # class constructor
-
     def __init__(self, id, eventConfig):
         self.id = id
         self.config = eventConfig
@@ -18,7 +19,8 @@ class finalizeStep():
             self.saveLastRun()
             self.saveIndexMetadata()
 
-        self.notify()
+        if self.config['notify-on-finished']:
+            self.notify()
 
     def success(self):
         if len(self.manifestMetadata["errors"]) > 0:
@@ -42,21 +44,23 @@ class finalizeStep():
                 'Bucket': self.config["process-bucket"],
                 'Key': o.object_key
             }
-            to_bucket.copy(copy_source, self.config["image-server-bucket-basepath"] + self.id + "/" + os.path.basename(o.object_key))
+            other_key = self.config["image-server-bucket-basepath"] + self.id + "/" + os.path.basename(o.object_key)
+            to_bucket.copy(copy_source, other_key)
         return
 
     def moveManifest(self):
-        print("moveManifest")
-
         s3 = boto3.resource('s3')
         copy_source = {
-          'Bucket': self.config["process-bucket"],
-          'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
+            'Bucket': self.config["process-bucket"],
+            'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
         }
 
         bucket = s3.Bucket(self.config["manifest-server-bucket"])
         print(copy_source)
-        bucket.copy(copy_source, self.test_basepath(self.config["manifest-server-bucket-basepath"]) + self.id + "/manifest/index.json", ExtraArgs={'ACL':'public-read'})
+
+        other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
+            + self.id + "/manifest/index.json"
+        bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
 
         return
 
@@ -67,13 +71,13 @@ class finalizeStep():
         from_path = self.config["process-bucket-read-basepath"] + "/" + self.id + "/"
         # all the items in the process directory for the id
         try:
-            objects = self._list_s3_obj_by_dir(from_path,self.config["process-bucket"])
+            objects = self._list_s3_obj_by_dir(from_path, self.config["process-bucket"])
 
             for s3obj in objects:
-                copy_src = {'Bucket':self.config["process-bucket"],'Key':s3obj}
+                copy_src = {'Bucket': self.config["process-bucket"], 'Key': s3obj}
                 dest_key = self.config["process-bucket-write-basepath"] + "/" \
-                            + self.id + "/lastSuccessfullRun/" + s3obj[len(from_path):]
-                s3.Object(self.config["process-bucket"],dest_key).copy_from(CopySource=copy_src)
+                    + self.id + "/lastSuccessfullRun/" + s3obj[len(from_path):]
+                s3.Object(self.config["process-bucket"], dest_key).copy_from(CopySource=copy_src)
         except Exception as e:
             print(e)
 
@@ -112,41 +116,38 @@ class finalizeStep():
         return
 
     def notify(self):
-        print("nofify")
-        RECIPIENT = "jhartzle@nd.edu"
-        SENDER = "jon.hartzler@gmail.com"
+        # Emails must be verified or whitelisted by SES
+        RECIPIENTS = self.config['notify-on-finished'].split(",")
+        SENDER = "noreply@nd.edu"
         AWS_REGION = "us-east-1"
 
         # The subject line for the email.
-        SUBJECT = "Amazon SES Test (SDK for Python)"
+        SUBJECT = self.id + " Manifest Pipeline Complete"
 
         # The email body for recipients with non-HTML email clients.
-        BODY_TEXT = ("Amazon SES Test (Python)\r\n"
-                     "This email was sent with Amazon SES using the "
-                     "AWS SDK for Python (Boto)."
-                    )
+        BODY_TEXT = ("The manifest pipeline has completed processing " + self.id)
 
         # The HTML body of the email.
         BODY_HTML = """<html>
         <head></head>
         <body>
-          <h1>Amazon SES Test (SDK for Python)</h1>
-          <p>This email was sent with
-            <a href='https://aws.amazon.com/ses/'>Amazon SES</a> using the
-            <a href='https://aws.amazon.com/sdk-for-python/'>
-              AWS SDK for Python (Boto)</a>.</p>
+          <h1>""" + self.id + """ manifest pipeline has completed</h1>
+          <p>CSVs and images have been processed through the pipeline.</p>
+          <ul>
+            <li><a href=\"""" + self._event_manifest_url() + """\">Manifest</a></li>
+            <li><a href=\"""" + self._event_imageviewer_url() + """\">Image Viewer</a></li>
+            <li><a href=\"""" + self._event_imageviewer_url(True) + """\">Image Viewer - Large</a></li>
+          </ul>
         </body>
-        </html>
-                    """
+        </html>"""
+
         CHARSET = "UTF-8"
-        client = boto3.client('ses',region_name=AWS_REGION)
+        client = boto3.client('ses', region_name=AWS_REGION)
         try:
-            #Provide the contents of the email.
+            # Provide the contents of the email.
             response = client.send_email(
                 Destination={
-                    'ToAddresses': [
-                        RECIPIENT,
-                    ],
+                    'ToAddresses': RECIPIENTS,
                 },
                 Message={
                     'Body': {
@@ -165,7 +166,7 @@ class finalizeStep():
                     },
                 },
                 Source=SENDER
-        )
+            )
         # Display an error if something goes wrong.
         except ClientError as e:
             print(e.response['Error']['Message'])
@@ -175,6 +176,17 @@ class finalizeStep():
 
         return
 
+    def _event_manifest_url(self):
+        return 'https://s3.amazonaws.com/' + self.config['manifest-server-bucket'] \
+            + '/' + self.id + '/manifest/index.json'
+
+    def _event_imageviewer_url(self, universalviewer=False):
+        url = 'https://image-viewer.library.nd.edu/'
+        if universalviewer:
+            url += 'universalviewer/index.html#'
+        url += '?manifest=' + self._event_manifest_url()
+        return url
+
     def test_basepath(self, basepath):
         if (basepath):
             return basepath + "/"
@@ -183,7 +195,8 @@ class finalizeStep():
 
     # read event data
     def readEventData(self, event_id):
-        remote_file = self.config['process-bucket-read-basepath'] + "/" + event_id + "/" + self.config["event-file"]
+        remote_file = self.config['process-bucket-read-basepath'] + "/" \
+            + event_id + "/" + self.config["event-file"]
         content_object = boto3.resource('s3').Object(self.config['process-bucket'], remote_file)
         file_content = content_object.get()['Body'].read().decode('utf-8')
         return json.loads(file_content).get('data')

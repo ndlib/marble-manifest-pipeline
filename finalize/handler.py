@@ -1,13 +1,17 @@
-import os, sys, json
+import os
+import sys
+import json
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 from finalizeStep import finalizeStep
 
+
 def run(event, context):
-    step = finalizeStep(event.get("id"),event.get('config'))
+    step = finalizeStep(event.get("id"), event.get('config'))
     step.run()
 
     return event
+
 
 # python -c 'from handler import *; test()'
 def test():

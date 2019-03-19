@@ -3,8 +3,8 @@ import os
 
 class iiifImage():
     def __init__(self, parent_id, file_name, label, event_config):
-        self.id = parent_id + '%2F' + self.filename_without_extension(file_name)
-        self.file_name = file_name
+        self.file_name = self.filename_without_extension(file_name) + '.tif'
+        self.id = parent_id + '%2F' + self.file_name
         self.label = label
         self.image_url = event_config['image-server-base-url'] + '/' + self.id
         self.canvas_url = event_config['manifest-server-base-url'] + '/' + parent_id + '/canvas/' + self.id

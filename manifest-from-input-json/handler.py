@@ -17,7 +17,6 @@ def run(event, context):
         manifestData = event.get('manifestData')
     else:
         manifestData = readS3Json(s3Bucket, s3EventPath)
-        print("MANI=")
         print(manifestData)
 
     # get manifest object

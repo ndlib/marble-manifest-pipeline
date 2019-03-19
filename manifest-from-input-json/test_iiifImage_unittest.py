@@ -18,10 +18,10 @@ class TestIiifImage(unittest.TestCase):
         pass
 
     def test_id(self):
-        self.assertEqual(self.iiifImage.id, self.parent_id + "%2Ffile_name")
+        self.assertEqual(self.iiifImage.id, self.parent_id + "%2Ffile_name.tif")
 
-    def test_base_url(self):
-        self.assertEqual(self.iiifImage.base_url, "image-server-base-url/parent_id%2Ffile_name")
+    def test_image_url(self):
+        self.assertEqual(self.iiifImage.image_url, "image-server-base-url/parent_id%2Ffile_name.tif")
 
     def test_filename_without_extension(self):
         self.assertEqual(self.iiifImage.filename_without_extension("file.jpg"), "file")
@@ -31,23 +31,23 @@ class TestIiifImage(unittest.TestCase):
         self.assertEqual(self.iiifImage.filename_without_extension("f@3516 &343 -1.jpg"), "f@3516 &343 -1")
 
     def test_thumbnail(self):
-        test_thumbnail = {'@id': 'image-server-base-url/parent_id%2Ffile_name/full/250,/0/default.jpg', 'service': {'@id': 'image-server-base-url/parent_id%2Ffile_name', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}}
+        test_thumbnail = {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif/full/250,/0/default.jpg', 'service': {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}}
         self.assertDictEqual(self.iiifImage.thumbnail(), test_thumbnail)
 
     def test_image_with_on_canvas(self):
-        test_image = {'@id': 'image-server-base-url/parent_id%2Ffile_name', '@type': 'oa:Annotation', 'motivation': 'sc:painting', 'on': 'manifest-server-base-url/parent_id/canvas/parent_id%2Ffile_name', 'resource': {'@id': 'image-server-base-url/parent_id%2Ffile_name/full/full/0/default.jpg', '@type': 'dctypes:Image', 'format': 'image/jpeg', 'service': {'@id': 'image-server-base-url/parent_id%2Ffile_name', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}}}
+        test_image = {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif', '@type': 'oa:Annotation', 'motivation': 'sc:painting', 'on': 'manifest-server-base-url/parent_id/canvas/parent_id%2Ffile_name.tif', 'resource': {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif/full/full/0/default.jpg', '@type': 'dctypes:Image', 'format': 'image/jpeg', 'service': {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}}}
         self.assertDictEqual(self.iiifImage.image(), test_image)
 
     def test_service(self):
-        test_service = {'@id': 'image-server-base-url/parent_id%2Ffile_name', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}
+        test_service = {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}
         self.assertDictEqual(self.iiifImage.service(), test_service)
 
     def test_resource(self):
-        test_resource = {'@id': 'image-server-base-url/parent_id%2Ffile_name/full/full/0/default.jpg', '@type': 'dctypes:Image', 'format': 'image/jpeg', 'service': {'@id': 'image-server-base-url/parent_id%2Ffile_name', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}}
+        test_resource = {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif/full/full/0/default.jpg', '@type': 'dctypes:Image', 'format': 'image/jpeg', 'service': {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}}
         self.assertDictEqual(self.iiifImage.resource(), test_resource)
 
     def test_canvas(self):
-        test_canvas = {'@id': 'manifest-server-base-url/parent_id/canvas/parent_id%2Ffile_name', '@type': 'sc:Canvas', 'label': 'label', 'height': '200', 'width': '200', 'images': [{'@id': 'image-server-base-url/parent_id%2Ffile_name', '@type': 'oa:Annotation', 'motivation': 'sc:painting', 'on': 'manifest-server-base-url/parent_id/canvas/parent_id%2Ffile_name', 'resource': {'@id': 'image-server-base-url/parent_id%2Ffile_name/full/full/0/default.jpg', '@type': 'dctypes:Image', 'format': 'image/jpeg', 'service': {'@id': 'image-server-base-url/parent_id%2Ffile_name', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}}}], 'thumbnail': {'@id': 'image-server-base-url/parent_id%2Ffile_name/full/250,/0/default.jpg', 'service': {'@id': 'image-server-base-url/parent_id%2Ffile_name', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}}}
+        test_canvas = {'@id': 'manifest-server-base-url/parent_id/canvas/parent_id%2Ffile_name.tif', '@type': 'sc:Canvas', 'label': 'label', 'height': '200', 'width': '200', 'images': [{'@id': 'image-server-base-url/parent_id%2Ffile_name.tif', '@type': 'oa:Annotation', 'motivation': 'sc:painting', 'on': 'manifest-server-base-url/parent_id/canvas/parent_id%2Ffile_name.tif', 'resource': {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif/full/full/0/default.jpg', '@type': 'dctypes:Image', 'format': 'image/jpeg', 'service': {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}}}], 'thumbnail': {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif/full/250,/0/default.jpg', 'service': {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}}}
         self.assertDictEqual(self.iiifImage.canvas(), test_canvas)
 
 if __name__ == '__main__':
