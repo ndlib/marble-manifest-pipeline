@@ -50,5 +50,6 @@ class TestIiifImage(unittest.TestCase):
         test_canvas = {'@id': 'manifest-server-base-url/parent_id/canvas/parent_id%2Ffile_name.tif', '@type': 'sc:Canvas', 'label': 'label', 'height': '200', 'width': '200', 'images': [{'@id': 'image-server-base-url/parent_id%2Ffile_name.tif', '@type': 'oa:Annotation', 'motivation': 'sc:painting', 'on': 'manifest-server-base-url/parent_id/canvas/parent_id%2Ffile_name.tif', 'resource': {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif/full/full/0/default.jpg', '@type': 'dctypes:Image', 'format': 'image/jpeg', 'service': {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}}}], 'thumbnail': {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif/full/250,/0/default.jpg', 'service': {'@id': 'image-server-base-url/parent_id%2Ffile_name.tif', 'profile': 'http://iiif.io/api/image/2/level2.json', '@context': 'http://iiif.io/api/image/2/context.json'}}}
         self.assertDictEqual(self.iiifImage.canvas(), test_canvas)
 
+
 if __name__ == '__main__':
     unittest.main()
