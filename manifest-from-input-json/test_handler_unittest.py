@@ -1,5 +1,4 @@
 import unittest
-import os
 import json
 from unittest.mock import patch
 from handler import *
@@ -11,8 +10,6 @@ input_source.close()
 
 @patch('handler.readS3Json', return_value=example_data)
 @patch('handler.writeS3Json')
-
-
 class TestHandler(unittest.TestCase):
     def setUp(self):
         self.parent_id = 'parent_id'
@@ -22,8 +19,6 @@ class TestHandler(unittest.TestCase):
         input_source.close()
 
         self.config = self.example_data.get('config')
-
-
         pass
 
     def test_readS3Json_not_called_when_manifest_data_is_passed(self, writeS3Json, readS3Json):
