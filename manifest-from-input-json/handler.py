@@ -8,7 +8,7 @@ def run(event, context):
     id = event.get('id')
     config = event.get('config')
     s3Bucket = config['process-bucket']
-    s3EventPath = os.path.join(config['process-bucket-write-basepath'], id, config["event-file"])
+    s3EventPath = os.path.join(config['process-bucket-read-basepath'], id, config["event-file"])
     s3ManifestPath = os.path.join(config['process-bucket-write-basepath'], id, '/manifest/index.json')
 
     # for testing see test() below.
