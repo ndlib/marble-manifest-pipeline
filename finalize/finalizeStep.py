@@ -181,7 +181,7 @@ class finalizeStep():
             + '/' + self.id + '/manifest/index.json'
 
     def _event_imageviewer_url(self, universalviewer=False):
-        url = 'https://image-viewer.library.nd.edu/'
+        url = 'https://viewer-iiif.library.nd.edu/'
         if universalviewer:
             url += 'universalviewer/index.html#'
         url += '?manifest=' + self._event_manifest_url()
