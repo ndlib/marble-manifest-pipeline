@@ -9,7 +9,7 @@ def run(event, context):
     config = event.get('config')
     s3Bucket = config['process-bucket']
     s3EventPath = os.path.join(config['process-bucket-read-basepath'], id, config["event-file"])
-    s3ManifestPath = os.path.join(config['process-bucket-write-basepath'], id, '/manifest/index.json')
+    s3ManifestPath = os.path.join(config['process-bucket-write-basepath'], id, 'manifest/index.json')
 
     # for testing see test() below.
     # This allows this to be run locally without having a file in s3
