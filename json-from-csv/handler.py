@@ -1,20 +1,30 @@
 import os
 import boto3
+import json
 import sys
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-
 from processCsv import processCsv
 
 
 def run(event, context):
-    event['config'] = get_config()
+    id = event.get("id")
+    config = get_config()
 
-    csvSet = processCsv(event.get("id"), event.get("config"))
-    if not csvSet.verifyCsvExist():
-        raise Exception(csvSet.error)
+    process_bucket = config['process-bucket']
+    main_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config['main-csv']
+    sequence_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config['sequence-csv']
+    event_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config["event-file"]
+
+    main_csv = readS3FileContent(process_bucket, main_key)
+    sequence_csv = readS3FileContent(process_bucket, sequence_key)
+
+    csvSet = processCsv(id, config, main_csv, sequence_csv)
 
     csvSet.buildJson()
-    csvSet.writeEventData({"data": csvSet.result_json})
+
+    writeS3Json(process_bucket, event_key, {"data": csvSet.result_json})
+
+    event['config'] = config
     return event
 
 
@@ -56,6 +66,16 @@ def get_config():
     config['manifest-server-base-url'] = "https://" + config['manifest-server-base-url']
 
     return config
+
+
+def readS3FileContent(s3Bucket, s3Path):
+    content_object = boto3.resource('s3').Object(s3Bucket, s3Path)
+    return content_object.get()['Body'].read().decode('utf-8')
+
+
+def writeS3Json(s3Bucket, s3Path, json_hash):
+    s3 = boto3.resource('s3')
+    s3.Object(s3Bucket, s3Path).put(Body=json.dumps(json_hash), ContentType='text/json')
 
 
 # python -c 'from handler import *; test()'
