@@ -35,7 +35,7 @@ groups = [
     {
         "id": "website",
         "label": "All Manifests",
-        "collections": [ "art-3", "le-rossignol", "art-1", "dante", "theophilus", "art-2", "journals" ],
+        "collections": [ "art-3", "le-rossignol", "art-1", "dante", "epistemological-letters", "theophilus", "art-2", "journals", "nd-life" ],
         "description": "All the manifests!!",
         "viewingHint": "multi-part",
         "metadata": {},
@@ -86,8 +86,8 @@ collections = {
         "id": "le-rossignol",
         "manifest_ids": ['le-rossignol-01/manifest', 'le-rossignol-02/manifest', 'le-rossignol-03/manifest', 'le-rossignol-04/manifest', 'le-rossignol-05/manifest', 'le-rossignol-06/manifest', 'le-rossignol-07/manifest', 'le-rossignol-08/manifest', 'le-rossignol-77/manifest', 'le-rossignol-81/manifest'],
         "label": "Le Rossignol Correspondence",
-        "description": "The Le Rossignol correspondence consists of 45 letters written from Arthur Stanley Le Rossignol to his sister, Constance Ethel, from his position on the Western Front during World War I. There are additional letters written by Arthur (5), Ethel's colleague Pierre Pulinekse (4), Ethel herself to her Aunt Anna Le Rossignol (4), and others. The bulk of correspondence took place in 1918. The letters cover topics of cultural interest, such as British-German animosity and perceptions of the war. Most of Arthur's letters are vague and do not reveal his location or the details of military operations. His correspondence covers the period 1914-1919. All together, there are 52 letters, 42 envelopes, 14 post cards, a photograph album, a telegram, a copy of strategic battle plans, a pamphlet, and other miscellaneous items. ",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/le-rossignol-81%2FMSE-MD_3821-081_00a.tif",
+        "description": "The Le Rossignol correspondence consists of 45 letters written from Arthur Stanley Le Rossignol to his sister, Constance Ethel, from his position on the Western Front during World War I. There are additional letters written by Arthur (5), Ethel's colleague Pierre Pulinekse (4), Ethel herself to her Aunt Anna Le Rossignol (4), and others. The bulk of correspondence took place in 1918. The letters cover topics of cultural interest, such as British-German animosity and perceptions of the war. Most of Arthur's letters are vague and do not reveal his location or the details of military operations. His correspondence covers the period 1914-1919. All together, there are 52 letters, 42 envelopes, 14 post cards, a photograph album, a telegram, a copy of strategic battle plans, a pamphlet, and other miscellaneous items.",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/le-rossignol-01%2FMSE-MD_3821-001-env_a.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
             {"label": "Dates", "value": "1914-1919"},
@@ -99,61 +99,73 @@ collections = {
     "dante": {
         "id": "dante",
         "manifest_ids": ['ils-000909884/manifest', 'ils-000909885/manifest', 'ils-000909886/manifest', 'ils-000949761/manifest'],
-        "label": "Dante",
-        "description": "Lots of Dante",
+        "label": "Dante Alighieri's Divine Comedy",
+        "description": "Versions of Dante Alighieri's Divine Comedy",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/ils-000909884%2FBOO_000909884-1-inf-02a.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
-            {"label": "Dates", "value": "1914-1919"},
-            {"label": "Creator", "value": "Le Rossignol, Arthur Stanley, 1875-? (Person)"},
-            {"label": "Language of Materials", "value": "English"},
+            {"label": "Dates", "value": "13th Century"},
+            {"label": "Creator", "value": "Dante Aligieri 1265-1321"},
+            {"label": "Language of Materials", "value": "13th Century Italian"},
             {"label": "Collection Finding Aid", "value": "<a href=\"https://archivesspace.library.nd.edu/repositories/3/resources/1392\">https://archivesspace.library.nd.edu/repositories/3/resources/1392</a>"}
+        ]
+    },
+    "nd-life": {
+        "id": "nd-life",
+        "manifest_ids": ['CEDW-20-02-08/manifest', 'CEDW-30-16-01/manifest', 'CSOR-04-05-01/manifest', 'CTAO-01-28/manifest', 'GNDL-45-01/manifest', 'GNDL-45-02/manifest', 'GNDL-45-03/manifest', 'GNDL-45-04/manifest', 'GNDL-45-05/manifest', 'GNDL-45-06/manifest'],
+        "label": "Notre Dame Life Collection",
+        "description": "The Notre Dame Life Collection represents historical moments the university's past. Most of the images and artifacts are representative of 19th century moments closely following the founding of the university.",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/GNDL-45-04%2FGNDL-45-04.tif",
+        "license": "Materials from the Notre Dame Archives may be protected by copyright law under Title 17 U.S. Code.  Cannot be sold, given away, reproduced, or published in whole or in part (including on the internet) without the prior permission of the University of Notre Dame Archives.",
+        "metadata": [
+            {"label": "Dates", "value": "Mid to Late 19th Century"},
+            {"label": "Creator", "value": "University of Notre Dame"},
         ]
     },
     "art-1": {
         "id": "art-1",
         "manifest_ids": ['1999.024/manifest', '1976.057/manifest'],
-        "label": "Art Collection #1",
-        "description": "Art",
+        "label": "Religious Paintings",
+        "description": "Paintings from various time periods representing religious themes",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1976.057%2F1976_057-v0001.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
-            {"label": "Dates", "value": "1914-1919"},
-            {"label": "Creator", "value": "Art People"},
-            {"label": "Language of Materials", "value": "English"},
+            {"label": "Dates", "value": "17th through 19th Centuries"},
+            {"label": "Theme", "value": "Religious"},
+            {"label": "Medium", "value": "Oil on canvas"},
         ]
     },
     "theophilus": {
         "id": "theophilus",
         "manifest_ids": ['theophilus-journal-v1/manifest', 'theophilus-journal-v2/manifest'],
-        "label": "Theophilus Journal",
-        "description": "Journal of Theophilus",
+        "label": "Theophilus Parson's Journal",
+        "description": "Journal of Theophilus Parsons",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/theophilus-journal-v1%2FMSN-EA_8011-01-B-000a.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
-            {"label": "Dates", "value": "1914-1919"},
-            {"label": "Creator", "value": "Le Rossignol, Arthur Stanley, 1875-? (Person)"},
+            {"label": "Dates", "value": "Late 18th through early 19th Centuries"},
+            {"label": "Creator", "value": "Theophilus Parsons 1750-1813"},
             {"label": "Language of Materials", "value": "English"},
+            {"label": "Format", "value": "Personal Journal"},
             {"label": "Collection Finding Aid", "value": "<a href=\"https://archivesspace.library.nd.edu/repositories/3/resources/1392\">https://archivesspace.library.nd.edu/repositories/3/resources/1392</a>"}
         ]
     },
     "art-3": {
         "id": "art-3",
         "manifest_ids": ['1982.072.001/manifest', '1983.053.002/manifest', '1986.059.001/manifest'],
-        "label": "Art Collection #3",
-        "description": "ART ART ART ART ART ART ART ART ART ART ART",
+        "label": "Historical Artifacts",
+        "description": "Historical artifacts from various time periods",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1983.053.002%2F1983_053_002-v0001.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
-            {"label": "Dates", "value": "1914-1919"},
-            {"label": "Creator", "value": "Art People"},
-            {"label": "Language of Materials", "value": "English"},
+            {"label": "Dates", "value": "3rd through 19th Centuries"},
+            {"label": "Materials", "value": "Woven cloth, metal and stone"},
         ]
     },
     "journals": {
         "id": "journals",
         "manifest_ids": ['abel-blanchard-correspondence/manifest', 'collection/theophilus', 'nathaniel-rogers-notebook/manifest'],
-        "label": "Journals",
+        "label": "Historical Journals",
         "description": "Journals we have",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/nathaniel-rogers-notebook%2FMSN-COL_9405-1-B-001v_002r.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
@@ -167,14 +179,14 @@ collections = {
     "art-2": {
         "id": "art-2",
         "manifest_ids": ['1934.007.001/manifest'],
-        "label": "Art Collection #2",
-        "description": "More Art",
+        "label": "Religious Art",
+        "description": "Artifacts of a religious nature",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1934.007.001%2F1934_007_001-v0001.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
-            {"label": "Dates", "value": "1914-1919"},
-            {"label": "Creator", "value": "Art People"},
-            {"label": "Language of Materials", "value": "English"},
+            {"label": "Dates", "value": "19th Century"},
+            {"label": "Creator", "value": "Anonymous"},
+            {"label": "Materials", "value": "Gilt polychrome wood"},
         ]
     },
     "ancient-time-period": {
