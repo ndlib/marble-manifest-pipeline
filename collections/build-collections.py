@@ -62,7 +62,7 @@ groups = [
     {
         "id": "themes",
         "label": "By Theme",
-        "collections": [ "religious", "historical", "personal", "science" ],
+        "collections": [ "religious", "notre-dame", "historical", "personal", "science" ],
         "description": "Items organized according to theme",
         "viewingHint": "multi-part",
         "metadata": {},
@@ -228,10 +228,10 @@ collections = {
     },
     "religious": {
         "id": "religious",
-        "manifest_ids": ['1934.007.001/manifest', '1982.072.001/manifest'],
+        "manifest_ids": ['1986.059.001/manifest', '1982.072.001/manifest', '1934.007.001/manifest', 'CSOR-04-05-01/manifest', 'GNDL-45-01/manifest', 'nduspec_ead7s75db80w4r/manifest', 'CTAO-01-28/manifest'],
         "label": "Religious Artifacts",
-        "description": "Liturgical and religious artifacts",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1934.007.001%2F1934_007_001-v0001.tif",
+        "description": "From liturgical dress to altar ornamentation to sermon manuscripts; explore the rich collections at the University of Notre Dame used in religious ceremonies and inspired by world religions.",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/CSOR-04-05-01%2FCSOR-04-05-01.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
             {"label": "Dates", "value": "19th Century"},
@@ -241,10 +241,10 @@ collections = {
     },
     "historical": {
         "id": "historical",
-        "manifest_ids": ['1934.007.001/manifest', '1982.072.001/manifest'],
+        "manifest_ids": ['1983.053.002/manifest', 'collection/le-rossignol', '1976.057/manifest', 'nduspec_eadks65h991878/manifest', 'nduspec_ead7s75db80w4r/manifest', 'collection/theophilus'],
         "label": "Historical Artifacts",
         "description": "Artifacts that have particular historical significance",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1934.007.001%2F1934_007_001-v0001.tif",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/GNDL-45-05%2FGNDL-45-05.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
             {"label": "Dates", "value": "19th Century"},
@@ -254,10 +254,10 @@ collections = {
     },
     "personal": {
         "id": "personal",
-        "manifest_ids": ['1934.007.001/manifest', '1982.072.001/manifest'],
+        "manifest_ids": ['collection/journals', 'collection/le-rossignol', 'collection/epistemological-letters', 'CSOR-04-05-01/manifest', 'CEDW-30-16-01/manifest'],
         "label": "Journals and Notebooks",
         "description": "Personal correspondence, journals, notes, and diaries from various time periods",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1934.007.001%2F1934_007_001-v0001.tif",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/nduspec_eadks65h991878%2FMSN-EA_5031-01.a.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
             {"label": "Dates", "value": "19th Century"},
@@ -267,10 +267,23 @@ collections = {
     },
     "science": {
         "id": "science",
-        "manifest_ids": ['1934.007.001/manifest', '1982.072.001/manifest'],
+        "manifest_ids": ['GNDL-45-05/manifest', 'collection/epistemological-letters'],
         "label": "Scientific Artifacts",
         "description": "Artifacts that are related to the history of science or are of scientific interest",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1934.007.001%2F1934_007_001-v0001.tif",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/epistemological-letters-issue-2%2FMay19742ndIssue_Page_01.tif",
+        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "metadata": [
+            {"label": "Dates", "value": "19th Century"},
+            {"label": "Creator", "value": "Anonymous"},
+            {"label": "Materials", "value": "Gilt polychrome wood, cloth and leather"},
+        ]
+    },
+    "notre-dame": {
+        "id": "notre-dame",
+        "manifest_ids": ['GNDL-45-02/manifest', 'GNDL-45-04/manifest', 'GNDL-45-05/manifest', 'CEDW-20-02-08/manifest', '1976.057/manifest'],
+        "label": "Notre Dame",
+        "description": "The University of Notre Dame was founded in 1842 by a small group of priests from the Congregation of the Holy Cross. Well-known for its sports programs and Catholic heritage, the university today is a site for cutting-edge research and rigorous liberal arts scholarship. The University of Notre Dame holds most of the photographs, documents, and related materials chronicling the university’s long history. The Snite Museum of Art also stewards many important portraits, prints, and paintings relating to significant figures in the university’s history.",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/GNDL-45-04%2FGNDL-45-04.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
             {"label": "Dates", "value": "19th Century"},
@@ -302,7 +315,7 @@ collections = {
     },
     "renaissance-time-period": {
         "id": "renaissance-time-period",
-        "manifest_ids": ['collection/dante'],
+        "manifest_ids": ['collection/dante', '1999.024/manifest', 'nduspec_ead7s75db80w4r/manifest'],
         "label": "Renaissance",
         "description": "Artifacts dating roughly to the 14th through 16th centuries",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/ils-000949761%2FBOO_000949761_c2-000ba.tif",
@@ -323,7 +336,7 @@ collections = {
     },
     "19thcentury-time-period": {
         "id": "19thcentury-time-period",
-        "manifest_ids": ['collection/theophilus'],
+        "manifest_ids": ['collection/theophilus', '1982.072.001/manifest', 'collection/nd-life', 'nduspec_eadks65h991878/manifest', '1976.057/manifest'],
         "label": "19th Century",
         "description": "Artifacts that have their origin in or reference the 19th century",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/theophilus-journal-v1%2FMSN-EA_8011-01-B-000a.tif",
@@ -333,7 +346,7 @@ collections = {
     },
     "20thcentury-time-period": {
         "id": "20thcentury-time-period",
-        "manifest_ids": ['collection/le-rossignol'],
+        "manifest_ids": ['collection/le-rossignol', '1986.059.001/manifest', 'collection/epistemological-letters'],
         "label": "20th Century",
         "description": "Artifacts that have their origin in or reference the 20th century",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/epistemological-letters-issue-2%2FMay19742ndIssue_Page_01.tif",
