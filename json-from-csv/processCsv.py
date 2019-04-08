@@ -112,10 +112,9 @@ class processCsv():
         with open('/tmp/' + self.config['sequence-csv'], 'r') as sequence_file:
             reader = csv.DictReader(sequence_file)
             for this_row in reader:
-                if reader.line_num == 1:
-                    # we can skip these
-                    pass
-                else:
+                if reader.line_num == 2:
+                    self._set_default_image(this_row['Filenames'])
+                if reader.line_num != 1:
                     self._add_pages_to_sequence(this_row)
 
     # store event data
@@ -133,3 +132,20 @@ class processCsv():
         content_object = boto3.resource('s3').Object(self.config['process-bucket'], remote_file)
         file_content = content_object.get()['Body'].read().decode('utf-8')
         return json.loads(file_content)
+
+    # copy the specified file into the process bucket
+    def _set_default_image(self, filename):
+        self.config['default-img'] = filename
+        bucket = self.config['process-bucket']
+        remote_file = self.config['process-bucket-read-basepath'] + "/" + self.id + "/images/" + filename
+        default_image = self.config['process-bucket-read-basepath'] + "/" + self.id + "/images/default.jpg"
+        self._copy_s3_file(bucket, remote_file, bucket, default_image)
+
+    # S3 copy file
+    def _copy_s3_file(self, src_bucket, src_key, dest_bucket, dest_key):
+        copy_source = {
+            'Bucket': src_bucket,
+            'Key': src_key
+        }
+        bucket = boto3.resource('s3').Bucket(dest_bucket)
+        bucket.copy(copy_source, dest_key)
