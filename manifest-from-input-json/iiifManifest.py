@@ -24,6 +24,8 @@ class iiifManifest():
             'sequences': self.sequences()
         }
         # add optional data
+        if 'homepage' in self.manifest_data:
+            manifest['homepage'] = self.manifest_data['homepage']
         if 'seeAlso' in self.manifest_data:
             manifest['seeAlso'] = self.manifest_data['seeAlso']
         return manifest
