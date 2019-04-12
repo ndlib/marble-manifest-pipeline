@@ -43,27 +43,27 @@ groups = [
     },
     {
         "id": "timeperiods",
-        "label": "All the Timeperiod Manifests",
-        "collections": [ "ancient-time-period", "medieval-time-period", "renaissance-time-period","18thcentury-time-period","19thcentury-time-period", "20thcentury-time-period", "21stcentury-time-period" ],
-        "description": "All the manifests!!",
+        "label": "By Time Period",
+        "collections": [ "ancient-time-period", "medieval-time-period", "renaissance-time-period","18thcentury-time-period","19thcentury-time-period", "20thcentury-time-period" ],
+        "description": "Items organized according to time period",
         "viewingHint": "multi-part",
         "metadata": {},
         "license": "https://creativecommons.org/licenses/by-nc/4.0/"
     },
     {
         "id": "places",
-        "label": "All the Places Manifests",
-        "collections": [ "ancient-time-period", "medieval-time-period", "renaissance-time-period" ],
-        "description": "All the manifests!!",
+        "label": "By Place",
+        "collections": [ "south-america", "north-america", "europe" ],
+        "description": "Items organized by geographic location",
         "viewingHint": "multi-part",
         "metadata": {},
         "license": "https://creativecommons.org/licenses/by-nc/4.0/"
     },
     {
         "id": "themes",
-        "label": "All the Themes Manifests",
-        "collections": [ "ancient-time-period", "medieval-time-period", "renaissance-time-period" ],
-        "description": "All the manifests!!",
+        "label": "By Theme",
+        "collections": [ "religious", "notre-dame", "historical", "personal", "science" ],
+        "description": "Items organized according to theme",
         "viewingHint": "multi-part",
         "metadata": {},
         "license": "https://creativecommons.org/licenses/by-nc/4.0/"
@@ -138,7 +138,7 @@ collections = {
     "theophilus": {
         "id": "theophilus",
         "manifest_ids": ['theophilus-journal-v1/manifest', 'theophilus-journal-v2/manifest'],
-        "label": "Theophilus Parson's Journal",
+        "label": "Theophilus Parsons Journal",
         "description": "Journal of Theophilus Parsons",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/theophilus-journal-v1%2FMSN-EA_8011-01-B-000a.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
@@ -164,48 +164,150 @@ collections = {
     },
     "journals": {
         "id": "journals",
-        "manifest_ids": ['abel-blanchard-correspondence/manifest', 'collection/theophilus', 'nathaniel-rogers-notebook/manifest'],
+        "manifest_ids": ['nduspec_eadks65h991878/manifest', 'collection/theophilus', 'nduspec_ead7s75db80w4r/manifest'],
         "label": "Historical Journals",
-        "description": "Journals we have",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/nathaniel-rogers-notebook%2FMSN-COL_9405-1-B-001v_002r.tif",
+        "description": "A collection of historical journals, letters and other personal correspondence",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/nduspec_ead7s75db80w4r%2FMSN-COL_9405-1-B-001v_002r.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
-            {"label": "Dates", "value": "1914-1919"},
-            {"label": "Creator", "value": "Le Rossignol, Arthur Stanley, 1875-? (Person)"},
-            {"label": "Language of Materials", "value": "English"},
-            {"label": "Collection Finding Aid", "value": "<a href=\"https://archivesspace.library.nd.edu/repositories/3/resources/1392\">https://archivesspace.library.nd.edu/repositories/3/resources/1392</a>"}
+            {"label": "Dates", "value": "19th Century"},
+            {"label": "Creator", "value": "Various Authors"},
+            {"label": "Language of Materials", "value": "English"}
         ]
     },
     "art-2": {
         "id": "art-2",
-        "manifest_ids": ['1934.007.001/manifest'],
-        "label": "Religious Art",
-        "description": "Artifacts of a religious nature",
+        "manifest_ids": ['1934.007.001/manifest', '1982.072.001/manifest'],
+        "label": "Religious Artifacts",
+        "description": "Liturgical and religious artifacts from the 19th century",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1934.007.001%2F1934_007_001-v0001.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
             {"label": "Dates", "value": "19th Century"},
             {"label": "Creator", "value": "Anonymous"},
-            {"label": "Materials", "value": "Gilt polychrome wood"},
+            {"label": "Materials", "value": "Gilt polychrome wood, cloth and leather"},
+        ]
+    },
+    "north-america": {
+        "id": "north-america",
+        "manifest_ids": ['1986.059.001/manifest', '1982.072.001/manifest', '1976.057/manifest', 'collection/theophilus', 'collection/journals', 'nduspec_ead7s75db80w4r/manifest', '1934.007.001/manifest', 'collection/nd-life' ],
+        "label": "North America",
+        "description": "Items that depict or have their origin in North America",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1976.057%2F1976_057-v0001.tif",
+        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "metadata": [
+            {"label": "Dates", "value": "19th and 20th Centuries"},
+            {"label": "Materials", "value": "This collection includes items in a variety of media from paintings to printed pamphlets"},
+        ]
+    },
+    "south-america": {
+        "id": "south-america",
+        "manifest_ids": ['1983.053.002/manifest'],
+        "label": "South America",
+        "description": "Items that depict or have their origin in South America",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1983.053.002%2F1983_053_002-v0001.tif",
+        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "metadata": [
+            {"label": "Dates", "value": "Ancient"},
+            {"label": "Creator", "value": "Anonymous"},
+            {"label": "Materials", "value": "Greenstone and other materials"},
+        ]
+    },
+    "europe": {
+        "id": "europe",
+        "manifest_ids": ['1999.024/manifest', 'collection/dante', 'collection/epistemological-letters', 'collection/le-rossignol'],
+        "label": "Europe",
+        "description": "Items that depict or have their origin in Europe",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/ils-000909884%2FBOO_000909884-1-inf-02a.tif",
+        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "metadata": [
+            {"label": "Dates", "value": "19th Century"},
+            {"label": "Creator", "value": "Anonymous"},
+            {"label": "Materials", "value": "Gilt polychrome wood, cloth and leather"},
+        ]
+    },
+    "religious": {
+        "id": "religious",
+        "manifest_ids": ['1986.059.001/manifest', '1982.072.001/manifest', '1934.007.001/manifest', 'CSOR-04-05-01/manifest', 'GNDL-45-01/manifest', 'nduspec_ead7s75db80w4r/manifest', 'CTAO-01-28/manifest'],
+        "label": "Religious Artifacts",
+        "description": "From liturgical dress to altar ornamentation to sermon manuscripts; explore the rich collections at the University of Notre Dame used in religious ceremonies and inspired by world religions.",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/CSOR-04-05-01%2FCSOR-04-05-01.tif",
+        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "metadata": [
+            {"label": "Dates", "value": "19th Century"},
+            {"label": "Creator", "value": "Anonymous"},
+            {"label": "Materials", "value": "Gilt polychrome wood, cloth and leather"},
+        ]
+    },
+    "historical": {
+        "id": "historical",
+        "manifest_ids": ['1983.053.002/manifest', 'collection/le-rossignol', '1976.057/manifest', 'nduspec_eadks65h991878/manifest', 'nduspec_ead7s75db80w4r/manifest', 'collection/theophilus'],
+        "label": "Historical Artifacts",
+        "description": "Artifacts that have particular historical significance",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/GNDL-45-05%2FGNDL-45-05.tif",
+        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "metadata": [
+            {"label": "Dates", "value": "19th Century"},
+            {"label": "Creator", "value": "Anonymous"},
+            {"label": "Materials", "value": "Gilt polychrome wood, cloth and leather"},
+        ]
+    },
+    "personal": {
+        "id": "personal",
+        "manifest_ids": ['collection/journals', 'collection/le-rossignol', 'collection/epistemological-letters', 'CSOR-04-05-01/manifest', 'CEDW-30-16-01/manifest'],
+        "label": "Journals and Notebooks",
+        "description": "Personal correspondence, journals, notes, and diaries from various time periods",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/nduspec_eadks65h991878%2FMSN-EA_5031-01.a.tif",
+        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "metadata": [
+            {"label": "Dates", "value": "19th Century"},
+            {"label": "Creator", "value": "Anonymous"},
+            {"label": "Materials", "value": "Gilt polychrome wood, cloth and leather"},
+        ]
+    },
+    "science": {
+        "id": "science",
+        "manifest_ids": ['GNDL-45-05/manifest', 'collection/epistemological-letters'],
+        "label": "Scientific Artifacts",
+        "description": "Artifacts that are related to the history of science or are of scientific interest",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/epistemological-letters-issue-2%2FMay19742ndIssue_Page_01.tif",
+        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "metadata": [
+            {"label": "Dates", "value": "19th Century"},
+            {"label": "Creator", "value": "Anonymous"},
+            {"label": "Materials", "value": "Gilt polychrome wood, cloth and leather"},
+        ]
+    },
+    "notre-dame": {
+        "id": "notre-dame",
+        "manifest_ids": ['GNDL-45-02/manifest', 'GNDL-45-04/manifest', 'GNDL-45-05/manifest', 'CEDW-20-02-08/manifest', '1976.057/manifest'],
+        "label": "Notre Dame",
+        "description": "The University of Notre Dame was founded in 1842 by a small group of priests from the Congregation of the Holy Cross. Well-known for its sports programs and Catholic heritage, the university today is a site for cutting-edge research and rigorous liberal arts scholarship. The University of Notre Dame holds most of the photographs, documents, and related materials chronicling the university’s long history. The Snite Museum of Art also stewards many important portraits, prints, and paintings relating to significant figures in the university’s history.",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/GNDL-45-04%2FGNDL-45-04.tif",
+        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "metadata": [
+            {"label": "Dates", "value": "19th Century"},
+            {"label": "Creator", "value": "Anonymous"},
+            {"label": "Materials", "value": "Gilt polychrome wood, cloth and leather"},
         ]
     },
     "ancient-time-period": {
         "id": "ancient-time-period",
-        "manifest_ids": ["collection/art-3"],
+        "manifest_ids": ['1983.053.002/manifest'],
         "label": "Ancient",
-        "description": "All The \"Ancient\" items",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/le-rossignol-81%2FMSE-MD_3821-081_00a.tif",
+        "description": "Artifacts from pre-historical or early first millenial time periods",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1983.053.002%2F1983_053_002-v0001.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
-            {"label": "Dates", "value": "A very very long time ago-A very long time ago"},
+            {"label": "Dates", "value": "Pre-historical or early first millenia"},
         ]
     },
     "medieval-time-period": {
         "id": "medieval-time-period",
         "manifest_ids": ['1934.007.001/manifest', 'collection/dante'],
-        "label": "Medieval Time Period",
-        "description": "All The \"Medieval\" items",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/le-rossignol-81%2FMSE-MD_3821-081_00a.tif",
+        "label": "Medieval",
+        "description": "Artifacts that originate in or depict aspects of the time period ranging from the 11th through 15th centuries",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1934.007.001%2F1934_007_001-v0001.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
             {"label": "Dates", "value": "1000-1400"},
@@ -213,51 +315,41 @@ collections = {
     },
     "renaissance-time-period": {
         "id": "renaissance-time-period",
-        "manifest_ids": ['collection/art-1'],
+        "manifest_ids": ['collection/dante', '1999.024/manifest', 'nduspec_ead7s75db80w4r/manifest'],
         "label": "Renaissance",
-        "description": "All The \"Renaissance\" items",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/le-rossignol-81%2FMSE-MD_3821-081_00a.tif",
+        "description": "Artifacts dating roughly to the 14th through 16th centuries",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/ils-000949761%2FBOO_000949761_c2-000ba.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
-            {"label": "Dates", "value": "1400-1700"},
+            {"label": "Dates", "value": "1400-1600"},
         ]
     },
     "18thcentury-time-period": {
         "id": "18thcentury-time-period",
-        "manifest_ids": ['collection/journals', 'le-rossignol-01/manifest', 'le-rossignol-02/manifest', 'le-rossignol-03/manifest', 'le-rossignol-04/manifest'],
+        "manifest_ids": ['nduspec_eadks65h991878/manifest'],
         "label": "18th Century",
-        "description": "All The \"18th Century\" items",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/le-rossignol-81%2FMSE-MD_3821-081_00a.tif",
+        "description": "Artifacts that have their origin in or reference the 18th century",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/nduspec_eadks65h991878%2FMSN-EA_5031-01.a.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
         ]
     },
     "19thcentury-time-period": {
         "id": "19thcentury-time-period",
-        "manifest_ids": ['collection/theophilus'],
+        "manifest_ids": ['collection/theophilus', '1982.072.001/manifest', 'collection/nd-life', 'nduspec_eadks65h991878/manifest', '1976.057/manifest'],
         "label": "19th Century",
-        "description": "All The \"19th Century\" items",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/le-rossignol-81%2FMSE-MD_3821-081_00a.tif",
+        "description": "Artifacts that have their origin in or reference the 19th century",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/theophilus-journal-v1%2FMSN-EA_8011-01-B-000a.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
         ]
     },
     "20thcentury-time-period": {
         "id": "20thcentury-time-period",
-        "manifest_ids": ['collection/le-rossignol'],
+        "manifest_ids": ['collection/le-rossignol', '1986.059.001/manifest', 'collection/epistemological-letters'],
         "label": "20th Century",
-        "description": "All The \"20th Century\" items",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/le-rossignol-81%2FMSE-MD_3821-081_00a.tif",
-        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
-        "metadata": [
-        ]
-    },
-    "21stcentury-time-period": {
-        "id": "21thcentury-time-period",
-        "manifest_ids": ['le-rossignol-01/manifest', 'le-rossignol-02/manifest', 'le-rossignol-03/manifest', 'le-rossignol-04/manifest'],
-        "label": "21st Century",
-        "description": "All The \"21st Century\" items",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/le-rossignol-81%2FMSE-MD_3821-081_00a.tif",
+        "description": "Artifacts that have their origin in or reference the 20th century",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/epistemological-letters-issue-2%2FMay19742ndIssue_Page_01.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
         ]
