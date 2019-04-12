@@ -114,11 +114,7 @@ class processCsv():
         f = StringIO(self.sequence_csv)
         reader = csv.DictReader(f, delimiter=',')
         for this_row in reader:
-            if reader.line_num == 1:
-                # we can skip these
-                pass
-            else:
+            if reader.line_num == 2:
+                self.config['default-img'] = this_row['Filenames']
+            if reader.line_num != 1:
                 self._add_pages_to_sequence(this_row)
-
-        if (self.result_json['sequences'][0]['pages'][0]['file']):
-            self.result_json['thumbnail'] = self.result_json['sequences'][0]['pages'][0]['file']

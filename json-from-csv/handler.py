@@ -22,6 +22,7 @@ def run(event, context):
 
     csvSet.buildJson()
 
+    copy_default_img(id, config)
     writeS3Json(process_bucket, event_key, {"data": csvSet.result_json})
 
     event['config'] = config
@@ -76,6 +77,18 @@ def readS3FileContent(s3Bucket, s3Path):
 def writeS3Json(s3Bucket, s3Path, json_hash):
     s3 = boto3.resource('s3')
     s3.Object(s3Bucket, s3Path).put(Body=json.dumps(json_hash), ContentType='text/json')
+
+
+# clones an established default image to an image named default.jpg
+def copy_default_img(id, config):
+    bucket = config['process-bucket']
+    remote_file = config['process-bucket-read-basepath'] + "/" + id + "/images/" + config['default-img']
+    default_image = config['process-bucket-read-basepath'] + "/" + id + "/images/default.jpg"
+    copy_source = {
+        'Bucket': bucket,
+        'Key': remote_file
+    }
+    boto3.resource('s3').Bucket(bucket).copy(copy_source, default_image)
 
 
 # python -c 'from handler import *; test()'

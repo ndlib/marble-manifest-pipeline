@@ -38,5 +38,9 @@ class iiifManifest():
         return ret
 
     def thumbnail(self):
-        first_page = self.manifest_data['sequences'][0]['pages'][0]
-        return iiifImage(self.id, first_page['file'], first_page['label'], self.config).thumbnail()
+        default_page = self.manifest_data['sequences'][0]['pages'][0]
+        for page in self.manifest_data['sequences'][0]['pages']:
+            if page['file'] == self.config['default-img']:
+                default_page = page.copy()
+                default_page['file'] = 'default'
+        return iiifImage(self.id, default_page['file'], default_page['label'], self.config).thumbnail()
