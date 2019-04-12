@@ -78,6 +78,7 @@ def writeS3Json(s3Bucket, s3Path, json_hash):
     s3 = boto3.resource('s3')
     s3.Object(s3Bucket, s3Path).put(Body=json.dumps(json_hash), ContentType='text/json')
 
+
 # clones an established default image to an image named default.jpg
 def copy_default_img(id, config):
     bucket = config['process-bucket']
