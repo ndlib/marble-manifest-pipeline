@@ -177,8 +177,8 @@ class finalizeStep():
         return
 
     def _event_manifest_url(self):
-        return 'https://s3.amazonaws.com/' + self.config['manifest-server-bucket'] \
-            + '/' + self.id + '/manifest/index.json'
+        return 'https://presentation-iiif.library.nd.edu/' \
+            + self.id + '/manifest/index.json'
 
     def _event_imageviewer_url(self, universalviewer=False):
         url = 'https://viewer-iiif.library.nd.edu/'

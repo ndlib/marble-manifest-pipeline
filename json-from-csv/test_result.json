@@ -1,36 +1,53 @@
 {
-  "errors": [], 
-  "attribution": "msuhovec", 
-  "description": "This is a Test", 
-  "iiif-server": "https://image-server.library.nd.edu:8182/iiif/2", 
-  "creator": "creator@email.com", 
-  "license": "whatever", 
-  "unique-identifier": "test_01", 
-  "label": "TestLabel", 
-  "sequences": [
-    {
-      "viewingHint": "paged", 
-      "pages": [
-        {
-          "file": "009_file1", 
-          "label": "009"
-        }, 
-        {
-          "file": "046_test.tif", 
-          "label": "046"
-        }
-      ], 
-      "label": "test_sequence"
-    }
-  ], 
+  "errors": [],
+  "creator": "creator@email.com",
+  "viewingDirection": "left-to-right",
   "metadata": [
     {
-      "value": "Test for Basic CSV to JSON conversion", 
-      "label": "Title"
-    }, 
+      "label": "Title",
+      "value": "Wunder der Verenbung"
+    },
     {
-      "value": "[2018-11-07]", 
-      "label": "Test creation date"
+      "label": "Author(s)",
+      "value": "Bolle, Fritz"
+    },
+    {
+      "label": "Publication date",
+      "value": "[1951]"
+    },
+    {
+      "label": "Attribution",
+      "value": "Welcome Library<br/>License: CC-BY-NC"
     }
-  ]
+  ],
+  "sequences": [
+    {
+      "pages": [
+        {
+          "file": "009_output.tif",
+          "label": "009"
+        },
+        {
+          "file": "046_output.tif",
+          "label": "046"
+        },
+        {
+          "file": "2018_009.jpg",
+          "label": "2018 009"
+        },
+        {
+          "file": "2018_049_004.jpg",
+          "label": "2018 049 009"
+        }
+      ],
+      "viewingHint": "paged",
+      "label": "sequency"
+    }
+  ],
+  "label": "Label",
+  "description": "Description",
+  "attribution": "attribution",
+  "license": "license",
+  "unique-identifier": "2018_example_001",
+  "thumbnail": "009_output.tif"
 }
