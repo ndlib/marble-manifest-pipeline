@@ -6,6 +6,7 @@
   "attribution": "attribution",
   "creator": "creator@email.com",
   "viewingDirection": "left-to-right",
+  "thumbnail": "009_output.tif",
   "config": {
     "image-server-base-url": "https://image-server.library.nd.edu:8182/iiif/2",
     "manifest-server-base-url": "https://manifest.nd.edu/",
