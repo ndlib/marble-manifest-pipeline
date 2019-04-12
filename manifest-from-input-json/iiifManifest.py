@@ -10,7 +10,7 @@ class iiifManifest():
         self.manifest_data = manifest_data
 
     def manifest(self):
-        return {
+        manifest = {
             '@context': 'http://iiif.io/api/presentation/2/context.json',
             '@type': 'sc:Manifest',
             '@id': self.manifest_id,
@@ -23,6 +23,10 @@ class iiifManifest():
             'thumbnail': self.thumbnail(),
             'sequences': self.sequences()
         }
+        # add optional data
+        if 'homepage' in self.manifest_data:
+            manifest['homepage'] = self.manifest_data['homepage']
+        return manifest
 
     def sequences(self):
         ret = []

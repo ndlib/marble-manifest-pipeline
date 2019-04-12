@@ -59,7 +59,7 @@ class processCsv():
         self.result_json['unique-identifier'] = first_line['unique_identifier']
         self.result_json['sequences'][0]['viewingHint'] = first_line['Sequence_viewing_experience']
         self.result_json['sequences'][0]['label'] = first_line['Sequence_label']
-
+        self._get_alternate_attr(first_line)
         self.config['notify-on-finished'] = first_line['Notify']
 
     # process a metadata lable/value only row from the main CSV (any line after 2)
@@ -69,6 +69,22 @@ class processCsv():
             this_item['label'] = this_line['Metadata_label']
             this_item['value'] = this_line['Metadata_value']
             self.result_json['metadata'].append(this_item)
+
+    # process alternate columns from the main CSV
+    def _get_alternate_attr(self, this_line):
+        alternate_keys = ('Alternate_id_system', 'Alternate_id_identifier', 'Alternate_id_url')
+        # check if all the alternate keys exist
+        if all(alt_key in this_line for alt_key in alternate_keys):
+            # check to see if we have data in that column
+            if this_line['Alternate_id_url']:
+                this_item = {}
+                this_item['id'] = this_line['Alternate_id_url']
+                this_item['label'] = {"en": [this_line['Alternate_id_system'] + " - " + self.id]}
+                this_item['type'] = "Text"
+                this_item['format'] = "text/html"
+                if 'homepage' not in self.result_json:
+                    self.result_json['homepage'] = []
+                self.result_json['homepage'].append(this_item)
 
     # process data rows from sequence CSV to create pages within default sequence
     def _add_pages_to_sequence(self, this_line):
@@ -97,13 +113,11 @@ class processCsv():
         with open('/tmp/' + self.config['main-csv'], 'r') as csv_file:
             reader = csv.DictReader(csv_file)
             for this_row in reader:
-                if reader.line_num == 1:
-                    # we can skip these
-                    pass
-                elif reader.line_num == 2:
+                if reader.line_num == 2:
                     self._get_attr_from_main_firstline(this_row)
-                else:
+                elif reader.line_num > 2:
                     self._get_metadata_attr(this_row)
+                    self._get_alternate_attr(this_row)
 
         # Sequence CSV File next, add to pages
         key = self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config['sequence-csv']
