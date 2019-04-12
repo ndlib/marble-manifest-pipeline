@@ -115,39 +115,6 @@ class processCsv():
         reader = csv.DictReader(f, delimiter=',')
         for this_row in reader:
             if reader.line_num == 2:
-                self._set_default_image(this_row['Filenames'])
+                self.config['default-img'] = this_row['Filenames']
             if reader.line_num != 1:
                 self._add_pages_to_sequence(this_row)
-
-    # store event data
-    def writeEventData(self, event):
-        local_file = '/tmp/' + self.config["event-file"]
-        with io.open(local_file, 'w', encoding='utf-8') as f:
-            f.write(json.dumps(event, ensure_ascii=False))
-        s3_file = self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config["event-file"]
-        boto3.resource('s3').Bucket(self.config['process-bucket']).upload_file(local_file, s3_file)
-        os.remove(local_file)
-
-    # read event data
-    def readEventData(self, filename):
-        remote_file = self.config['process-bucket-read-basepath'] + "/" + self.id + "/" + self.config["event-file"]
-        content_object = boto3.resource('s3').Object(self.config['process-bucket'], remote_file)
-        file_content = content_object.get()['Body'].read().decode('utf-8')
-        return json.loads(file_content)
-
-    # copy the specified file into the process bucket
-    def _set_default_image(self, filename):
-        self.config['default-img'] = filename
-        bucket = self.config['process-bucket']
-        remote_file = self.config['process-bucket-read-basepath'] + "/" + self.id + "/images/" + filename
-        default_image = self.config['process-bucket-read-basepath'] + "/" + self.id + "/images/default.jpg"
-        self._copy_s3_file(bucket, remote_file, bucket, default_image)
-
-    # S3 copy file
-    def _copy_s3_file(self, src_bucket, src_key, dest_bucket, dest_key):
-        copy_source = {
-            'Bucket': src_bucket,
-            'Key': src_key
-        }
-        bucket = boto3.resource('s3').Bucket(dest_bucket)
-        bucket.copy(copy_source, dest_key)
