@@ -34,6 +34,7 @@ def get_config():
     config = {
         "process-bucket-read-basepath": 'process',
         "process-bucket-write-basepath": 'finished',
+        "process-bucket-index-basepath": 'index',
         "image-server-bucket-basepath": '',
         "manifest-server-bucket-basepath": '',
         "sequence-csv": 'sequence.csv',

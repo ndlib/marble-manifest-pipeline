@@ -1,0 +1,192 @@
+<records xmlns:ns0="http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib"><ns0:record>
+  <ns0:control>
+    <ns0:sourcerecordid>000909885</ns0:sourcerecordid>
+    <ns0:sourceid>ndu_aleph</ns0:sourceid>
+    <ns0:recordid>ndu_aleph000909885</ns0:recordid>
+    <ns0:originalsourceid>NDU01</ns0:originalsourceid>
+    <ns0:ilsapiid>NDU01000909885</ns0:ilsapiid>
+    <ns0:sourceformat>MARC21</ns0:sourceformat>
+    <ns0:sourcesystem>Aleph</ns0:sourcesystem>
+  </ns0:control>
+  <ns0:display>
+    <ns0:type>book</ns0:type>
+    <ns0:title>Danthe alegieri fiorentino [with the] Comento di christoforo Landino fiorentino sopra la comedia di Danthe Alighieri poeta fiorentino.</ns0:title>
+    <ns0:creator>Dante Alighieri, 1265-1321.</ns0:creator>
+    <ns0:publisher>S.l. : s.n.</ns0:publisher>
+    <ns0:creationdate>1493</ns0:creationdate>
+    <ns0:format>[10]CCXCIX[l.]L. wdcts. ; cm..</ns0:format>
+    <ns0:language>ita</ns0:language>
+    <ns0:availlibrary>$$INDU$$LHESB$$1Special Coll.Incunable$$2PQ 4302 1493 L234$$Savailable$$31$$40$$5N$$65$$XNDU50$$YSPEC$$ZINCUN</ns0:availlibrary>
+    <ns0:unititle>Divina commedia</ns0:unititle>
+    <ns0:lds01>At end: Finita e lopa dellinclyto &amp; diuo D&#227;the alleghieri poeta fior&#7869;tino reuista &amp; em&#7869;data dilig&#7869;tem&#7869;te p el reuer&#7869;do maestro Piero da Figino... &amp; ha posto molte cose &#297; diuersi luoghi che ha trouata m&#227;care si &#297; lo texto c&#245;e nella giosa. Impressa in Venetia per Matheo di chodecha da Parma Del. MCCCCLXXXXIII.Adi.XXIX.de Nouembre.</ns0:lds01>
+    <ns0:lds01>The Credo, Pater nostro and Ave Maria follow the colophon.</ns0:lds01>
+    <ns0:lds01>The last leaf is the "Registrum".</ns0:lds01>
+    <ns0:lds01>Signatures: a,a-z,&amp;,A-O.</ns0:lds01>
+    <ns0:lds01>"The illustrations are reimpressions from the blocks used in the edition issued in March, 1491, by the same printer, in conjunction with Bernardino Benali". Koch.</ns0:lds01>
+    <ns0:lds01>O has 6ff.</ns0:lds01>
+    <ns0:lds02>ndu_aleph000909885</ns0:lds02>
+    <ns0:lds31>Dante Alighieri, 1265-1321. -- Divina commedia</ns0:lds31>
+    <ns0:availinstitution>$$INDU$$Savailable</ns0:availinstitution>
+    <ns0:availpnx>available</ns0:availpnx>
+  </ns0:display>
+  <ns0:links>
+    <ns0:openurl>$$Topenurl_journal</ns0:openurl>
+    <ns0:backlink>$$Taleph_backlink$$DNotre Dame Catalog</ns0:backlink>
+    <ns0:openurlfulltext>$$Topenurlfull_journal</ns0:openurlfulltext>
+    <ns0:linktoholdings>$$Taleph_holdings$$INDU</ns0:linktoholdings>
+    <ns0:linktoholdings>$$Taleph_holdings</ns0:linktoholdings>
+    <ns0:lln01>$$Tfindit_link</ns0:lln01>
+  </ns0:links>
+  <ns0:search>
+    <ns0:creatorcontrib>Dante Alighieri, 1265-1321.</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Al&#299;y&#299;r&#299;, D&#257;nt&#299;, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Tan-ting, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Alig&#299;eri, Dant, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Alighieri, Dante, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Dantte, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Tantte, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Dante, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Alleghieri, Dante, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Aldigeri, Dante, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Alihii&#865;eri, Dante, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>D&#257;nt&#299; Al&#299;jy&#299;r&#299;, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Dant Alig&#299;eri, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Danding, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Danthe Alighieri, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Alighieri, Danthe, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Dante Alig'i&#865;eri, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Alig'i&#865;eri, Dante, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Ail&#237;gi&#233;ir&#237;, Daint&#233;, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Dant&#279; Aligjeris, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>&#1488;&#1500;&#1497;&#1490;&#1497;&#1497;&#1512;&#1497; &#1491;&#1504;&#1496;&#1497;</ns0:creatorcontrib>
+    <ns0:creatorcontrib>&#1488;&#1500;&#1497;&#1490;&#1497;&#1512;&#1497;, &#1491;&#1504;&#1496;&#1497;</ns0:creatorcontrib>
+    <ns0:creatorcontrib>&#1491;&#1488;&#1504;&#1496;&#1497; &#1488;&#1500;&#1497;&#1490;&#1497;&#1497;&#1512;&#1497;</ns0:creatorcontrib>
+    <ns0:creatorcontrib>&#1491;&#1488;&#1504;&#1496;&#1497; &#1488;&#1500;&#1497;&#1490;&#1497;&#1497;&#1512;&#1497;, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>&#1491;&#1488;&#1504;&#1496;, 1321&#1470;1265</ns0:creatorcontrib>
+    <ns0:creatorcontrib>&#1491;&#1504;&#1496;&#1492; &#1488;&#1500;&#1497;&#1490;&#1497;&#1497;&#1512;&#1497;, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>&#1491;&#1504;&#1496;&#1492; &#1488;&#1500;&#1497;&#1490;&#1497;&#1512;&#1497;, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>&#1491;&#1504;&#1496;&#1497; &#1488;&#1500;&#1497;&#1490;&#1497;&#1512;&#1497;, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>&#1583;&#1575;&#1606;&#1578;&#1609; &#1571;&#1604;&#1594;&#1610;&#1610;&#1585;&#1610;</ns0:creatorcontrib>
+    <ns0:creatorcontrib>&#12480;&#12531;&#12486;, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>D&#257;nt&#233; &#700;Aligiy&#233;ri, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Mak&#257;kavi T&#257;nt&#275;, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>T&#257;nt&#275; Alikiyari, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Alikiyari, T&#257;nt&#275;, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>&#1491;&#1504;&#1496;&#1497; &#1488;&#1500;&#1497;&#1490;&#1497;&#1488;&#1512;&#1497;, &#8234;1265-1321&#8236;</ns0:creatorcontrib>
+    <ns0:creatorcontrib>&#1044;&#1072;&#1085;&#1090;&#1077; &#1040;&#1083;&#1110;&#1169;&#1075;&#1110;&#1077;&#1088;&#1110;, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Aligerius, Dantes, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Alaghieri, Dante, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Dante Alih'i&#865;eri, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Aligheri, Dante, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Dantis Alagherius, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Aligeri, Dante, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Durante Alighieri, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>&#1583;&#1575;&#1606;&#1578;&#1610; &#1571;&#1604;&#1610;&#1580;&#1610;&#1585;&#1610;&#1548;, 1265-1321</ns0:creatorcontrib>
+    <ns0:creatorcontrib>Allighieri, Dante, 1265-1321</ns0:creatorcontrib>
+    <ns0:title>Danthe alegieri fiorentino [with the] Comento di christoforo Landino fiorentino sopra la comedia di Danthe Alighieri poeta fiorentino.</ns0:title>
+    <ns0:general>[s.n.]</ns0:general>
+    <ns0:general>O has 6ff.</ns0:general>
+    <ns0:general>AED8390</ns0:general>
+    <ns0:general>AllDocuments</ns0:general>
+    <ns0:general>At end: Finita e lopa dellinclyto &amp; diuo D&#227;the alleghieri poeta fior&#7869;tino reuista &amp; em&#7869;data dilig&#7869;tem&#7869;te p el reuer&#7869;do maestro Piero da Figino... &amp; ha posto molte cose &#297; diuersi luoghi che ha trouata m&#227;care si &#297; lo texto c&#245;e nella giosa. Impressa in Venetia per Matheo di chodecha da Parma Del. MCCCCLXXXXIII.Adi.XXIX.de Nouembre.</ns0:general>
+    <ns0:general>The Credo, Pater nostro and Ave Maria follow the colophon.</ns0:general>
+    <ns0:general>The last leaf is the "Registrum".</ns0:general>
+    <ns0:general>Signatures: a,a-z,&amp;,A-O.</ns0:general>
+    <ns0:general>"The illustrations are reimpressions from the blocks used in the edition issued in March, 1491, by the same printer, in conjunction with Bernardino Benali". Koch.</ns0:general>
+    <ns0:sourceid>ndu_aleph</ns0:sourceid>
+    <ns0:recordid>ndu_aleph000909885</ns0:recordid>
+    <ns0:recordid>000909885</ns0:recordid>
+    <ns0:recordid>909885</ns0:recordid>
+    <ns0:creationdate>1493</ns0:creationdate>
+    <ns0:startdate>14930101</ns0:startdate>
+    <ns0:searchscope>ndu_aleph</ns0:searchscope>
+    <ns0:searchscope>NDU</ns0:searchscope>
+    <ns0:scope>SPEC</ns0:scope>
+    <ns0:scope>ndu_aleph</ns0:scope>
+    <ns0:scope>NDU</ns0:scope>
+    <ns0:alttitle>Divina commedia 1493</ns0:alttitle>
+    <ns0:lsr01>SPEC INCUN</ns0:lsr01>
+    <ns0:lsr01>SPEC Incunable</ns0:lsr01>
+    <ns0:lsr02>Dante Alighieri, Danthe alegieri fiorentino with the Comento di christoforo Landino fiorentino sopra la comedia di Danthe Alighieri poeta fiorentino</ns0:lsr02>
+    <ns0:lsr02>Danthe alegieri fiorentino with the Comento di christoforo Landino fiorentino sopra la comedia di Danthe Alighieri poeta fiorentino Dante Alighieri,</ns0:lsr02>
+    <ns0:lsr04>Divina commedia 1493</ns0:lsr04>
+    <ns0:lsr05>PQ 4302 1493 L234</ns0:lsr05>
+    <ns0:lsr05>PQ43021493L234</ns0:lsr05>
+    <ns0:lsr05>PQ4302 1493 L234 :</ns0:lsr05>
+    <ns0:lsr06>[s.n.]</ns0:lsr06>
+    <ns0:lsr07>Dante Alighieri, Danthe alegieri fiorentino with the Comento di christoforo Landino fiorentino sopra la comedia di Danthe Alighieri poeta fiorentino</ns0:lsr07>
+    <ns0:lsr07>Danthe alegieri fiorentino with the Comento di christoforo Landino fiorentino sopra la comedia di Danthe Alighieri poeta fiorentino Dante Alighieri,</ns0:lsr07>
+    <ns0:lsr08>[S.l.] :</ns0:lsr08>
+    <ns0:lsr09>SS001317366</ns0:lsr09>
+    <ns0:lsr31>Dante Alighieri, 1265-1321. Divina commedia</ns0:lsr31>
+  </ns0:search>
+  <ns0:sort>
+    <ns0:title>Danthe alegieri fiorentino [with the] Comento di christoforo Landino fiorentino sopra la comedia di Danthe Alighieri poeta fiorentino.</ns0:title>
+    <ns0:creationdate>1493</ns0:creationdate>
+    <ns0:author>Dante Alighieri, 1265-1321.</ns0:author>
+    <ns0:lso01>1493</ns0:lso01>
+    <ns0:lso02>PQ0 004302 1493 L00 234000 -- DLC</ns0:lso02>
+  </ns0:sort>
+  <ns0:facets>
+    <ns0:language>ita</ns0:language>
+    <ns0:creationdate>1493</ns0:creationdate>
+    <ns0:toplevel>available</ns0:toplevel>
+    <ns0:prefilter>books</ns0:prefilter>
+    <ns0:prefilter>print</ns0:prefilter>
+    <ns0:prefilter>pbook</ns0:prefilter>
+    <ns0:rsrctype>books</ns0:rsrctype>
+    <ns0:rsrctype>print</ns0:rsrctype>
+    <ns0:rsrctype>pbook</ns0:rsrctype>
+    <ns0:library>HESB</ns0:library>
+    <ns0:lfc04>Divina commedia</ns0:lfc04>
+    <ns0:classificationlcc>P - Language and literature.&#8211;French literature</ns0:classificationlcc>
+    <ns0:newrecords>20181019_157</ns0:newrecords>
+    <ns0:frbrgroupid>3434703</ns0:frbrgroupid>
+    <ns0:frbrtype>6</ns0:frbrtype>
+  </ns0:facets>
+  <ns0:dedup>
+    <ns0:t>99</ns0:t>
+    <ns0:c3>danthealegierifiorenfiorentino</ns0:c3>
+    <ns0:c4>1493</ns0:c4>
+    <ns0:f5>danthealegierifiorenfiorentino</ns0:f5>
+    <ns0:f6>1493</ns0:f6>
+    <ns0:f7>danthe alegieri fiorentino with the comento di christoforo landino fiorentino sopra la comedia di danthe alighieri poeta fiorentino</ns0:f7>
+    <ns0:f8>xx</ns0:f8>
+    <ns0:f10>s n</ns0:f10>
+    <ns0:f11>dante alighieri 1265 1321</ns0:f11>
+  </ns0:dedup>
+  <ns0:frbr>
+    <ns0:t>99</ns0:t>
+    <ns0:k1>$$Kndu_aleph000909885$$AA</ns0:k1>
+    <ns0:k3>$$Kdivina commedia$$AT</ns0:k3>
+    <ns0:k3>$$Kdanthe alegieri fiorentino with the comento di christoforo landino fiorentino sopra la comedia di danthe alighieri poeta fiorentino$$AT</ns0:k3>
+  </ns0:frbr>
+  <ns0:delivery>
+    <ns0:institution>NDU</ns0:institution>
+    <ns0:delcategory>Physical Item</ns0:delcategory>
+  </ns0:delivery>
+  <ns0:enrichment>
+    <ns0:classificationlcc>PQ 4302</ns0:classificationlcc>
+  </ns0:enrichment>
+  <ns0:ranking>
+    <ns0:booster1>1</ns0:booster1>
+    <ns0:booster2>1</ns0:booster2>
+  </ns0:ranking>
+  <ns0:addata>
+    <ns0:au>Dante Alighieri</ns0:au>
+    <ns0:btitle>Danthe alegieri fiorentino [with the] Comento di christoforo Landino fiorentino sopra la comedia di Danthe Alighieri poeta fiorentino.</ns0:btitle>
+    <ns0:date>1493</ns0:date>
+    <ns0:risdate>1493.</ns0:risdate>
+    <ns0:format>book</ns0:format>
+    <ns0:ristype>BOOK</ns0:ristype>
+    <ns0:cop>S.l.]</ns0:cop>
+    <ns0:pub>[s.n.]</ns0:pub>
+  </ns0:addata>
+  <ns0:browse>
+    <ns0:author>$$DDante Alighieri, 1265-1321$$EDante Alighieri, 1265-1321</ns0:author>
+    <ns0:title>$$DDanthe alegieri fiorentino [with the] Comento di christoforo Landino fiorentino sopra la comedia di Danthe Alighieri poeta fiorentino$$EDanthe alegieri fiorentino [with the] Comento di christoforo Landino fiorentino sopra la comedia di Danthe Alighieri poeta fiorentino</ns0:title>
+    <ns0:title>$$DDivina commedia 1493$$EDivina commedia 1493</ns0:title>
+    <ns0:callnumber>$$INDU$$DPQ 4302 1493 L234$$E0pq   0430249300.l  23400 $$T0</ns0:callnumber>
+    <ns0:institution>NDU</ns0:institution>
+  </ns0:browse>
+<id>ndu_aleph000909885</id></ns0:record></records>
