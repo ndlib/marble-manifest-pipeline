@@ -38,6 +38,10 @@ class processCsv():
         self._get_alternate_attr(first_line)
         self._get_metadata_attr(first_line)
         self._get_seealso_attr(first_line)
+        self.config['index-marble'] = True
+        if 'Index_for_MARBLE' in first_line:
+            if first_line['Index_for_MARBLE']:
+                self.config['index-marble'] = False
         self.config['notify-on-finished'] = first_line['Notify']
 
     # process metadata columns from the main CSV
