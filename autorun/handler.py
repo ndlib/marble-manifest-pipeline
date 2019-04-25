@@ -1,6 +1,9 @@
 import boto3
-import os, sys, json
+import os
+import sys
+from urllib.parse import unquote
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+
 
 def run(event, context):
     """
@@ -13,7 +16,7 @@ def run(event, context):
     """
     try:
         statemachine_arn = os.environ['STATE_MACHINE']
-        eventid = event['Records'][0]['s3']['object']['key'].split("/")[1]
+        eventid = unquote(event['Records'][0]['s3']['object']['key'].split("/")[1])
         boto3.client('stepfunctions').start_execution(
             stateMachineArn=statemachine_arn,
             input="{\"id\" : \"" + eventid + "\"}"
