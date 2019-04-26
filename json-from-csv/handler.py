@@ -15,15 +15,15 @@ def run(event, context):
     sequence_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config['sequence-csv']
     event_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config["event-file"]
 
-    main_csv = readS3FileContent(process_bucket, main_key)
-    sequence_csv = readS3FileContent(process_bucket, sequence_key)
+    main_csv = read_s3_file_content(process_bucket, main_key)
+    sequence_csv = read_s3_file_content(process_bucket, sequence_key)
 
     csvSet = processCsv(id, config, main_csv, sequence_csv)
 
     csvSet.buildJson()
 
     copy_default_img(id, config)
-    writeS3Json(process_bucket, event_key, {"data": csvSet.result_json})
+    write_s3_json(process_bucket, event_key, {"data": csvSet.result_json})
 
     event['config'] = config
     return event
@@ -70,12 +70,12 @@ def get_config():
     return config
 
 
-def readS3FileContent(s3Bucket, s3Path):
+def read_s3_file_content(s3Bucket, s3Path):
     content_object = boto3.resource('s3').Object(s3Bucket, s3Path)
     return content_object.get()['Body'].read().decode('utf-8')
 
 
-def writeS3Json(s3Bucket, s3Path, json_hash):
+def write_s3_json(s3Bucket, s3Path, json_hash):
     s3 = boto3.resource('s3')
     s3.Object(s3Bucket, s3Path).put(Body=json.dumps(json_hash), ContentType='text/json')
 
