@@ -8,7 +8,7 @@ from processCsv import processCsv
 
 def run(event, context):
     id = event.get("id")
-    config = get_config()
+    config = event.get("config")
 
     process_bucket = config['process-bucket']
     main_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config['main-csv']
@@ -27,47 +27,6 @@ def run(event, context):
 
     event['config'] = config
     return event
-
-
-# retrieve configuration from parameter store
-def get_config():
-    config = {
-        "process-bucket-read-basepath": 'process',
-        "process-bucket-write-basepath": 'finished',
-        "process-bucket-index-basepath": 'index',
-        "image-server-bucket-basepath": '',
-        "manifest-server-bucket-basepath": '',
-        "sequence-csv": 'sequence.csv',
-        "main-csv": 'main.csv',
-        "canvas-default-height": 2000,
-        "canvas-default-width": 2000,
-        "event-file": "event.json"
-    }
-
-    # read the keys we want out of ssm
-    client = boto3.client('ssm')
-    paginator = client.get_paginator('get_parameters_by_path')
-    path = os.environ['SSM_KEY_BASE'] + '/'
-    page_iterator = paginator.paginate(
-        Path=path,
-        Recursive=True,
-        WithDecryption=False,)
-
-    response = []
-    for page in page_iterator:
-        response.extend(page['Parameters'])
-
-    for ps in response:
-        value = ps['Value']
-        # change /all/stacks/mellon-manifest-pipeline/<key> to <key>
-        key = ps['Name'].replace(path, '')
-        # add the key/value pair
-        config[key] = value
-
-    config['image-server-base-url'] = "https://" + config['image-server-base-url'] + ':8182/iiif/2'
-    config['manifest-server-base-url'] = "https://" + config['manifest-server-base-url']
-
-    return config
 
 
 def read_s3_file_content(s3Bucket, s3Path):
