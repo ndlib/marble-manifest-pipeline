@@ -45,7 +45,7 @@ def get_config():
 
     config['image-server-base-url'] = "https://" + config['image-server-base-url'] + ':8182/iiif/2'
     config['manifest-server-base-url'] = "https://" + config['manifest-server-base-url']
-    config['notify-on-finished'] = os.environ['NO_REPLY_EMAIL']
+    config['noreply-email-addr'] = os.environ['NO_REPLY_EMAIL']
     config['troubleshoot-email-addr'] = os.environ['TROUBLESHOOTING_EMAIL']
 
     return config
