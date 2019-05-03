@@ -9,7 +9,6 @@ class finalizeStep():
     def __init__(self, id, eventConfig):
         self.id = id
         self.config = eventConfig
-        self.manifestMetadata = self.readEventData(id)
         self.error = []
 
     def run(self):
@@ -18,12 +17,10 @@ class finalizeStep():
             self.moveManifest()
             self.saveLastRun()
             self.saveIndexMetadata()
-
-        if self.config['notify-on-finished']:
-            self.notify()
+        self.notify()
 
     def success(self):
-        if len(self.manifestMetadata["errors"]) > 0:
+        if self.error or len(self.manifest_metadata["errors"]) > 0:
             return False
 
         return True
@@ -111,58 +108,78 @@ class finalizeStep():
 
         bucket = self.config["process-bucket"]
         key = self.config["process-bucket-write-basepath"] + "/" + self.id + "/stepFunctionsRunMetadata.json"
-        s3.Object(bucket, key).put(Body=json.dumps(self.manifestMetadata))
+        s3.Object(bucket, key).put(Body=json.dumps(self.manifest_metadata))
 
         return
 
     def notify(self):
-        # Emails must be verified or whitelisted by SES
-        RECIPIENTS = self.config['notify-on-finished'].split(",")
-        SENDER = "noreply@nd.edu"
+        if self.success():
+            recipients = self.config['notify-on-finished'].split(",")
+            subject = self.id + " Manifest Pipeline Complete"
+            body_text = "The manifest pipeline has completed processing " + self.id
+            body_html = """<html>
+            <head></head>
+            <body>
+            <h1>""" + self.id + """ manifest pipeline has completed</h1>
+            <p>CSVs and images have been processed through the pipeline.</p>
+            <ul>
+                <li><a href=\"""" + self._event_manifest_url() + """\">Manifest</a></li>
+                <li><a href=\"""" + self._event_imageviewer_url() + """\">Image Viewer</a></li>
+                <li><a href=\"""" + self._event_imageviewer_url(True) + """\">Image Viewer - Large</a></li>
+            </ul>
+            </body>
+            </html>"""
+        else:
+            recipients = []
+            if self.config.get('notify-on-finished', False):
+                recipients = self.config.get('notify-on-finished').split(",")
+            recipients.append(self.config['troubleshoot-email-addr'])
+            subject = "Error processing " + self.id
+            if self.error:
+                reportable_errs = "<li>" + str(self.error) + "</li>"
+            else:
+                for err in self.manifest_metadata["errors"]:
+                    reportable_errs += "<li>" + err + "</li>"
+            body_html = """<html>
+            <head></head>
+            <body>
+            <h1>""" + self.id + """ failed with errors!</h1>
+            <p>The pipeline failed for the following reasons:</p>
+            <ul>""" + reportable_errs + """</ul>
+            </body>
+            </html>"""
+            body_text = "The following errors were encountered processing: " \
+                + reportable_errs
+
+        self._send_notification(recipients, subject, body_html, body_text)
+
+        return
+
+    def _send_notification(self, recipients, subject, body_html, body_text):
+        SENDER = self.config['noreply-email-addr']
         AWS_REGION = "us-east-1"
-
-        # The subject line for the email.
-        SUBJECT = self.id + " Manifest Pipeline Complete"
-
-        # The email body for recipients with non-HTML email clients.
-        BODY_TEXT = ("The manifest pipeline has completed processing " + self.id)
-
-        # The HTML body of the email.
-        BODY_HTML = """<html>
-        <head></head>
-        <body>
-          <h1>""" + self.id + """ manifest pipeline has completed</h1>
-          <p>CSVs and images have been processed through the pipeline.</p>
-          <ul>
-            <li><a href=\"""" + self._event_manifest_url() + """\">Manifest</a></li>
-            <li><a href=\"""" + self._event_imageviewer_url() + """\">Image Viewer</a></li>
-            <li><a href=\"""" + self._event_imageviewer_url(True) + """\">Image Viewer - Large</a></li>
-          </ul>
-        </body>
-        </html>"""
-
         CHARSET = "UTF-8"
         client = boto3.client('ses', region_name=AWS_REGION)
         try:
             # Provide the contents of the email.
             response = client.send_email(
                 Destination={
-                    'ToAddresses': RECIPIENTS,
+                    'ToAddresses': recipients,
                 },
                 Message={
                     'Body': {
                         'Html': {
                             'Charset': CHARSET,
-                            'Data': BODY_HTML,
+                            'Data': body_html,
                         },
                         'Text': {
                             'Charset': CHARSET,
-                            'Data': BODY_TEXT,
+                            'Data': body_text,
                         },
                     },
                     'Subject': {
                         'Charset': CHARSET,
-                        'Data': SUBJECT,
+                        'Data': subject,
                     },
                 },
                 Source=SENDER
@@ -173,7 +190,6 @@ class finalizeStep():
         else:
             print("Email sent! Message ID:"),
             print(response['MessageId'])
-
         return
 
     def _event_manifest_url(self):
@@ -194,9 +210,9 @@ class finalizeStep():
         return ""
 
     # read event data
-    def readEventData(self, event_id):
+    def read_event_data(self):
         remote_file = self.config['process-bucket-read-basepath'] + "/" \
-            + event_id + "/" + self.config["event-file"]
+            + self.id + "/" + self.config["event-file"]
         content_object = boto3.resource('s3').Object(self.config['process-bucket'], remote_file)
         file_content = content_object.get()['Body'].read().decode('utf-8')
         return json.loads(file_content).get('data')
