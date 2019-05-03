@@ -4,7 +4,6 @@ import boto3
 
 def run(event, context):
     event['config'] = get_config()
-    print(event)
     return event
 
 
@@ -49,6 +48,3 @@ def get_config():
     config['troubleshoot-email-addr'] = os.environ['TROUBLESHOOTING_EMAIL']
 
     return config
-
-
-run({}, None)
