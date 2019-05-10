@@ -12,13 +12,13 @@ def run(event, context):
 
     process_bucket = config['process-bucket']
     main_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config['main-csv']
-    sequence_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config['sequence-csv']
+    items_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config['items-csv']
     event_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config["event-file"]
 
     main_csv = read_s3_file_content(process_bucket, main_key)
-    sequence_csv = read_s3_file_content(process_bucket, sequence_key)
+    items_csv = read_s3_file_content(process_bucket, items_key)
 
-    csvSet = processCsv(id, config, main_csv, sequence_csv)
+    csvSet = processCsv(id, config, main_csv, items_csv)
 
     csvSet.buildJson()
 

@@ -4,7 +4,6 @@ import boto3
 
 def run(event, context):
     event['config'] = get_config()
-    print(event)
     return event
 
 
@@ -16,7 +15,7 @@ def get_config():
         "process-bucket-index-basepath": 'index',
         "image-server-bucket-basepath": '',
         "manifest-server-bucket-basepath": '',
-        "sequence-csv": 'sequence.csv',
+        "items-csv": 'items.csv',
         "main-csv": 'main.csv',
         "canvas-default-height": 2000,
         "canvas-default-width": 2000,
@@ -49,6 +48,3 @@ def get_config():
     config['troubleshoot-email-addr'] = os.environ['TROUBLESHOOTING_EMAIL']
 
     return config
-
-
-run({}, None)

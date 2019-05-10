@@ -5,16 +5,17 @@ from io import StringIO
 
 class processCsv():
     # class constructor
-    def __init__(self, id, eventConfig, main_csv, sequence_csv):
+    def __init__(self, id, eventConfig, main_csv, items_csv):
         self.id = id
         self.error = []
         # start with an empty result json and config
         self.result_json = {}
         self.config = eventConfig
         self.main_csv = main_csv
-        self.sequence_csv = sequence_csv
+        self.items_csv = items_csv
         # population json info that is not csv-dependent
         self._set_json_skeleton()
+        self.lang = "en"
 
     # set up framework of an empty results_json
     def _set_json_skeleton(self):
@@ -22,20 +23,16 @@ class processCsv():
         self.result_json['creator'] = 'creator@email.com'
         self.result_json['viewingDirection'] = 'left-to-right'
         self.result_json['metadata'] = []
-        self.result_json['sequences'] = []
-        self.result_json['sequences'].append({})
-        self.result_json['sequences'][0]['pages'] = []
+        self.result_json['items'] = []
 
     # process first data row of main CSV
     def _get_attr_from_main_firstline(self, first_line):
-        self.result_json['label'] = first_line['Label']
-        self.result_json['description'] = first_line['Description']
-        self.result_json['attribution'] = first_line['Attribution']
-        self.result_json['license'] = first_line['License']
+        self.result_json['label'] = self._lang_wrapper(first_line['Label'])
+        self.result_json['requiredStatement'] = self._get_requiredstatement(first_line['Attribution'])
+        self.result_json['rights'] = first_line['Rights']
         self.result_json['unique-identifier'] = first_line['unique_identifier']
-        self.result_json['sequences'][0]['viewingHint'] = first_line['Sequence_viewing_experience']
-        self.result_json['sequences'][0]['label'] = first_line['Sequence_label']
         self._get_alternate_attr(first_line)
+        self._get_summary(first_line['Summary'])
         self._get_metadata_attr(first_line)
         self._get_seealso_attr(first_line)
         self.config['index-marble'] = True
@@ -48,8 +45,8 @@ class processCsv():
     def _get_metadata_attr(self, this_line):
         if this_line['Metadata_label'] and this_line['Metadata_value']:
             this_item = {}
-            this_item['label'] = this_line['Metadata_label']
-            this_item['value'] = this_line['Metadata_value']
+            this_item.update(self._label_wrapper(this_line['Metadata_label']))
+            this_item.update(self._value_wrapper(this_line['Metadata_value']))
             self.result_json['metadata'].append(this_item)
 
     # process alternate columns from the main CSV
@@ -84,13 +81,34 @@ class processCsv():
                     self.result_json['seeAlso'] = []
                 self.result_json['seeAlso'].append(this_item)
 
-    # process data rows from sequence CSV to create pages within default sequence
-    def _add_pages_to_sequence(self, this_line):
+    # process data rows from items CSV
+    def _add_items(self, this_line):
         if this_line['Filenames'] and this_line['Label']:
             this_item = {}
             this_item['file'] = this_line['Filenames']
             this_item['label'] = this_line['Label']
-            self.result_json['sequences'][0]['pages'].append(this_item)
+            self.result_json['items'].append(this_item)
+
+    def _get_requiredstatement(self, this_line):
+        rs = {}
+        rs.update(self._label_wrapper("Attribution"))
+        rs.update(self._value_wrapper(this_line))
+        return rs
+
+    def _get_summary(self, this_line):
+        summary = {}
+        summary.update(self._label_wrapper("Summary"))
+        summary.update(self._value_wrapper(this_line))
+        self.result_json['metadata'].append(summary)
+
+    def _lang_wrapper(self, line):
+        return {self.lang: [line]}
+
+    def _label_wrapper(self, line):
+        return {"label": self._lang_wrapper(line)}
+
+    def _value_wrapper(self, line):
+        return {"value": self._lang_wrapper(line)}
 
     # print out our constructed json
     def dumpJson(self):
@@ -100,7 +118,7 @@ class processCsv():
     # Excel sheets, we'll need to export them in that format
 
     # Read Main CSV file first
-    # add to result_json['sequences'][0]['pages'](for now, there is only one display sequence)
+    # add to result_json['items']
     # row 1 should be the headers, row 2 should have most of our metadata.
     # Any row after this is used only to provide global metadata
     def buildJson(self):
@@ -114,11 +132,11 @@ class processCsv():
                 self._get_seealso_attr(this_row)
                 self._get_alternate_attr(this_row)
 
-        # Sequence CSV File next, add to pages
-        f = StringIO(self.sequence_csv)
+        # Items CSV File next, add to pages
+        f = StringIO(self.items_csv)
         reader = csv.DictReader(f, delimiter=',')
         for this_row in reader:
             if reader.line_num == 2:
                 self.config['default-img'] = this_row['Filenames']
             if reader.line_num != 1:
-                self._add_pages_to_sequence(this_row)
+                self._add_items(this_row)

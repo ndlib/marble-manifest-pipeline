@@ -1,0 +1,269 @@
+{
+    "@context": [
+        "http://www.w3.org/ns/anno.jsonld",
+        "http://iiif.io/api/presentation/3/context.json"
+    ],
+    "type": "Manifest",
+    "id": "https://marble-manifest-test.libraries.nd.edu/bitter/manifest",
+    "label": {
+        "en": [
+            "ANNUNCIATION (A PAIR OF PRELATE'S CUFFS)"
+        ]
+    },
+    "metadata": [
+        {
+            "label": {
+                "en": [
+                    "Summary"
+                ]
+            },
+            "value": {
+                "en": [
+                    "ANNUNCIATION (A PAIR OF PRELATE'S CUFFS)"
+                ]
+            }
+        },
+        {
+            "label": {
+                "en": [
+                    "Title"
+                ]
+            },
+            "value": {
+                "en": [
+                    "ANNUNCIATION (A PAIR OF PRELATE'S CUFFS)"
+                ]
+            }
+        },
+        {
+            "label": {
+                "en": [
+                    "Creator"
+                ]
+            },
+            "value": {
+                "en": [
+                    "Italian"
+                ]
+            }
+        },
+        {
+            "label": {
+                "en": [
+                    "Classification"
+                ]
+            },
+            "value": {
+                "en": [
+                    "painting"
+                ]
+            }
+        },
+        {
+            "label": {
+                "en": [
+                    "Media"
+                ]
+            },
+            "value": {
+                "en": [
+                    "silk, metallic thread, mounted on leather"
+                ]
+            }
+        },
+        {
+            "label": {
+                "en": [
+                    "Dimensions"
+                ]
+            },
+            "value": {
+                "en": [
+                    "6 1/2 x 11 in. (16.51 x 27.94 cm)"
+                ]
+            }
+        },
+        {
+            "label": {
+                "en": [
+                    "Accession Number"
+                ]
+            },
+            "value": {
+                "en": [
+                    "1982.072.001.a"
+                ]
+            }
+        },
+        {
+            "label": {
+                "en": [
+                    "Repository"
+                ]
+            },
+            "value": {
+                "en": [
+                    "Snite"
+                ]
+            }
+        }
+    ],
+    "rights": "<a href="http://rightsstatements.org/vocab/NoC-US/1.0/" target="_blank">No Copyright - United States</a>", "requiredStatement": {
+        "label": {
+            "en": [
+                "Attribution"
+            ]
+        },
+        "value": {
+            "en": [
+                "University of Notre Dame::Hesburgh Libraries::General"
+            ]
+        }
+    },
+    "viewingDirection": "left-to-right",
+    "thumbnail": [
+        {
+            "id": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2/bitter%2Fdefault.tif/full/250,/0/default.jpg",
+            "type": "Image",
+            "service": [
+                {
+                    "id": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2/bitter%2Fdefault.tif",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                }
+            ]
+        }
+    ],
+    "items": [
+        {
+            "id": "https://marble-manifest-test.libraries.nd.edu/bitter/canvas/bitter%2F1982_072_001_a-v0001.jpg",
+            "type": "Canvas",
+            "label": {
+                "label": {
+                    "en": [
+                        "072_001_a-v0001"
+                    ]
+                }
+            },
+            "height": 2000,
+            "width": 2000,
+            "thumbnail": [
+                {
+                    "id": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2/bitter%2F1982_072_001_a-v0001.tif/full/250,/0/default.jpg",
+                    "type": "Image",
+                    "service": [
+                        {
+                            "id": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2/bitter%2F1982_072_001_a-v0001.tif",
+                            "type": "ImageService2",
+                            "profile": "http://iiif.io/api/image/2/level2.json"
+                        }
+                    ]
+                }
+            ],
+            "items": [
+                {
+                    "id": "AnnotationUrl",
+                    "type": "AnnotationPage",
+                    "items": [
+                        {
+                            "id": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2/bitter%2F1982_072_001_a-v0001.tif",
+                            "type": "Annotation",
+                            "motivation": "painting",
+                            "target": "https://marble-manifest-test.libraries.nd.edu/bitter/canvas/bitter%2F1982_072_001_a-v0001.tif",
+                            "body": {
+                                "id": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2/bitter%2F1982_072_001_a-v0001.tif/full/full/0/default.jpg",
+                                "type": "Image",
+                                "format": "image/jpeg",
+                                "service": [
+                                    {
+                                        "id": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2/bitter%2F1982_072_001_a-v0001.tif",
+                                        "type": "ImageService2",
+                                        "profile": "http://iiif.io/api/image/2/level2.json"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "https://marble-manifest-test.libraries.nd.edu/bitter/canvas/bitter%2F1982_072_001_a-v0002.jpg",
+            "type": "Canvas",
+            "label": {
+                "label": {
+                    "en": [
+                        "072_001_a-v0002"
+                    ]
+                }
+            },
+            "height": 2000,
+            "width": 2000,
+            "thumbnail": [
+                {
+                    "id": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2/bitter%2F1982_072_001_a-v0002.tif/full/250,/0/default.jpg",
+                    "type": "Image",
+                    "service": [
+                        {
+                            "id": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2/bitter%2F1982_072_001_a-v0002.tif",
+                            "type": "ImageService2",
+                            "profile": "http://iiif.io/api/image/2/level2.json"
+                        }
+                    ]
+                }
+            ],
+            "items": [
+                {
+                    "id": "AnnotationUrl",
+                    "type": "AnnotationPage",
+                    "items": [
+                        {
+                            "id": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2/bitter%2F1982_072_001_a-v0002.tif",
+                            "type": "Annotation",
+                            "motivation": "painting",
+                            "target": "https://marble-manifest-test.libraries.nd.edu/bitter/canvas/bitter%2F1982_072_001_a-v0002.tif",
+                            "body": {
+                                "id": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2/bitter%2F1982_072_001_a-v0002.tif/full/full/0/default.jpg",
+                                "type": "Image",
+                                "format": "image/jpeg",
+                                "service": [
+                                    {
+                                        "id": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2/bitter%2F1982_072_001_a-v0002.tif",
+                                        "type": "ImageService2",
+                                        "profile": "http://iiif.io/api/image/2/level2.json"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "homepage": [
+        {
+            "id": "http://www.thegoods.com/book1.html",
+            "label": {
+                "en": [
+                    "Curate - bitter"
+                ]
+            },
+            "type": "Text",
+            "format": "text/html"
+        }
+    ],
+    "seeAlso": [
+        {
+            "id": "http://www.someurl.com/library/catalog/book1.xml",
+            "type": "Dataset",
+            "format": "text/xml",
+            "profile": "https://example.org/profiles/bibliographic"
+        },
+        {
+            "id": "http://www.anotherurl.org/library/cata.log/mag1.xml",
+            "type": "Dataset",
+            "format": "text/xml",
+            "profile": "https://sample.org/profiles/biblio"
+        }
+    ]
+}

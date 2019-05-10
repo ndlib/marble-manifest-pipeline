@@ -16,7 +16,7 @@ def _get_config(args):
             "process-bucket-read-basepath": 'process',
             "process-bucket-write-basepath": 'finished',
             "process-bucket-last-basepath": 'lastSuccessfullRun',
-            "sequence-csv": 'sequence.csv',
+            "items-csv": 'items.csv',
             "main-csv": 'main.csv'
         }
 
@@ -67,10 +67,10 @@ def _verify_lastrun_files(args, events):
         main_csv = cfg["process-bucket-write-basepath"] + "/" \
             + event + "/" + cfg["process-bucket-last-basepath"] + "/" \
             + cfg["main-csv"]
-        seq_csv = cfg["process-bucket-write-basepath"] + "/" \
+        items_csv = cfg["process-bucket-write-basepath"] + "/" \
             + event + "/" + cfg["process-bucket-last-basepath"] + "/" \
-            + cfg["sequence-csv"]
-        for csv in [main_csv, seq_csv]:
+            + cfg["items-csv"]
+        for csv in [main_csv, items_csv]:
             try:
                 s3.Object(cfg["process-bucket"], csv).load()
             except botocore.exceptions.ClientError as e:
@@ -83,8 +83,8 @@ def _verify_local_files(args, events):
     cfg = _get_config(args)
     for event in events:
         main_csv = cfg['local-dir'] + event + '/' + cfg['main-csv']
-        seq_csv = cfg['local-dir'] + event + '/' + cfg['sequence-csv']
-        files = [main_csv, seq_csv]
+        items_csv = cfg['local-dir'] + event + '/' + cfg['items-csv']
+        files = [main_csv, items_csv]
         for filename in files:
             if not os.path.isfile(filename):
                 _add_validation_error('Local file not found - ' + filename, event)

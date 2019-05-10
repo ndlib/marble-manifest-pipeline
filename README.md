@@ -7,40 +7,50 @@ The initial input to the manifest pipeline is two CSV files.
 ### First CSV file
 The first CSV file contains the main metadata. It should end with *main.csv*
 
+Detailed information about what these fields map to can be found [here](https://iiif.io/api/presentation/3.0/#36-values)
+
 The following labels are expected:
 
-**Label** The label for the image sequence
-**Description**  A short description of the image sequence
-**License**  Licensing or Copyright information
-**Attribution** Artist attribution
-**Sequence_filename** **Not Used**
-**Sequence_label** The name of the image sequence array in the metadata JSON
-**Sequence_viewing_experience** the value should be *paged* or *individuals*
-**unique_identifier** id used for generating IIIF manifest
-**Metadata_label** on second and subsequent lines, and be used to specify metadata common to all images in the sequence
-**Metadata_value** on second and subsequent lines, and be used to specify metadata common to all images in the sequence
+* Label - The label for the image sequence
+* Summary - A short description of the image sequence
+* Rights - Licensing or Copyright information
+* Attribution - Artist attribution
+* unique_identifier - Id used for generating IIIF manifest
+* Metadata_label - Used to specify metadata common to all images in the sequence
+* Metadata_value - Used to specify metadata common to all images in the sequence
+* Notify - The email(s) of individual(s) to be contacted by the pipeline
+* SeeAlso_Label - An external, machine-readable resource such as an XML or RDF description that is related to the resource
+* SeeAlso_Type - The type of the seeAlso resource
+* SeeAlso_Format - The format of the seeAlso resource
+* SeeAlso_Profile - The profile of the seeAlso resource
+* Alternate_id_system - The id of a resource in an alternate system that relates to this resource
+* Alternate_id_identifier - The id of alternate system
+* Alternate_id_url - The url of the alternate system
 
 An example file, *example-main.csv*, looks like this:
 
 ```
 
-Label,Description,License,Attribution,Sequence_filename,Sequence_label,Sequence_viewing_experience,unique_identifier,Metadata_label,Metadata_value
-Label,Description,license,attribution,,sequency,paged,2018_example_001,,
-,,,,,,,,Title,"Wunder der Verenbung"
-,,,,,,,,Author(s),"Bolle, Fritz"
-,,,,,,,,"Publication date","[1951]"
-,,,,,,,,Attribution,""Welcome Library<br/>License: CC-BY-NC"
+Label,Notify,Summary,Rights,Attribution,unique_identifier,Metadata_label,Metadata_value,SeeAlso_Id,SeeAlso_Type,SeeAlso_Format,SeeAlso_Label,SeeAlso_Profile,Alternate_id_system,Alternate_id_identifier,Alternate_id_url,Index_for_MARBLE
+ANNUNCIATION (A PAIR OF PRELATE'S CUFFS),rdought1@nd.edu,ANNUNCIATION (A PAIR OF PRELATE'S CUFFS),"<a href=""http://rightsstatements.org/vocab/NoC-US/1.0/"" target=""_blank"">No Copyright - United States</a>",University of Notre Dame::Hesburgh Libraries::General,1982.072.001.a,Title,ANNUNCIATION (A PAIR OF PRELATE'S CUFFS),http://www.someurl.com/library/catalog/book1.xml,Dataset,text/xml,dataset from Curate ,https://example.org/profiles/bibliographic,Curate,R2345234534,http://www.thegoods.com/book1.html,YES
+,,,,,,Creator,Italian,http://www.anotherurl.org/library/cata.log/mag1.xml,Dataset,text/xml,data from Snite  ,https://sample.org/profiles/biblio,,,,
+,,,,,,,,,,,,,,,,
+,,,,,,Classification,painting,,,,,,,,,
+,,,,,,Media,"silk, metallic thread, mounted on leather",,,,,,,,,
+,,,,,,Dimensions,6 1/2 x 11 in. (16.51 x 27.94 cm),,,,,,,,,
+,,,,,,Accession Number,1982.072.001.a,,,,,,,,,
+,,,,,,Repository,Snite,,,,,,,,,
 
 ```
 
 ### Second CSV file
-The first CSV file contains the image sequence  metadata. It should end with *sequence.csv*
+The first CSV file contains the image metadata. It should end with *items.csv*
 
 The following labels are expected:
 
-**Filenames** the actual file name under the image directory
-**Label** This file's Label
-**Description** a file-specific description
+* Filenames - The actual file name under the image directory
+* Label - This file's Label
+* Description - A file-specific description
 
 The order in which the files are entered, by row, demotes their order in the image sequence.
 
@@ -58,7 +68,7 @@ Filenames,Label,Description
 
 ### CSV conversion script
 
-The `create-json-from_csv` script will look for a main and sequence CSV located in a directory together, and use them to generate a JSON file to standard out (the commandline). By default, it looks in the current directory. If an argument is provided on the command line, it will look for the files in that directory instead.
+The `create-json-from_csv` script will look for a main and items CSV located in a directory together, and use them to generate a JSON file to standard out (the commandline). By default, it looks in the current directory. If an argument is provided on the command line, it will look for the files in that directory instead.
 
 An example:
 
@@ -70,57 +80,165 @@ would produce the following output:
 
 ```
 {
-  "errors": [],
-  "attribution": "attribution",
-  "description": "Description",
-  "iiif-server": "https://image-server.library.nd.edu:8182/iiif/2",
-  "creator": "creator@email.com",
-  "license": "license info",
-  "unique-identifier": "2018_example_001",
-  "label": "Label",
-  "sequences": [
-    {
-      "viewingHint": "paged",
-      "pages": [
-        {
-          "file": "009_output",
-          "label": "009"
+    "errors": [
+      
+    ],
+    "creator": "sample@domain",
+    "viewingDirection": "left-to-right",
+    "metadata": [
+      {
+        "label": {
+          "en": [
+            "Summary"
+          ]
         },
-        {
-          "file": "046_output.tif",
-          "label": "046"
-        },
-        {
-          "file": "2018_009.jpg",
-          "label": "2018 009"
-        },
-        {
-          "file": "2018_049_009.jpg",
-          "label": "2018 049 009"
+        "value": {
+          "en": [
+            "ANNUNCIATION (A PAIR OF PRELATE'S CUFFS)"
+          ]
         }
-      ],
-      "label": "sequency"
-    }
-  ],
-  "metadata": [
-    {
-      "value": "Wunder der Verenbung",
-      "label": "Title"
+      },
+      {
+        "label": {
+          "en": [
+            "Title"
+          ]
+        },
+        "value": {
+          "en": [
+            "ANNUNCIATION (A PAIR OF PRELATE'S CUFFS)"
+          ]
+        }
+      },
+      {
+        "label": {
+          "en": [
+            "Creator"
+          ]
+        },
+        "value": {
+          "en": [
+            "Italian"
+          ]
+        }
+      },
+      {
+        "label": {
+          "en": [
+            "Classification"
+          ]
+        },
+        "value": {
+          "en": [
+            "painting"
+          ]
+        }
+      },
+      {
+        "label": {
+          "en": [
+            "Media"
+          ]
+        },
+        "value": {
+          "en": [
+            "silk, metallic thread, mounted on leather"
+          ]
+        }
+      },
+      {
+        "label": {
+          "en": [
+            "Dimensions"
+          ]
+        },
+        "value": {
+          "en": [
+            "6 1/2 x 11 in. (16.51 x 27.94 cm)"
+          ]
+        }
+      },
+      {
+        "label": {
+          "en": [
+            "Accession Number"
+          ]
+        },
+        "value": {
+          "en": [
+            "1982.072.001.a"
+          ]
+        }
+      },
+      {
+        "label": {
+          "en": [
+            "Repository"
+          ]
+        },
+        "value": {
+          "en": [
+            "Snite"
+          ]
+        }
+      }
+    ],
+    "items": [
+      {
+        "file": "1982_072_001_a-v0001.jpg",
+        "label": "072_001_a-v0001"
+      },
+      {
+        "file": "1982_072_001_a-v0002.jpg",
+        "label": "072_001_a-v0002"
+      }
+    ],
+    "label": {
+      "en": [
+        "ANNUNCIATION (A PAIR OF PRELATE'S CUFFS)"
+      ]
     },
-    {
-      "value": "Bolle, Fritz",
-      "label": "Author(s)"
+    "requiredStatement": {
+      "label": {
+        "en": [
+          "Attribution"
+        ]
+      },
+      "value": {
+        "en": [
+          "University of Notre Dame::Hesburgh Libraries::General"
+        ]
+      }
     },
-    {
-      "value": "[1951]",
-      "label": "Publication date"
-    },
-    {
-      "value": "Welcome Library<br/>License: CC-BY-NC\"",
-      "label": "Attribution"
-    }
-  ]
-}
+    "rights": "<a href="http://rightsstatements.org/vocab/NoC-US/1.0/" target="_blank">No Copyright - United States</a>",
+    "unique-identifier": "1982.072.001.a",
+    "homepage": [
+      {
+        "id": "http://www.thegoods.com/book1.html",
+        "label": {
+          "en": [
+            "Curate - bitter"
+          ]
+        },
+        "type": "Text",
+        "format": "text/html"
+      }
+    ],
+    "seeAlso": [
+      {
+        "id": "http://www.someurl.com/library/catalog/book1.xml",
+        "type": "Dataset",
+        "format": "text/xml",
+        "profile": "https://example.org/profiles/bibliographic"
+      },
+      {
+        "id": "http://www.anotherurl.org/library/cata.log/mag1.xml",
+        "type": "Dataset",
+        "format": "text/xml",
+        "profile": "https://sample.org/profiles/biblio"
+      }
+    ]
+  }
 ```
 ## Step 2: Generating a manifest from the JSON output of step 1
 
