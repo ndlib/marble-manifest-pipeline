@@ -19,7 +19,7 @@ def write_index_file(index_directory, filename, xml_tree):
     #        encoding="utf-8",
     #        method="xml")
     _create_tar_file(index_directory, filename)
-    os.remove(index_directory + '/' + filename)
+    # os.remove(index_directory + '/' + filename)  # removed to run tests 5/21/19 sm
     return
 
 

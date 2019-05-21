@@ -20,7 +20,8 @@
     "notify-on-finished": "notify@email.com",
     "canvas-default-height": 2000,
     "canvas-default-width": 2000,
-    "event-file": "event.json"
+    "event-file": "event.json",
+    "local-dir": "/tmp"
   },
   "metadata": [{
       "label": "Title",

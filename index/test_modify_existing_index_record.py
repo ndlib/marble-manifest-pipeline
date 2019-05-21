@@ -13,10 +13,9 @@ class Test(unittest.TestCase):
 
     def test_modify_existing_index_record(self):
         """ compare actual an expected modified xml """
-        json_input = json.loads('{"manifest_found": false, "id": "abc123xyz", "repository": "SNITE",'
-                                + ' "library": "Snite", "display_library": "Snite Museum of Art"}')
-        json_input = json.loads('{"manifest_found": false, "id": "ndu_aleph000909885", "repository": "snite",'
-                                + ' "library": "Snite", "display_library": "Snite Museum of Art"}')
+        json_input = json.loads('{"manifest_found": false, "id": "ndu_aleph000909885", "repository": "SPEC",'
+                                + ' "library": "HESB", "display_library": "Rare Books and Special Collections",'
+                                + ' "library_collection_code": "SPEC"}')
         sample_pnx = ElementTree(file='test/ndu_aleph000909885.xml').getroot()
         resulting_pnx = modify_existing_index_record(sample_pnx, json_input)
         self.assertTrue(isinstance(resulting_pnx, ElementTree))

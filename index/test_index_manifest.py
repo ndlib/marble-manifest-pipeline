@@ -4,6 +4,7 @@
 import unittest
 from index_manifest import index_manifest
 import os
+import json
 
 
 class Test(unittest.TestCase):
@@ -11,20 +12,26 @@ class Test(unittest.TestCase):
 
     def test_index_manifest(self):
         """ test creation of index file for manifest """
-        # Note:  Following should resolve to: https://presentation-iiif.library.nd.edu/ils-000909885/manifest
-        doc_id = 'ils-000909885'
-        index_directory = '/tmp/index'
+        with open("../example/example-input.json", 'r') as input_source:
+            data = json.load(input_source)
+        input_source.close()
+        config = data['config']
+        data = {
+          "id": "example",
+          "config": data["config"],
+          "manifestData": data
+        }
+        doc_id = data['id']
+        index_directory = config['local-dir']
+        print(index_directory)
         try:
             os.remove(index_directory + '/' + doc_id + '.xml')
             os.remove(index_directory + '/' + doc_id + '.xml.tar.gz')
         except FileNotFoundError:
             pass
-        manifest_info = index_manifest(doc_id)
+        manifest_info = index_manifest(doc_id, config)
         # print(manifest_info)
         self.assertTrue(isinstance(manifest_info, dict))
-        # Now that we are writing to an S3 bucket and removing locally, I removed the following lines
-        # self.assertTrue(os.path.exists(index_directory + '/' + doc_id + '.xml'))
-        # self.assertTrue(os.path.exists(index_directory + '/' + doc_id + '.xml.tar.gz'))
         # clean up after ourseleves
         try:
             os.remove(index_directory + '/' + doc_id + '.xml')

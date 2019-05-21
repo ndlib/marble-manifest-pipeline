@@ -10,28 +10,33 @@ from write_index_file import write_index_file
 from urllib import error
 import boto3
 import os
-# import xml.etree.ElementTree as ET
+from botocore.exceptions import ClientError
 
 
 def index_manifest(manifest_id, config):
     """ Augment or Insert Index record for manifest (id is either URL or unique identifier) """
     manifest_location = config['process-bucket-write-basepath'] \
         + "/" + manifest_id + "/manifest/index.json"
-    manifest_json = json.loads(_read_s3_file(config['process-bucket'], manifest_location))
-    manifest_info = append_manifest_info(manifest_id, manifest_json)
-    indexid = manifest_info['id']
-    # print(manifest_info)
     try:
-        index_record = get_existing_index_record(indexid)
-        index_record = modify_existing_index_record(index_record, manifest_info)
-    except error.HTTPError:
-        # print('except')
-        index_record = create_new_index_record(manifest_info)
-    # index_directory = 'tmp'
-    filename = manifest_info['id'] + '.xml'
-    write_index_file(config['local-dir'], filename, index_record)
-    remote_index_dir = config['process-bucket-index-basepath'] + "/process/"
-    _copy_local_to_s3(config['local-dir'], remote_index_dir, config['process-bucket'])
+        manifest_json = json.loads(_read_s3_file(config['process-bucket'], manifest_location))
+        manifest_info = append_manifest_info(manifest_id, manifest_json)
+        indexid = manifest_info['id']
+        # print(manifest_info)
+        try:
+            index_record = get_existing_index_record(indexid)
+            index_record = modify_existing_index_record(index_record, manifest_info)
+        except error.HTTPError:
+            index_record = create_new_index_record(manifest_info)
+        filename = manifest_info['id'] + '.xml'
+        write_index_file(config['local-dir'], filename, index_record)
+        remote_index_dir = config['process-bucket-index-basepath'] + "/process/"
+        _copy_local_to_s3(config['local-dir'], remote_index_dir, config['process-bucket'])
+    except ClientError as ex:
+        if ex.response['Error']['Code'] == 'NoSuchBucket':
+            print('Manifest not found for ', manifest_id, ' - returning empty manifest')
+            manifest_info = append_manifest_info(manifest_id, {})
+        else:
+            raise
     return manifest_info
 
 

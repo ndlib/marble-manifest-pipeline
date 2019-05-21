@@ -18,11 +18,13 @@ def append_manifest_info(manifest_id, manifest_json):
     else:
         manifest_info['repository'] = _get_manifest_repository({})
     manifest_info['library'] = _get_library(manifest_info)
+    manifest_info['library_collection_code'] = _get_library_collection_code(manifest_info)
     manifest_info['display_library'] = _get_display_library(manifest_info)
     return manifest_info
 
 
 def _get_id_given_manifest_url(manifest_url):
+    """ Get unique id from manifest @id """
     id = ""
     # URL is expected to be of the form:  "https://presentation-iiif.library.nd.edu/ils-000909884/manifest"
     if manifest_url.startswith('https://presentation-iiif.library.nd.edu/'):
@@ -33,6 +35,7 @@ def _get_id_given_manifest_url(manifest_url):
 
 
 def _harvest_important_manifest_info(manifest_json, manifest_info):
+    """ Pull important information from manifest to create search index record """
     try:
         if '@id' in manifest_json:
             manifest_info['url'] = manifest_json['@id']
@@ -50,20 +53,21 @@ def _harvest_important_manifest_info(manifest_json, manifest_info):
 
 
 def _get_manifest_repository(manifest_json):
-    repository = ""
-    logo = _get_manifest_logo(manifest_json)
-    if 'Archive'.upper() in logo.upper():
+    """ Find Repository from Manifest Attribution """
+    attribution = ''
+    repository = 'SNITE'  # set default
+    attribution = _get_manifest_attribution(manifest_json)
+    if 'Archives'.upper() in attribution.upper():
         repository = 'UNDA'  # Primo expects Repository of UNDA for Archives
-    if 'RBSC'.upper() in logo.upper():
+    if 'Rare Books'.upper() in attribution.upper():
         repository = 'SPEC'  # Primo expects Repository of SPEC for RBSC
-    if 'Snite'.upper() in logo.upper():
-        repository = 'SNITE'
-    if repository == '':
+    if 'Snite'.upper() in attribution.upper():
         repository = 'SNITE'
     return repository
 
 
 def _get_library(manifest_info):
+    """ Determine value of PNX Library given repository """
     library = ""
     if manifest_info['repository'].upper() == 'UNDA'.upper():
         library = 'HESB'
@@ -76,26 +80,40 @@ def _get_library(manifest_info):
     return library
 
 
+def _get_library_collection_code(manifest_info):
+    """ Get Primo lsr01 Collection Code given repository """
+    library_collection_code = ""
+    if manifest_info['repository'].upper() == 'UNDA'.upper():
+        library_collection_code = 'UNDA ARCHV'
+    if manifest_info['repository'].upper() == 'SPEC'.upper():
+        library_collection_code = 'SPEC'
+    if manifest_info['repository'].upper() == 'Snite'.upper():
+        library_collection_code = 'SNITE'
+    if library_collection_code == "":
+        library_collection_code = 'SNITE'
+    return library_collection_code
+
+
 def _get_display_library(manifest_info):
+    """ Get human-readable library given repository """
     display_library = ""
-    if manifest_info['library'].upper() == 'UNDA'.upper():
+    if manifest_info['repository'].upper() == 'UNDA'.upper():
         display_library = 'University Archives'
-    if manifest_info['library'].upper() == 'SPEC'.upper():
+    if manifest_info['repository'].upper() == 'SPEC'.upper():
         display_library = 'Rare Books and Special Collections'
-    if manifest_info['library'].upper() == 'Snite'.upper():
+    if manifest_info['repository'].upper() == 'Snite'.upper():
         display_library = 'Snite Museum of Art'
     if display_library == "":
         display_library = 'Snite'
     return display_library
 
 
-def _get_manifest_logo(manifest_json):
-    """ Get Logo from Manifest JSON [metadata][Creator] """
-    logo = ""
-    if 'logo' in manifest_json:
-        if '@id' in manifest_json['logo']:
-            logo = manifest_json['logo']['@id']
-    return logo
+def _get_manifest_attribution(manifest_json):
+    """ Get Attribution from Manifest JSON [metadata][Creator] """
+    attribution = ""
+    if 'attribution' in manifest_json:
+        attribution = manifest_json['attribution']
+    return attribution
 
 
 def _get_manifest_title(manifest_json):
@@ -130,7 +148,7 @@ def _get_manifest_creator(manifest_json):
 
 
 def _get_manifest_description(manifest_json):
-    """ Get Description from Manifest JSON [metadata][Creator] """
+    """ Get Description from Manifest JSON [metadata][description] """
     description = ""
     if 'description' in manifest_json:
         description = manifest_json['description']
@@ -138,7 +156,7 @@ def _get_manifest_description(manifest_json):
 
 
 def _get_manifest_classification(manifest_json):
-    """ Get Classification from Manifest JSON [metadata][Creator] """
+    """ Get Classification from Manifest JSON [metadata][classification] """
     classification = ""
     if 'metadata' in manifest_json:
         for metadata_item in manifest_json['metadata']:
@@ -152,10 +170,12 @@ def _get_manifest_classification(manifest_json):
 
 
 def _build_item_manifest_url_given_id(id):
+    """ Build url for Item Manifest given id """
     return 'https://presentation-iiif.library.nd.edu/' + id + '/manifest'
 
 
 def _build_collection_manifest_url_given_id(id):
+    """ Build url for Collection Manifest given id """
     return 'https://presentation-iiif.library.nd.edu/collection/' + id
 
 
@@ -172,23 +192,10 @@ def get_manifest_given_url(manifest_url):
 
 
 def _read_s3_file_content(s3Bucket, s3Path):
+    """ Read contents of s3 file """
     content_object = boto3.resource('s3').Object(s3Bucket, s3Path)
     return content_object.get()['Body'].read().decode('utf-8')
 
-
-# def get_thumbnail_from_manifest(unique_id):
-#     """ Open manifest from URL given id.  Retrieve thumbnail from manifest."""
-#     thumbnail = ""
-#     # manifest_baseurl = 'https://d1v1nx8kcr1acm.cloudfront.net/'
-#     manifest_baseurl = 'https://presentation-iiif.library.nd.edu/'
-#     try:
-#         manifest_url = manifest_baseurl + unique_id + '/manifest/index.json'
-#         manifest = json.load(request.urlopen(manifest_url))
-#         thumbnail = manifest['thumbnail']['@id']
-#     except error.HTTPError:
-#         print('Unable to retrieve thumbnail from ' + manifest_url + ' by passing unique_id: ' + unique_id)
-#         pass  # If we get a url error, we can't get a thumbnail
-#     return thumbnail
 
 # test
 # python -c "from get_manifest_info import get_manifest_info;  get_manifest_info('abel-blanchard-correspondence')"

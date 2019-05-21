@@ -3,13 +3,10 @@
 
 
 import xml.etree.ElementTree as ET
-# from get_thumbnail_from_manifest import get_thumbnail_from_manifest
-# from write_pnx_file import write_pnx_file
 
 
 def create_new_index_record(json_input):
     """ Create PNX Index Record for Primo """
-    # print(json_input)
     # xmlns = "http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib"
     # sear = "http://www.exlibrisgroup.com/xsd/jaguar/search"
     root = ET.Element("records")
@@ -28,7 +25,6 @@ def create_new_index_record(json_input):
     root.append(record)
     # root.tail = '\n'  # make sure there is a new line character at the end
     tree = ET.ElementTree(root)
-    # print(tree)
     return tree
 
 
@@ -97,11 +93,6 @@ def _create_display_section(json_input):
     display.append(_create_xml_element('format', _get_media_and_display(json_input)))
     display.append(_create_xml_element('lds09', _get_json_value(json_input, 'classification').lower()))
     display.append(_create_xml_element('type', _get_json_value(json_input, 'classification').lower()))
-    # print(json_input)
-    # print('library = ', json_input['library'])
-    # print('repository = ', json_input['repository'])
-    # print('display_library = ', json_input['display_library'])
-    # print(json_input['display_library'] == "Snite Museum of Art", 'here')
     display.append(_create_xml_element('lds10', _get_json_value(json_input, 'display_library').title()))
     # display.append(_create_xml_element('creationdate', _get_json_value(json_input, 'displayDate')))
     # if 'keyword' in json_input:
@@ -147,7 +138,7 @@ def _create_search_section(json_input):
     #         if 'name' in exhibition_json:
     #             search.append(_create_xml_element(
     #                 'general', _get_exhibition(exhibition_json)))
-    search.append(_create_xml_element('lsr01', _get_json_value(json_input, 'repository').upper()))
+    search.append(_create_xml_element('lsr01', _get_json_value(json_input, 'library_collection_code').upper()))
     return search
 
 

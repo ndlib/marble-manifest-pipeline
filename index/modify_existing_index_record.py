@@ -20,6 +20,7 @@ def modify_existing_index_record(pnx_xml, json_input):
     """ Modifies PNX record for re-insertion for use by Mellon"""
     repository = json_input['repository']
     library = json_input['library']
+    library_collection_code = json_input['library_collection_code']
     display_library = json_input['display_library']
     # unique_identifier = json_input['id']
     thumbnail_url = ''
@@ -29,7 +30,7 @@ def modify_existing_index_record(pnx_xml, json_input):
     pnx_xml = _strip_dedup_section_from_pnx(pnx_xml)
     pnx_xml = _strip_frbr_section_from_pnx(pnx_xml)
     _add_repository_to_display(pnx_xml, display_library)
-    _add_repository_to_search(pnx_xml, repository)
+    _add_repository_to_search(pnx_xml, repository, library_collection_code)
     _add_repository_to_facet(pnx_xml, library)
     _add_thumbnail_to_links(pnx_xml, thumbnail_url)
     final_new_pnx_xml = _enclose_pnx_in_new_root_node(pnx_xml, json_input)
@@ -46,7 +47,7 @@ def _add_repository_to_display(pnx_xml, display_library):
     return
 
 
-def _add_repository_to_search(pnx_xml, repository):
+def _add_repository_to_search(pnx_xml, repository, library_collection_code):
     # search_section = ElementTree.Element("search")
     for search_section in pnx_xml.findall('search'):
         # remove existing nodes to be replaced
@@ -56,7 +57,7 @@ def _add_repository_to_search(pnx_xml, repository):
         #     search_section.remove(lsr01_node)
         # add new nodes
         search_section.append(_create_xml_element('scope', repository.upper()))
-        search_section.append(_create_xml_element('lsr01', repository.upper()))
+        search_section.append(_create_xml_element('lsr01', library_collection_code.upper()))
     return
 
 
