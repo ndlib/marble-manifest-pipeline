@@ -2,7 +2,8 @@
 """ test get_manifest_info """
 
 import unittest
-from get_manifest_info import append_manifest_info
+from get_manifest_info import append_manifest_info, _get_library, _get_library_collection_code, \
+    _get_display_library
 import json
 
 
@@ -24,6 +25,39 @@ class Test(unittest.TestCase):
         manifest_info = append_manifest_info('abc123xyz', {})
         manifest_found = manifest_info['manifest_found']
         self.assertFalse(manifest_found)
+
+    def test_get_library(self):
+        """ validate results of _get_library """
+        manifest_info = {'repository': 'UNDA'}
+        self.assertTrue(_get_library(manifest_info) == 'HESB')
+        manifest_info = {'repository': 'SPEC'}
+        self.assertTrue(_get_library(manifest_info) == 'HESB')
+        manifest_info = {'repository': 'snite'}
+        self.assertTrue(_get_library(manifest_info) == 'Snite')
+        manifest_info = {'repository': 'abc123'}
+        self.assertTrue(_get_library(manifest_info) == 'Snite')
+
+    def test_get_library_collection_code(self):
+        """ validate results of _get_library_collection_code """
+        manifest_info = {'repository': 'UNDA'}
+        self.assertTrue(_get_library_collection_code(manifest_info) == 'UNDA ARCHV')
+        manifest_info = {'repository': 'SPEC'}
+        self.assertTrue(_get_library_collection_code(manifest_info) == 'SPEC')
+        manifest_info = {'repository': 'snite'}
+        self.assertTrue(_get_library_collection_code(manifest_info) == 'SNITE')
+        manifest_info = {'repository': 'abc123'}
+        self.assertTrue(_get_library_collection_code(manifest_info) == 'SNITE')
+
+    def test_get_display_library(self):
+        """ validate results of _get_display_library """
+        manifest_info = {'repository': 'UNDA'}
+        self.assertTrue(_get_display_library(manifest_info) == 'University Archives')
+        manifest_info = {'repository': 'SPEC'}
+        self.assertTrue(_get_display_library(manifest_info) == 'Rare Books and Special Collections')
+        manifest_info = {'repository': 'snite'}
+        self.assertTrue(_get_display_library(manifest_info) == 'Snite Museum of Art')
+        manifest_info = {'repository': 'abc123'}
+        self.assertTrue(_get_display_library(manifest_info) == 'Snite')
 
 
 def suite():
