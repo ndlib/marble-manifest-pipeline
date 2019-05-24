@@ -55,56 +55,48 @@ def _harvest_important_manifest_info(manifest_json, manifest_info):
 def _get_manifest_repository(manifest_json):
     """ Find Repository from Manifest Attribution """
     attribution = ''
-    repository = 'SNITE'  # set default
-    attribution = _get_manifest_attribution(manifest_json)
-    if 'Archives'.upper() in attribution.upper():
+    attribution = _get_manifest_attribution(manifest_json).upper()
+    if 'Archives'.upper() in attribution:
         repository = 'UNDA'  # Primo expects Repository of UNDA for Archives
-    if 'Rare Books'.upper() in attribution.upper():
+    elif 'Rare Books'.upper() in attribution:
         repository = 'SPEC'  # Primo expects Repository of SPEC for RBSC
-    if 'Snite'.upper() in attribution.upper():
+    elif 'Snite'.upper() in attribution:
+        repository = 'SNITE'
+    else:
         repository = 'SNITE'
     return repository
 
 
 def _get_library(manifest_info):
     """ Determine value of PNX Library given repository """
-    library = ""
-    if manifest_info['repository'].upper() == 'UNDA'.upper():
-        library = 'HESB'
-    if manifest_info['repository'].upper() == 'SPEC'.upper():
-        library = 'HESB'
-    if manifest_info['repository'].upper() == 'Snite'.upper():
-        library = 'Snite'
-    if library == "":
-        library = 'Snite'
+    l_dictionary = {
+        'UNDA': 'HESB',
+        'SPEC': 'HESB',
+        'SNITE': 'Snite'
+    }
+    library = l_dictionary.get(manifest_info['repository'].upper(), 'Snite')
     return library
 
 
 def _get_library_collection_code(manifest_info):
     """ Get Primo lsr01 Collection Code given repository """
-    library_collection_code = ""
-    if manifest_info['repository'].upper() == 'UNDA'.upper():
-        library_collection_code = 'UNDA ARCHV'
-    if manifest_info['repository'].upper() == 'SPEC'.upper():
-        library_collection_code = 'SPEC'
-    if manifest_info['repository'].upper() == 'Snite'.upper():
-        library_collection_code = 'SNITE'
-    if library_collection_code == "":
-        library_collection_code = 'SNITE'
+    lcc_dictionary = {
+        'UNDA': 'UNDA ARCHV',
+        'SPEC': 'SPEC',
+        'SNITE': 'SNITE'
+    }
+    library_collection_code = lcc_dictionary.get(manifest_info['repository'].upper(), 'SNITE')
     return library_collection_code
 
 
 def _get_display_library(manifest_info):
     """ Get human-readable library given repository """
-    display_library = ""
-    if manifest_info['repository'].upper() == 'UNDA'.upper():
-        display_library = 'University Archives'
-    if manifest_info['repository'].upper() == 'SPEC'.upper():
-        display_library = 'Rare Books and Special Collections'
-    if manifest_info['repository'].upper() == 'Snite'.upper():
-        display_library = 'Snite Museum of Art'
-    if display_library == "":
-        display_library = 'Snite'
+    dl_dictionary = {
+        'UNDA': 'University Archives',
+        'SPEC': 'Rare Books and Special Collections',
+        'SNITE': 'Snite Museum of Art'
+    }
+    display_library = dl_dictionary.get(manifest_info['repository'].upper(), 'Snite')
     return display_library
 
 
