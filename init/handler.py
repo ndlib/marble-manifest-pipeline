@@ -1,9 +1,12 @@
 import os
 import boto3
+import json
 
 
 def run(event, context):
     event['config'] = get_config()
+    event['config']['event_id'] = event['id']
+    event['ecs-args'] = [json.dumps(event['config'])]
     return event
 
 
@@ -16,6 +19,7 @@ def get_config():
         "image-server-bucket-basepath": '',
         "manifest-server-bucket-basepath": '',
         "sequence-csv": 'sequence.csv',
+        "items-csv": 'items.csv',
         "main-csv": 'main.csv',
         "canvas-default-height": 2000,
         "canvas-default-width": 2000,
