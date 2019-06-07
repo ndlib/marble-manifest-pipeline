@@ -37,7 +37,7 @@ class iiifManifest(iiifItem):
         ret = []
         if 'items' in self.manifest_data:
             for item_data in self.manifest_data['items']:
-                ret.append(iiifCanvas(item_data['file'], item_data['label'], self.config).canvas())
+                ret.append(iiifCanvas(item_data, self.config).canvas())
         return ret
 
     def thumbnail(self):

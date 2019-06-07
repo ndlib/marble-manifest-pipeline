@@ -4,18 +4,21 @@ from iiifAnnotationPage import iiifAnnotationPage
 
 
 class iiifCanvas(iiifItem):
-    def __init__(self, id, label, config):
-        iiifItem.__init__(self, id, 'Canvas')
+    def __init__(self, item_data, config):
+        # item_data = {'file': '1982_072_001_a-v0001.jpg', 'label': '072_001_a-v0001', 'height': 1747, 'width': 3000}
+        iiifItem.__init__(self, item_data['file'], 'Canvas')
         self.config = config
-        self.label = label
+        self.label = item_data['label']
+        self.height = item_data['height']
+        self.width = item_data['width']
 
     def canvas(self):
         return {
             'id': self._canvas_id(),
             'type': self.type,
             'label': super().label_wrapper(self.label),
-            'height': self.config['canvas-default-height'],
-            'width': self.config['canvas-default-width'],
+            'height': self.height,
+            'width': self.width,
             'thumbnail': [
                 iiifImage(self.id, self.config).thumbnail()
             ],

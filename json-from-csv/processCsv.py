@@ -1,11 +1,12 @@
 import json
 import csv
+import os
 from io import StringIO
 
 
 class processCsv():
     # class constructor
-    def __init__(self, id, eventConfig, main_csv, items_csv):
+    def __init__(self, id, eventConfig, main_csv, items_csv, image_data):
         self.id = id
         self.error = []
         # start with an empty result json and config
@@ -13,6 +14,7 @@ class processCsv():
         self.config = eventConfig
         self.main_csv = main_csv
         self.items_csv = items_csv
+        self.image_data = image_data
         # population json info that is not csv-dependent
         self._set_json_skeleton()
         self.lang = "en"
@@ -87,7 +89,25 @@ class processCsv():
             this_item = {}
             this_item['file'] = this_line['Filenames']
             this_item['label'] = this_line['Label']
+            this_item['height'] = self._get_canvas_height(this_line['Filenames'])
+            this_item['width'] = self._get_canvas_width(this_line['Filenames'])
             self.result_json['items'].append(this_item)
+
+    def _get_canvas_height(self, filename):
+        # filename without extension
+        base_filename = os.path.splitext(filename)[0]
+        height = self.config['canvas-default-height']
+        if self.image_data.get(base_filename):
+            height = self.image_data.get(base_filename)['height']
+        return height
+
+    def _get_canvas_width(self, filename):
+        # filename without extension
+        base_filename = os.path.splitext(filename)[0]
+        width = self.config['canvas-default-width']
+        if self.image_data.get(base_filename):
+            width = self.image_data.get(base_filename)['width']
+        return width
 
     def _get_requiredstatement(self, this_line):
         rs = {}

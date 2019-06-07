@@ -13,12 +13,14 @@ def run(event, context):
     process_bucket = config['process-bucket']
     main_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config['main-csv']
     items_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config['items-csv']
+    image_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config["image-data-file"]
     event_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config["event-file"]
 
     main_csv = read_s3_file_content(process_bucket, main_key)
     items_csv = read_s3_file_content(process_bucket, items_key)
+    image_data = json.loads(read_s3_file_content(process_bucket, image_key))
 
-    csvSet = processCsv(id, config, main_csv, items_csv)
+    csvSet = processCsv(id, config, main_csv, items_csv, image_data)
 
     csvSet.buildJson()
 
@@ -55,3 +57,24 @@ def copy_default_img(id, config):
 def test():
     data = {"id": "2018_example_001"}
     print(run(data, {}))
+
+
+event = {
+    "id": "bitter",
+    "config": {
+        "process-bucket": 'manifest-devred-processbucket-k430pz5alyks',
+        "process-bucket-read-basepath": 'process',
+        "process-bucket-write-basepath": 'finished',
+        "process-bucket-index-basepath": 'index',
+        "image-server-bucket-basepath": '',
+        "manifest-server-bucket-basepath": '',
+        "items-csv": 'items.csv',
+        "main-csv": 'main.csv',
+        "canvas-default-height": 2000,
+        "canvas-default-width": 2000,
+        "image-data-file": "image_data.json",
+        "event-file": "event.json"
+    }
+}
+
+run(event, None)
