@@ -57,24 +57,3 @@ def copy_default_img(id, config):
 def test():
     data = {"id": "2018_example_001"}
     print(run(data, {}))
-
-
-event = {
-    "id": "bitter",
-    "config": {
-        "process-bucket": 'manifest-devred-processbucket-k430pz5alyks',
-        "process-bucket-read-basepath": 'process',
-        "process-bucket-write-basepath": 'finished',
-        "process-bucket-index-basepath": 'index',
-        "image-server-bucket-basepath": '',
-        "manifest-server-bucket-basepath": '',
-        "items-csv": 'items.csv',
-        "main-csv": 'main.csv',
-        "canvas-default-height": 2000,
-        "canvas-default-width": 2000,
-        "image-data-file": "image_data.json",
-        "event-file": "event.json"
-    }
-}
-
-run(event, None)
