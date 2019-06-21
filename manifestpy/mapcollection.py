@@ -1,7 +1,5 @@
 def mapManifestCollection(readfile, wtype):
-    import re
     import os
-    import json
     from mapmain import mapMainManifest
 
     path = os.path.dirname(os.path.abspath(__file__))
