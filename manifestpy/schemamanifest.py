@@ -1,5 +1,4 @@
 def main():
-    import re
     import os
     import json
     from manifestmap import mapManifestOfItems
@@ -10,7 +9,7 @@ def main():
     with open(rfile, 'r') as f:
         readfile = json.load(f)
         type = readfile['@type']
-    if  type == 'sc:Collection':
+    if type == 'sc:Collection':
         mapManifestCollection(readfile, 'CreativeWorkSeries')
     elif type == 'sc:Manifest':
         if readfile['sequences']:
@@ -19,6 +18,7 @@ def main():
             mapSingleItem(readfile, 'CreativeWork')
     else:
         print 'Unknown Manifest'
+
 
 if __name__ == '__main__':
     main()
