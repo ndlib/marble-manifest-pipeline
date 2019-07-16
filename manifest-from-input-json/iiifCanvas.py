@@ -16,7 +16,7 @@ class iiifCanvas(iiifItem):
         return {
             'id': self._canvas_id(),
             'type': self.type,
-            'label': super().label_wrapper(self.label),
+            'label': self.label,
             'height': self.height,
             'width': self.width,
             'thumbnail': [

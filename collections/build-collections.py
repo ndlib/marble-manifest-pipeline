@@ -5,7 +5,7 @@ import boto3
 
 
 def write_file(dict, path):
-    manifest_bucket = "mellon-manifest-prod-manifestbucket-1aed76g9eb0if"
+    manifest_bucket = "marble-manifest-prod-manifestbucket-lpnnaj4jaxl5"
     if not os.path.exists(os.path.dirname(path)):
         try:
             os.makedirs(os.path.dirname(path))
@@ -294,7 +294,7 @@ collections = {
     "ancient-time-period": {
         "id": "ancient-time-period",
         "manifest_ids": ['1983.053.002/manifest'],
-        "label": "Ancient",
+        "label": "0-5th Century",
         "description": "Artifacts from pre-historical or early first millenial time periods",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1983.053.002%2F1983_053_002-v0001.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
@@ -305,7 +305,7 @@ collections = {
     "medieval-time-period": {
         "id": "medieval-time-period",
         "manifest_ids": ['1934.007.001/manifest', 'collection/dante'],
-        "label": "Medieval",
+        "label": "5th Century-14th Century",
         "description": "Artifacts that originate in or depict aspects of the time period ranging from the 11th through 15th centuries",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1934.007.001%2F1934_007_001-v0001.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
@@ -316,7 +316,7 @@ collections = {
     "renaissance-time-period": {
         "id": "renaissance-time-period",
         "manifest_ids": ['collection/dante', '1999.024/manifest', 'nduspec_ead7s75db80w4r/manifest'],
-        "label": "Renaissance",
+        "label": "14th Century-18th Century",
         "description": "Artifacts dating roughly to the 14th through 16th centuries",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/ils-000949761%2FBOO_000949761_c2-000ba.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
