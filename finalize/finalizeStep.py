@@ -37,9 +37,6 @@ class finalizeStep():
             'Bucket': bucket,
             'Key': remote_file
         }
-        print(bucket)
-        print(copy_source)
-        print(default_image)
         boto3.resource('s3').Bucket(bucket).copy(copy_source, default_image)
 
     def movePyramids(self):
