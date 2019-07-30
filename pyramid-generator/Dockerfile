@@ -1,8 +1,8 @@
 FROM amazonlinux:2018.03.0.20180424
 
-# stuff we need to build our own libvips 
+# stuff we need to build our own libvips
 # this is a pretty minimal selection of dependencies
-# especially consider orc, the runtime compiler, it can give libvips a 
+# especially consider orc, the runtime compiler, it can give libvips a
 # good speedup on many operations
 RUN yum install -y \
   wget \
@@ -57,6 +57,7 @@ RUN cd /usr/local/src \
 RUN pip install boto3 pyvips
 
 COPY pyramid.py /usr/local/bin/
+RUN chmod u+x /usr/local/bin/pyramid.py
 ENTRYPOINT ["pyramid.py"]
 
 #WORKDIR /data
