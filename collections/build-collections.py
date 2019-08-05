@@ -18,7 +18,7 @@ def write_file(dict, path):
 
         s3 = boto3.resource('s3')
         print("writing:" + path)
-        s3.Object(manifest_bucket, path).put(Body=json.dumps(dict), ACL='public-read', ContentType='text/json')
+        #s3.Object(manifest_bucket, path).put(Body=json.dumps(dict), ACL='public-read', ContentType='text/json')
 
 
 def get_manifest(id):
@@ -30,45 +30,6 @@ found_manifests = {}
 
 manifest_baseurl = 'https://presentation-iiif.library.nd.edu/'
 
-# these are the top level collection manifests created.
-groups = [
-    {
-        "id": "website",
-        "label": "All Manifests",
-        "collections": [ "art-3", "le-rossignol", "art-1", "dante", "epistemological-letters", "theophilus", "art-2", "journals", "nd-life" ],
-        "description": "All the manifests!!",
-        "viewingHint": "multi-part",
-        "metadata": {},
-        "license": "https://creativecommons.org/licenses/by-nc/4.0/"
-    },
-    {
-        "id": "timeperiods",
-        "label": "By Time Period",
-        "collections": [ "ancient-time-period", "medieval-time-period", "renaissance-time-period","18thcentury-time-period","19thcentury-time-period", "20thcentury-time-period" ],
-        "description": "Items organized according to time period",
-        "viewingHint": "multi-part",
-        "metadata": {},
-        "license": "https://creativecommons.org/licenses/by-nc/4.0/"
-    },
-    {
-        "id": "places",
-        "label": "By Place",
-        "collections": [ "south-america", "north-america", "europe" ],
-        "description": "Items organized by geographic location",
-        "viewingHint": "multi-part",
-        "metadata": {},
-        "license": "https://creativecommons.org/licenses/by-nc/4.0/"
-    },
-    {
-        "id": "themes",
-        "label": "By Theme",
-        "collections": [ "religious", "notre-dame", "historical", "personal", "science" ],
-        "description": "Items organized according to theme",
-        "viewingHint": "multi-part",
-        "metadata": {},
-        "license": "https://creativecommons.org/licenses/by-nc/4.0/"
-    }
-]
 
 # create on collection manifest for each collection
 collections = {
@@ -356,22 +317,23 @@ collections = {
     },
 }
 
+
 # when i get the manifest for the item from the server copy these fields
-copyFields = ['@id', '@type', 'label', 'metadata', 'thumbnail', 'description', "license"]
+copyFields = ['id', 'type', 'label', 'metadata', 'thumbnail', 'summary', "rights"]
 
 for collection_id in collections:
     print("working on: " + collection_id)
     data = collections[collection_id]
     collection = {}
-    collection["@id"] = manifest_baseurl + 'collection/' + data["id"]
-    collection["@type"] = "sc:Collection"
+    collection["id"] = manifest_baseurl + 'collection/' + data["id"]
+    collection["type"] = "Collection"
     collection["label"] = data["label"]
-    collection["description"] = data["description"]
-    collection["thumbnail"] = { "@id": data["thumbnail"] + "/full/250,/0/default.jpg", "service": {"@id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "@context": "http://iiif.io/api/image/2/context.json" } }
+    collection["summary"] = data["description"]
+    collection["thumbnail"] = [{ "id": data["thumbnail"] + "/full/250,/0/default.jpg", "service": {"id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "context": "http://iiif.io/api/image/2/context.json" } }]
 
     collection["metadata"]=data["metadata"]
-    collection["license"]=data["license"]
-    collection["manifests"] = []
+    collection["rights"]=data["license"]
+    collection["items"] = []
 
     for id in data["manifest_ids"]:
         m = {}
@@ -382,52 +344,9 @@ for collection_id in collections:
             found_manifests[id] = r
 
         for key in copyFields:
-            m[key] = r[key]
+            m[key] = r.get(key, '')
 
-        collection["manifests"].append(m)
+        collection["items"].append(m)
 
         write_file(collection, 'collection/' + data["id"] + '/index.json')
         found_manifests["collection/" + data["id"]] = collection
-
-
-for group in groups:
-    manifest = {}
-    manifest["@context"] = "https://iiif.io/api/presentation/2/context.json"
-    manifest["@id"] = manifest_baseurl + 'collection/' + group["id"]
-    manifest["@type"] = "sc:Collection"
-    manifest["label"] = group["label"]
-    manifest["description"] = group["description"]
-    manifest["license"] = group["license"]
-    manifest["metadata"] = group["metadata"]
-    manifest["viewingHint"] = group["viewingHint"]
-    manifest["collections"] = []
-
-    for collection_id in group["collections"]:
-        data = collections[collection_id]
-        collection = {}
-        collection["@id"] = manifest_baseurl + 'collection/' + data["id"]
-        collection["@type"] = "sc:Collection"
-        collection["label"] = data["label"]
-        collection["description"] = data["description"]
-        collection["thumbnail"] = {"@id": data["thumbnail"] + "/full/250,/0/default.jpg", "service": {"@id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "@context": "http://iiif.io/api/image/2/context.json"}}
-
-        collection["metadata"] = data["metadata"]
-        collection["license"] = data["license"]
-        collection["manifests"] = []
-
-        for id in data["manifest_ids"]:
-            m = {}
-            if (found_manifests.get(id, False)):
-                r = found_manifests[id]
-            else:
-                r = get_manifest(id)
-                found_manifests[id] = r
-
-            for key in copyFields:
-                m[key] = r[key]
-
-            collection["manifests"].append(m)
-
-        manifest["collections"].append(collection)
-
-    write_file(manifest, 'collection/' + group["id"] + '/index.json')
