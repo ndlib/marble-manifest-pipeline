@@ -42,7 +42,7 @@ def fix_metadata(metadata):
 
 found_manifests = {}
 
-manifest_baseurl = 'https://manifest-pipeline-v3.libraries.nd.edu/'
+manifest_baseurl = 'https://presentation-iiif.library.nd.edu/'
 
 
 # create on collection manifest for each collection
@@ -327,21 +327,6 @@ collections = {
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/epistemological-letters-issue-2%2FMay19742ndIssue_Page_01.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "metadata": [
-        ]
-    },
-}
-
-# create on collection manifest for each collection
-collections = {
-    "epistemological-letters": {
-        "id": "epistemological-letters",
-        "manifest_ids": ['epistemological-letters-issue-1/manifest', 'epistemological-letters-issue-2/manifest', 'epistemological-letters-issue-3/manifest', 'epistemological-letters-issue-4/manifest', 'epistemological-letters-issue-5/manifest', 'epistemological-letters-issue-6/manifest', 'epistemological-letters-issue-7/manifest', 'epistemological-letters-issue-8/manifest'],
-        "label": "Epistemological Letters",
-        "description": "A written symposium on the topic of quantum physics edited by Abner Shimony and others published and distributed to a limited mailing list by Association Ferdinand Gonseth 1973-1984",
-        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/epistemological-letters-issue-2%2FMay19742ndIssue_Page_01.tif",
-        "license": "Digitized and distributed with permission of Association Ferdinand Gonseth, the first to publish Epistemological Letters. CC BY-NC-ND",
-        "metadata": [
-            {"label": "label", "value": "value"}
         ]
     },
 }
