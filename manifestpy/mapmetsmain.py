@@ -11,13 +11,14 @@ def mapMetsManifest(readfile, wtype):
         'provider': json.dumps(xmlData['dcterms:publisher']),
         'license': json.dumps(xmlData['dcterms:rights']),
         "description": json.dumps(xmlData['dcterms:provenance']),
-        "alternateName": json.dumps(xmlData['dcterms:accessRights']),
+        "conditionOfAccess": json.dumps(xmlData['dcterms:accessRights']),
         "identifier": json.dumps(xmlData['dcterms:identifier']),
         "creator": json.dumps(xmlData['dcterms:creator']),
         "temporalCoverage": json.dumps(xmlData['dcterms:created']),
         "inLanguage": json.dumps(xmlVRA['vracore:agentSet']['vracore:culture']),
         "material": json.dumps(xmlVRA['vracore:materialSet']['vracore:display'])
     }
+
     for k, v in mainOut.items():
         mainOut[k] = mainOut[k].strip('\"')
     if 'dcterms:subject' in xmlData.keys():
