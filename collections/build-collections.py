@@ -343,7 +343,7 @@ for collection_id in collections:
     collection["type"] = "Collection"
     collection["label"] = fix_language(data["label"])
     collection["summary"] = fix_language(data["description"])
-    collection["thumbnail"] = [{ "id": data["thumbnail"] + "/full/250,/0/default.jpg", "service": {"id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "context": "http://iiif.io/api/image/2/context.json" } }]
+    collection["thumbnail"] = [{ "id": data["thumbnail"] + "/full/250,/0/default.jpg", "service": [{"id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "type": "ImageService2" }] }]
 
     collection["metadata"]=fix_metadata(data["metadata"])
     collection["rights"]=data["license"]
