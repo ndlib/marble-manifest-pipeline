@@ -5,7 +5,7 @@ import boto3
 
 
 def write_file(dict, path):
-    manifest_bucket = "marble-manifest-prod-manifestbucket-lpnnaj4jaxl5"
+    manifest_bucket = "manifest-pipeline-v3-manifestbucket-1dxmq1ws0o3ah"
     if not os.path.exists(os.path.dirname(path)):
         try:
             os.makedirs(os.path.dirname(path))
@@ -18,7 +18,7 @@ def write_file(dict, path):
 
         s3 = boto3.resource('s3')
         print("writing:" + path)
-        #s3.Object(manifest_bucket, path).put(Body=json.dumps(dict), ACL='public-read', ContentType='text/json')
+        s3.Object(manifest_bucket, path).put(Body=json.dumps(dict), ACL='public-read', ContentType='text/json')
 
 
 def get_manifest(id):
@@ -26,9 +26,23 @@ def get_manifest(id):
     return json.load(urlopen(manifest_baseurl + id + '/index.json'))
 
 
+def fix_language(str):
+    return {
+        "en": str
+    }
+
+
+def fix_metadata(metadata):
+    new = []
+    for data in metadata:
+        new.append({"label": fix_language(data.get('label')), "value":  fix_language(data.get('value'))})
+    return new
+
+
+
 found_manifests = {}
 
-manifest_baseurl = 'https://presentation-iiif.library.nd.edu/'
+manifest_baseurl = 'https://manifest-pipeline-v3.libraries.nd.edu/'
 
 
 # create on collection manifest for each collection
@@ -317,6 +331,21 @@ collections = {
     },
 }
 
+# create on collection manifest for each collection
+collections = {
+    "epistemological-letters": {
+        "id": "epistemological-letters",
+        "manifest_ids": ['epistemological-letters-issue-1/manifest', 'epistemological-letters-issue-2/manifest', 'epistemological-letters-issue-3/manifest', 'epistemological-letters-issue-4/manifest', 'epistemological-letters-issue-5/manifest', 'epistemological-letters-issue-6/manifest', 'epistemological-letters-issue-7/manifest', 'epistemological-letters-issue-8/manifest'],
+        "label": "Epistemological Letters",
+        "description": "A written symposium on the topic of quantum physics edited by Abner Shimony and others published and distributed to a limited mailing list by Association Ferdinand Gonseth 1973-1984",
+        "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/epistemological-letters-issue-2%2FMay19742ndIssue_Page_01.tif",
+        "license": "Digitized and distributed with permission of Association Ferdinand Gonseth, the first to publish Epistemological Letters. CC BY-NC-ND",
+        "metadata": [
+            {"label": "label", "value": "value"}
+        ]
+    },
+}
+
 
 # when i get the manifest for the item from the server copy these fields
 copyFields = ['id', 'type', 'label', 'metadata', 'thumbnail', 'summary', "rights"]
@@ -327,11 +356,11 @@ for collection_id in collections:
     collection = {}
     collection["id"] = manifest_baseurl + 'collection/' + data["id"]
     collection["type"] = "Collection"
-    collection["label"] = data["label"]
-    collection["summary"] = data["description"]
+    collection["label"] = fix_language(data["label"])
+    collection["summary"] = fix_language(data["description"])
     collection["thumbnail"] = [{ "id": data["thumbnail"] + "/full/250,/0/default.jpg", "service": {"id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "context": "http://iiif.io/api/image/2/context.json" } }]
 
-    collection["metadata"]=data["metadata"]
+    collection["metadata"]=fix_metadata(data["metadata"])
     collection["rights"]=data["license"]
     collection["items"] = []
 
@@ -348,5 +377,5 @@ for collection_id in collections:
 
         collection["items"].append(m)
 
-        write_file(collection, 'collection/' + data["id"] + '/index.json')
-        found_manifests["collection/" + data["id"]] = collection
+    write_file(collection, 'collection/' + data["id"] + '/index.json')
+    found_manifests["collection/" + data["id"]] = collection
