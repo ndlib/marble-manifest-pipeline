@@ -5,7 +5,7 @@ import boto3
 
 
 def write_file(dict, path):
-    manifest_bucket = "mellon-manifest-prod-manifestbucket-1aed76g9eb0if"
+    manifest_bucket = "manifest-pipeline-v3-manifestbucket-1dxmq1ws0o3ah"
     if not os.path.exists(os.path.dirname(path)):
         try:
             os.makedirs(os.path.dirname(path))
@@ -26,49 +26,24 @@ def get_manifest(id):
     return json.load(urlopen(manifest_baseurl + id + '/index.json'))
 
 
+def fix_language(str):
+    return {
+        "en": str
+    }
+
+
+def fix_metadata(metadata):
+    new = []
+    for data in metadata:
+        new.append({"label": fix_language(data.get('label')), "value":  fix_language(data.get('value'))})
+    return new
+
+
+
 found_manifests = {}
 
 manifest_baseurl = 'https://presentation-iiif.library.nd.edu/'
 
-# these are the top level collection manifests created.
-groups = [
-    {
-        "id": "website",
-        "label": "All Manifests",
-        "collections": [ "art-3", "le-rossignol", "art-1", "dante", "epistemological-letters", "theophilus", "art-2", "journals", "nd-life" ],
-        "description": "All the manifests!!",
-        "viewingHint": "multi-part",
-        "metadata": {},
-        "license": "https://creativecommons.org/licenses/by-nc/4.0/"
-    },
-    {
-        "id": "timeperiods",
-        "label": "By Time Period",
-        "collections": [ "ancient-time-period", "medieval-time-period", "renaissance-time-period","18thcentury-time-period","19thcentury-time-period", "20thcentury-time-period" ],
-        "description": "Items organized according to time period",
-        "viewingHint": "multi-part",
-        "metadata": {},
-        "license": "https://creativecommons.org/licenses/by-nc/4.0/"
-    },
-    {
-        "id": "places",
-        "label": "By Place",
-        "collections": [ "south-america", "north-america", "europe" ],
-        "description": "Items organized by geographic location",
-        "viewingHint": "multi-part",
-        "metadata": {},
-        "license": "https://creativecommons.org/licenses/by-nc/4.0/"
-    },
-    {
-        "id": "themes",
-        "label": "By Theme",
-        "collections": [ "religious", "notre-dame", "historical", "personal", "science" ],
-        "description": "Items organized according to theme",
-        "viewingHint": "multi-part",
-        "metadata": {},
-        "license": "https://creativecommons.org/licenses/by-nc/4.0/"
-    }
-]
 
 # create on collection manifest for each collection
 collections = {
@@ -294,7 +269,7 @@ collections = {
     "ancient-time-period": {
         "id": "ancient-time-period",
         "manifest_ids": ['1983.053.002/manifest'],
-        "label": "Ancient",
+        "label": "0-5th Century",
         "description": "Artifacts from pre-historical or early first millenial time periods",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1983.053.002%2F1983_053_002-v0001.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
@@ -305,7 +280,7 @@ collections = {
     "medieval-time-period": {
         "id": "medieval-time-period",
         "manifest_ids": ['1934.007.001/manifest', 'collection/dante'],
-        "label": "Medieval",
+        "label": "5th Century-14th Century",
         "description": "Artifacts that originate in or depict aspects of the time period ranging from the 11th through 15th centuries",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/1934.007.001%2F1934_007_001-v0001.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
@@ -316,7 +291,7 @@ collections = {
     "renaissance-time-period": {
         "id": "renaissance-time-period",
         "manifest_ids": ['collection/dante', '1999.024/manifest', 'nduspec_ead7s75db80w4r/manifest'],
-        "label": "Renaissance",
+        "label": "14th Century-18th Century",
         "description": "Artifacts dating roughly to the 14th through 16th centuries",
         "thumbnail": "https://image-iiif.library.nd.edu:8182/iiif/2/ils-000949761%2FBOO_000949761_c2-000ba.tif",
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
@@ -356,22 +331,23 @@ collections = {
     },
 }
 
+
 # when i get the manifest for the item from the server copy these fields
-copyFields = ['@id', '@type', 'label', 'metadata', 'thumbnail', 'description', "license"]
+copyFields = ['id', 'type', 'label', 'metadata', 'thumbnail', 'summary', "rights"]
 
 for collection_id in collections:
     print("working on: " + collection_id)
     data = collections[collection_id]
     collection = {}
-    collection["@id"] = manifest_baseurl + 'collection/' + data["id"]
-    collection["@type"] = "sc:Collection"
-    collection["label"] = data["label"]
-    collection["description"] = data["description"]
-    collection["thumbnail"] = { "@id": data["thumbnail"] + "/full/250,/0/default.jpg", "service": {"@id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "@context": "http://iiif.io/api/image/2/context.json" } }
+    collection["id"] = manifest_baseurl + 'collection/' + data["id"]
+    collection["type"] = "Collection"
+    collection["label"] = fix_language(data["label"])
+    collection["summary"] = fix_language(data["description"])
+    collection["thumbnail"] = [{ "id": data["thumbnail"] + "/full/250,/0/default.jpg", "service": [{"id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "type": "ImageService2" }] }]
 
-    collection["metadata"]=data["metadata"]
-    collection["license"]=data["license"]
-    collection["manifests"] = []
+    collection["metadata"]=fix_metadata(data["metadata"])
+    collection["rights"]=data["license"]
+    collection["items"] = []
 
     for id in data["manifest_ids"]:
         m = {}
@@ -382,52 +358,9 @@ for collection_id in collections:
             found_manifests[id] = r
 
         for key in copyFields:
-            m[key] = r[key]
+            m[key] = r.get(key, '')
 
-        collection["manifests"].append(m)
+        collection["items"].append(m)
 
-        write_file(collection, 'collection/' + data["id"] + '/index.json')
-        found_manifests["collection/" + data["id"]] = collection
-
-
-for group in groups:
-    manifest = {}
-    manifest["@context"] = "https://iiif.io/api/presentation/2/context.json"
-    manifest["@id"] = manifest_baseurl + 'collection/' + group["id"]
-    manifest["@type"] = "sc:Collection"
-    manifest["label"] = group["label"]
-    manifest["description"] = group["description"]
-    manifest["license"] = group["license"]
-    manifest["metadata"] = group["metadata"]
-    manifest["viewingHint"] = group["viewingHint"]
-    manifest["collections"] = []
-
-    for collection_id in group["collections"]:
-        data = collections[collection_id]
-        collection = {}
-        collection["@id"] = manifest_baseurl + 'collection/' + data["id"]
-        collection["@type"] = "sc:Collection"
-        collection["label"] = data["label"]
-        collection["description"] = data["description"]
-        collection["thumbnail"] = {"@id": data["thumbnail"] + "/full/250,/0/default.jpg", "service": {"@id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "@context": "http://iiif.io/api/image/2/context.json"}}
-
-        collection["metadata"] = data["metadata"]
-        collection["license"] = data["license"]
-        collection["manifests"] = []
-
-        for id in data["manifest_ids"]:
-            m = {}
-            if (found_manifests.get(id, False)):
-                r = found_manifests[id]
-            else:
-                r = get_manifest(id)
-                found_manifests[id] = r
-
-            for key in copyFields:
-                m[key] = r[key]
-
-            collection["manifests"].append(m)
-
-        manifest["collections"].append(collection)
-
-    write_file(manifest, 'collection/' + group["id"] + '/index.json')
+    write_file(collection, 'collection/' + data["id"] + '/index.json')
+    found_manifests["collection/" + data["id"]] = collection

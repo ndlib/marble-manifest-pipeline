@@ -1,64 +1,185 @@
 {
-  "label": "Label",
-  "description": "Description",
-  "unique-identifier": "2018_example_001",
-  "license": "license info",
-  "attribution": "attribution",
-  "creator": "creator@email.com",
-  "viewingDirection": "left-to-right",
-  "thumbnail": "009_output.tif",
+  "id": "bitter",
   "config": {
-    "image-server-base-url": "https://image-server.library.nd.edu:8182/iiif/2",
-    "manifest-server-base-url": "https://manifest.nd.edu/",
-    "process-bucket": "manifestpipeline-dev-processbucket-1vtt3jhjtkg21",
     "process-bucket-read-basepath": "process",
     "process-bucket-write-basepath": "finished",
-    "image-server-bucket": "manifestpipeline-dev-processbucket-1vtt3jhjtkg21",
-    "image-server-bucket-basepath": "images",
-    "manifest-server-bucket": "manifestpipeline-dev-processbucket-1vtt3jhjtkg21",
-    "manifest-server-bucket-basepath": "manifest",
-    "notify-on-finished": "notify@email.com",
+    "process-bucket-index-basepath": "index",
+    "image-server-bucket-basepath": "",
+    "manifest-server-bucket-basepath": "",
+    "items-csv": "items.csv",
+    "main-csv": "main.csv",
     "canvas-default-height": 2000,
     "canvas-default-width": 2000,
-    "event-file": "event.json"
+    "event-file": "event.json",
+    "image-server-base-url": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2",
+    "image-server-bucket": "marble-data-broker-publicbucket-kebe5zkimvyg",
+    "manifest-server-base-url": "https://marble-manifest-test.libraries.nd.edu",
+    "manifest-server-bucket": "manifest-devred-manifestbucket-ciz2yfqyo91o",
+    "process-bucket": "manifest-devred-processbucket-n6xx9hveflcp",
+    "noreply-email-addr": "sample@domain",
+    "troubleshoot-email-addr": "sample@domain",
+    "index-marble": False,
+    "notify-on-finished": "sample@domain",
+    "default-img": "1982_072_001_a-v0001.jpg"
   },
-  "metadata": [{
-      "label": "Title",
-      "value": "Wunder der Vererbung"
-    },
-    {
-      "label": "Author(s)",
-      "value": "Bolle, Fritz"
-    },
-    {
-      "label": "Publication date",
-      "value": "[1951]"
-    },
-    {
-      "label": "Attribution",
-      "value": "Wellcome Library<br/>License: CC-BY-NC"
-    }
-  ],
-  "sequences": [{
-    "label": "sequency",
-    "viewingHint": "individuals",
-    "pages": [{
-        "label": "009",
-        "file": "009_output.tif"
+  "manifestData": {
+    "errors": [
+      
+    ],
+    "creator": "sample@domain",
+    "viewingDirection": "left-to-right",
+    "metadata": [
+      {
+        "label": {
+          "en": [
+            "Summary"
+          ]
+        },
+        "value": {
+          "en": [
+            "ANNUNCIATION (A PAIR OF PRELATE'S CUFFS)"
+          ]
+        }
       },
       {
-        "label": "046",
-        "file": "046_output.tif"
+        "label": {
+          "en": [
+            "Title"
+          ]
+        },
+        "value": {
+          "en": [
+            "ANNUNCIATION (A PAIR OF PRELATE'S CUFFS)"
+          ]
+        }
       },
       {
-        "label": "2018 009",
-        "file": "2018_009.jpg"
+        "label": {
+          "en": [
+            "Creator"
+          ]
+        },
+        "value": {
+          "en": [
+            "Italian"
+          ]
+        }
       },
       {
-        "label": "2018 049 004",
-        "file": "2018_049_004.jpg"
+        "label": {
+          "en": [
+            "Classification"
+          ]
+        },
+        "value": {
+          "en": [
+            "painting"
+          ]
+        }
+      },
+      {
+        "label": {
+          "en": [
+            "Media"
+          ]
+        },
+        "value": {
+          "en": [
+            "silk, metallic thread, mounted on leather"
+          ]
+        }
+      },
+      {
+        "label": {
+          "en": [
+            "Dimensions"
+          ]
+        },
+        "value": {
+          "en": [
+            "6 1/2 x 11 in. (16.51 x 27.94 cm)"
+          ]
+        }
+      },
+      {
+        "label": {
+          "en": [
+            "Accession Number"
+          ]
+        },
+        "value": {
+          "en": [
+            "1982.072.001.a"
+          ]
+        }
+      },
+      {
+        "label": {
+          "en": [
+            "Repository"
+          ]
+        },
+        "value": {
+          "en": [
+            "Snite"
+          ]
+        }
+      }
+    ],
+    "items": [
+      {
+        "file": "1982_072_001_a-v0001.jpg",
+        "label": "072_001_a-v0001"
+      },
+      {
+        "file": "1982_072_001_a-v0002.jpg",
+        "label": "072_001_a-v0002"
+      }
+    ],
+    "label": {
+      "en": [
+        "ANNUNCIATION (A PAIR OF PRELATE'S CUFFS)"
+      ]
+    },
+    "requiredStatement": {
+      "label": {
+        "en": [
+          "Attribution"
+        ]
+      },
+      "value": {
+        "en": [
+          "University of Notre Dame::Hesburgh Libraries::General"
+        ]
+      }
+    },
+    "rights": "<a href="http://rightsstatements.org/vocab/NoC-US/1.0/" target="_blank">No Copyright - United States</a>",
+    "unique-identifier": "1982.072.001.a",
+    "homepage": [
+      {
+        "id": "http://www.thegoods.com/book1.html",
+        "label": {
+          "en": [
+            "Curate - bitter"
+          ]
+        },
+        "type": "Text",
+        "format": "text/html"
+      }
+    ],
+    "seeAlso": [
+      {
+        "id": "http://www.someurl.com/library/catalog/book1.xml",
+        "type": "Dataset",
+        "format": "text/xml",
+        "profile": "https://example.org/profiles/bibliographic"
+      },
+      {
+        "id": "http://www.anotherurl.org/library/cata.log/mag1.xml",
+        "type": "Dataset",
+        "format": "text/xml",
+        "profile": "https://sample.org/profiles/biblio"
       }
     ]
-  }],
-  "errors": []
+  }
 }

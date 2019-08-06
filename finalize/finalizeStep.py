@@ -2,6 +2,7 @@ import json
 import os
 import boto3
 from botocore.errorfactory import ClientError
+from pathlib import Path
 
 
 class finalizeStep():
@@ -13,6 +14,7 @@ class finalizeStep():
 
     def run(self):
         if self.success():
+            self.copyDefaultImg()
             self.movePyramids()
             self.moveManifest()
             self.saveLastRun()
@@ -24,6 +26,18 @@ class finalizeStep():
             return False
 
         return True
+
+    # clones an established default image to an image named default.jpg
+    def copyDefaultImg(self):
+        print("make default image")
+        bucket = self.config['process-bucket']
+        remote_file = self.config['process-bucket-write-basepath'] + "/" + self.id + "/images/" + Path(self.config['default-img']).stem + ".tif"
+        default_image = self.config['process-bucket-write-basepath'] + "/" + self.id + "/images/default.tif"
+        copy_source = {
+            'Bucket': bucket,
+            'Key': remote_file
+        }
+        boto3.resource('s3').Bucket(bucket).copy(copy_source, default_image)
 
     def movePyramids(self):
         print("movePyramids")
