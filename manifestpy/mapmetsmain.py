@@ -2,33 +2,26 @@ import json
 
 
 def mapMetsManifest(readfile, wtype):
+    with open('schemamets.json') as json_file:
+        fieldmap = json.load(json_file)
+        print fieldmap
     xmlBase = readfile['mets:mets']['mets:dmdSec']
+    xmlData = {}
     for i in xmlBase:
         if i['@ID'] == 'DSC_01_SNITE':
-            xmlDC = i['mets:mdWrap']['mets:xmlData']
+            xmlData.update(i['mets:mdWrap']['mets:xmlData'])
         if i['@ID'] == 'DSC_02_SNITE':
-            xmlVRA = i['mets:mdWrap']['mets:xmlData']['vracore:work']
+            vraBase = i['mets:mdWrap']['mets:xmlData']['vracore:work']
+            xmlData.update(vraBase['vracore:materialSet'])
+            xmlData.update(vraBase['vracore:dateSet'])
+            xmlData.update(vraBase['vracore:measurementsSet'])
+
     mainOut = {
         '@context': 'http://schema.org',
         'type': wtype,
-        'name': json.dumps(xmlDC['dcterms:title']),
-        'provider': json.dumps(xmlDC['dcterms:publisher']),
-        'license': json.dumps(xmlDC['dcterms:rights']),
-        "description": json.dumps(xmlDC['dcterms:provenance']),
-        "alternateName": json.dumps(xmlDC['dcterms:accessRights']),
-        "identifier": json.dumps(xmlDC['dcterms:identifier']),
-        "creator": json.dumps(xmlDC['dcterms:creator']),
-        "temporalCoverage": json.dumps(xmlDC['dcterms:created']),
-        "material": json.dumps(xmlVRA['vracore:materialSet']['vracore:display'])
     }
-    for k, v in mainOut.items():
-        mainOut[k] = mainOut[k].strip('\"')
-    if 'dcterms:subject' in xmlDC.keys():
-        kw = json.dumps(xmlDC['dcterms:subject'])
-        kw = kw.replace('\"', '')
-        kw = kw.strip('[')
-        kw = kw.strip(']')
-        kw = kw.split(',')
-        mainOut["keywords"] = kw
+    for key, val in fieldmap.items():
+        if val in xmlData.keys():
+            mainOut[key] = json.dumps(xmlData[val]).replace('\"', '')
 
     return mainOut
