@@ -18,6 +18,7 @@ replacements = [
 
 os.mkdir('./fix')
 
+
 def _key_existing_size__head(client, bucket, key):
     """return the key's size if it exist, else None"""
     try:
