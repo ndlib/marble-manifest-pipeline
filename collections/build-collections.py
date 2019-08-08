@@ -5,7 +5,7 @@ import boto3
 
 
 def write_file(dict, path):
-    manifest_bucket = "manifest-pipeline-v3-manifestbucket-1dxmq1ws0o3ah"
+    manifest_bucket = "marble-manifest-prod-manifestbucket-lpnnaj4jaxl5"
     if not os.path.exists(os.path.dirname(path)):
         try:
             os.makedirs(os.path.dirname(path))
@@ -18,7 +18,7 @@ def write_file(dict, path):
 
         s3 = boto3.resource('s3')
         print("writing:" + path)
-        s3.Object(manifest_bucket, path).put(Body=json.dumps(dict), ACL='public-read', ContentType='text/json')
+        s3.Object(manifest_bucket, path).put(Body=json.dumps(dict), ContentType='text/json')
 
 
 def get_manifest(id):
@@ -41,7 +41,6 @@ def fix_metadata(metadata):
 
 
 found_manifests = {}
-
 manifest_baseurl = 'https://presentation-iiif.library.nd.edu/'
 
 

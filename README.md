@@ -81,7 +81,7 @@ would produce the following output:
 ```
 {
     "errors": [
-      
+
     ],
     "creator": "sample@domain",
     "viewingDirection": "left-to-right",
@@ -346,3 +346,16 @@ path to the mellon-blueprints repo
 ```bash
 ./local-deploy.sh manifest-pipeline-jon ../mellon-blueprints/
 ```
+
+## Use Build Collection manifests script
+
+1.  Make sure the script points to the bucket you wish to update by editing the file.
+2.  Ensure the basic collection data is in the file you want to use to generate collection
+3.  Assume the Marble Data Admin Role.
+4.  python build-collections.py
+
+
+## Use the 2.0 to 3.0 csv fix script.
+1. Make sure the bucket you want to update the 2 -> 3 script is correct in the file.
+2. Assume Marble Data Admin Role.
+3. python fix_csv_for_3.py
