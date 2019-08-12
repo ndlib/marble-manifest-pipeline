@@ -1,0 +1,18 @@
+{
+  "name" : "dcterms:title",
+  "creator" : "dcterms:creator",
+  "temporalCoverage" : "dcterms:created",
+  "description" : "dcterms:format",
+  "material" : "vracore:display",
+  "identifier" : "dcterms:identifier",
+  "provider" : "dcterms:publisher",
+  "keywords" : "dcterms:subject",
+  "copyrightHolder" : "dcterms:rights",
+  "license" : "dcterms:license",
+  "conditionOfAccess" : "dcterms:accessRights",
+  "materialExtent" : "dcterms:extent",
+  "sponsor" : "dcterms:provenance",
+  "disambiguatingDescription" : "dcterms:description",
+  "hasPart" : "vracore:relation",
+  "dateModified" : "vracore:latestDate"
+}
