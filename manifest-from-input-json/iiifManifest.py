@@ -1,27 +1,30 @@
 from iiifImage import iiifImage
-from iiifSequence import iiifSequence
+from iiifCanvas import iiifCanvas
+from iiifItem import iiifItem
 
 
-class iiifManifest():
+class iiifManifest(iiifItem):
     def __init__(self, id, event_config, manifest_data):
-        self.id = id
-        self.manifest_id = event_config['manifest-server-base-url'] + '/' + self.id + '/manifest'
+        iiifItem.__init__(self, id, 'Manifest')
+        event_config['event_id'] = id
         self.config = event_config
         self.manifest_data = manifest_data
 
     def manifest(self):
         manifest = {
-            '@context': 'http://iiif.io/api/presentation/2/context.json',
-            '@type': 'sc:Manifest',
-            '@id': self.manifest_id,
+            "@context": [
+                "http://www.w3.org/ns/anno.jsonld",
+                "http://iiif.io/api/presentation/3/context.json"
+            ],
+            'type': self.type,
+            'id': self._manifest_id(),
             'label': self.manifest_data['label'],
             'metadata': self.manifest_data['metadata'],
-            'description': self.manifest_data['description'],
-            'license': self.manifest_data['license'],
-            'attribution': self.manifest_data['attribution'],
+            'rights': self.manifest_data['rights'],
+            'requiredStatement': self.manifest_data['requiredStatement'],
             'viewingDirection': self.manifest_data['viewingDirection'],
             'thumbnail': self.thumbnail(),
-            'sequences': self.sequences()
+            'items': self._items()
         }
         # add optional data
         if 'homepage' in self.manifest_data:
@@ -30,17 +33,20 @@ class iiifManifest():
             manifest['seeAlso'] = self.manifest_data['seeAlso']
         return manifest
 
-    def sequences(self):
+    def _items(self):
         ret = []
-        if 'sequences' in self.manifest_data:
-            for sequence_data in self.manifest_data['sequences']:
-                ret.append(iiifSequence(self.id, self.config, sequence_data).sequence())
+        if 'items' in self.manifest_data:
+            for item_data in self.manifest_data['items']:
+                ret.append(iiifCanvas(item_data, self.config).canvas())
         return ret
 
     def thumbnail(self):
-        default_page = self.manifest_data['sequences'][0]['pages'][0]
-        for page in self.manifest_data['sequences'][0]['pages']:
-            if page['file'] == self.config['default-img']:
-                default_page = page.copy()
+        default_page = self.manifest_data['items'][0]
+        for item in self.manifest_data['items']:
+            if item['file'] == self.config['default-img']:
+                default_page = item.copy()
                 default_page['file'] = 'default'
-        return iiifImage(self.id, default_page['file'], default_page['label'], self.config).thumbnail()
+        return [iiifImage(default_page['file'], self.config).thumbnail()]
+
+    def _manifest_id(self):
+        return self.config['manifest-server-base-url'] + '/' + self.id + '/manifest'

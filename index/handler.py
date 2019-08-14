@@ -10,7 +10,7 @@ from index_manifest import index_manifest
 def run(event, context):
     config = event.get("config")
     config["local-dir"] = "/tmp/index/"
-    index_manifest(event.get("id"), config)
+    #index_manifest(event.get("id"), config)
     # still need to write to S3 bucket and copy to Aleph server
     return event
 
