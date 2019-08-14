@@ -25,10 +25,10 @@ def mapManifestOfItems(readfile, wtype):
             "url": thischild['@id'],
             "thumbnailURL": thischild['thumbnail']['@id']
         }
-        writesub.write(json.dump(subOut))
+        writesub.write(json.dumps(subOut))
         writesub.close()
         j += 1
     mainOut.update({"hasPart": hasPart})
-    writemain.write(json.dump(mainOut))
+    writemain.write(json.dumps(mainOut))
     writemain.close()
     return

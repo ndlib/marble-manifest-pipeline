@@ -8,6 +8,6 @@ def mapSingleItem(readfile, wtype):
     writemain = open(wfile, 'w+')
     mainOut = mapMainManifest(readfile, wtype)
 
-    writemain.write(json.dump(mainOut))
+    writemain.write(json.dumps(mainOut))
     writemain.close()
     return
