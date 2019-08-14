@@ -4,7 +4,7 @@ import json
 def mapMetsManifest(readfile, wtype):
     with open('schemamets.json') as json_file:
         fieldmap = json.load(json_file)
-        print fieldmap
+
     xmlBase = readfile['mets:mets']['mets:dmdSec']
     xmlData = {}
     for i in xmlBase:

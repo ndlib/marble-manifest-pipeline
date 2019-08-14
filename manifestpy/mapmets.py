@@ -3,6 +3,7 @@ def main():
     import xmltodict
     import json
     from mapmetsmain import mapMetsManifest
+
     path = os.path.dirname(os.path.abspath(__file__))
     rfile = os.path.join(path, '1957.058.xml')
     with open(rfile, 'r') as f:

@@ -8,11 +8,11 @@ def main():
     rfile = os.path.join(path, 'manifest.json')
     with open(rfile, 'r') as f:
         readfile = json.load(f)
-        type = readfile['@type']
-    if type == 'sc:Collection':
+        type = readfile['type']
+    if type == 'Collection':
         mapManifestCollection(readfile, 'CreativeWorkSeries')
-    elif type == 'sc:Manifest':
-        if readfile['sequences']:
+    elif type == 'Manifest':
+        if 'sequences' in readfile.keys():
             mapManifestOfItems(readfile, 'CreativeWork')
         else:
             mapSingleItem(readfile, 'CreativeWork')
