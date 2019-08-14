@@ -9,7 +9,6 @@ def mapMainManifest(readfile, wtype):
         "@type": wtype,
     }
     for key, val in fieldmap.items():
-        print key, val
         if key in readfile.keys():
             mainOut.update({val: readfile[key]})
         elif readfile['metadata']:
