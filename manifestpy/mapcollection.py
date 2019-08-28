@@ -19,10 +19,10 @@ def mapManifestCollection(readfile, wtype):
         writesub = open(subfile, 'w+')
         subOut = mapMainManifest(thischild, 'CreativeWork')
         subOut.update({"isPartOf": wfile})
-        writesub.write(json.dump(subOut))
+        writesub.write(json.dumps(subOut))
         writesub.close()
         j += 1
     mainOut.update({"hasPart": hasPart})
-    writemain.write(json.dump(mainOut))
+    writemain.write(json.dumps(mainOut))
     writemain.close()
-    return
+    return mainOut
