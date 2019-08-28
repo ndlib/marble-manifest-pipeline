@@ -1,0 +1,18 @@
+{
+  'type': 'Manifest',
+  'label': 'Test',
+  'author': 'Unknown',
+  'identifier': 'abc-123',
+  'manifests': [{
+  }],
+  'sequences': [{
+    'canvases': [{
+      'label': 'cvsNameTest',
+      '@id': 'http://cvstesturl.com',
+      'thumbnail': {
+        'label': 'thumbTest',
+        '@id': 'http://thumbtesturl.com'
+      }
+    }]
+}]
+}

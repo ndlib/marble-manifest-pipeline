@@ -34,5 +34,4 @@ def mapMainManifest(readfile, wtype):
                         error.append(str(key) + ' has no value assigned \n')
                 i += 1
     writeerror.write(''.join(error))
-    print mainOut
     return mainOut
