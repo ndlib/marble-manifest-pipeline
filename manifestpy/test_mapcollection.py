@@ -6,14 +6,15 @@ from mapcollection import mapManifestCollection
 
 class testMapMain(unittest.TestCase):
     def test(self):
+        self.parent_id = 'parent_id'
         path = os.path.dirname(os.path.abspath(__file__))
         opchild = os.path.join(path, 'outputchild0.json')
-        with open("test_data.json", 'r') as input_source:
-            test_readfile = json.load(input_source)
+        with open("../example/example-input.json", 'r') as input_source:
+            self.example_data = json.load(input_source)
         input_source.close()
-        test_should_be = {'@context': 'http://schema.org', '@type': 'CreativeWork', u'name': 'Test', u'creator': 'Unknown', u'identifier': 'abc-123', u'hasPart': [str(opchild)]}
-        self.assertEqual(mapManifestCollection(test_readfile, 'CreativeWork'), test_should_be)
-        self.assertNotEqual(mapManifestCollection(test_readfile, 'CreativeWorkSeries'), test_should_be)
+        test_should_be = {'@context': 'http://schema.org', '@type': 'CreativeWork', u'hasPart': [str(opchild)], u'url': 'bitter'}
+        self.assertEqual(mapManifestCollection(self.example_data, 'CreativeWork'), test_should_be)
+        self.assertNotEqual(mapManifestCollection(self.example_data, 'CreativeWorkSeries'), test_should_be)
 
 
 if __name__ == '__main__':

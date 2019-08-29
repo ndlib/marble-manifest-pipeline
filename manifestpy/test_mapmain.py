@@ -5,10 +5,10 @@ from mapmain import mapMainManifest
 
 class testMapMain(unittest.TestCase):
     def test(self):
-        with open("test_data.json", 'r') as input_source:
+        with open("../example/example-input.json", 'r') as input_source:
             test_readfile = json.load(input_source)
         input_source.close()
-        test_should_be = {'@context': 'http://schema.org', '@type': 'CreativeWork', u'name': 'Test', u'creator': 'Unknown', u'identifier': 'abc-123'}
+        test_should_be = {'@context': 'http://schema.org', '@type': 'CreativeWork', u'url': 'bitter'}
         self.assertEqual(mapMainManifest(test_readfile, 'CreativeWork'), test_should_be)
         self.assertNotEqual(mapMainManifest(test_readfile, 'CreativeWorkSeries'), test_should_be)
 
