@@ -10,4 +10,4 @@ def mapSingleItem(readfile, wtype):
 
     writemain.write(json.dumps(mainOut))
     writemain.close()
-    return
+    return mainOut

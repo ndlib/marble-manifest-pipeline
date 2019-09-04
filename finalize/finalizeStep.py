@@ -17,6 +17,7 @@ class finalizeStep():
             self.copyDefaultImg()
             self.movePyramids()
             self.moveManifest()
+            self.moceSchema()
             self.saveLastRun()
             self.saveIndexMetadata()
         self.notify()
@@ -71,6 +72,22 @@ class finalizeStep():
 
         other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
             + self.id + "/manifest/index.json"
+        bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
+
+        return
+
+    def moveSchema(self):
+        s3 = boto3.resource('s3')
+        copy_source = {
+            'Bucket': self.config["process-bucket"],
+            'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/schema/index.json"
+        }
+
+        bucket = s3.Bucket(self.config["manifest-server-bucket"])
+        print(copy_source)
+
+        other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
+            + self.id + "/schema/index.json"
         bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
 
         return
