@@ -14,10 +14,12 @@ def run(event, context):
     content_object = boto3.resource('s3').Object(s3Bucket, s3EventPath)
     file_content = content_object.get()['Body'].read()
     readfile = json.loads(file_content).get('data')
-    if readfile['type'].exists():
-        type = readfile['type']
-    else:
+    try:
+        readfile['type']
+    except KeyError:
         type = 'manifest'
+    else:
+        type = readfile['type']
     if type.lower() == 'collection':
         mapManifestCollection(readfile, 'CreativeWorkSeries', s3EventPath, s3Bucket)
     elif type.lower() == 'manifest':
