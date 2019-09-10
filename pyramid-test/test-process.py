@@ -162,6 +162,4 @@ f.write('''  ]
 }''')
 f.close()
 
-
-
 print items
