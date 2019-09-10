@@ -30,6 +30,6 @@ fi
 
 aws cloudformation deploy --template-file output.yml --stack-name $stackname \
   --capabilities CAPABILITY_NAMED_IAM \
-  --parameter-overrides AppConfigPath="/all/$stackname"
+  --parameter-overrides AppConfigPath="/all/$stackname" ContainerImageUrl="333680067100.dkr.ecr.us-east-1.amazonaws.com/marbl-image-1cs1q74l7njir:latest"
 
 rm -rf output.yml
