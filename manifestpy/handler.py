@@ -21,16 +21,16 @@ def run(event, context):
     else:
         type = readfile['type']
     if type.lower() == 'collection':
-        mapManifestCollection(readfile, 'CreativeWorkSeries', s3EventPath, s3Bucket)
+        mainOut = mapManifestCollection(readfile, 'CreativeWorkSeries')
     elif type.lower() == 'manifest':
-        mapManifestCollection(readfile, 'CreativeWork', s3EventPath, s3Bucket)
+        mainOut = mapManifestCollection(readfile, 'CreativeWork')
     else:
         print("Unknown Manifest")
         return {
             'statusCode': 415
         }
     readfile.update({"seeAlso": s3SchemaPath})
-    s3.Object(s3Bucket, s3SchemaPath).put(Body=json.dumps(readfile), ContentType='text/json')
+    s3.Object(s3Bucket, s3SchemaPath).put(Body=json.dumps(mainOut), ContentType='text/json')
     return {
         'statusCode': 200
     }
