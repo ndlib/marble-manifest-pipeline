@@ -14,7 +14,6 @@ def run(event, context):
     content_object = boto3.resource('s3').Object(s3Bucket, s3EventPath)
     file_content = content_object.get()['Body'].read()
     readfile = json.loads(file_content).get('data')
-    print readfile
     if readfile['type'].exists():
         type = readfile['type']
     else:
