@@ -17,7 +17,7 @@ class finalizeStep():
             self.copyDefaultImg()
             self.movePyramids()
             self.moveManifest()
-            self.moceSchema()
+            self.moveSchema()
             self.saveLastRun()
             self.saveIndexMetadata()
         self.notify()
