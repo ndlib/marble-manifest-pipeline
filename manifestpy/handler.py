@@ -8,25 +8,23 @@ def run(event, context):
     id = event.get('id')
     config = event.get('config')
     s3Bucket = config['process-bucket']
+    s3EventPath = os.path.join(config['process-bucket-read-basepath'], id, config["event-file"])
     s3SchemaPath = os.path.join(config['process-bucket-write-basepath'], id, 'schema/index.json')
-    s3 = boto3.client('s3')
-    bucket_name = event['config']['manifest-server-bucket']
-    file_key = event['config']['event-file']
-    rfile = s3.get_object(Bucket=bucket_name, Key=file_key)
-    file_folder = file_key.split('.', 1)[0]
-    also_location = bucket_name+'.s3.amazonaws.com/finished/'+file_folder
-    readfile = json.load(rfile['Body'])
+    s3 = boto3.resource('s3')
+    content_object = boto3.resource('s3').Object(s3Bucket, s3EventPath)
+    file_content = content_object.get()['Body'].read()
+    readfile = json.loads(file_content).get('data')
     type = readfile['type']
     if type.lower() == 'collection':
-        mapManifestCollection(readfile, 'CreativeWorkSeries', file_folder, bucket_name)
+        mapManifestCollection(readfile, 'CreativeWorkSeries', s3EventPath, s3Bucket)
     elif type.lower() == 'manifest':
-        mapManifestCollection(readfile, 'CreativeWork', file_folder, bucket_name)
+        mapManifestCollection(readfile, 'CreativeWork', s3EventPath, s3Bucket)
     else:
         print("Unknown Manifest")
         return {
             'statusCode': 415
         }
-    readfile.update({"seeAlso": also_location})
+    readfile.update({"seeAlso": s3SchemaPath})
     s3.Object(s3Bucket, s3SchemaPath).put(Body=json.dumps(readfile), ContentType='text/json')
     return {
         'statusCode': 200
