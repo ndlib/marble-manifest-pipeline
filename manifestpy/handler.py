@@ -10,10 +10,12 @@ def run(event, context):
     s3Bucket = config['process-bucket']
     s3EventPath = os.path.join(config['process-bucket-read-basepath'], id, config["event-file"])
     s3SchemaPath = os.path.join(config['process-bucket-write-basepath'], id, 'schema/index.json')
+    s3ManifestPath = os.path.join(config['process-bucket-write-basepath'], id, 'manifest/index.json')
     s3 = boto3.resource('s3')
     content_object = boto3.resource('s3').Object(s3Bucket, s3EventPath)
     file_content = content_object.get()['Body'].read()
     readfile = json.loads(file_content).get('data')
+
     try:
         readfile['type']
     except KeyError:
@@ -29,11 +31,11 @@ def run(event, context):
         return {
             'statusCode': 415
         }
-    readfile.update({"seeAlso": s3SchemaPath})
+    writefile = {"seeAlso": s3EventPath}
+    s3.Object(s3Bucket, s3ManifestPath).put(Body=json.dumps(writefile), ContentType='text/json')
     s3.Object(s3Bucket, s3SchemaPath).put(Body=json.dumps(mainOut), ContentType='text/json')
-    return {
-        'statusCode': 200
-    }
+
+    return event
 
 
 def test():
