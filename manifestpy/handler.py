@@ -1,7 +1,7 @@
 import os
 import json
 import boto3
-from mapcollection import mapManifestCollection
+from mapmain import mapMainManifest
 
 
 def run(event, context):
@@ -21,9 +21,9 @@ def run(event, context):
     else:
         type = readfile['type']
     if type.lower() == 'collection':
-        mainOut = mapManifestCollection(readfile, 'CreativeWorkSeries')
+        mainOut = mapMainManifest(readfile, 'CreativeWorkSeries')
     elif type.lower() == 'manifest':
-        mainOut = mapManifestCollection(readfile, 'CreativeWork')
+        mainOut = mapMainManifest(readfile, 'CreativeWork')
     else:
         print("Unknown Manifest")
         return {
