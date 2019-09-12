@@ -31,7 +31,12 @@ def run(event, context):
         return {
             'statusCode': 415
         }
-    writefile = {"seeAlso": s3EventPath}
+
+    manifest_object = boto3.resource('s3').Object(s3Bucket, s3EventPath)
+    manifest_content = manifest_object.get()['Body'].read()
+    writefile = json.loads(manifest_content).get('data')
+    seeAlso = {"seeAlso": s3SchemaPath}
+    writefile.update(seeAlso)
     s3.Object(s3Bucket, s3ManifestPath).put(Body=json.dumps(writefile), ContentType='text/json')
     s3.Object(s3Bucket, s3SchemaPath).put(Body=json.dumps(mainOut), ContentType='text/json')
 
