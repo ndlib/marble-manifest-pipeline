@@ -5,27 +5,39 @@ from iiifManifest import iiifManifest
 
 class TestProcessCsv(unittest.TestCase):
     def setUp(self):
-        with open("../example/item-one-image/config.json", 'r') as input_source:
-            config = json.load(input_source)
-        input_source.close()
-
-        with open("../example/item-one-image/event.json", 'r') as input_source:
-            event_data = json.load(input_source)
-        input_source.close()
-
-        self.iiifManifest = iiifManifest(config, event_data)
+        self.ids = [
+            'item-one-image',
+            'item-multiple-images'
+        ]
         pass
 
     def test_buildJson(self):
-        with open('../example/item-one-image/manifest.json') as json_data:
-            # The Ordered Dict hook preserves the pair ordering in the file for comparison
-            manifest_json = json.load(json_data)
-            json_data.close()
+        for id in self.ids:
+            print(id)
+            data = self.load_data_for_test(id)
 
-        manifest_json = "".join(json.dumps(manifest_json, sort_keys=True).split())
-        result_json = "".join(json.dumps(self.iiifManifest.manifest(), sort_keys=True).split())
-        self.assertEqual(result_json, manifest_json)
+            self.iiifManifest = iiifManifest(data['config'], data['event_data'])
+            manifest_json = "".join(json.dumps(data['manifest_json'], sort_keys=True).split())
+            result_json = "".join(json.dumps(self.iiifManifest.manifest(), sort_keys=True).split())
 
+            self.assertEqual(result_json, manifest_json)
+
+    def load_data_for_test(self, id):
+        data = {}
+
+        with open("../example/{}/config.json".format(id), 'r') as input_source:
+            data['config'] = json.load(input_source)
+        input_source.close()
+
+        with open("../example/{}/event.json".format(id), 'r') as input_source:
+            data['event_data'] = json.load(input_source)
+        input_source.close()
+
+        with open('../example/{}/manifest.json'.format(id), 'r') as json_data:
+            data['manifest_json'] = json.load(json_data)
+        json_data.close()
+
+        return data
 
 if __name__ == '__main__':
     unittest.main()

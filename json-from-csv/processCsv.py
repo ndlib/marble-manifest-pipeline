@@ -124,9 +124,7 @@ class processCsv():
         return rs
 
     def _get_thumbnail(self):
-        print(self.result_json['items'])
         if self.result_json['items']:
-            print("yup")
             self.result_json['thumbnail'] = self.result_json['items'][0]['file']
 
     def _label_wrapper(self, line):
