@@ -18,13 +18,11 @@
     "process-bucket": "manifest-devred-processbucket-n6xx9hveflcp",
     "noreply-email-addr": "sample@domain",
     "troubleshoot-email-addr": "sample@domain",
-    "index-marble": False,
     "notify-on-finished": "sample@domain",
     "default-img": "1982_072_001_a-v0001.jpg"
   },
   "manifestData": {
     "errors": [
-      
     ],
     "creator": "sample@domain",
     "viewingDirection": "left-to-right",
@@ -153,7 +151,7 @@
         ]
       }
     },
-    "rights": "<a href="http://rightsstatements.org/vocab/NoC-US/1.0/" target="_blank">No Copyright - United States</a>",
+    "rights": "<a href='http://rightsstatements.org/vocab/NoC-US/1.0/' target='_blank'>No Copyright - United States</a>",
     "unique-identifier": "1982.072.001.a",
     "homepage": [
       {
@@ -181,5 +179,17 @@
         "profile": "https://sample.org/profiles/biblio"
       }
     ]
-  }
+  },
+  "sequences": [{
+    "canvases": [{
+      "label": "cvsNameTest",
+      "@id": "http://cvstesturl.com",
+      "thumbnail": {
+        "label": "thumbTest",
+        "@id": "http://thumbtesturl.com"
+      }
+    }]
+  }],
+  "manifests": [{
+  }]
 }

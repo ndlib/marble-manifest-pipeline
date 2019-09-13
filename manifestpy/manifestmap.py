@@ -31,4 +31,4 @@ def mapManifestOfItems(readfile, wtype):
     mainOut.update({"hasPart": hasPart})
     writemain.write(json.dumps(mainOut))
     writemain.close()
-    return
+    return mainOut
