@@ -1,0 +1,72 @@
+{
+  "data": {
+    "version": "1.0",
+    "source-system": "",    
+    "creator": "creator@email.com",
+    "unique-itentifier": "",
+    "language": "en",
+    "label": "",
+    "manifest-type": "",
+    "material-type": "",
+    "summary": "",
+    "provider": [""],
+    "rights": "",
+    "requiredStatement": [
+      {
+        "label": "",
+        "value": ""
+      },
+      {
+        "label": "",
+        "value": ""
+      }
+    ],
+    "metadata": [
+      {
+        "label": "",
+        "value": ""
+      },
+      {
+        "label": "",
+        "value": ""
+      },
+    ],
+    "seeAlso": [
+
+    ],
+    "items": [
+      {
+        "manifest-type": "",
+        "label": "",
+        "image": ""
+      },
+      {
+        "manifest-type": "",
+        "label": "",
+        "image": ""
+      },
+      {
+        "manifest-type": "",
+        "label": "",
+        "image": ""
+      }
+    ],
+    "images": {
+      "fileID": {
+        "path": "",
+        "height": "",
+        "width": ""
+      },
+      "fileID": {
+        "path": "",
+        "height": "",
+        "width": ""
+      },
+      "fileID": {
+        "path": "",
+        "height": "",
+        "width": ""
+      }
+    }
+  }
+}

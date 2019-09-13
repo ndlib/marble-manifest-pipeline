@@ -22,14 +22,16 @@ class processCsv():
     # set up framework of an empty results_json
     def _set_json_skeleton(self):
         self.result_json['errors'] = []
+        self.result_json['errors'] = []
         self.result_json['creator'] = 'creator@email.com'
         self.result_json['viewingDirection'] = 'left-to-right'
+        self.result_json['language'] = 'en'
         self.result_json['metadata'] = []
         self.result_json['items'] = []
 
     # process first data row of main CSV
     def _get_attr_from_main_firstline(self, first_line):
-        self.result_json['label'] = self._lang_wrapper(first_line['Label'])
+        self.result_json['label'] = first_line['Label']
         self.result_json['requiredStatement'] = self._get_requiredstatement(first_line['Attribution'])
         self.result_json['rights'] = first_line['Rights']
         self.result_json['unique-identifier'] = first_line['unique_identifier']
@@ -47,8 +49,8 @@ class processCsv():
     def _get_metadata_attr(self, this_line):
         if this_line['Metadata_label'] and this_line['Metadata_value']:
             this_item = {}
-            this_item.update(self._label_wrapper(this_line['Metadata_label']))
-            this_item.update(self._value_wrapper(this_line['Metadata_value']))
+            this_item.update(this_line['Metadata_label'])
+            this_item.update(this_line['Metadata_value'])
             self.result_json['metadata'].append(this_item)
 
     # process alternate columns from the main CSV
@@ -91,6 +93,8 @@ class processCsv():
             this_item['label'] = this_line['Label']
             this_item['height'] = self._get_canvas_height(this_line['Filenames'])
             this_item['width'] = self._get_canvas_width(this_line['Filenames'])
+            this_item['manifest-type'] = 'image'
+
             self.result_json['items'].append(this_item)
 
     def _get_canvas_height(self, filename):
@@ -121,14 +125,11 @@ class processCsv():
         summary.update(self._value_wrapper(this_line))
         self.result_json['metadata'].append(summary)
 
-    def _lang_wrapper(self, line):
-        return {self.lang: [line]}
-
     def _label_wrapper(self, line):
-        return {"label": self._lang_wrapper(line)}
+        return {"label": line}
 
     def _value_wrapper(self, line):
-        return {"value": self._lang_wrapper(line)}
+        return {"value": line}
 
     # print out our constructed json
     def dumpJson(self):

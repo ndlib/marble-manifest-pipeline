@@ -8,25 +8,24 @@ from processCsv import processCsv
 
 def run(event, context):
     id = event.get("id")
-    config = event.get("config")
 
-    process_bucket = config['process-bucket']
-    main_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config['main-csv']
-    items_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config['items-csv']
-    image_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config["image-data-file"]
-    event_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config["event-file"]
+    process_bucket = event['process-bucket']
+    main_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event['main-csv']
+    items_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event['items-csv']
+    image_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event["image-data-file"]
+    event_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event["event-file"]
 
     main_csv = read_s3_file_content(process_bucket, main_key)
     items_csv = read_s3_file_content(process_bucket, items_key)
     image_data = json.loads(read_s3_file_content(process_bucket, image_key))
 
-    csvSet = processCsv(id, config, main_csv, items_csv, image_data)
+    csvSet = processCsv(id, event, main_csv, items_csv, image_data)
 
     csvSet.buildJson()
 
     write_s3_json(process_bucket, event_key, {"data": csvSet.result_json})
 
-    event['config'] = config
+    event['event'] = event
     return event
 
 
