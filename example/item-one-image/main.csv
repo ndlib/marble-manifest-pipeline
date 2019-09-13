@@ -1,0 +1,4 @@
+Label,Summary,Rights,Attribution,unique_identifier,Notify,Metadata_label,Metadata_value,SeeAlso_Id,SeeAlso_Label,SeeAlso_Type,SeeAlso_Format,SeeAlso_Profile,Provider
+label,summary,rights,attribution,id,creator@email.com,,,seeAlsoId,seeAlsoLabel,seeAlsoType,seeAlsoFormat,seeAlsoProfile, snite
+,,,,,,"label1","value1"
+,,,,,,"label2","value2"

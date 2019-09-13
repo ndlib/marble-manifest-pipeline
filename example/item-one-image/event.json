@@ -1,69 +1,48 @@
 {
-  "config": {
-    "steps-completed": "",
-    "process-bucket": "marble-manifest-prod-processbucket-kskqchthxshg",
-    "process-bucket-read-basepath": "process",
-    "process-bucket-write-basepath": "finished",
-    "process-bucket-index-basepath": "index",
-    "image-server-bucket": "marble-data-broker-publicbucket-1kvqtwnvkhra2",
-    "image-server-base-url": "https://image-iiif.library.nd.edu:8182/iiif/2",
-    "image-server-bucket-basepath": "",
-    "manifest-server-bucket": "marble-manifest-prod-manifestbucket-lpnnaj4jaxl5",
-    "manifest-server-base-url": "https://presentation-iiif.library.nd.edu",
-    "manifest-server-bucket-basepath": "",
-    "simple-image-viewer-url": "",
-    "canvas-default-height": 2000,
-    "canvas-default-width": 2000,
-    "image-data-file": "image_data.json",
-    "event-file": "event.json",
-    "noreply-email-addr": "noreply@nd.edu",
-    "troubleshoot-email-addr": "rdought1@nd.edu",
-    "metadata-source-type": "csv"
+  "id": "id",
+  "version": "1.0",
+  "source-system": "",
+  "creator": "creator@email.com",
+  "language": "en",
+  "label": "label",
+  "manifest-type": "manifest",
+  "summary": "summary",
+  "provider": ["snite"],
+  "rights": "rights",
+  "thumbnail": "image1.tif",
+  "viewingDirection": "left-to-right",
+  "requiredStatement": {
+      "label": "Attribution",
+      "value": "attribution"
   },
-  "data": {
-    "id": "",
-    "version": "1.0",
-    "source-system": "",
-    "creator": "creator@email.com",
-    "language": "en",
-    "label": "",
-    "manifest-type": "",
-    "summary": "",
-    "provider": [""],
-    "rights": "",
-    "thumbnail": "",
-    "requiredStatement": [
-      {
-        "label": "",
-        "value": ""
-      },
-      {
-        "label": "",
-        "value": ""
-      }
-    ],
-    "metadata": [
-      {
-        "label": "",
-        "value": ""
-      },
-      {
-        "label": "",
-        "value": ""
-      },
-    ],
-    "seeAlso": [
-
-    ],
-    "items": [
-      {
-        "manifest-type": "",
-        "label": "",
-        "image": ""
-        "height": "",
-        "width": ""
-      }
-    ],
-    "errors": []
-  }
+  "metadata": [
+    {
+      "label": "label1",
+      "value": "value1"
+    },
+    {
+      "label": "label2",
+      "value": "value2"
+    }
+  ],
+  "seeAlso": [
+    {
+      "id": "seeAlsoId",
+      "label": "seeAlsoLabel",
+      "type": "seeAlsoType",
+      "format": "seeAlsoFormat",
+      "profile": "seeAlsoProfile"
+    }
+  ],
+  "items": [
+    {
+      "manifest-type": "image",
+      "label": "image label1",
+      "summary": "summary",
+      "file": "image1.tif",
+      "height": 444,
+      "width": 555
+    }
+  ],
+  "errors": []
 }
