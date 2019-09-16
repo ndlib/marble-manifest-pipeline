@@ -3,30 +3,23 @@
 	"type": "Manifest",
 	"id": "https://presentation-iiif.library.nd.edu/id/manifest",
 	"label": {
-		"en": "label"
+		"en": ["label"]
 	},
 	"metadata": [{
 		"label": {
-			"en": "label1"
+			"en": ["label1"]
 		},
 		"value": {
-			"en": "value1"
-		}
-	}, {
-		"label": {
-			"en": "label2"
-		},
-		"value": {
-			"en": "value2"
+			"en": ["value1"]
 		}
 	}],
 	"rights": "rights",
 	"requiredStatement": {
 		"label": {
-			"en": "Attribution"
+			"en": ["Attribution"]
 		},
 		"value": {
-			"en": "attribution"
+			"en": ["attribution"]
 		}
 	},
 	"viewingDirection": "left-to-right",
@@ -42,7 +35,7 @@
 	"items": [{
 		"id": "https://presentation-iiif.library.nd.edu/id/canvas/id%2Fimage1.tif",
 		"type": "Canvas",
-		"label": "image label1",
+		"label": { "en": ["image label1"]},
 		"height": 444,
 		"width": 555,
 		"thumbnail": [{
@@ -76,10 +69,10 @@
 		}]
 	}],
 	"seeAlso": [{
-		"id": "seeAlsoId",
-		"label": "seeAlsoLabel",
-		"type": "seeAlsoType",
-		"format": "seeAlsoFormat",
-		"profile": "seeAlsoProfile"
+		"id": "seeAlsoId1",
+		"label": { "en": ["seeAlsoLabel1"] },
+		"type": "seeAlsoType1",
+		"format": "seeAlsoFormat1",
+		"profile": "seeAlsoProfile1"
 	}]
 }

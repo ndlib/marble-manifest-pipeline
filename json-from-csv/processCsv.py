@@ -26,29 +26,36 @@ class processCsv():
         self.result_json['errors'] = []
         self.result_json['creator'] = 'creator@email.com'
         self.result_json['manifest-type'] = 'manifest'
-        self.result_json['viewingDirection'] = 'left-to-right'
         self.result_json['language'] = 'en'
         self.result_json['source-system'] = ''
-        self.result_json['provider'] = ['snite']
-        self.result_json['metadata'] = []
         self.result_json['items'] = []
-        self.result_json['seeAlso'] = []
 
     # process first data row of main CSV
     def _get_attr_from_main_firstline(self, first_line):
         self.result_json['label'] = first_line['Label']
-        self.result_json['requiredStatement'] = self._get_requiredstatement(first_line['Attribution'])
-        self.result_json['rights'] = first_line['Rights']
-        self.result_json['summary'] = first_line['Summary']
-        self._get_thumbnail()
+        if first_line.get('Attribution', False):
+            self.result_json['requiredStatement'] = self._get_requiredstatement(first_line['Attribution'])
+        if first_line.get('Rights', False):
+            self.result_json['rights'] = first_line['Rights']
+        if first_line.get('Summary', False):
+            self.result_json['summary'] = first_line['Summary']
         self._get_alternate_attr(first_line)
         self._get_metadata_attr(first_line)
         self._get_seealso_attr(first_line)
+        self._get_provider(first_line)
+
+        if ('thumbnail' not in self.result_json):
+            self.result_json['thumbnail'] = self.result_json['items'][0]['file']
+
         self.config['index-marble'] = True
         if 'Index_for_MARBLE' in first_line:
             if first_line['Index_for_MARBLE']:
                 self.config['index-marble'] = False
         self.config['notify-on-finished'] = first_line['Notify']
+
+    def _get_provider(self, first_line):
+        if first_line.get('Alternate_id_system', False):
+            self.result_json['provider'] = [first_line['Alternate_id_system']]
 
     # process metadata columns from the main CSV
     def _get_metadata_attr(self, this_line):
@@ -57,6 +64,8 @@ class processCsv():
                 "label": this_line['Metadata_label'],
                 "value": this_line['Metadata_value'],
             }
+            # get itself or set it to []
+            self.result_json['metadata'] = self.result_json.get('metadata', [])
             self.result_json['metadata'].append(this_item)
 
     # process alternate columns from the main CSV
@@ -68,10 +77,12 @@ class processCsv():
             if this_line['Alternate_id_url']:
                 this_item = {}
                 this_item['id'] = this_line['Alternate_id_url']
-                this_item['label'] = {"en": [this_line['Alternate_id_system'] + " - " + self.id]}
-                this_item['type'] = "Text"
+                this_item['label'] = this_line['label']
+                this_item['type'] = "HTML"
                 this_item['format'] = "text/html"
-                self.result_json['homepage'].append(this_item)
+
+                self.result_json['seeAlso'] = self.result_json.get('seeAlso', [])
+                self.result_json['seeAlso'].append(this_item)
 
     # process seealso columns from the main CSV
     def _get_seealso_attr(self, this_line):
@@ -86,17 +97,23 @@ class processCsv():
                 this_item['type'] = this_line['SeeAlso_Type']
                 this_item['format'] = this_line['SeeAlso_Format']
                 this_item['profile'] = this_line['SeeAlso_Profile']
-                self.result_json['seeAlso'].append(this_item)
+
+                self.result_json['seeAlso'] = [this_item]
 
     # process data rows from items CSV
     def _add_items(self, this_line):
-        if this_line['Filenames'] and this_line['Label']:
+        if this_line['Filenames']:
             this_item = {}
             this_item['file'] = this_line['Filenames']
-            this_item['label'] = this_line['Label']
+            if ('Label' in this_line and this_line['Label']):
+                this_item['label'] = this_line['Label']
+            if ('Description' in this_line and this_line['Description']):
+                this_item['summary'] = this_line['Description']
+            if ('DefaultImage' in this_line and this_line['DefaultImage']):
+                self.result_json['thumbnail'] = this_line['Filenames']
+
             this_item['height'] = self._get_canvas_height(this_line['Filenames'])
             this_item['width'] = self._get_canvas_width(this_line['Filenames'])
-            this_item['summary'] = this_line['Description']
             this_item['manifest-type'] = 'image'
 
             self.result_json['items'].append(this_item)
@@ -122,10 +139,6 @@ class processCsv():
         rs.update(self._label_wrapper("Attribution"))
         rs.update(self._value_wrapper(this_line))
         return rs
-
-    def _get_thumbnail(self):
-        if self.result_json['items']:
-            self.result_json['thumbnail'] = self.result_json['items'][0]['file']
 
     def _label_wrapper(self, line):
         return {"label": line}

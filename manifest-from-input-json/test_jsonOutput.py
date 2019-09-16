@@ -7,13 +7,14 @@ class TestProcessCsv(unittest.TestCase):
     def setUp(self):
         self.ids = [
             'item-one-image',
-            'item-multiple-images'
+            'item-multiple-images',
+            'item-minimal-data'
         ]
         pass
 
     def test_buildJson(self):
         for id in self.ids:
-            print(id)
+            print("Testing id, {}".format(id))
             data = self.load_data_for_test(id)
 
             self.iiifManifest = iiifManifest(data['config'], data['event_data'])
@@ -33,9 +34,9 @@ class TestProcessCsv(unittest.TestCase):
             data['event_data'] = json.load(input_source)
         input_source.close()
 
-        with open('../example/{}/manifest.json'.format(id), 'r') as json_data:
-            data['manifest_json'] = json.load(json_data)
-        json_data.close()
+        with open('../example/{}/manifest.json'.format(id), 'r') as input_source:
+            data['manifest_json'] = json.load(input_source)
+        input_source.close()
 
         return data
 

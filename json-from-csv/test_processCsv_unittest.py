@@ -7,13 +7,14 @@ class TestProcessCsv(unittest.TestCase):
     def setUp(self):
         self.ids = [
             'item-one-image',
-            'item-multiple-images'
+            'item-multiple-images',
+            'item-minimal-data'
         ]
         pass
 
     def test_itemOneImageJson(self):
         for id in self.ids:
-            print(id)
+            print("Testing id, {}".format(id))
             data = self.load_data_for_test(id)
 
             self.csvSet = processCsv(data['config'], data['main_csv'], data['items_csv'], data['image_data'])
@@ -21,6 +22,7 @@ class TestProcessCsv(unittest.TestCase):
 
             event_json = "".join(json.dumps(data['event_json'], sort_keys=True).split())
             result_json = "".join(json.dumps(self.csvSet.result_json, sort_keys=True).split())
+
             self.assertEqual(result_json, event_json)
 
     def load_data_for_test(self, id):

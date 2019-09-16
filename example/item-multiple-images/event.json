@@ -9,8 +9,7 @@
   "summary": "summary",
   "provider": ["snite"],
   "rights": "rights",
-  "thumbnail": "image1.tif",
-  "viewingDirection": "left-to-right",
+  "thumbnail": "image2.tif",
   "requiredStatement": {
       "label": "Attribution",
       "value": "attribution"
@@ -27,11 +26,11 @@
   ],
   "seeAlso": [
     {
-      "id": "seeAlsoId",
-      "label": "seeAlsoLabel",
-      "type": "seeAlsoType",
-      "format": "seeAlsoFormat",
-      "profile": "seeAlsoProfile"
+      "id": "seeAlsoId1",
+      "label": "seeAlsoLabel1",
+      "type": "seeAlsoType1",
+      "format": "seeAlsoFormat1",
+      "profile": "seeAlsoProfile1"
     }
   ],
   "items": [

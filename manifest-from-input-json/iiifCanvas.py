@@ -8,7 +8,7 @@ class iiifCanvas(iiifItem):
         # item_data = {'file': '1982_072_001_a-v0001.jpg', 'label': '072_001_a-v0001', 'height': 1747, 'width': 3000}
         iiifItem.__init__(self, item_data['file'], 'Canvas')
         self.config = config
-        self.label = item_data['label']
+        self.label = self._lang_wrapper(item_data.get('label', item_data['file']))
         self.height = item_data['height']
         self.width = item_data['width']
 
@@ -26,6 +26,7 @@ class iiifCanvas(iiifItem):
                 iiifAnnotationPage(self.id, self.config).page()
             ]
         }
+
 
     def _canvas_id(self):
         return self.config['manifest-server-base-url'] + '/' + self.config['event_id'] \

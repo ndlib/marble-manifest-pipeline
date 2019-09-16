@@ -34,7 +34,7 @@
           "type": "AnnotationPage"
         }
       ],
-      "label": "imagelabel1",
+      "label": { "en": ["imagelabel1"] },
       "thumbnail": [
         {
           "id": "https://image-iiif.library.nd.edu:8182/iiif/2/id%2Fimage1.tif/full/250,/0/default.jpg",
@@ -80,7 +80,7 @@
           "type": "AnnotationPage"
         }
       ],
-      "label": "imagelabel2",
+      "label": { "en": ["imagelabel2"]},
       "thumbnail": [
         {
           "id": "https://image-iiif.library.nd.edu:8182/iiif/2/id%2Fimage2.tif/full/250,/0/default.jpg",
@@ -126,7 +126,7 @@
           "type": "AnnotationPage"
         }
       ],
-      "label": "imagelabel3",
+      "label": { "en": ["imagelabel3"] },
       "thumbnail": [
         {
           "id": "https://image-iiif.library.nd.edu:8182/iiif/2/id%2Fimage3.tif/full/250,/0/default.jpg",
@@ -145,42 +145,42 @@
     }
   ],
   "label": {
-    "en": "label"
+    "en": ["label"]
   },
   "metadata": [
     {
       "label": {
-        "en": "label1"
+        "en": ["label1"]
       },
       "value": {
-        "en": "value1"
+        "en": ["value1"]
       }
     },
     {
       "label": {
-        "en": "label2"
+        "en": ["label2"]
       },
       "value": {
-        "en": "value2"
+        "en": ["value2"]
       }
     }
   ],
   "requiredStatement": {
     "label": {
-      "en": "Attribution"
+      "en": ["Attribution"]
     },
     "value": {
-      "en": "attribution"
+      "en": ["attribution"]
     }
   },
   "rights": "rights",
   "seeAlso": [
     {
-      "format": "seeAlsoFormat",
-      "id": "seeAlsoId",
-      "label": "seeAlsoLabel",
-      "profile": "seeAlsoProfile",
-      "type": "seeAlsoType"
+      "format": "seeAlsoFormat1",
+      "id": "seeAlsoId1",
+      "label": { "en": ["seeAlsoLabel1"] },
+      "profile": "seeAlsoProfile1",
+      "type": "seeAlsoType1"
     }
   ],
   "thumbnail": [
