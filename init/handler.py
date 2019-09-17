@@ -76,11 +76,11 @@ def get_config():
 # python -c 'from handler import *; test()'
 def test(id):
     if (not os.environ['SSM_KEY_BASE']):
-        print ("you must set an SSM_KEY_BASE for parameter store in the environment")
+        print("you must set an SSM_KEY_BASE for parameter store in the environment")
         return
 
     if (not id):
-        print ("you must pass an id to test")
+        print("you must pass an id to test")
 
     data = {"id": id}
     print(run(data, {}))

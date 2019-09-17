@@ -23,7 +23,7 @@ def run(event, context):
     csvSet.buildJson()
 
     write_s3_json(process_bucket, event_key, csvSet.result_json)
-    
+
     return event
 
 
