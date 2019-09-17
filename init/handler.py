@@ -5,6 +5,7 @@ import json
 
 def run(event, context):
     event.update(get_config())
+    event['event_id'] = event.get('id')
     event['ecs-args'] = [json.dumps(event)]
     event['metadata-source-type'] = determine_source_type(event)
     return event
@@ -18,7 +19,6 @@ def determine_source_type(event):
     keys = []
 
     for o in result.get('Contents'):
-        print(format(o))
         id = o.get('Key').replace(prefix, "")
         keys.append(id)
 

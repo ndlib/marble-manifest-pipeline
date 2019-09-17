@@ -146,6 +146,9 @@ class processCsv():
     def _value_wrapper(self, line):
         return {"value": line}
 
+    def get_default_image(self):
+        return self.result_json.get('thumbnail', '')
+
     # print out our constructed json
     def dumpJson(self):
         return json.dumps(self.result_json, indent=2)

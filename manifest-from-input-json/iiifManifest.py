@@ -10,13 +10,6 @@ class iiifManifest(iiifItem):
         config['event_id'] = config['id']
         self.config = config
         self.manifest_data = manifest_data
-        self.validate_manifest_data()
-
-    def validate_manifest_data(self):
-        if ('language' not in self.manifest_data):
-            self.manifest_data['language'] = 'en'
-        if ('viewingDirection' not in self.manifest_data):
-            self.manifest_data['viewingDirection'] = 'left-to-right'
 
     def manifest(self):
         manifest = {
@@ -44,7 +37,8 @@ class iiifManifest(iiifItem):
         if 'seeAlso' in self.manifest_data:
             manifest['seeAlso'] = self.manifest_data['seeAlso']
             for index, seeAlso in enumerate(manifest['seeAlso']):
-                manifest['seeAlso'][index]['label'] = self._lang_wrapper(manifest['seeAlso'][index]['label'])
+                if (manifest['seeAlso'][index].get('label', False)):
+                    manifest['seeAlso'][index]['label'] = self._lang_wrapper(manifest['seeAlso'][index]['label'])
 
         return manifest
 

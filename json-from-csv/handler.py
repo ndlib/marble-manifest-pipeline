@@ -20,12 +20,10 @@ def run(event, context):
     image_data = json.loads(read_s3_file_content(process_bucket, image_key))
 
     csvSet = processCsv(event, main_csv, items_csv, image_data)
-
     csvSet.buildJson()
 
     write_s3_json(process_bucket, event_key, csvSet.result_json)
-
-    event['event'] = event
+    
     return event
 
 
