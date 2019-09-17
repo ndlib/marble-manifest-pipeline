@@ -1,0 +1,63 @@
+{
+  "id": "id",
+  "version": "1.0",
+  "source-system": "",
+  "creator": "creator@email.com",
+  "language": "en",
+  "label": "label",
+  "manifest-type": "manifest",
+  "summary": "summary",
+  "provider": ["snite"],
+  "rights": "rights",
+  "thumbnail": "image2.tif",
+  "requiredStatement": {
+      "label": "Attribution",
+      "value": "attribution"
+  },
+  "metadata": [
+    {
+      "label": "label1",
+      "value": "value1"
+    },
+    {
+      "label": "label2",
+      "value": "value2"
+    }
+  ],
+  "seeAlso": [
+    {
+      "id": "seeAlsoId1",
+      "label": "seeAlsoLabel1",
+      "type": "seeAlsoType1",
+      "format": "seeAlsoFormat1",
+      "profile": "seeAlsoProfile1"
+    }
+  ],
+  "items": [
+    {
+      "manifest-type": "image",
+      "label": "image label1",
+      "summary": "summary1",
+      "file": "image1.tif",
+      "height": 444,
+      "width": 555
+    },
+    {
+      "manifest-type": "image",
+      "label": "image label2",
+      "summary": "summary2",
+      "file": "image2.tif",
+      "height": 111,
+      "width": 222
+    },
+    {
+      "manifest-type": "image",
+      "label": "image label3",
+      "summary": "summary3",
+      "file": "image3.tif",
+      "height": 999,
+      "width": 234
+    }
+  ],
+  "errors": []
+}

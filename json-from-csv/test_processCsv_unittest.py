@@ -5,41 +5,50 @@ from processCsv import processCsv
 
 class TestProcessCsv(unittest.TestCase):
     def setUp(self):
-        event_id = 'sample'
-        config = {
-            "image-server-base-url": "https://image-server.library.nd.edu:8182/iiif/2",
-            "manifest-server-base-url": "https://manifest.nd.edu/",
-            "process-bucket": "manifestpipeline-dev-processbucket-1vtt3jhjtkg21",
-            "process-bucket-read-basepath": "process",
-            "process-bucket-write-basepath": "finished",
-            "image-server-bucket": "manifestpipeline-dev-processbucket-1vtt3jhjtkg21",
-            "image-server-bucket-basepath": "images",
-            "manifest-server-bucket": "manifestpipeline-dev-processbucket-1vtt3jhjtkg21",
-            "manifest-server-bucket-basepath": "manifest",
-            "notify-on-finished": "notify@email.com",
-            "canvas-default-height": 2000,
-            "canvas-default-width": 2000,
-            "event-file": "event.json"
-          }
-
-        f = open('../example/main.csv', 'r')
-        main_csv = f.read()
-        f.close()
-
-        f = open('../example/sequence.csv', 'r')
-        sequence_csv = f.read()
-        f.close()
-
-        self.csvSet = processCsv(event_id, config, main_csv, sequence_csv)
+        self.ids = [
+            'item-one-image',
+            'item-multiple-images',
+            'item-minimal-data'
+        ]
         pass
 
-    def test_buildJson(self):
-        self.csvSet.buildJson()
-        with open('./test_result.json') as json_data:
+    def test_itemOneImageJson(self):
+        for id in self.ids:
+            print("Testing id, {}".format(id))
+            data = self.load_data_for_test(id)
+
+            self.csvSet = processCsv(data['config'], data['main_csv'], data['items_csv'], data['image_data'])
+            self.csvSet.buildJson()
+
+            event_json = "".join(json.dumps(data['event_json'], sort_keys=True).split())
+            result_json = "".join(json.dumps(self.csvSet.result_json, sort_keys=True).split())
+
+            self.assertEqual(result_json, event_json)
+
+    def load_data_for_test(self, id):
+        data = {}
+        with open("../example/{}/config.json".format(id), 'r') as input_source:
+            data['config'] = json.load(input_source)
+        input_source.close()
+
+        with open("../example/{}/main.csv".format(id), 'r') as input_source:
+            data['main_csv'] = input_source.read()
+        input_source.close()
+
+        with open("../example/{}/items.csv".format(id), 'r') as input_source:
+            data['items_csv'] = input_source.read()
+        input_source.close()
+
+        with open("../example/{}/image-data.json".format(id), 'r') as input_source:
+            data['image_data'] = json.load(input_source)
+        input_source.close()
+
+        with open('../example/{}/event.json'.format(id), 'r') as json_data:
             # The Ordered Dict hook preserves the pair ordering in the file for comparison
-            result_json = json.load(json_data)
+            data['event_json'] = json.load(json_data)
             json_data.close()
-        self.assertEqual(self.csvSet.dumpJson(), json.dumps(result_json, indent=2))
+
+        return data
 
 
 if __name__ == '__main__':

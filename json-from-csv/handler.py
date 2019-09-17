@@ -8,25 +8,22 @@ from processCsv import processCsv
 
 def run(event, context):
     id = event.get("id")
-    config = event.get("config")
 
-    process_bucket = config['process-bucket']
-    main_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config['main-csv']
-    items_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config['items-csv']
-    image_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config["image-data-file"]
-    event_key = config['process-bucket-read-basepath'] + "/" + id + "/" + config["event-file"]
+    process_bucket = event['process-bucket']
+    main_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event['main-csv']
+    items_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event['items-csv']
+    image_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event["image-data-file"]
+    event_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event["event-file"]
 
     main_csv = read_s3_file_content(process_bucket, main_key)
     items_csv = read_s3_file_content(process_bucket, items_key)
     image_data = json.loads(read_s3_file_content(process_bucket, image_key))
 
-    csvSet = processCsv(id, config, main_csv, items_csv, image_data)
-
+    csvSet = processCsv(event, main_csv, items_csv, image_data)
     csvSet.buildJson()
 
-    write_s3_json(process_bucket, event_key, {"data": csvSet.result_json})
+    write_s3_json(process_bucket, event_key, csvSet.result_json)
 
-    event['config'] = config
     return event
 
 
@@ -42,5 +39,19 @@ def write_s3_json(s3Bucket, s3Path, json_hash):
 
 # python -c 'from handler import *; test()'
 def test():
-    data = {"id": "2018_example_001"}
-    print(run(data, {}))
+    with open("../example/item-one-image/config.json", 'r') as input_source:
+        config = json.load(input_source)
+    input_source.close()
+    with open("../example/item-one-image/main.csv", 'r') as input_source:
+        main_csv = input_source.read()
+    input_source.close()
+    with open("../example/item-one-image/items.csv", 'r') as input_source:
+        items_csv = input_source.read()
+    input_source.close()
+    with open("../example/item-one-image/image-data.json", 'r') as input_source:
+        image_data = json.load(input_source)
+    input_source.close()
+
+    csvSet = processCsv(config, main_csv, items_csv, image_data)
+    csvSet.buildJson()
+    print(csvSet.result_json)
