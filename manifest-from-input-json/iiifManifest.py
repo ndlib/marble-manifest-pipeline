@@ -32,6 +32,9 @@ class iiifManifest(iiifItem):
             manifest['requiredStatement'] = self._convert_label_value(self.manifest_data['requiredStatement'])
         if 'viewingDirection' in self.manifest_data:
             manifest['viewingDirection'] = self.manifest_data['viewingDirection']
+        else:
+            manifest['viewingDirection'] = 'left-to-right'
+
         if 'homepage' in self.manifest_data:
             manifest['homepage'] = self.manifest_data['homepage']
         if 'seeAlso' in self.manifest_data:
@@ -56,7 +59,6 @@ class iiifManifest(iiifItem):
             for item in self.manifest_data['items']:
                 if item['file'] == self.manifest_data['thumbnail']:
                     default_page = item.copy()
-                    default_page['file'] = 'default'
 
         return [iiifImage(default_page['file'], self.config).thumbnail()]
 

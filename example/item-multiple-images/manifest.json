@@ -185,10 +185,10 @@
   ],
   "thumbnail": [
     {
-      "id": "https://image-iiif.library.nd.edu:8182/iiif/2/id%2Fdefault.tif/full/250,/0/default.jpg",
+      "id": "https://image-iiif.library.nd.edu:8182/iiif/2/id%2Fimage2.tif/full/250,/0/default.jpg",
       "service": [
         {
-          "id": "https://image-iiif.library.nd.edu:8182/iiif/2/id%2Fdefault.tif",
+          "id": "https://image-iiif.library.nd.edu:8182/iiif/2/id%2Fimage2.tif",
           "profile": "http://iiif.io/api/image/2/level2.json",
           "type": "ImageService2"
         }
