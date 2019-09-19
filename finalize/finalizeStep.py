@@ -14,7 +14,6 @@ class finalizeStep():
 
     def run(self):
         if self.success():
-            self.copyDefaultImg()
             self.movePyramids()
             self.moveManifest()
             self.moveSchema()

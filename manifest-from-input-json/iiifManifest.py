@@ -56,7 +56,6 @@ class iiifManifest(iiifItem):
             for item in self.manifest_data['items']:
                 if item['file'] == self.manifest_data['thumbnail']:
                     default_page = item.copy()
-                    default_page['file'] = 'default'
 
         return [iiifImage(default_page['file'], self.config).thumbnail()]
 
