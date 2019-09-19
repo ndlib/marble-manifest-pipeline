@@ -32,6 +32,9 @@ class iiifManifest(iiifItem):
             manifest['requiredStatement'] = self._convert_label_value(self.manifest_data['requiredStatement'])
         if 'viewingDirection' in self.manifest_data:
             manifest['viewingDirection'] = self.manifest_data['viewingDirection']
+        else:
+            manifest['viewingDirection'] = 'left-to-right'
+
         if 'homepage' in self.manifest_data:
             manifest['homepage'] = self.manifest_data['homepage']
         if 'seeAlso' in self.manifest_data:
