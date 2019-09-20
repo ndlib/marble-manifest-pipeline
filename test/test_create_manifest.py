@@ -7,12 +7,11 @@ from pathlib import Path
 class TestCreateManifest(unittest.TestCase):
     def setUp(self):
         self.ids = [
+            'collection-small',
             'item-one-image',
             'item-multiple-images',
             'item-minimal-data'
         ]
-        #             'collection-small-example',
-
         pass
 
     def test_buildJson(self):
@@ -24,9 +23,6 @@ class TestCreateManifest(unittest.TestCase):
             manifest_json = "".join(json.dumps(data['manifest_json'], sort_keys=True).split())
             result_json = "".join(json.dumps(self.iiifCollection.manifest(), sort_keys=True).split())
 
-            print(result_json)
-            print("----")
-            print(manifest_json)
             self.assertEqual(result_json, manifest_json)
 
     def load_data_for_test(self, id):

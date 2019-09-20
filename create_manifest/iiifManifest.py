@@ -47,33 +47,29 @@ class iiifManifest(iiifItem):
         ret = []
         if 'items' in self.manifest_data:
             for item_data in self.manifest_data['items']:
-                if (item_data['manifest-type'] == 'image'):
+                if (item_data['manifest-type'] == 'Image'):
                     file = Path(item_data['file']).stem
                     item_data['width'] = self.image_data[file]['width']
                     item_data['height'] = self.image_data[file]['height']
 
                     ret.append(iiifCanvas(item_data, self.config).canvas())
-                elif (item_data['manifest-type'] == 'manifest'):
+                elif (item_data['manifest-type'] == 'Manifest'):
                     tempConfig = self.config
                     tempConfig['id'] = item_data['id']
                     ret.append(iiifManifest(self.config, item_data, self.image_data).manifest())
-                elif (item_data['manifest-type'] == 'collection'):
+                elif (item_data['manifest-type'] == 'Collection'):
                     ret.append(iiifManifest(self.config, item_data, self.image_data).manifest())
         return ret
 
     def thumbnail(self):
-        return []
-        default_page = self.manifest_data['items'][0]
-
         if 'thumbnail' in self.manifest_data:
-            for item in self.manifest_data['items']:
-                if item['file'] == self.manifest_data['thumbnail']:
-                    default_page = item.copy()
+            item = self._find_image_in_items(self.manifest_data, self.manifest_data['thumbnail'])
+            return [iiifImage(item['file'], self.config).thumbnail()]
 
-        return [iiifImage(default_page['file'], self.config).thumbnail()]
+        return []
 
     def _manifest_id(self):
-        if self.type == 'manifest':
+        if self.type == 'Manifest':
             return self.config['manifest-server-base-url'] + '/' + self.id + '/manifest'
         else:
             return self.config['manifest-server-base-url'] + '/collection/' + self.id
@@ -94,8 +90,13 @@ class iiifManifest(iiifItem):
             return dict
         return None
 
-    def _find_first_image_for_manifest(self, data):
-        if ('items' in data and data['items'][0]['type'] != 'image'):
-            return self._find_first_image_for_manifest(data['items'])
-        else:
-            return data['items'][0]
+    def _find_image_in_items(self, data, image):
+        if ('items' in data):
+            for item in data['items']:
+                if (item['manifest-type'] != 'Image'):
+                    return self._find_image_in_items(item, image)
+
+                elif (item['file'] == image):
+                    return item
+
+        return False

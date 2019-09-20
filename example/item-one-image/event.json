@@ -5,7 +5,7 @@
   "creator": "creator@email.com",
   "language": "en",
   "label": "label",
-  "manifest-type": "manifest",
+  "manifest-type": "Manifest",
   "summary": "summary",
   "provider": ["snite"],
   "rights": "rights",
@@ -31,7 +31,7 @@
   ],
   "items": [
     {
-      "manifest-type": "image",
+      "manifest-type": "Image",
       "label": "image label1",
       "summary": "summary",
       "file": "image1.tif",

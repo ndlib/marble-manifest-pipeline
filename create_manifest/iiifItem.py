@@ -4,7 +4,7 @@ import os
 class iiifItem:
     def __init__(self, id, type):
         self.id = id
-        self.type = type.lower()
+        self.type = type
         self.lang = 'en'
 
     def get_id(self):

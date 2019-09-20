@@ -5,7 +5,7 @@
   "creator": "creator@email.com",
   "language": "en",
   "label": "label",
-  "manifest-type": "collection",
+  "manifest-type": "Collection",
   "summary": "summary",
   "provider": ["snite"],
   "rights": "rights",
@@ -32,13 +32,13 @@
   "items": [
     {
       "id": "manifest1-id",
-      "manifest-type": "manifest",
+      "manifest-type": "Manifest",
       "label": "manifest-small",
       "summary": "manifest-summary1",
       "thumbnail": "image1.tif",
       "items": [
         {
-          "manifest-type": "image",
+          "manifest-type": "Image",
           "label": "image label1",
           "summary": "summary",
           "file": "image1.tif"
@@ -47,7 +47,7 @@
     },
     {
       "id": "manifest2-id",
-      "manifest-type": "manifest",
+      "manifest-type": "Manifest",
       "label": "manifest-small",
       "summary": "manifest-summary1",
       "thumbnail": "image2.tif",
@@ -72,7 +72,7 @@
       ],
       "items": [
         {
-          "manifest-type": "image",
+          "manifest-type": "Image",
           "label": "image label2",
           "summary": "summary",
           "file": "image2.tif"
