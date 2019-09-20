@@ -1,5 +1,5 @@
-from iiifItem import iiifItem
-from iiifImage import iiifImage
+from manifest_from_input_json.iiifItem import iiifItem
+from manifest_from_input_json.iiifImage import iiifImage
 
 
 class iiifAnnotation(iiifItem):

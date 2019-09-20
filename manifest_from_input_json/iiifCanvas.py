@@ -1,6 +1,6 @@
-from iiifItem import iiifItem
-from iiifImage import iiifImage
-from iiifAnnotationPage import iiifAnnotationPage
+from manifest_from_input_json.iiifItem import iiifItem
+from manifest_from_input_json.iiifImage import iiifImage
+from manifest_from_input_json.iiifAnnotationPage import iiifAnnotationPage
 
 
 class iiifCanvas(iiifItem):
@@ -26,7 +26,6 @@ class iiifCanvas(iiifItem):
                 iiifAnnotationPage(self.id, self.config).page()
             ]
         }
-
 
     def _canvas_id(self):
         return self.config['manifest-server-base-url'] + '/' + self.config['event_id'] \

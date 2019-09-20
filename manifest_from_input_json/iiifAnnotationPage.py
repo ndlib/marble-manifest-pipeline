@@ -1,5 +1,5 @@
-from iiifItem import iiifItem
-from iiifAnnotation import iiifAnnotation
+from manifest_from_input_json.iiifItem import iiifItem
+from manifest_from_input_json.iiifAnnotation import iiifAnnotation
 
 
 class iiifAnnotationPage(iiifItem):

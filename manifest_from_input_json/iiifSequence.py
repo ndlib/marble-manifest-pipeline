@@ -1,4 +1,4 @@
-from iiifImage import iiifImage
+from manifest_from_input_json.iiifImage import iiifImage
 
 
 class iiifSequence():

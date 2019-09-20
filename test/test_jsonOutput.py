@@ -1,6 +1,7 @@
 import unittest
 import json
-from iiifManifest import iiifManifest
+from manifest_from_input_json.iiifManifest import iiifManifest
+from pathlib import Path
 
 
 class TestProcessCsv(unittest.TestCase):
@@ -25,20 +26,22 @@ class TestProcessCsv(unittest.TestCase):
 
     def load_data_for_test(self, id):
         data = {}
+        current_path = str(Path(__file__).parent.absolute())
 
-        with open("../example/{}/config.json".format(id), 'r') as input_source:
+        with open(current_path + "/../example/{}/config.json".format(id), 'r') as input_source:
             data['config'] = json.load(input_source)
         input_source.close()
 
-        with open("../example/{}/event.json".format(id), 'r') as input_source:
+        with open(current_path + "/../example/{}/event.json".format(id), 'r') as input_source:
             data['event_data'] = json.load(input_source)
         input_source.close()
 
-        with open('../example/{}/manifest.json'.format(id), 'r') as input_source:
+        with open(current_path + "/../example/{}/manifest.json".format(id), 'r') as input_source:
             data['manifest_json'] = json.load(input_source)
         input_source.close()
 
         return data
+
 
 if __name__ == '__main__':
     unittest.main()

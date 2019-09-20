@@ -1,6 +1,7 @@
 import unittest
 import json
-from processCsv import processCsv
+from json_from_csv.processCsv import processCsv
+from pathlib import Path
 
 
 class TestProcessCsv(unittest.TestCase):
@@ -27,23 +28,25 @@ class TestProcessCsv(unittest.TestCase):
 
     def load_data_for_test(self, id):
         data = {}
-        with open("../example/{}/config.json".format(id), 'r') as input_source:
+        current_path = str(Path(__file__).parent.absolute())
+
+        with open(current_path + "/../example/{}/config.json".format(id), 'r') as input_source:
             data['config'] = json.load(input_source)
         input_source.close()
 
-        with open("../example/{}/main.csv".format(id), 'r') as input_source:
+        with open(current_path + "/../example/{}/main.csv".format(id), 'r') as input_source:
             data['main_csv'] = input_source.read()
         input_source.close()
 
-        with open("../example/{}/items.csv".format(id), 'r') as input_source:
+        with open(current_path + "/../example/{}/items.csv".format(id), 'r') as input_source:
             data['items_csv'] = input_source.read()
         input_source.close()
 
-        with open("../example/{}/image-data.json".format(id), 'r') as input_source:
+        with open(current_path + "/../example/{}/image-data.json".format(id), 'r') as input_source:
             data['image_data'] = json.load(input_source)
         input_source.close()
 
-        with open('../example/{}/event.json'.format(id), 'r') as json_data:
+        with open(current_path + '/../example/{}/event.json'.format(id), 'r') as json_data:
             # The Ordered Dict hook preserves the pair ordering in the file for comparison
             data['event_json'] = json.load(json_data)
             json_data.close()
