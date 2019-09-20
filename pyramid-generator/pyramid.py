@@ -26,7 +26,7 @@ import botocore
 config = json.loads(sys.argv[1])
 BUCKET = config['process-bucket']
 PREFIX = config['process-bucket-read-basepath'] + '/' \
-    + config['event_id'] + '/images/'
+    + config['id'] + '/images/'
 kwargs = {'Bucket': BUCKET, 'Prefix': PREFIX}
 
 s3client = boto3.client('s3', region_name='us-east-1')
@@ -76,7 +76,7 @@ for obj in obj_list:
 
     try:
         image_dest = config['process-bucket-write-basepath'] + '/' \
-            + config['event_id'] + '/images/' + tif_file
+            + config['id'] + '/images/' + tif_file
         print 'Putting ' + tif_file + ' to ' + image_dest
         s3resource.Bucket(BUCKET).upload_file(tif_file, image_dest)
         os.remove(tif_file)
@@ -89,7 +89,7 @@ try:
     with open(image_data_file, 'w') as outfile:
         json.dump(image_info, outfile)
     image_data_dest = config['process-bucket-read-basepath'] + '/' \
-        + config['event_id'] + '/' + image_data_file
+        + config['id'] + '/' + image_data_file
     s3resource.Bucket(BUCKET).upload_file(image_data_file, image_data_dest)
 except botocore.exceptions.ClientError as e:
     image_errs[file] = str(e)
@@ -98,7 +98,7 @@ try:
     if image_errs:
         err_file = "image_err.json"
         s3err_dest = config['process-bucket-read-basepath'] + '/' \
-            + config['event_id'] + '/' + err_file
+            + config['id'] + '/' + err_file
         with open(err_file, 'w') as outfile:
             json.dump(image_errs, outfile)
         s3resource.Bucket(BUCKET).upload_file(err_file, s3err_dest)

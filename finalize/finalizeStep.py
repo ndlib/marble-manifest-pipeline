@@ -14,7 +14,6 @@ class finalizeStep():
 
     def run(self):
         if self.success():
-            self.copyDefaultImg()
             self.movePyramids()
             self.moveManifest()
             self.moveSchema()
@@ -32,7 +31,7 @@ class finalizeStep():
     def copyDefaultImg(self):
         print("make default image")
         bucket = self.config['process-bucket']
-        remote_file = self.config['process-bucket-write-basepath'] + "/" + self.id + "/images/" + Path(self.config['default-img']).stem + ".tif"
+        remote_file = self.config['process-bucket-write-basepath'] + "/" + self.id + "/images/" + Path(self.manifest_metadata['thumbnail']).stem + ".tif"
         default_image = self.config['process-bucket-write-basepath'] + "/" + self.id + "/images/default.tif"
         copy_source = {
             'Bucket': bucket,
@@ -246,4 +245,4 @@ class finalizeStep():
             + self.id + "/" + self.config["event-file"]
         content_object = boto3.resource('s3').Object(self.config['process-bucket'], remote_file)
         file_content = content_object.get()['Body'].read().decode('utf-8')
-        return json.loads(file_content).get('data')
+        return json.loads(file_content)

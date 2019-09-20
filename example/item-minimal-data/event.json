@@ -1,0 +1,19 @@
+{
+  "id": "id",
+  "version": "1.0",
+  "source-system": "",
+  "creator": "creator@email.com",
+  "language": "en",
+  "label": "label",
+  "manifest-type": "manifest",
+  "thumbnail": "image1.tif",
+  "items": [
+    {
+      "manifest-type": "image",
+      "file": "image1.tif",
+      "height": 444,
+      "width": 555
+    }
+  ],
+  "errors": []
+}

@@ -7,7 +7,7 @@ from finalizeStep import finalizeStep
 
 
 def run(event, context):
-    step = finalizeStep(event.get("id"), event.get("config"))
+    step = finalizeStep(event.get("id"), event)
     step.error = event.get("unexpected", "")
     if not step.error:
         step.manifest_metadata = step.read_event_data()
