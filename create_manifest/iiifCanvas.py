@@ -1,6 +1,6 @@
-from create_manifest.iiifItem import iiifItem
-from create_manifest.iiifImage import iiifImage
-from create_manifest.iiifAnnotationPage import iiifAnnotationPage
+from iiifItem import iiifItem
+from iiifImage import iiifImage
+from iiifAnnotationPage import iiifAnnotationPage
 
 
 class iiifCanvas(iiifItem):

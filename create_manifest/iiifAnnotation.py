@@ -1,5 +1,5 @@
-from create_manifest.iiifItem import iiifItem
-from create_manifest.iiifImage import iiifImage
+from iiifItem import iiifItem
+from iiifImage import iiifImage
 
 
 class iiifAnnotation(iiifItem):

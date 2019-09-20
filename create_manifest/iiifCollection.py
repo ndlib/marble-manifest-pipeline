@@ -1,5 +1,5 @@
-from create_manifest.iiifManifest import iiifManifest
-from create_manifest.iiifItem import iiifItem
+from iiifManifest import iiifManifest
+from iiifItem import iiifItem
 
 
 class iiifCollection(iiifItem):

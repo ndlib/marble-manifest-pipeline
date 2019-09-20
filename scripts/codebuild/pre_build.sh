@@ -5,4 +5,4 @@ echo "$BLUEPRINTS_DIR/deploy/cloudformation/manifest-pipeline.yml"
 cp $BLUEPRINTS_DIR/deploy/cloudformation/manifest-pipeline.yml ./
 
 
-python -m unittest discover ||  { echo 'Auto Tests Failed' ; exit 1; }
+python -m unittest discover  ||  { echo 'Auto Tests Failed' ; exit 1; }

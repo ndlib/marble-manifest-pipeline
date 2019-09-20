@@ -1,4 +1,4 @@
-from create_manifest.iiifItem import iiifItem
+from iiifItem import iiifItem
 
 
 class iiifImage(iiifItem):

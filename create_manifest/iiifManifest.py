@@ -1,6 +1,6 @@
-from create_manifest.iiifImage import iiifImage
-from create_manifest.iiifCanvas import iiifCanvas
-from create_manifest.iiifItem import iiifItem
+from iiifImage import iiifImage
+from iiifCanvas import iiifCanvas
+from iiifItem import iiifItem
 from pathlib import Path
 
 

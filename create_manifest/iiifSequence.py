@@ -1,4 +1,4 @@
-from create_manifest.iiifImage import iiifImage
+from iiifImage import iiifImage
 
 
 class iiifSequence():

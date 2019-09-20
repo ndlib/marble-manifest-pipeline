@@ -17,7 +17,7 @@ def run(event, context):
     imageData = json.loads(read_s3_file_content(s3_bucket, s3_image_data_path))
 
     # get manifest object
-    manifest = iiifManifest(event, manifestData, imageData)
+    manifest = iiifCollection(event, manifestData, imageData)
     # write to s3
     write_s3_json(s3_bucket, s3_manifest_path, manifest.manifest())
 
@@ -48,4 +48,4 @@ def test():
         config = json.load(input_source)
     input_source.close()
 
-    print(iiifManifest(config, data, image_data).manifest())
+    print(iiifCollection(config, data, image_data).manifest())
