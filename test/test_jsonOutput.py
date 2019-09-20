@@ -7,10 +7,10 @@ from pathlib import Path
 class TestProcessCsv(unittest.TestCase):
     def setUp(self):
         self.ids = [
+            'collection-small-example',
             'item-one-image',
             'item-multiple-images',
-            'item-minimal-data'
-        ]
+            'item-minimal-data'        ]
         pass
 
     def test_buildJson(self):
@@ -22,6 +22,7 @@ class TestProcessCsv(unittest.TestCase):
             manifest_json = "".join(json.dumps(data['manifest_json'], sort_keys=True).split())
             result_json = "".join(json.dumps(self.iiifManifest.manifest(), sort_keys=True).split())
 
+            print(result_json)
             self.assertEqual(result_json, manifest_json)
 
     def load_data_for_test(self, id):
