@@ -27,7 +27,5 @@ class TestProcessCsvOutput(unittest.TestCase):
             self.assertEqual(result_json, event_json)
 
 
-
-
 if __name__ == '__main__':
     unittest.main()
