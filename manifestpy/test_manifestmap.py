@@ -6,7 +6,6 @@ from manifestmap import mapManifestOfItems
 
 class testManifestMap(unittest.TestCase):
     def test(self):
-        print("HI")
         path = os.path.dirname(os.path.abspath(__file__))
         opchild = os.path.join(path, 'outputchild0.json')
         with open("../example/example-input.json", 'r') as input_source:
