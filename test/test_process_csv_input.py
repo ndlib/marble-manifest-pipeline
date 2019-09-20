@@ -1,7 +1,7 @@
 import unittest
 import json
 from process_csv_input.ProcessCsvInput import ProcessCsvInput
-from test_utils import load_data_for_test
+from test.test_utils import load_data_for_test
 
 
 class TestProcessCsvOutput(unittest.TestCase):

@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 
-def load_data_for_test(self, id):
+def load_data_for_test(id):
     data = {}
     current_path = str(Path(__file__).parent.absolute())
 

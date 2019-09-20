@@ -23,10 +23,10 @@ if [ -z ${S3_BUCKET+x} ]; then
   exit 1
 fi
 
-./scripts/codebuild/install.sh
-./scripts/codebuild/pre_build.sh
-./scripts/codebuild/build.sh
-./scripts/codebuild/post_build.sh
+./scripts/codebuild/install.sh  ||  { exit 1; }
+./scripts/codebuild/pre_build.sh ||  { exit 1; }
+./scripts/codebuild/build.sh ||  { exit 1; }
+./scripts/codebuild/post_build.sh ||  { exit 1; }
 
 aws cloudformation deploy --template-file output.yml --stack-name $stackname \
   --capabilities CAPABILITY_NAMED_IAM \
