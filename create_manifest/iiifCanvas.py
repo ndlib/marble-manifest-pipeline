@@ -1,6 +1,6 @@
-from manifest_from_input_json.iiifItem import iiifItem
-from manifest_from_input_json.iiifImage import iiifImage
-from manifest_from_input_json.iiifAnnotationPage import iiifAnnotationPage
+from create_manifest.iiifItem import iiifItem
+from create_manifest.iiifImage import iiifImage
+from create_manifest.iiifAnnotationPage import iiifAnnotationPage
 
 
 class iiifCanvas(iiifItem):

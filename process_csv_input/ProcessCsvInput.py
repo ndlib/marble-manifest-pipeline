@@ -4,7 +4,7 @@ import os
 from io import StringIO
 
 
-class processCsv():
+class ProcessCsvInput():
     # class constructor
     def __init__(self, config, main_csv, items_csv, image_data):
         self.id = config['id']

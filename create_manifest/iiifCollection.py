@@ -1,5 +1,5 @@
-from iiifManifest import iiifManifest
-from iiifItem import iiifItem
+from create_manifest.iiifManifest import iiifManifest
+from create_manifest.iiifItem import iiifItem
 
 
 class iiifCollection(iiifItem):
@@ -12,7 +12,7 @@ class iiifCollection(iiifItem):
         self.image_data = image_data
 
     def manifest(self):
-        manifest = iiifManifest(self.config, self.manifest_data, self.image_data)
+        manifest = iiifManifest(self.config, self.manifest_data, self.image_data).manifest()
         manifest["@context"] = [
             "http://www.w3.org/ns/anno.jsonld",
             "http://iiif.io/api/presentation/3/context.json"

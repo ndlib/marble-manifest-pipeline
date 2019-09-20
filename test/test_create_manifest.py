@@ -1,17 +1,18 @@
 import unittest
 import json
-from manifest_from_input_json.iiifManifest import iiifManifest
+from create_manifest.iiifCollection import iiifCollection
 from pathlib import Path
 
 
-class TestProcessCsv(unittest.TestCase):
+class TestCreateManifest(unittest.TestCase):
     def setUp(self):
         self.ids = [
-            'collection-small-example',
             'item-one-image',
             'item-multiple-images',
             'item-minimal-data'
         ]
+        #             'collection-small-example',
+
         pass
 
     def test_buildJson(self):
@@ -19,11 +20,13 @@ class TestProcessCsv(unittest.TestCase):
             print("Testing id, {}".format(id))
             data = self.load_data_for_test(id)
 
-            self.iiifManifest = iiifManifest(data['config'], data['event_data'])
+            self.iiifCollection = iiifCollection(data['config'], data['event_data'], data['image_data'])
             manifest_json = "".join(json.dumps(data['manifest_json'], sort_keys=True).split())
-            result_json = "".join(json.dumps(self.iiifManifest.manifest(), sort_keys=True).split())
+            result_json = "".join(json.dumps(self.iiifCollection.manifest(), sort_keys=True).split())
 
             print(result_json)
+            print("----")
+            print(manifest_json)
             self.assertEqual(result_json, manifest_json)
 
     def load_data_for_test(self, id):
@@ -36,6 +39,10 @@ class TestProcessCsv(unittest.TestCase):
 
         with open(current_path + "/../example/{}/event.json".format(id), 'r') as input_source:
             data['event_data'] = json.load(input_source)
+        input_source.close()
+
+        with open(current_path + "/../example/{}/image-data.json".format(id), 'r') as input_source:
+            data['image_data'] = json.load(input_source)
         input_source.close()
 
         with open(current_path + "/../example/{}/manifest.json".format(id), 'r') as input_source:

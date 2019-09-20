@@ -1,7 +1,8 @@
 import boto3
 import json
-from processCsv import processCsv
+from ProcessCsvInput import ProcessCsvInput
 from pathlib import Path
+
 
 def run(event, context):
     id = event.get("id")
@@ -16,7 +17,7 @@ def run(event, context):
     items_csv = read_s3_file_content(process_bucket, items_key)
     image_data = json.loads(read_s3_file_content(process_bucket, image_key))
 
-    csvSet = processCsv(event, main_csv, items_csv, image_data)
+    csvSet = ProcessCsvInput(event, main_csv, items_csv, image_data)
     csvSet.buildJson()
 
     write_s3_json(process_bucket, event_key, csvSet.result_json)
@@ -36,7 +37,7 @@ def write_s3_json(s3Bucket, s3Path, json_hash):
 
 # python -c 'from handler import *; test()'
 def test():
-    current_path = Path(__file__).absolute()
+    current_path = str(Path(__file__).parent.absolute())
 
     with open(current_path + "/../example/item-one-image/config.json", 'r') as input_source:
         config = json.load(input_source)
@@ -51,6 +52,7 @@ def test():
         image_data = json.load(input_source)
     input_source.close()
 
-    csvSet = processCsv(config, main_csv, items_csv, image_data)
+    csvSet = ProcessCsvInput(config, main_csv, items_csv, image_data)
     csvSet.buildJson()
+
     print(csvSet.result_json)

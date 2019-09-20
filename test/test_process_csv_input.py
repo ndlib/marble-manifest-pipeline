@@ -1,10 +1,10 @@
 import unittest
 import json
-from json_from_csv.processCsv import processCsv
+from process_csv_input.ProcessCsvInput import ProcessCsvInput
 from pathlib import Path
 
 
-class TestProcessCsv(unittest.TestCase):
+class TestProcessCsvOutput(unittest.TestCase):
     def setUp(self):
         self.ids = [
             'item-one-image',
@@ -18,7 +18,7 @@ class TestProcessCsv(unittest.TestCase):
             print("Testing id, {}".format(id))
             data = self.load_data_for_test(id)
 
-            self.csvSet = processCsv(data['config'], data['main_csv'], data['items_csv'], data['image_data'])
+            self.csvSet = ProcessCsvInput(data['config'], data['main_csv'], data['items_csv'], data['image_data'])
             self.csvSet.buildJson()
 
             event_json = "".join(json.dumps(data['event_json'], sort_keys=True).split())

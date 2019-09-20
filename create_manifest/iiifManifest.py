@@ -1,13 +1,13 @@
-from manifest_from_input_json.iiifImage import iiifImage
-from manifest_from_input_json.iiifCanvas import iiifCanvas
-from manifest_from_input_json.iiifItem import iiifItem
+from create_manifest.iiifImage import iiifImage
+from create_manifest.iiifCanvas import iiifCanvas
+from create_manifest.iiifItem import iiifItem
 from pathlib import Path
 
 
 class iiifManifest(iiifItem):
     def __init__(self, config, manifest_data, image_data):
         self.id = config['id']
-        iiifItem.__init__(self, self.id, manifest_data.type)
+        iiifItem.__init__(self, self.id, manifest_data['manifest-type'])
         config['event_id'] = config['id']
         self.config = config
         self.manifest_data = manifest_data
@@ -15,10 +15,6 @@ class iiifManifest(iiifItem):
 
     def manifest(self):
         manifest = {
-            "@context": [
-                "http://www.w3.org/ns/anno.jsonld",
-                "http://iiif.io/api/presentation/3/context.json"
-            ],
             'type': self.type,
             'id': self._manifest_id(),
             'label': self._lang_wrapper(self.manifest_data['label']),
