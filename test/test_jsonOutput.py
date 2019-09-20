@@ -10,7 +10,8 @@ class TestProcessCsv(unittest.TestCase):
             'collection-small-example',
             'item-one-image',
             'item-multiple-images',
-            'item-minimal-data'        ]
+            'item-minimal-data'
+        ]
         pass
 
     def test_buildJson(self):
