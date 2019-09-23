@@ -27,7 +27,6 @@ class iiifCanvas(iiifItem):
             ]
         }
 
-
     def _canvas_id(self):
         return self.config['manifest-server-base-url'] + '/' + self.config['event_id'] \
             + '/canvas/' + self.config['event_id'] + '%2F' + self.id

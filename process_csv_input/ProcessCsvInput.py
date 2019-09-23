@@ -4,7 +4,7 @@ import os
 from io import StringIO
 
 
-class processCsv():
+class ProcessCsvInput():
     # class constructor
     def __init__(self, config, main_csv, items_csv, image_data):
         self.id = config['id']
@@ -25,7 +25,7 @@ class processCsv():
         self.result_json['version'] = '1.0'
         self.result_json['errors'] = []
         self.result_json['creator'] = 'creator@email.com'
-        self.result_json['manifest-type'] = 'manifest'
+        self.result_json['manifest-type'] = 'Manifest'
         self.result_json['language'] = 'en'
         self.result_json['source-system'] = ''
         self.result_json['items'] = []
@@ -114,7 +114,7 @@ class processCsv():
 
             this_item['height'] = self._get_canvas_height(this_line['Filenames'])
             this_item['width'] = self._get_canvas_width(this_line['Filenames'])
-            this_item['manifest-type'] = 'image'
+            this_item['manifest-type'] = 'Image'
 
             self.result_json['items'].append(this_item)
 

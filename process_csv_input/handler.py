@@ -1,9 +1,7 @@
-import os
 import boto3
 import json
-import sys
-sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-from processCsv import processCsv
+from ProcessCsvInput import ProcessCsvInput
+from pathlib import Path
 
 
 def run(event, context):
@@ -19,7 +17,7 @@ def run(event, context):
     items_csv = read_s3_file_content(process_bucket, items_key)
     image_data = json.loads(read_s3_file_content(process_bucket, image_key))
 
-    csvSet = processCsv(event, main_csv, items_csv, image_data)
+    csvSet = ProcessCsvInput(event, main_csv, items_csv, image_data)
     csvSet.buildJson()
 
     write_s3_json(process_bucket, event_key, csvSet.result_json)
@@ -39,19 +37,22 @@ def write_s3_json(s3Bucket, s3Path, json_hash):
 
 # python -c 'from handler import *; test()'
 def test():
-    with open("../example/item-one-image/config.json", 'r') as input_source:
+    current_path = str(Path(__file__).parent.absolute())
+
+    with open(current_path + "/../example/item-one-image/config.json", 'r') as input_source:
         config = json.load(input_source)
     input_source.close()
-    with open("../example/item-one-image/main.csv", 'r') as input_source:
+    with open(current_path + "/../example/item-one-image/main.csv", 'r') as input_source:
         main_csv = input_source.read()
     input_source.close()
-    with open("../example/item-one-image/items.csv", 'r') as input_source:
+    with open(current_path + "/../example/item-one-image/items.csv", 'r') as input_source:
         items_csv = input_source.read()
     input_source.close()
-    with open("../example/item-one-image/image-data.json", 'r') as input_source:
+    with open(current_path + "/../example/item-one-image/image-data.json", 'r') as input_source:
         image_data = json.load(input_source)
     input_source.close()
 
-    csvSet = processCsv(config, main_csv, items_csv, image_data)
+    csvSet = ProcessCsvInput(config, main_csv, items_csv, image_data)
     csvSet.buildJson()
+
     print(csvSet.result_json)

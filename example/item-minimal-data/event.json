@@ -5,11 +5,11 @@
   "creator": "creator@email.com",
   "language": "en",
   "label": "label",
-  "manifest-type": "manifest",
+  "manifest-type": "Manifest",
   "thumbnail": "image1.tif",
   "items": [
     {
-      "manifest-type": "image",
+      "manifest-type": "Image",
       "file": "image1.tif",
       "height": 444,
       "width": 555

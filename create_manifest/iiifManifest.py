@@ -1,22 +1,20 @@
 from iiifImage import iiifImage
 from iiifCanvas import iiifCanvas
 from iiifItem import iiifItem
+from pathlib import Path
 
 
 class iiifManifest(iiifItem):
-    def __init__(self, config, manifest_data):
+    def __init__(self, config, manifest_data, image_data):
         self.id = config['id']
-        iiifItem.__init__(self, self.id, 'Manifest')
+        iiifItem.__init__(self, self.id, manifest_data['manifest-type'])
         config['event_id'] = config['id']
         self.config = config
         self.manifest_data = manifest_data
+        self.image_data = image_data
 
     def manifest(self):
         manifest = {
-            "@context": [
-                "http://www.w3.org/ns/anno.jsonld",
-                "http://iiif.io/api/presentation/3/context.json"
-            ],
             'type': self.type,
             'id': self._manifest_id(),
             'label': self._lang_wrapper(self.manifest_data['label']),
@@ -49,21 +47,32 @@ class iiifManifest(iiifItem):
         ret = []
         if 'items' in self.manifest_data:
             for item_data in self.manifest_data['items']:
-                ret.append(iiifCanvas(item_data, self.config).canvas())
+                if (item_data['manifest-type'] == 'Image'):
+                    file = Path(item_data['file']).stem
+                    item_data['width'] = self.image_data[file]['width']
+                    item_data['height'] = self.image_data[file]['height']
+
+                    ret.append(iiifCanvas(item_data, self.config).canvas())
+                elif (item_data['manifest-type'] == 'Manifest'):
+                    tempConfig = self.config
+                    tempConfig['id'] = item_data['id']
+                    ret.append(iiifManifest(self.config, item_data, self.image_data).manifest())
+                elif (item_data['manifest-type'] == 'Collection'):
+                    ret.append(iiifManifest(self.config, item_data, self.image_data).manifest())
         return ret
 
     def thumbnail(self):
-        default_page = self.manifest_data['items'][0]
-
         if 'thumbnail' in self.manifest_data:
-            for item in self.manifest_data['items']:
-                if item['file'] == self.manifest_data['thumbnail']:
-                    default_page = item.copy()
+            item = self._find_image_in_items(self.manifest_data, self.manifest_data['thumbnail'])
+            return [iiifImage(item['file'], self.config).thumbnail()]
 
-        return [iiifImage(default_page['file'], self.config).thumbnail()]
+        return []
 
     def _manifest_id(self):
-        return self.config['manifest-server-base-url'] + '/' + self.id + '/manifest'
+        if self.type == 'Manifest':
+            return self.config['manifest-server-base-url'] + '/' + self.id + '/manifest'
+        else:
+            return self.config['manifest-server-base-url'] + '/collection/' + self.id
 
     def _convert_metadata(self, metadata):
         ret = []
@@ -80,3 +89,14 @@ class iiifManifest(iiifItem):
             dict['value'] = self._lang_wrapper(dict['value'])
             return dict
         return None
+
+    def _find_image_in_items(self, data, image):
+        if ('items' in data):
+            for item in data['items']:
+                if (item['manifest-type'] != 'Image'):
+                    return self._find_image_in_items(item, image)
+
+                elif (item['file'] == image):
+                    return item
+
+        return False
