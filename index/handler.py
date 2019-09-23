@@ -4,13 +4,13 @@ import sys
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 # from create_json_items_from_embark_xml import create_json_items_from_embark_xml
-from index_manifest import index_manifest
+from index_manifest import index_manifest  # noqa: E402, F401
 
 
 def run(event, context):
     config = event.get("config")
     config["local-dir"] = "/tmp/index/"
-    #index_manifest(event.get("id"), config)
+    # index_manifest(event.get("id"), config)
     # still need to write to S3 bucket and copy to Aleph server
     return event
 

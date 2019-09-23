@@ -3,3 +3,4 @@ node_modules
 output.yml
 manifest-pipeline.yml
 collections/collection
+dependencies/
