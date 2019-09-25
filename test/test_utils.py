@@ -31,3 +31,19 @@ def load_data_for_test(id):
     input_source.close()
 
     return data
+
+
+def load_img_data_for_test():
+    current_path = str(Path(__file__).parent.absolute())
+    return {
+        'woman': {
+            'path': current_path + "/../example/2018_049_004.jpg",
+            'height': 2274,
+            'width': 3000,
+        },
+        'cube': {
+            'path': current_path + "/../example/009_output.tif",
+            'height': 3000,
+            'width': 2395,
+        }
+    }
