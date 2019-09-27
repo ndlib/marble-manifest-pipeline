@@ -58,7 +58,7 @@ class ImageProcessor:
         with open(image_data_file, 'w') as outfile:
             json.dump(self.image_info, outfile)
         s3_file = self.report_write_path + image_data_file
-        print 'Uploading {} to {}'.format(image_data_file, s3_file)
+        print('Uploading {} to {}'.format(image_data_file, s3_file))
         self.S3_RESOURCE.Bucket(self.bucket).upload_file(image_data_file, s3_file)
 
         if self.image_errs:
@@ -66,7 +66,7 @@ class ImageProcessor:
             s3_file = self.report_write_path + image_err_file
             with open(image_err_file, 'w') as outfile:
                 json.dump(self.image_errs, outfile)
-            print 'Uploading {} to {}'.format(image_err_file, s3_file)
+            print('Uploading {} to {}'.format(image_err_file, s3_file))
             self.S3_RESOURCE.Bucket(self.bucket).upload_file(image_err_file, s3_file)
 
     def record_img_err(self, file, err_msg):
@@ -79,9 +79,9 @@ class ImageProcessor:
                 shrink_by = image.height / self.MAX_IMG_HEIGHT
             else:
                 shrink_by = image.width / self.MAX_IMG_WIDTH
-            print 'Resizing original image by: {}%'.format(shrink_by)
-            print 'Original image height: {}'.format(image.height)
-            print 'Original image width: {}'.format(image.width)
+            print('Resizing original image by: {}%'.format(shrink_by))
+            print('Original image height: {}'.format(image.height))
+            print('Original image width: {}'.format(image.width))
             image = image.shrink(shrink_by, shrink_by)
         return image
 
@@ -111,23 +111,22 @@ if __name__ == "__main__":
         try:
             # prefix needed to avoid tif naming conflicts
             temp_file = 'TEMP_' + file
-            print 'Downloading {} to {}'.format(obj['Key'], temp_file)
+            print('Downloading {} to {}'.format(obj['Key'], temp_file))
             img_proc.download_image(obj['Key'], temp_file)
         except Exception as e:
-            print 'Exception with {}'.format(obj['Key'])
+            print('Exception with {}'.format(obj['Key']))
             img_proc.record_img_err(file, str(e))
             continue
 
         try:
-            print 'Generating pyramid tif for: {}'.format(file)
+            print('Generating pyramid tif for: {}'.format(file))
             img_proc.generate_pytiff(temp_file, tif_file)
         except Exception as e:
-            print e
             img_proc.record_img_err(file, str(e))
             continue
 
         try:
-            print 'Uploading {} to {}'.format(tif_file, img_proc.img_write_path)
+            print('Uploading {} to {}'.format(tif_file, img_proc.img_write_path))
             img_proc.upload_image(tif_file, tif_file)
             os.remove(temp_file)
             os.remove(tif_file)
@@ -138,4 +137,4 @@ if __name__ == "__main__":
     try:
         img_proc.upload_image_reports()
     except Exception as e:
-        print 'Couldnt write data/error file(s) to bucket: ' + str(e)
+        print('Couldnt write data/error file(s) to bucket: ' + str(e))
