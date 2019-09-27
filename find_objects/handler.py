@@ -17,15 +17,25 @@ config = get_config()
 
 def run(event, context):
     """ run the process to retrieve and process metadata files """
+    event['findObjectsCompleted'] = False
+    event['findImagesCompleted'] = False
+    event['populatePipelineCompleted'] = False
+    objects_needing_processed = []
     if config != {}:
         google_credentials = config['google']['credentials']
         google_connection = establish_connection_with_google_api(google_credentials)
         repositories = ['museum']  # ['museum', 'library']
         for repository in repositories:
-            objects_needing_processed = find_objects_needing_processed(google_connection, config, repository)
+            repository_objects_needing_processed = find_objects_needing_processed(google_connection, config, repository)  # noqa: E501
+            if len(objects_needing_processed) == 0:
+                objects_needing_processed = repository_objects_needing_processed
+            else:
+                objects_needing_processed.append(repository_objects_needing_processed)
+        event['findObjectsCompleted'] = True
     else:
         print('No configuration defined.  Unable to continue.')
-    return objects_needing_processed
+    event['objectsNeedingProcessed'] = objects_needing_processed
+    return event
 
 
 # setup:
@@ -37,9 +47,9 @@ def run(event, context):
 # python -c 'from handler import *; test()'
 def test():
     """ test execution """
-    data = {}
-    objects_needing_processed = run(data, {})
+    event = {}
+    event = run(event, {})
     current_path = str(Path(__file__).parent.absolute())
-    file_name = current_path + '/../example/recently_changed_objects_needing_processed/objects_needing_processed.json'
+    file_name = current_path + '/../example/recently_changed_objects_needing_processed/event_after_find_objects.json'  # noqa: E501
     with open(file_name, 'w', encoding='utf-8') as f:
-        json.dump(objects_needing_processed, f, ensure_ascii=False, indent=4, sort_keys=True)
+        json.dump(event, f, ensure_ascii=False, indent=4, sort_keys=True)

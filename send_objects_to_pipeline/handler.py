@@ -15,15 +15,21 @@ from send_object_to_manifest_pipeline import process_objects  # noqa: E402
 config = get_config()
 
 
-def run(objects_needing_processed, context):
+def run(event, context):
     """ run the process to retrieve and process web kiosk metadata """
+    objects_needing_processed = []
     if config != {}:
         google_credentials = config['google']['credentials']
         google_connection = establish_connection_with_google_api(google_credentials)
-        objects_needing_processed = process_objects(google_connection, config, objects_needing_processed)
+        if 'objectsNeedingProcessed' in event:
+            objects_needing_processed = event['objectsNeedingProcessed']
+            objects_needing_processed = process_objects(google_connection, config, objects_needing_processed)
     else:
         print('No configuration defined.  Unable to continue.')
-    return objects_needing_processed
+    event['objectsNeedingProcessed'] = objects_needing_processed
+    if len(objects_needing_processed) == 0:
+        event['populatePipelineCompleted'] = True
+    return event
 
 
 # setup:
@@ -35,14 +41,15 @@ def run(objects_needing_processed, context):
 # python -c 'from handler import *; test()'
 def test():
     """ test execution """
-    objects_needing_processed = {}
+    event = {}
     current_path = str(Path(__file__).parent.absolute())
-    file_name = current_path + '/../example/recently_changed_objects_needing_processed/objects_needing_processed.json'
+    file_name = current_path + '/../example/recently_changed_objects_needing_processed/event_after_find_images.json'  # noqa: E501
     if os.path.isfile(file_name):
         with open(file_name, encoding='utf-8') as data_file:
-            objects_needing_processed = json.loads(data_file.read())
+            event = json.loads(data_file.read())
             data_file.close()
-    objects_needing_processed = run(objects_needing_processed, {})
+    event = run(event, {})
+    objects_needing_processed = event['objectsNeedingProcessed']
     if len(objects_needing_processed) == 0:
         try:
             os.remove(file_name)

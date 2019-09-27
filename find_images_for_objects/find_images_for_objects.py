@@ -39,7 +39,11 @@ def find_images_for_objects(google_connection, config, objects_needing_processed
                     break
                 print("Elapsed_Time = " + str(int(time.time() - start_time)) + " seconds.")
             else:
-                print("Unable to find objectID in metadata_info: " + metadata_info['name'] + ' - unable to process file.')  # noqa: 501
+                # print(metadata_info)
+                metadata_file_name = 'NULL'
+                if 'name' in metadata_info:
+                    metadata_file_name = metadata_info['name']
+                print("Unable to find objectID in metadata_info: " + metadata_file_name + ' - unable to process file.')  # noqa: 501
     return objects_needing_processed
 
 

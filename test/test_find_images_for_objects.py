@@ -20,23 +20,24 @@ class TestCreateManifest(unittest.TestCase):
         self.setUp()
         google_credentials = self.config['google']['credentials']
         google_connection = establish_connection_with_google_api(google_credentials)
-        objects_needing_processed = {}
+        event = {}
         current_path = str(Path(__file__).parent.absolute())
         file_name = current_path + '/../example/recently_changed_objects_needing_processed/example_objects_needing_processed.json'  # noqa: 501
         if os.path.isfile(file_name):
             with open(file_name, encoding='utf-8') as data_file:
-                objects_needing_processed = json.loads(data_file.read())
+                event = json.loads(data_file.read())
                 data_file.close()
         objects_needing_processed_with_image_references = {}
-        objects_needing_processed_with_image_references = find_images_for_objects(google_connection, self.config, objects_needing_processed)  # noqa: 501
+        objects_needing_processed_with_image_references = find_images_for_objects(google_connection, self.config, event['objectsNeedingProcessed'])  # noqa: 501
         file_name = current_path + '/../example/recently_changed_objects_needing_processed/example_objects_needing_processed_with_image_references.json'  # noqa: 501
-        benchmark_objects_needing_processed_with_image_references = {}
+        benchmark_objects = {}
         if os.path.isfile(file_name):
             with open(file_name, encoding='utf-8') as data_file:
-                benchmark_objects_needing_processed_with_image_references = json.loads(data_file.read())
+                benchmark_file = json.loads(data_file.read())
                 data_file.close()
+                benchmark_objects = benchmark_file['objectsNeedingProcessed']
         self.assertEqual(objects_needing_processed_with_image_references,
-                         benchmark_objects_needing_processed_with_image_references)
+                         benchmark_objects)
 
 
 if __name__ == '__main__':
