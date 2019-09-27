@@ -1,0 +1,901 @@
+{
+    "findImagesCompleted": true,
+    "findObjectsCompleted": true,
+    "objectsNeedingProcessed": [
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1Bg0yc_7-0PashXgd9Iyas0344bRIhLt8",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_007-v0001.jpg",
+                    "filePath": "2010/2017/2017_007/2017_007-v0001.jpg",
+                    "id": "1jCGMcyWZuFgV_kDtkYiyHkxaqOVAh9tI",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1F8eVDZCSMqd9b4PlifoN3-yTaFeQwQvH"
+                    ],
+                    "size": "8497356"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "2017.007.xml",
+            "objectId": "2017.007",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "5824"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1t0FkI1c9sDEOSNL0tzhG4DyJca2k5qsv",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2016_010-v0001.jpg",
+                    "filePath": "2010/2016/2016_010/2016_010-v0001.jpg",
+                    "id": "1meeSENmE6rygxVxsmkOlJ8JnKN0YnngV",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1I4R_tblOOxSb6mL4p-b-1GoRdyuxfmh4"
+                    ],
+                    "size": "13592835"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "2016.010.xml",
+            "objectId": "2016.010",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "5768"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1QQAkBpbcQHCsmdCF2Y1m-3YN4WUWTUTn",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2015_045_003-v0002.jpg",
+                    "filePath": "2010/2015/2015_045_003/2015_045_003-v0002.jpg",
+                    "id": "1tmKX2LH8fKO9gdJtRv8g2LD3JC3lIJJm",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1MMmcSUqaJC664NVcnfZirwUOJ9HdX-b2"
+                    ],
+                    "size": "4524727"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2015_045_003-v0001.jpg",
+                    "filePath": "2010/2015/2015_045_003/2015_045_003-v0001.jpg",
+                    "id": "1V7sdBLdGLXxtpdQhhg0qausS8p2vlGG9",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1MMmcSUqaJC664NVcnfZirwUOJ9HdX-b2"
+                    ],
+                    "size": "7107476"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "2015.045.003.xml",
+            "objectId": "2015.045.003",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "5799"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1Mr0Sg4VRZPogRL6AQsKHuiPX9dAsrluA",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2012_105-v0001.jpg",
+                    "filePath": "2010/2012/2012_105/2012_105-v0001.jpg",
+                    "id": "1Rh4TwoU7Lr_DEhnM-yik24XNR-KODXaY",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "17Ex6nVDOoRl1VBugIzk7Bk0zJeVlQ6--"
+                    ],
+                    "size": "9280291"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "2012.105.xml",
+            "objectId": "2012.105",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "5524"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1ST-Ki3P0jxvU5R97lU-bk7iiwZS4PU_A",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0015.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0015.jpg",
+                    "id": "18fMnKp3lWVO9zqDTznX73KssYP81ibLa",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "3792939"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0014.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0014.jpg",
+                    "id": "1KKfAxh46Tf9Wndt-dXx5Vaqg2AQLGO9Y",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "3209518"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0013.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0013.jpg",
+                    "id": "1SvDg8_9nd4PXxZT-iEKye4Us6Ken1wRP",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "1965329"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0012.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0012.jpg",
+                    "id": "1_8J4vPbDB3ikH5-gHiDkmbg-8n5jdWfR",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "2664172"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0011.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0011.jpg",
+                    "id": "1zOSunV-MGrSKleTOFCByr5YNsNvpKBRF",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "2920219"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0010.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0010.jpg",
+                    "id": "12vHtD3r5_BOSli3q4dxJrd3EFAlKelYe",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "5520189"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0009.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0009.jpg",
+                    "id": "1CHVs4xgzKf9vydg0vY4BeN0TTEHHZygS",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "5392116"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0008.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0008.jpg",
+                    "id": "1RFjmnvCTCh1GPPw4_D1xtygXBeu_XUvN",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "4759921"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0007.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0007.jpg",
+                    "id": "1WroAOl4QthCFEk0gOfdQp_reeixLza83",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "5071758"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0006.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0006.jpg",
+                    "id": "1RkD19GrBUM338FqyZt9OAG77hSrDDILU",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "5624150"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0005.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0005.jpg",
+                    "id": "1UIzn27SQjxx0k-ZRT5dhlApAfrgBeD8u",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "4808280"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0004.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0004.jpg",
+                    "id": "1IufUsTXYRUoucttuKM0AIUkNPyGh_-Mc",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "5498786"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0003.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0003.jpg",
+                    "id": "1cQdDozdB4PDfEzm7n_DoXPqZNAdIHRbv",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "5643769"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0002.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0002.jpg",
+                    "id": "1pkWc8uBGwIFzeLvVeWPgrO1zFvdPHUIT",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "1498355"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "2017_025_667-v0001.jpg",
+                    "filePath": "2010/2017/2017_025_667/2017_025_667-v0001.jpg",
+                    "id": "1OValcTjmmbfLMRzT6u0Lvo2c1itMMQvT",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1KjEpNfZ84j9McXY7bJP5Tc9rrktN5Ojh"
+                    ],
+                    "size": "1473979"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "2017.025.667.xml",
+            "objectId": "2017.025.667",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "14350"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1El6Ylwha7Y-UhouElyI9sLXJ_3hPX5mY",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1999_024-v0001.jpg",
+                    "filePath": "1990/1999/1999_024/1999_024-v0001.jpg",
+                    "id": "10JWnCbb62Omt9PXHDdvq948rprafNi3J",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1J63ljyOkfdLFhm0y3QjSXr0kPMvBUwh5"
+                    ],
+                    "size": "1454437"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "1999.024.xml",
+            "objectId": "1999.024",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "5899"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1tBU_j22fLKalKQxspxYUVrdV1zD-k_ba",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1992_055-v0001.jpg",
+                    "filePath": "1990/1992/1992_055/1992_055-v0001.jpg",
+                    "id": "1_8pfICHDQscjjVTH_1K3scRl9DA0U_Gs",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1axSDlZ5FqXiCndVgLBbbaag6Vu8p6WUn"
+                    ],
+                    "size": "1212380"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1992_055-v0002.jpg",
+                    "filePath": "1990/1992/1992_055/1992_055-v0002.jpg",
+                    "id": "1WzwBH5Yi8Gu4G2YcKNKxsFyEAbEhHJ5h",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1axSDlZ5FqXiCndVgLBbbaag6Vu8p6WUn"
+                    ],
+                    "size": "1248116"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1992_055-v0003.jpg",
+                    "filePath": "1990/1992/1992_055/1992_055-v0003.jpg",
+                    "id": "1nt0r20tAupwIQ9tyJ7YRVDiVgnOBPu7d",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1axSDlZ5FqXiCndVgLBbbaag6Vu8p6WUn"
+                    ],
+                    "size": "833827"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1992_055-v0004.jpg",
+                    "filePath": "1990/1992/1992_055/1992_055-v0004.jpg",
+                    "id": "1mkOV5Kk5lfccppTCliw2neEz5C0fpchY",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1axSDlZ5FqXiCndVgLBbbaag6Vu8p6WUn"
+                    ],
+                    "size": "5644927"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1992_055-v0005.jpg",
+                    "filePath": "1990/1992/1992_055/1992_055-v0005.jpg",
+                    "id": "1iduUJXsPD3dsLWf9EjzAQR2XLxz4Ua2r",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1axSDlZ5FqXiCndVgLBbbaag6Vu8p6WUn"
+                    ],
+                    "size": "5678547"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1992_055-v0006.jpg",
+                    "filePath": "1990/1992/1992_055/1992_055-v0006.jpg",
+                    "id": "1slg1wuKp4woyQREJfx0L5Tki8ILBBSVa",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1axSDlZ5FqXiCndVgLBbbaag6Vu8p6WUn"
+                    ],
+                    "size": "5824447"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1992_055-v0007.jpg",
+                    "filePath": "1990/1992/1992_055/1992_055-v0007.jpg",
+                    "id": "1aSja3bJM8Fh6L-FO346iwpSS3jMBTSnh",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1axSDlZ5FqXiCndVgLBbbaag6Vu8p6WUn"
+                    ],
+                    "size": "5851122"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1992_055-v0008.jpg",
+                    "filePath": "1990/1992/1992_055/1992_055-v0008.jpg",
+                    "id": "19ObWeUM6YyrAb2tVG2xAvMKuRD7LEPq0",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1axSDlZ5FqXiCndVgLBbbaag6Vu8p6WUn"
+                    ],
+                    "size": "5845632"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "1992.055.xml",
+            "objectId": "1992.055",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "9774"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1gQcPWe01PSLP-yGaUZYdM9lfykWFoMaI",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1990_005_001-v0002.jpg",
+                    "filePath": "1990/1990/1990_005_001/1990_005_001-v0002.jpg",
+                    "id": "1S_IEouJfNCD0JNcBiPo908qTtS_R26rR",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1SqZenJGXRtDrPcNOAzE9aR8dE9k9esMj"
+                    ],
+                    "size": "5626505"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "1990.005.001.b.xml",
+            "objectId": "1990.005.001.b",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "5891"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1cNtnwvnCmORk01ZKTUZnlHMBd3OPnqL0",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1990_005_001-v0002.jpg",
+                    "filePath": "1990/1990/1990_005_001/1990_005_001-v0002.jpg",
+                    "id": "1S_IEouJfNCD0JNcBiPo908qTtS_R26rR",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1SqZenJGXRtDrPcNOAzE9aR8dE9k9esMj"
+                    ],
+                    "size": "5626505"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "1990.005.001.a.xml",
+            "objectId": "1990.005.001.a",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "5891"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1N8rZv25FWpSoUHn2IkoIFJOvj9B0YJuq",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1990_005_002-v0002.jpg",
+                    "filePath": "1990/1990/1990_005_002/1990_005_002-v0002.jpg",
+                    "id": "1_OeBE7z-nX7wNq4VP3vbmSlvBGbERIeu",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "19Z3ghQkzLP5ZLXqg1wegL5mbAklynpV5"
+                    ],
+                    "size": "5610495"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1990_005_002-v0004.jpg",
+                    "filePath": "1990/1990/1990_005_002/1990_005_002-v0004.jpg",
+                    "id": "13NXSnYaBZ9phAyR7JizQvHzIp9Bh8B6j",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "19Z3ghQkzLP5ZLXqg1wegL5mbAklynpV5"
+                    ],
+                    "size": "5564528"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1990_005_002-v0003.jpg",
+                    "filePath": "1990/1990/1990_005_002/1990_005_002-v0003.jpg",
+                    "id": "1SrUmhW9gtjaoIiWJcp1KN816Qt1KwQEL",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "19Z3ghQkzLP5ZLXqg1wegL5mbAklynpV5"
+                    ],
+                    "size": "5632899"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1990_005_002-v0001.jpg",
+                    "filePath": "1990/1990/1990_005_002/1990_005_002-v0001.jpg",
+                    "id": "1c7mPqgJxcOPpypUZK5abDWRLphX18SiR",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "19Z3ghQkzLP5ZLXqg1wegL5mbAklynpV5"
+                    ],
+                    "size": "5609174"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "1990.005.002.xml",
+            "objectId": "1990.005.002",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "7133"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1pBUG7vH-ehookspSpBTZyuFP3xAM6Mg5",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1990_005_001-v0004.jpg",
+                    "filePath": "1990/1990/1990_005_001/1990_005_001-v0004.jpg",
+                    "id": "1lxLLreSLq3v1bbvO9FsD3PMf4IV-m238",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1SqZenJGXRtDrPcNOAzE9aR8dE9k9esMj"
+                    ],
+                    "size": "5651708"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1990_005_001-v0003.jpg",
+                    "filePath": "1990/1990/1990_005_001/1990_005_001-v0003.jpg",
+                    "id": "1MrC-QDlkdMDR0rgdTENqwdlD7lY3AGe6",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1SqZenJGXRtDrPcNOAzE9aR8dE9k9esMj"
+                    ],
+                    "size": "5526047"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1990_005_001-v0002.jpg",
+                    "filePath": "1990/1990/1990_005_001/1990_005_001-v0002.jpg",
+                    "id": "1S_IEouJfNCD0JNcBiPo908qTtS_R26rR",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1SqZenJGXRtDrPcNOAzE9aR8dE9k9esMj"
+                    ],
+                    "size": "5626505"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1990_005_001-v0001.jpg",
+                    "filePath": "1990/1990/1990_005_001/1990_005_001-v0001.jpg",
+                    "id": "1HAE2M8B5WinoWwldL3-1ilWC5RMQeP7l",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1SqZenJGXRtDrPcNOAzE9aR8dE9k9esMj"
+                    ],
+                    "size": "5644344"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "1990.005.001.xml",
+            "objectId": "1990.005.001",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "7897"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1P9QlbJ9_JinEvM7G_McwTbYNQIQ4LU-Y",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1988_012-v0001.jpg",
+                    "filePath": "1980/1988/1988_012/1988_012-v0001.jpg",
+                    "id": "1RuMLoZOwNU6QD_oWH-qimLlm4NRf6pk6",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "15hbG1sxsWeM58GgJNTJflqcm0pfPXfx-"
+                    ],
+                    "size": "5453871"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1988_012-v0002.jpg",
+                    "filePath": "1980/1988/1988_012/1988_012-v0002.jpg",
+                    "id": "116CQ1umdzG0cLHYzFOa_zWUEZxs5wFpg",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "15hbG1sxsWeM58GgJNTJflqcm0pfPXfx-"
+                    ],
+                    "size": "5471959"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1988_012-v0003.jpg",
+                    "filePath": "1980/1988/1988_012/1988_012-v0003.jpg",
+                    "id": "1ZEhXuZqsu3kmz9xOds4qZZ7yzpliT4Hn",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "15hbG1sxsWeM58GgJNTJflqcm0pfPXfx-"
+                    ],
+                    "size": "5637727"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1988_012-v0004.jpg",
+                    "filePath": "1980/1988/1988_012/1988_012-v0004.jpg",
+                    "id": "1TlsVx5Xn7zy3rrKCc6lVKfLB9d6x6WkL",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "15hbG1sxsWeM58GgJNTJflqcm0pfPXfx-"
+                    ],
+                    "size": "5517339"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "1988.012.xml",
+            "objectId": "1988.012",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "7045"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1ZirA_aUByFHkQakacM-cunRqBrkO-l3o",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1983_053_002-v0001.jpg",
+                    "filePath": "1980/1983/1983_053_002/1983_053_002-v0001.jpg",
+                    "id": "1Z7VYGRwTVqDdTmBlKU8ED_54eiuTmBRn",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1Nor7kQwI9CER9ytriT-EzOJJqPnLxyVU"
+                    ],
+                    "size": "1156635"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "1983.053.002.xml",
+            "objectId": "1983.053.002",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "5183"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1FGah6o9m1hvhJfBJCgi1iVgd5sVDOFbO",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1981_105-v0001.jpg",
+                    "filePath": "1980/1981/1981_105/1981_105-v0001.jpg",
+                    "id": "1Xqvaf9vaX4eu_L0hkUus3qWkQ3JbFG4B",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1Jj-CsZ0zWWY36_rF1nxw5bq84_bliT3Q"
+                    ],
+                    "size": "2928748"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "1981.105.xml",
+            "objectId": "1981.105",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "5472"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "15vRfDETbybk061uqyAc_4O6Ue1p3EluB",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1976_057-v0001.jpg",
+                    "filePath": "1970/1976/1976_057/1976_057-v0001.jpg",
+                    "id": "1GL2V5SQQ1Um2jaKtz5D8DGUIhZqtIF-N",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1VE_r8ptv0kdEa_TpsDu-VYr7USR7nb0l"
+                    ],
+                    "size": "2425446"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "1976.057.xml",
+            "objectId": "1976.057",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "6761"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1WbF5E-RqP1GQIN8BodOIFQFiy_4SsxVd",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1973_079_005-v0002.jpg",
+                    "filePath": "1970/1973/1973_079_005/1973_079_005-v0002.jpg",
+                    "id": "1e0V2bjFQks75oIDiQKlR1Y5OZTnN5FHZ",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1fxN5caQzVj3E3bZ3gZDgSPDzUPTrttWI"
+                    ],
+                    "size": "879657"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1973_079_005-v0001.jpg",
+                    "filePath": "1970/1973/1973_079_005/1973_079_005-v0001.jpg",
+                    "id": "1hcBWzUYIs1yz_W1oYkCLgcg11Cvf0Emh",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1fxN5caQzVj3E3bZ3gZDgSPDzUPTrttWI"
+                    ],
+                    "size": "1606925"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "1973.079.005.xml",
+            "objectId": "1973.079.005",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "5527"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1NGeUstbMxLCbB3r6opNUoCSzy0TLsn-w",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1957_058-v0001.jpg",
+                    "filePath": "1950/1957_058/1957_058-v0001.jpg",
+                    "id": "1e9EQ9rSWcto0U-YUS76r77bJOOHkH5DB",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1UnJhc0BkDKzA6PbUX1V-W3-HMpvqVM3E"
+                    ],
+                    "size": "1579485"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "1957.058.xml",
+            "objectId": "1957.058",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "5958"
+        },
+        {
+            "allImagesFound": true,
+            "driveId": "0AASeuQIa42uxUk9PVA",
+            "id": "1bdzvKXWQFM-OIryOFXCYRW4CynfHGYfK",
+            "imageList": [
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1934_007_001-v0003.jpg",
+                    "filePath": "1930/1934_007_001/1934_007_001-v0003.jpg",
+                    "id": "1801JSqSXsRD9CIXl-dFkJdlXV8wLrOCi",
+                    "mimeType": "image/jpeg",
+                    "order": "1",
+                    "parents": [
+                        "1knNJR9BTYJP1JjTvlDosToJIQuqeCtYu"
+                    ],
+                    "size": "5594182"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1934_007_001-v0001.jpg",
+                    "filePath": "1930/1934_007_001/1934_007_001-v0001.jpg",
+                    "id": "1AJqKH75dk-I0sdojTFtukO7qV_IiHtHi",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1knNJR9BTYJP1JjTvlDosToJIQuqeCtYu"
+                    ],
+                    "size": "2246043"
+                },
+                {
+                    "driveId": "0AGid-WpPHOiEUk9PVA",
+                    "fileName": "1934_007_001-v0002.jpg",
+                    "filePath": "1930/1934_007_001/1934_007_001-v0002.jpg",
+                    "id": "1CQMTCghx18TmfXHauFv66_uxc1vMRzYB",
+                    "mimeType": "image/jpeg",
+                    "order": "2",
+                    "parents": [
+                        "1knNJR9BTYJP1JjTvlDosToJIQuqeCtYu"
+                    ],
+                    "size": "2288618"
+                }
+            ],
+            "mimeType": "text/xml",
+            "name": "1934.007.001.xml",
+            "objectId": "1934.007.001",
+            "parents": [
+                "1dmyElc0cuunBfDo7geaspMlNU4rtH-lq"
+            ],
+            "repository": "museum",
+            "size": "6244"
+        }
+    ],
+    "populatePipelineCompleted": false
+}
