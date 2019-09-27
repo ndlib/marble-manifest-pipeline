@@ -1,0 +1,28 @@
+{
+  "@context": "http://schema.org",
+  "@graph": [
+    {
+      "@id": "schema/id",
+      "@type": "CreativeWork",
+      "name": "label",
+      "description": "summary",
+      "license": "rights",
+      "sponsor": "attribution",
+      "identifier": "id",
+      "creator": "creator",
+      "hasPart": [
+        "schema/id%2Fimage1.tif"
+      ]
+    },
+    {
+      "@id": "schema/id%2Fimage1.tif",
+      "@type": "ImageObject",
+      "name": "image label1",
+      "caption": "summary",
+      "contentUrl": "image1.tif",
+      "position": 1,
+      "isPartOf": "schema/id",
+      "representativeOfPage": true
+    }
+  ]
+}

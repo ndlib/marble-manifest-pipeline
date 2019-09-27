@@ -1,3 +1,3 @@
 Label,Summary,Rights,Attribution,unique_identifier,Notify,Metadata_label,Metadata_value,SeeAlso_Id,SeeAlso_Label,SeeAlso_Type,SeeAlso_Format,SeeAlso_Profile,Alternate_id_system,Alternate_id_identifier,Alternate_id_url
 label,summary,rights,attribution,id,creator@email.com,,,seeAlsoId1,seeAlsoLabel1,seeAlsoType1,seeAlsoFormat1,seeAlsoProfile1,snite,,
-,,,,,,"label1","value1"
+,,,,,,"creator","creator"
