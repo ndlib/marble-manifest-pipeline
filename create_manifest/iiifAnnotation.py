@@ -17,9 +17,9 @@ class iiifAnnotation(iiifItem):
         }
 
     def _annotation_id(self):
-        return self.config['image-server-base-url'] + '/' + self.config['event_id'] \
-            + '%2F' + super().filename_with_tif_extension(self.id)
+        return self.config['manifest-server-base-url'] + '/' + self.config['event_id'] \
+            + '/annotation/' + self.id
 
     def _target_id(self):
         return self.config['manifest-server-base-url'] + '/' + self.config['event_id'] \
-            + '/canvas/' + self.config['event_id'] + '%2F' + super().filename_with_tif_extension(self.id)
+            + '/canvas/' + self.id

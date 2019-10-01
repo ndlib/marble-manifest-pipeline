@@ -39,27 +39,6 @@ def write_s3_json(s3Bucket, s3Path, json_hash):
     s3.Object(s3Bucket, s3Path).put(Body=json.dumps(json_hash), ContentType='text/json')
 
 
-def csv_to_dict(main_csv, items_csv):
-    dict = {"items": []}
-    f = StringIO(items_csv)
-    reader = csv.DictReader(f, delimiter=',')
-    for this_row in reader:
-        if reader.line_num != 1:
-            dict["items"].append(this_row)
-
-    f = StringIO(main_csv)
-    reader = csv.DictReader(f, delimiter=',')
-    for this_row in reader:
-        if reader.line_num == 2:
-            dict.update(this_row)
-            del dict["Metadata_label"]
-            del dict["Metadata_value"]
-        elif reader.line_num > 2:
-            dict[this_row["Metadata_label"]] = this_row['Metadata_value']
-
-    return dict
-
-
 # python -c 'from handler import *; test()'
 def test():
     current_path = str(Path(__file__).parent.absolute())
@@ -78,17 +57,20 @@ def test():
     input_source.close()
 
     with open(current_path + "/../example/item-one-image/descriptive_metadata_mets.xml", 'r') as input_source:
-        mets_structural = input_source.read()
+        descriptive_metadata = input_source.read()
     input_source.close()
 
-    # print(csv_to_dict(main_csv, items_csv))
+    with open(current_path + "/../example/item-one-image/structural_metadata_mets.xml", 'r') as input_source:
+        structural_metadata = input_source.read()
+    input_source.close()
 
     c = CsvToSchema(config, main_csv, items_csv, image_data)
     print(c.get_json())
     print(c.errors)
 
-    b = MetsToSchema(config, mets_structural, {}, image_data)
-    print(b.dict)
+    b = MetsToSchema(config, descriptive_metadata, structural_metadata, image_data)
+    print(b.get_json())
+
     csvSet = ProcessCsvInput(config, main_csv, items_csv, image_data)
     csvSet.buildJson()
 

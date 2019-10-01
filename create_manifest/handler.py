@@ -48,4 +48,11 @@ def test():
         config = json.load(input_source)
     input_source.close()
 
-    print(iiifCollection(config, data, image_data).manifest())
+    with open("../example/item-one-image/schema.json", 'r') as input_source:
+        schema = json.load(input_source)
+    input_source.close()
+
+    m = iiifCollection(config, schema)
+    print(m.manifest())
+
+#    print(iiifCollection(config, data, image_data).manifest())

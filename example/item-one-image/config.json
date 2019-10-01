@@ -1,5 +1,5 @@
 {
-  "id": "id",
+  "id": "identifier",
   "steps-completed": "",
   "process-bucket": "marble-manifest-prod-processbucket-kskqchthxshg",
   "process-bucket-read-basepath": "process",

@@ -31,5 +31,4 @@ class iiifImage(iiifItem):
         }
 
     def _image_id(self):
-        return self.config['image-server-base-url'] + '/' + self.config['event_id'] \
-            + '%2F' + super().filename_with_tif_extension(self.id)
+        return self.config['image-server-base-url'] + '/' + self.id

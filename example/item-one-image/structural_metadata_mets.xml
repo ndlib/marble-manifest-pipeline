@@ -1,139 +1,80 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <mets:mets xmlns:dcterms="http://purl.org/dc/terms/" xmlns:mets="http://www.loc.gov/METS/" xmlns:vracore="http://www.vraweb.org/vracore4.htm" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/METS/ http://www.loc.gov/standards/mets/mets.xsd http://purl.org/dc/terms/                  http://dublincore.org/schemas/xmls/qdc/2008/02/11/dcterms.xsd                  http://www.vraweb.org/vracore4.htm http://www.loc.gov/standards/vracore/vra-strict.xsd">
-        <mets:dmdSec ID="DSC_01_SNITE">
-          <mets:mdWrap MDTYPE="DC">
-            <mets:xmlData>
-              <dcterms:identifier>1990.005.001.a</dcterms:identifier>
-
-    
-        
-        
-        
-        
-        
-        
-        
-              <dcterms:title>Covered Sugar Bowl</dcterms:title>
-              
-              
-                  
-                  <dcterms:creator>Dufrène, Maurice</dcterms:creator>
-              
-              <dcterms:created>ca. 1899-1900</dcterms:created>
-              <dcterms:type />
-              <dcterms:extent>4 3/4 x 7 in. (12.07 x 17.78 cm)</dcterms:extent>
-            <dcterms:format />
-            <dcterms:rights>Copyright</dcterms:rights>
-            <dcterms:license />
-    
-        
-        
-            
-            <dcterms:accessRights>Galleries Ashbaugh Decorative Arts Gallery</dcterms:accessRights>
-            
-        
-        
-            <dcterms:provenance>Acquired with funds provided by the William L. and Erma M. Travis Endowment for the Decorative Arts</dcterms:provenance>
-            
-            
-            <dcterms:publisher>University of Notre Dame, Snite Museum of Art</dcterms:publisher>
-            </mets:xmlData>
-          </mets:mdWrap>
-        </mets:dmdSec>
-
-        <mets:dmdSec ID="DSC_02_SNITE">
-            <mets:mdWrap MDTYPE="VRA">
-              <mets:xmlData>
-                  <vracore:work id="w_1990.005.001.a" refid="1990.005.001.a" source="EmbARK">
-            			
-                      
-                          
-              			<vracore:agentSet>
-                            <vracore:display />
-                            <vracore:agent>
-                  				<vracore:name refid="500085880" type="personal" vocab="ULAN">Dufrène, Maurice</vracore:name>
-                                  <vracore:role>Primary</vracore:role>
-                                  <vracore:culture>French</vracore:culture>
-                                  <vracore:dates type="life">
-                  					<vracore:earliestDate>1876</vracore:earliestDate>
-                  					<vracore:latestDate>1955</vracore:latestDate>
-                  				</vracore:dates>
-                  				<vracore:attribution />
-                            </vracore:agent>
-              			</vracore:agentSet>
-                      
-            			<vracore:measurementsSet>
-                            <vracore:display>4 3/4 x 7 in. (12.07 x 17.78 cm)</vracore:display>
-                            <vracore:measurements type="height" unit="in">4 3/4 in.</vracore:measurements>
-                            <vracore:measurements type="width" unit="in">7 in.</vracore:measurements>
-                            <vracore:measurements type="depth" unit="in" />
-            			</vracore:measurementsSet>
-                        <vracore:worktypeSet><vracore:worktype>Decorative Arts, Craft, and Design</vracore:worktype></vracore:worktypeSet>
-            			<vracore:materialSet>
-            				<vracore:display>White porcelain, glazed and painted</vracore:display>
-                            <vracore:material />
-            			</vracore:materialSet>
-            			<vracore:dateSet>
-                          <vracore:display>8/26/2019 10:54:54</vracore:display>
-                          <vracore:date type="alteration">
-                            
-                      </vracore:date>
-            			</vracore:dateSet>
-                      
-                          
-                              
-                              <vracore:relationSet>
-                                  <vracore:relation relids="1990.005.001" type="componentOf">Covered Sugar Bowl</vracore:relation>
-                              </vracore:relationSet>
-                              
-                      
-                      
-                      
-                          
-                          <vracore:relationSet>
-                              <vracore:relation relids="1990.005.001.b" type="partnerInSetWith">Covered Sugar Bowl Lid</vracore:relation>
-                          </vracore:relationSet>
-                          
-                      
-                      
-                      
-
-            		</vracore:work>
-                  
-                  
-                      
-                  
-                  
-              </mets:xmlData>
-            </mets:mdWrap>
-        </mets:dmdSec>
-        <mets:fileSec>
-            <mets:fileGrp ID="JPG" USE="MASTER">
-                
-                
-                
-                    
-                        <mets:file ID="ID_1990_005_001-v0002.jpg" MIMETYPE="image/jpeg">
-                            <mets:FLocat LOCTYPE="URL" xlink:href="GOOGLE::Snite Archive-Collection Team Drive::/Media/images/1990/1990/1990_005_001/1990_005_001-v0002.jpg" />
-                        </mets:file>
-                    
-                
-            </mets:fileGrp>
-        </mets:fileSec>
-        <mets:structMap TYPE="logical">
-            <mets:div>
-                
-                
-                
-                    
-                <mets:div LABEL="primary" ORDER="1">
-                    <mets:fptr FILEID="ID_1990_005_001-v0002.jpg" />
-                </mets:div>
-                    
-                
-            </mets:div>
-        </mets:structMap>
-    </mets:mets>
-
-    
-    
+  <mets:dmdSec ID="DSC_01_SNITE">
+    <mets:mdWrap MDTYPE="DC">
+      <mets:xmlData>
+        <dcterms:identifier>1990.005.001.a</dcterms:identifier>
+        <dcterms:title>Covered Sugar Bowl</dcterms:title>
+        <dcterms:creator>Dufrène, Maurice</dcterms:creator>
+        <dcterms:created>ca. 1899-1900</dcterms:created>
+        <dcterms:type />
+        <dcterms:extent>4 3/4 x 7 in. (12.07 x 17.78 cm)</dcterms:extent>
+        <dcterms:format />
+        <dcterms:rights>Copyright</dcterms:rights>
+        <dcterms:license />
+        <dcterms:accessRights>Galleries Ashbaugh Decorative Arts Gallery</dcterms:accessRights>
+        <dcterms:provenance>Acquired with funds provided by the William L. and Erma M. Travis Endowment for the Decorative Arts</dcterms:provenance>
+        <dcterms:publisher>University of Notre Dame, Snite Museum of Art</dcterms:publisher>
+      </mets:xmlData>
+    </mets:mdWrap>
+  </mets:dmdSec>
+  <mets:dmdSec ID="DSC_02_SNITE">
+    <mets:mdWrap MDTYPE="VRA">
+      <mets:xmlData>
+        <vracore:work id="w_1990.005.001.a" refid="1990.005.001.a" source="EmbARK">
+          <vracore:agentSet>
+            <vracore:display />
+            <vracore:agent>
+              <vracore:name refid="500085880" type="personal" vocab="ULAN">Dufrène, Maurice</vracore:name>
+              <vracore:role>Primary</vracore:role>
+              <vracore:culture>French</vracore:culture>
+              <vracore:dates type="life">
+                <vracore:earliestDate>1876</vracore:earliestDate>
+                <vracore:latestDate>1955</vracore:latestDate>
+              </vracore:dates>
+              <vracore:attribution />
+            </vracore:agent>
+          </vracore:agentSet>
+          <vracore:measurementsSet>
+            <vracore:display>4 3/4 x 7 in. (12.07 x 17.78 cm)</vracore:display>
+            <vracore:measurements type="height" unit="in">4 3/4 in.</vracore:measurements>
+            <vracore:measurements type="width" unit="in">7 in.</vracore:measurements>
+            <vracore:measurements type="depth" unit="in" />
+          </vracore:measurementsSet>
+          <vracore:worktypeSet>
+            <vracore:worktype>Decorative Arts, Craft, and Design</vracore:worktype>
+          </vracore:worktypeSet>
+          <vracore:materialSet>
+            <vracore:display>White porcelain, glazed and painted</vracore:display>
+            <vracore:material />
+          </vracore:materialSet>
+          <vracore:dateSet>
+            <vracore:display>8/26/2019 10:54:54</vracore:display>
+            <vracore:date type="alteration">
+            </vracore:date>
+          </vracore:dateSet>
+          <vracore:relationSet>
+            <vracore:relation relids="1990.005.001" type="componentOf">Covered Sugar Bowl</vracore:relation>
+          </vracore:relationSet>
+          <vracore:relationSet>
+            <vracore:relation relids="1990.005.001.b" type="partnerInSetWith">Covered Sugar Bowl Lid</vracore:relation>
+          </vracore:relationSet>
+        </vracore:work>
+      </mets:xmlData>
+    </mets:mdWrap>
+  </mets:dmdSec>
+  <mets:fileSec>
+    <mets:fileGrp ID="JPG" USE="MASTER">
+      <mets:file ID="ID_image1.tif" MIMETYPE="image/tif">
+        <mets:FLocat LOCTYPE="URL" xlink:href="GOOGLE::Snite Archive-Collection Team Drive::/Media/images/1990/1990/1990_005_001/image1.tif" />
+      </mets:file>
+    </mets:fileGrp>
+  </mets:fileSec>
+  <mets:structMap TYPE="logical">
+    <mets:div>
+      <mets:div LABEL="name" ORDER="1">
+        <mets:fptr FILEID="ID_image1.tif" />
+      </mets:div>
+    </mets:div>
+  </mets:structMap>
+</mets:mets>

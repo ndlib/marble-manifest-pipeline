@@ -1,17 +1,19 @@
-import json
 import csv
 from io import StringIO
+from pathlib import Path
 
 
 class CsvToSchema():
     def __init__(self, config, main_csv, items_csv, image_data):
+        self.errors = []
+        self.config = config
+        self.image_data = image_data
         self.dict = self.csv_to_dict(main_csv, items_csv)
         self.id = self.dict['unique_identifier']
         self.base_url = config['manifest-server-base-url'] + "/" + self.id
         self.default_image = {}
         self.has_part_items = self.has_part_items()
-        self.main_item = self.main_item
-        self.errors = []
+        self.main_item = self.main_item()
 
     def get_json(self):
         graph = [self.main_item] + self.has_part_items
@@ -39,47 +41,49 @@ class CsvToSchema():
         return main
 
     def csv_to_dict(self, main_csv, items_csv):
-        dict = {"items": []}
+        ret_dict = {"items": []}
         f = StringIO(items_csv)
         reader = csv.DictReader(f, delimiter=',')
         for this_row in reader:
             if reader.line_num != 1:
-                dict["items"].append(this_row)
+                ret_dict["items"].append(this_row)
 
         f = StringIO(main_csv)
         reader = csv.DictReader(f, delimiter=',')
         for this_row in reader:
             if reader.line_num == 2:
-                dict.update(this_row)
-                del dict["Metadata_label"]
-                del dict["Metadata_value"]
+                ret_dict.update(this_row)
+                del ret_dict["Metadata_label"]
+                del ret_dict["Metadata_value"]
             elif reader.line_num > 2:
-                dict[this_row["Metadata_label"].lower()] = this_row['Metadata_value']
+                ret_dict[this_row["Metadata_label"].lower()] = this_row['Metadata_value']
 
-        return dict
+        return ret_dict
 
     def has_part_items(self):
         ret = []
         for index, item in enumerate(self.dict['items']):
-            id = self.base_url + "/" + item["Filenames"]
+            id = self.base_url + "%2F" + item["Filenames"]
+            file = Path(item["Filenames"]).stem
 
             schemaImage = {
                 "@id": id,
                 "@type": "ImageObject",
                 "name": item["Label"],
                 "caption": item["Description"],
-                "contentUrl": item["Filenames"],
-                "position": index + 1,
+                "contentUrl": self.config['image-server-base-url'] + "/" + self.id + "%2F" + item["Filenames"],
+                "position": str(index + 1),
                 "isPartOf": self.base_url,
+                "height": str(self.image_data[file]['height']),
+                "width": str(self.image_data[file]['width']),
                 "identifier": self.id + "%2F" + item["Filenames"],
-                "representativeOfPage": True
             }
             ret.append(schemaImage)
             if (item['DefaultImage'] == 'yes'):
                 self.default_image = id
 
         if (not self.default_image):
-            self._default_image = ret[0]['@id']
+            self.default_image = ret[0]['@id']
 
         return ret
 
@@ -105,7 +109,6 @@ class CsvToSchema():
           "attribution": "provider",
           "keywords": "keywords",
           "rights": "copyrightHolder",
-          "rights": "license",
           "license": "license",
           "id": "url",
           "unique_identifier": "identifier",
@@ -115,5 +118,10 @@ class CsvToSchema():
           "dimensions": "materialExtent",
           "attribution": "sponsor",
           "description": "disambiguatingDescription",
-          "thumbnail": "thumbnailURL"
+          "thumbnail": "thumbnailURL",
+          "subject": "subject",
+          "provider": "provider",
+          "datecreated": "dateCreated",
+          "conditionofaccess": "conditionOfAccess",
+          "materialextent": "materialExtent"
         }

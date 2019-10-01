@@ -3,18 +3,20 @@
   <mets:dmdSec ID="DSC_01_SNITE">
     <mets:mdWrap MDTYPE="DC">
       <mets:xmlData>
-        <dcterms:identifier>1990.005.001.a</dcterms:identifier>
-        <dcterms:title>Covered Sugar Bowl</dcterms:title>
-        <dcterms:creator>Dufrène, Maurice</dcterms:creator>
-        <dcterms:created>ca. 1899-1900</dcterms:created>
-        <dcterms:type />
-        <dcterms:extent>4 3/4 x 7 in. (12.07 x 17.78 cm)</dcterms:extent>
-        <dcterms:format />
-        <dcterms:rights>Copyright</dcterms:rights>
-        <dcterms:license />
-        <dcterms:accessRights>Galleries Ashbaugh Decorative Arts Gallery</dcterms:accessRights>
-        <dcterms:provenance>Acquired with funds provided by the William L. and Erma M. Travis Endowment for the Decorative Arts</dcterms:provenance>
-        <dcterms:publisher>University of Notre Dame, Snite Museum of Art</dcterms:publisher>
+        <dcterms:identifier>identifier</dcterms:identifier>
+        <dcterms:title>name</dcterms:title>
+        <dcterms:creator>creator</dcterms:creator>
+        <dcterms:created>dateCreated</dcterms:created>
+        <dcterms:type>artMedium</dcterms:type>
+        <dcterms:extent>materialExtent</dcterms:extent>
+        <dcterms:format>artMedium</dcterms:format>
+        <dcterms:rights>copyrightHolder</dcterms:rights>
+        <dcterms:license>license</dcterms:license>
+        <dcterms:accessRights>conditionOfAccess</dcterms:accessRights>
+        <dcterms:provenance>sponsor</dcterms:provenance>
+        <dcterms:publisher>provider</dcterms:publisher>
+        <dcterms:subject>subject</dcterms:subject>
+        <dcterms:description>description</dcterms:description>
       </mets:xmlData>
     </mets:mdWrap>
   </mets:dmdSec>
