@@ -22,7 +22,7 @@ class finalizeStep():
         self.notify()
 
     def success(self):
-        if self.error or len(self.manifest_metadata["errors"]) > 0:
+        if self.error:  # or len(self.manifest_metadata["errors"]) > 0:
             return False
 
         return True
@@ -132,19 +132,13 @@ class finalizeStep():
                 params.pop('ContinuationToken', None)
         return keys
 
-    def saveIndexMetadata(self):
-        print("Save Index Metadata")
-        s3 = boto3.resource('s3')
-
-        bucket = self.config["process-bucket"]
-        key = self.config["process-bucket-write-basepath"] + "/" + self.id + "/stepFunctionsRunMetadata.json"
-        s3.Object(bucket, key).put(Body=json.dumps(self.manifest_metadata))
-
-        return
-
     def notify(self):
         if self.success():
-            recipients = self.config['notify-on-finished'].split(",")
+            if self.config.get('notify-on-finish', False):
+                recipients = self.config['notify-on-finished'].split(",")
+            else:
+                recipients = ['jhartzle@nd.edu']
+
             subject = self.id + " Manifest Pipeline Complete"
             body_text = "The manifest pipeline has completed processing " + self.id
             body_html = """<html>
@@ -168,7 +162,7 @@ class finalizeStep():
             if self.error:
                 reportable_errs = "<li>" + str(self.error) + "</li>"
             else:
-                for err in self.manifest_metadata["errors"]:
+                for err in self.config.get("errors", []):
                     reportable_errs += "<li>" + err + "</li>"
             body_html = """<html>
             <head></head>

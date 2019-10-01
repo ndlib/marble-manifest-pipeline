@@ -6,16 +6,19 @@ from iiifCollection import iiifCollection
 
 def run(event, context):
     id = event.get('id')
-    s3_bucket = event['process-bucket']
-    s3_schema_path = os.path.join(event['process-bucket-read-basepath'], id, event["schema-file"])
-    s3_manifest_path = os.path.join(event['process-bucket-write-basepath'], id, 'manifest/index.json')
 
-    schema_json = json.loads(read_s3_file_content(s3_bucket, s3_schema_path))
+    s3_bucket = event['process-bucket']
+    s3_schema_read_path = os.path.join(event['process-bucket-read-basepath'], id, event["schema-file"])
+    s3_manifest_path = os.path.join(event['process-bucket-write-basepath'], id, 'manifest/index.json')
+    s3_schema_write_path = os.path.join(event['process-bucket-write-basepath'], id, event["schema-file"])
+
+    schema_json = json.loads(read_s3_file_content(s3_bucket, s3_schema_read_path))
 
     # get manifest object
     manifest = iiifCollection(event, schema_json)
     # write to s3
     write_s3_json(s3_bucket, s3_manifest_path, manifest.manifest())
+    write_s3_json(s3_bucket, s3_schema_write_path, schema_json)
 
     return event
 

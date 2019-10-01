@@ -12,7 +12,6 @@ class iiifManifest(iiifItem):
         iiifItem.__init__(self, self.id, self._schema_to_manifest_type())
 
     def manifest(self):
-        print(self.type)
         ret = {
             'type': self.type,
             'id': self._manifest_id(),

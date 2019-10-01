@@ -79,13 +79,16 @@ class CsvToSchema():
                 "identifier": self.id + "%2F" + item["Filenames"],
             }
             ret.append(schemaImage)
-            if (item['DefaultImage'] == 'yes'):
+            if (item.get('DefaultImage', False) == 'yes'):
                 self.default_image = id
 
         if (not self.default_image):
             self.default_image = ret[0]['@id']
 
         return ret
+
+    def get_notify_on_success(self):
+        return self.dict.get('Notify', "")
 
     def mappings(self):
         return {

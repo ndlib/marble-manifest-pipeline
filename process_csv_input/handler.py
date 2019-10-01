@@ -21,6 +21,7 @@ def run(event, context):
 
     write_s3_json(process_bucket, schema_key, csvSet.get_json())
 
+    event['notify-on-finished'] = csvSet.get_notify_on_success()
     return event
 
 

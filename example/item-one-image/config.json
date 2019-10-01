@@ -22,5 +22,6 @@
   "schema-file": "schema.json",
   "noreply-email-addr": "noreply@nd.edu",
   "troubleshoot-email-addr": "rdought1@nd.edu",
-  "metadata-source-type": "csv"
+  "metadata-source-type": "csv",
+  "errors": []
 }
