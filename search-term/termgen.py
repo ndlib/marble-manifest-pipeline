@@ -13,4 +13,5 @@ def getTermList(termid):
     result = re.sub("[\".\&\(\[\<].*?[;\)\]\>]", "", result)
     result = re.sub("\n\n", "\n", result)
     result = re.sub("\n", ", ", result)
-    return result
+    results = result.split(', ')
+    return results
