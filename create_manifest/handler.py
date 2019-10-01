@@ -7,17 +7,13 @@ from iiifCollection import iiifCollection
 def run(event, context):
     id = event.get('id')
     s3_bucket = event['process-bucket']
-    s3_event_path = os.path.join(event['process-bucket-read-basepath'], id, event["event-file"])
-    s3_image_data_path = os.path.join(event['process-bucket-read-basepath'], id, event["image-data-file"])
+    s3_schema_path = os.path.join(event['process-bucket-read-basepath'], id, event["schema-file"])
     s3_manifest_path = os.path.join(event['process-bucket-write-basepath'], id, 'manifest/index.json')
 
-    # for testing see test() below.
-    # This allows this to be run locally without having a file in s3
-    manifestData = json.loads(read_s3_file_content(s3_bucket, s3_event_path))
-    imageData = json.loads(read_s3_file_content(s3_bucket, s3_image_data_path))
+    schema_json = json.loads(read_s3_file_content(s3_bucket, s3_schema_path))
 
     # get manifest object
-    manifest = iiifCollection(event, manifestData, imageData)
+    manifest = iiifCollection(event, schema_json)
     # write to s3
     write_s3_json(s3_bucket, s3_manifest_path, manifest.manifest())
 

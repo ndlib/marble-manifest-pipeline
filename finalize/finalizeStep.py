@@ -79,14 +79,14 @@ class finalizeStep():
         s3 = boto3.resource('s3')
         copy_source = {
             'Bucket': self.config["process-bucket"],
-            'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/schema/index.json"
+            'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/" + self.config['schema-file']
         }
 
         bucket = s3.Bucket(self.config["manifest-server-bucket"])
         print(copy_source)
 
         other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
-            + self.id + "/schema/index.json"
+            + self.id + "/index.json"
         bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
 
         return
@@ -238,11 +238,3 @@ class finalizeStep():
             return basepath + "/"
 
         return ""
-
-    # read event data
-    def read_event_data(self):
-        remote_file = self.config['process-bucket-read-basepath'] + "/" \
-            + self.id + "/" + self.config["event-file"]
-        content_object = boto3.resource('s3').Object(self.config['process-bucket'], remote_file)
-        file_content = content_object.get()['Body'].read().decode('utf-8')
-        return json.loads(file_content)

@@ -10,7 +10,7 @@
     "main-csv": "main.csv",
     "canvas-default-height": 2000,
     "canvas-default-width": 2000,
-    "event-file": "event.json",
+    "schema-file": "schema.json",
     "image-server-base-url": "https://image-iiif-test.libraries.nd.edu:8182/iiif/2",
     "image-server-bucket": "marble-data-broker-publicbucket-kebe5zkimvyg",
     "manifest-server-base-url": "https://marble-manifest-test.libraries.nd.edu",
