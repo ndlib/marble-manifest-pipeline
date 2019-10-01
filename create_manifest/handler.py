@@ -36,14 +36,6 @@ def write_s3_json(s3_bucket, s3_path, json_hash):
 
 # python -c 'from handler import *; test()'
 def test():
-    with open("../example/collection-small/event.json", 'r') as input_source:
-        data = json.load(input_source)
-    input_source.close()
-
-    with open("../example/collection-small/image-data.json", 'r') as input_source:
-        image_data = json.load(input_source)
-    input_source.close()
-
     with open("../example/collection-small/config.json", 'r') as input_source:
         config = json.load(input_source)
     input_source.close()

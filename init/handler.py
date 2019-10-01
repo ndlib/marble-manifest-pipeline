@@ -39,10 +39,12 @@ def get_config():
         "sequence-csv": 'sequence.csv',
         "items-csv": 'items.csv',
         "main-csv": 'main.csv',
+        "descriptive-mets-file": "descriptive_metadata_mets.xml",
+        "structural-mets-file": "structural_metadata_mets.xml",
         "canvas-default-height": 2000,
         "canvas-default-width": 2000,
         "image-data-file": "image_data.json",
-        "event-file": "event.json"
+        "schema-file": "schema.json"
     }
 
     # read the keys we want out of ssm

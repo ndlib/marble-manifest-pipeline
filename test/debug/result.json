@@ -1,37 +1,191 @@
 {
-  "@context": "http://schema.org",
-  "@graph": [
+  "@context": [
+    "http://www.w3.org/ns/anno.jsonld",
+    "http://iiif.io/api/presentation/3/context.json"
+  ],
+  "id": "https://presentation-iiif.library.nd.edu/identifier/manifest",
+  "items": [
     {
-      "@id": "https://presentation-iiif.library.nd.edu/identifier",
-      "@type": "CreativeWork",
-      "conditionOfAccess": "conditionOfAccess",
-      "copyrightHolder": "copyrightHolder",
-      "creator": "creator",
-      "dateCreated": "dateCreated",
-      "description": "description",
-      "hasPart": [
-        "https://presentation-iiif.library.nd.edu/identifier%2Fimage1.tif"
-      ],
-      "identifier": "identifier",
-      "license": "license",
-      "materialExtent": "materialExtent",
-      "name": "name",
-      "provider": "provider",
-      "sponsor": "sponsor",
-      "subject": "subject",
-      "thumbnail": "https://presentation-iiif.library.nd.edu/identifier%2Fimage1.tif"
-    },
-    {
-      "@id": "https://presentation-iiif.library.nd.edu/identifier%2Fimage1.tif",
-      "@type": "ImageObject",
-      "caption": "",
-      "contentUrl": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif",
       "height": "444",
-      "identifier": "identifier%2Fimage1.tif",
-      "isPartOf": "https://presentation-iiif.library.nd.edu/identifier",
-      "name": "name",
-      "position": "1",
+      "id": "https://presentation-iiif.library.nd.edu/identifier/canvas/identifier%2Fimage1.tif",
+      "items": [
+        {
+          "id": "AnnotationUrl",
+          "items": [
+            {
+              "body": {
+                "format": "image/jpeg",
+                "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif",
+                    "profile": "http://iiif.io/api/image/2/level2.json",
+                    "type": "ImageService2"
+                  }
+                ],
+                "type": "Image"
+              },
+              "id": "https://presentation-iiif.library.nd.edu/identifier/annotation/identifier%2Fimage1.tif",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.library.nd.edu/identifier/canvas/identifier%2Fimage1.tif",
+              "type": "Annotation"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "label": {
+        "en": [
+          "name"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Canvas",
       "width": "555"
     }
-  ]
+  ],
+  "label": {
+    "en": [
+      "name"
+    ]
+  },
+  "metadata": [
+    {
+      "label": {
+        "en": [
+          "Creator"
+        ]
+      },
+      "value": {
+        "en": [
+          "creator"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Date"
+        ]
+      },
+      "value": {
+        "en": [
+          "dateCreated"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Material Extent"
+        ]
+      },
+      "value": {
+        "en": [
+          "materialExtent"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Copyright Holder"
+        ]
+      },
+      "value": {
+        "en": [
+          "copyrightHolder"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Condition Of Access"
+        ]
+      },
+      "value": {
+        "en": [
+          "conditionOfAccess"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Provienance"
+        ]
+      },
+      "value": {
+        "en": [
+          "sponsor"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Subject"
+        ]
+      },
+      "value": {
+        "en": [
+          "subject"
+        ]
+      }
+    }
+  ],
+  "requiredStatement": {
+    "label": {
+      "en": [
+        "Condition Of Access"
+      ]
+    },
+    "value": {
+      "en": [
+        "conditionOfAccess"
+      ]
+    }
+  },
+  "rights": "license",
+  "seeAlso": [
+    {
+      "format": "application/ld+json",
+      "id": "https://presentation-iiif.library.nd.edu/identifier",
+      "profile": "https://schema.org/",
+      "type": "Dataset"
+    }
+  ],
+  "summary": {
+    "en": [
+      "description"
+    ]
+  },
+  "thumbnail": [
+    {
+      "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif/full/250,/0/default.jpg",
+      "service": [
+        {
+          "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif",
+          "profile": "http://iiif.io/api/image/2/level2.json",
+          "type": "ImageService2"
+        }
+      ],
+      "type": "Image"
+    }
+  ],
+  "type": "Manifest",
+  "viewingDirection": "left-to-right"
 }
