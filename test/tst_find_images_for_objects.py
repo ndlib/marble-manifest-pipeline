@@ -13,6 +13,10 @@ from find_images_for_objects.google_utilities import establish_connection_with_g
 
 class TestCreateManifest(unittest.TestCase):
     def setUp(self):
+        if "SSM_MARBLE_DATA_PROCESSING_KEY_BASE" not in os.environ:
+            os.environ["SSM_MARBLE_DATA_PROCESSING_KEY_BASE"] = "/all/marble-data-processing/test"
+        if "SSM_KEY_BASE" not in os.environ:
+            os.environ["SSM_KEY_BASE"] = "/all/manifest-pipeline-v3"
         self.config = get_config()
         pass
 
