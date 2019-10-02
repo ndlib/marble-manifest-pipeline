@@ -17,6 +17,7 @@ class finalizeStep():
             self.movePyramids()
             self.moveManifest()
             self.moveSchema()
+            self.moveMets()
             self.saveLastRun()
         self.notify()
 
@@ -87,6 +88,23 @@ class finalizeStep():
         other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
             + self.id + "/index.json"
         bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
+
+        return
+
+    def moveMets(self):
+        if self.config['metadata-source-type'] == 'mets':
+            s3 = boto3.resource('s3')
+            copy_source = {
+                'Bucket': self.config["process-bucket"],
+                'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/mets.xml"
+            }
+
+            bucket = s3.Bucket(self.config["manifest-server-bucket"])
+            print(copy_source)
+
+            other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
+                + self.id + "/mets.xml"
+            bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
 
         return
 
@@ -217,7 +235,7 @@ class finalizeStep():
 
     def _event_manifest_url(self):
         return self.config['manifest-server-base-url'] \
-            + self.id + '/manifest/index.json'
+            + "/" + self.id + '/manifest/index.json'
 
     def _event_imageviewer_url(self, universalviewer=False):
         url = 'https://viewer-iiif.library.nd.edu/'

@@ -29,10 +29,23 @@ class iiifManifest(iiifItem):
         }
         if self.creativework_data.get('conditionOfAccess', False):
             ret['requiredStatement'] = self._convert_label_value('Condition Of Access', self.creativework_data['conditionOfAccess'])
+
         if self.creativework_data.get('license', False):
             ret['rights'] = self.creativework_data['license']
+
         if self.creativework_data.get('description', False):
             ret['summary'] = self._lang_wrapper(self.creativework_data['description'])
+
+        print("----")
+        if self.config['metadata-source-type'] == 'mets':
+            print(ret['seeAlso'])
+            ret['seeAlso'].append({
+                "id": self.config['manifest-server-base-url'] + '/' + self.id + '/mets.xml',
+                "type": "Dataset",
+                "format": "application/xml",
+                "profile": "https://schema.org/"
+            })
+            print(ret['seeAlso'])
 
         for key, label in self._schema_to_metadata_mappings().items():
             if self.creativework_data.get(key, False):
