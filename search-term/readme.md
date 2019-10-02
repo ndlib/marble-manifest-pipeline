@@ -8,7 +8,7 @@ Function takes the id and retrieves the hierarchy listing of terms, including al
 
 Using the ID for marble (rock)
 
-`getTermList('http://www.getty.edu/vow/AATHierarchy?find=&logic=AND&note=&page=1&subjectid=300011443')`
+`get_term_list('http://www.getty.edu/vow/AATHierarchy?find=&logic=AND&note=&page=1&subjectid=300011443')`
 
 expected response:
 

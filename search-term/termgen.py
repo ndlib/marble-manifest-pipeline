@@ -2,7 +2,7 @@ import urllib2
 import re
 
 
-def getTermList(termuri):
+def get_term_list(termuri):
     response = urllib2.urlopen(termuri)
     lines = response.readlines()
     result = ""
