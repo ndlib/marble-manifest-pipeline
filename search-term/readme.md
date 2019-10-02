@@ -1,15 +1,14 @@
 #Term Generation
 
-When calling on getTermList, supply the Art and Architecture Thesaurus(AAT) ID
+When calling on getTermList, supply the Art and Architecture Thesaurus(AAT) URI for hierarchy page
 
 Function takes the id and retrieves the hierarchy listing of terms, including all parent terms and two levels of children terms. After removing all extra formatting and html tags, function compiles the hierarchy list as a csv list.
 
 #Example Use
 
-
 Using the ID for marble (rock)
 
-`getTermList(300011443)`
+`getTermList('http://www.getty.edu/vow/AATHierarchy?find=&logic=AND&note=&page=1&subjectid=300011443')`
 
 expected response:
 

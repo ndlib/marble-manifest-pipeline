@@ -2,8 +2,8 @@ import urllib2
 import re
 
 
-def getTermList(termid):
-    response = urllib2.urlopen('http://www.getty.edu/vow/AATHierarchy?find=&logic=AND&note=&page=1&subjectid='+termid)
+def getTermList(termuri):
+    response = urllib2.urlopen(termuri)
     lines = response.readlines()
     result = ""
     for line in lines:
