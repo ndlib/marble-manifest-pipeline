@@ -22,8 +22,11 @@ def determine_source_type(event):
         id = o.get('Key').replace(prefix, "")
         keys.append(id)
 
-    if (event["main-csv"] in keys):
+    print(event)
+    if (event["main-csv"] in keys and event['items-csv'] in keys):
         return "csv"
+    elif (event['descriptive-mets-file'] in keys and event['structural-mets-file'] in keys):
+        return 'mets'
 
     raise Exception('unable to determine metadata source type from {}'.format(keys))
 
@@ -33,10 +36,8 @@ def get_config():
     config = {
         "process-bucket-read-basepath": 'process',
         "process-bucket-write-basepath": 'finished',
-        "process-bucket-index-basepath": 'index',
         "image-server-bucket-basepath": '',
         "manifest-server-bucket-basepath": '',
-        "sequence-csv": 'sequence.csv',
         "items-csv": 'items.csv',
         "main-csv": 'main.csv',
         "descriptive-mets-file": "descriptive_metadata_mets.xml",

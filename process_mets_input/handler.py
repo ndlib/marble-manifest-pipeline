@@ -1,6 +1,6 @@
 import boto3
 import json
-from mets_to_schema import MetsToSchema
+from MetsToSchema import MetsToSchema
 from pathlib import Path
 
 
@@ -8,7 +8,7 @@ def run(event, context):
     id = event.get("id")
 
     process_bucket = event['process-bucket']
-    descriptive_metadata_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event['descriptive-metadata-file']
+    descriptive_metadata_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event['descriptive-mets-file']
     structural_metadata_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event['structural-mets-file']
     image_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event["image-data-file"]
     schema_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event["schema-file"]

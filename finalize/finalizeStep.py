@@ -18,7 +18,6 @@ class finalizeStep():
             self.moveManifest()
             self.moveSchema()
             self.saveLastRun()
-            self.saveIndexMetadata()
         self.notify()
 
     def success(self):
@@ -217,7 +216,7 @@ class finalizeStep():
         return
 
     def _event_manifest_url(self):
-        return 'https://presentation-iiif.library.nd.edu/' \
+        return self.config['manifest-server-base-url'] \
             + self.id + '/manifest/index.json'
 
     def _event_imageviewer_url(self, universalviewer=False):

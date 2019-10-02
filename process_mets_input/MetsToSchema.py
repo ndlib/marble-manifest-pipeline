@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 from io import StringIO
 from pathlib import Path
+import os
 
 
 class MetsToSchema():
@@ -62,6 +63,8 @@ class MetsToSchema():
         ret = []
         for index, item in enumerate(xml_value):
             filename = item.find('.//mets:fptr', self.structural_namespaces).attrib['FILEID'].replace('ID_', '')
+            filename = self.filename_with_tif_extension(filename)
+
             position = item.attrib['ORDER']
             name = item.attrib['LABEL']
             file = Path(filename).stem
@@ -104,6 +107,10 @@ class MetsToSchema():
           # "material": "vracore:display",
           # "dateModified": "vracore:latestDate"
         }
+
+    def filename_with_tif_extension(self, file):
+        return os.path.splitext(file)[0] + '.tif'
+
 #           "temporalCoverage": "dcterms:created",
 #         <dcterms:type>artMedium</dcterms:type>
 #  <dcterms:format>artMedium</dcterms:format>
