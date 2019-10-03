@@ -8,10 +8,10 @@ from test.test_utils import debug_json
 class TestCreateManifest(unittest.TestCase):
     def setUp(self):
         self.ids = [
-            #'collection-small',
+            # 'collection-small',
             'item-one-image',
-            #'item-multiple-images',
-            #'item-minimal-data'
+            # 'item-multiple-images',
+            # 'item-minimal-data'
         ]
         pass
 
