@@ -5,6 +5,8 @@ import time
 import boto3
 from botocore.exceptions import ClientError
 import locale
+import json
+import os
 from google_utilities import download_google_file
 from file_system_utilities import delete_file  # , get_full_path_file_name  # noqa: E402
 
@@ -23,11 +25,24 @@ def process_objects(google_connection, config, objects_needing_processed):
         if not object_already_processed and metadata_info['allImagesFound']:
             success = _process_individual_object(google_connection, config, metadata_info)
             metadata_info['objectSuccessfullyProcessed'] = success
+            _start_next_step(metadata_info['objectId'])
+
         if int(time.time() - start_time) > (seconds_to_allow_for_processing):
             print("Time expired. Saving objects still needing processed and exiting")
             objects_still_needing_processed = _return_objects_still_needing_processed(objects_needing_processed)
             break
     return objects_still_needing_processed
+
+
+def _start_next_step(id):
+    print("starting")
+    statemachine_arn = os.environ['STATE_MACHINE']
+    client = boto3.client('stepfunctions')
+    response = client.start_execution(
+        stateMachineArn=statemachine_arn,
+        input=json.dumps({"id": id})
+    )
+    return response
 
 
 def _return_objects_still_needing_processed(objects_needing_processed):
@@ -78,8 +93,10 @@ def _copy_metadata_files_from_google_drive_to_s3(google_connection, bucket_name,
             structural_metadata_file_name = descriptive_metadata_file_name
         else:
             raise ValueError('We can only process metadata for the museum at this time.')
-            structural_metadata_file_name = '/tmp/' + object_id + '.xml'
-            download_google_file(google_connection, metadata_info['id'], structural_metadata_file_name)
+
+        structural_metadata_file_name = '/tmp/' + object_id + '.xml'
+        print("copying xml: " + structural_metadata_file_name)
+        download_google_file(google_connection, metadata_info['id'], structural_metadata_file_name)
         structural_metadata_uploaded = _upload_to_s3(bucket_name, structural_metadata_file_name,
                                                      object_folder_name + 'structural_metadata_mets.xml')
     metadata_info['structuralMetadataUploaded'] = structural_metadata_uploaded

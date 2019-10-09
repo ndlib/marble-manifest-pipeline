@@ -43,13 +43,16 @@ def test():
     """ test execution """
     event = {}
     current_path = str(Path(__file__).parent.absolute())
-    file_name = current_path + '/../example/recently_changed_objects_needing_processed/event_after_find_images.json'  # noqa: E501
-    if os.path.isfile(file_name):
-        with open(file_name, encoding='utf-8') as data_file:
-            event = json.loads(data_file.read())
-            data_file.close()
+    file_name = current_path + '/../example/recently_changed_objects_needing_processed/event_after_find_objects.json'  # noqa: E501
+    # if os.path.isfile(file_name):
+    print (file_name)
+    with open(file_name, encoding='utf-8') as data_file:
+        event = json.loads(data_file.read())
+        data_file.close()
+    print(event)
     event = run(event, {})
     objects_needing_processed = event['objectsNeedingProcessed']
+
     if len(objects_needing_processed) == 0:
         try:
             os.remove(file_name)
