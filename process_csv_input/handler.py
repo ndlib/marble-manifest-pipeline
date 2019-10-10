@@ -10,7 +10,7 @@ def run(event, context):
     process_bucket = event['process-bucket']
     main_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event['main-csv']
     items_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event['items-csv']
-    image_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event["image-data-file"]
+    image_key = event['process-bucket-write-basepath'] + "/" + id + "/" + event["image-data-file"]
     schema_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event["schema-file"]
 
     main_csv = read_s3_file_content(process_bucket, main_key)
