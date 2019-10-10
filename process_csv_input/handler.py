@@ -1,7 +1,7 @@
 import boto3
 import json
-from ProcessCsvInput import ProcessCsvInput
 from pathlib import Path
+from CsvToSchema import CsvToSchema
 
 
 def run(event, context):
@@ -11,17 +11,17 @@ def run(event, context):
     main_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event['main-csv']
     items_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event['items-csv']
     image_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event["image-data-file"]
-    event_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event["event-file"]
+    schema_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event["schema-file"]
 
     main_csv = read_s3_file_content(process_bucket, main_key)
     items_csv = read_s3_file_content(process_bucket, items_key)
     image_data = json.loads(read_s3_file_content(process_bucket, image_key))
 
-    csvSet = ProcessCsvInput(event, main_csv, items_csv, image_data)
-    csvSet.buildJson()
+    csvSet = CsvToSchema(event, main_csv, items_csv, image_data)
 
-    write_s3_json(process_bucket, event_key, csvSet.result_json)
+    write_s3_json(process_bucket, schema_key, csvSet.get_json())
 
+    event['notify-on-finished'] = csvSet.get_notify_on_success()
     return event
 
 
@@ -40,19 +40,21 @@ def test():
     current_path = str(Path(__file__).parent.absolute())
 
     with open(current_path + "/../example/item-one-image/config.json", 'r') as input_source:
-        config = json.load(input_source)
+        event = json.load(input_source)
     input_source.close()
+
     with open(current_path + "/../example/item-one-image/main.csv", 'r') as input_source:
         main_csv = input_source.read()
     input_source.close()
+
     with open(current_path + "/../example/item-one-image/items.csv", 'r') as input_source:
         items_csv = input_source.read()
     input_source.close()
+
     with open(current_path + "/../example/item-one-image/image-data.json", 'r') as input_source:
         image_data = json.load(input_source)
     input_source.close()
 
-    csvSet = ProcessCsvInput(config, main_csv, items_csv, image_data)
-    csvSet.buildJson()
-
-    print(csvSet.result_json)
+    c = CsvToSchema(event, main_csv, items_csv, image_data)
+    print(c.get_json())
+    print(c.errors)

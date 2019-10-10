@@ -59,6 +59,7 @@ def write_s3_json(s3_bucket, s3Path, manifest):
     s3.Object(s3_bucket, s3Path).put(Body=json.dumps(manifest), ContentType='text/json')
 
 
+# python -c 'from handler import *; test()'
 def test():
     with open("../example/item-one-image/config.json", 'r') as input_source:
         event = json.load(input_source)
@@ -73,5 +74,3 @@ def test():
 
     print("SCHEMA:")
     print(schema_dict)
-    print("EVENT_JSON:")
-    print(event_json)

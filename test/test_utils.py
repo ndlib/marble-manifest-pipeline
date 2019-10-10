@@ -22,15 +22,36 @@ def load_data_for_test(id):
         data['image_data'] = json.load(input_source)
     input_source.close()
 
-    with open(current_path + '/../example/{}/event.json'.format(id), 'r') as input_source:
-        data['event_json'] = json.load(input_source)
-    input_source.close()
-
     with open(current_path + '/../example/{}/manifest.json'.format(id), 'r') as input_source:
         data['manifest_json'] = json.load(input_source)
     input_source.close()
 
+    with open(current_path + '/../example/{}/schema.json'.format(id), 'r') as input_source:
+        data['schema_json'] = json.load(input_source)
+    input_source.close()
+
+    with open(current_path + '/../example/{}/descriptive_metadata_mets.xml'.format(id), 'r') as input_source:
+        data['descriptive_metadata'] = input_source.read()
+    input_source.close()
+
+    with open(current_path + '/../example/{}/structural_metadata_mets.xml'.format(id), 'r') as input_source:
+        data['structural_metadata'] = input_source.read()
+    input_source.close()
+
     return data
+
+
+def debug_json(tested, result):
+    tested = json.dumps(tested, sort_keys=True, indent=2)
+    result = json.dumps(result, sort_keys=True, indent=2)
+
+    f = open("./test/debug/test.json", "w")
+    f.write(tested)
+    f.close()
+
+    f = open("./test/debug/result.json", "w")
+    f.write(result)
+    f.close()
 
 
 def load_img_data_for_test():

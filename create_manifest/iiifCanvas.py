@@ -6,9 +6,9 @@ from iiifAnnotationPage import iiifAnnotationPage
 class iiifCanvas(iiifItem):
     def __init__(self, item_data, config):
         # item_data = {'file': '1982_072_001_a-v0001.jpg', 'label': '072_001_a-v0001', 'height': 1747, 'width': 3000}
-        iiifItem.__init__(self, item_data['file'], 'Canvas')
+        iiifItem.__init__(self, item_data['identifier'], 'Canvas')
         self.config = config
-        self.label = self._lang_wrapper(item_data.get('label', item_data['file']))
+        self.label = self._lang_wrapper(item_data.get('label', item_data['name']))
         self.height = item_data['height']
         self.width = item_data['width']
 
@@ -29,4 +29,4 @@ class iiifCanvas(iiifItem):
 
     def _canvas_id(self):
         return self.config['manifest-server-base-url'] + '/' + self.config['event_id'] \
-            + '/canvas/' + self.config['event_id'] + '%2F' + self.id
+            + '/canvas/' + self.id

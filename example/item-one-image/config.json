@@ -1,5 +1,5 @@
 {
-  "id": "id",
+  "id": "identifier",
   "steps-completed": "",
   "process-bucket": "marble-manifest-prod-processbucket-kskqchthxshg",
   "process-bucket-read-basepath": "process",
@@ -14,9 +14,14 @@
   "simple-image-viewer-url": "",
   "canvas-default-height": 2000,
   "canvas-default-width": 2000,
+  "items-csv": "items.csv",
+  "main-csv": "main.csv",
+  "descriptive-mets-file": "descriptive_metadata_mets.xml",
+  "structural-mets-file": "structural_metadata_mets.xml",
   "image-data-file": "image_data.json",
-  "event-file": "event.json",
+  "schema-file": "schema.json",
   "noreply-email-addr": "noreply@nd.edu",
   "troubleshoot-email-addr": "rdought1@nd.edu",
-  "metadata-source-type": "csv"
+  "metadata-source-type": "csv",
+  "errors": []
 }
