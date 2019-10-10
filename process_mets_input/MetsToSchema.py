@@ -67,14 +67,13 @@ class MetsToSchema():
 
             position = item.attrib['ORDER']
             name = item.attrib['LABEL']
-            file = Path(filename).stem
             schemaImage = {
                 "@id": self.base_url + "%2F" + filename,
                 "@type": "ImageObject",
                 "name": name,
                 "caption": "",
-                "height": str(self.image_data[file]['height']),
-                "width": str(self.image_data[file]['width']),
+                "height": str(self.image_data[filename]['height']),
+                "width": str(self.image_data[filename]['width']),
                 "contentUrl": self.config['image-server-base-url'] + "/" + self.id + "%2F" + filename,
                 "position": str(position),
                 "isPartOf": self.base_url,
