@@ -64,7 +64,7 @@ class CsvToSchema():
         ret = []
         for index, item in enumerate(self.dict['items']):
             id = self.base_url + "%2F" + item["Filenames"]
-            file = Path(item["Filenames"]).stem
+            file = item["Filenames"]
 
             schemaImage = {
                 "@id": id,

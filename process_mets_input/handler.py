@@ -10,7 +10,7 @@ def run(event, context):
     process_bucket = event['process-bucket']
     descriptive_metadata_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event['descriptive-mets-file']
     structural_metadata_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event['structural-mets-file']
-    image_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event["image-data-file"]
+    image_key = event['process-bucket-write-basepath'] + "/" + id + "/" + event["image-data-file"]
     schema_key = event['process-bucket-read-basepath'] + "/" + id + "/" + event["schema-file"]
 
     descriptive_metadata_xml = read_s3_file_content(process_bucket, descriptive_metadata_key)
