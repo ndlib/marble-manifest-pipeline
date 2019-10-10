@@ -9,7 +9,7 @@ def get_loc_list(locuri):
            'Accept-Encoding': 'none',
            'Accept-Language': 'en-US,en;q=0.8',
            'Connection': 'keep-alive'}
-    response = urllib2.urlopen(urllib2.Request("http://www.loc.gov/item/94512286/", headers=hdr))
+    response = urllib2.urlopen(urllib2.Request(locuri, headers=hdr))
     lines = response.readlines()
     result = ""
     for line in lines:
