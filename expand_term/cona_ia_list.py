@@ -2,7 +2,7 @@ import urllib
 import re
 
 
-def get_conaia_list(conaiauri):
+def get_cona_ia_list(conaiauri):
     response = urllib.urlopen(conaiauri)
     lines = response.readlines()
     result = ""
