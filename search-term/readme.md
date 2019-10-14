@@ -1,8 +1,8 @@
-#Term Generation
+# Term Generation
 
 When calling on get_list, supply the Art and Architecture Thesaurus(AAT) URI for hierarchy page, the CONA Iconography URI, or the Library of Congress Item URI. get_list will then determine which URI type it is, call to have the URI processed, and return the usable data.
 
-#Example Use
+# Example Use
 
 Call function using the URI for marble (rock) from the getty vocab:
 
