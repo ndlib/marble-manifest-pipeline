@@ -20,5 +20,4 @@ def get_conaia_list(conaiauri):
     result = re.sub("  ", "", result)
     result = re.sub("\.\.", "", result)
     results = result.split("; ")
-    print results
     return results
