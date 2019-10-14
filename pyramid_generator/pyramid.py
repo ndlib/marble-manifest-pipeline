@@ -7,6 +7,7 @@ from pyvips import Image, Error
 import json
 import boto3
 from botocore.exceptions import ClientError
+from pathlib import Path
 
 
 class ImageProcessor():
@@ -145,6 +146,8 @@ class ImageProcessor():
             filename: file reporting about
             image: vips image object
         """
+        filename = Path(filename).stem
+
         self.image_info[filename] = {
             u'height': image.get('height'),
             u'width': image.get('width')
