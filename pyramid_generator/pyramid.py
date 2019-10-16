@@ -3,11 +3,11 @@
 
 import sys
 import os
-from pyvips import Image, Error
+import hashlib
 import json
+from pyvips import Image, Error
 import boto3
 from botocore.exceptions import ClientError
-from pathlib import Path
 
 
 class ImageProcessor():
@@ -30,8 +30,11 @@ class ImageProcessor():
         img_read_path (str): path in S3 bucket to pull images
         img_write_path (str): path in S3 bucket to push pytiffs
         report_write_path (str): path in S3 bucket to push image reports
+        image_data_file (str): name of file with image data
         image_info (dict): filename -> {image stats}
+        __filename (str): name of file currently processing
         image_errs (dict): filename -> {error message}
+        previous_run_data (dict): image data, if any, from prior runthrough
 
     Args:
         config (dict): S3 config information (bucketname, paths, id, etc)
@@ -52,8 +55,11 @@ class ImageProcessor():
             + config['id'] + '/images/'
         self.report_write_path = config['process-bucket-write-basepath'] + '/' \
             + config['id'] + '/'
+        self.image_data_file = config['image-data-file']
         self.image_info = {}
+        self.__filename = None
         self.image_errs = {}
+        self.previous_run_data = {}
 
     def list_images(self) -> dict:
         """
@@ -65,6 +71,47 @@ class ImageProcessor():
         kwargs = {'Bucket': self.bucket, 'Prefix': self.img_read_path}
         return self.S3_CLIENT.list_objects_v2(**kwargs)['Contents']
 
+    def _download_s3_file(self, s3_file: str, **kwargs) -> None:
+        """
+        Download S3 bucket object to local file system.
+
+        Args:
+            s3_file: S3 path/key to dowload
+            local_file: file to save to
+        """
+        local_file = kwargs.get('local_file', None)
+        if not local_file:
+            local_file = os.path.basename(s3_file)
+        self.S3_CLIENT.download_file(self.bucket, s3_file, local_file)
+
+    def set_previous_run_data(self):
+        """
+        Download pre-existing image data
+        """
+        try:
+            self._download_s3_file(self.report_write_path + self.image_data_file)
+            with open(self.image_data_file) as previous_run_file:
+                self.previous_run_data = json.load(previous_run_file)
+        except ClientError as ce:
+            if ce.response['Error']['Code'] == '404':
+                print(f"No previous image data found for {self.report_write_path}")
+            else:
+                print(f"Unexpected error: {ce.response['Error']['Code']}")
+        except IOError as ioe:
+            print(f"Unexpected error handling file: {ioe}")
+
+    def processed_previously(self, local_file: str) -> bool:
+        origin_md5sum = self.previous_run_data.get(self.__filename, {}).get('origin_md5sum')
+        with open(local_file, 'rb') as afile:
+            buf = afile.read()
+            hasher = hashlib.md5()
+            hasher.update(buf)
+            self._set_image_stat('origin_md5sum', hasher.hexdigest())
+        if origin_md5sum == self._get_image_stat('origin_md5sum'):
+            self.image_info[self.__filename] = self.previous_run_data.get(self.__filename)
+            return True
+        return False
+
     def download_image(self, s3_file: str, local_file: str) -> None:
         """
         Download S3 bucket image to local file system.
@@ -73,7 +120,7 @@ class ImageProcessor():
             s3_file: S3 path/key to dowload
             local_file: file to save to
         """
-        self.S3_CLIENT.download_file(self.bucket, s3_file, local_file)
+        self._download_s3_file(s3_file, local_file=local_file)
 
     def upload_image(self, local_file: str, s3_file: str) -> None:
         """
@@ -91,12 +138,11 @@ class ImageProcessor():
         Uploads image data and, if applicable, image error files
         to an S3 destination.
         """
-        image_data_file = 'image_data.json'
-        with open(image_data_file, 'w') as outfile:
+        with open(self.image_data_file, 'w') as outfile:
             json.dump(self.image_info, outfile)
-        s3_file = self.report_write_path + image_data_file
-        print(f'Uploading {image_data_file} to {s3_file}')
-        self.S3_RESOURCE.Bucket(self.bucket).upload_file(image_data_file, s3_file)
+        s3_file = self.report_write_path + self.image_data_file
+        print(f'Uploading {self.image_data_file} to {s3_file}')
+        self.S3_RESOURCE.Bucket(self.bucket).upload_file(self.image_data_file, s3_file)
 
         if self.image_errs:
             image_err_file = "image_err.json"
@@ -104,7 +150,7 @@ class ImageProcessor():
             with open(image_err_file, 'w') as outfile:
                 json.dump(self.image_errs, outfile)
             print(f'Uploading {image_err_file} to {s3_file}')
-            self.S3_RESOURCE.Bucket(self.bucket).upload_file(image_data_file, s3_file)
+            self.S3_RESOURCE.Bucket(self.bucket).upload_file(image_err_file, s3_file)
 
     def record_img_err(self, file: str, err_msg: str) -> None:
         """
@@ -138,20 +184,31 @@ class ImageProcessor():
             image = image.shrink(shrink_by, shrink_by)
         return image
 
-    def _postprocess_image(self, filename: str, image: Image) -> None:
+    def set_filename(self, filename) -> None:
+        self.__filename = filename
+
+    def _set_image_stat(self, key: str, stat) -> None:
         """
         Record various image attributes.
 
         Args:
-            filename: file reporting about
-            image: vips image object
+            key: image attribute name to record
+            stat: value of the image attribute
         """
-        filename = Path(filename).stem
+        if self.image_info.get(self.__filename):
+            self.image_info[self.__filename][key] = stat
+        else:
+            self.image_info[self.__filename] = {}
+            self.image_info[self.__filename][key] = stat
 
-        self.image_info[filename] = {
-            u'height': image.get('height'),
-            u'width': image.get('width')
-        }
+    def _get_image_stat(self, key: str):
+        """
+        Retrieve various image attributes.
+
+        Args:
+            key: image attribute to retrieve
+        """
+        return self.image_info[self.__filename].get(key, None)
 
     def generate_pytiff(self, source_file: str, tif_filename: str) -> None:
         """
@@ -165,11 +222,13 @@ class ImageProcessor():
         image = self._preprocess_image(source_file)
         image.tiffsave(tif_filename, tile=True, pyramid=True, compression=self.COMPRESSION_TYPE,
                        tile_width=self.PYTIF_TILE_WIDTH, tile_height=self.PYTIF_TILE_HEIGHT)
-        self._postprocess_image(tif_filename, image)
+        self._set_image_stat('height', image.get('height'))
+        self._set_image_stat('width', image.get('width'))
 
 
 if __name__ == "__main__":
     img_proc = ImageProcessor(json.loads(sys.argv[1]))
+    img_proc.set_previous_run_data()
     for obj in img_proc.list_images():
         try:
             # ignore directories
@@ -178,10 +237,17 @@ if __name__ == "__main__":
             file = os.path.basename(obj['Key'])
             filename, file_ext = os.path.splitext(file)
             tif_file = filename + '.tif'
+            img_proc.set_filename(filename)
             # prefix needed to avoid tif naming conflicts
             temp_file = 'TEMP_' + file
             print(f"Downloading {obj['Key']} to {temp_file}")
             img_proc.download_image(obj['Key'], temp_file)
+            # avoid processing images that have been through
+            # the pipeline on a previous runthrough
+            if img_proc.processed_previously(temp_file):
+                print(f"No changes to image; reusing existing {tif_file}")
+                os.remove(temp_file)
+                continue
             print(f'Generating pyramid tif for: {file}')
             img_proc.generate_pytiff(temp_file, tif_file)
             print(f'Uploading {tif_file} to {img_proc.img_write_path}')
