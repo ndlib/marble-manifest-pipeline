@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 """This module converts images to pyramid tiffs using libvips."""
 
 import sys
