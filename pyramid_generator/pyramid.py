@@ -1,9 +1,8 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 """This module converts images to pyramid tiffs using libvips."""
 
 import sys
 import os
-import hashlib
 import json
 from pyvips import Image, Error
 import boto3
@@ -100,13 +99,18 @@ class ImageProcessor():
         except IOError as ioe:
             print(f"Unexpected error handling file: {ioe}")
 
-    def processed_previously(self, local_file: str) -> bool:
+    def processed_previously(self, image_etag: str) -> bool:
+        """
+        Return true if the MD5 hash of the current image matches the MD5 hash
+        of the image of a previous runthrough.
+
+        Args:
+            image_etag: MD5 hash of current image
+        Returns:
+            bool: True if MD5 hash is equal to prior runs MD5 hash
+        """
         origin_md5sum = self.previous_run_data.get(self.__filename, {}).get('origin_md5sum')
-        with open(local_file, 'rb') as afile:
-            buf = afile.read()
-            hasher = hashlib.md5()
-            hasher.update(buf)
-            self._set_image_stat('origin_md5sum', hasher.hexdigest())
+        self._set_image_stat('origin_md5sum', image_etag)
         if origin_md5sum == self._get_image_stat('origin_md5sum'):
             self.image_info[self.__filename] = self.previous_run_data.get(self.__filename)
             return True
@@ -238,16 +242,15 @@ if __name__ == "__main__":
             filename, file_ext = os.path.splitext(file)
             tif_file = filename + '.tif'
             img_proc.set_filename(filename)
+            # avoid processing unchanged images that have been through
+            # the pipeline on a previous runthrough
+            if img_proc.processed_previously(obj['ETag'].strip('\"')):
+                print(f"No changes to image; reusing existing {tif_file}")
+                continue
             # prefix needed to avoid tif naming conflicts
             temp_file = 'TEMP_' + file
             print(f"Downloading {obj['Key']} to {temp_file}")
             img_proc.download_image(obj['Key'], temp_file)
-            # avoid processing images that have been through
-            # the pipeline on a previous runthrough
-            if img_proc.processed_previously(temp_file):
-                print(f"No changes to image; reusing existing {tif_file}")
-                os.remove(temp_file)
-                continue
             print(f'Generating pyramid tif for: {file}')
             img_proc.generate_pytiff(temp_file, tif_file)
             print(f'Uploading {tif_file} to {img_proc.img_write_path}')
