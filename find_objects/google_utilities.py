@@ -77,7 +77,7 @@ def build_query_string_for_recently_changed_files(parent_folder_id, hours_thresh
     query_string = ""
     if hours_threshold == "":
         hours_threshold = 0
-    recent_past = datetime.utcnow() - timedelta(hours=hours_threshold)  # Google uses UTC time
+    recent_past = datetime.utcnow() - timedelta(hours=int(hours_threshold))  # Google uses UTC time
     recent_past_string = recent_past.strftime('%Y-%m-%dT%H:%M:%S')
     time_phrase = "" if hours_threshold == 0 else " and modifiedTime > '" + recent_past_string + "'"
     parent_folder_phrase = "" if parent_folder_id == '' else " and '" + parent_folder_id + "' in parents"
