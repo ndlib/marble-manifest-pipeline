@@ -95,7 +95,7 @@
     "en": [
       "description"
     ]
-  },	
+  },
 	"rights": "license",
 	"requiredStatement": {
 		"label": {
@@ -116,7 +116,7 @@
 		}]
 	}],
 	"items": [{
-		"id": "https://presentation-iiif.library.nd.edu/identifier/canvas/identifier%2Fimage1.tif",
+		"id": "https://presentation-iiif.library.nd.edu/identifier/canvas/image1.tif",
 		"type": "Canvas",
 		"label": { "en": ["name"]},
 		"height": "444",
@@ -131,13 +131,13 @@
 			}]
 		}],
 		"items": [{
-			"id": "AnnotationUrl",
+			"id": "https://presentation-iiif.library.nd.edu/identifier/annotation_page/image1.tif",
 			"type": "AnnotationPage",
 			"items": [{
-				"id": "https://presentation-iiif.library.nd.edu/identifier/annotation/identifier%2Fimage1.tif",
+				"id": "https://presentation-iiif.library.nd.edu/identifier/annotation/image1.tif",
 				"type": "Annotation",
 				"motivation": "painting",
-				"target": "https://presentation-iiif.library.nd.edu/identifier/canvas/identifier%2Fimage1.tif",
+				"target": "https://presentation-iiif.library.nd.edu/identifier/canvas/image1.tif",
 				"body": {
 					"id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif/full/full/0/default.jpg",
 					"type": "Image",

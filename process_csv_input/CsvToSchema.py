@@ -76,7 +76,7 @@ class CsvToSchema():
                 "isPartOf": self.base_url,
                 "height": str(self.image_data[file]['height']),
                 "width": str(self.image_data[file]['width']),
-                "identifier": self.id + "%2F" + item["Filenames"],
+                "identifier": item["Filenames"],
             }
             ret.append(schemaImage)
             if (item.get('DefaultImage', False) == 'yes'):

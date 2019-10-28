@@ -6,7 +6,6 @@ from iiifItem import iiifItem
 class iiifManifest(iiifItem):
     def __init__(self, config, data):
         self.id = config['id']
-        config['event_id'] = config['id']
         self.config = config
         self._process_graph(data)
         iiifItem.__init__(self, self.id, self._schema_to_manifest_type())
@@ -54,7 +53,7 @@ class iiifManifest(iiifItem):
         if 'thumbnail' in self.creativework_data:
             item = self._find_image_in_items(self.creativework_data['thumbnail'])
             if item:
-                return [iiifImage(item['identifier'], self.config).thumbnail()]
+                return [iiifImage(item['contentUrl'], self).thumbnail()]
 
         return []
 
@@ -66,7 +65,7 @@ class iiifManifest(iiifItem):
                 # item_data['width'] = self.image_data[file]['width']
                 # item_data['height'] = self.image_data[file]['height']
 
-                ret.append(iiifCanvas(item_data, self.config).canvas())
+                ret.append(iiifCanvas(self, item_data).canvas())
             elif (item_data['@type'] == 'Manifest'):
                 tempConfig = self.config
                 tempConfig['id'] = item_data['id']

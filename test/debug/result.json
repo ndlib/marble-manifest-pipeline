@@ -7,10 +7,10 @@
   "items": [
     {
       "height": "444",
-      "id": "https://presentation-iiif.library.nd.edu/identifier/canvas/identifier%2Fimage1.tif",
+      "id": "https://presentation-iiif.library.nd.edu/identifier/canvas/image1.tif",
       "items": [
         {
-          "id": "AnnotationUrl",
+          "id": "https://presentation-iiif.library.nd.edu/identifier/annotation_page/image1.tif",
           "items": [
             {
               "body": {
@@ -25,9 +25,9 @@
                 ],
                 "type": "Image"
               },
-              "id": "https://presentation-iiif.library.nd.edu/identifier/annotation/identifier%2Fimage1.tif",
+              "id": "https://presentation-iiif.library.nd.edu/identifier/annotation/image1.tif",
               "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/identifier/canvas/identifier%2Fimage1.tif",
+              "target": "https://presentation-iiif.library.nd.edu/identifier/canvas/image1.tif",
               "type": "Annotation"
             }
           ],
