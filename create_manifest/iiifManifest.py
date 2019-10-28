@@ -26,11 +26,11 @@ class iiifManifest(iiifItem):
             }],
             'metadata': []
         }
-        if self.creativework_data.get('conditionOfAccess', False):
-            ret['requiredStatement'] = self._convert_label_value('Condition Of Access', self.creativework_data['conditionOfAccess'])
-
         if self.creativework_data.get('license', False):
-            ret['rights'] = self.creativework_data['license']
+            ret['requiredStatement'] = self._convert_label_value('Copyright', self.creativework_data['license'])
+
+        if self.creativework_data.get('copyrightHolder', False):
+            ret['rights'] = self.creativework_data['copyrightHolder']
 
         if self.creativework_data.get('description', False):
             ret['summary'] = self._lang_wrapper(self.creativework_data['description'])
@@ -119,8 +119,7 @@ class iiifManifest(iiifItem):
           "creator": "Creator",
           "dateCreated": "Date",
           "materialExtent": "Material Extent",
-          "copyrightHolder": "Copyright Holder",
-          "conditionOfAccess": "Condition Of Access",
-          "sponsor": "Provienance",
+          "conditionOfAccess": "Access",
+          "sponsor": "Credit line",
           "subject": "Subject",
         }

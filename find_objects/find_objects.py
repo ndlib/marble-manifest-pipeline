@@ -78,8 +78,9 @@ def _recently_changed_team_drive_files(google_connection, drive_id, parent_folde
 def _get_distinct_object_ids_given_modified_files_changed_list(files_changed_list):
     object_id_set = set([])
     for file_changed in files_changed_list:
-        object_id = file_changed['objectId']
-        object_id_set.add(object_id)
+        if 'objectId' in file_changed:
+            object_id = file_changed['objectId']
+            object_id_set.add(object_id)
     return object_id_set
 
 
