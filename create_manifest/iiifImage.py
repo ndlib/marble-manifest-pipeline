@@ -1,5 +1,4 @@
 from iiifItem import iiifItem
-import os
 
 
 class iiifImage(iiifItem):
