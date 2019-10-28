@@ -33,6 +33,3 @@ class iiifImage(iiifItem):
 
     def image_url_id(self):
         return self.content_url
-
-    def remomve_file_extension(file):
-        return os.path.splitext(file)[0]

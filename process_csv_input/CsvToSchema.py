@@ -1,7 +1,7 @@
 import csv
 from io import StringIO
 from pathlib import Path
-
+import os
 
 class CsvToSchema():
     def __init__(self, config, main_csv, items_csv, image_data):
@@ -71,7 +71,7 @@ class CsvToSchema():
                 "@type": "ImageObject",
                 "name": item["Label"],
                 "caption": item["Description"],
-                "contentUrl": self.config['image-server-base-url'] + "/" + self.id + "%2F" + item["Filenames"],
+                "contentUrl": self.config['image-server-base-url'] + "/" + self.id + "%2F" + self.remomve_file_extension(item["Filenames"]),
                 "position": str(index + 1),
                 "isPartOf": self.base_url,
                 "height": str(self.image_data[file]['height']),
@@ -128,3 +128,6 @@ class CsvToSchema():
           "conditionofaccess": "conditionOfAccess",
           "materialextent": "materialExtent"
         }
+
+    def remomve_file_extension(self, file):
+        return os.path.splitext(file)[0]

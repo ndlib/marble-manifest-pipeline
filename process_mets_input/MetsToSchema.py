@@ -74,7 +74,7 @@ class MetsToSchema():
                 "caption": "",
                 "height": str(self.image_data[file]['height']),
                 "width": str(self.image_data[file]['width']),
-                "contentUrl": self.config['image-server-base-url'] + "/" + self.id + "%2F" + filename,
+                "contentUrl": self.config['image-server-base-url'] + "/" + self.id + "%2F" + self.remomve_file_extension(filename),
                 "position": str(position),
                 "isPartOf": self.base_url,
                 "identifier": filename,
@@ -106,6 +106,9 @@ class MetsToSchema():
           # "material": "vracore:display",
           # "dateModified": "vracore:latestDate"
         }
+
+    def remomve_file_extension(self, file):
+        return os.path.splitext(file)[0]
 
 
 #           "temporalCoverage": "dcterms:created",

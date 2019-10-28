@@ -107,10 +107,10 @@
 	},
 	"viewingDirection": "left-to-right",
 	"thumbnail": [{
-		"id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif/full/250,/0/default.jpg",
+		"id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1/full/250,/0/default.jpg",
 		"type": "Image",
 		"service": [{
-			"id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif",
+			"id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1",
 			"type": "ImageService2",
 			"profile": "http://iiif.io/api/image/2/level2.json"
 		}]
@@ -122,10 +122,10 @@
 		"height": "444",
 		"width": "555",
 		"thumbnail": [{
-			"id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif/full/250,/0/default.jpg",
+			"id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1/full/250,/0/default.jpg",
 			"type": "Image",
 			"service": [{
-				"id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif",
+				"id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1",
 				"type": "ImageService2",
 				"profile": "http://iiif.io/api/image/2/level2.json"
 			}]
@@ -139,11 +139,11 @@
 				"motivation": "painting",
 				"target": "https://presentation-iiif.library.nd.edu/identifier/canvas/image1.tif",
 				"body": {
-					"id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif/full/full/0/default.jpg",
+					"id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1/full/full/0/default.jpg",
 					"type": "Image",
 					"format": "image/jpeg",
 					"service": [{
-						"id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif",
+						"id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1",
 						"type": "ImageService2",
 						"profile": "http://iiif.io/api/image/2/level2.json"
 					}]

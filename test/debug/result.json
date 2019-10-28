@@ -15,10 +15,10 @@
             {
               "body": {
                 "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif/full/full/0/default.jpg",
+                "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1/full/full/0/default.jpg",
                 "service": [
                   {
-                    "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif",
+                    "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1",
                     "profile": "http://iiif.io/api/image/2/level2.json",
                     "type": "ImageService2"
                   }
@@ -41,10 +41,10 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif/full/250,/0/default.jpg",
+          "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1/full/250,/0/default.jpg",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif",
+              "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1",
               "profile": "http://iiif.io/api/image/2/level2.json",
               "type": "ImageService2"
             }
@@ -175,10 +175,10 @@
   },
   "thumbnail": [
     {
-      "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif/full/250,/0/default.jpg",
+      "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1/full/250,/0/default.jpg",
       "service": [
         {
-          "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1.tif",
+          "id": "https://image-iiif.library.nd.edu:8182/iiif/2/identifier%2Fimage1",
           "profile": "http://iiif.io/api/image/2/level2.json",
           "type": "ImageService2"
         }
