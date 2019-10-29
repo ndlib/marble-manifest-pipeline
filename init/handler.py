@@ -67,7 +67,7 @@ def get_config():
         # add the key/value pair
         config[key] = value
 
-    config['image-server-base-url'] = "https://" + config['image-server-base-url'] + ':8182/iiif/2'
+    config['image-server-base-url'] = "https://" + config['image-server-base-url'] + '/iiif/2'
     config['manifest-server-base-url'] = "https://" + config['manifest-server-base-url']
     config['noreply-email-addr'] = os.environ.get('NO_REPLY_EMAIL', '')
     config['troubleshoot-email-addr'] = os.environ.get('TROUBLESHOOTING_EMAIL', '')

@@ -53,7 +53,7 @@ def copy_s3(to_bucket, to_path, from_bucket, from_path):
 
 # python -c 'from handler import *; test()'
 def test():
-    with open("../example/collection-small/config.json", 'r') as input_source:
+    with open("../example/item-one-image/config.json", 'r') as input_source:
         config = json.load(input_source)
     input_source.close()
 

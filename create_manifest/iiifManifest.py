@@ -6,7 +6,6 @@ from iiifItem import iiifItem
 class iiifManifest(iiifItem):
     def __init__(self, config, data):
         self.id = config['id']
-        config['event_id'] = config['id']
         self.config = config
         self._process_graph(data)
         iiifItem.__init__(self, self.id, self._schema_to_manifest_type())
@@ -27,11 +26,11 @@ class iiifManifest(iiifItem):
             }],
             'metadata': []
         }
-        if self.creativework_data.get('conditionOfAccess', False):
-            ret['requiredStatement'] = self._convert_label_value('Condition Of Access', self.creativework_data['conditionOfAccess'])
-
         if self.creativework_data.get('license', False):
-            ret['rights'] = self.creativework_data['license']
+            ret['requiredStatement'] = self._convert_label_value('Copyright', self.creativework_data['license'])
+
+        if self.creativework_data.get('copyrightHolder', False):
+            ret['rights'] = self.creativework_data['copyrightHolder']
 
         if self.creativework_data.get('description', False):
             ret['summary'] = self._lang_wrapper(self.creativework_data['description'])
@@ -54,7 +53,7 @@ class iiifManifest(iiifItem):
         if 'thumbnail' in self.creativework_data:
             item = self._find_image_in_items(self.creativework_data['thumbnail'])
             if item:
-                return [iiifImage(item['identifier'], self.config).thumbnail()]
+                return [iiifImage(item['contentUrl'], self).thumbnail()]
 
         return []
 
@@ -66,7 +65,7 @@ class iiifManifest(iiifItem):
                 # item_data['width'] = self.image_data[file]['width']
                 # item_data['height'] = self.image_data[file]['height']
 
-                ret.append(iiifCanvas(item_data, self.config).canvas())
+                ret.append(iiifCanvas(self, item_data).canvas())
             elif (item_data['@type'] == 'Manifest'):
                 tempConfig = self.config
                 tempConfig['id'] = item_data['id']
@@ -120,8 +119,7 @@ class iiifManifest(iiifItem):
           "creator": "Creator",
           "dateCreated": "Date",
           "materialExtent": "Material Extent",
-          "copyrightHolder": "Copyright Holder",
-          "conditionOfAccess": "Condition Of Access",
-          "sponsor": "Provienance",
+          "conditionOfAccess": "Access",
+          "sponsor": "Credit Line",
           "subject": "Subject",
         }
