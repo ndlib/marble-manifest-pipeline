@@ -1,3 +1,5 @@
+# edit the state machine you want to run and the bucket below.
+# future could read this out of ssm
 import boto3
 import json
 

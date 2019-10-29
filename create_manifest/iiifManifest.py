@@ -120,6 +120,6 @@ class iiifManifest(iiifItem):
           "dateCreated": "Date",
           "materialExtent": "Material Extent",
           "conditionOfAccess": "Access",
-          "sponsor": "Credit line",
+          "sponsor": "Credit Line",
           "subject": "Subject",
         }
