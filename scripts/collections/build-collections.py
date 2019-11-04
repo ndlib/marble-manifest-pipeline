@@ -29,7 +29,7 @@ def get_manifest(id):
 
 def fix_language(str):
     return {
-        "en": str
+        "en": [str]
     }
 
 
