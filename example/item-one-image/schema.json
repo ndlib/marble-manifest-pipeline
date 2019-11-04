@@ -1,0 +1,37 @@
+{
+  "@context": "http://schema.org",
+  "@graph": [
+    {
+      "@id": "https://presentation-iiif.library.nd.edu/identifier",
+      "@type": "CreativeWork",
+      "name": "name",
+      "creator": "creator",
+      "identifier": "identifier",
+      "dateCreated": "dateCreated",
+      "description": "description",
+      "materialExtent": "materialExtent",
+      "license": "license",
+      "copyrightHolder": "copyrightHolder",
+      "conditionOfAccess": "conditionOfAccess",
+      "sponsor": "sponsor",
+      "provider": "provider",
+      "subject": "subject",
+      "thumbnail": "https://presentation-iiif.library.nd.edu/identifier%2Fimage1.tif",
+      "hasPart": [
+        "https://presentation-iiif.library.nd.edu/identifier%2Fimage1.tif"
+      ]
+    },
+    {
+      "@id": "https://presentation-iiif.library.nd.edu/identifier%2Fimage1.tif",
+      "@type": "ImageObject",
+      "name": "name",
+      "caption": "",
+      "identifier": "image1.tif",
+      "contentUrl": "https://image-iiif.library.nd.edu/iiif/2/identifier%2Fimage1",
+      "height": "444",
+      "width": "555",
+      "position": "1",
+      "isPartOf": "https://presentation-iiif.library.nd.edu/identifier"
+    }
+  ]
+}

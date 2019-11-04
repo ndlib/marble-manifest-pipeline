@@ -1,19 +1,29 @@
+import boto3
 import os
 import sys
 import json
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-
 from finalizeStep import finalizeStep
 
 
 def run(event, context):
-    step = finalizeStep(event.get("id"), event.get("config"))
+    id = event.get('id')
+    s3_bucket = event['process-bucket']
+    s3_schema_path = os.path.join(event['process-bucket-read-basepath'], id, event["schema-file"])
+
+    step = finalizeStep(id, event)
     step.error = event.get("unexpected", "")
     if not step.error:
-        step.manifest_metadata = step.read_event_data()
+        step.manifest_metadata = json.loads(read_s3_file_content(s3_bucket, s3_schema_path))
+
     step.run()
 
     return event
+
+
+def read_s3_file_content(s3_bucket, s3_path):
+    content_object = boto3.resource('s3').Object(s3_bucket, s3_path)
+    return content_object.get()['Body'].read().decode('utf-8')
 
 
 # python -c 'from handler import *; test()'

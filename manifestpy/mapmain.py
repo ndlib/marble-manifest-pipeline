@@ -1,24 +1,23 @@
 import json
+import os
 
 
 def mapMainManifest(readfile, wtype):
-    with open('schemaiiif.json') as json_file:
+    path = os.path.dirname(os.path.abspath(__file__))
+    schemaiiif = os.path.join(path, 'schemaiiif.json')
+
+    with open(schemaiiif) as json_file:
         fieldmap = json.load(json_file)
     mainOut = {
         "@context": "http://schema.org",
         "@type": wtype,
     }
+    error = []
     for key, val in fieldmap.items():
         if key in readfile.keys():
-            mainOut.update({val: readfile[key]})
-        elif readfile['metadata']:
-            metl = len(readfile['metadata'])
-            i = 0
-            while i < metl:
-                label = readfile['metadata'][i]['label']['true'][0]
-                value = readfile['metadata'][i]['value']['true'][0]
-                if value != '':
-                    if label.upper() == key.upper():
-                        mainOut.update({val: value})
-                i += 1
+            if readfile[key] != '':
+                mainOut.update({val: readfile[key]})
+            else:
+                error += readfile[key] + ' has no value assigned \n'
+
     return mainOut

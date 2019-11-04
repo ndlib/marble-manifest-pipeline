@@ -14,15 +14,15 @@ class finalizeStep():
 
     def run(self):
         if self.success():
-            self.copyDefaultImg()
             self.movePyramids()
             self.moveManifest()
+            self.moveSchema()
+            self.moveMets()
             self.saveLastRun()
-            self.saveIndexMetadata()
         self.notify()
 
     def success(self):
-        if self.error or len(self.manifest_metadata["errors"]) > 0:
+        if self.error:  # or len(self.manifest_metadata["errors"]) > 0:
             return False
 
         return True
@@ -31,7 +31,7 @@ class finalizeStep():
     def copyDefaultImg(self):
         print("make default image")
         bucket = self.config['process-bucket']
-        remote_file = self.config['process-bucket-write-basepath'] + "/" + self.id + "/images/" + Path(self.config['default-img']).stem + ".tif"
+        remote_file = self.config['process-bucket-write-basepath'] + "/" + self.id + "/images/" + Path(self.manifest_metadata['thumbnail']).stem + ".tif"
         default_image = self.config['process-bucket-write-basepath'] + "/" + self.id + "/images/default.tif"
         copy_source = {
             'Bucket': bucket,
@@ -72,6 +72,39 @@ class finalizeStep():
         other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
             + self.id + "/manifest/index.json"
         bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
+
+        return
+
+    def moveSchema(self):
+        s3 = boto3.resource('s3')
+        copy_source = {
+            'Bucket': self.config["process-bucket"],
+            'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/" + self.config['schema-file']
+        }
+
+        bucket = s3.Bucket(self.config["manifest-server-bucket"])
+        print(copy_source)
+
+        other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
+            + self.id + "/index.json"
+        bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
+
+        return
+
+    def moveMets(self):
+        if self.config['metadata-source-type'] == 'mets':
+            s3 = boto3.resource('s3')
+            copy_source = {
+                'Bucket': self.config["process-bucket"],
+                'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/mets.xml"
+            }
+
+            bucket = s3.Bucket(self.config["manifest-server-bucket"])
+            print(copy_source)
+
+            other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
+                + self.id + "/mets.xml"
+            bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
 
         return
 
@@ -116,19 +149,13 @@ class finalizeStep():
                 params.pop('ContinuationToken', None)
         return keys
 
-    def saveIndexMetadata(self):
-        print("Save Index Metadata")
-        s3 = boto3.resource('s3')
-
-        bucket = self.config["process-bucket"]
-        key = self.config["process-bucket-write-basepath"] + "/" + self.id + "/stepFunctionsRunMetadata.json"
-        s3.Object(bucket, key).put(Body=json.dumps(self.manifest_metadata))
-
-        return
-
     def notify(self):
         if self.success():
-            recipients = self.config['notify-on-finished'].split(",")
+            if self.config.get('notify-on-finish', False):
+                recipients = self.config['notify-on-finished'].split(",")
+            else:
+                recipients = ['jhartzle@nd.edu']
+
             subject = self.id + " Manifest Pipeline Complete"
             body_text = "The manifest pipeline has completed processing " + self.id
             body_html = """<html>
@@ -152,7 +179,7 @@ class finalizeStep():
             if self.error:
                 reportable_errs = "<li>" + str(self.error) + "</li>"
             else:
-                for err in self.manifest_metadata["errors"]:
+                for err in self.config.get("errors", []):
                     reportable_errs += "<li>" + err + "</li>"
             body_html = """<html>
             <head></head>
@@ -207,8 +234,8 @@ class finalizeStep():
         return
 
     def _event_manifest_url(self):
-        return 'https://presentation-iiif.library.nd.edu/' \
-            + self.id + '/manifest/index.json'
+        return self.config['manifest-server-base-url'] \
+            + "/" + self.id + '/manifest/index.json'
 
     def _event_imageviewer_url(self, universalviewer=False):
         url = 'https://viewer-iiif.library.nd.edu/'
@@ -222,11 +249,3 @@ class finalizeStep():
             return basepath + "/"
 
         return ""
-
-    # read event data
-    def read_event_data(self):
-        remote_file = self.config['process-bucket-read-basepath'] + "/" \
-            + self.id + "/" + self.config["event-file"]
-        content_object = boto3.resource('s3').Object(self.config['process-bucket'], remote_file)
-        file_content = content_object.get()['Body'].read().decode('utf-8')
-        return json.loads(file_content).get('data')
