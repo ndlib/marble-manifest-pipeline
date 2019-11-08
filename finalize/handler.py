@@ -18,6 +18,10 @@ def run(event, context):
 
     step.run()
 
+    if "unexpected" in event:
+        event['error_found'] = True
+    else:
+        event['error_found'] = False
     return event
 
 
