@@ -8,8 +8,8 @@ class iiifCanvas(iiifItem):
         iiifItem.__init__(self, item_data['identifier'], 'Canvas')
         self.manifest = manifest
         self.label = self._lang_wrapper(item_data.get('label', item_data['name']))
-        self.height = item_data['height']
-        self.width = item_data['width']
+        self.height = int(item_data['height'])
+        self.width = int(item_data['width'])
         self.item_data = item_data
         self.image = iiifImage(item_data['contentUrl'], self.manifest)
 
