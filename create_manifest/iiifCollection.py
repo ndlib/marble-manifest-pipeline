@@ -14,6 +14,7 @@ class iiifCollection(iiifItem):
         manifest = iiifManifest(self.config, self.schema).manifest()
         manifest["@context"] = [
             "http://www.w3.org/ns/anno.jsonld",
+            "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
             "http://iiif.io/api/presentation/3/context.json"
         ]
 

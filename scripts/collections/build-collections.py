@@ -1,11 +1,14 @@
 import json
 import os
 from urllib.request import urlopen
+import urllib.parse
 import boto3
 
 
 def write_file(dict, path):
     manifest_bucket = "marble-manifest-prod-manifestbucket-lpnnaj4jaxl5"
+    #manifest_bucket = "marble-manifest-prod-manifestbucket-jzzipymzclzw"
+
     if not os.path.exists(os.path.dirname(path)):
         try:
             os.makedirs(os.path.dirname(path))
@@ -23,8 +26,9 @@ def write_file(dict, path):
 
 
 def get_manifest(id):
-    print("Fetching: " + manifest_baseurl + id + '/index.json')
-    return json.load(urlopen(manifest_baseurl + id + '/index.json'))
+    print("Fetching: " + manifest_baseurl + id)
+    id = urllib.parse.quote(id)
+    return json.load(urlopen(manifest_baseurl + id))
 
 
 def fix_language(str):
@@ -110,18 +114,20 @@ collections = {
             {"label": "Medium", "value": "Oil on canvas"},
         ]
     },
-    "theophilus": {
-        "id": "theophilus",
-        "manifest_ids": ['theophilus-journal-v1/manifest', 'theophilus-journal-v2/manifest'],
+    "MSN-EA_8011": {
+        "id": "MSN-EA_8011",
+        "manifest_ids": ['MSN-EA_8011-1-B/manifest', 'MSN-EA_8011-2-B/manifest'],
         "label": "Theophilus Parsons Journal",
-        "description": "Journal of Theophilus Parsons",
-        "thumbnail": "https://image-iiif.library.nd.edu/iiif/2/theophilus-journal-v1%2FMSN-EA_8011-01-B-000a",
-        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "description": "Parsons' two-volume journal dates from his early professional years, with entries running from January 1819 (when he opened his Boston law practice) to March 1823. The volumes are bound in polished calf, with Parsons' name stamped in gilt on the covers. Entries are irregular but often lengthy, running to a total of perhaps 60,000 words. The journal discusses aspects of Parsons' personal, professional, and intellectual/spiritual life with what appears to be a high degree of candor. Topics include the courtship of his future wife, Catherine; travel through New York and New England; detailed accounts of his extensive and eclectic reading; literary efforts; and a budding legal career, including work on an early fugitive slave case. There is discussion of what proved to be influential cultural events, like the Swedenborgian Sampson Reed's \"Oration on Genius,\" heard by Parsons (and Emerson) at Harvard in 1821. There is also a great deal on Boston and Cambridge intellectual life generally. Parsons travelled in elevated social circles, and mention is made of many of New England's first families. As he makes clear in a preface to volume 1, Parsons regarded his \"journalising\" as a vehicle for self-improvement, and strengths and (more commonly) inadequacies of character are frequently meditated upon. Parsons is no Calvinist, but the introspective nature of his entries places his journal in the tradition of New England forebears like Samuel Sewall. ",
+        "thumbnail": "https://image-iiif.library.nd.edu/iiif/2/MSN-EA_8011-1-B%2FMSN-EA_8011-01-B-000a",
+        "license": "http://rightsstatements.org/vocab/NoC-US/1.0/",
         "metadata": [
-            {"label": "Dates", "value": "Late 18th through early 19th Centuries"},
-            {"label": "Creator", "value": "Theophilus Parsons 1750-1813"},
+            {"label": "Identifier", "value": "MSN/EA 8011"},
+            {"label": "Dates", "value": "1819-1823"},
+            {"label": "Creator", "value": "Parsons, Theophilus, 1797-1882"},
             {"label": "Language of Materials", "value": "English"},
-            {"label": "Format", "value": "Personal Journal"},
+            {"label": "Biographical / Historical", "value": "Theophilus Parsons (1797-1882), a son of the noted Massachusetts jurist of the same name, was a Boston lawyer and literary figure best remembered for the legal texts he authored during his long tenure as Dane Professor of Law at Harvard. He was also a man of literary, philosophical, and religious interests, editing several journals and writing on a variety of topics (including Swedenborgianism, a preoccupation he shared with the Transcendentalists). Born in Newburyport and raised in Boston, Parsons graduated from Harvard in 1815 and went on to study law in the office of William Prescott; in 1819 he opened a law office in Boston. From 1822-27 Parsons lived in Taunton, Massachusetts, serving briefly as a representative to the state legislature. In 1823—the year of his marriage to Catherine Amory Chandler—he converted to the Swedenborgian faith. Though called by one of his contemporaries \"really more of a littérateur than a lawyer\" he effectively pursued both careers, building his legal practice while writing on literary and philosophical topics and editing journals like The United States Literary Gazette (which he founded in 1825) and The New-England Galaxy. In 1848 he accepted an appointment as Dane Professor of Law at Harvard, a position he held until 1870. In the 1850s Parsons published a succession of legal texts, most notably The Law of Contracts, (1853-55) which by 1904 had run through nine editions. Oliver Wendell Holmes, Jr. noted that Parsons was \". . . almost if not quite, a man of genius and gifted with a power of impressive statement which I do not know that I have ever seen equaled.\" After leaving Harvard Parsons remained in Cambridge, pursuing literary interests. "},
+            {"label": "Extent", "value": ".25 Cubic Feet"},
             {"label": "Collection Finding Aid", "value": "<a href=\"https://archivesspace.library.nd.edu/repositories/3/resources/1392\">https://archivesspace.library.nd.edu/repositories/3/resources/1392</a>"}
         ]
     },
@@ -333,20 +339,21 @@ collections = {
 
 
 # when i get the manifest for the item from the server copy these fields
-copyFields = ['id', 'type', 'label', 'metadata', 'thumbnail', 'summary', "rights"]
+copyFields = ['id', 'type', 'label', 'thumbnail', "rights"]
 
 for collection_id in collections:
     print("working on: " + collection_id)
     data = collections[collection_id]
     collection = {}
+    collection["@context"] = "http://iiif.io/api/presentation/3/context.json"
     collection["id"] = manifest_baseurl + 'collection/' + data["id"]
     collection["type"] = "Collection"
     collection["label"] = fix_language(data["label"])
     collection["summary"] = fix_language(data["description"])
-    collection["thumbnail"] = [{ "id": data["thumbnail"] + "/full/250,/0/default.jpg", "service": [{"id": data["thumbnail"], "profile": "http://iiif.io/api/image/2/level2.json", "type": "ImageService2" }] }]
-
-    collection["metadata"]=fix_metadata(data["metadata"])
-    collection["rights"]=data["license"]
+    collection["thumbnail"] = [{"id": data["thumbnail"] + "/full/250,/0/default.jpg", "type": "Image", "service": [{"id": data["thumbnail"], "type": "ImageService2", "profile": "http://iiif.io/api/image/2/level2.json"}]}]
+    collection["behavior"] = [ "multi-part" ]
+    collection["metadata"] = fix_metadata(data["metadata"])
+    collection["rights"] = data["license"]
     collection["items"] = []
 
     for id in data["manifest_ids"]:
@@ -358,7 +365,8 @@ for collection_id in collections:
             found_manifests[id] = r
 
         for key in copyFields:
-            m[key] = r.get(key, '')
+            if (r.get(key, False)):
+                m[key] = r.get(key, '')
 
         collection["items"].append(m)
 

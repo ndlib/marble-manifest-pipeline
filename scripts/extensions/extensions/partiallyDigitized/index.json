@@ -1,0 +1,6 @@
+{
+  "@context": {
+    "version": "1.0",
+    "partiallyDigitized": "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized"
+  }
+}
