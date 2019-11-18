@@ -6,7 +6,7 @@
   "id": "https://presentation-iiif.library.nd.edu/identifier/manifest",
   "items": [
     {
-      "height": "444",
+      "height": 444,
       "id": "https://presentation-iiif.library.nd.edu/identifier/canvas/image1.tif",
       "items": [
         {
@@ -53,7 +53,7 @@
         }
       ],
       "type": "Canvas",
-      "width": "555"
+      "width": 555
     }
   ],
   "label": {

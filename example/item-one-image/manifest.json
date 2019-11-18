@@ -107,8 +107,8 @@
 		"id": "https://presentation-iiif.library.nd.edu/identifier/canvas/image1.tif",
 		"type": "Canvas",
 		"label": { "en": ["name"]},
-		"height": "444",
-		"width": "555",
+		"height": 444,
+		"width": 555,
 		"thumbnail": [{
 			"id": "https://image-iiif.library.nd.edu/iiif/2/identifier%2Fimage1/full/250,/0/default.jpg",
 			"type": "Image",
