@@ -8,6 +8,5 @@ matrix:
       dist: xenial
       sudo: true
 install: "pip install -r dev-requirements.txt"
-before_script: cd test
 script:
   - coverage run run_all_tests.py
