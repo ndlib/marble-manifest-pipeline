@@ -15,7 +15,7 @@
       "conditionOfAccess": "conditionOfAccess",
       "sponsor": "sponsor",
       "provider": "provider",
-      "subject": "subject",
+      "keywords": "subject",
       "thumbnail": "https://presentation-iiif.library.nd.edu/identifier%2Fimage1.tif",
       "hasPart": [
         "https://presentation-iiif.library.nd.edu/identifier%2Fimage1.tif"

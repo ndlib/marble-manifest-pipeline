@@ -37,6 +37,9 @@ def write_s3_json(s3Bucket, s3Path, json_hash):
 
 # python -c 'from handler import *; test()'
 def test():
+    import pprint
+    pp = pprint.PrettyPrinter(indent=4)
+
     current_path = str(Path(__file__).parent.absolute())
 
     with open(current_path + "/../example/item-one-image/config.json", 'r') as input_source:
@@ -56,5 +59,5 @@ def test():
     input_source.close()
 
     c = CsvToSchema(event, main_csv, items_csv, image_data)
-    print(c.get_json())
-    print(c.errors)
+    pp.pprint(c.get_json())
+    pp.pprint(c.errors)

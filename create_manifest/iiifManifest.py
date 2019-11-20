@@ -121,5 +121,9 @@ class iiifManifest(iiifItem):
           "materialExtent": "Material Extent",
           "conditionOfAccess": "Access",
           "sponsor": "Credit Line",
-          "subject": "Subject",
+          "publisher": "Publisher",
+          "notes": "Notes",
+          "keywords": "Subject",
+          "inLanguage": "Language",
+          "material": "Format",
         }

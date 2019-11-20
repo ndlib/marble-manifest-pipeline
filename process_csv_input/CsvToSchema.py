@@ -3,6 +3,7 @@ from io import StringIO
 from pathlib import Path
 import os
 
+
 class CsvToSchema():
     def __init__(self, config, main_csv, items_csv, image_data):
         self.errors = []
@@ -56,7 +57,7 @@ class CsvToSchema():
                 del ret_dict["Metadata_label"]
                 del ret_dict["Metadata_value"]
             elif reader.line_num > 2:
-                ret_dict[this_row["Metadata_label"].lower()] = this_row['Metadata_value']
+                ret_dict[this_row["Metadata_label"].lower().strip()] = this_row['Metadata_value']
 
         return ret_dict
 
@@ -99,6 +100,7 @@ class CsvToSchema():
           "author": "creator",
           "creator": "creator",
           "date": "temporalCoverage",
+          "publisher": "publisher",
           "dates": "temporalCoverage",
           "creation date": "dateCreated",
           "classification": "description",
@@ -118,11 +120,15 @@ class CsvToSchema():
           "contributor": "publisher",
           "access rights": "conditionOfAccess",
           "language of material": "inLanguage",
+          "language": "inLanguage",
+          "notes": "notes",
+          "extent": "materialExtent",
           "dimensions": "materialExtent",
           "attribution": "sponsor",
           "description": "disambiguatingDescription",
           "thumbnail": "thumbnailURL",
-          "subject": "subject",
+          "subject": "keywords",
+          "subjects": "keywords",
           "provider": "provider",
           "datecreated": "dateCreated",
           "conditionofaccess": "conditionOfAccess",
