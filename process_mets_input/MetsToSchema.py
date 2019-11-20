@@ -101,7 +101,7 @@ class MetsToSchema():
           "conditionOfAccess": "dcterms:accessRights",
           "sponsor": "dcterms:provenance",
           "provider": "dcterms:publisher",
-          "subject": "dcterms:subject",
+          "keywords": "dcterms:subject",
           "description": "dcterms:description",
           # "material": "vracore:display",
           # "dateModified": "vracore:latestDate"
