@@ -2,7 +2,14 @@ import boto3
 import os
 import sys
 from urllib.parse import unquote
+import sentry_sdk
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+
+sentry_sdk.init(
+    dsn=os.environ['SENTRY_DSN'],
+    integrations=[AwsLambdaIntegration()]
+)
 
 
 def run(event, context):
