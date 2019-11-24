@@ -18,6 +18,7 @@ class iiifManifest(iiifItem):
             'thumbnail': self.thumbnail(),
             'items': self._items(),
             'viewingDirection': 'left-to-right',
+            'provider': self._provider(),
             'seeAlso': [{
                 "id": self.creativework_data['@id'],
                 "type": "Dataset",
@@ -75,7 +76,33 @@ class iiifManifest(iiifItem):
 
         return ret
 
-        return []
+    def _provider(self):
+        return [{
+            "id": "https://example.org/about",
+            "type": "Agent",
+            "label": self._lang_wrapper("Example Organization"),
+            "homepage": {
+                "id": "https://example.org/",
+                "type": "Text",
+                "label": self._lang_wrapper("Example Organization"),
+                "format": "text/html"
+            },
+            "logo": {
+                "id": "https://example.org/logos/institution1.jpg",
+                "type": "Image",
+                "service": [{
+                    "id": "https://example.org/service/inst1",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                }]
+            },
+            "seeAlso": [{
+                "id": "https://data.example.org/about/us.jsonld",
+                "type": "Dataset",
+                "format": "application/ld+json",
+                "profile": "https://schema.org/"
+            }]
+        }]
 
     def _schema_to_manifest_type(self):
         if self.creativework_data['@type'].lower() == 'creativework':

@@ -84,7 +84,41 @@
       "description"
     ]
   },
-	"rights": "copyrightHolder",
+  "rights": "copyrightHolder",
+  "provider": [{
+      "homepage": {
+        "format": "text/html",
+        "id": "https://example.org/",
+        "label": {
+          "en": [
+            "ExampleOrganization"
+          ]
+        },
+        "type": "Text"
+      },
+      "id": "https://example.org/about",
+      "label": {
+        "en": [
+          "ExampleOrganization"
+        ]
+      },
+      "logo": {
+        "id": "https://example.org/logos/institution1.jpg",
+        "service": [{
+            "id": "https://example.org/service/inst1",
+            "profile": "level2",
+            "type": "ImageService3"
+        }],
+        "type": "Image"
+      },
+      "seeAlso": [{
+          "format": "application/ld+json",
+          "id": "https://data.example.org/about/us.jsonld",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+      }],
+      "type": "Agent"
+  }],
 	"requiredStatement": {
 		"label": {
 			"en": ["Copyright"]
