@@ -1,5 +1,5 @@
 {
-	"@context": ["http://www.w3.org/ns/anno.jsonld", "http://iiif.io/api/presentation/3/context.json"],
+	"@context": ["http://www.w3.org/ns/anno.jsonld", "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized", "http://iiif.io/api/presentation/3/context.json"],
 	"type": "Manifest",
 	"id": "https://presentation-iiif.library.nd.edu/identifier/manifest",
 	"label": {
@@ -122,7 +122,7 @@
       }
     ],
     "type": "Agent"
-  },	
+  },
 	"viewingDirection": "left-to-right",
 	"thumbnail": [{
 		"id": "https://image-iiif.library.nd.edu/iiif/2/identifier%2Fimage1/full/250,/0/default.jpg",
