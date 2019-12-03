@@ -26,6 +26,10 @@ class iiifManifest(iiifItem):
             }],
             'metadata': []
         }
+
+        if self.creativework_data.get('provider', False):
+            ret['provider'] = self._add_provider(self.creativework_data.get('provider'))
+
         if self.creativework_data.get('license', False):
             ret['requiredStatement'] = self._convert_label_value('Copyright', self.creativework_data['license'])
 
@@ -113,6 +117,87 @@ class iiifManifest(iiifItem):
                 'value': self._lang_wrapper(value)
             }
         return None
+
+    def _add_provider(self, provider):
+        if (provider == 'snite'):
+            return self._snite_proivider()
+        elif (provider == 'archives'):
+            return self._archives_proivider()
+        elif (provider == 'rbsc'):
+            return self._rbsc_proivider()
+
+    def _snite_proivider(self):
+        return {
+            "id": "https://sniteartmuseum.nd.edu/about-us/contact-us/",
+            "type": "Agent",
+            "label": {"en": ["Snite Museum of Art"]},
+            "homepage": [
+                {
+                  "id": "https://sniteartmuseum.nd.edu",
+                  "type": "Text",
+                  "label": {"en": ["Snite Museum of Art"]},
+                  "format": "text/html"
+                }
+            ],
+            "logo": [
+                {
+                  "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
+                  "type": "Image",
+                  "format": "image/png",
+                  "height": 100,
+                  "width": 120
+                }
+              ]
+        }
+
+    def _rbsc_proivider(self):
+        return {
+            "id": "https://rarebooks.library.nd.edu/using",
+            "type": "Agent",
+            "label": {"en": ["Rare Books and Special Collections"]},
+            "homepage": [
+                {
+                  "id": "https://rarebooks.library.nd.edu/",
+                  "type": "Text",
+                  "label": {"en": ["Rare Books and Special Collections"]},
+                  "format": "text/html"
+                }
+            ],
+            "logo": [
+                {
+                  "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
+                  "type": "Image",
+                  "format": "image/png",
+                  "height": 100,
+                  "width": 120
+                }
+              ]
+        }
+
+    def _archives_proivider(self):
+        return {
+            "id": "http://archives.nd.edu/about/",
+            "type": "Agent",
+            "label": {"en": ["University of Notre Dame Archives"]},
+            "homepage": [
+                {
+                  "id": "http://archives.nd.edu/",
+                  "type": "Text",
+                  "label": {"en": ["University of Notre Dame Archives"]},
+                  "format": "text/html"
+                }
+            ],
+            "logo": [
+                {
+                  "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
+                  "type": "Image",
+                  "format": "image/png",
+                  "height": 100,
+                  "width": 120
+                }
+              ]
+        }
+
 
     def _schema_to_metadata_mappings(self):
         return {

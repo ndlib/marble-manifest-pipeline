@@ -46,6 +46,7 @@ class MetsToSchema():
             if xml_value is not None and xml_value.text is not None:
                 main[schema_key] = xml_value.text
 
+        main["provider"] = "snite"
         main['thumbnail'] = self.default_image
         main["hasPart"] = []
         for hasPartItem in self.has_part_items:
