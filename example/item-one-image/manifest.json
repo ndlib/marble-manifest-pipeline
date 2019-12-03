@@ -93,6 +93,36 @@
 			"en": ["license"]
 		}
 	},
+	"provider": {
+    "homepage": [
+      {
+        "format": "text/html",
+        "id": "https://rarebooks.library.nd.edu/",
+        "label": {
+          "en": [
+            "Rare Books and Special Collections"
+          ]
+        },
+        "type": "Text"
+      }
+    ],
+    "id": "https://rarebooks.library.nd.edu/using",
+    "label": {
+      "en": [
+        "Rare Books and Special Collections"
+      ]
+    },
+    "logo": [
+      {
+        "format": "image/png",
+        "height": 100,
+        "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
+        "type": "Image",
+        "width": 120
+      }
+    ],
+    "type": "Agent"
+  },	
 	"viewingDirection": "left-to-right",
 	"thumbnail": [{
 		"id": "https://image-iiif.library.nd.edu/iiif/2/identifier%2Fimage1/full/250,/0/default.jpg",

@@ -34,6 +34,7 @@ class CsvToSchema():
             else:
                 self.errors.append(key + ' has no value assigned \n')
 
+        main["provider"] = fieldmap["Provider"] if 'Provider' in fieldmap else "rbsc"
         main['thumbnail'] = self.default_image
         main["hasPart"] = []
         for hasPartItem in self.has_part_items:
@@ -57,9 +58,11 @@ class CsvToSchema():
                 del ret_dict["Metadata_label"]
                 del ret_dict["Metadata_value"]
             elif reader.line_num > 2:
-                ret_dict[this_row["Metadata_label"].lower().strip()] = this_row['Metadata_value']
+                key = " ".join(this_row["Metadata_label"].split()).lower()
+                ret_dict[key] = this_row['Metadata_value']
 
         return ret_dict
+
 
     def has_part_items(self):
         ret = []
@@ -132,7 +135,9 @@ class CsvToSchema():
           "provider": "provider",
           "datecreated": "dateCreated",
           "conditionofaccess": "conditionOfAccess",
-          "materialextent": "materialExtent"
+          "materialextent": "materialExtent",
+          "accessnotes": "notes",
+          "datecreated": "dateCreated"
         }
 
     def remomve_file_extension(self, file):
