@@ -5,11 +5,18 @@ from urllib.parse import urlparse
 
 bucket = "libnd-smb-rbsc"
 
+# patterns we skip if the file matches these
 skip_files = [
     r"^.*[.]100[.]jpg$",
     r"^[.]_.*$",
 ]
 
+# patterns that corrispond to urls we can parse
+valid_urls = [
+    r"http[s]?:[/]{2}rarebooks[.]library.*",
+]
+
+# these are used to match the id part of the file name
 regexps = {
     "three_part_underscore": r"^([0-9]{4}_[0-9]{2}_[0-9]{2}[-.]?)(.*)$",
     "three_part_dash_underscore": r"^([a-zA-Z0-9]{3}-[a-zA-Z]{2}_[0-9]{2,4}[-.]?)(.*)?$",
@@ -17,12 +24,21 @@ regexps = {
     "one_part_underscore": r"^([a-zA-Z0-9]{3,8}[-.]?)(.*)?$",
 }
 
+# urls in this list do not have a group note in the output of the parse_filename function
 urls_without_a_group = [
     r"^[a-zA-Z]+_[a-zA-Z][0-9]{2}.*$",  # CodeLat_b04
 ]
 
 
 def parse_filename(file):
+    """
+    Returns a hash of the split filename
+    id: The first part of the file that loosely connects to the directory name.
+    group: if there is a sub grouping i.e. by archival folder it is listed here.
+    label:  the label that should be applied to the file
+
+    :param file: File to parse
+    """
     found = 0
     found_keys = []
     file = os.path.basename(file)
@@ -96,7 +112,11 @@ def get_matching_s3_objects(bucket, prefix="", suffix=""):
 
 
 def getFilesFromUri(url):
+    """
+    Returns an iterator of the files for a url in s3
 
+    :param url: The url to search for files
+    """
     url = urlparse(url)
     directory = os.path.dirname(url.path)[1:]
 
