@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 import os
 import sys
+import sentry_sdk
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am)
 sys.path.append(where_i_am + "/dependencies")
@@ -13,6 +15,10 @@ from google_utilities import establish_connection_with_google_api  # noqa: E402
 from find_images_for_objects import find_images_for_objects  # noqa: E402
 
 config = get_config()
+sentry_sdk.init(
+    dsn=os.environ['SENTRY_DSN'],
+    integrations=[AwsLambdaIntegration()]
+)
 
 
 def run(event, context):

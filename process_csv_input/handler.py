@@ -2,6 +2,14 @@ import boto3
 import json
 from pathlib import Path
 from CsvToSchema import CsvToSchema
+import os
+import sentry_sdk
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+
+sentry_sdk.init(
+    dsn=os.environ['SENTRY_DSN'],
+    integrations=[AwsLambdaIntegration()]
+)
 
 
 def run(event, context):
