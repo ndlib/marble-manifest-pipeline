@@ -18,15 +18,41 @@ example_ids = {
     'https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-299-part1.jpg': {'id': 'BPP_1001-', 'group': '299', 'label': 'part1'},
 }
 
+valid_urls = [
+    'https://rarebooks.library.nd.edu/path/to/file.jpg',
+    'http://rarebooks.library.nd.edu/path/to/file.jpg',
+]
+
+invalid_urls = [
+    'https://rarebooks.nd.edu/path/to/file.jpg',
+    'https://www.google.com/path/to/file.jpg'
+]
+
+skipped_files = [
+    '._filename.jpg',
+    'filename.100.jpg'
+]
+
 # date example we may remediated saved for now.
 # 'https://rarebooks.nd.edu/digital/civil_war/records_military/images/bloodgood/1864_07_10.c.150.jpg]': ['1864_07_10', 'c'],
-
 class TestSearchFiles(unittest.TestCase):
 
     def test_examples(self):
         for key in example_ids:
             output = search_files.parse_filename(key)
             self.assertEqual(output, example_ids[key])
+
+    def test_url_can_be_harvested(self):
+        for url in valid_urls:
+            self.assertTrue(search_files.url_can_be_harvested(url))
+
+        for url in invalid_urls:
+            self.assertFalse(search_files.url_can_be_harvested(url))
+
+    def test_file_should_be_skipped(self):
+        for url in skipped_files:
+            self.assertTrue(search_files.file_should_be_skipped(url))
+
 
 
 if __name__ == '__main__':

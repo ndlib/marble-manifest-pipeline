@@ -111,12 +111,30 @@ def get_matching_s3_objects(bucket, prefix="", suffix=""):
                     yield obj
 
 
+def url_can_be_harvested(url):
+    for exp in valid_urls:
+        if re.match(exp, url):
+            return True
+    return False
+
+
+def file_should_be_skipped(file):
+    for exp in skip_files:
+        if re.match(exp, file):
+            return True
+
+    return False
+
+
 def getFilesFromUri(url):
     """
     Returns an iterator of the files for a url in s3
 
     :param url: The url to search for files
     """
+    if not url_can_be_harvested(url):
+        return False
+
     url = urlparse(url)
     directory = os.path.dirname(url.path)[1:]
 
@@ -129,12 +147,7 @@ def getFilesFromUri(url):
         if re.match("^.*[.]jpg$", obj.get('Key'), re.MULTILINE):
             file = os.path.basename(obj.get('Key'))
 
-            skip_file = False
-            for exp in skip_files:
-                if re.match(exp, file):
-                    skip_file = True
-
-            if not skip_file:
+            if not file_should_be_skipped(file):
                 output = parse_filename(file)
                 if output['group'] == base_directory['group']:
                     obj['Label'] = output['label']
