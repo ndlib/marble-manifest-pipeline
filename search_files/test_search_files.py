@@ -33,6 +33,7 @@ skipped_files = [
     'filename.100.jpg'
 ]
 
+
 # date example we may remediated saved for now.
 # 'https://rarebooks.nd.edu/digital/civil_war/records_military/images/bloodgood/1864_07_10.c.150.jpg]': ['1864_07_10', 'c'],
 class TestSearchFiles(unittest.TestCase):
