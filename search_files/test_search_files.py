@@ -18,6 +18,17 @@ example_ids = {
     'https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-299-part1.jpg': {'id': 'BPP_1001-', 'group': '299', 'label': 'part1'},
 }
 
+temp_ids_example = {
+    'https://rarebooks.library.nd.edu/collections/ead_xml/images/MSN-EA_5026/MSN-EA_5026-20.a.150.jpg': 'https://rarebooks.library.nd.edu/collections/ead_xml/images/MSN-EA_5026/MSN-EA_5026-20',
+    'https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-016-c2.jpg': 'https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-016',
+    'https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-018.jpg': 'https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-018',
+    'https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8006-1-B/images/MSN-EA_8006-01-B-00a.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8006-1-B/images/MSN-EA_8006',
+    'https://rarebooks.library.nd.edu/digital/bookreader/CodeLat_b04/images/CodeLat_b04-000a-front_cover.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/CodeLat_b04/images/CodeLat_b04',
+    'https://rarebooks.library.nd.edu/digital/bookreader/El_Duende/images/El_Duende_5_000003.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/El_Duende/images/El_Duende',
+    'https://rarebooks.library.nd.edu/digital/bookreader/MSS_CodLat_e05/images/MSS_CodLat_e05-084r.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/MSS_CodLat_e05/images/MSS_CodLat_e05',
+
+}
+
 valid_urls = [
     'https://rarebooks.library.nd.edu/path/to/file.jpg',
     'http://rarebooks.library.nd.edu/path/to/file.jpg',
@@ -42,6 +53,10 @@ class TestSearchFiles(unittest.TestCase):
         for key in example_ids:
             output = search_files.parse_filename(key)
             self.assertEqual(output, example_ids[key])
+
+    def test_id_from_url(self):
+        for url in temp_ids_example:
+            self.assertEqual(search_files.id_from_url(url), temp_ids_example[url])
 
     def test_url_can_be_harvested(self):
         for url in valid_urls:
