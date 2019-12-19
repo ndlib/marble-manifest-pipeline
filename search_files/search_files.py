@@ -24,10 +24,46 @@ regexps = {
     "one_part_underscore": r"^([a-zA-Z0-9]{3,8}[-.]?)(.*)?$",
 }
 
+
+newregexps = {
+    "ead_xml": [
+        r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
+        r"([a-zA-Z]{3}_[0-9]{2,4}-[0-9]+)",
+    ],
+    "bookreader": [
+        r"(^El_Duende)",
+        r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{2,3}))"
+    ]
+}
 # urls in this list do not have a group note in the output of the parse_filename function
 urls_without_a_group = [
     r"^[a-zA-Z]+_[a-zA-Z][0-9]{2}.*$",  # CodeLat_b04
 ]
+
+
+def id_from_url(url):
+    if not url_can_be_harvested(url):
+        return False
+
+    url = urlparse(url)
+    file = os.path.basename(url.path)
+
+    if file_should_be_skipped(file):
+        return False
+
+    directory = os.path.dirname(url.path)
+
+    test_expressions = []
+    for key in newregexps:
+        if key in url.path:
+            test_expressions = newregexps[key]
+
+    for exp in test_expressions:
+        test = re.findall(exp, file)
+        if test:
+            return "%s://%s%s/%s" % (url.scheme, url.netloc, directory, test[0])
+
+    return False
 
 
 def parse_filename(file):
@@ -160,7 +196,10 @@ def test():
     url = "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg"
     url = "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/cline/8007-000a.150.jpg"
     url = "https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-214.jpg"
-    url = "https://rarebooks.library.nd.edu/digital/bookreader/CodLat_b04/images/CodLat_b04-000a_front_cover.jpg"
+    #url = "https://rarebooks.library.nd.edu/digital/bookreader/CodLat_b04/images/CodLat_b04-000a_front_cover.jpg"
+
+    print("ret", id_from_url(url))
+    return
 
     for obj in getFilesFromUri(url):
         print(obj['Key'])
