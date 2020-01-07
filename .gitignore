@@ -4,3 +4,5 @@ output.yml
 manifest-pipeline.yml
 collections/collection
 dependencies/
+.env
+manifest_utils.py

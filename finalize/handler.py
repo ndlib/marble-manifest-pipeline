@@ -1,11 +1,11 @@
-import boto3
 import os
 import sys
 import json
 import sentry_sdk
+import manifest_utils as mu
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-from finalizeStep import finalizeStep
+from finalizeStep import FinalizeStep
 
 sentry_sdk.init(
     dsn=os.environ['SENTRY_DSN'],
@@ -18,10 +18,10 @@ def run(event, context):
     s3_bucket = event['process-bucket']
     s3_schema_path = os.path.join(event['process-bucket-read-basepath'], id, event["schema-file"])
 
-    step = finalizeStep(id, event)
+    step = FinalizeStep(id, event)
     step.error = event.get("unexpected", "")
     if not step.error:
-        step.manifest_metadata = json.loads(read_s3_file_content(s3_bucket, s3_schema_path))
+        step.manifest_metadata = json.loads(mu.s3_read_file_content(s3_bucket, s3_schema_path))
 
     step.run()
 
@@ -30,11 +30,6 @@ def run(event, context):
     else:
         event['error_found'] = False
     return event
-
-
-def read_s3_file_content(s3_bucket, s3_path):
-    content_object = boto3.resource('s3').Object(s3_bucket, s3_path)
-    return content_object.get()['Body'].read().decode('utf-8')
 
 
 # python -c 'from handler import *; test()'

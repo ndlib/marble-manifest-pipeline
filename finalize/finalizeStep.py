@@ -1,12 +1,9 @@
-import json
-import os
+import manifest_utils as mu
 import boto3
 from botocore.errorfactory import ClientError
-from pathlib import Path
 
 
-class finalizeStep():
-    # class constructor
+class FinalizeStep():
     def __init__(self, id, eventConfig):
         self.id = id
         self.config = eventConfig
@@ -14,140 +11,65 @@ class finalizeStep():
 
     def run(self):
         if self.success():
-            self.movePyramids()
-            self.moveManifest()
-            self.moveSchema()
-            self.moveMets()
-            self.saveLastRun()
+            self.move_pyramids()
+            self.move_manifest()
+            self.move_schema()
+            self.move_mets()
+            self.save_last_run()
         self.notify()
 
     def success(self):
-        if self.error:  # or len(self.manifest_metadata["errors"]) > 0:
+        if self.error:
             return False
-
         return True
 
-    # clones an established default image to an image named default.jpg
-    def copyDefaultImg(self):
-        print("make default image")
-        bucket = self.config['process-bucket']
-        remote_file = self.config['process-bucket-write-basepath'] + "/" + self.id + "/images/" + Path(self.manifest_metadata['thumbnail']).stem + ".tif"
-        default_image = self.config['process-bucket-write-basepath'] + "/" + self.id + "/images/default.tif"
-        copy_source = {
-            'Bucket': bucket,
-            'Key': remote_file
-        }
-        boto3.resource('s3').Bucket(bucket).copy(copy_source, default_image)
+    def move_pyramids(self):
+        src_bucket = self.config['process-bucket']
+        dest_bucket = self.config['image-server-bucket']
+        src_path = f"{self.config['process-bucket-write-basepath']}/{self.id}/images/"
 
-    def movePyramids(self):
-        print("movePyramids")
-
-        s3 = boto3.resource('s3')
-
-        from_bucket = s3.Bucket(self.config["process-bucket"])
-        to_bucket = s3.Bucket(self.config["image-server-bucket"])
-
-        from_path = self.config["process-bucket-write-basepath"] + "/" + self.id + "/images/"
-        all_objects = from_bucket.object_versions.filter(Prefix=from_path, Delimiter="/")
-
-        for o in all_objects:
-            copy_source = {
-                'Bucket': self.config["process-bucket"],
-                'Key': o.object_key
-            }
-            other_key = self.config["image-server-bucket-basepath"] + self.id + "/" + os.path.basename(o.object_key)
-            to_bucket.copy(copy_source, other_key)
+        all_objects = mu.s3_list_obj_by_dir(src_bucket, src_path)
+        for obj in all_objects:
+            dest_key = f"{self.config['image-server-bucket-basepath']}{self.id}/{obj[len(src_path):]}"
+            mu.s3_copy_data(dest_bucket, dest_key, src_bucket, obj)
         return
 
-    def moveManifest(self):
-        s3 = boto3.resource('s3')
-        copy_source = {
-            'Bucket': self.config["process-bucket"],
-            'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/manifest/index.json"
-        }
-
-        bucket = s3.Bucket(self.config["manifest-server-bucket"])
-        print(copy_source)
-
-        other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
-            + self.id + "/manifest/index.json"
-        bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
-
+    def move_manifest(self):
+        src_bucket = self.config['process-bucket']
+        src_key = f"{self.config['process-bucket-write-basepath']}/{self.id}/manifest/index.json"
+        dest_bucket = self.config['manifest-server-bucket']
+        dest_key = f"{self.test_basepath(self.config['manifest-server-bucket-basepath'])}{self.id}/manifest/index.json"
+        mu.s3_copy_data(dest_bucket, dest_key, src_bucket, src_key, extra={'ACL': 'public-read'})
         return
 
-    def moveSchema(self):
-        s3 = boto3.resource('s3')
-        copy_source = {
-            'Bucket': self.config["process-bucket"],
-            'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/" + self.config['schema-file']
-        }
-
-        bucket = s3.Bucket(self.config["manifest-server-bucket"])
-        print(copy_source)
-
-        other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
-            + self.id + "/index.json"
-        bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
-
+    def move_schema(self):
+        src_bucket = self.config['process-bucket']
+        src_key = f"{self.config['process-bucket-write-basepath']}/{self.id}/{self.config['schema-file']}"
+        dest_bucket = self.config['manifest-server-bucket']
+        dest_key = f"{self.test_basepath(self.config['manifest-server-bucket-basepath'])}{self.id}/index.json"
+        mu.s3_copy_data(dest_bucket, dest_key, src_bucket, src_key, extra={'ACL': 'public-read'})
         return
 
-    def moveMets(self):
+    def move_mets(self):
         if self.config['metadata-source-type'] == 'mets':
-            s3 = boto3.resource('s3')
-            copy_source = {
-                'Bucket': self.config["process-bucket"],
-                'Key': self.config["process-bucket-write-basepath"] + "/" + self.id + "/mets.xml"
-            }
-
-            bucket = s3.Bucket(self.config["manifest-server-bucket"])
-            print(copy_source)
-
-            other_key = self.test_basepath(self.config["manifest-server-bucket-basepath"]) \
-                + self.id + "/mets.xml"
-            bucket.copy(copy_source, other_key, ExtraArgs={'ACL': 'public-read'})
-
+            src_bucket = self.config["process-bucket"]
+            src_key = f"{self.config['process-bucket-write-basepath']}/{self.id}/mets.xml"
+            dest_bucket = self.config["manifest-server-bucket"]
+            dest_key = f"{self.test_basepath(self.config['manifest-server-bucket-basepath'])}{self.id}/mets.xml"
+            mu.s3_copy_data(dest_bucket, dest_key, src_bucket, src_key, extra={'ACL': 'public-read'})
         return
 
-    def saveLastRun(self):
-        print("Save Last Run")
-        s3 = boto3.resource('s3')
+    def save_last_run(self):
+        src_bucket = self.config['process-bucket']
+        dest_bucket = self.config['process-bucket']
+        src_path = f"{self.config['process-bucket-read-basepath']}/{self.id}/"
 
-        from_path = self.config["process-bucket-read-basepath"] + "/" + self.id + "/"
-        # all the items in the process directory for the id
-        try:
-            objects = self._list_s3_obj_by_dir(from_path, self.config["process-bucket"])
-
-            for s3obj in objects:
-                copy_src = {'Bucket': self.config["process-bucket"], 'Key': s3obj}
-                dest_key = self.config["process-bucket-write-basepath"] + "/" \
-                    + self.id + "/lastSuccessfullRun/" + s3obj[len(from_path):]
-                s3.Object(self.config["process-bucket"], dest_key).copy_from(CopySource=copy_src)
-        except Exception as e:
-            print(e)
-
-    def _list_s3_obj_by_dir(self, s3dir, bucket):
-        s3 = boto3.client('s3')
-        params = {
-            'Bucket': bucket,
-            'Prefix': s3dir,
-            'StartAfter': s3dir,
-        }
-        attempt = 0
-        keys = []
-        while ('ContinuationToken' in params) or (attempt == 0):
-            attempt += 1
-            objects = s3.list_objects_v2(**params)
-            for content in objects['Contents']:
-                # skip 'folders'
-                if content['Key'].endswith('/'):
-                    continue
-                keys.append(content['Key'])
-            # grab more objects to process if necessary(max 1,000/request)
-            if objects['IsTruncated']:
-                params['ContinuationToken'] = objects['NextContinuationToken']
-            else:
-                params.pop('ContinuationToken', None)
-        return keys
+        all_objects = mu.s3_list_obj_by_dir(src_bucket, src_path)
+        for obj in all_objects:
+            dest_key = f"{self.config['process-bucket-write-basepath']}/{self.id}/lastSuccessfullRun/{obj[len(src_path):]}"
+            print(dest_key)
+            mu.s3_copy_data(dest_bucket, dest_key, src_bucket, obj)
+        return
 
     def notify(self):
         if self.success():

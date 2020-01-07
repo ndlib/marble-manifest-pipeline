@@ -7,9 +7,9 @@
     Because there are secrets stored in parameter store, these cannot be passed between step function lambdas,
     therefore, we will need to retrieve the configuration in each step function. """
 
-import boto3
 import os
 import sys
+import manifest_utils as mu
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am)
 
@@ -53,20 +53,7 @@ def get_config():
 
 
 def _get_parameter_store_config(config, ssm_path):
-    """ Retrieve remaining configuration from parameter store """
-    client = boto3.client('ssm')
-    paginator = client.get_paginator('get_parameters_by_path')
-    ssm_path += '/'
-    page_iterator = paginator.paginate(
-        Path=ssm_path,
-        Recursive=True,
-        WithDecryption=True,)
-
-    response = []
-    for page in page_iterator:
-        response.extend(page['Parameters'])
-
-    for ps in response:
+    for ps in mu.ssm_get_params_by_path(ssm_path):
         value = ps['Value']
         key = ps['Name'].replace(ssm_path, '')
         _add_key_value_pair_to_config(config, key, value)
