@@ -28,7 +28,7 @@ class FinalizeStep():
         dest_bucket = self.config['image-server-bucket']
         src_path = f"{self.config['process-bucket-write-basepath']}/{self.id}/images/"
 
-        all_objects = mu.s3_list_obj_by_dir(src_bucket, src_path)
+        all_objects = mu.s3_list_obj_by_path(src_bucket, src_path)
         for obj in all_objects:
             dest_key = f"{self.config['image-server-bucket-basepath']}{self.id}/{obj[len(src_path):]}"
             mu.s3_copy_data(dest_bucket, dest_key, src_bucket, obj)
@@ -64,7 +64,7 @@ class FinalizeStep():
         dest_bucket = self.config['process-bucket']
         src_path = f"{self.config['process-bucket-read-basepath']}/{self.id}/"
 
-        all_objects = mu.s3_list_obj_by_dir(src_bucket, src_path)
+        all_objects = mu.s3_list_obj_by_path(src_bucket, src_path)
         for obj in all_objects:
             dest_key = f"{self.config['process-bucket-write-basepath']}/{self.id}/lastSuccessfullRun/{obj[len(src_path):]}"
             print(dest_key)
