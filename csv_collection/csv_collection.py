@@ -104,7 +104,7 @@ class Item():
 # python -c 'from csv_collection import *; test()'
 def test():
     # s3 libnd
-    bucket = "marble-manifest-test-processbucket-19w6raq5mndlo"
+    bucket = ""
     path = "archives-space-csv-files"
 
     for id in ['BPP1001_EAD', 'MSNCOL8500_EAD']:
