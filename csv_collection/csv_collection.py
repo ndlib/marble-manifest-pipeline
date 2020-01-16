@@ -39,18 +39,6 @@ def load_id_from_file(path, id):
     filepath = current_path + "/" + path + "/" + id + ".csv"
 
     objects = list(load_csv_from_file_system(filepath))
-    image_data = load_json_from_file_system(current_path + "/" + path + "/image-data.json")
-    for object in objects:
-        if object.get('filepath', False) and object.get('filepath'):
-            key = object.get('myId')
-            object['width'] = image_data[key].get('width', 2000)
-            object['height'] = image_data[key].get('height', 2000)
-            object['etag'] = image_data[key].get('etag', '')
-        else:
-            object['width'] = ''
-            object['height'] = ''
-            object['etag'] = ''
-
     return Item(objects[0], objects).collection()
 
 
