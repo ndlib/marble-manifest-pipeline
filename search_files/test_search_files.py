@@ -26,6 +26,8 @@ temp_ids_example = {
     'https://rarebooks.library.nd.edu/digital/bookreader/CodeLat_b04/images/CodeLat_b04-000a-front_cover.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/CodeLat_b04/images/CodeLat_b04',
     'https://rarebooks.library.nd.edu/digital/bookreader/El_Duende/images/El_Duende_5_000003.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/El_Duende/images/El_Duende',
     'https://rarebooks.library.nd.edu/digital/bookreader/MSS_CodLat_e05/images/MSS_CodLat_e05-084r.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/MSS_CodLat_e05/images/MSS_CodLat_e05',
+    'https://rarebooks.library.nd.edu/digital/bookreader/images/CodLat_c03/MSS_CodLat_c3_098r.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/images/CodLat_c03/MSS_CodLat_c3',
+    'https://rarebooks.library.nd.edu/digital/bookreader/Newberry-Case_MS_181/images/Newberry-Case_MS_181-999d.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/Newberry-Case_MS_181/images/Newberry-Case_MS_181',
 
 }
 
@@ -41,18 +43,18 @@ invalid_urls = [
 
 skipped_files = [
     '._filename.jpg',
-    'filename.100.jpg'
+    'filename.100.jpg',
+]
+
+valid_files = [
+    'filename.150.jpg',
+    'filename.150.jpeg',
 ]
 
 
 # date example we may remediated saved for now.
 # 'https://rarebooks.nd.edu/digital/civil_war/records_military/images/bloodgood/1864_07_10.c.150.jpg]': ['1864_07_10', 'c'],
 class TestSearchFiles(unittest.TestCase):
-
-    def test_examples(self):
-        for key in example_ids:
-            output = search_files.parse_filename(key)
-            self.assertEqual(output, example_ids[key])
 
     def test_id_from_url(self):
         for url in temp_ids_example:
@@ -67,8 +69,22 @@ class TestSearchFiles(unittest.TestCase):
 
     def test_file_should_be_skipped(self):
         for url in skipped_files:
+            print(url)
             self.assertTrue(search_files.file_should_be_skipped(url))
 
+        for url in valid_files:
+            self.assertFalse(search_files.file_should_be_skipped(url))
+
+    def test_is_jpg(self):
+        tests = [
+            'filename.jpg',
+            'filename.jpeg',
+            'filename.jpEg',
+            'filename.JPG',
+        ]
+
+        for test in tests:
+            self.assertTrue(search_files.is_jpg(test))
 
 
 if __name__ == '__main__':

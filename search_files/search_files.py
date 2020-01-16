@@ -1,9 +1,18 @@
 import boto3
 import re
 import os
+import json
+from hashlib import md5
 from urllib.parse import urlparse
 
+
 bucket = "libnd-smb-rbsc"
+
+directories = ['digital/bookreader', 'collections/ead_xml/images']
+
+bucket_to_url = {
+    "libnd-smb-rbsc": 'https://rarebooks.library.nd.edu/'
+}
 
 # patterns we skip if the file matches these
 skip_files = [
@@ -16,23 +25,15 @@ valid_urls = [
     r"http[s]?:[/]{2}rarebooks[.]library.*",
 ]
 
-# these are used to match the id part of the file name
 regexps = {
-    "three_part_underscore": r"^([0-9]{4}_[0-9]{2}_[0-9]{2}[-.]?)(.*)$",
-    "three_part_dash_underscore": r"^([a-zA-Z0-9]{3}-[a-zA-Z]{2}_[0-9]{2,4}[-.]?)(.*)?$",
-    "two_part_underscore": r"^([a-zA-Z0-9]{3,8}_[a-zA-Z0-9]{2,4}[-.]?)(.*)?$",
-    "one_part_underscore": r"^([a-zA-Z0-9]{3,8}[-.]?)(.*)?$",
-}
-
-
-newregexps = {
     "ead_xml": [
         r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
         r"([a-zA-Z]{3}_[0-9]{2,4}-[0-9]+)",
     ],
     "bookreader": [
         r"(^El_Duende)",
-        r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{2,3}))"
+        r"(^Newberry-Case_[a-zA-Z]{2}_[0-9]{3})",
+        r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{1,3}))"
     ]
 }
 # urls in this list do not have a group note in the output of the parse_filename function
@@ -54,9 +55,9 @@ def id_from_url(url):
     directory = os.path.dirname(url.path)
 
     test_expressions = []
-    for key in newregexps:
+    for key in regexps:
         if key in url.path:
-            test_expressions = newregexps[key]
+            test_expressions = regexps[key]
 
     for exp in test_expressions:
         test = re.findall(exp, file)
@@ -64,52 +65,6 @@ def id_from_url(url):
             return "%s://%s%s/%s" % (url.scheme, url.netloc, directory, test[0])
 
     return False
-
-
-def parse_filename(file):
-    """
-    Returns a hash of the split filename
-    id: The first part of the file that loosely connects to the directory name.
-    group: if there is a sub grouping i.e. by archival folder it is listed here.
-    label:  the label that should be applied to the file
-
-    :param file: File to parse
-    """
-    found = 0
-    found_keys = []
-    file = os.path.basename(file)
-    file = re.sub("[.]jpg$", "", file)
-    file = re.sub("[.]150$", "", file)
-    output = {"id": '', "group": '', "label": ''}
-
-    for key in regexps:
-        if re.match(regexps[key], file):
-            found += 1
-            found_keys.append(key)
-
-    if (len(found_keys) != 0):
-        matches = re.match(regexps[found_keys[0]], file)
-        output['id'] = matches[1]
-        removed_key = file.replace(matches[1], '')
-
-    has_group = True
-    for exp in urls_without_a_group:
-        if re.match(exp, file):
-            has_group = False
-
-    # it is a group match only if the first group has numbers and no letters.
-    if has_group:
-        matches = re.match(r"^([0-9]+).*", removed_key)
-        output['group'] = matches[1]
-        removed_key = removed_key.replace(matches[1], '')
-
-    removed_key = removed_key.replace("-", " ")
-    removed_key = removed_key.replace("_", " ")
-    removed_key = removed_key.replace(".", " ")
-    removed_key = re.sub(' +', ' ', removed_key)
-    output['label'] = removed_key.strip()
-
-    return output
 
 
 def get_matching_s3_objects(bucket, prefix="", suffix=""):
@@ -162,33 +117,65 @@ def file_should_be_skipped(file):
     return False
 
 
-def getFilesFromUri(url):
-    """
-    Returns an iterator of the files for a url in s3
+def make_label(url, id):
+    label = url.replace(id, "")
+    label = label.replace(".jpg", "")
+    label = label.replace("-", " ")
+    label = label.replace("_", " ")
+    label = label.replace(".", " ")
+    label = re.sub(' +', ' ', label)
+    return label.strip()
 
-    :param url: The url to search for files
-    """
-    if not url_can_be_harvested(url):
-        return False
 
-    url = urlparse(url)
-    directory = os.path.dirname(url.path)[1:]
+def crawl_available_files():
+    order_field = {}
 
-    base_directory = parse_filename(url.path)
+    for directory in directories:
+        objects = get_matching_s3_objects(bucket, directory)
+        for obj in objects:
+            if is_jpg(obj.get('Key')):
+                url = bucket_to_url[bucket] + obj.get('Key')
+                id = id_from_url(url)
+                if id:
+                    if not order_field.get(id, False):
+                        order_field[id] = {
+                            "FileId": id,
+                            "Source": "RBSC",
+                            "LastModified": False,
+                            "files": [],
+                        }
 
-    directory = directory + "/"
-    result = get_matching_s3_objects(bucket, directory)
-    for obj in result:
-        # make sure it is a jpg
-        if re.match("^.*[.]jpg$", obj.get('Key'), re.MULTILINE):
-            file = os.path.basename(obj.get('Key'))
+                    obj['FileId'] = id
+                    obj['Label'] = make_label(url, id)
+                    # set the overall last modified to the most recent
+                    if not order_field[id]["LastModified"] or obj['LastModified'] > order_field[id]["LastModified"]:
+                        order_field[id]["LastModified"] = obj['LastModified']
 
-            if not file_should_be_skipped(file):
-                output = parse_filename(file)
-                if output['group'] == base_directory['group']:
-                    obj['Label'] = output['label']
-                    obj['group'] = output['group']
-                    yield obj
+                    # Athena timestamp 'YYYY-MM-DD HH:MM:SS' 24 hour time no timezone
+                    # here i am converting to utc because the timezone is lost,
+                    obj['LastModified'] = obj['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
+                    obj['Order'] = len(order_field[id]['files'])
+                    obj['Source'] = 'RBSC'
+                    obj['Path'] = "s3://" + os.path.join(bucket, obj['Key'])
+
+                    order_field[id]['files'].append(obj)
+
+    return order_field
+
+
+def is_jpg(file):
+    return re.match("^.*[.]jpe?g$", file, re.IGNORECASE)
+
+
+def output_as_file():
+    for row in crawl_available_files().items():
+        id = row[0]
+        obj = row[1]
+
+        file = "./data/" + md5(id.encode()).hexdigest() + ".json"
+        with open(file, 'w') as outfile:
+            obj["LastModified"] = obj["LastModified"].strftime('%Y-%m-%d %H:%M:%S')
+            json.dump(obj, outfile)
 
 
 # python -c 'from search_files import *; test()'
@@ -196,10 +183,39 @@ def test():
     url = "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg"
     url = "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/cline/8007-000a.150.jpg"
     url = "https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-214.jpg"
-    #url = "https://rarebooks.library.nd.edu/digital/bookreader/CodLat_b04/images/CodLat_b04-000a_front_cover.jpg"
+    # url = "https://rarebooks.library.nd.edu/digital/bookreader/CodLat_b04/images/CodLat_b04-000a_front_cover.jpg"
 
-    print("ret", id_from_url(url))
+    output_as_file()
+    # data = crawl_available_files()
+
     return
 
-    for obj in getFilesFromUri(url):
-        print(obj['Key'])
+
+def output_for_ryan():
+    data = iter(crawl_available_files())
+
+    output = []
+    ids = {}
+    ids['colctionator'] = ['2016.10', '2012.105']
+    ids['colctionator2'] = ['2017.007', '1992.055']
+
+    for collection_id, items in ids.items():
+        for item_id in items:
+            row = next(data)
+            obj = row[1]
+            for file in obj['files']:
+                d = {
+                    "id": file['Key'],
+                    "source": file['Source'],
+                    "repository": file['Source'],
+                    "filepath": "s3://%s/%s" % (bucket, file['Key']),
+                    "sequence": file['Order'],
+                    "last_modified": file['LastModified'],
+                    "collection_id": collection_id,
+                    "item_id": item_id
+                }
+                output.append(d)
+
+    file = "./file_for_ryan.json"
+    with open(file, 'w') as outfile:
+        json.dump(output, outfile)
