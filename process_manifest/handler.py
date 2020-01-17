@@ -3,9 +3,10 @@ import sys
 import json
 from pathlib import Path
 # from AthenaToSchema import AthenaToSchema
-from iiifCollection import iiifCollection
+#from iiifCollection import iiifCollection
 
-sys.path.append("../")
+import pipelineutilities
+exit()
 from shared.csv_collection import load_csv_data
 from shared.pipeline_config import get_pipeline_config
 # import sentry_sdk
