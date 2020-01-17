@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 
-setup(name='pipeline_utilites',
+setup(name='pipelineutilites',
       version='1.0',
       packages=find_packages(),
       )
