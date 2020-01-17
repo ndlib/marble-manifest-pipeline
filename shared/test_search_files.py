@@ -1,6 +1,5 @@
 import unittest
 import search_files
-#from search_files.search_files import get_matching_s3_objects
 
 example_ids = {
     'https://rarebooks.nd.edu/digital/civil_war/letters/images/caley/5024-34.a.150.jpg': {'id': '5024-', 'group': '34', 'label': 'a'},
