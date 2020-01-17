@@ -1,5 +1,6 @@
 import unittest
-import search_files
+from shared.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_jpg
+
 
 example_ids = {
     'https://rarebooks.nd.edu/digital/civil_war/letters/images/caley/5024-34.a.150.jpg': {'id': '5024-', 'group': '34', 'label': 'a'},
@@ -57,22 +58,22 @@ class TestSearchFiles(unittest.TestCase):
 
     def test_id_from_url(self):
         for url in temp_ids_example:
-            self.assertEqual(search_files.id_from_url(url), temp_ids_example[url])
+            self.assertEqual(id_from_url(url), temp_ids_example[url])
 
     def test_url_can_be_harvested(self):
         for url in valid_urls:
-            self.assertTrue(search_files.url_can_be_harvested(url))
+            self.assertTrue(url_can_be_harvested(url))
 
         for url in invalid_urls:
-            self.assertFalse(search_files.url_can_be_harvested(url))
+            self.assertFalse(url_can_be_harvested(url))
 
     def test_file_should_be_skipped(self):
         for url in skipped_files:
             print(url)
-            self.assertTrue(search_files.file_should_be_skipped(url))
+            self.assertTrue(file_should_be_skipped(url))
 
         for url in valid_files:
-            self.assertFalse(search_files.file_should_be_skipped(url))
+            self.assertFalse(file_should_be_skipped(url))
 
     def test_is_jpg(self):
         tests = [
@@ -83,7 +84,7 @@ class TestSearchFiles(unittest.TestCase):
         ]
 
         for test in tests:
-            self.assertTrue(search_files.is_jpg(test))
+            self.assertTrue(is_jpg(test))
 
 
 if __name__ == '__main__':
