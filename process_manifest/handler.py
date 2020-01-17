@@ -47,12 +47,7 @@ def write_s3_json(s3Bucket, s3Path, json_hash):
 def test():
     # import pprint
     # pp = pprint.PrettyPrinter(indent=4)
-    current_path = str(Path(__file__).parent.absolute())
-
-    with open(current_path + "/../example/item-one-image/config.json", 'r') as input_source:
-        event = json.load(input_source)
-    input_source.close()
-
+    event = {}
     event['ids'] = ['parsons', '1976.057']
     event['local'] = True
     run(event, {})

@@ -29,7 +29,7 @@ def load_config_ssm(ssm_key_base):
         "manifest-server-bucket-basepath": '',
         "canvas-default-height": 2000,
         "canvas-default-width": 2000,
-        "image-data-file": "image_data.json",
+        "image-data-file": "image-data.json",
         "schema-file": "schema.json"
     }
 
