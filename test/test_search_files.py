@@ -1,5 +1,5 @@
 import unittest
-from shared.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_jpg
+from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_jpg
 
 
 example_ids = {
