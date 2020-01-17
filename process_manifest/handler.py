@@ -2,14 +2,11 @@ import boto3
 import sys
 import json
 from pathlib import Path
-# from AthenaToSchema import AthenaToSchema
-#from iiifCollection import iiifCollection
-
 from pipelineutilities.csv_collection import load_csv_data
 from pipelineutilities.pipeline_config import get_pipeline_config
-exit()
-# import sentry_sdk
-# from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+
+import sentry_sdk
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 # sentry_sdk.init(
 #    dsn=os.environ['SENTRY_DSN'],
 #    integrations=[AwsLambdaIntegration()]
