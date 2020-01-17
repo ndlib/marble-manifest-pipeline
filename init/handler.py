@@ -1,7 +1,7 @@
 import os
-import boto3
 import json
 import sentry_sdk
+import manifest_utils as mu
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 
 sentry_sdk.init(
@@ -19,10 +19,8 @@ def run(event, context):
 
 
 def determine_source_type(event):
-    s3 = boto3.resource('s3')
-
     prefix = os.path.join(event["process-bucket-read-basepath"], event["id"]) + "/"
-    result = s3.meta.client.list_objects(Bucket=event["process-bucket"], Prefix=prefix, Delimiter='/')
+    result = mu.s3_list_obj_by_path(event["process-bucket"], prefix)
     keys = []
 
     for o in result.get('Contents'):
@@ -54,20 +52,8 @@ def get_config():
         "schema-file": "schema.json"
     }
 
-    # read the keys we want out of ssm
-    client = boto3.client('ssm')
-    paginator = client.get_paginator('get_parameters_by_path')
     path = os.environ['SSM_KEY_BASE'] + '/'
-    page_iterator = paginator.paginate(
-        Path=path,
-        Recursive=True,
-        WithDecryption=False,)
-
-    response = []
-    for page in page_iterator:
-        response.extend(page['Parameters'])
-
-    for ps in response:
+    for ps in mu.ssm_get_params_by_path(path):
         value = ps['Value']
         # change /all/stacks/mellon-manifest-pipeline/<key> to <key>
         key = ps['Name'].replace(path, '')
