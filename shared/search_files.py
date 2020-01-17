@@ -5,13 +5,12 @@ import json
 from hashlib import md5
 from urllib.parse import urlparse
 
-
-bucket = "libnd-smb-rbsc"
-
-directories = ['digital/bookreader', 'collections/ead_xml/images']
+# saved live path
+# "libnd-smb-rbsc": ["digital/bookreader", "collections/ead_xml/images"]
 
 bucket_to_url = {
-    "libnd-smb-rbsc": 'https://rarebooks.library.nd.edu/'
+    "libnd-smb-rbsc": 'https://rarebooks.library.nd.edu/',
+    "marble-manifest-prod-processbucket-13bond538rnnb": 'https://rarebooks.library.nd.edu/'
 }
 
 # patterns we skip if the file matches these
@@ -127,38 +126,39 @@ def make_label(url, id):
     return label.strip()
 
 
-def crawl_available_files():
+def crawl_available_files(config):
     order_field = {}
+    for bucket_info in config['rbsc-image-buckets'].items():
+        bucket = bucket_info[0]
+        for directory in bucket_info[1]:
+            objects = get_matching_s3_objects(bucket, directory)
+            for obj in objects:
+                if is_jpg(obj.get('Key')):
+                    url = bucket_to_url[bucket] + obj.get('Key')
+                    id = id_from_url(url)
+                    if id:
+                        if not order_field.get(id, False):
+                            order_field[id] = {
+                                "FileId": id,
+                                "Source": "RBSC",
+                                "LastModified": False,
+                                "files": [],
+                            }
 
-    for directory in directories:
-        objects = get_matching_s3_objects(bucket, directory)
-        for obj in objects:
-            if is_jpg(obj.get('Key')):
-                url = bucket_to_url[bucket] + obj.get('Key')
-                id = id_from_url(url)
-                if id:
-                    if not order_field.get(id, False):
-                        order_field[id] = {
-                            "FileId": id,
-                            "Source": "RBSC",
-                            "LastModified": False,
-                            "files": [],
-                        }
+                        obj['FileId'] = id
+                        obj['Label'] = make_label(url, id)
+                        # set the overall last modified to the most recent
+                        if not order_field[id]["LastModified"] or obj['LastModified'] > order_field[id]["LastModified"]:
+                            order_field[id]["LastModified"] = obj['LastModified']
 
-                    obj['FileId'] = id
-                    obj['Label'] = make_label(url, id)
-                    # set the overall last modified to the most recent
-                    if not order_field[id]["LastModified"] or obj['LastModified'] > order_field[id]["LastModified"]:
-                        order_field[id]["LastModified"] = obj['LastModified']
+                        # Athena timestamp 'YYYY-MM-DD HH:MM:SS' 24 hour time no timezone
+                        # here i am converting to utc because the timezone is lost,
+                        obj['LastModified'] = obj['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
+                        obj['Order'] = len(order_field[id]['files'])
+                        obj['Source'] = 'RBSC'
+                        obj['Path'] = "s3://" + os.path.join(bucket, obj['Key'])
 
-                    # Athena timestamp 'YYYY-MM-DD HH:MM:SS' 24 hour time no timezone
-                    # here i am converting to utc because the timezone is lost,
-                    obj['LastModified'] = obj['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
-                    obj['Order'] = len(order_field[id]['files'])
-                    obj['Source'] = 'RBSC'
-                    obj['Path'] = "s3://" + os.path.join(bucket, obj['Key'])
-
-                    order_field[id]['files'].append(obj)
+                        order_field[id]['files'].append(obj)
 
     return order_field
 
@@ -180,42 +180,12 @@ def output_as_file():
 
 # python -c 'from search_files import *; test()'
 def test():
-    url = "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg"
-    url = "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/cline/8007-000a.150.jpg"
-    url = "https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-214.jpg"
-    # url = "https://rarebooks.library.nd.edu/digital/bookreader/CodLat_b04/images/CodLat_b04-000a_front_cover.jpg"
+    from pipeline_config import get_pipeline_config
+    event = {"local": True}
+    config = get_pipeline_config(event)
 
-    output_as_file()
+    data = crawl_available_files(config)
+    print(data)
     # data = crawl_available_files()
 
     return
-
-
-def output_for_ryan():
-    data = iter(crawl_available_files())
-
-    output = []
-    ids = {}
-    ids['colctionator'] = ['2016.10', '2012.105']
-    ids['colctionator2'] = ['2017.007', '1992.055']
-
-    for collection_id, items in ids.items():
-        for item_id in items:
-            row = next(data)
-            obj = row[1]
-            for file in obj['files']:
-                d = {
-                    "id": file['Key'],
-                    "source": file['Source'],
-                    "repository": file['Source'],
-                    "filepath": "s3://%s/%s" % (bucket, file['Key']),
-                    "sequence": file['Order'],
-                    "last_modified": file['LastModified'],
-                    "collection_id": collection_id,
-                    "item_id": item_id
-                }
-                output.append(d)
-
-    file = "./file_for_ryan.json"
-    with open(file, 'w') as outfile:
-        json.dump(output, outfile)

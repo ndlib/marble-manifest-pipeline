@@ -1,44 +1,39 @@
 import boto3
 import csv
-import json
 from io import StringIO
 from pathlib import Path
 
 
+def load_csv_data(id, config):
+    if config['local']:
+        return load_id_from_file(id)
+    else:
+        return load_id_from_s3(config['csv-data-files-bucket'], config['csv-data-files-basepath'], id)
+
+
 def load_id_from_s3(s3Bucket, s3Path, id):
     s3Path = s3Path + "/" + id + ".csv"
-    source = read_s3_file_content(s3Bucket, s3Path)
+
+    source = boto3.resource('s3').Object(s3Bucket, s3Path)
+    source = source.get()['Body'].read().decode('utf-8')
+    print(source)
     f = StringIO(source)
 
     objects = list(csv.DictReader(f, delimiter=','))
     return Item(objects[0], objects).collection()
 
 
-def read_s3_file_content(s3Bucket, s3Path):
-    content_object = boto3.resource('s3').Object(s3Bucket, s3Path)
-    return content_object.get()['Body'].read().decode('utf-8')
+def load_id_from_file(id):
+    current_path = str(Path(__file__).parent.absolute())
+    filepath = current_path + "/../example/csv_data/" + id + ".csv"
 
-
-def load_csv_from_file_system(filepath):
     with open(filepath, 'r') as input_source:
         source = input_source.read()
     input_source.close()
     f = StringIO(source)
-    return csv.DictReader(f, delimiter=',')
 
+    objects = list(csv.DictReader(f, delimiter=','))
 
-def load_json_from_file_system(filepath):
-    with open(filepath, 'r') as input_source:
-        source = json.loads(input_source.read())
-    input_source.close()
-    return source
-
-
-def load_id_from_file(path, id):
-    current_path = str(Path(__file__).parent.absolute())
-    filepath = current_path + "/" + path + "/" + id + ".csv"
-
-    objects = list(load_csv_from_file_system(filepath))
     return Item(objects[0], objects).collection()
 
 
@@ -91,17 +86,22 @@ class Item():
 
 # python -c 'from csv_collection import *; test()'
 def test():
-    # s3 libnd
-    bucket = ""
-    path = "archives-space-csv-files"
+    from pipeline_config import get_pipeline_config
+    event = {"local": True}
+    config = get_pipeline_config(event)
 
+    # s3 libnd
+    config['local'] = False
     for id in ['BPP1001_EAD', 'MSNCOL8500_EAD']:
-        parent = load_id_from_s3(bucket, path, id)
+        parent = load_csv_data(id, config)
         print(parent.get('title'))
         for file in parent.files():
             print(file.get("filePath"))
 
     # local
-    for id in ['parsons2']:
-        parent = load_id_from_file('../example/item-one-image', id)
-        print(parent)
+    config['local'] = True
+    for id in ['parsons', '1976.057']:
+        parent = load_csv_data(id, config)
+        print(parent.get('title'))
+        for file in parent.files():
+            print(file.get("filePath"))
