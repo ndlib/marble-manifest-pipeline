@@ -1,6 +1,6 @@
 import unittest
-import search_files
-#from search_files.search_files import get_matching_s3_objects
+from shared.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_jpg
+
 
 example_ids = {
     'https://rarebooks.nd.edu/digital/civil_war/letters/images/caley/5024-34.a.150.jpg': {'id': '5024-', 'group': '34', 'label': 'a'},
@@ -26,6 +26,8 @@ temp_ids_example = {
     'https://rarebooks.library.nd.edu/digital/bookreader/CodeLat_b04/images/CodeLat_b04-000a-front_cover.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/CodeLat_b04/images/CodeLat_b04',
     'https://rarebooks.library.nd.edu/digital/bookreader/El_Duende/images/El_Duende_5_000003.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/El_Duende/images/El_Duende',
     'https://rarebooks.library.nd.edu/digital/bookreader/MSS_CodLat_e05/images/MSS_CodLat_e05-084r.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/MSS_CodLat_e05/images/MSS_CodLat_e05',
+    'https://rarebooks.library.nd.edu/digital/bookreader/images/CodLat_c03/MSS_CodLat_c3_098r.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/images/CodLat_c03/MSS_CodLat_c3',
+    'https://rarebooks.library.nd.edu/digital/bookreader/Newberry-Case_MS_181/images/Newberry-Case_MS_181-999d.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/Newberry-Case_MS_181/images/Newberry-Case_MS_181',
 
 }
 
@@ -41,7 +43,12 @@ invalid_urls = [
 
 skipped_files = [
     '._filename.jpg',
-    'filename.100.jpg'
+    'filename.100.jpg',
+]
+
+valid_files = [
+    'filename.150.jpg',
+    'filename.150.jpeg',
 ]
 
 
@@ -49,26 +56,35 @@ skipped_files = [
 # 'https://rarebooks.nd.edu/digital/civil_war/records_military/images/bloodgood/1864_07_10.c.150.jpg]': ['1864_07_10', 'c'],
 class TestSearchFiles(unittest.TestCase):
 
-    def test_examples(self):
-        for key in example_ids:
-            output = search_files.parse_filename(key)
-            self.assertEqual(output, example_ids[key])
-
     def test_id_from_url(self):
         for url in temp_ids_example:
-            self.assertEqual(search_files.id_from_url(url), temp_ids_example[url])
+            self.assertEqual(id_from_url(url), temp_ids_example[url])
 
     def test_url_can_be_harvested(self):
         for url in valid_urls:
-            self.assertTrue(search_files.url_can_be_harvested(url))
+            self.assertTrue(url_can_be_harvested(url))
 
         for url in invalid_urls:
-            self.assertFalse(search_files.url_can_be_harvested(url))
+            self.assertFalse(url_can_be_harvested(url))
 
     def test_file_should_be_skipped(self):
         for url in skipped_files:
-            self.assertTrue(search_files.file_should_be_skipped(url))
+            print(url)
+            self.assertTrue(file_should_be_skipped(url))
 
+        for url in valid_files:
+            self.assertFalse(file_should_be_skipped(url))
+
+    def test_is_jpg(self):
+        tests = [
+            'filename.jpg',
+            'filename.jpeg',
+            'filename.jpEg',
+            'filename.JPG',
+        ]
+
+        for test in tests:
+            self.assertTrue(is_jpg(test))
 
 
 if __name__ == '__main__':
