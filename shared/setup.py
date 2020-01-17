@@ -1,10 +1,7 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 
-setup(name='Pipeline utils',
+
+setup(name='Pipeline Utilities',
       version='1.0',
-      description='Manifest Pipeline Utilities',
-      author='Hesburgh Utilities',
-      author_email='jhartzle@nd.edu',
-      url='',
-      packages=['distutils', 'distutils.command'],
-     )
+      packages=find_packages(),
+      )
