@@ -35,6 +35,7 @@ aws cloudformation deploy --template-file output.yml --stack-name $stackname \
     HostnamePrefix=$stackname \
     ImageServerHostname="/all/stacks/marble-image-service-prod/hostname" \
     MarbleProcessingKeyPath="/all/marble-data-processing/test" \
+    SentryDsn="testdsn" \
   || { echo "${RED} FAILED FAILED LOOK UP ^${NC}"; exit 1; }
 
 rm -rf output.yml

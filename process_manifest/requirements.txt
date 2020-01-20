@@ -1,2 +1,2 @@
-../pipelineutilities/dist/pipelineutilities-1.0-py3-none-any.whl
+../pipelineutilities/
 sentry_sdk

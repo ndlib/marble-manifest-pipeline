@@ -2,11 +2,16 @@ import boto3
 import sys
 import json
 from pathlib import Path
-from pipelineutilities.csv_collection import load_csv_data
-from pipelineutilities.pipeline_config import get_pipeline_config
+import os
+where_i_am = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(where_i_am)
+sys.path.append(where_i_am + "/dependencies")
 
-import sentry_sdk
-from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+from dependencies.pipelineutilities.csv_collection import load_csv_data
+from dependencies.pipelineutilities.pipeline_config import get_pipeline_config
+
+import dependencies.sentry_sdk
+from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 # sentry_sdk.init(
 #    dsn=os.environ['SENTRY_DSN'],
 #    integrations=[AwsLambdaIntegration()]
@@ -17,6 +22,8 @@ def run(event, context):
     ids = event.get("ids")
     config = get_pipeline_config(event)
     print(config)
+    return event
+    
     for id in ids:
         parent = load_csv_data(id, config)
         # a2s = AthenaToSchema(event, parent, [])
