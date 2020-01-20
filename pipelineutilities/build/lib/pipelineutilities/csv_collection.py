@@ -6,7 +6,7 @@ from pathlib import Path
 
 def load_csv_data(id, config):
     if config['local']:
-        return load_id_from_file(id)
+        return load_id_from_file(id, config)
     else:
         return load_id_from_s3(config['csv-data-files-bucket'], config['csv-data-files-basepath'], id)
 
@@ -16,16 +16,14 @@ def load_id_from_s3(s3Bucket, s3Path, id):
 
     source = boto3.resource('s3').Object(s3Bucket, s3Path)
     source = source.get()['Body'].read().decode('utf-8')
-    print(source)
     f = StringIO(source)
 
     objects = list(csv.DictReader(f, delimiter=','))
     return Item(objects[0], objects).collection()
 
 
-def load_id_from_file(id):
-    current_path = str(Path(__file__).parent.absolute())
-    filepath = current_path + "/../example/csv_data/" + id + ".csv"
+def load_id_from_file(id, config):
+    filepath = config['local-path'] + "csv_data/" + id + ".csv"
 
     with open(filepath, 'r') as input_source:
         source = input_source.read()

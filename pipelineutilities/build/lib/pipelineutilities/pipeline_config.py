@@ -1,20 +1,22 @@
 import boto3
 import json
 import os
+import sys
 from pathlib import Path
 
 
 def get_pipeline_config(event):
     if event['local']:
-        return load_config_local()
+        config = load_config_local(event['local-path'])
     else:
-        return load_config_ssm(event['ssm_key_base'])
+        config = load_config_ssm(event['ssm_key_base'])
+
+    config.update(event)
+    return config
 
 
-def load_config_local():
-    current_path = str(Path(__file__).parent.absolute())
-
-    with open(current_path + "/../example/default_config.json", 'r') as input_source:
+def load_config_local(local_path):
+    with open(local_path + "default_config.json", 'r') as input_source:
         source = json.loads(input_source.read())
     input_source.close()
     source['local'] = True
