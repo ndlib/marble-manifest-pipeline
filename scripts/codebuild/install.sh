@@ -16,3 +16,7 @@ popd
 pushd send_objects_to_pipeline
 ./local_install.sh
 popd
+
+pushd process_manifest
+./local_install.sh
+popd

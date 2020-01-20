@@ -2,15 +2,16 @@ import boto3
 import sys
 import json
 from pathlib import Path
-# from AthenaToSchema import AthenaToSchema
-from iiifCollection import iiifCollection
+import os
+where_i_am = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(where_i_am)
+sys.path.append(where_i_am + "/dependencies")
 
-#sys.path.append("../")
-import pipelineutilites
-from csv_collection import load_csv_data
-from pipeline_config import get_pipeline_config
-# import sentry_sdk
-# from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+from dependencies.pipelineutilities.csv_collection import load_csv_data
+from dependencies.pipelineutilities.pipeline_config import get_pipeline_config
+
+import dependencies.sentry_sdk
+from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 # sentry_sdk.init(
 #    dsn=os.environ['SENTRY_DSN'],
 #    integrations=[AwsLambdaIntegration()]
@@ -20,6 +21,8 @@ from pipeline_config import get_pipeline_config
 def run(event, context):
     ids = event.get("ids")
     config = get_pipeline_config(event)
+    print(config)
+    return event
 
     for id in ids:
         parent = load_csv_data(id, config)
@@ -51,4 +54,5 @@ def test():
     event = {}
     event['ids'] = ['parsons', '1976.057']
     event['local'] = True
+    event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     run(event, {})
