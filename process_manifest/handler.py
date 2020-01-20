@@ -47,5 +47,5 @@ def test():
     event = {}
     event['ids'] = ['parsons', '1976.057']
     event['local'] = True
-    event['local_path'] = str(Path(__file__).parent.absolute()) + "/../example/"
+    event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     run(event, {})

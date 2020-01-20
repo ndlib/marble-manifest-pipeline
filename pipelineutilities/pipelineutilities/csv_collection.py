@@ -23,7 +23,7 @@ def load_id_from_s3(s3Bucket, s3Path, id):
 
 
 def load_id_from_file(id, config):
-    filepath = config['local_path'] + "csv_data/" + id + ".csv"
+    filepath = config['local-path'] + "csv_data/" + id + ".csv"
 
     with open(filepath, 'r') as input_source:
         source = input_source.read()

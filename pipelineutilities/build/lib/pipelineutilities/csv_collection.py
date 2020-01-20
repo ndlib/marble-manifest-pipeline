@@ -16,7 +16,6 @@ def load_id_from_s3(s3Bucket, s3Path, id):
 
     source = boto3.resource('s3').Object(s3Bucket, s3Path)
     source = source.get()['Body'].read().decode('utf-8')
-    print(source)
     f = StringIO(source)
 
     objects = list(csv.DictReader(f, delimiter=','))
@@ -24,7 +23,7 @@ def load_id_from_s3(s3Bucket, s3Path, id):
 
 
 def load_id_from_file(id, config):
-    filepath = config['local_path'] + "csv_data/" + id + ".csv"
+    filepath = config['local-path'] + "csv_data/" + id + ".csv"
 
     with open(filepath, 'r') as input_source:
         source = input_source.read()
