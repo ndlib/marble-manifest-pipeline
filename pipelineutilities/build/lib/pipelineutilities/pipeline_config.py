@@ -1,12 +1,10 @@
 import boto3
 import json
 import os
-import sys
-from pathlib import Path
 
 
 def get_pipeline_config(event):
-    if event['local']:
+    if 'local' in event and event['local']:
         config = load_config_local(event['local-path'])
     else:
         config = load_config_ssm(event['ssm_key_base'])

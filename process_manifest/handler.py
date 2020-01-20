@@ -19,11 +19,12 @@ from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 
 
 def run(event, context):
-    ids = event.get("ids")
-    config = get_pipeline_config(event)
-    print(config)
-    return event
+    if 'ssm_key_base' not in event:
+        event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
 
+    config = get_pipeline_config(event)
+
+    ids = event.get("ids")
     for id in ids:
         parent = load_csv_data(id, config)
         # a2s = AthenaToSchema(event, parent, [])
@@ -53,6 +54,8 @@ def test():
     # pp = pprint.PrettyPrinter(indent=4)
     event = {}
     event['ids'] = ['parsons', '1976.057']
-    event['local'] = True
+    event['ssm_key_base'] = '/all/new-csv'
+    event['csv-data-files-bucket'] = 'marble-manifest-test-processbucket-19w6raq5mndlo'
+    event['csv-data-files-basepath'] = 'archives-space-csv-files'
     event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     run(event, {})

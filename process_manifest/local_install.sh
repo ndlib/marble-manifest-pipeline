@@ -6,6 +6,8 @@ reset=`tput sgr0`
 
 echo "\n\n ${magenta}----- find_objects LOCAL_INSTALL.SH -----${reset}"
 
+rm -rf ./dependencies
+
 # install dependencies in dependencies folder that will need to be included with deployed lambda
 mkdir dependencies
 
