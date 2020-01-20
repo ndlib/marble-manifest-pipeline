@@ -20,7 +20,7 @@
   "image-data-file": "image-data.json",
   "noreply-email-addr": "noreply@nd.edu",
   "troubleshoot-email-addr": "rdought1@nd.edu",
-  "metadata-source-type": "csv",
+  "local_path": "please set me",
   "errors": []
 
 }

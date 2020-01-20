@@ -16,7 +16,7 @@ from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 def run(event, context):
     ids = event.get("ids")
     config = get_pipeline_config(event)
-
+    print(config)
     for id in ids:
         parent = load_csv_data(id, config)
         # a2s = AthenaToSchema(event, parent, [])
@@ -44,12 +44,8 @@ def write_s3_json(s3Bucket, s3Path, json_hash):
 def test():
     # import pprint
     # pp = pprint.PrettyPrinter(indent=4)
-    current_path = str(Path(__file__).parent.absolute())
-
-    with open(current_path + "/../example/item-one-image/config.json", 'r') as input_source:
-        event = json.load(input_source)
-    input_source.close()
-
+    event = {}
     event['ids'] = ['parsons', '1976.057']
     event['local'] = True
+    event['local_path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     run(event, {})
