@@ -4,6 +4,7 @@
   "process-bucket-read-basepath": "process",
   "process-bucket-write-basepath": "finished",
   "process-bucket-csv-basepath": "csv",
+  "process-bucket-ead-resource-mappings-file": "ead_to_resource_dictionary.json",
   "image-server-bucket": "marble-data-broker-publicbucket-1kvqtwnvkhra2",
   "image-server-base-url": "https://image-iiif.library.nd.edu/iiif/2",
   "image-server-bucket-basepath": "",
@@ -31,5 +32,4 @@
   "hours-threshold-for-incremental-harvest": 72,
   "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai",
   "errors": []
-
 }
