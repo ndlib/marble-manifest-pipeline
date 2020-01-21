@@ -63,6 +63,10 @@ class InprocessBucket():
         path = self.basepath + "/" + id + ".csv"
         write_s3_file(self.process_bucket, path, csv)
 
+    def write_image(self, name, image):
+        path = self.basepath + "/data/images/" + name
+        write_s3_file(self.process_bucket, path, image)
+
 
 def read_s3_file_content(s3Bucket, s3Path):
     content_object = boto3.resource('s3').Object(s3Bucket, s3Path)
