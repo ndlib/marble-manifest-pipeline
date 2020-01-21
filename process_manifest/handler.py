@@ -28,6 +28,9 @@ def run(event, context):
     event = get_pipeline_config(event)
 
     ids = event.get("ids")
+    config = get_pipeline_config(event)
+    return event
+
     for id in ids:
         inprocess_bucket = InprocessBucket(id, event)
 
