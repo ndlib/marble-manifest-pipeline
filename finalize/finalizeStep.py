@@ -1,6 +1,6 @@
-import manifest_utils as mu
 import boto3
 from botocore.errorfactory import ClientError
+from dependencies.pipelineutilities.s3_helpers import get_matching_s3_objects, s3_copy_data
 
 
 class FinalizeStep():
@@ -13,7 +13,7 @@ class FinalizeStep():
         if self.success():
             self.move_pyramids()
             self.remove_pyramids_not_in_run()
-            self.move_manifest()
+            self.move_metadata()
         self.notify()
 
     def success(self):
@@ -26,10 +26,10 @@ class FinalizeStep():
         dest_bucket = self.config['image-server-bucket']
         src_path = f"{self.config['process-bucket-write-basepath']}/{self.id}/images/"
 
-        all_objects = mu.s3_list_obj_by_path(src_bucket, src_path)
+        all_objects = get_matching_s3_objects(src_bucket, src_path)
         for obj in all_objects:
             dest_key = f"{self.config['image-server-bucket-basepath']}{self.id}/{obj[len(src_path):]}"
-            mu.s3_copy_data(dest_bucket, dest_key, src_bucket, obj)
+            s3_copy_data(dest_bucket, dest_key, src_bucket, obj)
         return
 
     def remove_pyramids_not_in_run(self):
@@ -43,15 +43,15 @@ class FinalizeStep():
         dest_bucket = self.config['manifest-server-bucket']
         src_path = f"{self.config['process-bucket-write-basepath']}/{self.id}/metadata/"
 
-        all_objects = mu.s3_list_obj_by_path(src_bucket, src_path)
+        all_objects = get_matching_s3_objects(src_bucket, src_path)
         for obj in all_objects:
             dest_key = f"{self.config['image-server-bucket-basepath']}{self.id}/{obj[len(src_path):]}"
-            mu.s3_copy_data(dest_bucket, dest_key, src_bucket, obj)
+            s3_copy_data(dest_bucket, dest_key, src_bucket, obj)
         return
 
     def notify(self):
         return
-        
+
         if self.success():
             if self.config.get('notify-on-finish', False):
                 recipients = self.config['notify-on-finished'].split(",")

@@ -44,28 +44,24 @@ class InprocessBucket():
         self.basepath = config['process-bucket-read-basepath'] + "/" + self.id
 
     def write_manifest(self, data):
-        path = self.basepath + "/metadata/manifest/index.json"
+        path = self.basepath + "/data/manifest/index.json"
         write_s3_json(self.process_bucket, path, data)
 
     def write_collection(self, data):
-        path = self.basepath + "/metadata/collection/index.json"
+        path = self.basepath + "/data/collection/index.json"
         write_s3_json(self.process_bucket, path, data)
 
     def write_schema_org(self, data):
-        path = self.basepath + "/metadata/index.json"
+        path = self.basepath + "/data/index.json"
         write_s3_json(self.process_bucket, path, data)
 
     def write_mets(self, data):
-        path = self.basepath + "/metadata/index.json"
+        path = self.basepath + "/data/index.json"
         write_s3_json(self.process_bucket, path, data)
 
     def write_data_csv(self, csv):
         path = self.basepath + "/" + id + ".csv"
         write_s3_file(self.process_bucket, path, csv)
-
-    def write_image(self, name, image):
-        path = self.basepath + "/images/" + name
-        write_s3_file(self.process_bucket, path, image)
 
 
 def read_s3_file_content(s3Bucket, s3Path):
@@ -86,3 +82,22 @@ def write_xml_file(s3Bucket, s3Path, file):
 def write_s3_json(s3Bucket, s3Path, json_hash):
     s3 = boto3.resource('s3')
     s3.Object(s3Bucket, s3Path).put(Body=json.dumps(json_hash), ContentType='text/json')
+
+
+def s3_copy_data(dest_bucket, dest_key, src_bucket, src_key, **kwargs):
+    """
+    Copies S3 data from one key to another
+    Args:
+        dest_bucket: S3 bucket to copy data to
+        dest_key: destination data location
+        src_bucket: S3 bucket to copy data from
+        src_key: source data location
+    """
+    s3 = boto3.resource('s3')
+    dest_bucket = s3.Bucket(dest_bucket)
+    from_source = {
+        'Bucket': src_bucket,
+        'Key': src_key
+    }
+    extra = kwargs.get('extra', {})
+    dest_bucket.copy(from_source, dest_key, ExtraArgs=extra)

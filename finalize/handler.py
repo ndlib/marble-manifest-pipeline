@@ -1,13 +1,12 @@
 import os
 import sys
-import json
+from pathlib import Path
 from finalizeStep import FinalizeStep
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am)
 sys.path.append(where_i_am + "/dependencies")
 
 from dependencies.pipelineutilities.pipeline_config import get_pipeline_config
-from dependencies.pipelineutilities.s3_helpers import get_matching_s3_objects
 
 import dependencies.sentry_sdk as sentry_sdk
 from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
@@ -45,12 +44,10 @@ def run(event, context):
 
 # python -c 'from handler import *; test()'
 def test():
-    with open("../example/example-input.json", 'r') as input_source:
-        data = json.load(input_source)
-    input_source.close()
-
     data = {
-      "id": "example",
-      "data": data
+      "ids": ["parsons"],
+      "local": True,
+      "ssm_key_base": "ds",
+      "local-path": str(Path(__file__).parent.absolute()) + "/../example/"
     }
     print(run(data, {}))
