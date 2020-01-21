@@ -20,3 +20,7 @@ popd
 pushd process_manifest
 ./local_install.sh
 popd
+
+pushd init
+./local_install.sh
+popd
