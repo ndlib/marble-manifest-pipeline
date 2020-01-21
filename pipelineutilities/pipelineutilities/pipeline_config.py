@@ -6,12 +6,10 @@ import os
 def get_pipeline_config(event):
     if 'local' in event and event['local']:
         config = load_config_local(event['local-path'])
-        print(config)
     else:
         config = load_config_ssm(event['ssm_key_base'])
 
     config.update(event)
-    print(config)
     return config
 
 

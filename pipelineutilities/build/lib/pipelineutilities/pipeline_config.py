@@ -64,4 +64,7 @@ def load_config_ssm(ssm_key_base):
 
 # python -c 'from pipeline_config import *; test()'
 def test():
-    ""
+    event = {}
+    event['local'] = True
+    event['local-path'] = '/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/'
+    get_pipeline_config(event)
