@@ -1,6 +1,4 @@
-import boto3
 import sys
-import json
 from pathlib import Path
 import os
 from iiifCollection import iiifCollection
@@ -28,8 +26,6 @@ def run(event, context):
     event = get_pipeline_config(event)
 
     ids = event.get("ids")
-    config = get_pipeline_config(event)
-    return event
 
     for id in ids:
         inprocess_bucket = InprocessBucket(id, event)
@@ -38,7 +34,6 @@ def run(event, context):
         # a2s = AthenaToSchema(event, parent, [])
         iiif = iiifCollection(id, event, parent)
         inprocess_bucket.write_manifest(iiif.manifest())
-        print(json.dumps(iiif.manifest()))
 
     return event
 

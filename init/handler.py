@@ -1,8 +1,17 @@
 import os
 import json
-import sentry_sdk
-import manifest_utils as mu
-from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+from pathlib import Path
+import sys
+from datetime import datetime, timedelta, timezone
+where_i_am = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(where_i_am)
+sys.path.append(where_i_am + "/dependencies")
+
+from dependencies.pipelineutilities.pipeline_config import get_pipeline_config
+from dependencies.pipelineutilities.s3_helpers import get_matching_s3_objects
+
+import dependencies.sentry_sdk as sentry_sdk
+from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 
 sentry_sdk.init(
     dsn=os.environ['SENTRY_DSN'],
@@ -11,71 +20,36 @@ sentry_sdk.init(
 
 
 def run(event, context):
-    event.update(get_config())
-    event['event_id'] = event.get('id')
-    event['ecs-args'] = [json.dumps(event)]
-    event['metadata-source-type'] = determine_source_type(event)
+    if 'ssm_key_base' not in event:
+        event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
+
+    config = get_pipeline_config(event)
+
+    event['ecs-args'] = [json.dumps(config)]
+    event['ids'] = []
+    event['errors'] = []
+
+    time_threshold_for_processing = datetime.utcnow() - timedelta(hours=config['hours-threshold-for-incremental-harvest'])
+    # since this is utc already but there is no timezone add it in so
+    # the data can be compared to the timze zone aware date in file
+    time_threshold_for_processing = time_threshold_for_processing.replace(tzinfo=timezone.utc)
+    for file in get_matching_s3_objects(config['process-bucket'], config['process-bucket-csv-basepath'] + "/"):
+        if file['Key'] == 'csv/':
+            continue
+
+        if file['LastModified'] >= time_threshold_for_processing:
+            file = os.path.splitext(file['Key'])
+            file = os.path.basename(file[0])
+            event['ids'].append(file)
+
     return event
 
 
-def determine_source_type(event):
-    prefix = os.path.join(event["process-bucket-read-basepath"], event["id"]) + "/"
-    result = mu.s3_list_obj_by_path(event["process-bucket"], prefix)
-    keys = []
-
-    for o in result.get('Contents'):
-        id = o.get('Key').replace(prefix, "")
-        keys.append(id)
-
-    if (event["main-csv"] in keys and event['items-csv'] in keys):
-        return "csv"
-    elif (event['descriptive-mets-file'] in keys and event['structural-mets-file'] in keys):
-        return 'mets'
-
-    raise Exception('unable to determine metadata source type from {}'.format(keys))
-
-
-# retrieve configuration from parameter store
-def get_config():
-    config = {
-        "process-bucket-read-basepath": 'process',
-        "process-bucket-write-basepath": 'finished',
-        "image-server-bucket-basepath": '',
-        "manifest-server-bucket-basepath": '',
-        "items-csv": 'items.csv',
-        "main-csv": 'main.csv',
-        "descriptive-mets-file": "descriptive_metadata_mets.xml",
-        "structural-mets-file": "structural_metadata_mets.xml",
-        "canvas-default-height": 2000,
-        "canvas-default-width": 2000,
-        "image-data-file": "image_data.json",
-        "schema-file": "schema.json"
-    }
-
-    path = os.environ['SSM_KEY_BASE'] + '/'
-    for ps in mu.ssm_get_params_by_path(path):
-        value = ps['Value']
-        # change /all/stacks/mellon-manifest-pipeline/<key> to <key>
-        key = ps['Name'].replace(path, '')
-        # add the key/value pair
-        config[key] = value
-
-    config['image-server-base-url'] = "https://" + config['image-server-base-url'] + '/iiif/2'
-    config['manifest-server-base-url'] = "https://" + config['manifest-server-base-url']
-    config['noreply-email-addr'] = os.environ.get('NO_REPLY_EMAIL', '')
-    config['troubleshoot-email-addr'] = os.environ.get('TROUBLESHOOTING_EMAIL', '')
-
-    return config
-
 
 # python -c 'from handler import *; test()'
-def test(id):
-    if (not os.environ['SSM_KEY_BASE']):
-        print("you must set an SSM_KEY_BASE for parameter store in the environment")
-        return
+def test():
+    data = {}
+    data['local'] = True
+    data['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
 
-    if (not id):
-        print("you must pass an id to test")
-
-    data = {"id": id}
     print(run(data, {}))
