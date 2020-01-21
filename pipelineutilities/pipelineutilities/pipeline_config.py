@@ -6,10 +6,12 @@ import os
 def get_pipeline_config(event):
     if 'local' in event and event['local']:
         config = load_config_local(event['local-path'])
+        print(config)
     else:
         config = load_config_ssm(event['ssm_key_base'])
 
     config.update(event)
+    print(config)
     return config
 
 
@@ -64,4 +66,7 @@ def load_config_ssm(ssm_key_base):
 
 # python -c 'from pipeline_config import *; test()'
 def test():
-    ""
+    event = {}
+    event['local'] = True
+    event['local-path'] = '/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/'
+    get_pipeline_config(event)

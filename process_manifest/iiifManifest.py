@@ -4,11 +4,12 @@ from iiifItem import iiifItem
 
 
 class iiifManifest(iiifItem):
-    def __init__(self, config, data, mapping):
+    def __init__(self, id, config, data, mapping):
+        print(config)
         self.config = config
         self.data = data
         self.mapping = mapping
-        self.parent_id = config['id']
+        self.parent_id = id
         self.id = self._make_id()
 
         iiifItem.__init__(self, self.id, self._schema_to_manifest_type())
@@ -41,7 +42,7 @@ class iiifManifest(iiifItem):
         if self.data.get('description', False):
             ret['summary'] = self._lang_wrapper(self.data.get('description'))
 
-        if self.config['metadata-source-type'] == 'mets':
+        if False:
             ret['seeAlso'].append({
                 "id": self.config['manifest-server-base-url'] + '/' + self.id + '/mets.xml',
                 "type": "Dataset",
@@ -85,7 +86,7 @@ class iiifManifest(iiifItem):
             if (item_data.type() == 'file'):
                 ret.append(iiifCanvas(self, item_data).canvas())
             else:
-                ret.append(iiifManifest(self.config, item_data, self.mapping).manifest())
+                ret.append(iiifManifest(self.id, self.config, item_data, self.mapping).manifest())
 
         return ret
 
@@ -101,6 +102,7 @@ class iiifManifest(iiifItem):
 
     def _manifest_id(self):
         if self.type == 'Manifest':
+            print(self.config)
             return self.config['manifest-server-base-url'] + '/' + self.id + '/manifest'
         else:
             return self.config['manifest-server-base-url'] + '/collection/' + self.id
