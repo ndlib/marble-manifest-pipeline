@@ -12,7 +12,7 @@ default_config = {
     "manifest-server-base-url": "https://presentation-iiif.library.nd.edu",
     "manifest-server-bucket-basepath": "",
     "rbsc-image-buckets": {
-        "marble-manifest-prod-processbucket-13bond538rnnb": ["rbsc-test-files"]
+        "marble-manifest-prod-processbucket-13bond538rnnb": ["digital/bookreader", "collections/ead_xml/images/"]
     },
     "canvas-default-height": 2000,
     "canvas-default-width": 2000,

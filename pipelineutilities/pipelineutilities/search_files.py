@@ -182,7 +182,10 @@ def output_as_file():
 def test():
     from pipeline_config import get_pipeline_config
     event = {"local": True}
+    event['local-path'] = "/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/"
+
     config = get_pipeline_config(event)
+    print(config)
 
     data = crawl_available_files(config)
     print(data)
