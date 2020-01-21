@@ -44,19 +44,19 @@ class InprocessBucket():
         self.basepath = config['process-bucket-read-basepath'] + "/" + self.id
 
     def write_manifest(self, data):
-        path = self.basepath + "/data/manifest/index.json"
+        path = self.basepath + "/metadata/manifest/index.json"
         write_s3_json(self.process_bucket, path, data)
 
     def write_collection(self, data):
-        path = self.basepath + "/data/collection/index.json"
+        path = self.basepath + "/metadata/collection/index.json"
         write_s3_json(self.process_bucket, path, data)
 
     def write_schema_org(self, data):
-        path = self.basepath + "/data/index.json"
+        path = self.basepath + "/metadata/index.json"
         write_s3_json(self.process_bucket, path, data)
 
     def write_mets(self, data):
-        path = self.basepath + "/data/index.json"
+        path = self.basepath + "/metadata/index.json"
         write_s3_json(self.process_bucket, path, data)
 
     def write_data_csv(self, csv):
@@ -64,7 +64,7 @@ class InprocessBucket():
         write_s3_file(self.process_bucket, path, csv)
 
     def write_image(self, name, image):
-        path = self.basepath + "/data/images/" + name
+        path = self.basepath + "/images/" + name
         write_s3_file(self.process_bucket, path, image)
 
 

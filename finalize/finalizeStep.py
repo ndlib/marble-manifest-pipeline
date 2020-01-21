@@ -12,10 +12,8 @@ class FinalizeStep():
     def run(self):
         if self.success():
             self.move_pyramids()
+            self.remove_pyramids_not_in_run()
             self.move_manifest()
-            self.move_schema()
-            self.move_mets()
-            self.save_last_run()
         self.notify()
 
     def success(self):
@@ -34,44 +32,26 @@ class FinalizeStep():
             mu.s3_copy_data(dest_bucket, dest_key, src_bucket, obj)
         return
 
-    def move_manifest(self):
+    def remove_pyramids_not_in_run(self):
+        "used to remove not in the src bucket"
         src_bucket = self.config['process-bucket']
-        src_key = f"{self.config['process-bucket-write-basepath']}/{self.id}/manifest/index.json"
+        dest_bucket = self.config['image-server-bucket']
+        src_path = f"{self.config['process-bucket-write-basepath']}/{self.id}/images/"
+
+    def move_metadata(self):
+        src_bucket = self.config['process-bucket']
         dest_bucket = self.config['manifest-server-bucket']
-        dest_key = f"{self.test_basepath(self.config['manifest-server-bucket-basepath'])}{self.id}/manifest/index.json"
-        mu.s3_copy_data(dest_bucket, dest_key, src_bucket, src_key, extra={'ACL': 'public-read'})
-        return
-
-    def move_schema(self):
-        src_bucket = self.config['process-bucket']
-        src_key = f"{self.config['process-bucket-write-basepath']}/{self.id}/{self.config['schema-file']}"
-        dest_bucket = self.config['manifest-server-bucket']
-        dest_key = f"{self.test_basepath(self.config['manifest-server-bucket-basepath'])}{self.id}/index.json"
-        mu.s3_copy_data(dest_bucket, dest_key, src_bucket, src_key, extra={'ACL': 'public-read'})
-        return
-
-    def move_mets(self):
-        if self.config['metadata-source-type'] == 'mets':
-            src_bucket = self.config["process-bucket"]
-            src_key = f"{self.config['process-bucket-write-basepath']}/{self.id}/mets.xml"
-            dest_bucket = self.config["manifest-server-bucket"]
-            dest_key = f"{self.test_basepath(self.config['manifest-server-bucket-basepath'])}{self.id}/mets.xml"
-            mu.s3_copy_data(dest_bucket, dest_key, src_bucket, src_key, extra={'ACL': 'public-read'})
-        return
-
-    def save_last_run(self):
-        src_bucket = self.config['process-bucket']
-        dest_bucket = self.config['process-bucket']
-        src_path = f"{self.config['process-bucket-read-basepath']}/{self.id}/"
+        src_path = f"{self.config['process-bucket-write-basepath']}/{self.id}/metadata/"
 
         all_objects = mu.s3_list_obj_by_path(src_bucket, src_path)
         for obj in all_objects:
-            dest_key = f"{self.config['process-bucket-write-basepath']}/{self.id}/lastSuccessfullRun/{obj[len(src_path):]}"
-            print(dest_key)
+            dest_key = f"{self.config['image-server-bucket-basepath']}{self.id}/{obj[len(src_path):]}"
             mu.s3_copy_data(dest_bucket, dest_key, src_bucket, obj)
         return
 
     def notify(self):
+        return
+        
         if self.success():
             if self.config.get('notify-on-finish', False):
                 recipients = self.config['notify-on-finished'].split(",")
