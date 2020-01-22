@@ -45,7 +45,6 @@ def run(event, context):
     return event
 
 
-
 # python -c 'from handler import *; test()'
 def test():
     data = {}

@@ -24,3 +24,7 @@ popd
 pushd init
 ./local_install.sh
 popd
+
+pushd finalize
+./local_install.sh
+popd
