@@ -5,7 +5,6 @@ from iiifItem import iiifItem
 
 class iiifManifest(iiifItem):
     def __init__(self, id, config, data, mapping):
-        print(config)
         self.config = config
         self.data = data
         self.mapping = mapping

@@ -1,5 +1,3 @@
-import csv
-from io import StringIO
 from pathlib import Path
 import os
 from MetadataMappings import MetadataMappings
@@ -69,9 +67,6 @@ class AthenaToSchema():
             self.default_image = ret[0]['@id']
 
         return ret
-
-    def get_notify_on_success(self):
-        return self.dict.get('Notify', "")
 
     def mappings(self):
         return MetadataMappings('snite')
