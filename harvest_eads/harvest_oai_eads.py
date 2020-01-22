@@ -50,7 +50,7 @@ class HarvestOaiEads():
         elif mode == 'known':
             ids = self.event.get("ids")
             ead_to_resource_dictionary = self._read_ead_to_resource_dictionary()
-            for key, value in ead_to_resource_dictionary.items():
+            for _key, value in ead_to_resource_dictionary.items():
                 self._get_individual_ead(value)
             resumption_token = None
         return resumption_token
@@ -175,7 +175,7 @@ class HarvestOaiEads():
         json_summary = {}
         if self._digital_records_exist(record):
             ead_id = self._get_ead_id(record)
-            json_summary = self.jsonFromXMLClass.extract_fields(record, 'root')
+            json_summary = self.jsonFromXMLClass.extract_fields(record, 'root', {})
             if json_summary != {}:
                 ead_id = self._get_ead_id(record)
                 self.event['eadToResourceDictionary'][ead_id] = identifier

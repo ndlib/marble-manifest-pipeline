@@ -12,7 +12,7 @@ def write_csv_header(local_path, file_name, header_fields):
     return
 
 
-def append_to_csv(local_path, file_name, header_fields, dict_to_write, intentionally_excluded_fields=[]):
+def append_to_csv(local_path, file_name, header_fields, dict_to_write, intentionally_excluded_fields):
     """ Append a line to the csv file we've already started """
     create_directory(local_path)
     fully_qualified_file_name = get_full_path_file_name(local_path, file_name)

@@ -33,7 +33,7 @@ class createJsonFromXml():
         self.processing_dao_for_parent_id = ""
         self.temporary_local_path = "/tmp"
 
-    def extract_fields(self, xml_root, json_section, seeded_json_output={}):
+    def extract_fields(self, xml_root, json_section, seeded_json_output):
         """ This code processes translations defined in the portion of the
             xml_to_json_translation_control_file.json named by the json_section passed.
             This calls get_node, which in turn calls extract_fields as needed. """
@@ -99,7 +99,7 @@ class createJsonFromXml():
         if json_node is not None:
             local_path = self.temporary_local_path
             file_name = 'root.csv'
-            append_to_csv(local_path, file_name, self.config["csv-field-names"], json_node)  # noqa: E501
+            append_to_csv(local_path, file_name, self.config["csv-field-names"], json_node, [])  # noqa: E501
             if 'fileNamedForNode' in field:
                 if field['fileNamedForNode'] in json_node:
                     new_file_name = json_node[field['fileNamedForNode']] + '.csv'
@@ -241,7 +241,7 @@ class createJsonFromXml():
                         each_file_dict['title'] = obj['Label']
                         each_file_dict['modifiedDate'] = obj['LastModified']
                         each_file_dict['etag'] = obj['ETag'].replace("'", "").replace('"', '')  # strip duplicated quotes: {'ETag': '"8b50cfed39b7d8bcb4bd652446fe8adf"'}  # noqa: E501
-                        append_to_csv(local_path, file_name, self.config["csv-field-names"], each_file_dict)  # noqa: E501
+                        append_to_csv(local_path, file_name, self.config["csv-field-names"], each_file_dict, [])  # noqa: E501
         return None
 
     def _is_this_first_dao_in_object(self, my_parent_id):
