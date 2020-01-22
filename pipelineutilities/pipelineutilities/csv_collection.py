@@ -42,7 +42,7 @@ class Item():
         self.all_objects = all_objects
 
     def repository(self):
-        return 'snite'
+        return self.get('repository')
 
     def type(self):
         return self.get('level')
