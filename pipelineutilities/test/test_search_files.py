@@ -3,6 +3,7 @@ import os
 import unittest
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am + "../")
+print("path: ", sys.path)
 from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_jpg
 
 
