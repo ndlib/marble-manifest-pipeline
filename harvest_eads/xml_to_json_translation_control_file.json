@@ -1,0 +1,345 @@
+{
+	"root" : {
+		"FieldsToExtract": [
+			{ "label": "sourceSystem",
+				"constant": "ArchivesSpace",
+				"format": "text"
+			},
+			{
+				"label": "eadResource",
+				"xpath": "./header/identifier",
+				"format": "text"
+			},
+			{
+				"label": "eadId",
+				"xpath": "./metadata/ead/eadheader/eadid",
+				"format": "text"
+			},
+			{
+				"label": "collectionInformation",
+				"xpath": "./metadata/ead/eadheader/filedesc/titlestmt/titleproper",
+				"format": "text"
+			},
+			{
+				"label": "",
+				"otherNodes": "did",
+				"xpath": "./metadata/ead/archdesc/did",
+				"optional": true,
+				"collapseTree": true
+			},
+			{
+				"label": "repository",
+				"externalProcess": "get_repository_name_from_ead_resource",
+				"passLabels": [{"resource": "eadResource"}]
+			},
+			{
+				"label": "subjects",
+				"otherNodes": "subjects",
+				"xpath": "./metadata/ead/archdesc/controlaccess/subject"
+			},
+			{ "label": "usage",
+				"constant": "This field does not exist in ArchivesSpace",
+				"format": "text"
+			},
+			{
+				"label": "license",
+				"xpath": "./metadata/ead/archdesc/userestrict/p",
+				"format": "text"
+			},
+			{
+				"label": "linkToSource",
+				"xpath": "./metadata/ead/eadheader/eadid",
+				"returnAttributeName": "url",
+				"format": "text"
+			},
+			{
+				"label": "access",
+				"xpath": "./metadata/ead/archdesc/accessrestrict/p",
+				"format": "text"
+			},
+			{
+				"label": "format",
+				"xpath": "./metadata/ead/archdesc/controlaccess/genreform",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "dedication",
+				"xpath": "./metadata/ead/archdesc/acqinfo/p",
+				"format": "text"
+			},
+			{
+				"label": "description",
+				"xpath": "./metadata/ead/archdesc/scopecontent/p",
+				"format": "text"
+			},
+			{
+				"label": "modifiedDate",
+				"xpath": "./header/datestamp",
+				"format": "text"
+			},
+			{ "label": "myId",
+				"fromLabels": ["eadId", "uniqueIdentifier"],
+				"format": "text"
+			},
+			{	"label": "collectionId",
+				"fromLabels": ["myId"],
+				"format": "text"
+			},
+			{ "label": "parentId",
+				"constant": "root",
+				"format": "text"
+			},
+			{
+				"label": "children",
+				"otherNodes": "children",
+				"xpath": "./metadata/ead/archdesc/dsc/c01",
+				"optional": true,
+				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "myId"}]
+			},
+			{
+				"label": "level",
+				"externalProcess": "define_level",
+				"passLabels": [{"children": "children"}]
+			},
+			{
+				"removeNodes": ["eadResource", "eadId"]
+			},
+			{
+				"saveCsvRecord": "true",
+				"fileNamedForNode": "myId"
+			},
+			{
+				"!saveRecordAsSeparateFile": "true",
+				"!fileNamedForNode": "myId"
+			}
+		]
+	},
+	"children": {
+		"xrequiredDescendants": ["digitalAssets"],
+		"FieldsToExtract": [
+			{
+				"label": "myId",
+				"xpath": ".",
+				"optional": true,
+				"returnAttributeName": "id",
+				"format": "text"
+			},
+			{
+				"label": "description",
+				"xpath": "./scopecontent/p",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "child",
+				"otherNodes": "childDetails",
+				"xpath": "./did",
+				"optional": true,
+				"collapseTree": true,
+				"requiredDescendants": ["digitalAssets"],
+				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "myId"}]
+			},
+			{
+				"removeNodes": ["passedParentId"]
+			},
+			{
+				"label": "children",
+				"otherNodes": "children",
+				"xpath": "./c02",
+				"optional": true,
+				"collapseTree": false,
+				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "myId"}]
+			},
+			{
+				"label": "children",
+				"otherNodes": "children",
+				"xpath": "./c03",
+				"optional": true,
+				"collapseTree": false,
+				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "myId"}]
+			},
+			{
+				"label": "children",
+				"otherNodes": "children",
+				"xpath": "./c04",
+				"optional": true,
+				"collapseTree": false,
+				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "myId"}]
+			},
+			{
+				"label": "level",
+				"externalProcess": "define_level",
+				"passLabels": [{"children": "children"}]
+			},
+			{
+				"saveCsvRecord": "true",
+				"retainOnlyNodes": ["myId"],
+				"requiredDescendants": ["digitalAssets"]
+			},
+			{
+				"!saveRecordAsSeparateFile": "true",
+				"!fileNamedForNode": "myId",
+				"!retainOnlyNodes": ["myId"],
+				"!requiredDescendants": ["digitalAssets"]
+			}
+		]
+	},
+	"childDetails": {
+		"requiredDescendants": ["digitalAssets"],
+		"FieldsToExtract": [
+			{
+				"label": "child",
+				"otherNodes": "did",
+				"xpath": ".",
+				"optional": true,
+				"collapseTree": true,
+				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "passedParentId"}]
+			},
+			{
+				"removeNodes": ["passedParentId"]
+			}
+		]
+	},
+	"did": {
+		"FieldsToExtract": [
+			{
+				"label": "title",
+				"xpath": "./unittitle",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "creator",
+				"xpath": "./origination[@label='Creator']/persname",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "dateCreated",
+				"xpath": "./unitdate[@type='inclusive']",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "uniqueIdentifier",
+				"xpath": "./unitid",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "dimensions",
+				"xpath": "./physdesc/extent",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"!label": "physdesc",
+				"!xpath": "./physdesc",
+				"!optional": true,
+				"!format": "text"
+			},
+			{
+				"label": "linkToSource",
+				"xpath": "./unitid/extref",
+				"returnAttributeName": "href",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "languages",
+				"xpath": "./langmaterial",
+				"optional": true
+			},
+			{
+				"label": "languages",
+				"xpath": "./langmaterial/language",
+				"optional": true
+			},
+			{
+				"label": "digitalAssets",
+				"otherNodes": "daogrp",
+				"xpath": "./daogrp",
+				"optional": true,
+				"collapseTree": false,
+				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "passedParentId"}],
+				"checkForInconsistencies": ["fileId"]
+			}
+		]
+	},
+	"daogrp": {
+		"!checkForInconsistencies": ["fileId"],
+		"FieldsToExtract": [
+			{ "label": "level",
+				"constant": "file",
+				"format": "text"
+			},
+			{
+				"label": "thumbnail",
+				"constant": true,
+				"format": "text"
+			},
+			{
+				"label": "description",
+				"xpath": "./daodesc/p",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "filePath",
+				"xpath": "./daoloc",
+				"optional": true,
+				"returnAttributeName": "href",
+				"removeDuplicates": true,
+				"excludePattern": [".shtml"],
+				"format": "text"
+			},
+			{ "label": "parentId",
+				"fromLabels": ["passedParentId"],
+				"format": "text"
+			},
+			{
+				"removeNodes": ["passedParentId"]
+			},
+			{
+				"label": "myId",
+				"externalProcess": "file_name_from_filePath",
+				"passLabels": [{"filename": "filePath"}]
+			},
+			{
+				"externalProcess": "getFilesFromUri",
+				"passLabels": [{"filename": "filePath"}],
+				"seedNodes": [{"collectionId": "collectionId"}, {"level": "level"},
+					{"parentId": "parentId"}, {"fileId": "fileId"}]
+			},
+			{
+				"label": "fileId",
+				"externalProcess": "id_from_url",
+				"passLabels": [{"filename": "filePath"}]
+			}
+		]
+	},
+	"subjects": {
+		"FieldsToExtract": [
+			{
+				"label": "authority",
+				"xpath": ".",
+				"returnAttributeName": "source",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "term",
+				"xpath": ".",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "uri",
+				"constant": "",
+				"optional": false,
+				"format": "text"
+			}
+		]
+	}
+}
