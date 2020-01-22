@@ -1,5 +1,3 @@
-
-
 def nodes_exist_in_json_tree(json_tree, required_descendants):
     """ Returns boolean if all required nodes exists at any level in the passed json_tree """
     nodes_exist = True
@@ -15,7 +13,7 @@ def node_exists_in_dict(dict_passed, node_name):
     if node_name in dict_passed:
         return True
     else:
-        for key, value in dict_passed.items():
+        for _key, value in dict_passed.items():
             result = node_exists_in_json_tree(value, node_name)
             if result:
                 return result

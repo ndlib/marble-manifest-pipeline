@@ -2,7 +2,6 @@
 """ Module to launch application """
 
 import json
-# import requests
 import io
 import os
 import sys

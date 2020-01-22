@@ -249,7 +249,7 @@ class HarvestOaiEads():
     def _digital_records_exist(self, xml_root):
         """ Test to see if a digital asset object record exists in the object """
         result = False
-        for dao in xml_root.findall('.//daogrp'):
+        for _dao in xml_root.findall('.//daogrp'):
             result = True
             break
         return result

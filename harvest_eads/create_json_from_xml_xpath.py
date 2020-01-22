@@ -3,7 +3,6 @@ import json
 import boto3
 import os
 import sys
-# from search_files import id_from_url, crawl_available_files
 from file_system_utilities import create_directory, copy_file_from_local_to_s3, delete_file, get_full_path_file_name
 from write_csv import write_csv_header, append_to_csv
 from additional_functions import check_for_inconsistent_dao_image_paths, file_name_from_filePath, \
