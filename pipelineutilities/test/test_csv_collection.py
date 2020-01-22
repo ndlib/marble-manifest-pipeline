@@ -8,8 +8,8 @@ from pipelineutilities.csv_collection import Item
 objects = [
     {"sourceSystem": "EmbARK", "repository": "repository", "myId": "collectionId", "collectionId": "collectionId", "parentId": "root", "level": "collection"},
     {"sourceSystem": "", "repository": "", "myId": "itemId", "collectionId": "collectionId", "parentId": "collectionId", "level": "manifest"},
-    {"sourceSystem": "", "repository": "", "myId": "fileId1", "collectionId": "collectionId", "parentId": "itemId", "level": "manifest"},
-    {"sourceSystem": "", "repository": "", "myId": "fileId2", "collectionId": "collectionId", "parentId": "itemId", "level": "manifest"}
+    {"sourceSystem": "", "repository": "", "myId": "fileId1", "collectionId": "collectionId", "parentId": "itemId", "level": "file"},
+    {"sourceSystem": "", "repository": "", "myId": "fileId2", "collectionId": "collectionId", "parentId": "itemId", "level": "file"}
 ]
 
 
