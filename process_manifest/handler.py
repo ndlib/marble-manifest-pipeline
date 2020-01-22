@@ -20,7 +20,7 @@ from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 
 
 def run(event, context):
-    if 'ssm_key_base' not in event:
+    if 'ssm_key_base' not in event and not event.get('local', False):
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
 
     event = get_pipeline_config(event)

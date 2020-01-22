@@ -4,31 +4,31 @@
     "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
     "http://iiif.io/api/presentation/3/context.json"
   ],
-  "id": "https://presentation-iiif.library.nd.edu/identifier/manifest",
+  "id": "https://presentation-iiif.library.nd.edu/item-one-image-embark/collectionId/manifest",
   "items": [
     {
-      "height": 444,
-      "id": "https://presentation-iiif.library.nd.edu/identifier/canvas/image1.tif",
+      "height": "",
+      "id": "https://presentation-iiif.library.nd.edu/item-one-image-embark/canvas/file.jpg",
       "items": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/identifier/annotation_page/image1.tif",
+          "id": "https://presentation-iiif.library.nd.edu/item-one-image-embark/annotation_page/file.jpg",
           "items": [
             {
               "body": {
                 "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/identifier%2Fimage1/full/full/0/default.jpg",
+                "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-embark/file.jpg/full/full/0/default.jpg",
                 "service": [
                   {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/identifier%2Fimage1",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-embark/file.jpg",
                     "profile": "http://iiif.io/api/image/2/level2.json",
                     "type": "ImageService2"
                   }
                 ],
                 "type": "Image"
               },
-              "id": "https://presentation-iiif.library.nd.edu/identifier/annotation/image1.tif",
+              "id": "https://presentation-iiif.library.nd.edu/item-one-image-embark/annotation/file.jpg",
               "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/identifier/canvas/image1.tif",
+              "target": "https://presentation-iiif.library.nd.edu/item-one-image-embark/canvas/file.jpg",
               "type": "Annotation"
             }
           ],
@@ -37,15 +37,15 @@
       ],
       "label": {
         "en": [
-          "name"
+          "title"
         ]
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/identifier%2Fimage1/full/250,/0/default.jpg",
+          "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-embark/file.jpg/full/250,/0/default.jpg",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/identifier%2Fimage1",
+              "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-embark/file.jpg",
               "profile": "http://iiif.io/api/image/2/level2.json",
               "type": "ImageService2"
             }
@@ -54,19 +54,19 @@
         }
       ],
       "type": "Canvas",
-      "width": 555
+      "width": ""
     }
   ],
   "label": {
     "en": [
-      "name"
+      "title"
     ]
   },
   "metadata": [
     {
       "label": {
         "en": [
-          "Creator"
+          "Creator "
         ]
       },
       "value": {
@@ -78,24 +78,48 @@
     {
       "label": {
         "en": [
-          "Date"
+          "Classification "
         ]
       },
       "value": {
         "en": [
-          "dateCreated"
+          "Classification"
         ]
       }
     },
     {
       "label": {
         "en": [
-          "Material Extent"
+          "Medium"
         ]
       },
       "value": {
         "en": [
-          "materialExtent"
+          "Medium"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Usage"
+        ]
+      },
+      "value": {
+        "en": [
+          "usage"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Copyright"
+        ]
+      },
+      "value": {
+        "en": [
+          "license"
         ]
       }
     },
@@ -107,65 +131,48 @@
       },
       "value": {
         "en": [
-          "conditionOfAccess"
+          "access"
         ]
       }
     },
     {
       "label": {
         "en": [
-          "Credit Line"
+          "Format"
         ]
       },
       "value": {
         "en": [
-          "sponsor"
+          "format"
         ]
       }
     },
     {
       "label": {
         "en": [
-          "Subject"
+          "Dimensions"
         ]
       },
       "value": {
         "en": [
-          "subject"
+          "dimensions"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Credit line "
+        ]
+      },
+      "value": {
+        "en": [
+          "dedication"
         ]
       }
     }
   ],
-  "provider": {
-    "homepage": [
-      {
-        "format": "text/html",
-        "id": "https://rarebooks.library.nd.edu/",
-        "label": {
-          "en": [
-            "Rare Books and Special Collections"
-          ]
-        },
-        "type": "Text"
-      }
-    ],
-    "id": "https://rarebooks.library.nd.edu/using",
-    "label": {
-      "en": [
-        "Rare Books and Special Collections"
-      ]
-    },
-    "logo": [
-      {
-        "format": "image/png",
-        "height": 100,
-        "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
-        "type": "Image",
-        "width": 120
-      }
-    ],
-    "type": "Agent"
-  },
+  "provider": null,
   "requiredStatement": {
     "label": {
       "en": [
@@ -174,15 +181,15 @@
     },
     "value": {
       "en": [
-        "license"
+        "usage"
       ]
     }
   },
-  "rights": "copyrightHolder",
+  "rights": "license",
   "seeAlso": [
     {
       "format": "application/ld+json",
-      "id": "https://presentation-iiif.library.nd.edu/identifier",
+      "id": "https://presentation-iiif.library.nd.edu/item-one-image-embark/collectionId",
       "profile": "https://schema.org/",
       "type": "Dataset"
     }
@@ -194,10 +201,10 @@
   },
   "thumbnail": [
     {
-      "id": "https://image-iiif.library.nd.edu/iiif/2/identifier%2Fimage1/full/250,/0/default.jpg",
+      "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-embark/file.jpg/full/250,/0/default.jpg",
       "service": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/identifier%2Fimage1",
+          "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-embark/file.jpg",
           "profile": "http://iiif.io/api/image/2/level2.json",
           "type": "ImageService2"
         }
