@@ -30,7 +30,7 @@ class iiifManifest(iiifItem):
         }
 
         if self.data.get('repository', False):
-            ret['provider'] = self._add_provider(self.data.repository())
+            ret['provider'] = self._add_provider(self.data.get('repository'))
 
         if self.data.get('usage', False):
             ret['requiredStatement'] = self._convert_label_value('Copyright', self.data.get('usage'))
@@ -101,7 +101,6 @@ class iiifManifest(iiifItem):
 
     def _manifest_id(self):
         if self.type == 'Manifest':
-            print(self.config)
             return self.config['manifest-server-base-url'] + '/' + self.id + '/manifest'
         else:
             return self.config['manifest-server-base-url'] + '/collection/' + self.id
@@ -220,5 +219,6 @@ class iiifManifest(iiifItem):
             'title',
             'provider',
             'description',
-            'collectioninformation'
+            'collectioninformation',
+            'repository'
         ]

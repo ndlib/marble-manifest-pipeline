@@ -9,4 +9,4 @@ matrix:
       sudo: true
 install: "pip install -r dev-requirements.txt"
 script:
-  - coverage run run_all_tests.py
+  - ./run-all-tests.sh

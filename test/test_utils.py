@@ -6,36 +6,12 @@ def load_data_for_test(id):
     data = {}
     current_path = str(Path(__file__).parent.absolute())
 
-    with open(current_path + "/../example/{}/config.json".format(id), 'r') as input_source:
-        data['config'] = json.load(input_source)
-    input_source.close()
+    #with open(current_path + "/../example/{}/image-data.json".format(id), 'r') as input_source:
+    #    data['image_data'] = json.load(input_source)
+    #input_source.close()
 
-    with open(current_path + "/../example/{}/main.csv".format(id), 'r') as input_source:
-        data['main_csv'] = input_source.read()
-    input_source.close()
-
-    with open(current_path + "/../example/{}/items.csv".format(id), 'r') as input_source:
-        data['items_csv'] = input_source.read()
-    input_source.close()
-
-    with open(current_path + "/../example/{}/image-data.json".format(id), 'r') as input_source:
-        data['image_data'] = json.load(input_source)
-    input_source.close()
-
-    with open(current_path + '/../example/{}/manifest.json'.format(id), 'r') as input_source:
+    with open(current_path + '/../example/test_manifests/{}.json'.format(id), 'r') as input_source:
         data['manifest_json'] = json.load(input_source)
-    input_source.close()
-
-    with open(current_path + '/../example/{}/schema.json'.format(id), 'r') as input_source:
-        data['schema_json'] = json.load(input_source)
-    input_source.close()
-
-    with open(current_path + '/../example/{}/descriptive_metadata_mets.xml'.format(id), 'r') as input_source:
-        data['descriptive_metadata'] = input_source.read()
-    input_source.close()
-
-    with open(current_path + '/../example/{}/structural_metadata_mets.xml'.format(id), 'r') as input_source:
-        data['structural_metadata'] = input_source.read()
     input_source.close()
 
     return data

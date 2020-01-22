@@ -1,7 +1,6 @@
 import unittest
 from datetime import datetime, timedelta, timezone
-from init.handler import get_file_ids_to_be_processed
-import sys
+from init.helpers import get_file_ids_to_be_processed
 
 test_config = {
   "process-bucket-csv-basepath": "csv",
@@ -17,7 +16,6 @@ s3_query_result = [
     {"Key": "csv/", "LastModified": (now - timedelta(hours=test_config['hours-threshold-for-incremental-harvest'] - 5))}
 ]
 
-print(sys.path)
 
 class TestSearchFiles(unittest.TestCase):
 
