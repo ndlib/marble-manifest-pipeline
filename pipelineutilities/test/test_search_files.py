@@ -1,3 +1,7 @@
+import sys
+import os
+where_i_am = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(where_i_am + "../")
 import unittest
 from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_jpg
 
@@ -28,7 +32,6 @@ temp_ids_example = {
     'https://rarebooks.library.nd.edu/digital/bookreader/MSS_CodLat_e05/images/MSS_CodLat_e05-084r.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/MSS_CodLat_e05/images/MSS_CodLat_e05',
     'https://rarebooks.library.nd.edu/digital/bookreader/images/CodLat_c03/MSS_CodLat_c3_098r.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/images/CodLat_c03/MSS_CodLat_c3',
     'https://rarebooks.library.nd.edu/digital/bookreader/Newberry-Case_MS_181/images/Newberry-Case_MS_181-999d.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/Newberry-Case_MS_181/images/Newberry-Case_MS_181',
-
 }
 
 valid_urls = [
@@ -69,7 +72,6 @@ class TestSearchFiles(unittest.TestCase):
 
     def test_file_should_be_skipped(self):
         for url in skipped_files:
-            print(url)
             self.assertTrue(file_should_be_skipped(url))
 
         for url in valid_files:

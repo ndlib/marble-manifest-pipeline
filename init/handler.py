@@ -20,7 +20,7 @@ sentry_sdk.init(
 
 
 def run(event, context):
-    if 'ssm_key_base' not in event:
+    if 'ssm_key_base' not in event and not event.get('local', False):
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
 
     config = get_pipeline_config(event)
@@ -29,20 +29,33 @@ def run(event, context):
     event['ids'] = []
     event['errors'] = []
 
+    all_files = get_matching_s3_objects(config['process-bucket'], config['process-bucket-csv-basepath'] + "/")
+    event['ids'] = list(get_file_ids_to_be_processed(all_files, config))
+
+    return event
+
+
+def get_file_ids_to_be_processed(files, config):
+    time_threshold_for_processing = determine_time_threshold_for_processing(config)
+    for file in files:
+        # if it is not the basedirectory which is returned in the list and
+        # the time is more recent than out test threshold
+        if file['Key'] != config['process-bucket-csv-basepath'] + "/" and file['LastModified'] >= time_threshold_for_processing:
+            yield get_if_from_file_key(file['Key'])
+
+
+def determine_time_threshold_for_processing(config):
     time_threshold_for_processing = datetime.utcnow() - timedelta(hours=config['hours-threshold-for-incremental-harvest'])
     # since this is utc already but there is no timezone add it in so
     # the data can be compared to the timze zone aware date in file
-    time_threshold_for_processing = time_threshold_for_processing.replace(tzinfo=timezone.utc)
-    for file in get_matching_s3_objects(config['process-bucket'], config['process-bucket-csv-basepath'] + "/"):
-        if file['Key'] == 'csv/':
-            continue
+    return time_threshold_for_processing.replace(tzinfo=timezone.utc)
 
-        if file['LastModified'] >= time_threshold_for_processing:
-            file = os.path.splitext(file['Key'])
-            file = os.path.basename(file[0])
-            event['ids'].append(file)
 
-    return event
+def get_if_from_file_key(key):
+    # remove the extension
+    id = os.path.splitext(key)
+    # get the basename (filename)
+    return os.path.basename(id[0])
 
 
 # python -c 'from handler import *; test()'
