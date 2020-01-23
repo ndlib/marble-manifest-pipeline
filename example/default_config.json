@@ -20,13 +20,13 @@
   "noreply-email-addr": "noreply@nd.edu",
   "troubleshoot-email-addr": "rdought1@nd.edu",
   "local-path": "please set me",
-  "csv-field-names": ["sourceSystem", "repository", "collectionId", "parentId",
-        "myId", "level", "title", "creator", "dateCreated", "uniqueIdentifier",
+  "csv-field-names": ["id", "sourceSystem", "repository", "collectionId", "parentId",
+        "level", "title", "creator", "dateCreated", "uniqueIdentifier",
         "dimensions", "languages", "subjects", "usage", "license", "linkToSource",
         "access", "format", "dedication", "description", "modifiedDate", "thumbnail",
-        "filePath", "fileId", "sequence", "collectionInformation", "fileInfo",
+        "filePath", "sequence", "collectionInformation", "fileInfo", "imageUri", "mimeType",
         "classification", "workType", "medium", "artists", "digitalAssets",
-        "width", "height", "etag", "md5Checksum", "children"
+        "width", "height", "md5Checksum", "children", "fileId"
       ],
   "seconds-to-allow-for-processing": 780,
   "hours-threshold-for-incremental-harvest": 72,

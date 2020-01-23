@@ -3,6 +3,7 @@ import json
 import boto3
 import os
 import sys
+from datetime import datetime
 from file_system_utilities import create_directory, copy_file_from_local_to_s3, delete_file, get_full_path_file_name
 from write_csv import write_csv_header, append_to_csv
 from additional_functions import check_for_inconsistent_dao_image_paths, file_name_from_filePath, \
@@ -32,6 +33,7 @@ class createJsonFromXml():
         self.hash_of_available_files = crawl_available_files(self.config)
         self.processing_dao_for_parent_id = ""
         self.temporary_local_path = "/tmp"
+        self.sequences_within_parent = {}
 
     def extract_fields(self, xml_root, json_section, seeded_json_output):
         """ This code processes translations defined in the portion of the
@@ -99,7 +101,8 @@ class createJsonFromXml():
         if json_node is not None:
             local_path = self.temporary_local_path
             file_name = 'root.csv'
-            append_to_csv(local_path, file_name, self.config["csv-field-names"], json_node, [])  # noqa: E501
+            json_node['sequence'] = self._accumulate_sequences_by_parent(json_node)
+            append_to_csv(local_path, file_name, self.config["csv-field-names"], json_node, ["children"])  # noqa: E501
             if 'fileNamedForNode' in field:
                 if field['fileNamedForNode'] in json_node:
                     new_file_name = json_node[field['fileNamedForNode']] + '.csv'
@@ -117,6 +120,14 @@ class createJsonFromXml():
                     if return_node_name in json_node:
                         return_node[return_node_name] = json_node[return_node_name]
         return return_node
+
+    def _accumulate_sequences_by_parent(self, json_node):
+        sequence_to_use = 1
+        my_parent_id = json_node['parentId']
+        if my_parent_id != 'root' and my_parent_id in self.sequences_within_parent:
+            sequence_to_use = self.sequences_within_parent[my_parent_id] + 1
+        self.sequences_within_parent[my_parent_id] = sequence_to_use
+        return sequence_to_use
 
     def _save_record_as_separate_file(self, json_node, field):
         """ This gives us the opportunity to save the json file.
@@ -230,18 +241,19 @@ class createJsonFromXml():
             if id in self.hash_of_available_files:
                 if 'files' in self.hash_of_available_files[id]:
                     for obj in self.hash_of_available_files[id]['files']:
-                        each_file_dict['myId'] = file_name_from_filePath(obj['Key'])
-                        each_file_dict['thumbnail'] = (each_file_dict['myId'] == json_node['myId'])
+                        each_file_dict['id'] = file_name_from_filePath(obj['Key'])
+                        each_file_dict['thumbnail'] = (each_file_dict['id'] == json_node['id'])
                         each_file_dict['description'] = None
-                        if each_file_dict['myId'] == json_node['myId']:
+                        if each_file_dict['id'] == json_node['id']:
                             each_file_dict['description'] = json_node['description']
                         each_file_dict['fileInfo'] = obj
                         each_file_dict['filePath'] = obj['Path']
                         each_file_dict['sequence'] = obj['Order']
                         each_file_dict['title'] = obj['Label']
                         each_file_dict['modifiedDate'] = obj['LastModified']
-                        each_file_dict['etag'] = obj['ETag'].replace("'", "").replace('"', '')  # strip duplicated quotes: {'ETag': '"8b50cfed39b7d8bcb4bd652446fe8adf"'}  # noqa: E501
-                        append_to_csv(local_path, file_name, self.config["csv-field-names"], each_file_dict, [])  # noqa: E501
+                        each_file_dict['modifiedDate'] = datetime.strptime(obj['LastModified'], '%Y-%m-%d %H:%M:%S').isoformat() + 'Z'  # noqa: E501
+                        each_file_dict['md5Checksum'] = obj['ETag'].replace("'", "").replace('"', '')  # strip duplicated quotes: {'ETag': '"8b50cfed39b7d8bcb4bd652446fe8adf"'}  # noqa: E501
+                        append_to_csv(local_path, file_name, self.config["csv-field-names"], each_file_dict, ["children"])  # noqa: E501
         return None
 
     def _is_this_first_dao_in_object(self, my_parent_id):

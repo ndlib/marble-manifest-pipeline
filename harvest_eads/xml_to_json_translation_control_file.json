@@ -5,6 +5,10 @@
 				"constant": "ArchivesSpace",
 				"format": "text"
 			},
+			{ "label": "sequence",
+				"constant": 0,
+				"format": "text"
+			},
 			{
 				"label": "eadResource",
 				"xpath": "./header/identifier",
@@ -78,12 +82,12 @@
 				"xpath": "./header/datestamp",
 				"format": "text"
 			},
-			{ "label": "myId",
+			{ "label": "id",
 				"fromLabels": ["eadId", "uniqueIdentifier"],
 				"format": "text"
 			},
 			{	"label": "collectionId",
-				"fromLabels": ["myId"],
+				"fromLabels": ["id"],
 				"format": "text"
 			},
 			{ "label": "parentId",
@@ -95,7 +99,7 @@
 				"otherNodes": "children",
 				"xpath": "./metadata/ead/archdesc/dsc/c01",
 				"optional": true,
-				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "myId"}]
+				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"}]
 			},
 			{
 				"label": "level",
@@ -107,11 +111,11 @@
 			},
 			{
 				"saveCsvRecord": "true",
-				"fileNamedForNode": "myId"
+				"fileNamedForNode": "id"
 			},
 			{
 				"!saveRecordAsSeparateFile": "true",
-				"!fileNamedForNode": "myId"
+				"!fileNamedForNode": "id"
 			}
 		]
 	},
@@ -119,7 +123,7 @@
 		"xrequiredDescendants": ["digitalAssets"],
 		"FieldsToExtract": [
 			{
-				"label": "myId",
+				"label": "id",
 				"xpath": ".",
 				"optional": true,
 				"returnAttributeName": "id",
@@ -138,7 +142,7 @@
 				"optional": true,
 				"collapseTree": true,
 				"requiredDescendants": ["digitalAssets"],
-				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "myId"}]
+				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"}]
 			},
 			{
 				"removeNodes": ["passedParentId"]
@@ -149,7 +153,7 @@
 				"xpath": "./c02",
 				"optional": true,
 				"collapseTree": false,
-				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "myId"}]
+				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"}]
 			},
 			{
 				"label": "children",
@@ -157,7 +161,7 @@
 				"xpath": "./c03",
 				"optional": true,
 				"collapseTree": false,
-				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "myId"}]
+				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"}]
 			},
 			{
 				"label": "children",
@@ -165,7 +169,7 @@
 				"xpath": "./c04",
 				"optional": true,
 				"collapseTree": false,
-				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "myId"}]
+				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"}]
 			},
 			{
 				"label": "level",
@@ -174,13 +178,13 @@
 			},
 			{
 				"saveCsvRecord": "true",
-				"retainOnlyNodes": ["myId"],
+				"retainOnlyNodes": ["id"],
 				"requiredDescendants": ["digitalAssets"]
 			},
 			{
 				"!saveRecordAsSeparateFile": "true",
-				"!fileNamedForNode": "myId",
-				"!retainOnlyNodes": ["myId"],
+				"!fileNamedForNode": "id",
+				"!retainOnlyNodes": ["id"],
 				"!requiredDescendants": ["digitalAssets"]
 			}
 		]
@@ -194,7 +198,7 @@
 				"xpath": ".",
 				"optional": true,
 				"collapseTree": true,
-				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "passedParentId"}]
+				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "passedParentId"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"}]
 			},
 			{
 				"removeNodes": ["passedParentId"]
@@ -262,7 +266,7 @@
 				"xpath": "./daogrp",
 				"optional": true,
 				"collapseTree": false,
-				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "passedParentId"}],
+				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "passedParentId"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"}],
 				"checkForInconsistencies": ["fileId"]
 			}
 		]
@@ -302,7 +306,7 @@
 				"removeNodes": ["passedParentId"]
 			},
 			{
-				"label": "myId",
+				"label": "id",
 				"externalProcess": "file_name_from_filePath",
 				"passLabels": [{"filename": "filePath"}]
 			},
@@ -310,7 +314,7 @@
 				"externalProcess": "getFilesFromUri",
 				"passLabels": [{"filename": "filePath"}],
 				"seedNodes": [{"collectionId": "collectionId"}, {"level": "level"},
-					{"parentId": "parentId"}, {"fileId": "fileId"}]
+					{"parentId": "parentId"}, {"fileId": "fileId"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"}]
 			},
 			{
 				"label": "fileId",

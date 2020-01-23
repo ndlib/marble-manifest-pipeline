@@ -55,10 +55,7 @@ def _suplement_event(event):
 
 def _init_sentry():
     if 'SENTRY_DSN' in os.environ:
-        sentry_sdk.init(
-            dsn=os.environ['SENTRY_DSN'],
-            integrations=[AwsLambdaIntegration()]
-            )
+        sentry_sdk.init(dsn=os.environ['SENTRY_DSN'], integrations=[AwsLambdaIntegration()])
 
 
 def _check_environment_variable(variable_name, default):
@@ -95,7 +92,7 @@ def test(identifier=""):
         if mode == 'identifiers':
             event['ids'] = ['oai:und//repositories/3/resources/1644']
         elif mode == 'ids':
-            event['ids'] = ['MSNEA8011_EAD']
+            event['ids'] = ['BPP1001_EAD', 'MSNEA8011_EAD']
 
     event = run(event, {})
 
