@@ -27,7 +27,6 @@ def run(event, context):
 
     ids = event.get("ids")
     for id in ids:
-
         step = FinalizeStep(id, config)
         # step.error = event.get("unexpected", "")
         # if not step.error:

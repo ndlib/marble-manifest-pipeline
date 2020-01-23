@@ -1,35 +1,52 @@
 {
-  "steps-completed": "",
   "process-bucket": "marble-manifest-prod-processbucket-13bond538rnnb",
+  "image-server-bucket": "marble-data-broker-publicbucket-1kvqtwnvkhra2",
+  "manifest-server-bucket": "marble-manifest-prod-manifestbucket-lpnnaj4jaxl5",
+  "museum-google-credentials": "",
+  "museum-google-drive-id": "",
+  "museum-server-username": "",
+  "museum-server-password": "",
+  "rbsc-image-buckets": {
+    "marble-manifest-prod-processbucket-13bond538rnnb": ["digital/bookreader", "collections/ead_xml/images"]
+  },
+  "museum-server-base-url": "http://notredame.dom5182.com:8080",
   "process-bucket-read-basepath": "process",
   "process-bucket-write-basepath": "finished",
   "process-bucket-csv-basepath": "csv",
   "process-bucket-ead-resource-mappings-file": "ead_to_resource_dictionary.json",
-  "image-server-bucket": "marble-data-broker-publicbucket-1kvqtwnvkhra2",
   "image-server-base-url": "https://image-iiif.library.nd.edu/iiif/2",
   "image-server-bucket-basepath": "",
-  "manifest-server-bucket": "marble-manifest-prod-manifestbucket-lpnnaj4jaxl5",
   "manifest-server-base-url": "https://presentation-iiif.library.nd.edu",
   "manifest-server-bucket-basepath": "",
-  "rbsc-image-buckets": {
-    "marble-manifest-prod-processbucket-13bond538rnnb": ["digital/bookreader", "collections/ead_xml/images"]
-  },
   "canvas-default-height": 2000,
   "canvas-default-width": 2000,
   "image-data-file": "image-data.json",
   "noreply-email-addr": "noreply@nd.edu",
-  "troubleshoot-email-addr": "rdought1@nd.edu",
-  "local-path": "please set me",
-  "csv-field-names": ["sourceSystem", "repository", "collectionId", "parentId",
-        "myId", "level", "title", "creator", "dateCreated", "uniqueIdentifier",
+  "csv-field-names": ["id", "sourceSystem", "repository", "collectionId", "parentId",
+        "level", "title", "creator", "dateCreated", "uniqueIdentifier",
         "dimensions", "languages", "subjects", "usage", "license", "linkToSource",
         "access", "format", "dedication", "description", "modifiedDate", "thumbnail",
-        "filePath", "fileId", "sequence", "collectionInformation", "fileInfo",
+        "filePath", "sequence", "collectionInformation", "fileInfo", "imageUri", "mimeType",
         "classification", "workType", "medium", "artists", "digitalAssets",
-        "width", "height", "etag", "md5Checksum", "children"
+        "width", "height", "md5Checksum"
       ],
+  "museum-required-fields": {
+      "Title": "title",
+      "Creator": "creator",
+      "Date created": "dateCreated",
+      "Work Type": "workType",
+      "Medium": "medium",
+      "Unique identifier": "uniqueIdentifier",
+      "Repository": "repository",
+      "Subject": "subjects",
+      "Usage": "usage",
+      "Access": "access",
+      "Dimensions": "dimensions",
+      "Dedication": "dedication",
+      "Thumbnail": "digitalAssets"
+    },
   "seconds-to-allow-for-processing": 780,
   "hours-threshold-for-incremental-harvest": 72,
   "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai",
-  "errors": []
+  "local-path": "please set me"
 }
