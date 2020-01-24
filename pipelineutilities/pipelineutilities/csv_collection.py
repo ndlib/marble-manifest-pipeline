@@ -8,7 +8,7 @@ def load_csv_data(id, config):
     if config['local']:
         return load_id_from_file(id, config)
     else:
-        return load_id_from_s3(config['csv-data-files-bucket'], config['csv-data-files-basepath'], id)
+        return load_id_from_s3(config['process-bucket'], config['process-bucket-csv-basepath'], id)
 
 
 def load_id_from_s3(s3Bucket, s3Path, id):
@@ -42,7 +42,7 @@ class Item():
         self.all_objects = all_objects
 
     def repository(self):
-        return self.get('repository')
+        return self.get('sourceSystem', 'aleph')
 
     def type(self):
         return self.get('level')

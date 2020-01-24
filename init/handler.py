@@ -26,12 +26,13 @@ def run(event, context):
 
     config = get_pipeline_config(event)
 
-    event['ecs-args'] = [json.dumps(config)]
-    event['ids'] = []
     event['errors'] = []
 
-    all_files = get_matching_s3_objects(config['process-bucket'], config['process-bucket-csv-basepath'] + "/")
-    event['ids'] = list(get_file_ids_to_be_processed(all_files, config))
+    if not event.get('ids'):
+        all_files = get_matching_s3_objects(config['process-bucket'], config['process-bucket-csv-basepath'] + "/")
+        event['ids'] = list(get_file_ids_to_be_processed(all_files, config))
+
+    event['ecs-args'] = [json.dumps(config)]
 
     return event
 
@@ -41,5 +42,5 @@ def test():
     data = {}
     data['local'] = True
     data['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
-
+    data['process-bucket-csv-basepath'] = ""
     print(run(data, {}))

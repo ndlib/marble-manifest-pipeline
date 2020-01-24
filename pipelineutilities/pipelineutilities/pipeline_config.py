@@ -4,13 +4,8 @@ import os
 
 default_config = {
     "process-bucket-read-basepath": "process",
-    "process-bucket-write-basepath": "finished",
     "process-bucket-csv-basepath": "csv",
     "process-bucket-ead-resource-mappings-file": "ead_to_resource_dictionary.json",
-    "image-server-base-url": "https://image-iiif.library.nd.edu/iiif/2",
-    "image-server-bucket-basepath": "",
-    "manifest-server-base-url": "https://presentation-iiif.library.nd.edu",
-    "manifest-server-bucket-basepath": "",
     "rbsc-image-buckets": {
         "marble-manifest-prod-processbucket-13bond538rnnb": ["digital/bookreader", "collections/ead_xml/images"]
     },
@@ -18,7 +13,6 @@ default_config = {
     "canvas-default-width": 2000,
     "image-data-file": "image-data.json",
     "noreply-email-addr": "noreply@nd.edu",
-    "troubleshoot-email-addr": "rdought1@nd.edu",
     "local-path": "please set me",
     "csv-field-names": ["sourceSystem", "repository", "collectionId", "parentId",
                         "myId", "level", "title", "creator", "dateCreated", "uniqueIdentifier",
@@ -28,10 +22,35 @@ default_config = {
                         "classification", "workType", "medium", "artists", "digitalAssets",
                         "width", "height", "etag", "md5Checksum", "children"
                         ],
+  "museum-required-fields": {
+      "Title": "title",
+      "Creator": "creator",
+      "Date created": "dateCreated",
+      "Work Type": "workType",
+      "Medium": "medium",
+      "Unique identifier": "uniqueIdentifier",
+      "Repository": "repository",
+      "Subject": "subjects",
+      "Usage": "usage",
+      "Access": "access",
+      "Dimensions": "dimensions",
+      "Dedication": "dedication",
+      "Thumbnail": "digitalAssets"
+    },
     "seconds-to-allow-for-processing": 780,
     "hours-threshold-for-incremental-harvest": 72,
     "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai",
 }
+
+# currently only used as reference here could be used for validation in the future
+ssm_only_keys = [
+    "process-bucket",
+    "manifest-server-bucket",
+    "image-server-buckcet",
+    "image-server-base-url",
+    "manifest-server-base-url"
+]
+
 
 def get_pipeline_config(event):
     if 'local' in event and event['local']:

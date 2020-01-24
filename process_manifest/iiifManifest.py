@@ -30,7 +30,7 @@ class iiifManifest(iiifItem):
         }
 
         if self.data.get('repository', False):
-            ret['provider'] = self._add_provider(self.data.get('repository'))
+            ret['provider'] = self._add_provider(self.data.repository())
 
         if self.data.get('usage', False):
             ret['requiredStatement'] = self._convert_label_value('Copyright', self.data.get('usage'))
@@ -117,9 +117,9 @@ class iiifManifest(iiifItem):
         return None
 
     def _add_provider(self, provider):
-        if (provider == 'snite'):
+        if (provider == 'embark'):
             return self._snite_proivider()
-        elif (provider == 'archives'):
+        elif (provider == 'archivespace'):
             return self._archives_proivider()
         elif (provider == 'rbsc'):
             return self._rbsc_proivider()

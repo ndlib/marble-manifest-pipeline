@@ -2,6 +2,8 @@ import sys
 from pathlib import Path
 import os
 from iiifCollection import iiifCollection
+from ToSchema import ToSchema
+from ndJson import ndJson
 
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am)
@@ -34,6 +36,12 @@ def run(event, context):
         # a2s = AthenaToSchema(event, parent, [])
         iiif = iiifCollection(id, event, parent)
         inprocess_bucket.write_manifest(iiif.manifest())
+
+        nd = ndJson(id, event, parent)
+        inprocess_bucket.write_nd_json(nd.to_hash())
+
+        schema = ToSchema(id, event, parent)
+        inprocess_bucket.write_schema_json(schema.get_json())
 
     return event
 

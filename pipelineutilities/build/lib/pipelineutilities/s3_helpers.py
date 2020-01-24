@@ -51,7 +51,7 @@ class InprocessBucket():
         path = self.basepath + "/data/collection/index.json"
         write_s3_json(self.process_bucket, path, data)
 
-    def write_schema_org(self, data):
+    def write_schema_json(self, data):
         path = self.basepath + "/data/index.json"
         write_s3_json(self.process_bucket, path, data)
 
@@ -62,6 +62,10 @@ class InprocessBucket():
     def write_data_csv(self, csv):
         path = self.basepath + "/" + id + ".csv"
         write_s3_file(self.process_bucket, path, csv)
+
+    def write_nd_json(self, data):
+        path = self.basepath + "/data/nd/index.json"
+        write_s3_json(self.process_bucket, path, data)
 
 
 def read_s3_file_content(s3Bucket, s3Path):
