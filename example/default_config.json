@@ -23,7 +23,7 @@
         "level", "title", "creator", "dateCreated", "uniqueIdentifier",
         "dimensions", "languages", "subjects", "usage", "license", "linkToSource",
         "access", "format", "dedication", "description", "modifiedDate", "thumbnail",
-        "filePath", "sequence", "collectionInformation", "fileInfo", "imageUri", "mimeType",
+        "filePath", "sequence", "collectionInformation", "fileId", "fileInfo", "imageUri", "mimeType",
         "classification", "workType", "medium", "artists", "digitalAssets",
         "width", "height", "md5Checksum"
       ],
