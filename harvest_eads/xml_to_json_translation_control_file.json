@@ -42,7 +42,7 @@
 				"xpath": "./metadata/ead/archdesc/controlaccess/subject"
 			},
 			{ "label": "usage",
-				"constant": "This field does not exist in ArchivesSpace",
+				"constant": "",
 				"format": "text"
 			},
 			{
