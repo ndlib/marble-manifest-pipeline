@@ -29,7 +29,7 @@ class FinalizeStep():
 
         all_objects = get_matching_s3_objects(src_bucket, src_path)
         for obj in all_objects:
-            dest_key = f"{self.config['image-server-bucket-basepath']}{self.id}/{obj[len(src_path):]}"
+            dest_key = f"{self.id}/{obj[len(src_path):]}"
             s3_copy_data(dest_bucket, dest_key, src_bucket, obj)
         return
 

@@ -11,13 +11,10 @@
   },
   "museum-server-base-url": "http://notredame.dom5182.com:8080",
   "process-bucket-read-basepath": "process",
-  "process-bucket-write-basepath": "finished",
   "process-bucket-csv-basepath": "csv",
   "process-bucket-ead-resource-mappings-file": "ead_to_resource_dictionary.json",
   "image-server-base-url": "https://image-iiif.library.nd.edu/iiif/2",
-  "image-server-bucket-basepath": "",
   "manifest-server-base-url": "https://presentation-iiif.library.nd.edu",
-  "manifest-server-bucket-basepath": "",
   "canvas-default-height": 2000,
   "canvas-default-width": 2000,
   "image-data-file": "image-data.json",
@@ -48,5 +45,4 @@
   "seconds-to-allow-for-processing": 780,
   "hours-threshold-for-incremental-harvest": 72,
   "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai",
-  "local-path": "please set me"
 }
