@@ -4,13 +4,12 @@ from MetadataMappings import MetadataMappings
 
 
 class ToSchema():
-    def __init__(self, id, config, data, image_data={}):
+    def __init__(self, id, config, data, image_data=False):
         self.errors = []
         self.config = config
         self.image_data = image_data
         self.dict = data
         self.id = id
-        print(self.id)
         self.base_url = config['manifest-server-base-url'] + "/" + self.id
         self.default_image = {}
         self.has_part_items = self.has_part_items()
