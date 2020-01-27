@@ -53,8 +53,8 @@ def test():
     event = {}
     event['ids'] = ['parsons', '1976.057']
     event['ssm_key_base'] = '/all/new-csv'
-    event['csv-data-files-bucket'] = 'marble-manifest-test-processbucket-19w6raq5mndlo'
-    event['csv-data-files-basepath'] = 'archives-space-csv-files'
+    event['process-bucket'] = 'marble-manifest-test-processbucket-19w6raq5mndlo'
+    event['process-bucket-csv-basepath'] = 'archives-space-csv-files'
     event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     event['local'] = True
     run(event, {})

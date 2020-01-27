@@ -1,3 +1,4 @@
+README.md
 setup.py
 pipelineutilities/__init__.py
 pipelineutilities/csv_collection.py

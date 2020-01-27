@@ -15,7 +15,7 @@ default_config = {
     "noreply-email-addr": "noreply@nd.edu",
     "local-path": "please set me",
     "csv-field-names": ["sourceSystem", "repository", "collectionId", "parentId",
-                        "myId", "level", "title", "creator", "dateCreated", "uniqueIdentifier",
+                        "id", "level", "title", "creator", "dateCreated", "uniqueIdentifier",
                         "dimensions", "languages", "subjects", "usage", "license", "linkToSource",
                         "access", "format", "dedication", "description", "modifiedDate", "thumbnail",
                         "filePath", "fileId", "sequence", "collectionInformation", "fileInfo",
