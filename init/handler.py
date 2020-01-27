@@ -2,7 +2,7 @@ import os
 import json
 from pathlib import Path
 import sys
-from helpers import get_file_ids_to_be_processed
+from helpers import get_file_ids_to_be_processed, get_all_file_ids
 
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am)
@@ -30,7 +30,10 @@ def run(event, context):
 
     if not event.get('ids'):
         all_files = get_matching_s3_objects(config['process-bucket'], config['process-bucket-csv-basepath'] + "/")
-        event['ids'] = list(get_file_ids_to_be_processed(all_files, config))
+        if event.get("run_all_ids", False):
+            event['ids'] = list(get_all_file_ids(all_files, config))
+        else:
+            event['ids'] = list(get_file_ids_to_be_processed(all_files, config))
 
     event['ecs-args'] = [json.dumps(config)]
 

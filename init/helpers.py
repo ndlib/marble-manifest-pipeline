@@ -14,6 +14,12 @@ def get_file_ids_to_be_processed(files, config):
             yield get_if_from_file_key(file['Key'])
 
 
+def get_all_file_ids(files, config):
+    for file in files:
+        if file['Key'] != config['process-bucket-csv-basepath'] + "/":
+            yield get_if_from_file_key(file['Key'])
+
+
 def determine_time_threshold_for_processing(config):
     """ Creates the datetime object that is used to test all the files against """
 
