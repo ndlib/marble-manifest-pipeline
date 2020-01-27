@@ -58,7 +58,7 @@ class Item():
 
     def children(self):
         children = []
-        test_id = "".join(self.get('myId').lower().split(" "))
+        test_id = "".join(self.get('id').lower().split(" "))
         for row in self.all_objects:
             if "".join(row['parentId'].lower().split(" ")) == test_id:
                 children.append(Item(row, self.all_objects))
@@ -78,7 +78,7 @@ class Item():
 
     def _find_row(self, id):
         for this_row in self.all_objects:
-            if this_row.get('myId', False) == id:
+            if this_row.get('id', False) == id:
                 return Item(this_row, self.all_objects)
 
 

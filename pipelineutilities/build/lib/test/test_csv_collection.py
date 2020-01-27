@@ -6,10 +6,10 @@ sys.path.append(where_i_am + "/../")
 from pipelineutilities.csv_collection import Item
 
 objects = [
-    {"sourceSystem": "EmbARK", "repository": "repository", "myId": "collectionId", "collectionId": "collectionId", "parentId": "root", "level": "collection"},
-    {"sourceSystem": "", "repository": "", "myId": "itemId", "collectionId": "collectionId", "parentId": "collectionId", "level": "manifest"},
-    {"sourceSystem": "", "repository": "", "myId": "fileId1", "collectionId": "collectionId", "parentId": "itemId", "level": "file"},
-    {"sourceSystem": "", "repository": "", "myId": "fileId2", "collectionId": "collectionId", "parentId": "itemId", "level": "file"}
+    {"sourceSystem": "EmbARK", "repository": "repository", "id": "collectionId", "collectionId": "collectionId", "parentId": "root", "level": "collection"},
+    {"sourceSystem": "", "repository": "", "id": "itemId", "collectionId": "collectionId", "parentId": "collectionId", "level": "manifest"},
+    {"sourceSystem": "", "repository": "", "id": "fileId1", "collectionId": "collectionId", "parentId": "itemId", "level": "file"},
+    {"sourceSystem": "", "repository": "", "id": "fileId2", "collectionId": "collectionId", "parentId": "itemId", "level": "file"}
 ]
 
 

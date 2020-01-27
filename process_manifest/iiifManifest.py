@@ -197,18 +197,18 @@ class iiifManifest(iiifItem):
         }
 
     def _make_id(self):
-        if self.parent_id == self.data.get('myId'):
+        if self.parent_id == self.data.get('id'):
             return self.parent_id
 
-        return self.parent_id + "/" + self.data.get('myId')
+        return self.parent_id + "/" + self.data.get('id')
 
     def _search_for_default_image(self, data):
         if data.type() == 'file':
-            return data.get('myId')
+            return data.get('id')
 
         for child in data.children():
             if child.type == 'file':
-                return child.get('myId')
+                return child.get('id')
 
             return self._search_for_default_image(child)
 
