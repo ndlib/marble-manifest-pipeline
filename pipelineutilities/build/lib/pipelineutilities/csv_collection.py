@@ -8,7 +8,7 @@ def load_csv_data(id, config):
     if config['local']:
         return load_id_from_file(id, config)
     else:
-        return load_id_from_s3(config['csv-data-files-bucket'], config['csv-data-files-basepath'], id)
+        return load_id_from_s3(config['csv-data-files-bucket'], config['process-bucket-csv-basepath'], id)
 
 
 def load_id_from_s3(s3Bucket, s3Path, id):
