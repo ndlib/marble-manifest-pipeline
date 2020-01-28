@@ -2,6 +2,8 @@ import sys
 from pathlib import Path
 import os
 from iiifCollection import iiifCollection
+from ToSchema import ToSchema
+from ndJson import ndJson
 
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am)
@@ -20,7 +22,7 @@ from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 
 
 def run(event, context):
-    if 'ssm_key_base' not in event:
+    if 'ssm_key_base' not in event and not event.get('local', False):
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
 
     event = get_pipeline_config(event)
@@ -35,6 +37,12 @@ def run(event, context):
         iiif = iiifCollection(id, event, parent)
         inprocess_bucket.write_manifest(iiif.manifest())
 
+        nd = ndJson(id, event, parent)
+        inprocess_bucket.write_nd_json(nd.to_hash())
+
+        schema = ToSchema(id, event, parent)
+        inprocess_bucket.write_schema_json(schema.get_json())
+
     return event
 
 
@@ -45,8 +53,8 @@ def test():
     event = {}
     event['ids'] = ['parsons', '1976.057']
     event['ssm_key_base'] = '/all/new-csv'
-    event['csv-data-files-bucket'] = 'marble-manifest-test-processbucket-19w6raq5mndlo'
-    event['csv-data-files-basepath'] = 'archives-space-csv-files'
+    event['process-bucket'] = 'marble-manifest-test-processbucket-19w6raq5mndlo'
+    event['process-bucket-csv-basepath'] = 'archives-space-csv-files'
     event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     event['local'] = True
     run(event, {})

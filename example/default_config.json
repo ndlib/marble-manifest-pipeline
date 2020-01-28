@@ -7,7 +7,7 @@
   "museum-server-username": "",
   "museum-server-password": "",
   "rbsc-image-buckets": {
-    "marble-manifest-prod-processbucket-13bond538rnnb": [
+    "rbsc-test-files": [
       "digital/bookreader",
       "collections/ead_xml/images"
     ]
@@ -22,6 +22,8 @@
   "canvas-default-width": 2000,
   "image-data-file": "image-data.json",
   "noreply-email-addr": "noreply@nd.edu",
+  "google_keys_ssm_base": "/all/marble/google",
+  "museum_keys_ssm_base": "/all/marble/museum",
   "csv-field-names": [
     "id",
     "sourceSystem",

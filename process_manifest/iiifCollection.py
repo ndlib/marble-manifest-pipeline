@@ -6,7 +6,6 @@ from MetadataMappings import MetadataMappings
 class iiifCollection(iiifItem):
     def __init__(self, id, config, data):
         self.id = id
-        config['event_id'] = self.id
         self.config = config
         self.data = data
         iiifItem.__init__(self, self.id, 'Collection')
@@ -22,4 +21,4 @@ class iiifCollection(iiifItem):
         return manifest
 
     def mappings(self):
-        return MetadataMappings(self.data.get('sourceSystem', 'rbsc'))
+        return MetadataMappings(self.data)

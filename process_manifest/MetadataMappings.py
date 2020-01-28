@@ -5,8 +5,9 @@ from pathlib import Path
 
 class MetadataMappings():
 
-    def __init__(self, provider):
-        self.provider = provider
+    def __init__(self, data):
+        self.data = data
+        self.provider = data.repository()
         self.lookup = self.loadFile()
 
     def loadFile(self):

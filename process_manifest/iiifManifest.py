@@ -101,7 +101,6 @@ class iiifManifest(iiifItem):
 
     def _manifest_id(self):
         if self.type == 'Manifest':
-            print(self.config)
             return self.config['manifest-server-base-url'] + '/' + self.id + '/manifest'
         else:
             return self.config['manifest-server-base-url'] + '/collection/' + self.id
@@ -118,9 +117,9 @@ class iiifManifest(iiifItem):
         return None
 
     def _add_provider(self, provider):
-        if (provider == 'snite'):
+        if (provider == 'embark'):
             return self._snite_proivider()
-        elif (provider == 'archives'):
+        elif (provider == 'archivespace'):
             return self._archives_proivider()
         elif (provider == 'rbsc'):
             return self._rbsc_proivider()
@@ -198,18 +197,18 @@ class iiifManifest(iiifItem):
         }
 
     def _make_id(self):
-        if self.parent_id == self.data.get('myId'):
+        if self.parent_id == self.data.get('id'):
             return self.parent_id
 
-        return self.parent_id + "/" + self.data.get('myId')
+        return self.parent_id + "/" + self.data.get('id')
 
     def _search_for_default_image(self, data):
         if data.type() == 'file':
-            return data.get('myId')
+            return data.get('id')
 
         for child in data.children():
             if child.type == 'file':
-                return child.get('myId')
+                return child.get('id')
 
             return self._search_for_default_image(child)
 
@@ -220,5 +219,6 @@ class iiifManifest(iiifItem):
             'title',
             'provider',
             'description',
-            'collectioninformation'
+            'collectioninformation',
+            'repository'
         ]

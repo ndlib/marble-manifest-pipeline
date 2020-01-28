@@ -5,14 +5,14 @@ from iiifImage import iiifImage
 class iiifCanvas(iiifItem):
     def __init__(self, manifest, item_data):
         # item_data = {'file': '1982_072_001_a-v0001.jpg', 'label': '072_001_a-v0001', 'height': 1747, 'width': 3000}
-        iiifItem.__init__(self, item_data.get('myId'), 'Canvas')
+        iiifItem.__init__(self, item_data.get('id'), 'Canvas')
         self.manifest = manifest
         self.label = self._lang_wrapper(item_data.get('label', item_data.get('title')))
         self.height = item_data.get('width', 2000)
         self.width = item_data.get('height', 2000)
         self.item_data = item_data
-        # myId is currently the filename
-        self.image = iiifImage(item_data.get('myId'), self.manifest)
+        # id is currently the filename
+        self.image = iiifImage(item_data.get('id'), self.manifest)
 
     def canvas(self):
         return {

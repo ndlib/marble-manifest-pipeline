@@ -1,4 +1,5 @@
 import boto3
+import os
 from botocore.errorfactory import ClientError
 from dependencies.pipelineutilities.s3_helpers import get_matching_s3_objects, s3_copy_data
 
@@ -17,6 +18,7 @@ class FinalizeStep():
         self.notify()
 
     def success(self):
+        return True
         if self.error:
             return False
         return True
@@ -24,29 +26,29 @@ class FinalizeStep():
     def move_pyramids(self):
         src_bucket = self.config['process-bucket']
         dest_bucket = self.config['image-server-bucket']
-        src_path = f"{self.config['process-bucket-write-basepath']}/{self.id}/images/"
+        src_path = f"{self.config['process-bucket-read-basepath']}/{self.id}/images/"
 
         all_objects = get_matching_s3_objects(src_bucket, src_path)
         for obj in all_objects:
-            dest_key = f"{self.config['image-server-bucket-basepath']}{self.id}/{obj[len(src_path):]}"
-            s3_copy_data(dest_bucket, dest_key, src_bucket, obj)
+            dest_key = f"{self.id}/{os.path.basename(obj['Key'])}"
+            s3_copy_data(dest_bucket, dest_key, src_bucket, obj['Key'])
         return
 
     def remove_pyramids_not_in_run(self):
         "used to remove not in the src bucket"
         src_bucket = self.config['process-bucket']
         dest_bucket = self.config['image-server-bucket']
-        src_path = f"{self.config['process-bucket-write-basepath']}/{self.id}/images/"
+        src_path = f"{self.config['process-bucket-read-basepath']}/{self.id}/images/"
 
     def move_metadata(self):
         src_bucket = self.config['process-bucket']
         dest_bucket = self.config['manifest-server-bucket']
-        src_path = f"{self.config['process-bucket-write-basepath']}/{self.id}/metadata/"
+        src_path = f"{self.config['process-bucket-read-basepath']}/{self.id}/metadata/"
 
         all_objects = get_matching_s3_objects(src_bucket, src_path)
         for obj in all_objects:
-            dest_key = f"{self.config['image-server-bucket-basepath']}{self.id}/{obj[len(src_path):]}"
-            s3_copy_data(dest_bucket, dest_key, src_bucket, obj)
+            dest_key = obj['Key'].replace('metadata/', '').replace('process/', '')
+            s3_copy_data(dest_bucket, dest_key, src_bucket, obj['Key'])
         return
 
     def notify(self):
