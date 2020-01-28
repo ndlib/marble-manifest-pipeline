@@ -37,6 +37,8 @@ default_config = {
       "Dedication": "dedication",
       "Thumbnail": "digitalAssets"
     },
+    "google_keys_ssm_base": "/all/marble/google",
+    "museum_keys_ssm_base": "/all/marble/museum",
     "seconds-to-allow-for-processing": 780,
     "hours-threshold-for-incremental-harvest": 72,
     "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai",
