@@ -6,7 +6,7 @@ default_config = {
     "process-bucket-csv-basepath": "csv",
     "process-bucket-ead-resource-mappings-file": "ead_to_resource_dictionary.json",
     "rbsc-image-buckets": {
-        "marble-manifest-prod-processbucket-13bond538rnnb": ["digital/bookreader", "collections/ead_xml/images"]
+        "rbsc-test-files": ["digital/bookreader", "collections/ead_xml/images"]
     },
     "canvas-default-height": 2000,
     "canvas-default-width": 2000,
