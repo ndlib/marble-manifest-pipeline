@@ -1,4 +1,5 @@
 import boto3
+import os
 from botocore.errorfactory import ClientError
 from dependencies.pipelineutilities.s3_helpers import get_matching_s3_objects, s3_copy_data
 
@@ -29,8 +30,8 @@ class FinalizeStep():
 
         all_objects = get_matching_s3_objects(src_bucket, src_path)
         for obj in all_objects:
-            dest_key = f"{self.id}/{obj[len(src_path):]}"
-            s3_copy_data(dest_bucket, dest_key, src_bucket, obj)
+            dest_key = f"{self.id}/{os.path.basename(obj['Key'])}"
+            s3_copy_data(dest_bucket, dest_key, src_bucket, obj['Key'])
         return
 
     def remove_pyramids_not_in_run(self):
@@ -46,7 +47,7 @@ class FinalizeStep():
 
         all_objects = get_matching_s3_objects(src_bucket, src_path)
         for obj in all_objects:
-            dest_key = obj['Key'].replace('data/', '').replace('process/', '')
+            dest_key = obj['Key'].replace('metadata/', '').replace('process/', '')
             s3_copy_data(dest_bucket, dest_key, src_bucket, obj['Key'])
         return
 
