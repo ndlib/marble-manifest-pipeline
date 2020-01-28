@@ -1,6 +1,5 @@
 import boto3
 import json
-import os
 
 default_config = {
     "process-bucket-read-basepath": "process",
