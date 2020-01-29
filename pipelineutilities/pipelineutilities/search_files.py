@@ -10,7 +10,8 @@ from urllib.parse import urlparse
 
 bucket_to_url = {
     "libnd-smb-rbsc": 'https://rarebooks.library.nd.edu/',
-    "marble-manifest-prod-processbucket-13bond538rnnb": 'https://rarebooks.library.nd.edu/'
+    "marble-manifest-prod-processbucket-13bond538rnnb": 'https://rarebooks.library.nd.edu/',
+    "rbsc-test-files": 'https://rarebooks.library.nd.edu/'
 }
 
 # patterns we skip if the file matches these

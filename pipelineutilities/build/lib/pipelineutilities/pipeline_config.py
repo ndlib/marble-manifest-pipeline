@@ -1,13 +1,12 @@
 import boto3
 import json
-import os
 
 default_config = {
     "process-bucket-read-basepath": "process",
     "process-bucket-csv-basepath": "csv",
     "process-bucket-ead-resource-mappings-file": "ead_to_resource_dictionary.json",
     "rbsc-image-buckets": {
-        "marble-manifest-prod-processbucket-13bond538rnnb": ["digital/bookreader", "collections/ead_xml/images"]
+        "rbsc-test-files": ["digital/bookreader", "collections/ead_xml/images"]
     },
     "canvas-default-height": 2000,
     "canvas-default-width": 2000,
@@ -18,11 +17,11 @@ default_config = {
                         "id", "level", "title", "creator", "dateCreated", "uniqueIdentifier",
                         "dimensions", "languages", "subjects", "usage", "license", "linkToSource",
                         "access", "format", "dedication", "description", "modifiedDate", "thumbnail",
-                        "filePath", "fileId", "sequence", "collectionInformation", "fileInfo",
+                        "filePath", "fileId", "sequence", "collectionInformation", "fileInfo", "imageUri", "mimeType",
                         "classification", "workType", "medium", "artists", "digitalAssets",
                         "width", "height", "etag", "md5Checksum", "children"
                         ],
-  "museum-required-fields": {
+    "museum-required-fields": {
       "Title": "title",
       "Creator": "creator",
       "Date created": "dateCreated",
@@ -42,6 +41,7 @@ default_config = {
     "seconds-to-allow-for-processing": 780,
     "hours-threshold-for-incremental-harvest": 72,
     "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai",
+    "museum-server-base-url": "http://notredame.dom5182.com:8080",
 }
 
 # currently only used as reference here could be used for validation in the future
@@ -58,7 +58,7 @@ def get_pipeline_config(event):
     if 'local' in event and event['local']:
         config = load_config_local(event['local-path'])
     else:
-        config = load_config_ssm(event['ssm_key_base'])
+        config = load_config_ssm(event['ssm_key_base'], default_config)
 
     config.update(event)
     return config
@@ -72,8 +72,8 @@ def load_config_local(local_path):
     return source
 
 
-def load_config_ssm(ssm_key_base):
-    config = default_config
+def load_config_ssm(ssm_key_base, default_config):
+    config = default_config.copy()
 
     # read the keys we want out of ssm
     client = boto3.client('ssm')
@@ -82,7 +82,7 @@ def load_config_ssm(ssm_key_base):
     page_iterator = paginator.paginate(
         Path=path,
         Recursive=True,
-        WithDecryption=False,)
+        WithDecryption=True,)
 
     response = []
     for page in page_iterator:
