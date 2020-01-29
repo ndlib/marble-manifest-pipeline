@@ -5,7 +5,6 @@
     They are then uploaded to a Google Team Drive, and deleted locally. """
 
 import json
-import requests
 from datetime import datetime, timedelta
 import os
 import sys
@@ -19,6 +18,7 @@ from sentry_sdk import capture_message, push_scope, capture_exception  # noqa: E
 from file_system_utilities import delete_file, get_full_path_file_name  # noqa: E402
 from dependencies.pipelineutilities.google_utilities import execute_google_query  # noqa: E402
 from dependencies.pipelineutilities.s3_helpers import write_s3_file  # noqa: E402
+import requests  # noqa: E402
 
 
 class processWebKioskJsonMetadata():
