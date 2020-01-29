@@ -11,19 +11,8 @@ sys.path.append(where_i_am + "/dependencies")
 from dependencies.pipelineutilities.pipeline_config import get_pipeline_config, load_config_ssm  # noqa: E402
 import dependencies.sentry_sdk as sentry_sdk  # noqa: E402
 from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
-
-
-# import sentry_sdk  # noqa: E402
-# from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
-# from get_config import get_config  # noqa: E402
 from process_web_kiosk_json_metadata import processWebKioskJsonMetadata  # noqa: E402
 from dependencies.pipelineutilities.google_utilities import establish_connection_with_google_api, execute_google_query, build_google_query_string  # noqa: #402
-
-# from file_system_utilities import delete_file  # noqa: E402
-
-
-# config = get_config()
-# config['process-bucket'] = 'new-csv-processbucket-10dr776tnq9be'
 
 
 def run(event, context):
@@ -32,7 +21,6 @@ def run(event, context):
     config = get_pipeline_config(event)
     config = load_config_ssm(config['google_keys_ssm_base'], config)
     config = load_config_ssm(config['museum_keys_ssm_base'], config)
-    # print("config=", config)
     # print("config-process-bucket=", config['process-bucket'])
     # config['process-bucket'] = 'new-csv-processbucket-10dr776tnq9be'
 
@@ -66,7 +54,7 @@ def _suplement_event(event):
 
 
 # setup:
-# cd marble-web-kiosk-export
+# cd museum_export
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # # export SSM_KEY_BASE=/all/marble-data-processing/test
 # export SSM_KEY_BASE=/all/manifest-pipeline-v3
