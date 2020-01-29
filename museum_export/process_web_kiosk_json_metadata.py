@@ -10,13 +10,15 @@ from datetime import datetime, timedelta
 import os
 import sys
 import boto3
+import io
+import csv
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am)
 sys.path.append(where_i_am + "/dependencies")
 from sentry_sdk import capture_message, push_scope, capture_exception  # noqa: E402
-from file_system_utilities import delete_file, get_full_path_file_name, copy_file_from_local_to_s3  # noqa: E402
-from write_csv import write_csv_header, append_to_csv  # noqa: E402
+from file_system_utilities import delete_file, get_full_path_file_name  # noqa: E402
 from dependencies.pipelineutilities.google_utilities import execute_google_query  # noqa: E402
+from dependencies.pipelineutilities.s3_helpers import write_s3_file  # noqa: E402
 
 
 class processWebKioskJsonMetadata():
@@ -108,20 +110,21 @@ class processWebKioskJsonMetadata():
                                                        self.config['museum-required-fields'])
         if missing_fields == "" or self.save_despite_missing_fields:
             csv_file_name = object_id + '.csv'
-            write_csv_header(self.folder_name, csv_file_name, self.config["csv-field-names"])  # noqa: E501
-            append_to_csv(self.folder_name, csv_file_name, self.config["csv-field-names"], object, ["children"])  # noqa: E501
+            csv_string = io.StringIO()
+            writer = csv.DictWriter(csv_string, fieldnames=self.config["csv-field-names"])
+            writer.writeheader()
+            writer = csv.DictWriter(csv_string, fieldnames=self.config["csv-field-names"], extrasaction='ignore')
+            writer.writerow(object)
             sequence = 0
             if 'digitalAssets' in object:
                 for digital_asset in object['digitalAssets']:
-                    self._write_file_csv_record(object, digital_asset, sequence, self.folder_name, csv_file_name)
+                    self._write_file_csv_record(object, digital_asset, sequence, csv_string)
                     sequence += 1
             s3_file_name = get_full_path_file_name(self.config['process-bucket-csv-basepath'], csv_file_name)
-            if copy_file_from_local_to_s3(self.bucket, s3_file_name, self.folder_name, csv_file_name):
-                if self.delete_local_copy:
-                    delete_file(self.folder_name, csv_file_name)
+            write_s3_file(self.config['process-bucket'], s3_file_name, csv_string.getvalue())
         return missing_fields
 
-    def _write_file_csv_record(self, object, digital_asset, sequence, local_folder_name, csv_file_name):
+    def _write_file_csv_record(self, object, digital_asset, sequence, csv_string):
         """ Write file-related information in the CSV file for each image file found for this object. """
         each_file_dict = {}
         each_file_dict['collectionId'] = object['collectionId']
@@ -143,14 +146,15 @@ class processWebKioskJsonMetadata():
             each_file_dict['fileId'] = google_image_info['id']
             each_file_dict['modifiedDate'] = google_image_info['modifiedTime']
             each_file_dict['mimeType'] = google_image_info['mimeType']
-            append_to_csv(local_folder_name, csv_file_name, self.config["csv-field-names"], each_file_dict, ["children"])  # noqa: E501
+            each_file_dict['anotherField'] = 'abc'
+            writer = csv.DictWriter(csv_string, fieldnames=self.config["csv-field-names"], extrasaction='ignore')
+            writer.writerow(each_file_dict)
         return
 
     def _get_metadata_given_url(self, url):
         """ Return json from URL."""
         json_response = {}
         try:
-            # print(url)
             json_response = json.loads(requests.get(url).text)
         except ConnectionRefusedError:
             capture_exception('Connection refused on url ' + url)

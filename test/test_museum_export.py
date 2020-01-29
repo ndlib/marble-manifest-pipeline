@@ -3,17 +3,10 @@
 import os
 import sys
 import json
-# sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 parent_dir = os.path.dirname(where_i_am)
 sys.path.append(where_i_am)
 sys.path.append(parent_dir + "/museum_export")
-# sys.path.append(where_i_am + "/dependencies")
-#
-#
-# sys.path.append(where_i_am)
-# sys.path.append(where_i_am + "../museum_export/dependencies")
-# sys.path.append(where_i_am + "../museum_export")
 import unittest  # noqa: E402
 from process_web_kiosk_json_metadata import processWebKioskJsonMetadata  # noqa: E402
 from dependencies.pipelineutilities.pipeline_config import get_pipeline_config, load_config_ssm  # noqa: E402

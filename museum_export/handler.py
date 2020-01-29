@@ -58,10 +58,6 @@ def run(event, context):
 
 
 def _suplement_event(event):
-    # if 'ids' not in event:
-    #     event['ids'] = []
-    # if 'local' not in event:
-    #     event['local'] = True
     if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
     if 'local-path' not in event:
