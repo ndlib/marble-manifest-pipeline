@@ -14,11 +14,11 @@ import csv
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am)
 sys.path.append(where_i_am + "/dependencies")
-from sentry_sdk import capture_message, push_scope, capture_exception  # noqa: E402
 from file_system_utilities import delete_file, get_full_path_file_name  # noqa: E402
+from dependencies.sentry_sdk import capture_message, push_scope, capture_exception  # noqa: E402
 from dependencies.pipelineutilities.google_utilities import execute_google_query  # noqa: E402
 from dependencies.pipelineutilities.s3_helpers import write_s3_file  # noqa: E402
-import requests  # noqa: E402
+import dependencies.requests  # noqa: E402
 
 
 class processWebKioskJsonMetadata():
@@ -155,7 +155,7 @@ class processWebKioskJsonMetadata():
         """ Return json from URL."""
         json_response = {}
         try:
-            json_response = json.loads(requests.get(url).text)
+            json_response = json.loads(dependencies.requests.get(url).text)
         except ConnectionRefusedError:
             capture_exception('Connection refused on url ' + url)
         except:  # noqa E722 - intentionally ignore warning about bare except
