@@ -28,3 +28,11 @@ popd
 pushd finalize
 ./local_install.sh
 popd
+
+pushd museum_export
+./local_install.sh
+popd
+
+pushd harvest_eads
+./local_install.sh
+popd
