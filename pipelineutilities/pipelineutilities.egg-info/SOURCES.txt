@@ -2,6 +2,7 @@ README.md
 setup.py
 pipelineutilities/__init__.py
 pipelineutilities/csv_collection.py
+pipelineutilities/google_utilities.py
 pipelineutilities/pipeline_config.py
 pipelineutilities/s3_helpers.py
 pipelineutilities/search_files.py
