@@ -15,21 +15,20 @@ from process_web_kiosk_json_metadata import processWebKioskJsonMetadata  # noqa:
 from dependencies.pipelineutilities.google_utilities import establish_connection_with_google_api, execute_google_query, build_google_query_string  # noqa: #402
 
 
+if 'SENTRY_DSN' in os.environ:
+    sentry_sdk.init(dsn=os.environ['SENTRY_DSN'], integrations=[AwsLambdaIntegration()])
+
+
 def run(event, context):
     """ run the process to retrieve and process web kiosk metadata """
     _suplement_event(event)
     config = get_pipeline_config(event)
     config = load_config_ssm(config['google_keys_ssm_base'], config)
     config = load_config_ssm(config['museum_keys_ssm_base'], config)
-    # print("config-process-bucket=", config['process-bucket'])
-    # config['process-bucket'] = 'new-csv-processbucket-10dr776tnq9be'
 
-    if config != {}:
+    if config:
         google_credentials = json.loads(config["museum-google-credentials"])
         google_connection = establish_connection_with_google_api(google_credentials)
-
-        if 'SENTRY_DSN' in os.environ:
-            sentry_sdk.init(dsn=os.environ['SENTRY_DSN'], integrations=[AwsLambdaIntegration()])
         if 'MODE' in os.environ:
             mode = os.environ['MODE']
         else:
@@ -41,7 +40,7 @@ def run(event, context):
         else:
             print('No JSON to process')
     else:
-        print('No configuration defined.  Unable to continue.')
+        raise SystemExit('No configuration defined.  Unable to continue.')
     return event
 
 

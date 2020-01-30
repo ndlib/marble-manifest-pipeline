@@ -42,7 +42,7 @@ class processWebKioskJsonMetadata():
         """ Build URL, call URL, save resulting output to disk """
         url = self._get_embark_metadata_url(mode)
         self.composite_json = self._get_metadata_given_url(url)
-        if self.composite_json != {}:
+        if self.composite_json:
             fully_qualified_file_name = get_full_path_file_name(self.folder_name, self.file_name)
             with open(fully_qualified_file_name, 'w') as f:
                 json.dump(self.composite_json, f)
