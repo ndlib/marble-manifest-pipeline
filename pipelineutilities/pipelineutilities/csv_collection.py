@@ -4,7 +4,7 @@ from io import StringIO
 
 
 def load_csv_data(id, config):
-    if config.get('local', False):
+    if config['local']:
         return load_id_from_file(id, config)
     else:
         return load_id_from_s3(config['process-bucket'], config['process-bucket-csv-basepath'], id)
@@ -41,7 +41,7 @@ class Item():
         self.all_objects = all_objects
 
     def repository(self):
-        return self.get('repository')
+        return self.get('sourceSystem', 'aleph')
 
     def type(self):
         return self.get('level')
@@ -57,7 +57,7 @@ class Item():
 
     def children(self):
         children = []
-        test_id = "".join(self.get('myId').lower().split(" "))
+        test_id = "".join(self.get('id').lower().split(" "))
         for row in self.all_objects:
             if "".join(row['parentId'].lower().split(" ")) == test_id:
                 children.append(Item(row, self.all_objects))
@@ -77,7 +77,7 @@ class Item():
 
     def _find_row(self, id):
         for this_row in self.all_objects:
-            if this_row.get('myId', False) == id:
+            if this_row.get('id', False) == id:
                 return Item(this_row, self.all_objects)
 
 

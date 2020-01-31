@@ -115,6 +115,7 @@ class S3ImageProcessor(ImageProcessor):
         # print(f"{image.get_fields()}")  # image fields, including exif
         self._log_result('height', image.get('height'))
         self._log_result('width', image.get('width'))
+        self._log_result('md5sum', self.source_md5sum)
 
     def _preprocess_image(self, file: str) -> Image:
         """
