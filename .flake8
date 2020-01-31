@@ -2,3 +2,4 @@
 exclude = .git,example,scripts,collections
 max-line-length = 119
 max-complexity = 10
+ignore = BLK100
