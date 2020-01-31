@@ -54,4 +54,4 @@ COPY pyramid_generator/image_processor.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/pipeline_config.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/csv_collection.py /usr/local/bin/
 RUN chmod u+x /usr/local/bin/pyramid.py
-#ENTRYPOINT ["pyramid.py"]
+ENTRYPOINT ["pyramid.py"]
