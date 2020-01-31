@@ -24,5 +24,7 @@ class ndJson():
         # add image path to the image server
         # mime type
         # remove s3 path
+        # add unknown for missing creators
+        #
         #
         return row
