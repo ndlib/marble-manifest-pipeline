@@ -1,14 +1,18 @@
 import json
 import time
 from datetime import datetime, timedelta
-import requests
 import os
 import io
 import boto3
+import sys
 from xml.etree import ElementTree
 from create_json_from_xml_xpath import createJsonFromXml
 from file_system_utilities import create_directory, get_full_path_file_name, copy_file_from_s3_to_local, \
     copy_file_from_local_to_s3, delete_file
+where_i_am = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(where_i_am)
+sys.path.append(where_i_am + "/dependencies")
+import dependencies.requests  # noqa: E402
 
 
 class HarvestOaiEads():
@@ -154,7 +158,7 @@ class HarvestOaiEads():
         url = self._get_ead_url(identifier)
         json_summary = {}
         try:
-            xml_string = self._strip_namespaces(requests.get(url, timeout=800).text)
+            xml_string = self._strip_namespaces(dependencies.requests.get(url, timeout=800).text)
         except ConnectionError:
             print("ConnectionError calling " + url)  # eventually want to write to sentry and continue
             return json_summary
@@ -224,7 +228,7 @@ class HarvestOaiEads():
             identifier_xpath = "./ListRecords/record/header/identifier"
         resumption_token_xpath = "./" + oai_verb + "/resumptionToken"
         url = self._get_next_url(oai_verb, resumption_token, change_date)
-        xml_string = self._strip_namespaces(requests.get(url).text)
+        xml_string = self._strip_namespaces(dependencies.requests.get(url).text)
         xml_tree = ElementTree.fromstring(xml_string)
         next_resumption_token = self._get_resumption_token(xml_tree, resumption_token_xpath)
         id_node = xml_tree.find(identifier_xpath)

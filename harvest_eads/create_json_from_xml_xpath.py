@@ -3,9 +3,10 @@ import json
 import boto3
 import os
 import sys
+import io
+import csv
 from datetime import datetime
-from file_system_utilities import create_directory, copy_file_from_local_to_s3, delete_file, get_full_path_file_name
-from write_csv import write_csv_header, append_to_csv
+from file_system_utilities import create_directory, get_full_path_file_name
 from additional_functions import check_for_inconsistent_dao_image_paths, file_name_from_filePath, \
     define_manifest_level, get_repository_name_from_ead_resource, return_None_if_needed, \
     get_seed_nodes_json, get_xml_node_value, get_value_from_labels, remove_nodes_from_dictionary, \
@@ -15,6 +16,7 @@ where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am)
 sys.path.append(where_i_am + "/dependencies")
 from dependencies.pipelineutilities.search_files import id_from_url, crawl_available_files  # noqa: #402
+from dependencies.pipelineutilities.s3_helpers import write_s3_file  # noqa: E402
 
 
 class createJsonFromXml():
@@ -34,13 +36,15 @@ class createJsonFromXml():
         self.processing_dao_for_parent_id = ""
         self.temporary_local_path = "/tmp"
         self.sequences_within_parent = {}
+        self.csv_string_io = io.StringIO()
+        self.csv_writer = csv.DictWriter(self.csv_string_io, fieldnames=self.config["csv-field-names"], extrasaction='ignore')  # noqa: E501
 
     def extract_fields(self, xml_root, json_section, seeded_json_output):
         """ This code processes translations defined in the portion of the
             xml_to_json_translation_control_file.json named by the json_section passed.
             This calls get_node, which in turn calls extract_fields as needed. """
         if json_section == 'root':
-            write_csv_header(self.temporary_local_path, 'root.csv', self.config["csv-field-names"])  # noqa: E501
+            self._write_csv_header()
         json_output = seeded_json_output.copy()
         json_control_root = self.json_control[json_section]
         section_required_descendants = get_json_value_as_string(json_control_root, 'requiredDescendants')
@@ -90,28 +94,18 @@ class createJsonFromXml():
         return value
 
     def _save_csv_record(self, json_node, field):
-        """ Append json_node information to the "root.csv" csv file in progress.
-            If we are directed to save (as defined by "fileNamedForNode",
-            we rename the local "root.csv" to the name passed.
-            Next, we copy this the S3 bucket specified in config['process-bucket'].
-            Finally, we truncate the passed json_node so we don't save this same information again. """
+        """ Append json_node information to the csv_writer and then save to s3. """
         return_node = {}
         required_descendants = get_json_value_as_string(field, 'requiredDescendants')
         json_node = enforce_required_descendants(json_node, required_descendants)
         if json_node is not None:
-            local_path = self.temporary_local_path
-            file_name = 'root.csv'
             json_node['sequence'] = self._accumulate_sequences_by_parent(json_node)
-            append_to_csv(local_path, file_name, self.config["csv-field-names"], json_node, ["children"])  # noqa: E501
+            self.csv_writer.writerow(json_node)
             if 'fileNamedForNode' in field:
                 if field['fileNamedForNode'] in json_node:
-                    new_file_name = json_node[field['fileNamedForNode']] + '.csv'
-                    fully_qualified_new_file_name = get_full_path_file_name(local_path, new_file_name)
-                    fully_qualified_old_file_name = get_full_path_file_name(local_path, file_name)
-                    os.rename(fully_qualified_old_file_name, fully_qualified_new_file_name)
-                    s3_file_name = get_full_path_file_name(self.config['process-bucket-csv-basepath'], new_file_name)
-                    if copy_file_from_local_to_s3(self.output_bucket, s3_file_name, local_path, new_file_name):
-                        delete_file(local_path, new_file_name)
+                    csv_file_name = json_node[field['fileNamedForNode']] + '.csv'
+                    s3_file_name = get_full_path_file_name(self.config['process-bucket-csv-basepath'], csv_file_name)
+                    write_s3_file(self.config['process-bucket'], s3_file_name, self.csv_string_io.getvalue())
             retain_only_nodes = get_json_value_as_string(field, 'retainOnlyNodes')
             if retain_only_nodes == "":
                 return_node = json_node
@@ -187,17 +181,12 @@ class createJsonFromXml():
         return node
 
     def save_json_record(self, file_name, json_to_save):
-        """ This lets us save the json record locally, and optionally to s3. """
+        """ This lets us save the json record locally, for debugging purposes. """
         local_folder = self.temporary_local_path
         create_directory(local_folder)
         local_file_name = get_full_path_file_name(local_folder, file_name)
         with open(local_file_name, 'w') as f:
             json.dump(json_to_save, f, indent=2)
-        if self.save_to_s3:
-            s3_file_name = get_full_path_file_name(self.config['process-bucket-csv-basepath'], file_name)
-            copy_file_from_local_to_s3(self.output_bucket, s3_file_name, local_folder, file_name)
-            if self.delete_local_copy:
-                delete_file(local_folder, file_name)
         return
 
     def _call_external_process(self, json_node, field):  # noqa: C901
@@ -235,8 +224,6 @@ class createJsonFromXml():
                 seed_nodes_control = get_json_value_as_string(field, 'seedNodes')
                 each_file_dict = get_seed_nodes_json(json_node, seed_nodes_control)
             uri = parameters_json['filename']
-            local_path = self.temporary_local_path
-            file_name = 'root.csv'
             id = id_from_url(uri)
             if id in self.hash_of_available_files:
                 if 'files' in self.hash_of_available_files[id]:
@@ -253,7 +240,7 @@ class createJsonFromXml():
                         each_file_dict['modifiedDate'] = obj['LastModified']
                         each_file_dict['modifiedDate'] = datetime.strptime(obj['LastModified'], '%Y-%m-%d %H:%M:%S').isoformat() + 'Z'  # noqa: E501
                         each_file_dict['md5Checksum'] = obj['ETag'].replace("'", "").replace('"', '')  # strip duplicated quotes: {'ETag': '"8b50cfed39b7d8bcb4bd652446fe8adf"'}  # noqa: E501
-                        append_to_csv(local_path, file_name, self.config["csv-field-names"], each_file_dict, ["children"])  # noqa: E501
+                        self.csv_writer.writerow(each_file_dict)
         return None
 
     def _is_this_first_dao_in_object(self, my_parent_id):
@@ -264,3 +251,8 @@ class createJsonFromXml():
             return_value = False
         self.processing_dao_for_parent_id = my_parent_id
         return return_value
+
+    def _write_csv_header(self):
+        self.csv_string_io.truncate(0)  # truncate anything in the io buffer
+        self.csv_string_io.seek(0)  # reposition the pointer to the beginning of the buffer
+        self.csv_writer.writeheader()
