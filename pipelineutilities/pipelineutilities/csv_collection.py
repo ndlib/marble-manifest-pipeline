@@ -1,11 +1,10 @@
 import boto3
 import csv
 from io import StringIO
-from pathlib import Path
 
 
 def load_csv_data(id, config):
-    if config['local']:
+    if config.get('local', False):
         return load_id_from_file(id, config)
     else:
         return load_id_from_s3(config['process-bucket'], config['process-bucket-csv-basepath'], id)
