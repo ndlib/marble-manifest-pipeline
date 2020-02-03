@@ -1,5 +1,7 @@
 import boto3
 import csv
+import re
+import math
 from io import StringIO
 from pathlib import Path
 
@@ -81,21 +83,59 @@ class Item():
             if this_row.get('id', False) == id:
                 return Item(this_row, self.all_objects)
 
+        return False
+
+
+class DateTags():
+    def __init__(self, item, field):
+        self.item = item
+        self.field = field
+        self.date = self._find_date()
+        self.years = self._pull_out_years()
+        self.tags = self._find_tags()
+
+    def _find_date(self):
+        current_date_row = self.item.get(self.field, False)
+        collection_date_row = self.item.collection().get(self.field, False)
+
+        if current_date_row and current_date_row.lower() != 'undated':
+            return current_date_row
+        elif collection_date_row and collection_date_row.lower() != 'undated':
+            return collection_date_row
+
+        return False
+
+    def _find_tags(self):
+        return [self._year_to_ordinal(year) for year in self.years]
+
+    def _year_to_ordinal(self, n):
+        n = math.ceil(int(n) / 100)
+        # https://stackoverflow.com/questions/9647202/ordinal-numbers-replacement
+        return "%d%s Century" % (n, "tsnrhtdd"[(math.floor(n/10) % 10 != 1) * (n % 10 < 4) * n % 10::4])
+
+    def _pull_out_years(self):
+        exp = r"([0-9]{4})"
+        matches = re.findall(exp, self.date)
+        return list(matches)
+
 
 # python -c 'from csv_collection import *; test()'
 def test():
     from pipeline_config import get_pipeline_config
     event = {"local": True}
+    event['local-path'] = '/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/'
+
     config = get_pipeline_config(event)
 
     # s3 libnd
     config['local'] = False
     for id in ['BPP1001_EAD', 'MSNCOL8500_EAD']:
         parent = load_csv_data(id, config)
-        print(parent.get('title'))
+        DateTags(parent, 'dateCreated')
         for file in parent.files():
-            print(file.get("filePath"))
-
+            ""
+            # print(file.get("filePath"))
+    return
     # local
     config['local'] = True
     for id in ['parsons', '1976.057']:
