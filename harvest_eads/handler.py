@@ -43,11 +43,9 @@ def _suplement_event(event):
     if 'ids' not in event:
         event['ids'] = []
     if 'local' not in event:
-        event['local'] = True
+        event['local'] = False
     if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
-    else:
-        event['ssm_key_base'] = "xxx"
     if 'local-path' not in event:
         event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     return
@@ -66,18 +64,27 @@ def _check_environment_variable(variable_name, default):
 
 
 # setup:
-# aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # aws-vault exec libnd-dlt-admin --session-ttl=1h --assume-role-ttl=1h --
 # export SSM_MARBLE_DATA_PROCESSING_KEY_BASE=/all/marble-data-processing/test
 # export SSM_KEY_BASE=/all/manifest-pipeline-v3
 
+# export SENTRY_DSN=https://136d489c91484b55be18e0a28d463b43@sentry.io/1831199
+# export SSM_KEY_BASE=/all/new-csv
+# export MODE=known
+# aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
+# python -c 'from handler import *; test()'
+
+# To run blueprints:
+# export S3_BUCKET=testlibnd-cf
+# aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
+# ./local-deploy.sh new-csv ../marble-blueprints
+
+
 # # export SSM_KEY_BASE=/all/marble-data-processing/test
 # export MODE=incremental
 # to run an individual ead, set the export to export MODE=individual and run the following:
-# python -c 'from handler import *; test()'
 # export HOURS_THRESHOLD=125
 # export SECONDS_TO_ALLOW_FOR_PROCESSING=1800
-# export REPOSITORIES_OF_INTEREST=["3"]
 # python -c 'from handler import *; test()'
 # python 'run_all_tests.py'
 def test(identifier=""):
