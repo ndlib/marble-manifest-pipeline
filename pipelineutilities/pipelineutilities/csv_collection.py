@@ -80,21 +80,25 @@ class Item():
             if this_row.get('id', False) == id:
                 return Item(this_row, self.all_objects)
 
+        return False
+
 
 # python -c 'from csv_collection import *; test()'
 def test():
     from pipeline_config import get_pipeline_config
     event = {"local": True}
+    event['local-path'] = '/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/'
+
     config = get_pipeline_config(event)
 
     # s3 libnd
     config['local'] = False
     for id in ['BPP1001_EAD', 'MSNCOL8500_EAD']:
         parent = load_csv_data(id, config)
-        print(parent.get('title'))
         for file in parent.files():
-            print(file.get("filePath"))
-
+            ""
+            # print(file.get("filePath"))
+    return
     # local
     config['local'] = True
     for id in ['parsons', '1976.057']:

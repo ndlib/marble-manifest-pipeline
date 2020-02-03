@@ -35,6 +35,7 @@ def run(event, context):
         else:
             event['ids'] = list(get_file_ids_to_be_processed(all_files, config))
 
+    config['ids'] = event['ids']
     event['ecs-args'] = [json.dumps(config)]
 
     return event
