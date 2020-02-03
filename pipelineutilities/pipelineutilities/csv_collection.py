@@ -1,9 +1,6 @@
 import boto3
 import csv
-import re
-import math
 from io import StringIO
-from pathlib import Path
 
 
 def load_csv_data(id, config):
