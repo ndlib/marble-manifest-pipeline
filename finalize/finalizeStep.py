@@ -1,7 +1,9 @@
 import boto3
 import os
+import json
 from botocore.errorfactory import ClientError
-from dependencies.pipelineutilities.s3_helpers import get_matching_s3_objects, s3_copy_data
+from dependencies.pipelineutilities.s3_helpers \
+    import get_matching_s3_objects, s3_copy_data, read_s3_file_content
 
 
 class FinalizeStep():
@@ -27,10 +29,18 @@ class FinalizeStep():
         src_bucket = self.config['process-bucket']
         dest_bucket = self.config['image-server-bucket']
         src_path = f"{self.config['process-bucket-read-basepath']}/{self.id}/images/"
+        img_data_path = f"{self.config['process-bucket-read-basepath']}/{self.id}/image_data.json"
 
+        img_data = json.loads(read_s3_file_content(src_bucket, img_data_path))
         all_objects = get_matching_s3_objects(src_bucket, src_path)
         for obj in all_objects:
-            dest_key = f"{self.id}/{os.path.basename(obj['Key'])}"
+            # only copy those files that have changed
+            file = os.path.basename(obj['Key'])
+            filename = file.rsplit('.', maxsplit=1)[0]
+            reason = img_data.get(filename, {}).get('reason', '')
+            if reason.startswith('no changes'):
+                continue
+            dest_key = f"{self.id}/{file}"
             s3_copy_data(dest_bucket, dest_key, src_bucket, obj['Key'])
         return
 
