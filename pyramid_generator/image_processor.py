@@ -66,15 +66,14 @@ class ImageProcessor(ABC):
         os.remove(self.tif_file)
 
     def _previously_processed(self) -> bool:
-        image_modified = False
         if self.id not in self.prior_results:
             self.prior_results.update({self.id: {}})
             img_data = f"{self.img_write_base}/{self.id}/image_data.json"
             self._set_prior_run_data(self.bucket, img_data, self.id)
         prior_md5sum = self.prior_results.get(self.id).get(self.filename, {}).get('md5sum', 'nomatch')
         if self.source_md5sum == prior_md5sum:
-            image_modified = True
-        return image_modified
+            return True
+        return False
 
     def _set_prior_run_data(self, bucket: str, key: str, id: str, **kwargs) -> dict:
         try:
