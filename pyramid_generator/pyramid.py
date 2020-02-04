@@ -4,7 +4,7 @@
 import sys
 import json
 import boto3
-from image_processor import S3ImageProcessor
+from s3_processor import S3ImageProcessor
 from csv_collection import load_csv_data
 
 
@@ -21,7 +21,7 @@ class ImageRunner():
             id_results = {}
             config = {'process-bucket': self.bucket, 'process-bucket-csv-basepath': self.csv_read_base}
             for file in load_csv_data(id, config).files():
-                if file.get("filePath").startswith('s3'):
+                if file.get('filePath').startswith('s3'):
                     id_results.update(self._process_s3_image(id, file))
             s3_file = f"{self.img_write_base}/{id}/image_data.json"
             self._upload_image_report(id_results, s3_file)
@@ -30,7 +30,7 @@ class ImageRunner():
         image_info = {}
         image_info['id'] = id
         image_info['file'] = file.get("filePath")
-        image_info['md5sum'] = file.get("etag")
+        image_info['md5sum'] = file.get("md5Checksum")
         image_info['bucket'] = self.bucket
         image_info['img_write_base'] = self.img_write_base
         self.s3_processor.set_data(image_info)
