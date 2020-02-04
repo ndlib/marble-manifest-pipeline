@@ -26,11 +26,11 @@ class iiifImage(iiifItem):
 
     def _service(self):
         return {
-            'id':  self.image_url_id(),
+            'id': self.image_url_id(),
             'type': 'ImageService2',
             'profile': "http://iiif.io/api/image/2/level2.json"
         }
 
     def image_url_id(self):
-        path = os.path.join("/", self.manifest.parent_id, self.filename)
+        path = os.path.join('%2F', self.manifest.parent_id, os.path.splitext(self.filename)[0])
         return self.manifest.config['image-server-base-url'] + path
