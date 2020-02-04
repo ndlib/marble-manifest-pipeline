@@ -1,7 +1,7 @@
 import os
-from abc import ABC, abstractmethod
+import json
 import boto3
-from pyvips import Image
+from abc import ABC, abstractmethod
 from botocore.exceptions import ClientError
 
 
@@ -26,6 +26,7 @@ class ImageProcessor(ABC):
         self.bucket = None
         self.img_write_base = None
         self.source_md5sum = None
+        self.prior_results = {}
         self.image_result = {}
 
     @abstractmethod
@@ -64,83 +65,25 @@ class ImageProcessor(ABC):
         os.remove(self.local_file)
         os.remove(self.tif_file)
 
-
-class S3ImageProcessor(ImageProcessor):
-    def __init__(self) -> None:
-        super().__init__()
-
-    def process(self) -> dict:
-        # if self._previously_processed():
-        #     self._log_result('status', 'processed')
-        #     self._log_result('reason', 'no changes to image since last run')
-        # else:
-        img_bucket, key = self.source_image.split('/', 2)[-1].split('/', 1)
-        s3_file = f"{self.img_write_base}/{self.id}/images/{self.tif_file}"
-        self.S3_RESOURCE.Bucket(img_bucket).download_file(key, self.local_file)
-        self._generate_pytiff(self.local_file, self.tif_file)
-        self.S3_RESOURCE.Bucket(self.bucket).upload_file(self.tif_file, s3_file)
-        self._cleanup()
-        self._log_result('status', 'processed')
-        return self.image_result
-
     def _previously_processed(self) -> bool:
-        # has this been ran before and has it changed?
-        previous_image = f"{self.img_write_base}/{self.id}/images/{self.filename}"
-        response = self._get_image_metadata(self.bucket, previous_image)
-        return self.source_md5sum == response['ETag']
+        if self.id not in self.prior_results:
+            self.prior_results.update({self.id: {}})
+            img_data = f"{self.img_write_base}/{self.id}/image_data.json"
+            self._set_prior_run_data(self.bucket, img_data, self.id)
+        prior_md5sum = self.prior_results.get(self.id).get(self.filename, {}).get('md5sum', 'nomatch')
+        if self.source_md5sum == prior_md5sum:
+            return True
+        return False
 
-    def _get_image_metadata(self, bucket: str, key: str, **kwargs) -> dict:
+    def _set_prior_run_data(self, bucket: str, key: str, id: str, **kwargs) -> dict:
         try:
-            response = self.S3_CLIENT.head_object(Bucket=bucket, Key=key)
+            local_file = os.path.basename(key)
+            boto3.resource('s3').Bucket(bucket).download_file(key, local_file)
+            with open(local_file) as json_file:
+                self.prior_results.get(id).update(json.load(json_file))
+            os.remove(local_file)
         except ClientError as ce:
-            response = {'ETag': None}
             if ce.response['Error']['Code'] == '404':
                 print(f"No previous image data found for {bucket}://{key}")
             else:
                 print(f"Unexpected error {bucket}://{key}: {ce.response['Error']['Code']}")
-        return response
-
-    def _generate_pytiff(self, file: str, tif_filename: str) -> None:
-        """
-        Create a pyramid tiff from a source image, while enforcing constraints,
-        and record the image attributes.
-
-        Args:
-            file: local file to transform into pytiff
-            tif_filename: name of the resulting pytiff file
-        """
-        image = self._preprocess_image(file)
-        image.tiffsave(tif_filename, tile=True, pyramid=True, compression=self.COMPRESSION_TYPE,
-                       tile_width=self.PYTIF_TILE_WIDTH, tile_height=self.PYTIF_TILE_HEIGHT)
-        # print(f"{image.get_fields()}")  # image fields, including exif
-        self._log_result('height', image.get('height'))
-        self._log_result('width', image.get('width'))
-        self._log_result('md5sum', self.source_md5sum)
-
-    def _preprocess_image(self, file: str) -> Image:
-        """
-        Perform any preprocess work on the source image
-        prior to transforming that image into a pytif
-
-        Args:
-            file: full path/name of local file
-        Returns:
-            Image: Vips object of source file
-        """
-        image = Image.new_from_file(file, access='sequential')
-        if image.height > self.MAX_IMG_HEIGHT or image.width > self.MAX_IMG_WIDTH:
-            if image.height >= image.width:
-                shrink_by = image.height / self.MAX_IMG_HEIGHT
-            else:
-                shrink_by = image.width / self.MAX_IMG_WIDTH
-            print(f'Resizing original image by: {shrink_by}')
-            print(f'Original image height: {image.height}')
-            print(f'Original image width: {image.width}')
-            image = image.shrink(shrink_by, shrink_by)
-        return image
-
-
-class GDImageProcessor(ImageProcessor):
-    def __init__(self, config: dict) -> None:
-        super().__init__(config)
-        self.source_md5 = config['md5']
