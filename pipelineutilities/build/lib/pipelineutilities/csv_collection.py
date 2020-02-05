@@ -1,11 +1,29 @@
-import boto3
 import csv
+import json
 from io import StringIO
-from pathlib import Path
+from .s3_helpers import read_s3_file_content
+
+
+def load_image_data(id, config):
+    if config.get('local', False):
+        return load_image_from_file(id, config)
+    else:
+        return load_image_from_s3(config['process-bucket'], config['process-bucket-read-basepath'], id)
+
+
+def load_image_from_file(id, config):
+    ""
+
+
+def load_image_from_s3(s3Bucket, s3Path, id):
+    s3Path = s3Path + "/" + id + "/" + config['image-data-file']
+
+    source = read_s3_file_content(s3Bucket, s3Path)
+    return json.parse(source)
 
 
 def load_csv_data(id, config):
-    if config['local']:
+    if config.get('local', False):
         return load_id_from_file(id, config)
     else:
         return load_id_from_s3(config['process-bucket'], config['process-bucket-csv-basepath'], id)
@@ -14,8 +32,7 @@ def load_csv_data(id, config):
 def load_id_from_s3(s3Bucket, s3Path, id):
     s3Path = s3Path + "/" + id + ".csv"
 
-    source = boto3.resource('s3').Object(s3Bucket, s3Path)
-    source = source.get()['Body'].read().decode('utf-8')
+    source = read_s3_file_content(s3Bucket, s3Path)
     f = StringIO(source)
 
     objects = list(csv.DictReader(f, delimiter=','))
@@ -81,21 +98,25 @@ class Item():
             if this_row.get('id', False) == id:
                 return Item(this_row, self.all_objects)
 
+        return False
+
 
 # python -c 'from csv_collection import *; test()'
 def test():
     from pipeline_config import get_pipeline_config
     event = {"local": True}
+    event['local-path'] = '/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/'
+
     config = get_pipeline_config(event)
 
     # s3 libnd
     config['local'] = False
     for id in ['BPP1001_EAD', 'MSNCOL8500_EAD']:
         parent = load_csv_data(id, config)
-        print(parent.get('title'))
         for file in parent.files():
-            print(file.get("filePath"))
-
+            ""
+            # print(file.get("filePath"))
+    return
     # local
     config['local'] = True
     for id in ['parsons', '1976.057']:
