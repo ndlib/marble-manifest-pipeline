@@ -8,9 +8,8 @@ class iiifCanvas(iiifItem):
         iiifItem.__init__(self, item_data.get('id'), 'Canvas')
         self.manifest = manifest
         self.label = self._lang_wrapper(item_data.get('label', item_data.get('title')))
-        self.height = item_data.get('width', 2000)
-        self.width = item_data.get('height', 2000)
         self.item_data = item_data
+        self._set_width_and_height()
         # id is currently the filename
         self.image = iiifImage(item_data.get('id'), self.manifest)
 
@@ -19,8 +18,6 @@ class iiifCanvas(iiifItem):
             'id': self.canvas_url_id(),
             'type': self.type,
             'label': self.label,
-            'height': self.height,
-            'width': self.width,
             'thumbnail': [
                 self.image.thumbnail()
             ],
@@ -58,3 +55,13 @@ class iiifCanvas(iiifItem):
     def _annotation_id(self):
         return self.manifest.config['manifest-server-base-url'] + '/' + self.manifest.parent_id \
             + '/annotation/' + self.id
+
+    def _set_width_and_height(self):
+        self.height = self.item_data.get('width', False)
+        self.width = self.item_data.get('height', False)
+
+        if not self.height:
+            self.height = self.manifest.config['canvas-default-height']
+
+        if not self.width:
+            self.height = self.manifest.config['canvas-default-width']
