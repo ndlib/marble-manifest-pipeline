@@ -18,6 +18,8 @@ class iiifCanvas(iiifItem):
             'id': self.canvas_url_id(),
             'type': self.type,
             'label': self.label,
+            'width': self.width,
+            'height': self.height,
             'thumbnail': [
                 self.image.thumbnail()
             ],
