@@ -32,5 +32,5 @@ class iiifImage(iiifItem):
         }
 
     def image_url_id(self):
-        path = os.path.join('%2F', self.manifest.parent_id, os.path.splitext(self.filename)[0])
+        path = '/' + self.manifest.parent_id + '%2F' + os.path.splitext(self.filename)[0]
         return self.manifest.config['image-server-base-url'] + path

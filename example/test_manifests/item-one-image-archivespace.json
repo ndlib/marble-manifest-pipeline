@@ -7,7 +7,7 @@
   "id": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/collectionId/manifest",
   "items": [
     {
-      "height": "",
+      "height": 2000,
       "id": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/canvas/file.jpg",
       "items": [
         {
@@ -16,10 +16,10 @@
             {
               "body": {
                 "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2%2F/item-one-image-archivespace/file/full/full/0/default.jpg",
+                "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile/full/full/0/default.jpg",
                 "service": [
                   {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2%2F/item-one-image-archivespace/file",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile",
                     "profile": "http://iiif.io/api/image/2/level2.json",
                     "type": "ImageService2"
                   }
@@ -42,10 +42,10 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2%2F/item-one-image-archivespace/file/full/250,/0/default.jpg",
+          "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile/full/250,/0/default.jpg",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2%2F/item-one-image-archivespace/file",
+              "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile",
               "profile": "http://iiif.io/api/image/2/level2.json",
               "type": "ImageService2"
             }
@@ -54,7 +54,7 @@
         }
       ],
       "type": "Canvas",
-      "width": ""
+      "width": 2000
     }
   ],
   "label": {
@@ -177,10 +177,10 @@
   },
   "thumbnail": [
     {
-      "id": "https://image-iiif.library.nd.edu/iiif/2%2F/item-one-image-archivespace/file/full/250,/0/default.jpg",
+      "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile/full/250,/0/default.jpg",
       "service": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2%2F/item-one-image-archivespace/file",
+          "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile",
           "profile": "http://iiif.io/api/image/2/level2.json",
           "type": "ImageService2"
         }

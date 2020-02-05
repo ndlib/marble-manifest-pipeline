@@ -10,7 +10,7 @@ default_config = {
     },
     "canvas-default-height": 2000,
     "canvas-default-width": 2000,
-    "image-data-file": "image-data.json",
+    "image-data-file": "image_data.json",
     "noreply-email-addr": "noreply@nd.edu",
     "local-path": "please set me",
     "csv-field-names": ["sourceSystem", "repository", "collectionId", "parentId",
