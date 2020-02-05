@@ -66,4 +66,4 @@ class iiifCanvas(iiifItem):
             self.height = self.manifest.config['canvas-default-height']
 
         if not self.width:
-            self.height = self.manifest.config['canvas-default-width']
+            self.width = self.manifest.config['canvas-default-width']
