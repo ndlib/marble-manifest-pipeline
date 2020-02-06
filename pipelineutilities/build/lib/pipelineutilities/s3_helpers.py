@@ -48,8 +48,7 @@ class InprocessBucket():
         write_s3_json(self.process_bucket, path, data)
 
     def write_sub_manifest(self, path, data):
-        path = self.basepath + path.replace(self.id, '')
-        print(path)
+        path = self.basepath + "/metadata" + path.replace(self.id, '')
         write_s3_json(self.process_bucket, path, data)
 
     def write_collection(self, data):
