@@ -32,6 +32,14 @@ def run(event, context):
     if 'finished_ids' not in event:
         event['finished_ids'] = []
 
+    if 'finalized_run_number' not in event:
+        event['finalized_run_number'] = 0
+
+    event['finalized_run_number'] = event['finalized_run_number'] + 1
+
+    if event['finalized_run_number'] > 5:
+        raise("Too many executrions")
+
     for id in ids:
         if id not in event['finished_ids']:
             step = FinalizeStep(id, config)

@@ -25,25 +25,50 @@ def run(event, context):
     if 'ssm_key_base' not in event and not event.get('local', False):
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
 
-    event = get_pipeline_config(event)
+    config = get_pipeline_config(event)
 
     ids = event.get("ids")
 
     for id in ids:
-        inprocess_bucket = InprocessBucket(id, event)
+        inprocess_bucket = InprocessBucket(id, config)
 
-        parent = load_csv_data(id, event)
+        parent = load_csv_data(id, config)
+#        image = load_image_data(id, event)
+
         # a2s = AthenaToSchema(event, parent, [])
-        iiif = iiifCollection(id, event, parent)
+        iiif = iiifCollection(id, config, parent)
+        manifest = iiif.manifest()
+
+        # split the manifests
+        for item in sub_manifests(manifest):
+            path = file_name_from_manifest(item, config)
+            inprocess_bucket.write_sub_manifest(path, item)
+
         inprocess_bucket.write_manifest(iiif.manifest())
 
-        nd = ndJson(id, event, parent)
+        nd = ndJson(id, config, parent)
         inprocess_bucket.write_nd_json(nd.to_hash())
 
-        schema = ToSchema(id, event, parent)
+        schema = ToSchema(id, config, parent)
         inprocess_bucket.write_schema_json(schema.get_json())
 
     return event
+
+
+def file_name_from_manifest(manifest, config):
+    return manifest.get('id').replace(config['manifest-server-base-url'] + "/", '') + "/index.json"
+
+
+def sub_manifests(manifest):
+    ret = []
+    for item in manifest.get('items', []):
+        if item.get('type').lower() == 'manifest':
+            ret.append(item)
+
+        ret = ret + sub_manifests(item)
+
+    return ret
+
 
 
 # python -c 'from handler import *; test()'
@@ -51,10 +76,10 @@ def test():
     # import pprint
     # pp = pprint.PrettyPrinter(indent=4)
     event = {}
-    event['ids'] = ['parsons', '1976.057']
+    event['ids'] = ['BPP1001_EAD']
     event['ssm_key_base'] = '/all/new-csv'
-    event['process-bucket'] = 'marble-manifest-test-processbucket-19w6raq5mndlo'
-    event['process-bucket-csv-basepath'] = 'archives-space-csv-files'
+    event['process-bucket'] = 'marble-manifest-prod-processbucket-13bond538rnnb'
+    event['process-bucket-csv-basepath'] = 'csv'
     event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
-    event['local'] = True
+    event['local'] = False
     run(event, {})
