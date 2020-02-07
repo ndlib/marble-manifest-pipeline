@@ -42,14 +42,18 @@ class InprocessBucket():
         self.id = id
         self.process_bucket = config['process-bucket']
         self.basepath = config['process-bucket-read-basepath'] + "/" + self.id
+        self.manifest_url = config['manifest-server-base-url']
 
     def write_manifest(self, data):
         path = self.basepath + "/metadata/manifest/index.json"
         write_s3_json(self.process_bucket, path, data)
 
-    def write_sub_manifest(self, path, data):
-        path = self.basepath + path.replace(self.id, '')
-        print(path)
+    def write_sub_manifest(self, data):
+        path = data.get('id')
+        path = path.replace(self.manifest_url + "/", '')
+        path = path.replace(self.id, 'metadata')
+        path = path + "/index.json"
+        # .replace(self.id, 'metadata') + "/index.json"
         write_s3_json(self.process_bucket, path, data)
 
     def write_collection(self, data):
@@ -61,7 +65,7 @@ class InprocessBucket():
         write_s3_json(self.process_bucket, path, data)
 
     def write_mets(self, data):
-        path = self.basepath + "/metadata/index.json"
+        path = self.basepath + "/metadata/mets.xml"
         write_s3_json(self.process_bucket, path, data)
 
     def write_data_csv(self, csv):
@@ -110,3 +114,10 @@ def s3_copy_data(dest_bucket, dest_key, src_bucket, src_key, **kwargs):
     }
     extra = kwargs.get('extra', {})
     dest_bucket.copy(from_source, dest_key, ExtraArgs=extra)
+
+
+def delete_file(s3Bucket, s3Path):
+    boto3.client('s3').delete_object(
+        Bucket=s3Bucket,
+        Key=s3Path,
+    )

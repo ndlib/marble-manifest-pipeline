@@ -37,6 +37,46 @@ def get_matching_s3_objects(bucket, prefix="", suffix=""):
                     yield obj
 
 
+class InprocessBucket():
+    def __init__(self, id, config):
+        self.id = id
+        self.process_bucket = config['process-bucket']
+        self.basepath = config['process-bucket-read-basepath'] + "/" + self.id
+        self.manifest_url = config['manifest-server-base-url']
+
+    def write_manifest(self, data):
+        path = self.basepath + "/metadata/manifest/index.json"
+        write_s3_json(self.process_bucket, path, data)
+
+    def write_sub_manifest(self, data):
+        path = data.get('id')
+        path = path.replace(self.manifest_url + "/", '')
+        path = path.replace(self.id, 'metadata')
+        path = path + "/index.json"
+        # .replace(self.id, 'metadata') + "/index.json"
+        write_s3_json(self.process_bucket, path, data)
+
+    def write_collection(self, data):
+        path = self.basepath + "/metadata/collection/index.json"
+        write_s3_json(self.process_bucket, path, data)
+
+    def write_schema_json(self, data):
+        path = self.basepath + "/metadata/index.json"
+        write_s3_json(self.process_bucket, path, data)
+
+    def write_mets(self, data):
+        path = self.basepath + "/metadata/mets.xml"
+        write_s3_json(self.process_bucket, path, data)
+
+    def write_data_csv(self, csv):
+        path = self.basepath + "/" + id + ".csv"
+        write_s3_file(self.process_bucket, path, csv)
+
+    def write_nd_json(self, data):
+        path = self.basepath + "/metadata/nd/index.json"
+        write_s3_json(self.process_bucket, path, data)
+
+
 def read_s3_file_content(s3Bucket, s3Path):
     content_object = boto3.resource('s3').Object(s3Bucket, s3Path)
     return content_object.get()['Body'].read().decode('utf-8')
@@ -81,34 +121,3 @@ def delete_file(s3Bucket, s3Path):
         Bucket=s3Bucket,
         Key=s3Path,
     )
-
-
-class InprocessBucket():
-    def __init__(self, id, config):
-        self.id = id
-        self.process_bucket = config['process-bucket']
-        self.basepath = config['process-bucket-read-basepath'] + "/" + self.id
-
-    def write_manifest(self, data):
-        path = self.basepath + "/metadata/manifest/index.json"
-        write_s3_json(self.process_bucket, path, data)
-
-    def write_collection(self, data):
-        path = self.basepath + "/metadata/collection/index.json"
-        write_s3_json(self.process_bucket, path, data)
-
-    def write_schema_json(self, data):
-        path = self.basepath + "/metadata/index.json"
-        write_s3_json(self.process_bucket, path, data)
-
-    def write_mets(self, data):
-        path = self.basepath + "/metadata/index.json"
-        write_s3_json(self.process_bucket, path, data)
-
-    def write_data_csv(self, csv):
-        path = self.basepath + "/" + id + ".csv"
-        write_s3_file(self.process_bucket, path, csv)
-
-    def write_nd_json(self, data):
-        path = self.basepath + "/metadata/nd/index.json"
-        write_s3_json(self.process_bucket, path, data)
