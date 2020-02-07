@@ -114,3 +114,10 @@ def s3_copy_data(dest_bucket, dest_key, src_bucket, src_key, **kwargs):
     }
     extra = kwargs.get('extra', {})
     dest_bucket.copy(from_source, dest_key, ExtraArgs=extra)
+
+
+def delete_file(s3Bucket, s3Path):
+    boto3.client('s3').delete_object(
+        Bucket=s3Bucket,
+        Key=s3Path,
+    )

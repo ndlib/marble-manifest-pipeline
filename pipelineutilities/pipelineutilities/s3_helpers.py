@@ -121,34 +121,3 @@ def delete_file(s3Bucket, s3Path):
         Bucket=s3Bucket,
         Key=s3Path,
     )
-
-
-class InprocessBucket():
-    def __init__(self, id, config):
-        self.id = id
-        self.process_bucket = config['process-bucket']
-        self.basepath = config['process-bucket-read-basepath'] + "/" + self.id
-
-    def write_manifest(self, data):
-        path = self.basepath + "/metadata/manifest/index.json"
-        write_s3_json(self.process_bucket, path, data)
-
-    def write_collection(self, data):
-        path = self.basepath + "/metadata/collection/index.json"
-        write_s3_json(self.process_bucket, path, data)
-
-    def write_schema_json(self, data):
-        path = self.basepath + "/metadata/index.json"
-        write_s3_json(self.process_bucket, path, data)
-
-    def write_mets(self, data):
-        path = self.basepath + "/metadata/index.json"
-        write_s3_json(self.process_bucket, path, data)
-
-    def write_data_csv(self, csv):
-        path = self.basepath + "/" + id + ".csv"
-        write_s3_file(self.process_bucket, path, csv)
-
-    def write_nd_json(self, data):
-        path = self.basepath + "/metadata/nd/index.json"
-        write_s3_json(self.process_bucket, path, data)
