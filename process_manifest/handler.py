@@ -77,7 +77,7 @@ def test():
     event = {}
     event['ids'] = ['BPP1001_EAD']
     event['ssm_key_base'] = '/all/new-csv'
-    event['process-bucket'] = 'marble-manifest-prod-processbucket-13bond538rnnb'
+    event['process-bucket'] = 'new-csv-processbucket-10dr776tnq9be'
     event['process-bucket-csv-basepath'] = 'csv'
     event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     event['local'] = False

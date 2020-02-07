@@ -53,6 +53,7 @@ class InprocessBucket():
         path = path.replace(self.manifest_url + "/", '')
         path = path.replace(self.id, 'metadata')
         path = path + "/index.json"
+        path = self.basepath + "/" + path
         # .replace(self.id, 'metadata') + "/index.json"
         write_s3_json(self.process_bucket, path, data)
 

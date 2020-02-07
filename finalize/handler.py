@@ -11,6 +11,7 @@ from dependencies.pipelineutilities.pipeline_config import get_pipeline_config
 
 import dependencies.sentry_sdk as sentry_sdk
 from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+from datetime import datetime, timedelta, timezone
 
 sentry_sdk.init(
     dsn=os.environ['SENTRY_DSN'],
@@ -21,20 +22,21 @@ sentry_sdk.init(
 def run(event, context):
     # s3_bucket = event['process-bucket']
     # s3_schema_path = os.path.join(event['process-bucket-read-basepath'], id, event["schema-file"])
-    start_time = time.time()
+
     if 'ssm_key_base' not in event:
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
 
     config = get_pipeline_config(event)
-    event['finalize_complete'] = False
     ids = event.get("ids")
+
+    quittime = datetime.utcnow() + timedelta(seconds=config['seconds-to-allow-for-processing'])
+    event['finalize_complete'] = False
 
     if 'finished_ids' not in event:
         event['finished_ids'] = []
 
     if 'finalized_run_number' not in event:
         event['finalized_run_number'] = 0
-
     event['finalized_run_number'] = event['finalized_run_number'] + 1
 
     if event['finalized_run_number'] > 5:
@@ -49,7 +51,7 @@ def run(event, context):
             step.run()
             event['finished_ids'].append(id)
 
-        if int(time.time() - start_time) > (config['seconds-to-allow-for-processing']):
+        if quittime <= datetime.utcnow():
             break
 
     if len(config['ids']) == len(event['finished_ids']):
