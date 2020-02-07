@@ -1,7 +1,8 @@
 import os
-from abc import ABC, abstractmethod
+import json
 import boto3
 from pyvips import Image
+from abc import ABC, abstractmethod
 from botocore.exceptions import ClientError
 
 
@@ -20,12 +21,12 @@ class ImageProcessor(ABC):
         self.source_image = None
         self.filename = None
         self.ext = None
-        self.ext = None
         self.local_file = None
         self.tif_file = None
         self.bucket = None
         self.img_write_base = None
         self.source_md5sum = None
+        self.prior_results = {}
         self.image_result = {}
 
     @abstractmethod
@@ -35,8 +36,8 @@ class ImageProcessor(ABC):
     def set_data(self, config: dict) -> None:
         self.id = config['id']
         self.source_image = config['file']
-        self.filename, self.ext = self.source_image.split('/')[-1].rsplit('.', 1)
-        self.ext = f".{self.ext}"
+        self.filename = config['filename']
+        self.ext = config['ext']
         self.local_file = f"TEMP_{self.filename}{self.ext}"
         self.tif_file = f"{self.filename}.tif"
         self.bucket = config['bucket']
@@ -64,41 +65,28 @@ class ImageProcessor(ABC):
         os.remove(self.local_file)
         os.remove(self.tif_file)
 
-
-class S3ImageProcessor(ImageProcessor):
-    def __init__(self) -> None:
-        super().__init__()
-
-    def process(self) -> dict:
-        # if self._previously_processed():
-        #     self._log_result('status', 'processed')
-        #     self._log_result('reason', 'no changes to image since last run')
-        # else:
-        img_bucket, key = self.source_image.split('/', 2)[-1].split('/', 1)
-        s3_file = f"{self.img_write_base}/{self.id}/images/{self.tif_file}"
-        self.S3_RESOURCE.Bucket(img_bucket).download_file(key, self.local_file)
-        self._generate_pytiff(self.local_file, self.tif_file)
-        self.S3_RESOURCE.Bucket(self.bucket).upload_file(self.tif_file, s3_file)
-        self._cleanup()
-        self._log_result('status', 'processed')
-        return self.image_result
-
     def _previously_processed(self) -> bool:
-        # has this been ran before and has it changed?
-        previous_image = f"{self.img_write_base}/{self.id}/images/{self.filename}"
-        response = self._get_image_metadata(self.bucket, previous_image)
-        return self.source_md5sum == response['ETag']
+        if self.id not in self.prior_results:
+            self.prior_results.update({self.id: {}})
+            img_data = f"{self.img_write_base}/{self.id}/image_data.json"
+            self._set_prior_run_data(self.bucket, img_data, self.id)
+        prior_md5sum = self.prior_results.get(self.id).get(self.filename, {}).get('md5sum', 'nomatch')
+        if self.source_md5sum == prior_md5sum:
+            return True
+        return False
 
-    def _get_image_metadata(self, bucket: str, key: str, **kwargs) -> dict:
+    def _set_prior_run_data(self, bucket: str, key: str, id: str, **kwargs) -> dict:
         try:
-            response = self.S3_CLIENT.head_object(Bucket=bucket, Key=key)
+            local_file = os.path.basename(key)
+            boto3.resource('s3').Bucket(bucket).download_file(key, local_file)
+            with open(local_file) as json_file:
+                self.prior_results.get(id).update(json.load(json_file))
+            os.remove(local_file)
         except ClientError as ce:
-            response = {'ETag': None}
             if ce.response['Error']['Code'] == '404':
                 print(f"No previous image data found for {bucket}://{key}")
             else:
                 print(f"Unexpected error {bucket}://{key}: {ce.response['Error']['Code']}")
-        return response
 
     def _generate_pytiff(self, file: str, tif_filename: str) -> None:
         """
@@ -138,9 +126,3 @@ class S3ImageProcessor(ImageProcessor):
             print(f'Original image width: {image.width}')
             image = image.shrink(shrink_by, shrink_by)
         return image
-
-
-class GDImageProcessor(ImageProcessor):
-    def __init__(self, config: dict) -> None:
-        super().__init__(config)
-        self.source_md5 = config['md5']
