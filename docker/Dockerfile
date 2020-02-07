@@ -46,13 +46,17 @@ RUN apk add \
 
 # and now pyvips can go on
 RUN pip3 install --upgrade pip \
-  && pip3 install pyvips boto3
+  && pip3 install pyvips boto3 oauth2client==4.1.3 google==2.0.2 \
+	google-api-python-client==1.7.11 google-auth-httplib2==0.0.3 \
+	google-auth-oauthlib==0.4.0
 
 # image transformation script
 COPY pyramid_generator/pyramid.py /usr/local/bin/
 COPY pyramid_generator/image_processor.py /usr/local/bin/
 COPY pyramid_generator/s3_processor.py /usr/local/bin/
+COPY pyramid_generator/gdrive_processor.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/pipeline_config.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/csv_collection.py /usr/local/bin/
+COPY pipelineutilities/pipelineutilities/google_utilities.py /usr/local/bin/
 RUN chmod u+x /usr/local/bin/pyramid.py
 ENTRYPOINT ["pyramid.py"]

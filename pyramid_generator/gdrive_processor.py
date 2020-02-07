@@ -1,9 +1,11 @@
 from image_processor import ImageProcessor
+import google_utilities
 
 
-class S3ImageProcessor(ImageProcessor):
-    def __init__(self) -> None:
+class GoogleImageProcessor(ImageProcessor):
+    def __init__(self, credentials) -> None:
         super().__init__()
+        self.gdrive_conn = google_utilities.establish_connection_with_google_api(credentials)
 
     def process(self) -> dict:
         if self._previously_processed():
@@ -17,10 +19,10 @@ class S3ImageProcessor(ImageProcessor):
             self._log_result('md5sum', md5sum)
             self._log_result('reason', 'no changes to image since last run')
         else:
-            img_bucket, key = self.source_image.split('/', 2)[-1].split('/', 1)
-            s3_file = f"{self.img_write_base}/{self.id}/images/{self.tif_file}"
-            self.S3_RESOURCE.Bucket(img_bucket).download_file(key, self.local_file)
+            file_id = self.source_image.split('/')[-2]
+            google_utilities.download_google_file(self.gdrive_conn, file_id, self.local_file)
             self._generate_pytiff(self.local_file, self.tif_file)
+            s3_file = f"{self.img_write_base}/{self.id}/images/{self.tif_file}"
             self.S3_RESOURCE.Bucket(self.bucket).upload_file(self.tif_file, s3_file)
             self._cleanup()
             self._log_result('status', 'processed')
