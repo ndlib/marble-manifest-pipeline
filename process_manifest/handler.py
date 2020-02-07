@@ -41,10 +41,9 @@ def run(event, context):
 
         # split the manifests
         for item in sub_manifests(manifest):
-            path = file_name_from_manifest(item, config)
-            inprocess_bucket.write_sub_manifest(path, item)
+            inprocess_bucket.write_sub_manifest(item)
 
-        inprocess_bucket.write_manifest(iiif.manifest())
+        inprocess_bucket.write_manifest(manifest)
 
         nd = ndJson(id, config, parent)
         inprocess_bucket.write_nd_json(nd.to_hash())
