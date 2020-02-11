@@ -14,8 +14,8 @@ class FinalizeStep():
 
     def run(self):
         if self.success():
+            self.image_cleanup()
             self.move_pyramids()
-            self.remove_obsolete_pyramids()
             self.move_metadata()
         self.notify()
 
@@ -44,37 +44,46 @@ class FinalizeStep():
             s3_copy_data(dest_bucket, dest_key, src_bucket, obj['Key'])
         return
 
-    def remove_obsolete_pyramids(self):
+    def image_cleanup(self):
         src_bucket = self.config['process-bucket']
         dest_bucket = self.config['image-server-bucket']
         src_path = f"{self.config['process-bucket-read-basepath']}/{self.id}/images"
         img_data = f"{self.config['process-bucket-read-basepath']}/{self.id}/image_data.json"
         latest_images = get_matching_s3_objects(src_bucket, src_path)
         public_images = get_matching_s3_objects(dest_bucket, self.id)
-        latest = []
-        public = []
-        manifest = []
+        latest = set()  # images in the process bucket
+        public = set()  # images in the image server bucket
+        manifest = set()  # images listed in processbucket/{id}/image_data.json
 
         for image in public_images:
-            public.append(os.path.basename(image['Key']))
+            public.add(os.path.basename(image['Key']))
         for image in latest_images:
-            latest.append(os.path.basename(image['Key']))
-
-        # delete images from image bucket not in proces bucket
-        deletion_list = list(set(public) - set(latest))
-        for image in deletion_list:
-            print(f"Removing - {self.id}/{image} from {dest_bucket}")
-            delete_file(dest_bucket, f"{self.id}/{image}")
-
+            latest.add(os.path.basename(image['Key']))
         manifest_data = json.loads(read_s3_file_content(src_bucket, img_data))
         for image in manifest_data:
-            manifest.append(f"{image}.tif")
+            manifest.add(f"{image}.tif")
 
-        # delete images from process bucket not in manifest
-        deletion_list = list(set(latest) - set(manifest))
-        for image in deletion_list:
-            print(f"Removing - {src_path}/{image} from {src_bucket}")
-            delete_file(src_bucket, f"{self.id}/{image}")
+        # delete pyramids in process bucket but not in image_data.json
+        self._delete_obsolete_pyramids(src_bucket, src_path, latest.difference(manifest))
+
+        # delete pyramids in image server bucket but not in process bucket
+        self._delete_obsolete_pyramids(dest_bucket, self.id, public.difference(latest))
+
+    def _delete_obsolete_pyramids(self, bucket, path, images, **kwargs) -> set:
+        deleted_images = set()
+        for image in images:
+            print(f"Removing - {path}/{image} from {bucket}")
+            if kwargs.get('local', False):
+                response = {'DeleteMarker': True}
+            else:
+                try:
+                    response = delete_file(bucket, f"{path}/{image}")
+                except Exception as e:
+                    print(e)
+                    response = {'DeleteMarker': False}
+            if response.get('DeleteMarker'):
+                deleted_images.add(image)
+        return deleted_images
 
     def move_metadata(self):
         src_bucket = self.config['process-bucket']
@@ -183,9 +192,3 @@ class FinalizeStep():
             url += 'universalviewer/index.html#'
         url += '?manifest=' + self._event_manifest_url()
         return url
-
-    def test_basepath(self, basepath):
-        if (basepath):
-            return basepath + "/"
-
-        return ""
