@@ -114,6 +114,5 @@ class TestCsvCollection(unittest.TestCase):
         self.assertEqual(400, objects[3]['width'])
 
 
-
 if __name__ == '__main__':
     unittest.main()
