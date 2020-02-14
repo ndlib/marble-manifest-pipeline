@@ -38,7 +38,7 @@ def run(event, context):
         # a2s = AthenaToSchema(event, parent, [])
         iiif = iiifCollection(config, parent)
         manifest = iiif.manifest()
-        print(manifest)
+
         # split the manifests
         for item in sub_manifests(manifest):
             inprocess_bucket.write_sub_manifest(item)
