@@ -35,7 +35,7 @@ class TestCreateManifest(unittest.TestCase):
             data = load_data_for_test(id)
 
             parent = load_csv_data(id, config)
-            iiif = iiifCollection(id, config, parent)
+            iiif = iiifCollection(config, parent)
             manifest = iiif.manifest()
 
             debug_json(data['manifest_json'], manifest)

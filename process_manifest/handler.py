@@ -36,9 +36,9 @@ def run(event, context):
 #        image = load_image_data(id, event)
 
         # a2s = AthenaToSchema(event, parent, [])
-        iiif = iiifCollection(id, config, parent)
+        iiif = iiifCollection(config, parent)
         manifest = iiif.manifest()
-
+        print(manifest)
         # split the manifests
         for item in sub_manifests(manifest):
             inprocess_bucket.write_sub_manifest(item)
@@ -69,16 +69,15 @@ def sub_manifests(manifest):
     return ret
 
 
-
 # python -c 'from handler import *; test()'
 def test():
     # import pprint
     # pp = pprint.PrettyPrinter(indent=4)
     event = {}
-    event['ids'] = ['BPP1001_EAD']
+    event['ids'] = ['item-one-image-embark']
     event['ssm_key_base'] = '/all/new-csv'
     event['process-bucket'] = 'new-csv-processbucket-10dr776tnq9be'
     event['process-bucket-csv-basepath'] = 'csv'
     event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
-    event['local'] = False
+    event['local'] = True
     run(event, {})

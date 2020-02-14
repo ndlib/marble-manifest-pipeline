@@ -4,31 +4,31 @@
     "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
     "http://iiif.io/api/presentation/3/context.json"
   ],
-  "id": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/collectionId/manifest",
+  "id": "https://presentation-iiif.library.nd.edu/collectionId/manifest",
   "items": [
     {
       "height": 2000,
-      "id": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/canvas/file.jpg",
+      "id": "https://presentation-iiif.library.nd.edu/collectionId/file.jpg/canvas",
       "items": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/annotation_page/file.jpg",
+          "id": "https://presentation-iiif.library.nd.edu/collectionId/file.jpg/canvas/annotation_page/file.jpg",
           "items": [
             {
               "body": {
                 "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile/full/full/0/default.jpg",
+                "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile/full/full/0/default.jpg",
                 "service": [
                   {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile",
                     "profile": "http://iiif.io/api/image/2/level2.json",
                     "type": "ImageService2"
                   }
                 ],
                 "type": "Image"
               },
-              "id": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/annotation/file.jpg",
+              "id": "https://presentation-iiif.library.nd.edu/collectionId/file.jpg/canvas/annotation/file.jpg",
               "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/canvas/file.jpg",
+              "target": "https://presentation-iiif.library.nd.edu/collectionId/file.jpg/canvas",
               "type": "Annotation"
             }
           ],
@@ -40,12 +40,128 @@
           "title"
         ]
       },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              "Creator"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Copyright"
+            ]
+          },
+          "value": {
+            "en": [
+              "usage"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Conditions Governing Use"
+            ]
+          },
+          "value": {
+            "en": [
+              "license"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Conditions Governing Access"
+            ]
+          },
+          "value": {
+            "en": [
+              "Access"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Genre/Physical Characteristic"
+            ]
+          },
+          "value": {
+            "en": [
+              "format"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Extent"
+            ]
+          },
+          "value": {
+            "en": [
+              "dimensions"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Immediate Source of Acquisition"
+            ]
+          },
+          "value": {
+            "en": [
+              "dedication"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "N/a"
+            ]
+          },
+          "value": {
+            "en": [
+              "True"
+            ]
+          }
+        }
+      ],
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "usage"
+          ]
+        }
+      },
+      "rights": "license",
+      "summary": {
+        "en": [
+          "description"
+        ]
+      },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile/full/250,/0/default.jpg",
+          "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile/full/250,/0/default.jpg",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile",
+              "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile",
               "profile": "http://iiif.io/api/image/2/level2.json",
               "type": "ImageService2"
             }
@@ -54,6 +170,7 @@
         }
       ],
       "type": "Canvas",
+      "viewingDirection": "left-to-right",
       "width": 2000
     }
   ],
@@ -164,9 +281,9 @@
   "rights": "license",
   "seeAlso": [
     {
-      "format": "application/ld+json",
-      "id": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/collectionId",
-      "profile": "https://schema.org/",
+      "format": "application/xml",
+      "id": "https://presentation-iiif.library.nd.edu/collectionId/mets.xml",
+      "profile": "http://www.loc.gov/METS/",
       "type": "Dataset"
     }
   ],
@@ -177,10 +294,10 @@
   },
   "thumbnail": [
     {
-      "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile/full/250,/0/default.jpg",
+      "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile/full/250,/0/default.jpg",
       "service": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile",
+          "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile",
           "profile": "http://iiif.io/api/image/2/level2.json",
           "type": "ImageService2"
         }
