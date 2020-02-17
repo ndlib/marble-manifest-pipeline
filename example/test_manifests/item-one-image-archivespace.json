@@ -8,10 +8,10 @@
   "items": [
     {
       "height": 2000,
-      "id": "https://presentation-iiif.library.nd.edu/collectionId/file.jpg/canvas",
+      "id": "https://presentation-iiif.library.nd.edu/collectionId/file/canvas",
       "items": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/collectionId/file.jpg/canvas/annotation_page/file.jpg",
+          "id": "https://presentation-iiif.library.nd.edu/collectionId/file/canvas/annotation_page/file.jpg",
           "items": [
             {
               "body": {
@@ -26,9 +26,9 @@
                 ],
                 "type": "Image"
               },
-              "id": "https://presentation-iiif.library.nd.edu/collectionId/file.jpg/canvas/annotation/file.jpg",
+              "id": "https://presentation-iiif.library.nd.edu/collectionId/file/canvas/annotation/file.jpg",
               "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/collectionId/file.jpg/canvas",
+              "target": "https://presentation-iiif.library.nd.edu/collectionId/file/canvas",
               "type": "Annotation"
             }
           ],
@@ -50,6 +50,42 @@
           "value": {
             "en": [
               "Creator"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "dateCreated"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Material Type"
+            ]
+          },
+          "value": {
+            "en": [
+              "workType"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "uniqueIdentifier"
             ]
           }
         },
@@ -80,6 +116,18 @@
         {
           "label": {
             "en": [
+              "Link to finding aid"
+            ]
+          },
+          "value": {
+            "en": [
+              "linkToSource"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
               "Conditions Governing Access"
             ]
           },
@@ -98,6 +146,18 @@
           "value": {
             "en": [
               "format"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Collection"
+            ]
+          },
+          "value": {
+            "en": [
+              "Collectioninformation"
             ]
           }
         },
@@ -195,6 +255,42 @@
     {
       "label": {
         "en": [
+          "Date "
+        ]
+      },
+      "value": {
+        "en": [
+          "dateCreated"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Material Type"
+        ]
+      },
+      "value": {
+        "en": [
+          "workType"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Identifier"
+        ]
+      },
+      "value": {
+        "en": [
+          "uniqueIdentifier"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
           "Copyright"
         ]
       },
@@ -213,6 +309,18 @@
       "value": {
         "en": [
           "license"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Link to finding aid"
+        ]
+      },
+      "value": {
+        "en": [
+          "linkToSource"
         ]
       }
     },
@@ -243,6 +351,18 @@
     {
       "label": {
         "en": [
+          "Collection"
+        ]
+      },
+      "value": {
+        "en": [
+          "Collectioninformation"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
           "Extent"
         ]
       },
@@ -265,7 +385,36 @@
       }
     }
   ],
-  "provider": null,
+  "provider": {
+    "homepage": [
+      {
+        "format": "text/html",
+        "id": "https://rarebooks.library.nd.edu/",
+        "label": {
+          "en": [
+            "Rare Books and Special Collections"
+          ]
+        },
+        "type": "Text"
+      }
+    ],
+    "id": "https://rarebooks.library.nd.edu/using",
+    "label": {
+      "en": [
+        "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+      ]
+    },
+    "logo": [
+      {
+        "format": "image/png",
+        "height": 100,
+        "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+        "type": "Image",
+        "width": 120
+      }
+    ],
+    "type": "Agent"
+  },
   "requiredStatement": {
     "label": {
       "en": [

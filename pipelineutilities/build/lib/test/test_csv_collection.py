@@ -81,12 +81,12 @@ class TestCsvCollection(unittest.TestCase):
 
         self.assertEqual("", objects[1]['iiifImageUri'])
         self.assertEqual("", objects[1]['iiifImageFilePath'])
-        self.assertEqual("manifest-server-base-url/itemId/itemId/manifest", objects[1]['iiifUri'])
-        self.assertEqual("s3://manifest-server-bucket/itemId/itemId/manifest/index.json", objects[1]['iiifFilePath'])
-        self.assertEqual("manifest-server-base-url/itemId/itemId/mets.xml", objects[1]['metsUri'])
-        self.assertEqual("s3://manifest-server-bucket/itemId/itemId/mets.xml", objects[1]['metsFilePath'])
-        self.assertEqual("manifest-server-base-url/itemId/itemId", objects[1]['schemaUri'])
-        self.assertEqual("s3://manifest-server-bucket/itemId/itemId/index.json", objects[1]['schemaPath'])
+        self.assertEqual("manifest-server-base-url/collectionId/itemId/manifest", objects[1]['iiifUri'])
+        self.assertEqual("s3://manifest-server-bucket/collectionId/itemId/manifest/index.json", objects[1]['iiifFilePath'])
+        self.assertEqual("manifest-server-base-url/collectionId/itemId/mets.xml", objects[1]['metsUri'])
+        self.assertEqual("s3://manifest-server-bucket/collectionId/itemId/mets.xml", objects[1]['metsFilePath'])
+        self.assertEqual("manifest-server-base-url/collectionId/itemId", objects[1]['schemaUri'])
+        self.assertEqual("s3://manifest-server-bucket/collectionId/itemId/index.json", objects[1]['schemaPath'])
 
     def test_add_additional_paths_for_collections(self):
         _add_additional_paths(objects[0], config)

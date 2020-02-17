@@ -22,7 +22,7 @@ class iiifManifest():
         }
 
         if self.key_exists('repository'):
-            ret['provider'] = self._add_provider(self.data.repository())
+            ret['provider'] = self._add_provider(self.data.get('repository'))
 
         if self.key_exists('usage'):
             ret['requiredStatement'] = self._convert_label_value('Copyright', self.data.get('usage'))
@@ -133,12 +133,14 @@ class iiifManifest():
         return {self.lang: [line]}
 
     def _add_provider(self, provider):
-        if (provider == 'embark'):
+        if (provider.lower() == 'embark'):
             return self._snite_proivider()
-        elif (provider == 'archivespace'):
+        elif (provider.lower() == 'archivesspace'):
             return self._archives_proivider()
-        elif (provider == 'rbsc'):
+        elif (provider.lower() == 'rbsc'):
             return self._rbsc_proivider()
+
+        raise Exception("bad provider " + provider.lower())
 
     def _snite_proivider(self):
         return {
@@ -179,7 +181,7 @@ class iiifManifest():
             ],
             "logo": [
                 {
-                  "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
+                  "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
                   "type": "Image",
                   "format": "image/png",
                   "height": 100,
@@ -203,7 +205,7 @@ class iiifManifest():
             ],
             "logo": [
                 {
-                  "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
+                  "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
                   "type": "Image",
                   "format": "image/png",
                   "height": 100,

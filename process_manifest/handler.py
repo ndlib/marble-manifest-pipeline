@@ -54,10 +54,6 @@ def run(event, context):
     return event
 
 
-def file_name_from_manifest(manifest, config):
-    return manifest.get('id').replace(config['manifest-server-base-url'] + "/", '') + "/index.json"
-
-
 def sub_manifests(manifest):
     ret = []
     for item in manifest.get('items', []):
@@ -74,10 +70,10 @@ def test():
     # import pprint
     # pp = pprint.PrettyPrinter(indent=4)
     event = {}
-    event['ids'] = ['item-one-image-embark']
+    event['ids'] = ['BPP1001_EAD']
     event['ssm_key_base'] = '/all/new-csv'
     event['process-bucket'] = 'new-csv-processbucket-10dr776tnq9be'
     event['process-bucket-csv-basepath'] = 'csv'
     event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
-    event['local'] = True
+    event['local'] = False
     run(event, {})

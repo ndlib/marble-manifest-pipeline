@@ -160,7 +160,7 @@ def _file_paths(row, config):
 
 
 def _manifest_paths(row, config):
-    path = "/" + row.get('id')
+    path = "/" + row.get('collectionId')
     if row.get('collectionId') != row.get('id'):
         path = path + "/" + row.get("id")
 
@@ -177,7 +177,7 @@ def _manifest_paths(row, config):
 
 
 def _collection_paths(row, config):
-    path = "/" + row.get('id')
+    path = "/" + row.get('collectionId')
     if row.get('collectionId') != row.get('id'):
         path = path + "/" + row.get("id")
 
