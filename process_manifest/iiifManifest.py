@@ -66,7 +66,7 @@ class iiifManifest():
         return ret
 
     def key_exists(self, key):
-        return self.data.get(key, False) and self.data.get(key)
+        return key in self.data.object and self.data.get(key)
 
     def metadata_array(self):
         mapper = self.mapping
