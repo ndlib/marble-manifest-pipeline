@@ -133,10 +133,8 @@ def _add_additional_paths(row, config):
     level = row.get('level')
     if level == "file":
         paths = _file_paths(row, config)
-    elif level == "manifest":
+    elif level == "manifest" or level == "collection":
         paths = _manifest_paths(row, config)
-    elif level == "collection":
-        paths = _collection_paths(row, config)
     else:
         raise "invalid type passed to _addition_paths"
 
@@ -144,8 +142,9 @@ def _add_additional_paths(row, config):
 
 
 def _file_paths(row, config):
-    uri_path = '/' + row.get('collectionId') + '%2F' + os.path.splitext(row.get('id'))[0]
-    path = '/' + row.get('collectionId') + "/" + row.get('id')
+    id_no_extension = os.path.splitext(row.get('id'))[0]
+    uri_path = '/' + row.get('collectionId') + '%2F' + id_no_extension
+    path = '/' + row.get('collectionId') + "/" + id_no_extension
 
     return {
         "iiifImageUri": config['image-server-base-url'] + uri_path,
@@ -169,23 +168,6 @@ def _manifest_paths(row, config):
         "iiifImageFilePath": "",
         "iiifUri": config["manifest-server-base-url"] + path + "/manifest",
         "iiifFilePath": "s3://" + config['manifest-server-bucket'] + path + "/manifest/index.json",
-        "metsUri": config["manifest-server-base-url"] + path + "/mets.xml",
-        "metsFilePath": "s3://" + config['manifest-server-bucket'] + path + "/mets.xml",
-        "schemaUri": config["manifest-server-base-url"] + path,
-        "schemaPath": "s3://" + config['manifest-server-bucket'] + path + "/index.json",
-    }
-
-
-def _collection_paths(row, config):
-    path = "/" + row.get('collectionId')
-    if row.get('collectionId') != row.get('id'):
-        path = path + "/" + row.get("id")
-
-    return {
-        "iiifImageUri": "",
-        "iiifImageFilePath": "",
-        "iiifUri": config["manifest-server-base-url"] + path + "/collection",
-        "iiifFilePath": "s3://" + config['manifest-server-bucket'] + path + "/collection/index.json",
         "metsUri": config["manifest-server-base-url"] + path + "/mets.xml",
         "metsFilePath": "s3://" + config['manifest-server-bucket'] + path + "/mets.xml",
         "schemaUri": config["manifest-server-base-url"] + path,
