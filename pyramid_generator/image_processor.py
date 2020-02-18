@@ -12,8 +12,6 @@ class ImageProcessor(ABC):
     PYTIF_TILE_WIDTH = 512
     PYTIF_TILE_HEIGHT = 512
     COMPRESSION_TYPE = 'deflate'
-    MAX_IMG_HEIGHT = 8500.0
-    MAX_IMG_WIDTH = 8500.0
 
     def __init__(self) -> None:
         super().__init__()
@@ -28,6 +26,8 @@ class ImageProcessor(ABC):
         self.source_md5sum = None
         self.prior_results = {}
         self.image_result = {}
+        self.max_img_height = 8500.0
+        self.max_img_width = 8500.0
 
     @abstractmethod
     def process(self) -> dict:
@@ -43,6 +43,14 @@ class ImageProcessor(ABC):
         self.bucket = config['bucket']
         self.img_write_base = config['img_write_base']
         self.source_md5sum = config['md5sum']
+        # if copyrighted work scale height/width directed by aamd.org
+        if self._is_copyrighted(config['usage']):
+            self.max_img_height = 560.0
+            self.max_img_width = 843.0
+
+    def _is_copyrighted(self, usage: str) -> bool:
+        if usage and usage.lower().startswith('copyright'):
+            return True
 
     def _log_result(self, key: str, info) -> None:
         """
@@ -116,11 +124,11 @@ class ImageProcessor(ABC):
             Image: Vips object of source file
         """
         image = Image.new_from_file(file, access='sequential')
-        if image.height > self.MAX_IMG_HEIGHT or image.width > self.MAX_IMG_WIDTH:
+        if image.height > self.max_img_height or image.width > self.max_img_width:
             if image.height >= image.width:
-                shrink_by = image.height / self.MAX_IMG_HEIGHT
+                shrink_by = image.height / self.max_img_height
             else:
-                shrink_by = image.width / self.MAX_IMG_WIDTH
+                shrink_by = image.width / self.max_img_width
             print(f'Resizing original image by: {shrink_by}')
             print(f'Original image height: {image.height}')
             print(f'Original image width: {image.width}')
