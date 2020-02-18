@@ -38,3 +38,7 @@ class TestSearchFiles(unittest.TestCase):
         # should only filter the main directory out
         result = get_all_file_ids(s3_query_result, test_config)
         self.assertEqual(list(result), ['file_in_range', 'file_out_of_range'])
+
+
+if __name__ == '__main__':
+    unittest.main()

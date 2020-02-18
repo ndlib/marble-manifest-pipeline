@@ -1,17 +1,14 @@
 from iiifManifest import iiifManifest
-from iiifItem import iiifItem
 from MetadataMappings import MetadataMappings
 
 
-class iiifCollection(iiifItem):
-    def __init__(self, id, config, data):
-        self.id = id
+class iiifCollection():
+    def __init__(self, config, data):
         self.config = config
         self.data = data
-        iiifItem.__init__(self, self.id, 'Collection')
 
     def manifest(self):
-        manifest = iiifManifest(self.id, self.config, self.data, self.mappings()).manifest()
+        manifest = iiifManifest(self.config, self.data, self.mappings()).manifest()
         manifest["@context"] = [
             "http://www.w3.org/ns/anno.jsonld",
             "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",

@@ -1,17 +1,15 @@
 from iiifImage import iiifImage
-from iiifCanvas import iiifCanvas
-from iiifItem import iiifItem
 
 
-class iiifManifest(iiifItem):
-    def __init__(self, id, config, data, mapping):
+class iiifManifest():
+    def __init__(self, config, data, mapping):
         self.config = config
         self.data = data
         self.mapping = mapping
-        self.parent_id = id
-        self.id = self._make_id()
-
-        iiifItem.__init__(self, self.id, self._schema_to_manifest_type())
+        self.parent_id = self.data.get('collectionId')
+        self.id = self.data.get('id')
+        self.lang = 'en'
+        self.type = self._schema_to_manifest_type()
 
     def manifest(self):
         ret = {
@@ -20,33 +18,45 @@ class iiifManifest(iiifItem):
             'label': self._lang_wrapper(self.data.get('title')),
             'thumbnail': self.thumbnail(),
             'items': self._items(),
-            'viewingDirection': 'left-to-right',
-            'seeAlso': [{
-                "id": self._schema_url(),
-                "type": "Dataset",
-                "format": "application/ld+json",
-                "profile": "https://schema.org/"
-            }]
+            'viewingDirection': 'left-to-right'
         }
 
-        if self.data.get('repository', False):
-            ret['provider'] = self._add_provider(self.data.repository())
+        if self.key_exists('repository'):
+            ret['provider'] = self._add_provider(self.data.get('repository'))
 
-        if self.data.get('usage', False):
+        if self.key_exists('usage'):
             ret['requiredStatement'] = self._convert_label_value('Copyright', self.data.get('usage'))
 
-        if self.data .get('license', False):
+        if self.key_exists('license'):
             ret['rights'] = self.data.get('license')
 
-        if self.data.get('description', False):
+        if self.key_exists('description'):
             ret['summary'] = self._lang_wrapper(self.data.get('description'))
 
-        if False:
+        if self.key_exists('height') and self.key_exists('width') and self.type == 'Canvas':
+            ret['height'] = self.data.get('height')
+            ret['width'] = self.data.get('width')
+
+        if self.key_exists('metsUri'):
+            if 'seeAlso' not in ret:
+                ret['seeAlso'] = []
+
             ret['seeAlso'].append({
-                "id": self.config['manifest-server-base-url'] + '/' + self.id + '/mets.xml',
+                "id": self.data.get('metsUri'),
                 "type": "Dataset",
                 "format": "application/xml",
                 "profile": "http://www.loc.gov/METS/"
+            })
+
+        if self.key_exists('imageUri'):
+            if 'seeAlso' not in ret:
+                ret['seeAlso'] = []
+
+            ret['seeAlso'].append({
+                "id": self.data.get('schemaUri'),
+                "type": "Dataset",
+                "format": "application/ld+json",
+                "profile": "https://schema.org/"
             })
 
         metadata = self.metadata_array()
@@ -55,9 +65,12 @@ class iiifManifest(iiifItem):
 
         return ret
 
+    def key_exists(self, key):
+        return key in self.data.object and self.data.get(key)
+
     def metadata_array(self):
         mapper = self.mapping
-        keys_in_other_parts_of_manifest = self.metadata_keys_that_have_top_level_values()
+        keys_in_other_parts_of_manifest = self._metadata_keys_that_have_top_level_values()
 
         ret = []
         for key in mapper.get_athena_keys():
@@ -70,22 +83,28 @@ class iiifManifest(iiifItem):
 
     def thumbnail(self):
         if self.data.get('default_image', False):
-            return [iiifImage(self.data.get('default_image'), self).thumbnail()]
+            return [iiifImage(self.data).thumbnail()]
 
         thumbnail = self._search_for_default_image(self.data)
         if thumbnail:
-            return [iiifImage(thumbnail, self).thumbnail()]
+            return [iiifImage(thumbnail).thumbnail()]
 
         return []
 
     def _items(self):
         ret = []
-        for item_data in self.data.children():
-
-            if (item_data.type() == 'file'):
-                ret.append(iiifCanvas(self, item_data).canvas())
-            else:
-                ret.append(iiifManifest(self.id, self.config, item_data, self.mapping).manifest())
+        if self.type == 'Canvas':
+            image = iiifImage(self.data)
+            ret.append({
+                'id': self._annotation_page_id(),
+                'type': 'AnnotationPage',
+                'items': [
+                    image.annotation(self._manifest_id())
+                ]
+            })
+        else:
+            for item_data in self.data.children():
+                ret.append(iiifManifest(self.config, item_data, self.mapping).manifest())
 
         return ret
 
@@ -95,18 +114,12 @@ class iiifManifest(iiifItem):
         elif self.data.type() == 'collection':
             return 'Collection'
         elif self.data.type() == 'file':
-            return 'Manifest'
+            return 'Canvas'
 
         raise "invalid schema processor type"
 
     def _manifest_id(self):
-        if self.type == 'Manifest':
-            return self.config['manifest-server-base-url'] + '/' + self.id + '/manifest'
-        else:
-            return self.config['manifest-server-base-url'] + '/collection/' + self.id
-
-    def _schema_url(self):
-        return self.config['manifest-server-base-url'] + '/' + self.id
+        return self.data.get('iiifUri')
 
     def _convert_label_value(self, label, value):
         if (label and value):
@@ -116,13 +129,18 @@ class iiifManifest(iiifItem):
             }
         return None
 
+    def _lang_wrapper(self, line):
+        return {self.lang: [line]}
+
     def _add_provider(self, provider):
-        if (provider == 'embark'):
+        if (provider.lower() == 'embark'):
             return self._snite_proivider()
-        elif (provider == 'archivespace'):
+        elif (provider.lower() == 'archivesspace'):
             return self._archives_proivider()
-        elif (provider == 'rbsc'):
+        elif (provider.lower() == 'rbsc'):
             return self._rbsc_proivider()
+
+        raise Exception("bad provider " + provider.lower())
 
     def _snite_proivider(self):
         return {
@@ -163,7 +181,7 @@ class iiifManifest(iiifItem):
             ],
             "logo": [
                 {
-                  "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
+                  "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
                   "type": "Image",
                   "format": "image/png",
                   "height": 100,
@@ -187,7 +205,7 @@ class iiifManifest(iiifItem):
             ],
             "logo": [
                 {
-                  "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
+                  "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
                   "type": "Image",
                   "format": "image/png",
                   "height": 100,
@@ -196,25 +214,22 @@ class iiifManifest(iiifItem):
               ]
         }
 
-    def _make_id(self):
-        if self.parent_id == self.data.get('id'):
-            return self.parent_id
-
-        return self.parent_id + "/" + self.data.get('id')
+    def _annotation_page_id(self):
+        return self._manifest_id() + '/annotation_page/' + self.id
 
     def _search_for_default_image(self, data):
         if data.type() == 'file':
-            return data.get('id')
+            return data
 
         for child in data.children():
             if child.type == 'file':
-                return child.get('id')
+                return child
 
             return self._search_for_default_image(child)
 
         return False
 
-    def metadata_keys_that_have_top_level_values(self):
+    def _metadata_keys_that_have_top_level_values(self):
         return [
             'title',
             'provider',

@@ -1,5 +1,7 @@
 import csv
 import json
+import os
+import boto3
 from io import StringIO
 from .s3_helpers import read_s3_file_content
 
@@ -8,25 +10,43 @@ def load_image_data(id, config):
     if config.get('local', False):
         return load_image_from_file(id, config)
     else:
-        return load_image_from_s3(config['process-bucket'], config['process-bucket-read-basepath'], id)
+        return load_image_from_s3(config['process-bucket'], config['process-bucket-read-basepath'], id, config)
 
 
 def load_image_from_file(id, config):
-    ""
+    filepath = config['local-path'] + "/" + id + "/" + config['image-data-file']
+    try:
+        with open(filepath, 'r') as input_source:
+            source = input_source.read()
+        input_source.close()
+    except FileNotFoundError:
+        return {}
+
+    return json.loads(source)
 
 
-def load_image_from_s3(s3Bucket, s3Path, id):
+def load_image_from_s3(s3Bucket, s3Path, id, config):
     s3Path = s3Path + "/" + id + "/" + config['image-data-file']
 
-    source = read_s3_file_content(s3Bucket, s3Path)
-    return json.parse(source)
+    try:
+        source = read_s3_file_content(s3Bucket, s3Path)
+        return json.loads(source)
+    except boto3.resource('s3').meta.client.exceptions.NoSuchKey:
+        return {}
 
 
 def load_csv_data(id, config):
     if config.get('local', False):
-        return load_id_from_file(id, config)
+        objects = load_id_from_file(id, config)
     else:
-        return load_id_from_s3(config['process-bucket'], config['process-bucket-csv-basepath'], id)
+        objects = load_id_from_s3(config['process-bucket'], config['process-bucket-csv-basepath'], id)
+
+    all_image_data = load_image_data(id, config)
+
+    for object in objects:
+        _augment_row_data(object, all_image_data, config)
+
+    return Item(objects[0], objects).collection()
 
 
 def load_id_from_s3(s3Bucket, s3Path, id):
@@ -35,21 +55,18 @@ def load_id_from_s3(s3Bucket, s3Path, id):
     source = read_s3_file_content(s3Bucket, s3Path)
     f = StringIO(source)
 
-    objects = list(csv.DictReader(f, delimiter=','))
-    return Item(objects[0], objects).collection()
+    return list(csv.DictReader(f, delimiter=','))
 
 
 def load_id_from_file(id, config):
-    filepath = config['local-path'] + "csv_data/" + id + ".csv"
+    filepath = config['local-path'] + "/" + id + "/" + id + ".csv"
 
     with open(filepath, 'r') as input_source:
         source = input_source.read()
     input_source.close()
     f = StringIO(source)
 
-    objects = list(csv.DictReader(f, delimiter=','))
-
-    return Item(objects[0], objects).collection()
+    return list(csv.DictReader(f, delimiter=','))
 
 
 class Item():
@@ -101,6 +118,104 @@ class Item():
         return False
 
 
+def _augment_row_data(row, all_image_data, config):
+    _check_creator(row)
+    _add_additional_paths(row, config)
+    _add_image_dimensions(row, all_image_data, config)
+
+
+def _check_creator(row):
+    if not (row.get("creator", False) or row.get('creator')):
+        row["creator"] = "unknown"
+
+
+def _add_additional_paths(row, config):
+    level = row.get('level')
+    if level == "file":
+        paths = _file_paths(row, config)
+    elif level == "manifest":
+        paths = _manifest_paths(row, config)
+    elif level == "collection":
+        paths = _collection_paths(row, config)
+    else:
+        raise "invalid type passed to _addition_paths"
+
+    row.update(paths)
+
+
+def _file_paths(row, config):
+    uri_path = '/' + row.get('collectionId') + '%2F' + os.path.splitext(row.get('id'))[0]
+    path = '/' + row.get('collectionId') + "/" + row.get('id')
+
+    return {
+        "iiifImageUri": config['image-server-base-url'] + uri_path,
+        "iiifImageFilePath": "s3://" + config['image-server-bucket'] + path,
+        "iiifUri": config["manifest-server-base-url"] + path + "/canvas",
+        "iiifFilePath": "s3://" + config['manifest-server-bucket'] + path + "/canvas/index.json",
+        "metsUri": "",
+        "metsFilePath": "",
+        "schemaUri": "",
+        "schemaPath": "",
+    }
+
+
+def _manifest_paths(row, config):
+    path = "/" + row.get('collectionId')
+    if row.get('collectionId') != row.get('id'):
+        path = path + "/" + row.get("id")
+
+    return {
+        "iiifImageUri": "",
+        "iiifImageFilePath": "",
+        "iiifUri": config["manifest-server-base-url"] + path + "/manifest",
+        "iiifFilePath": "s3://" + config['manifest-server-bucket'] + path + "/manifest/index.json",
+        "metsUri": config["manifest-server-base-url"] + path + "/mets.xml",
+        "metsFilePath": "s3://" + config['manifest-server-bucket'] + path + "/mets.xml",
+        "schemaUri": config["manifest-server-base-url"] + path,
+        "schemaPath": "s3://" + config['manifest-server-bucket'] + path + "/index.json",
+    }
+
+
+def _collection_paths(row, config):
+    path = "/" + row.get('collectionId')
+    if row.get('collectionId') != row.get('id'):
+        path = path + "/" + row.get("id")
+
+    return {
+        "iiifImageUri": "",
+        "iiifImageFilePath": "",
+        "iiifUri": config["manifest-server-base-url"] + path + "/collection",
+        "iiifFilePath": "s3://" + config['manifest-server-bucket'] + path + "/collection/index.json",
+        "metsUri": config["manifest-server-base-url"] + path + "/mets.xml",
+        "metsFilePath": "s3://" + config['manifest-server-bucket'] + path + "/mets.xml",
+        "schemaUri": config["manifest-server-base-url"] + path,
+        "schemaPath": "s3://" + config['manifest-server-bucket'] + path + "/index.json",
+    }
+
+
+def _add_image_dimensions(row, all_image_data, config):
+    level = row.get('level')
+    if level != "file":
+        row.update({"width": "", "height": ""})
+        return
+
+    image_key = os.path.splitext(row.get('id'))[0]
+    image_data = all_image_data.get(image_key, {})
+
+    ret = {
+        "height": image_data.get('height', False),
+        "width": image_data.get('width', False)
+    }
+
+    if not ret["height"]:
+        ret["height"] = config['canvas-default-height']
+
+    if not ret["width"]:
+        ret["width"] = config['canvas-default-width']
+
+    row.update(ret)
+
+
 # python -c 'from csv_collection import *; test()'
 def test():
     from pipeline_config import get_pipeline_config
@@ -114,13 +229,14 @@ def test():
     for id in ['BPP1001_EAD', 'MSNCOL8500_EAD']:
         parent = load_csv_data(id, config)
         for file in parent.files():
-            ""
-            # print(file.get("filePath"))
-    return
+            print(file.get("height"))
+
     # local
     config['local'] = True
     for id in ['parsons', '1976.057']:
         parent = load_csv_data(id, config)
         print(parent.get('title'))
+        print(parent.get('height'))
+
         for file in parent.files():
-            print(file.get("filePath"))
+            print(file.get("height"))

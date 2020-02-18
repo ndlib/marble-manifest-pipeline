@@ -20,7 +20,9 @@ class MetadataMappings():
         reader = csv.DictReader(f, delimiter=',')
         for this_row in reader:
             if reader.line_num != 1:
-                athena_key = "".join(this_row['Preferred Name'].split()).lower()
+                athena_key = "".join(this_row['Preferred Name'].title().split())
+                athena_key = athena_key[0].lower() + athena_key[1:]
+
                 line = {
                     "preferred_name": this_row['Preferred Name'],
                     "schema.org": this_row['Schema.org mapping'],
@@ -51,7 +53,7 @@ class MetadataMappings():
         return self.element.get(name.lower()).get(field, False)
 
     def get_by_athena(self, name, field):
-        return self.athena.get(name.lower()).get(field, False)
+        return self.athena.get(name).get(field, False)
 
     def get_prefered_keys(self):
         return self.preferred.keys()

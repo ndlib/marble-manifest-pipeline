@@ -1,4 +1,3 @@
-from MetadataMappings import MetadataMappings
 
 
 class ndJson():
@@ -20,11 +19,4 @@ class ndJson():
         return output
 
     def _fix_row(self, row):
-        #
-        # add image path to the image server
-        # mime type
-        # remove s3 path
-        # add unknown for missing creators
-        #
-        #
         return row

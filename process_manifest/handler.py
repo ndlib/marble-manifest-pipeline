@@ -36,7 +36,7 @@ def run(event, context):
 #        image = load_image_data(id, event)
 
         # a2s = AthenaToSchema(event, parent, [])
-        iiif = iiifCollection(id, config, parent)
+        iiif = iiifCollection(config, parent)
         manifest = iiif.manifest()
 
         # split the manifests
@@ -54,10 +54,6 @@ def run(event, context):
     return event
 
 
-def file_name_from_manifest(manifest, config):
-    return manifest.get('id').replace(config['manifest-server-base-url'] + "/", '') + "/index.json"
-
-
 def sub_manifests(manifest):
     ret = []
     for item in manifest.get('items', []):
@@ -67,7 +63,6 @@ def sub_manifests(manifest):
         ret = ret + sub_manifests(item)
 
     return ret
-
 
 
 # python -c 'from handler import *; test()'

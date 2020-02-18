@@ -4,31 +4,31 @@
     "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
     "http://iiif.io/api/presentation/3/context.json"
   ],
-  "id": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/collectionId/manifest",
+  "id": "https://presentation-iiif.library.nd.edu/collectionId/manifest",
   "items": [
     {
       "height": 2000,
-      "id": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/canvas/file.jpg",
+      "id": "https://presentation-iiif.library.nd.edu/collectionId/file/canvas",
       "items": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/annotation_page/file.jpg",
+          "id": "https://presentation-iiif.library.nd.edu/collectionId/file/canvas/annotation_page/file.jpg",
           "items": [
             {
               "body": {
                 "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile/full/full/0/default.jpg",
+                "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile/full/full/0/default.jpg",
                 "service": [
                   {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile",
                     "profile": "http://iiif.io/api/image/2/level2.json",
                     "type": "ImageService2"
                   }
                 ],
                 "type": "Image"
               },
-              "id": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/annotation/file.jpg",
+              "id": "https://presentation-iiif.library.nd.edu/collectionId/file/canvas/annotation/file.jpg",
               "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/canvas/file.jpg",
+              "target": "https://presentation-iiif.library.nd.edu/collectionId/file/canvas",
               "type": "Annotation"
             }
           ],
@@ -40,12 +40,188 @@
           "title"
         ]
       },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              "Creator"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "dateCreated"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Material Type"
+            ]
+          },
+          "value": {
+            "en": [
+              "workType"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "uniqueIdentifier"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Copyright"
+            ]
+          },
+          "value": {
+            "en": [
+              "usage"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Conditions Governing Use"
+            ]
+          },
+          "value": {
+            "en": [
+              "license"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Link to finding aid"
+            ]
+          },
+          "value": {
+            "en": [
+              "linkToSource"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Conditions Governing Access"
+            ]
+          },
+          "value": {
+            "en": [
+              "Access"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Genre/Physical Characteristic"
+            ]
+          },
+          "value": {
+            "en": [
+              "format"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Collection"
+            ]
+          },
+          "value": {
+            "en": [
+              "Collectioninformation"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Extent"
+            ]
+          },
+          "value": {
+            "en": [
+              "dimensions"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Immediate Source of Acquisition"
+            ]
+          },
+          "value": {
+            "en": [
+              "dedication"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "N/a"
+            ]
+          },
+          "value": {
+            "en": [
+              "True"
+            ]
+          }
+        }
+      ],
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "usage"
+          ]
+        }
+      },
+      "rights": "license",
+      "summary": {
+        "en": [
+          "description"
+        ]
+      },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile/full/250,/0/default.jpg",
+          "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile/full/250,/0/default.jpg",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile",
+              "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile",
               "profile": "http://iiif.io/api/image/2/level2.json",
               "type": "ImageService2"
             }
@@ -54,6 +230,7 @@
         }
       ],
       "type": "Canvas",
+      "viewingDirection": "left-to-right",
       "width": 2000
     }
   ],
@@ -72,6 +249,42 @@
       "value": {
         "en": [
           "creator"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Date "
+        ]
+      },
+      "value": {
+        "en": [
+          "dateCreated"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Material Type"
+        ]
+      },
+      "value": {
+        "en": [
+          "workType"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Identifier"
+        ]
+      },
+      "value": {
+        "en": [
+          "uniqueIdentifier"
         ]
       }
     },
@@ -102,6 +315,18 @@
     {
       "label": {
         "en": [
+          "Link to finding aid"
+        ]
+      },
+      "value": {
+        "en": [
+          "linkToSource"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
           "Conditions Governing Access"
         ]
       },
@@ -120,6 +345,18 @@
       "value": {
         "en": [
           "format"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Collection"
+        ]
+      },
+      "value": {
+        "en": [
+          "Collectioninformation"
         ]
       }
     },
@@ -148,7 +385,36 @@
       }
     }
   ],
-  "provider": null,
+  "provider": {
+    "homepage": [
+      {
+        "format": "text/html",
+        "id": "https://rarebooks.library.nd.edu/",
+        "label": {
+          "en": [
+            "Rare Books and Special Collections"
+          ]
+        },
+        "type": "Text"
+      }
+    ],
+    "id": "https://rarebooks.library.nd.edu/using",
+    "label": {
+      "en": [
+        "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+      ]
+    },
+    "logo": [
+      {
+        "format": "image/png",
+        "height": 100,
+        "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+        "type": "Image",
+        "width": 120
+      }
+    ],
+    "type": "Agent"
+  },
   "requiredStatement": {
     "label": {
       "en": [
@@ -164,9 +430,9 @@
   "rights": "license",
   "seeAlso": [
     {
-      "format": "application/ld+json",
-      "id": "https://presentation-iiif.library.nd.edu/item-one-image-archivespace/collectionId",
-      "profile": "https://schema.org/",
+      "format": "application/xml",
+      "id": "https://presentation-iiif.library.nd.edu/collectionId/mets.xml",
+      "profile": "http://www.loc.gov/METS/",
       "type": "Dataset"
     }
   ],
@@ -177,10 +443,10 @@
   },
   "thumbnail": [
     {
-      "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile/full/250,/0/default.jpg",
+      "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile/full/250,/0/default.jpg",
       "service": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/item-one-image-archivespace%2Ffile",
+          "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile",
           "profile": "http://iiif.io/api/image/2/level2.json",
           "type": "ImageService2"
         }
