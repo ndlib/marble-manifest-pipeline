@@ -1,5 +1,7 @@
 import boto3
 import json
+from os.path import basename
+from os import remove
 
 
 def get_matching_s3_objects(bucket, prefix="", suffix=""):
@@ -124,3 +126,15 @@ def delete_file(s3Bucket, s3Path):
         Bucket=s3Bucket,
         Key=s3Path,
     )
+
+
+def upload_json(s3Bucket, s3Path, json_data) -> None:
+    local_file = f"/tmp/{basename(s3Path)}"
+    with open(local_file, 'w') as outfile:
+        json.dump(json_data, outfile)
+    upload_file(s3Bucket, s3Path, local_file)
+    remove(local_file)
+
+
+def upload_file(s3Bucket, s3Path, local_file):
+    boto3.resource('s3').Bucket(s3Bucket).upload_file(local_file, s3Path)
