@@ -57,6 +57,8 @@ COPY pyramid_generator/s3_processor.py /usr/local/bin/
 COPY pyramid_generator/gdrive_processor.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/pipeline_config.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/csv_collection.py /usr/local/bin/
+COPY pipelineutilities/pipelineutilities/s3_helpers.py /usr/local/bin/
+COPY pipelineutilities/pipelineutilities/search_files.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/google_utilities.py /usr/local/bin/
 RUN chmod u+x /usr/local/bin/pyramid.py
 ENTRYPOINT ["pyramid.py"]
