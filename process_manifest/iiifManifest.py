@@ -133,11 +133,12 @@ class iiifManifest():
         return {self.lang: [line]}
 
     def _add_provider(self, provider):
-        if (provider.lower() == 'embark'):
+        provider = provider.lower()
+        if (provider == 'embark' or provider == 'museum'):
             return self._snite_proivider()
-        elif (provider.lower() == 'archivesspace'):
+        elif (provider == 'archivesspace'):
             return self._archives_proivider()
-        elif (provider.lower() == 'rbsc'):
+        elif (provider == 'rbsc'):
             return self._rbsc_proivider()
 
         raise Exception("bad provider " + provider.lower())
