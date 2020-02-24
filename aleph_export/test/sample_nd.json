@@ -1,0 +1,40 @@
+{
+  "sourceSystem": "Aleph",
+  "repository": "",
+  "sequence": 1,
+  "title": "New edition of a general Collection of the ancient Irish music : containing a variety of Irish Airs, never before published, and also the compositions of Conolan and Carolan, collected from the harpers, etc., in the different provinces of Ireland, and adapted for the pianoforte /",
+  "collectionId": "000297305",
+  "parentId": "root",
+  "id": "000297305",
+  "level": "manifest",
+  "creator": "Bunting, Edward.",
+  "dateCreated": "[1796?]",
+  "workType": "",
+  "subjects": [
+    {
+      "term": "Folk songs Ireland Instrumental settings."
+    },
+    {
+      "term": "Songs, Irish Ireland Instrumental settings."
+    },
+    {
+      "term": "Piano music, Arranged."
+    },
+    {
+      "term": "Folk music Ireland."
+    }
+  ],
+  "copyrightStatus": "",
+  "copyrightStatement": "",
+  "linkToSource": "https://onesearch.library.nd.edu/primo-explore/fulldisplay?docid=ndu_aleph000297305&context=L&vid=NDU&lang=en_US&search_scope=malc_blended&adaptor=Local%20Search%20Engine&tab=onesearch&query=any,contains,ndu_aleph002097132&mode=basic",
+  "publisher": "published by I. Willis",
+  "format": "1 score ([2], iv, 36 pages) ;",
+  "languages": [
+    "eng"
+  ],
+  "dimensions": "35 cm",
+  "dedication": "Donated to the Library by Capt. Francis O'Neill in 1931.",
+  "description": "",
+  "imageUri": "https://rarebooks.library.nd.edu/digital/bookreader/CodLat_b04/images/CodLat_b04-000a_front_cover.jpg",
+  "anotherID": ""
+}

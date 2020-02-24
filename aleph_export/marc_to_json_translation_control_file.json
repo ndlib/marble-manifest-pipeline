@@ -1,0 +1,121 @@
+{
+	"root" : {
+		"FieldsToExtract": [
+			{ "label": "sourceSystem",
+				"constant": "Aleph",
+				"format": "text"
+			},
+			{ "label": "repository",
+				"constant": "",
+				"format": "text"
+			},
+			{ "label": "sequence",
+				"constant": 1,
+				"format": "text"
+			},
+			{ "label": "title",
+				"fields": ["245"],
+				"subfields": ["a", "b"],
+				"format": "text"
+			},
+			{ "label": "collectionId",
+				"fields": ["001"],
+				"format": "text"
+			},
+			{ "label": "parentId",
+				"constant": "root",
+				"format": "text"
+			},
+			{ "label": "id",
+				"fields": ["001"],
+				"format": "text"
+			},
+			{ "label": "level",
+				"constant": "manifest",
+				"format": "text"
+			},
+			{ "label": "creator",
+				"fields": ["100", "199"],
+				"selection": "range",
+				"subfields": ["a", "b", "c", "d", "q"],
+				"format": "text"
+			},
+			{ "label": "dateCreated",
+				"fields": ["264", "260"],
+				"selection": "first",
+				"subfields": ["c"],
+				"format": "text"
+			},
+			{ "label": "workType",
+				"fields": ["LDR"],
+				"positions": [6],
+				"extraProcessing": "lookup_work_type",
+				"format": "text"
+			},
+			{ "label": "subjects",
+				"fields": ["600", "689"],
+				"selection": "range",
+				"skipFields": ["655", "690"],
+				"subfields": ["a", "b", "c", "d", "e", "f", "g", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+				"extraProcessing": "format_subjects",
+				"format": "array"
+			},
+			{ "label": "copyrightStatus",
+				"fields": ["542"],
+				"subfields": ["l"],
+				"format": "text"
+			},
+			{ "label": "copyrightStatement",
+				"fields": ["542"],
+				"subfields": ["f"],
+				"format": "text"
+			},
+			{ "label": "linkToSource",
+				"fields": ["001"],
+				"format": "text",
+				"extraProcessing": "link_to_source"
+			},
+			{ "label": "publisher",
+				"fields": ["264", "260"],
+				"selection": "first",
+				"subfields": ["b"],
+				"format": "text"
+			},
+			{ "label": "format",
+				"fields": ["300"],
+				"subfields": ["a"],
+				"format": "text"
+			},
+			{ "label": "languages",
+				"fields": ["008"],
+				"positions": [35, 36, 37],
+				"format": "array"
+			},
+			{ "label": "dimensions",
+				"fields": ["300"],
+				"subfields": ["c"],
+				"format": "text"
+			},
+			{ "label": "dedication",
+				"fields": ["561"],
+				"subfields": ["a"],
+				"format": "text"
+			},
+			{ "label": "description",
+				"fields": ["520"],
+				"subfields": ["a", "b"],
+				"format": "text"
+			},
+			{ "label": "imageUri",
+				"fields": ["956"],
+				"subfields": ["u"],
+				"verifySubfieldsMatch": {"subfield": "x", "value": "MARBLE"},
+				"format": "text"
+			},
+			{ "label": "anotherID",
+				"fields": ["AVA"],
+				"subfields": ["d"],
+				"format": "text"
+			}		]
+	}
+}
