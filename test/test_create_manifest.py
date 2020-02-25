@@ -45,6 +45,28 @@ class TestCreateManifest(unittest.TestCase):
 
             self.assertEqual(result_json, manifest_json)
 
+    def test_addProvider(self):
+        tests = [
+            {"provider": "rbsc", "result": "https://rarebooks.library.nd.edu/using"},
+            {"provider": "rare", "result": "https://rarebooks.library.nd.edu/using"},
+            {"provider": "mrare", "result": "https://rarebooks.library.nd.edu/using"},
+            {"provider": "embark", "result": "https://sniteartmuseum.nd.edu/about-us/contact-us/"},
+            {"provider": "museum", "result": "https://sniteartmuseum.nd.edu/about-us/contact-us/"},
+            {"provider": "unda", "result": "http://archives.nd.edu/about/"}
+        ]
+
+        parent = load_csv_data("item-one-image-embark", config)
+        for test in tests:
+            parent.object['repository'] = test.get("provider")
+            iiif = iiifCollection(config, parent)
+            iiif.document.add_provider()
+            self.assertEqual(test.get("result"), iiif.document.manifest_hash['provider'].get('id'))
+
+        del parent.object['repository']
+        iiif = iiifCollection(config, parent)
+        iiif.document.add_provider()
+        self.assertEqual("not here", iiif.document.manifest_hash.get('provider', "not here"))
+
 
 if __name__ == '__main__':
     unittest.main()

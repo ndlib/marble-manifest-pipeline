@@ -1,5 +1,7 @@
 import boto3
 import json
+from os.path import basename
+from os import remove
 
 
 def get_matching_s3_objects(bucket, prefix="", suffix=""):
@@ -49,13 +51,11 @@ class InprocessBucket():
         write_s3_json(self.process_bucket, path, data)
 
     def write_sub_manifest(self, data):
-        print(data.get('id'))
         path = data.get('id')
         path = path.replace(self.manifest_url + "/", '')
         path = path.replace(self.id, 'metadata')
         path = path + "/index.json"
         path = self.basepath + "/" + path
-        print(path)
         # .replace(self.id, 'metadata') + "/index.json"
         write_s3_json(self.process_bucket, path, data)
 
@@ -120,7 +120,19 @@ def s3_copy_data(dest_bucket, dest_key, src_bucket, src_key, **kwargs):
 
 
 def delete_file(s3Bucket, s3Path):
-    boto3.client('s3').delete_object(
+    return boto3.client('s3').delete_object(
         Bucket=s3Bucket,
         Key=s3Path,
     )
+
+
+def upload_json(s3Bucket, s3Path, json_data) -> None:
+    local_file = f"/tmp/{basename(s3Path)}"
+    with open(local_file, 'w') as outfile:
+        json.dump(json_data, outfile)
+    upload_file(s3Bucket, s3Path, local_file)
+    remove(local_file)
+
+
+def upload_file(s3Bucket, s3Path, local_file):
+    boto3.resource('s3').Bucket(s3Bucket).upload_file(local_file, s3Path)

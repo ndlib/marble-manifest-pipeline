@@ -10,60 +10,11 @@ class iiifManifest():
         self.id = self.data.get('id')
         self.lang = 'en'
         self.type = self._schema_to_manifest_type()
+        self.manifest_hash = {}
+        self._build_mainfest()
 
     def manifest(self):
-        ret = {
-            'type': self.type,
-            'id': self._manifest_id(),
-            'label': self._lang_wrapper(self.data.get('title')),
-            'thumbnail': self.thumbnail(),
-            'items': self._items(),
-            'viewingDirection': 'left-to-right'
-        }
-
-        if self.key_exists('repository'):
-            ret['provider'] = self._add_provider(self.data.get('repository'))
-
-        if self.key_exists('usage'):
-            ret['requiredStatement'] = self._convert_label_value('Copyright', self.data.get('usage'))
-
-        if self.key_exists('license'):
-            ret['rights'] = self.data.get('license')
-
-        if self.key_exists('description'):
-            ret['summary'] = self._lang_wrapper(self.data.get('description'))
-
-        if self.key_exists('height') and self.key_exists('width') and self.type == 'Canvas':
-            ret['height'] = self.data.get('height')
-            ret['width'] = self.data.get('width')
-
-        if self.key_exists('metsUri'):
-            if 'seeAlso' not in ret:
-                ret['seeAlso'] = []
-
-            ret['seeAlso'].append({
-                "id": self.data.get('metsUri'),
-                "type": "Dataset",
-                "format": "application/xml",
-                "profile": "http://www.loc.gov/METS/"
-            })
-
-        if self.key_exists('imageUri'):
-            if 'seeAlso' not in ret:
-                ret['seeAlso'] = []
-
-            ret['seeAlso'].append({
-                "id": self.data.get('schemaUri'),
-                "type": "Dataset",
-                "format": "application/ld+json",
-                "profile": "https://schema.org/"
-            })
-
-        metadata = self.metadata_array()
-        if len(metadata) > 0:
-            ret['metadata'] = self.metadata_array()
-
-        return ret
+        return self.manifest_hash
 
     def key_exists(self, key):
         return key in self.data.object and self.data.get(key)
@@ -90,6 +41,27 @@ class iiifManifest():
             return [iiifImage(thumbnail).thumbnail()]
 
         return []
+
+    def _build_mainfest(self):
+        self.manifest_hash = {
+            'type': self.type,
+            'id': self._manifest_id(),
+            'label': self._lang_wrapper(self.data.get('title')),
+            'thumbnail': self.thumbnail(),
+            'items': self._items(),
+            'viewingDirection': 'left-to-right'
+        }
+        self.add_provider()
+        self.add_required_statement()
+        self.add_license()
+        self.add_description()
+        self.add_width_height()
+        self.add_mets()
+        self.add_schema_org()
+
+        metadata = self.metadata_array()
+        if len(metadata) > 0:
+            self.manifest_hash['metadata'] = self.metadata_array()
 
     def _items(self):
         ret = []
@@ -132,16 +104,60 @@ class iiifManifest():
     def _lang_wrapper(self, line):
         return {self.lang: [line]}
 
-    def _add_provider(self, provider):
-        provider = provider.lower()
-        if (provider == 'embark' or provider == 'museum'):
-            return self._snite_proivider()
-        elif (provider == 'archivesspace'):
-            return self._archives_proivider()
-        elif (provider == 'rbsc'):
-            return self._rbsc_proivider()
+    def add_schema_org(self):
+        if self.key_exists('schemaUri'):
+            if 'seeAlso' not in self.manifest_hash:
+                self.manifest_hash['seeAlso'] = []
 
-        raise Exception("bad provider " + provider.lower())
+            self.manifest_hash['seeAlso'].append({
+                "id": self.data.get('schemaUri'),
+                "type": "Dataset",
+                "format": "application/ld+json",
+                "profile": "https://schema.org/"
+            })
+
+    def add_mets(self):
+        if self.key_exists('metsUri'):
+            if 'seeAlso' not in self.manifest_hash:
+                self.manifest_hash['seeAlso'] = []
+
+            self.manifest_hash['seeAlso'].append({
+                "id": self.data.get('metsUri'),
+                "type": "Dataset",
+                "format": "application/xml",
+                "profile": "http://www.loc.gov/METS/"
+            })
+
+    def add_width_height(self):
+        if self.key_exists('height') and self.key_exists('width') and self.type == 'Canvas':
+            self.manifest_hash['height'] = self.data.get('height')
+            self.manifest_hash['width'] = self.data.get('width')
+
+    def add_description(self):
+        if self.key_exists('description'):
+            self.manifest_hash['summary'] = self._lang_wrapper(self.data.get('description'))
+
+    def add_license(self):
+        if self.key_exists('copyrightStatement'):
+            self.manifest_hash['rights'] = self.data.get('copyrightStatement')
+
+    def add_required_statement(self):
+        if self.key_exists('copyrightStatus'):
+            self.manifest_hash['requiredStatement'] = self._convert_label_value('Copyright', self.data.get('copyrightStatus'))
+
+    def add_provider(self):
+        if not self.key_exists('repository'):
+            return
+
+        provider = self.data.get('repository').lower()
+        if (provider == 'embark' or provider == 'museum'):
+            self.manifest_hash['provider'] = self._snite_proivider()
+        elif (provider == 'unda'):
+            self.manifest_hash['provider'] = self._archives_proivider()
+        elif (provider == 'rbsc' or provider == 'rare' or provider == 'spec' or provider == 'mrare'):
+            self.manifest_hash['provider'] = self._rbsc_proivider()
+        else:
+            raise Exception("bad provider " + provider.lower())
 
     def _snite_proivider(self):
         return {
@@ -158,13 +174,13 @@ class iiifManifest():
             ],
             "logo": [
                 {
-                  "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
-                  "type": "Image",
-                  "format": "image/png",
-                  "height": 100,
-                  "width": 120
+                    "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
+                    "type": "Image",
+                    "format": "image/png",
+                    "height": 100,
+                    "width": 120
                 }
-              ]
+            ]
         }
 
     def _rbsc_proivider(self):
@@ -182,13 +198,13 @@ class iiifManifest():
             ],
             "logo": [
                 {
-                  "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
-                  "type": "Image",
-                  "format": "image/png",
-                  "height": 100,
-                  "width": 120
+                    "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+                    "type": "Image",
+                    "format": "image/png",
+                    "height": 100,
+                    "width": 120
                 }
-              ]
+            ]
         }
 
     def _archives_proivider(self):
@@ -206,13 +222,13 @@ class iiifManifest():
             ],
             "logo": [
                 {
-                  "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
-                  "type": "Image",
-                  "format": "image/png",
-                  "height": 100,
-                  "width": 120
+                    "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+                    "type": "Image",
+                    "format": "image/png",
+                    "height": 100,
+                    "width": 120
                 }
-              ]
+            ]
         }
 
     def _annotation_page_id(self):
@@ -238,5 +254,7 @@ class iiifManifest():
             'collectioninformation',
             'repository',
             'copyrightStatus',
-            'copyrightStatement'
+            'copyrightStatement',
+            'usage',
+            'license'
         ]

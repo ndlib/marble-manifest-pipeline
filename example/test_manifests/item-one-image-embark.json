@@ -116,30 +116,6 @@
         {
           "label": {
             "en": [
-              "Usage"
-            ]
-          },
-          "value": {
-            "en": [
-              "usage"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Copyright"
-            ]
-          },
-          "value": {
-            "en": [
-              "license"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
               "Access"
             ]
           },
@@ -315,30 +291,6 @@
     {
       "label": {
         "en": [
-          "Usage"
-        ]
-      },
-      "value": {
-        "en": [
-          "usage"
-        ]
-      }
-    },
-    {
-      "label": {
-        "en": [
-          "Copyright"
-        ]
-      },
-      "value": {
-        "en": [
-          "license"
-        ]
-      }
-    },
-    {
-      "label": {
-        "en": [
           "Access"
         ]
       },
@@ -433,6 +385,12 @@
       "format": "application/xml",
       "id": "https://presentation-iiif.library.nd.edu/collectionId/mets.xml",
       "profile": "http://www.loc.gov/METS/",
+      "type": "Dataset"
+    },
+    {
+      "format": "application/ld+json",
+      "id": "https://presentation-iiif.library.nd.edu/collectionId",
+      "profile": "https://schema.org/",
       "type": "Dataset"
     }
   ],
