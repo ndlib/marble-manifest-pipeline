@@ -1,0 +1,2293 @@
+{
+	"objects": [
+	
+	
+	
+		
+		
+		
+			
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Coronation of the Virgin",
+		"creator": "Unidentified German artist",
+		"dateCreated": "ca. 1460",
+		"classification": "Fine Arts",
+		"workType": "Sculpture",
+		"medium": "gilt polychrome over wood",
+		"uniqueIdentifier": "1934.007.001",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+				
+					{"authority": "IA", "term": "Blessed Virgin Mary", "uri": "http://vocab.getty.edu/page/ia/901000032"}
+				,
+				
+			
+				
+					{"authority": "AAT", "term": "crowns", "uri": "http://vocab.getty.edu/aat/300046020"}
+				,
+				
+				
+			
+				
+				
+					{"authority": "IA", "term": "God the Father", "uri": "http://vocab.getty.edu/page/ia/901000593"}
+				,
+				
+			
+				
+				
+					{"authority": "IA", "term": "Jesus Christ", "uri": "http://vocab.getty.edu/page/ia/901000087"}
+				,
+				
+			
+				
+					{"authority": "AAT", "term": "orbs", "uri": "http://vocab.getty.edu/aat/300211999"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "religion", "uri": "http://vocab.getty.edu/aat/300054300"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "scepters", "uri": "http://vocab.getty.edu/aat/300214161"}
+				
+				
+				
+			 ],
+		"usage": "Public domain",
+		"license": "",
+		"access":
+			
+				
+				
+				
+				
+					
+						"Galleries Ancient, Medieval, and Renaissance Art Gallery"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "43 x 34 x 12 in. (109.22 x 86.36 x 30.48 cm)",
+		"dedication": "Gift of Mrs. F. H. Wickett",
+		"description": "",
+		"id": "1934.007.001",
+		
+		 
+			"collectionId": "1934.007.001",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Unidentified German artist",
+						"nationality": "",
+						"lifeDates": "",
+						"startDate": "",
+						"endDate": "",
+						"livingFlag": "1",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "12/17/2019 10:36:55",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "1934_007_001-v0003.jpg",
+						"filePath": "/Media/images/1930/1934_007_001/1934_007_001-v0003.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 2,
+						"thumbnail": false,
+						"fileDescription": "1934_007_001-v0001.jpg",
+						"filePath": "/Media/images/1930/1934_007_001/1934_007_001-v0001.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 3,
+						"thumbnail": false,
+						"fileDescription": "1934_007_001-v0002.jpg",
+						"filePath": "/Media/images/1930/1934_007_001/1934_007_001-v0002.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "A Musical Party",
+		"creator": "Jan Miense Molenaer",
+		"dateCreated": "1650-1668",
+		"classification": "Fine Arts",
+		"workType": "Paintings",
+		"medium": "oil on canvas",
+		"uniqueIdentifier": "1957.058",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "bagpipes", "uri": "http://vocab.getty.edu/aat/300042405"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "Baroque", "uri": "http://vocab.getty.edu/aat/300021147"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "Canis familiaris", "uri": "http://vocab.getty.edu/aat/300250130"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "drinking", "uri": "http://vocab.getty.edu/aat/300379698"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "Felis domesticus", "uri": "http://vocab.getty.edu/aat/300265960"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "genre", "uri": "http://vocab.getty.edu/aat/300139140"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "music", "uri": "http://vocab.getty.edu/aat/300054146"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "tankards", "uri": "http://vocab.getty.edu/aat/300043256"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "violins", "uri": "http://vocab.getty.edu/aat/300042215"}
+				
+				
+				
+			 ],
+		"usage": "Public domain",
+		"license": "",
+		"access":
+			
+				
+				
+				
+				
+					
+						"Storage"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "29 1/4 x 42 in. (74.3 x 106.68 cm)",
+		"dedication": "Gift of Mr.and Mrs. Lewis J. Ruskin",
+		"description": "",
+		"id": "1957.058",
+		
+		 
+			"collectionId": "1957.058",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Jan Miense Molenaer",
+						"nationality": "Dutch",
+						"lifeDates": "ca. 1610 - 1668",
+						"startDate": "ca. 1610",
+						"endDate": "1668",
+						"livingFlag": "0",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "12/19/2019 11:10:03",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "1957_058-v0001.jpg",
+						"filePath": "/Media/images/1950/1957_058/1957_058-v0001.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Theater Mask",
+		"creator": "Unidentified Roman artist",
+		"dateCreated": "ca. 300",
+		"classification": "Ethnographic Arts and Antiquities",
+		"workType": "Building components",
+		"medium": "marble",
+		"uniqueIdentifier": "1973.079.005",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "courtesans", "uri": "http://vocab.getty.edu/aat/300236521"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "female", "uri": "http://vocab.getty.edu/aat/300189557"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "masks", "uri": "http://vocab.getty.edu/aat/300138758"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "theater", "uri": "http://vocab.getty.edu/aat/300054148"}
+				
+				
+				
+			 ],
+		"usage": "Public domain",
+		"license": "",
+		"access":
+			
+				
+				
+				
+				
+					
+						"Galleries Ancient, Medieval, and Renaissance Art Gallery"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "12 x 9 7/8 x 4 5/8 in. (30.4 x 25.2 x 11.6 cm)",
+		"dedication": "Gift of Mr. James W. Alsdorf",
+		"description": "The theater mask in the Snite Museum collection was found in Asia Minor and dates to about 300 CE. Its features are exaggerated and deeply carved, the eyes and mouth wide open and the eyes deeply set. Although little attention is paid to skeletal structure, the face has other pronounced features, such as a strong nose and arched eyebrows. The prominence of facial features on theatre masks was in part so that they could be seen and understood from a distance: some theatres held as many as twenty thousand spectators. %20%20Large holes like those in the eyes and mouth of the Snite piece allowed actors wearing theater masks to see and speak, but the Snite mask was never intended to be worn. There is no provision for securing it to an actor's head--it is flat on the back, not molded to fit a face--and as it is carved from a thick slab of marble, it would have been much too heavy to wear. Actual theater masks were made of lighter materials--wood, cork, or even leather--and covered the entire head, not just the face.%20%20from Rhodes, Eclectic Antiquity: The Classical Collection of the Snite Museum of Art (Notre Dame, 2010)",
+		"id": "1973.079.005",
+		
+		 
+			"collectionId": "1973.079.005",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Unidentified Roman artist",
+						"nationality": "",
+						"lifeDates": "",
+						"startDate": "",
+						"endDate": "",
+						"livingFlag": "1",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "12/5/2019 09:41:45",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "1973_079_005-v0002.jpg",
+						"filePath": "/Media/images/1970/1973/1973_079_005/1973_079_005-v0002.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 2,
+						"thumbnail": false,
+						"fileDescription": "1973_079_005-v0001.jpg",
+						"filePath": "/Media/images/1970/1973/1973_079_005/1973_079_005-v0001.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Absolution under Fire",
+		"creator": "Paul Henry Wood",
+		"dateCreated": "1891",
+		"classification": "Fine Arts",
+		"workType": "Paintings",
+		"medium": "oil on canvas",
+		"uniqueIdentifier": "1976.057",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "absolution", "uri": "http://vocab.getty.edu/aat/300264303"}
+				,
+				
+				
+			
+				
+				
+					{"authority": "IA", "term": "American Civil War (American history, 1861-1865)", "uri": "http://vocab.getty.edu/page/ia/901000030"}
+				,
+				
+			
+				
+					{"authority": "AAT", "term": "battlefields", "uri": "http://vocab.getty.edu/aat/300000835"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "battles", "uri": "http://vocab.getty.edu/aat/300185692"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "civil wars", "uri": "http://vocab.getty.edu/aat/300055315"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "Irish", "uri": "http://vocab.getty.edu/aat/300111259"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "priests", "uri": "http://vocab.getty.edu/aat/300025774"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "soldiers", "uri": "http://vocab.getty.edu/aat/300185678"}
+				
+				
+				
+			 ],
+		"usage": "Public domain",
+		"license": "",
+		"access":
+			
+				
+				
+				
+				
+					
+						"Galleries American Art"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "76 1/2 x 102 x 3 1/4 in. (194.31 x 259.08 x 8.26 cm)",
+		"dedication": "Gift of the artist",
+		"description": "",
+		"id": "1976.057",
+		
+		 
+			"collectionId": "1976.057",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Paul Henry Wood",
+						"nationality": "American",
+						"lifeDates": "1872 - 1892",
+						"startDate": "1872",
+						"endDate": "1892",
+						"livingFlag": "0",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "12/17/2019 10:38:03",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "1976_057-v0001.jpg",
+						"filePath": "/Media/images/1970/1976/1976_057/1976_057-v0001.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Portrait of the Actor Constant Coquelin l&#39;Ainé (1841–1909)",
+		"creator": "Jules Bastien-Lepage",
+		"dateCreated": "ca. 1881-1882",
+		"classification": "Fine Arts",
+		"workType": "Paintings",
+		"medium": "oil on canvas",
+		"uniqueIdentifier": "1981.105",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "actors", "uri": "http://vocab.getty.edu/aat/300025658"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "theater", "uri": "http://vocab.getty.edu/aat/300054148"}
+				
+				
+				
+			 ],
+		"usage": "Public domain",
+		"license": "",
+		"access":
+			
+				
+				
+				
+				
+					
+						"Galleries 19th Century Art"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "21 3/4 x 20 x 3 1/2 in. (55.25 x 50.8 x 8.89 cm)",
+		"dedication": "Noah L. Butkin Fund",
+		"description": "",
+		"id": "1981.105",
+		
+		 
+			"collectionId": "1981.105",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Jules Bastien-Lepage",
+						"nationality": "French",
+						"lifeDates": "1848 - 1884",
+						"startDate": "1848",
+						"endDate": "1884",
+						"livingFlag": "0",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "1/30/2020 13:00:25",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "1981_105-v0001.jpg",
+						"filePath": "/Media/images/1980/1981/1981_105/1981_105-v0001.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Ritual Ballgame Yoke Depicting a Toad",
+		"creator": "Unidentified Veracruz artist",
+		"dateCreated": "250-400",
+		"classification": "Ethnographic Arts and Antiquities",
+		"workType": "Ceremonial objects and regalia",
+		"medium": "greenstone",
+		"uniqueIdentifier": "1983.053.002",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "Panthera onca", "uri": "http://vocab.getty.edu/aat/300310389"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "toads", "uri": "http://vocab.getty.edu/aat/300252284"}
+				
+				
+				
+			 ],
+		"usage": "Public domain",
+		"license": "",
+		"access":
+			
+				
+				
+				
+				
+					
+						"Galleries Mesoamerican and South American Art Gallery"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "17 x 14 1/2 in. (43.18 x 36.83 cm)",
+		"dedication": "Gift of Mr. Peter G. Wray",
+		"description": "Yokes were worn around the waist to provide a hard, dense surface with which to strike the ball, and as pre- and post- game ritual paraphernalia. The U-shaped yoke slipped over the waist sideways, with the closed end on one hip...Ballplayers were left- or right-hipped, hitting the ball with the closed end or one side of the yoke. Yokes and yoke fragments also must have functioned as trophies and heirlooms, and usually are recovered in elite burials.%20%20A marine toad is depicted wrapped around the exterior of this yoke...The toad's two oval eyes appear on the upper side of the closed end, separated by the nostrils in the center. Behind the eyes on the top surface are the sacs of the parotid glands, with the front legs below them. The globular body and back legs are arranged down each side. In the toad's crouching rear legs, skeletalized jaguar head profiles are carved...Among the Olmec, jaguars were associated with royalty..., a connection that seems to have survived the transitions to Teotihuacan..., Classic Veracruz and Maya cultures.%20%20from Bradley, Life, Death & Duality: A Handbook of the Rev. Edmund P. Joyce, C.S.C. Collection of Ritual Ballgame Sculpture (Notre Dame, 1997)",
+		"id": "1983.053.002",
+		
+		 
+			"collectionId": "1983.053.002",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Unidentified Veracruz artist",
+						"nationality": "",
+						"lifeDates": "",
+						"startDate": "",
+						"endDate": "",
+						"livingFlag": "1",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "1/8/2020 14:45:19",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "1983_053_002-v0001.jpg",
+						"filePath": "/Media/images/1980/1983/1983_053_002/1983_053_002-v0001.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Sappho Seated",
+		"creator": "James Pradier",
+		"dateCreated": "after 1848",
+		"classification": "Fine Arts",
+		"workType": "Sculpture",
+		"medium": "gilded bronze",
+		"uniqueIdentifier": "1988.012",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "lyres", "uri": "http://vocab.getty.edu/aat/300042114"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "musical instruments", "uri": "http://vocab.getty.edu/aat/300041620"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "poets", "uri": "http://vocab.getty.edu/aat/300025513"}
+				
+				
+				
+			 ],
+		"usage": "Public domain",
+		"license": "",
+		"access":
+			
+				
+				
+				
+				
+					
+						"Storage"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "9 x 11 x 5 in. (22.86 x 27.94 x 12.7 cm)",
+		"dedication": "Gift of Charles Wightman and Fred B. Snite, by Exchange",
+		"description": "",
+		"id": "1988.012",
+		
+		 
+			"collectionId": "1988.012",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"James Pradier",
+						"nationality": "Swiss",
+						"lifeDates": "1790 - 1852",
+						"startDate": "1790",
+						"endDate": "1852",
+						"livingFlag": "0",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "12/17/2019 10:40:06",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "1988_012-v0001.jpg",
+						"filePath": "/Media/images/1980/1988/1988_012/1988_012-v0001.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 2,
+						"thumbnail": false,
+						"fileDescription": "1988_012-v0002.jpg",
+						"filePath": "/Media/images/1980/1988/1988_012/1988_012-v0002.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 3,
+						"thumbnail": false,
+						"fileDescription": "1988_012-v0003.jpg",
+						"filePath": "/Media/images/1980/1988/1988_012/1988_012-v0003.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 4,
+						"thumbnail": false,
+						"fileDescription": "1988_012-v0004.jpg",
+						"filePath": "/Media/images/1980/1988/1988_012/1988_012-v0004.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Covered Sugar Bowl",
+		"creator": "Maurice Dufrène",
+		"dateCreated": "ca. 1899-1900",
+		"classification": "Decorative Arts, Craft, and Design",
+		"workType": "Ceramics",
+		"medium": "white porcelain, glazed and painted",
+		"uniqueIdentifier": "1990.005.001",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "Art Nouveau", "uri": "http://vocab.getty.edu/aat/300021430"}
+				
+				
+				
+			 ],
+		"usage": "Copyright",
+		"license": "Maurice Dufrène",
+		"access":
+			
+				
+				
+				
+				
+					
+						"Galleries Ashbaugh Decorative Arts Gallery"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "4 3/4 x 7 in. (12.07 x 17.78 cm)",
+		"dedication": "The William L. and Erma M. Travis Endowment for the Decorative Arts",
+		"description": "",
+		"id": "1990.005.001",
+		
+		 
+			"collectionId": "1990.005.001",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+						
+                          
+                              {"id": "1990.005.001.a"}
+							,
+                          
+                              {"id": "1990.005.001.b"}
+							
+                          
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Maurice Dufrène",
+						"nationality": "French",
+						"lifeDates": "1876 - 1955",
+						"startDate": "1876",
+						"endDate": "1955",
+						"livingFlag": "0",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "1/28/2020 09:13:16",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "1990_005_001-v0004.jpg",
+						"filePath": "/Media/images/1990/1990/1990_005_001/1990_005_001-v0004.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 2,
+						"thumbnail": false,
+						"fileDescription": "1990_005_001-v0003.jpg",
+						"filePath": "/Media/images/1990/1990/1990_005_001/1990_005_001-v0003.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 3,
+						"thumbnail": false,
+						"fileDescription": "1990_005_001-v0002.jpg",
+						"filePath": "/Media/images/1990/1990/1990_005_001/1990_005_001-v0002.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 4,
+						"thumbnail": false,
+						"fileDescription": "1990_005_001-v0001.jpg",
+						"filePath": "/Media/images/1990/1990/1990_005_001/1990_005_001-v0001.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"  
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Creamer",
+		"creator": "Maurice Dufrène",
+		"dateCreated": "1899-1900",
+		"classification": "Decorative Arts, Craft, and Design",
+		"workType": "Ceramics",
+		"medium": "white porcelain, glazed and painted",
+		"uniqueIdentifier": "1990.005.002",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "Art Nouveau", "uri": "http://vocab.getty.edu/aat/300021430"}
+				
+				
+				
+			 ],
+		"usage": "Copyright",
+		"license": "Maurice Dufrène",
+		"access":
+			
+				
+				
+				
+				
+					
+						"Galleries Ashbaugh Decorative Arts Gallery"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "3 3/4 x 4 1/4 in. (9.53 x 10.8 cm)",
+		"dedication": "The William L. and Erma M. Travis Endowment for the Decorative Arts",
+		"description": "",
+		"id": "1990.005.002",
+		
+		 
+			"collectionId": "1990.005.002",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Maurice Dufrène",
+						"nationality": "French",
+						"lifeDates": "1876 - 1955",
+						"startDate": "1876",
+						"endDate": "1955",
+						"livingFlag": "0",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "1/28/2020 09:13:26",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "1990_005_002-v0002.jpg",
+						"filePath": "/Media/images/1990/1990/1990_005_002/1990_005_002-v0002.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 2,
+						"thumbnail": false,
+						"fileDescription": "1990_005_002-v0004.jpg",
+						"filePath": "/Media/images/1990/1990/1990_005_002/1990_005_002-v0004.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 3,
+						"thumbnail": false,
+						"fileDescription": "1990_005_002-v0003.jpg",
+						"filePath": "/Media/images/1990/1990/1990_005_002/1990_005_002-v0003.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 4,
+						"thumbnail": false,
+						"fileDescription": "1990_005_002-v0001.jpg",
+						"filePath": "/Media/images/1990/1990/1990_005_002/1990_005_002-v0001.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Bowl of Covered Sugar Bowl",
+		"creator": "Maurice Dufrène",
+		"dateCreated": "ca. 1899-1900",
+		"classification": "Decorative Arts, Craft, and Design",
+		"workType": "Ceramics",
+		"medium": "white porcelain, glazed and painted",
+		"uniqueIdentifier": "1990.005.001.a",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "Art Nouveau", "uri": "http://vocab.getty.edu/aat/300021430"}
+				
+				
+				
+			 ],
+		"usage": "Copyright",
+		"license": "Maurice Dufrène",
+		"access":
+			
+				
+				
+					
+						"Galleries Ashbaugh Decorative Arts Gallery"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "4 3/4 x 7 in. (12.07 x 17.78 cm)",
+		"dedication": "William L. and Erma M. Travis Endowment for the Decorative Arts",
+		"description": "",
+		"id": "1990.005.001.a",
+		
+		 
+			
+				"collectionId": "1990.005.001.a",
+				"parentId": "root",
+			
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Maurice Dufrène",
+						"nationality": "French",
+						"lifeDates": "1876 - 1955",
+						"startDate": "1876",
+						"endDate": "1955",
+						"livingFlag": "0",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "1/17/2020 16:02:07",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "1990_005_001-v0002.jpg",
+						"filePath": "/Media/images/1990/1990/1990_005_001/1990_005_001-v0002.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Lid of Covered Sugar Bowl",
+		"creator": "Maurice Dufrène",
+		"dateCreated": "ca. 1899-1900",
+		"classification": "Decorative Arts, Craft, and Design",
+		"workType": "Ceramics",
+		"medium": "white porcelain, glazed and painted",
+		"uniqueIdentifier": "1990.005.001.b",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "Art Nouveau", "uri": "http://vocab.getty.edu/aat/300021430"}
+				
+				
+				
+			 ],
+		"usage": "Copyright",
+		"license": "Maurice Dufrène",
+		"access":
+			
+				
+				
+					
+						"Galleries Ashbaugh Decorative Arts Gallery"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "4 3/4 x 7 in. (12.07 x 17.78 cm)",
+		"dedication": "William L. and Erma M. Travis Endowment for the Decorative Arts",
+		"description": "",
+		"id": "1990.005.001.b",
+		
+		 
+			
+				"collectionId": "1990.005.001.b",
+				"parentId": "root",
+			
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Maurice Dufrène",
+						"nationality": "French",
+						"lifeDates": "1876 - 1955",
+						"startDate": "1876",
+						"endDate": "1955",
+						"livingFlag": "0",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "1/17/2020 16:02:32",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "1990_005_001-v0002.jpg",
+						"filePath": "/Media/images/1990/1990/1990_005_001/1990_005_001-v0002.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Dancing Columbine",
+		"creator": "Meissen Porcelain Manufactory",
+		"dateCreated": "ca. 1748",
+		"classification": "Decorative Arts, Craft, and Design",
+		"workType": "Ceramics",
+		"medium": "hard-paste porcelain",
+		"uniqueIdentifier": "1992.055",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "dancing", "uri": "http://vocab.getty.edu/aat/300389779"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "Rococo", "uri": "http://vocab.getty.edu/aat/300021155"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "women", "uri": "http://vocab.getty.edu/aat/300025943"}
+				
+				
+				
+			 ],
+		"usage": "Public domain",
+		"license": "",
+		"access":
+			
+				
+				
+				
+				
+					
+						"Galleries Ashbaugh Decorative Arts Gallery"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "6 3/4 in. (17.15 cm)",
+		"dedication": "Mr. and Mrs. Eugene Witchger fund",
+		"description": "",
+		"id": "1992.055",
+		
+		 
+			"collectionId": "1992.055",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Meissen Porcelain Manufactory",
+						"nationality": "German",
+						"lifeDates": "1710 - present",
+						"startDate": "1710",
+						"endDate": "present",
+						"livingFlag": "1",
+						"lifeFlag": "0"
+						}
+						
+                      
+		],
+		"modifiedDate": "1/16/2020 11:13:15",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "1992_055-v0001.jpg",
+						"filePath": "/Media/images/1990/1992/1992_055/1992_055-v0001.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 2,
+						"thumbnail": false,
+						"fileDescription": "1992_055-v0002.jpg",
+						"filePath": "/Media/images/1990/1992/1992_055/1992_055-v0002.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 3,
+						"thumbnail": false,
+						"fileDescription": "1992_055-v0003.jpg",
+						"filePath": "/Media/images/1990/1992/1992_055/1992_055-v0003.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 4,
+						"thumbnail": false,
+						"fileDescription": "1992_055-v0004.jpg",
+						"filePath": "/Media/images/1990/1992/1992_055/1992_055-v0004.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 5,
+						"thumbnail": false,
+						"fileDescription": "1992_055-v0005.jpg",
+						"filePath": "/Media/images/1990/1992/1992_055/1992_055-v0005.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 6,
+						"thumbnail": false,
+						"fileDescription": "1992_055-v0006.jpg",
+						"filePath": "/Media/images/1990/1992/1992_055/1992_055-v0006.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 7,
+						"thumbnail": false,
+						"fileDescription": "1992_055-v0007.jpg",
+						"filePath": "/Media/images/1990/1992/1992_055/1992_055-v0007.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 8,
+						"thumbnail": false,
+						"fileDescription": "1992_055-v0008.jpg",
+						"filePath": "/Media/images/1990/1992/1992_055/1992_055-v0008.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Memento Mori: Death Comes to the Table",
+		"creator": "Giovanni Martinelli",
+		"dateCreated": "1620-1659",
+		"classification": "Fine Arts",
+		"workType": "Paintings",
+		"medium": "oil on canvas",
+		"uniqueIdentifier": "1999.024",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "allegory", "uri": "http://vocab.getty.edu/aat/300055866"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "Baroque", "uri": "http://vocab.getty.edu/aat/300021147"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "food", "uri": "http://vocab.getty.edu/aat/300254496"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "glassware", "uri": "http://vocab.getty.edu/aat/300010898"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "grape", "uri": "http://vocab.getty.edu/aat/300379338"}
+				,
+				
+				
+			
+				
+				
+			
+				
+					{"authority": "AAT", "term": "skeletons", "uri": "http://vocab.getty.edu/aat/300191778"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "tables", "uri": "http://vocab.getty.edu/aat/300039548"}
+				
+				
+				
+			 ],
+		"usage": "Public domain",
+		"license": "",
+		"access":
+			
+				
+				
+				
+				
+					
+						"Galleries 16th and 17th Century Art Gallery"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "48 x 57 1/4 x 4 3/8 in. (121.92 x 145.42 x 11.11 cm)",
+		"dedication": "Partial gift by an anonymous donor; gift of Mrs. James Alsdorf, by Exchange; Mr. and Mrs. Robert Raclin, Mr. and Mrs. Russell G. Ashbaugh, Mr. Joseph Richard Skelton funds",
+		"description": "",
+		"id": "1999.024",
+		
+		 
+			"collectionId": "1999.024",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Giovanni Martinelli",
+						"nationality": "Italian",
+						"lifeDates": "1600 - 1659",
+						"startDate": "1600",
+						"endDate": "1659",
+						"livingFlag": "0",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "1/17/2020 15:26:11",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "1999_024-v0001.jpg",
+						"filePath": "/Media/images/1990/1999/1999_024/1999_024-v0001.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Marionette Puppet: French Colonial Officer on a Horse",
+		"creator": "Unidentified Bamana or Bozo artist",
+		"dateCreated": "mid-20th century",
+		"classification": "Ethnographic Arts and Antiquities",
+		"workType": "Dolls, toys, and games",
+		"medium": "wood, fabric, paint, metal tacks, string",
+		"uniqueIdentifier": "2017.025.667",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "marionettes", "uri": "http://vocab.getty.edu/aat/300211126"}
+				
+				
+				
+			 ],
+		"usage": "Public domain",
+		"license": "",
+		"access":
+			
+				
+				
+				
+				
+				
+				
+					
+						"Galleries Milly &amp; Fritz Kaeser Mestrovic Studio Gallery"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "23 3/4 x 26 1/8 x 7 3/4 in. (60.45 x 66.29 x 19.81 cm)",
+		"dedication": "Bequest of Owen D. Mort Jr.",
+		"description": "",
+		"id": "2017.025.667",
+		
+		 
+			"collectionId": "2017.025.667",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Unidentified Bamana or Bozo artist",
+						"nationality": "",
+						"lifeDates": "",
+						"startDate": "",
+						"endDate": "",
+						"livingFlag": "1",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "1/29/2020 16:43:58",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "2017_025_667-v0015.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0015.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 2,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0014.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0014.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 3,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0013.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0013.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 4,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0012.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0012.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 5,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0011.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0011.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 6,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0010.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0010.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 7,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0009.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0009.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 8,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0008.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0008.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 9,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0007.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0007.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 10,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0006.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0006.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 11,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0005.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0005.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 12,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0004.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0004.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 13,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0003.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0003.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 14,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0002.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0002.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 15,
+						"thumbnail": false,
+						"fileDescription": "2017_025_667-v0001.jpg",
+						"filePath": "/Media/images/2010/2017/2017_025_667/2017_025_667-v0001.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Bartet and Mounet-Sully, in Antigone",
+		"creator": "Henri de Toulouse-Lautrec",
+		"dateCreated": "1893",
+		"classification": "Fine Arts",
+		"workType": "Prints",
+		"medium": "crayon and brush lithograph on cream wove paper",
+		"uniqueIdentifier": "2012.105",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "actors", "uri": "http://vocab.getty.edu/aat/300025658"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "Ancient Greek", "uri": "http://vocab.getty.edu/aat/300020072"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "Post-Impressionist", "uri": "http://vocab.getty.edu/aat/300021508"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "stages", "uri": "http://vocab.getty.edu/aat/300004751"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "theaters", "uri": "http://vocab.getty.edu/aat/300007117"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "tragedy", "uri": "http://vocab.getty.edu/aat/300055916"}
+				
+				
+				
+			 ],
+		"usage": "Public domain",
+		"license": "",
+		"access":
+			
+				
+				
+				
+				
+				
+				
+					
+						"Storage"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "15 x 11 1/8 in. (37.94 x 28.26 cm)",
+		"dedication": "Gift of Dr. and Mrs. R. Stephen Lehman",
+		"description": "",
+		"id": "2012.105",
+		
+		 
+			"collectionId": "2012.105",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Henri de Toulouse-Lautrec",
+						"nationality": "French",
+						"lifeDates": "1864 - 1901",
+						"startDate": "1864",
+						"endDate": "1901",
+						"livingFlag": "0",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "1/29/2020 14:56:46",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "2012_105-v0001.jpg",
+						"filePath": "/Media/images/2010/2012/2012_105/2012_105-v0001.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Le Grand Prix",
+		"creator": "Jacques Henri Lartigue",
+		"dateCreated": "1913",
+		"classification": "Fine Arts",
+		"workType": "Photographs",
+		"medium": "gelatin silver print",
+		"uniqueIdentifier": "2015.045.003",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "automobile racetracks", "uri": "http://vocab.getty.edu/aat/300000597"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "racing cars", "uri": "http://vocab.getty.edu/aat/300212834"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "speed", "uri": "http://vocab.getty.edu/aat/300056047"}
+				
+				
+				
+			 ],
+		"usage": "Copyright",
+		"license": "© Ministère de la Culture (France), MAP-AAJHL",
+		"access":
+			
+				
+				
+				
+				
+					
+						"Storage"
+					
+				
+				
+				
+				,
+ 		"format": "",
+		"dimensions": "12 x 16 1/8 in. (30.5 x 40.8 cm)",
+		"dedication": "Mr. Jack B. Smith Jr. fund",
+		"description": "Lartique's famous photograph Le Grand Prix was long thought to have been taken in 1912, when the annual race was held at Dieppe. However, the car can be identified as a machine built by Th. Schneider et Cie of Besançon, which René Croquet drove in the following year's race by, accompanied by a mechanic remembered only as Didier. The photograph was taken on July 12, 1913, when the Grand Prix was held in Amiens. The race that year was marred by three fatal crashes and the death of one spectator. The competitors drove 29 laps of the 19.65-mile (31.62-kilometer) race circuit on public roads. Georges Boillot won in a Peugeot EX3, in under eight hours. Croquet crossed the finish line in 10th position, with a time of 9:12:52:6.%20%20from Acton, A History of Photography at the University of Notre Dame: Twentieth Century (Notre Dame, 2019)",
+		"id": "2015.045.003",
+		
+		 
+			"collectionId": "2015.045.003",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Jacques Henri Lartigue",
+						"nationality": "French",
+						"lifeDates": "1894 - 1986",
+						"startDate": "1894",
+						"endDate": "1986",
+						"livingFlag": "0",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "2/20/2020 10:12:41",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "2015_045_003-v0002.jpg",
+						"filePath": "/Media/images/2010/2015/2015_045_003/2015_045_003-v0002.jpg"}
+						,
+                    
+                
+                    
+						
+						{"sequence": 2,
+						"thumbnail": false,
+						"fileDescription": "2015_045_003-v0001.jpg",
+						"filePath": "/Media/images/2010/2015/2015_045_003/2015_045_003-v0001.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Garrick in the Character of Richard III",
+		"creator": "William Hogarth",
+		"dateCreated": "1746",
+		"classification": "Fine Arts",
+		"workType": "Prints",
+		"medium": "etching and engraving on laid paper",
+		"uniqueIdentifier": "2016.010",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "actors", "uri": "http://vocab.getty.edu/aat/300025658"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "crucifixes", "uri": "http://vocab.getty.edu/aat/300248835"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "plays", "uri": "http://vocab.getty.edu/aat/300201028"}
+				,
+				
+				
+			
+				
+				
+			
+				
+					{"authority": "AAT", "term": "tents", "uri": "http://vocab.getty.edu/aat/300005694"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "theaters", "uri": "http://vocab.getty.edu/aat/300007117"}
+				
+				
+				
+			 ],
+		"usage": "Public domain",
+		"license": "",
+		"access":
+			
+				
+				
+				
+				
+					
+						"Storage"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "16 1/2 x 20 5/8 in. (41.75 x 52.39 cm)",
+		"dedication": "Mr. and Mrs. Charles K. Driscoll ND ’63 fund",
+		"description": "",
+		"id": "2016.010",
+		
+		 
+			"collectionId": "2016.010",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"William Hogarth",
+						"nationality": "British",
+						"lifeDates": "1697 - 1764",
+						"startDate": "1697",
+						"endDate": "1764",
+						"livingFlag": "0",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "1/21/2020 16:12:48",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "2016_010-v0001.jpg",
+						"filePath": "/Media/images/2010/2016/2016_010/2016_010-v0001.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+		
+		
+		
+		,
+		
+		{
+		"sourceSystem": "EmbARK",
+		"title": "The Water Organ at the Villa d&#39;Este, Tivoli",
+		"creator": "Israël Silvestre",
+		"dateCreated": "1640-1691",
+		"classification": "Fine Arts",
+		"workType": "Drawings",
+		"medium": "black chalk, pen, and brown wash on laid paper",
+		"uniqueIdentifier": "2017.007",
+		
+		"repository": "museum",
+		"subjects": [
+			
+				
+					{"authority": "AAT", "term": "architecture", "uri": "http://vocab.getty.edu/aat/300263552"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "design", "uri": "http://vocab.getty.edu/aat/300054171"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "gardens", "uri": "http://vocab.getty.edu/aat/300008090"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "landscapes", "uri": "http://vocab.getty.edu/aat/300015636"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "music", "uri": "http://vocab.getty.edu/aat/300054146"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "musical instruments", "uri": "http://vocab.getty.edu/aat/300041620"}
+				,
+				
+				
+			
+				
+					{"authority": "AAT", "term": "water", "uri": "http://vocab.getty.edu/aat/300011772"}
+				
+				
+				
+			 ],
+		"usage": "Public domain",
+		"license": "",
+		"access":
+			
+				
+				
+				
+				
+				
+				
+					
+						"Storage"
+					
+				
+				,
+ 		"format": "",
+		"dimensions": "8 3/4 x 12 3/4 in. (22.23 x 32.39 cm)",
+		"dedication": "John D. Reilly Endowment for Excellence",
+		"description": "",
+		"id": "2017.007",
+		
+		 
+			"collectionId": "2017.007",
+			"parentId": "root",
+		 
+		"children":[
+                      
+					  
+		],
+		"artists": [
+           			
+                      
+						{"attribution":	"",
+						"role": "Primary",
+						
+						"fullName":	"Israël Silvestre",
+						"nationality": "French",
+						"lifeDates": "1621 - 1691",
+						"startDate": "1621",
+						"endDate": "1691",
+						"livingFlag": "0",
+						"lifeFlag": "1"
+						}
+						
+                      
+		],
+		"modifiedDate": "2/19/2020 14:03:49",
+		"digitalAssets": [
+                
+                
+				
+                
+                    
+						
+						{"sequence": 1,
+						"thumbnail": true,
+						"fileDescription": "2017_007-v0001.jpg",
+						"filePath": "/Media/images/2010/2017/2017_007/2017_007-v0001.jpg"}
+						
+                    
+                
+		],
+		
+			"level": "manifest"
+		
+
+		}
+		
+	
+	]
+}
