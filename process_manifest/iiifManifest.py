@@ -236,5 +236,7 @@ class iiifManifest():
             'provider',
             'description',
             'collectioninformation',
-            'repository'
+            'repository',
+            'copyrightStatus',
+            'copyrightStatement'
         ]
