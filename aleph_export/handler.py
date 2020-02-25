@@ -42,12 +42,7 @@ def _supplement_event(event):
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
 
-# To run blueprints:
-# export S3_BUCKET=testlibnd-cf
-# aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
-# ./local-deploy.sh new-csv ../marble-blueprints
-
-
+# testing:
 # python 'run_all_tests.py'
 def test(identifier=""):
     """ test exection """

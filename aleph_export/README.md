@@ -12,7 +12,12 @@ Our process downloads and processes that .mrc file
 Run local_install.sh to set up dependencies
 
 ## Execute
-export SSM_KEY_BASE=/all/new-csv
+export SSM_KEY_BASE=/all/<stack_name>  (e.g. new-csv)
 export SENTRY_DSN=1234567890
 aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 python -c 'from handler import *; test()'
+
+## Run Blueprints
+export S3_BUCKET=testlibnd-cf
+aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
+./local-deploy.sh <stack_name> ../marble-blueprints
