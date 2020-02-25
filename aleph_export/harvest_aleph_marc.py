@@ -44,15 +44,10 @@ class HarvestAlephMarc():
         processed_records_count = 0
         for marc_record in marc_reader:
             marc_record_as_json = json.loads(marc_record.as_json())
-            # for field in marc_record_as_json['fields']:
-            #     if '001' in field:
-            #         filename = field['001'] + '.json'
-            #         with open(os.path.join('test', filename), "w") as file1:
-            #             file1.write(json.dumps(marc_record_as_json, indent=2))
-            # print("marc_record_as_json = ", marc_record_as_json)
             json_record = transform_marc_json_class.build_json_from_marc_json(marc_record_as_json)
-            # with open(os.path.join('test', filename), "w") as file1:
-            #     file1.write(json.dumps(json_record, indent=2))
+            if False:  # change to True to output test files.
+                filename = self._save_local_marc_json_for_testing(marc_record_as_json)
+                self._save_local_nd_json_for_testing(filename, json_record)
             if json_record:
                 csv_string = transform_marc_json_class.create_csv_from_json(json_record)
                 self._save_csv_record(json_record, csv_string)
@@ -63,6 +58,19 @@ class HarvestAlephMarc():
         if not self.event['local']:
             print("Saved to s3: ", os.path.join(self.config['process-bucket'], self.config['process-bucket-csv-basepath']))  # noqa: #501
         return processed_records_count
+
+    def _save_local_marc_json_for_testing(self, marc_record_as_json):
+        for field in marc_record_as_json['fields']:
+            if '001' in field:
+                filename = field['001'] + '.json'
+                with open(os.path.join('test', filename), "w") as file1:
+                    file1.write(json.dumps(marc_record_as_json, indent=2))
+        return filename
+
+    def _save_local_nd_json_for_testing(self, filename, json_record):
+        filename = filename.replace(".json", "_nd.json")
+        with open(os.path.join('test', filename), "w") as file1:
+            file1.write(json.dumps(json_record, indent=2))
 
     def _save_csv_record(self, json_record, csv_string):
         if 'id' in json_record:
