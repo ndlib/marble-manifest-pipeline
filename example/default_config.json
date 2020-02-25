@@ -38,8 +38,8 @@
     "dimensions",
     "languages",
     "subjects",
-    "usage",
-    "license",
+    "copyrightStatus",
+    "copyrightStatement",
     "linkToSource",
     "access",
     "format",
@@ -54,14 +54,15 @@
     "fileInfo",
     "imageUri",
     "mimeType",
-    "classification",
     "workType",
     "medium",
     "artists",
     "digitalAssets",
     "width",
     "height",
-    "md5Checksum"
+    "md5Checksum",
+    "children",
+    "location"
   ],
   "museum-required-fields": {
     "Title": "title",
