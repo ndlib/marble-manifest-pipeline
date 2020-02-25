@@ -1,0 +1,98 @@
+import time
+import json
+import os
+from transform_marc_json import TransformMarcJson
+from dependencies.pymarc import MARCReader
+from dependencies.sentry_sdk import capture_exception
+import dependencies.requests
+from dependencies.pipelineutilities.search_files import crawl_available_files
+from dependencies.pipelineutilities.s3_helpers import write_s3_file
+
+
+class HarvestAlephMarc():
+    """ This performs all Marc-related processing """
+    def __init__(self, config, event, marc_records_url):
+        self.config = config
+        self.marc_records_url = marc_records_url
+        self.start_time = time.time()
+        self.event = event
+        self.hash_of_available_files = {}
+        if not self.event['local']:
+            self.hash_of_available_files = crawl_available_files(self.config)
+            # with open(os.path.join('test', 'hash_of_available_files.json'), "w") as file1:
+            #     file1.write(json.dumps(self.hash_of_available_files, indent=2, default=str))
+        self.temporary_local_path = '/tmp'
+        self.marc_records_stream = self._open_marc_records_stream()
+
+    def _open_marc_records_stream(self):
+        """ Return marc records from URL."""
+        marc_records_stream = ""
+        url = self.marc_records_url
+        try:
+            r = dependencies.requests.get(url, stream=True)
+            if r.status_code == 200:
+                marc_records_stream = r.raw
+        except ConnectionRefusedError:
+            capture_exception('Connection refused on url ' + url)
+        except:  # noqa E722 - intentionally ignore warning about bare except
+            capture_exception('Error caught trying to process url ' + url)
+        return marc_records_stream
+
+    def process_marc_records_from_stream(self, test_mode_flag=False):
+        marc_reader = MARCReader(self.marc_records_stream)
+        transform_marc_json_class = TransformMarcJson(self.config["csv-field-names"], self.hash_of_available_files)
+        processed_records_count = 0
+        for marc_record in marc_reader:
+            marc_record_as_json = json.loads(marc_record.as_json())
+            json_record = transform_marc_json_class.build_json_from_marc_json(marc_record_as_json)
+            if False:  # change to True to output test files.
+                filename = self._save_local_marc_json_for_testing(marc_record_as_json)
+                self._save_local_nd_json_for_testing(filename, json_record)
+            if json_record:
+                csv_string = transform_marc_json_class.create_csv_from_json(json_record)
+                self._save_csv_record(json_record, csv_string)
+            processed_records_count += 1
+            print("processed record ", processed_records_count, " - ", int(time.time() - self.start_time), " seconds.")
+            if test_mode_flag:
+                break
+        if not self.event['local']:
+            print("Saved to s3: ", os.path.join(self.config['process-bucket'], self.config['process-bucket-csv-basepath']))  # noqa: #501
+        return processed_records_count
+
+    def _save_local_marc_json_for_testing(self, marc_record_as_json):
+        for field in marc_record_as_json['fields']:
+            if '001' in field:
+                filename = field['001'] + '.json'
+                with open(os.path.join('test', filename), "w") as file1:
+                    file1.write(json.dumps(marc_record_as_json, indent=2))
+        return filename
+
+    def _save_local_nd_json_for_testing(self, filename, json_record):
+        filename = filename.replace(".json", "_nd.json")
+        with open(os.path.join('test', filename), "w") as file1:
+            file1.write(json.dumps(json_record, indent=2))
+
+    def _save_csv_record(self, json_record, csv_string):
+        if 'id' in json_record:
+            csv_file_name = json_record['id'] + '.csv'
+            if not self.event['local']:
+                self._save_csv_to_s3(self.config['process-bucket'], csv_file_name, csv_string)
+            else:
+                self._save_csv_locally(csv_file_name, csv_string)
+
+    def _save_csv_to_s3(self, s3_bucket_name, csv_file_name, csv_string):
+        fully_qualified_file_name = os.path.join(self.config['process-bucket-csv-basepath'], csv_file_name)
+        try:
+            write_s3_file(s3_bucket_name, fully_qualified_file_name, csv_string)
+            results = True
+        except Exception:
+            results = False
+        return results
+
+    def _save_csv_locally(self, csv_file_name, csv_string):
+        directory = self.temporary_local_path
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        fully_qualified_file_name = os.path.join(directory, csv_file_name)
+        with open(fully_qualified_file_name, "w") as csv_file:
+            csv_file.write(csv_string)
