@@ -6,7 +6,8 @@
 				"format": "text"
 			},
 			{ "label": "repository",
-				"constant": "",
+				"fields": ["852"],
+				"subfields": ["b"],
 				"format": "text"
 			},
 			{ "label": "sequence",
@@ -57,6 +58,7 @@
 				"selection": "range",
 				"skipFields": ["655", "690"],
 				"subfields": ["a", "b", "c", "d", "e", "f", "g", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+				"specialSubfields": ["0"],
 				"extraProcessing": "format_subjects",
 				"format": "array"
 			},

@@ -1,5 +1,5 @@
 {
-  "leader": "01793ccm a2200409Ki 4500",
+  "leader": "02167ccm a2200409Ki 4500",
   "fields": [
     {
       "001": "000297305"
@@ -88,6 +88,9 @@
         "subfields": [
           {
             "a": "Bunting, Edward."
+          },
+          {
+            "0": "http://id.loc.gov/authorities/names/n86068741"
           }
         ],
         "ind1": "1",
@@ -153,6 +156,9 @@
           },
           {
             "2": "rdacontent"
+          },
+          {
+            "0": "http://id.loc.gov/vocabulary/contentTypes/ntm"
           }
         ],
         "ind1": " ",
@@ -170,6 +176,9 @@
           },
           {
             "2": "rdamedia"
+          },
+          {
+            "0": "http://id.loc.gov/vocabulary/mediaTypes/n"
           }
         ],
         "ind1": " ",
@@ -187,6 +196,9 @@
           },
           {
             "2": "rdacarrier"
+          },
+          {
+            "0": "http://id.loc.gov/vocabulary/carriers/nc"
           }
         ],
         "ind1": " ",
@@ -254,6 +266,9 @@
         "subfields": [
           {
             "a": "Piano music, Arranged."
+          },
+          {
+            "0": "http://id.loc.gov/authorities/subjects/sh85101791"
           }
         ],
         "ind1": " ",
@@ -268,6 +283,9 @@
           },
           {
             "z": "Ireland."
+          },
+          {
+            "0": "http://id.loc.gov/authorities/subjects/sh98002834"
           }
         ],
         "ind1": " ",
@@ -281,7 +299,10 @@
             "a": "Bunting, Edward,"
           },
           {
-            "d": "1773-1843."
+            "d": "1773-1843"
+          },
+          {
+            "0": "http://id.loc.gov/authorities/names/n82080086"
           }
         ],
         "ind1": "1",
@@ -347,6 +368,9 @@
           },
           {
             "4": "dnr"
+          },
+          {
+            "0": "http://id.loc.gov/authorities/names/n50002984"
           }
         ],
         "ind1": "1",
@@ -427,23 +451,6 @@
         ],
         "ind1": " ",
         "ind2": " "
-      }
-    },
-    {
-      "956": {
-        "subfields": [
-          {
-            "u": "https://rarebooks.library.nd.edu/digital/bookreader/CodLat_b04/images/CodLat_b04-000a_front_cover.jpg"
-          },
-          {
-            "x": "MARBLE"
-          },
-          {
-            "y": "Online Access"
-          }
-        ],
-        "ind1": "4",
-        "ind2": "1"
       }
     }
   ]

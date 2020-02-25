@@ -52,6 +52,6 @@ def _supplement_event(event):
 def test(identifier=""):
     """ test exection """
     event = {}
-    event['local'] = True
+    event['local'] = False
     event = run(event, {})
     print(event)

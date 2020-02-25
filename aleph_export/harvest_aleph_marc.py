@@ -60,6 +60,8 @@ class HarvestAlephMarc():
             print("processed record ", processed_records_count, " - ", int(time.time() - self.start_time), " seconds.")
             if test_mode_flag:
                 break
+        if not self.event['local']:
+            print("Saved to s3: ", os.path.join(self.config['process-bucket'], self.config['process-bucket-csv-basepath']))  # noqa: #501
         return processed_records_count
 
     def _save_csv_record(self, json_record, csv_string):

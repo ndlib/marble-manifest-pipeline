@@ -38,12 +38,13 @@ class TransformMarcJson():
         positions = json_field_definition.get("positions", "")
         format = json_field_definition.get("format", "")
         extra_processing = json_field_definition.get("extraProcessing", "")
+        special_subfields = json_field_definition.get("specialSubfields", "")
         node = self._default_to_appropriate_data_type(format)
         for field in marc_record_as_json['fields']:
             for key, value in field.items():
                 if self._process_this_field(json_field_definition, key, value):
                     if 'subfields' in value:
-                        value_found = self._get_required_subfields(value, subfields_needed)
+                        value_found = self._get_required_subfields(value, subfields_needed, special_subfields)
                     elif positions != "":
                         value_found = self._get_required_positions(value, positions)
                     else:
@@ -134,7 +135,11 @@ class TransformMarcJson():
         results = []
         for each_value in value:
             node = {}
-            node['term'] = each_value
+            if "^^^" in each_value:
+                node["term"] = each_value.split("^^^")[0]
+                node["uri"] = each_value.split("^^^")[1]
+            else:
+                node['term'] = each_value
             results.append(node)
         return results
 
@@ -146,7 +151,7 @@ class TransformMarcJson():
                 results += value[position]
         return results
 
-    def _get_required_subfields(self, subfields, subfields_needed):
+    def _get_required_subfields(self, subfields, subfields_needed, special_subfields):
         """ Append values from subfields we're interested in """
         results = ""
         for subfield in subfields['subfields']:
@@ -156,6 +161,8 @@ class TransformMarcJson():
                         results = value
                     else:
                         results += " " + value
+                if key in special_subfields:
+                    results += "^^^" + value
         return results
 
 

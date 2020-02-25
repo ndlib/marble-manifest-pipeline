@@ -1,6 +1,6 @@
 {
   "sourceSystem": "Aleph",
-  "repository": "",
+  "repository": "RARE",
   "sequence": 1,
   "title": "New edition of a general Collection of the ancient Irish music : containing a variety of Irish Airs, never before published, and also the compositions of Conolan and Carolan, collected from the harpers, etc., in the different provinces of Ireland, and adapted for the pianoforte /",
   "collectionId": "000297305",
@@ -18,10 +18,12 @@
       "term": "Songs, Irish Ireland Instrumental settings."
     },
     {
-      "term": "Piano music, Arranged."
+      "term": "Piano music, Arranged.",
+      "uri": "http://id.loc.gov/authorities/subjects/sh85101791"
     },
     {
-      "term": "Folk music Ireland."
+      "term": "Folk music Ireland.",
+      "uri": "http://id.loc.gov/authorities/subjects/sh98002834"
     }
   ],
   "copyrightStatus": "",
@@ -35,6 +37,6 @@
   "dimensions": "35 cm",
   "dedication": "Donated to the Library by Capt. Francis O'Neill in 1931.",
   "description": "",
-  "imageUri": "https://rarebooks.library.nd.edu/digital/bookreader/CodLat_b04/images/CodLat_b04-000a_front_cover.jpg",
+  "imageUri": "",
   "anotherID": ""
 }
