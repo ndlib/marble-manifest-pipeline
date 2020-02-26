@@ -86,7 +86,11 @@ class Item():
         return self._find_row(self.object.get('collectionId'))
 
     def parent(self):
-        return self._find_row(self.object.get('parentId'))
+        parent = self._find_row(self.object.get('parentId'))
+        if not parent:
+            parent = self
+
+        return parent
 
     def get(self, key, default=False):
         return self.object.get(key, default)
