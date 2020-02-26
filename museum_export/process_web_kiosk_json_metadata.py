@@ -6,19 +6,13 @@
 
 import json
 from datetime import datetime, timedelta
-import os
-import sys
 import boto3
-import io
-import csv
-where_i_am = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(where_i_am)
-sys.path.append(where_i_am + "/dependencies")
-from file_system_utilities import delete_file, get_full_path_file_name  # noqa: E402
-from dependencies.sentry_sdk import capture_message, push_scope, capture_exception  # noqa: E402
-from dependencies.pipelineutilities.google_utilities import execute_google_query  # noqa: E402
-from dependencies.pipelineutilities.s3_helpers import write_s3_file  # noqa: E402
-import dependencies.requests  # noqa: E402
+import os
+from dependencies.sentry_sdk import capture_message, push_scope, capture_exception
+from dependencies.pipelineutilities.google_utilities import execute_google_query
+from dependencies.pipelineutilities.s3_helpers import write_s3_file
+import dependencies.requests
+from output_csv import OutputCsv
 
 
 class processWebKioskJsonMetadata():
@@ -43,7 +37,7 @@ class processWebKioskJsonMetadata():
         url = self._get_embark_metadata_url(mode)
         self.composite_json = self._get_metadata_given_url(url)
         if self.composite_json:
-            fully_qualified_file_name = get_full_path_file_name(self.folder_name, self.file_name)
+            fully_qualified_file_name = os.path.join(self.folder_name, self.file_name)
             with open(fully_qualified_file_name, 'w') as f:
                 json.dump(self.composite_json, f)
             self._get_image_file_info()
@@ -103,28 +97,44 @@ class processWebKioskJsonMetadata():
             save information as CSV to S3, and delete the local copy. """
         object_id = object['uniqueIdentifier']
         print("Processing JSON: ", object_id)
-        if 'modifiedDate' in object:
-            object['modifiedDate'] = datetime.strptime(object['modifiedDate'], '%m/%d/%Y %H:%M:%S').isoformat() + 'Z'
+        self._augment_additional_fields(object)
         missing_fields = self._test_for_missing_fields(object_id,
                                                        object,
                                                        self.config['museum-required-fields'])
         if missing_fields == "" or self.save_despite_missing_fields:
             csv_file_name = object_id + '.csv'
-            csv_string = io.StringIO()
-            writer = csv.DictWriter(csv_string, fieldnames=self.config["csv-field-names"])
-            writer.writeheader()
-            writer = csv.DictWriter(csv_string, fieldnames=self.config["csv-field-names"], extrasaction='ignore')
-            writer.writerow(object)
+            output_csv_class = OutputCsv(self.config["csv-field-names"])
+            output_csv_class.write_csv_row(object)
             sequence = 0
             if 'digitalAssets' in object:
                 for digital_asset in object['digitalAssets']:
-                    self._write_file_csv_record(object, digital_asset, sequence, csv_string)
+                    self._write_file_csv_record(object, digital_asset, sequence, output_csv_class)
                     sequence += 1
-            s3_file_name = get_full_path_file_name(self.config['process-bucket-csv-basepath'], csv_file_name)
-            write_s3_file(self.config['process-bucket'], s3_file_name, csv_string.getvalue())
+            s3_file_name = os.path.join(self.config['process-bucket-csv-basepath'], csv_file_name)
+            write_s3_file(self.config['process-bucket'], s3_file_name, output_csv_class.return_csv_value())
         return missing_fields
 
-    def _write_file_csv_record(self, object, digital_asset, sequence, csv_string):
+    def _augment_additional_fields(self, object):
+        self._define_creator(object)
+        self._define_worktype(object)
+        if 'modifiedDate' in object:
+            object['modifiedDate'] = datetime.strptime(object['modifiedDate'], '%m/%d/%Y %H:%M:%S').isoformat() + 'Z'
+
+    def _define_creator(self, object):
+        if "artists" in object:
+            for artist in object["artists"]:
+                role = artist.get("role", "")
+                if role == "Primary":
+                    object["creator"] = artist.get("fullName", "")
+                    break
+
+    def _define_worktype(self, object):
+        classifiction = object.get("classification", "")
+        if classifiction == "Decorative Arts, Craft, and Design":
+            object['workType'] = classifiction
+        del object['classification']
+
+    def _write_file_csv_record(self, object, digital_asset, sequence, output_csv_class):
         """ Write file-related information in the CSV file for each image file found for this object. """
         each_file_dict = {}
         each_file_dict['collectionId'] = object['collectionId']
@@ -146,9 +156,7 @@ class processWebKioskJsonMetadata():
             each_file_dict['fileId'] = google_image_info['id']
             each_file_dict['modifiedDate'] = google_image_info['modifiedTime']
             each_file_dict['mimeType'] = google_image_info['mimeType']
-            each_file_dict['anotherField'] = 'abc'
-            writer = csv.DictWriter(csv_string, fieldnames=self.config["csv-field-names"], extrasaction='ignore')
-            writer.writerow(each_file_dict)
+            output_csv_class.write_csv_row(each_file_dict)
         return
 
     def _get_metadata_given_url(self, url):
@@ -196,3 +204,12 @@ class processWebKioskJsonMetadata():
             scope.set_tag('problem', 'missing_field')
             scope.level = 'warning'
             capture_message(object_id + ' is missing the follwing required field(s): \n' + missing_fields)
+
+
+def delete_file(folder_name, file_name):
+    """ Delete temparary intermediate file """
+    full_path_file_name = os.path.join(folder_name, file_name)
+    try:
+        os.remove(full_path_file_name)
+    except FileNotFoundError:
+        pass

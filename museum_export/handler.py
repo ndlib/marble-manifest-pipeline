@@ -2,17 +2,13 @@
 """ Module to launch application """
 
 import os
-import sys
 import json
 from pathlib import Path
-where_i_am = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(where_i_am)
-sys.path.append(where_i_am + "/dependencies")
-from dependencies.pipelineutilities.pipeline_config import get_pipeline_config, load_config_ssm  # noqa: E402
-import dependencies.sentry_sdk as sentry_sdk  # noqa: E402
-from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
-from process_web_kiosk_json_metadata import processWebKioskJsonMetadata  # noqa: E402
-from dependencies.pipelineutilities.google_utilities import establish_connection_with_google_api, execute_google_query, build_google_query_string  # noqa: #402
+from process_web_kiosk_json_metadata import processWebKioskJsonMetadata
+from dependencies.pipelineutilities.pipeline_config import get_pipeline_config, load_config_ssm
+from dependencies.pipelineutilities.google_utilities import establish_connection_with_google_api
+import dependencies.sentry_sdk as sentry_sdk
+from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 
 
 if 'SENTRY_DSN' in os.environ:
@@ -55,8 +51,7 @@ def _suplement_event(event):
 # setup:
 # cd museum_export
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
-# # export SSM_KEY_BASE=/all/marble-data-processing/test
-# export SSM_KEY_BASE=/all/manifest-pipeline-v3
+# export SSM_KEY_BASE=/all/new-csv
 # export MODE=full
 # python -c 'from handler import *; test()'
 # python 'run_all_tests.py'
