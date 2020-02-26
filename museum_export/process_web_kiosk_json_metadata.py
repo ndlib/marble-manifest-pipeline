@@ -116,6 +116,7 @@ class processWebKioskJsonMetadata():
 
     def _augment_additional_fields(self, object):
         self._define_creator(object)
+        self._define_worktype(object)
         if 'modifiedDate' in object:
             object['modifiedDate'] = datetime.strptime(object['modifiedDate'], '%m/%d/%Y %H:%M:%S').isoformat() + 'Z'
 
@@ -126,6 +127,12 @@ class processWebKioskJsonMetadata():
                 if role == "Primary":
                     object["creator"] = artist.get("fullName", "")
                     break
+
+    def _define_worktype(self, object):
+        classifiction = object.get("classification", "")
+        if classifiction == "Decorative Arts, Craft, and Design":
+            object['workType'] = classifiction
+        del object['classification']
 
     def _write_file_csv_record(self, object, digital_asset, sequence, output_csv_class):
         """ Write file-related information in the CSV file for each image file found for this object. """
