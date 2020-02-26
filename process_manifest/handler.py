@@ -1,7 +1,8 @@
 import sys
 from pathlib import Path
 import os
-from iiifCollection import iiifCollection
+from iiifManifest import iiifManifest
+from MetadataMappings import MetadataMappings
 from ToSchema import ToSchema
 from ndJson import ndJson
 
@@ -35,8 +36,8 @@ def run(event, context):
         parent = load_csv_data(id, config)
 #        image = load_image_data(id, event)
 
-        # a2s = AthenaToSchema(event, parent, [])
-        iiif = iiifCollection(config, parent)
+        mapping = MetadataMappings(parent)
+        iiif = iiifManifest(config, parent, mapping)
         manifest = iiif.manifest()
 
         # split the manifests

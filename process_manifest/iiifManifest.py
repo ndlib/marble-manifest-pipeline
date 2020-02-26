@@ -51,6 +51,8 @@ class iiifManifest():
             'items': self._items(),
             'viewingDirection': 'left-to-right'
         }
+
+        self.add_context()
         self.add_provider()
         self.add_required_statement()
         self.add_license()
@@ -103,6 +105,14 @@ class iiifManifest():
 
     def _lang_wrapper(self, line):
         return {self.lang: [line]}
+
+    def add_context(self):
+        if self.data.get('id') == self.data.parent().get('id'):
+            self.manifest_hash["@context"] = [
+                "http://www.w3.org/ns/anno.jsonld",
+                "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
+                "http://iiif.io/api/presentation/3/context.json"
+            ]
 
     def add_schema_org(self):
         if self.key_exists('schemaUri'):
