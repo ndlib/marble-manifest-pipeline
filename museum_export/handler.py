@@ -4,11 +4,15 @@
 import os
 import json
 from pathlib import Path
-from process_web_kiosk_json_metadata import processWebKioskJsonMetadata
-from dependencies.pipelineutilities.pipeline_config import get_pipeline_config, load_config_ssm
-from dependencies.pipelineutilities.google_utilities import establish_connection_with_google_api
-import dependencies.sentry_sdk as sentry_sdk
-from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+import sys
+where_i_am = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(where_i_am)
+sys.path.append(where_i_am + "/dependencies/")
+from process_web_kiosk_json_metadata import processWebKioskJsonMetadata  # noqa: E402
+from dependencies.pipelineutilities.pipeline_config import get_pipeline_config, load_config_ssm  # noqa: E402
+from dependencies.pipelineutilities.google_utilities import establish_connection_with_google_api  # noqa: E402
+import dependencies.sentry_sdk as sentry_sdk  # noqa: E402
+from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
 
 
 if 'SENTRY_DSN' in os.environ:
