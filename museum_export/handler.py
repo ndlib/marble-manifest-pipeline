@@ -4,11 +4,11 @@
 import os
 import json
 from pathlib import Path
+from process_web_kiosk_json_metadata import processWebKioskJsonMetadata
 from dependencies.pipelineutilities.pipeline_config import get_pipeline_config, load_config_ssm
+from dependencies.pipelineutilities.google_utilities import establish_connection_with_google_api
 import dependencies.sentry_sdk as sentry_sdk
 from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
-from process_web_kiosk_json_metadata import processWebKioskJsonMetadata
-from dependencies.pipelineutilities.google_utilities import establish_connection_with_google_api
 
 
 if 'SENTRY_DSN' in os.environ:
