@@ -44,7 +44,7 @@
         {
           "label": {
             "en": [
-              "Creator "
+              "Creator"
             ]
           },
           "value": {
@@ -62,18 +62,6 @@
           "value": {
             "en": [
               "dateCreated"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Classification "
-            ]
-          },
-          "value": {
-            "en": [
-              "Classification"
             ]
           }
         },
@@ -152,7 +140,7 @@
         {
           "label": {
             "en": [
-              "Credit line "
+              "Credit Line"
             ]
           },
           "value": {
@@ -219,7 +207,7 @@
     {
       "label": {
         "en": [
-          "Creator "
+          "Creator"
         ]
       },
       "value": {
@@ -237,18 +225,6 @@
       "value": {
         "en": [
           "dateCreated"
-        ]
-      }
-    },
-    {
-      "label": {
-        "en": [
-          "Classification "
-        ]
-      },
-      "value": {
-        "en": [
-          "Classification"
         ]
       }
     },
@@ -327,7 +303,7 @@
     {
       "label": {
         "en": [
-          "Credit line "
+          "Credit Line"
         ]
       },
       "value": {

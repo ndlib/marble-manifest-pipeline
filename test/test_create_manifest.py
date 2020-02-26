@@ -10,7 +10,9 @@ sys.path.append(where_i_am + "/../pipelineutilities")
 sys.path.append(where_i_am + "/../process_manifest/")
 from pipelineutilities.csv_collection import load_csv_data
 from pipelineutilities.pipeline_config import get_pipeline_config
-from iiifCollection import iiifCollection
+from iiifManifest import iiifManifest
+from MetadataMappings import MetadataMappings
+
 
 base_config = {}
 base_config['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
@@ -35,7 +37,8 @@ class TestCreateManifest(unittest.TestCase):
             data = load_data_for_test(id)
 
             parent = load_csv_data(id, config)
-            iiif = iiifCollection(config, parent)
+            mapping = MetadataMappings(parent)
+            iiif = iiifManifest(config, parent, mapping)
             manifest = iiif.manifest()
 
             debug_json(data['manifest_json'], manifest)
@@ -58,14 +61,16 @@ class TestCreateManifest(unittest.TestCase):
         parent = load_csv_data("item-one-image-embark", config)
         for test in tests:
             parent.object['repository'] = test.get("provider")
-            iiif = iiifCollection(config, parent)
-            iiif.document.add_provider()
-            self.assertEqual(test.get("result"), iiif.document.manifest_hash['provider'].get('id'))
+            mapping = MetadataMappings(parent)
+            iiif = iiifManifest(config, parent, mapping)
+            iiif.add_provider()
+            self.assertEqual(test.get("result"), iiif.manifest_hash['provider'].get('id'))
 
         del parent.object['repository']
-        iiif = iiifCollection(config, parent)
-        iiif.document.add_provider()
-        self.assertEqual("not here", iiif.document.manifest_hash.get('provider', "not here"))
+        mapping = MetadataMappings(parent)
+        iiif = iiifManifest(config, parent, mapping)
+        iiif.add_provider()
+        self.assertEqual("not here", iiif.manifest_hash.get('provider', "not here"))
 
 
 if __name__ == '__main__':
