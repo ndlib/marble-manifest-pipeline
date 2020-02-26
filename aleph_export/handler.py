@@ -3,6 +3,10 @@
 
 import os
 from pathlib import Path
+import sys
+where_i_am = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(where_i_am)
+sys.path.append(where_i_am + "/dependencies/")
 from harvest_aleph_marc import HarvestAlephMarc  # noqa: #502
 from dependencies.pipelineutilities.pipeline_config import get_pipeline_config  # noqa: E402
 import dependencies.sentry_sdk as sentry_sdk  # noqa: E402
