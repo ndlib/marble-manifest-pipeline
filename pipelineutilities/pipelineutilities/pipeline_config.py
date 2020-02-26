@@ -67,7 +67,8 @@ default_config = {
         "height",
         "md5Checksum",
         "children",
-        "location"
+        "location",
+        "creationPlace"
     ],
     "museum-required-fields": {
         "Title": "title",
@@ -78,7 +79,7 @@ default_config = {
         "Unique identifier": "uniqueIdentifier",
         "Repository": "repository",
         "Subject": "subjects",
-        "Usage": "usage",
+        "Copyright Status": "copyrightStatus",
         "Access": "access",
         "Dimensions": "dimensions",
         "Dedication": "dedication",

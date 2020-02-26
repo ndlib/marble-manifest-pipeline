@@ -62,7 +62,8 @@
     "height",
     "md5Checksum",
     "children",
-    "location"
+    "location",
+    "creationPlace"
   ],
   "museum-required-fields": {
     "Title": "title",
@@ -73,7 +74,7 @@
     "Unique identifier": "uniqueIdentifier",
     "Repository": "repository",
     "Subject": "subjects",
-    "Usage": "usage",
+    "Copyright Status": "copyrightStatus",
     "Access": "access",
     "Dimensions": "dimensions",
     "Dedication": "dedication",
