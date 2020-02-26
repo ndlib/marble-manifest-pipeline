@@ -1,15 +1,10 @@
 import unittest
 import json
-import os
-import sys
 from test.test_utils import load_data_for_test
 from test.test_utils import debug_json
 from pathlib import Path
-where_i_am = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(where_i_am + "/../pipelineutilities")
-sys.path.append(where_i_am + "/../process_manifest/")
-from pipelineutilities.csv_collection import load_csv_data
-from pipelineutilities.pipeline_config import get_pipeline_config
+from csv_collection import load_csv_data
+from pipeline_config import get_pipeline_config
 from iiifManifest import iiifManifest
 from MetadataMappings import MetadataMappings
 
