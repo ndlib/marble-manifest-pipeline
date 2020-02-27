@@ -1,23 +1,18 @@
 from pathlib import Path
 import os
-import sys
-where_i_am = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(where_i_am)
-sys.path.append(where_i_am + "/dependencies/")
-sys.path.append(where_i_am + "/dependencies/pipelineutilities/")
 from iiifManifest import iiifManifest
 from MetadataMappings import MetadataMappings
 from ToSchema import ToSchema
 from ndJson import ndJson
-from csv_collection import load_csv_data
-from pipeline_config import get_pipeline_config
-from s3_helpers import InprocessBucket
+from dependencies.pipelineutilities.csv_collection import load_csv_data
+from dependencies.pipelineutilities.pipeline_config import get_pipeline_config
+from dependencies.pipelineutilities.s3_helpers import InprocessBucket
 
-import sentry_sdk
-from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+import dependencies.sentry_sdk
+from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 
 if 'SENTRY_DSN' in os.environ:
-    sentry_sdk.init(
+    dependencies.sentry_sdk.init(
         dsn=os.environ['SENTRY_DSN'],
         integrations=[AwsLambdaIntegration()]
     )
