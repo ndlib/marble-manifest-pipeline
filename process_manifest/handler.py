@@ -1,18 +1,21 @@
+import sys
+sys.path.append('./dependencies')
+
 from pathlib import Path
 import os
 from iiifManifest import iiifManifest
 from MetadataMappings import MetadataMappings
 from ToSchema import ToSchema
 from ndJson import ndJson
-from dependencies.pipelineutilities.csv_collection import load_csv_data
-from dependencies.pipelineutilities.pipeline_config import get_pipeline_config
-from dependencies.pipelineutilities.s3_helpers import InprocessBucket
+from pipelineutilities.csv_collection import load_csv_data
+from pipelineutilities.pipeline_config import get_pipeline_config
+from pipelineutilities.s3_helpers import InprocessBucket
+import sentry_sdk
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 
-import dependencies.sentry_sdk
-from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 
 if 'SENTRY_DSN' in os.environ:
-    dependencies.sentry_sdk.init(
+    sentry_sdk.init(
         dsn=os.environ['SENTRY_DSN'],
         integrations=[AwsLambdaIntegration()]
     )
@@ -30,7 +33,6 @@ def run(event, context):
         inprocess_bucket = InprocessBucket(id, config)
 
         parent = load_csv_data(id, config)
-#        image = load_image_data(id, event)
 
         mapping = MetadataMappings(parent)
         iiif = iiifManifest(config, parent, mapping)
