@@ -1,6 +1,4 @@
-import sys
-sys.path.append('./dependencies')
-
+import _set_path  # noqa
 from pathlib import Path
 import os
 from iiifManifest import iiifManifest
