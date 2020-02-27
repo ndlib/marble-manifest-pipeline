@@ -350,10 +350,10 @@ for collection_id in collections:
     collection["type"] = "Collection"
     collection["label"] = fix_language(data["label"])
     collection["summary"] = fix_language(data["description"])
-    collection["thumbnail"] = [{"id": data["thumbnail"] + "/full/250,/0/default.jpg", "type": "Image", "service": [{"id": data["thumbnail"], "type": "ImageService2", "profile": "http://iiif.io/api/image/2/level2.json"}]}]
-    collection["behavior"] = [ "multi-part" ]
+    collection["thumbnail"] = [{"id": data["thumbnail"] + "/full/250,/0/default.jpg", "type": "Image", "service": [{"id": data["thumbnail"], "type": "ImageService2", "profile": "http://iiif.io/api/image/2/level2.json"}]}]  # noqa: #501
+    collection["behavior"] = ["multi-part"]
     collection["metadata"] = fix_metadata(data["metadata"])
-    collection["rights"] = data["license"]
+    collection["rights"] = data["copyrightStatement"]
     collection["items"] = []
 
     for id in data["manifest_ids"]:

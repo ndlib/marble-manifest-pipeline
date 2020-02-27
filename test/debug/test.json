@@ -170,11 +170,11 @@
         },
         "value": {
           "en": [
-            "usage"
+            "copyrightStatus"
           ]
         }
       },
-      "rights": "license",
+      "rights": "copyrightStatement",
       "summary": {
         "en": [
           "description"
@@ -351,11 +351,11 @@
     },
     "value": {
       "en": [
-        "usage"
+        "copyrightStatus"
       ]
     }
   },
-  "rights": "license",
+  "rights": "copyrightStatement",
   "seeAlso": [
     {
       "format": "application/xml",

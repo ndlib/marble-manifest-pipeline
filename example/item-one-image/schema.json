@@ -10,7 +10,7 @@
       "dateCreated": "dateCreated",
       "description": "description",
       "materialExtent": "materialExtent",
-      "license": "license",
+      "license": "copyrightStatement",
       "copyrightHolder": "copyrightHolder",
       "conditionOfAccess": "conditionOfAccess",
       "sponsor": "sponsor",
