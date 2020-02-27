@@ -43,7 +43,8 @@ class ImageRunner():
         image_info['md5sum'] = file.get("md5Checksum", None)
         image_info['bucket'] = self.bucket
         image_info['img_write_base'] = self.img_write_base
-        image_info['usage'] = file.get("usage", None)
+        # image_info['usage'] = file.get("usage", None)
+        image_info['copyrightStatus'] = file.get("copyrightStatus", None)
         if img_type == 's3':
             filename, ext = image_info['file'].split('/')[-1].rsplit('.', 1)
             image_info['filename'] = filename

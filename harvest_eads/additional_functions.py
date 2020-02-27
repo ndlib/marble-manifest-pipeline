@@ -20,7 +20,7 @@ def check_for_inconsistent_dao_image_paths(field_record, json_output):
 def file_name_from_filePath(file_path):
     """ Retrieve just the file name given the complete file path."""
     split_file_path = file_path.split('/')
-    return_value = split_file_path[len(split_file_path)-1]
+    return_value = split_file_path[len(split_file_path) - 1]
     return return_value
 
 
@@ -37,7 +37,7 @@ def get_repository_name_from_ead_resource(ead_resource):
     """ Note:  ead_resource is of the form: 'oai:und//repositories/3/resources/1569'
         This will return standardized names for each of our ArchivesSpace resources. """
     resource = ead_resource.split('/')
-    repository_name_dictionary = {"2": "UNDA", "3": "RBSC"}
+    repository_name_dictionary = {"2": "UNDA", "3": "RARE"}
     repository_name = repository_name_dictionary[resource[3]]
     return repository_name
 
