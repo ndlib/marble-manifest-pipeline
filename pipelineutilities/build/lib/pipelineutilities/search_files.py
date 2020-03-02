@@ -10,7 +10,7 @@ from urllib.parse import urlparse
 
 bucket_to_url = {
     "libnd-smb-rbsc": 'https://rarebooks.library.nd.edu/',
-    "rbsc-test-files": 'https://rarebooks.library.nd.edu/'
+    "rbsc-test-files": 'https://rarebooks.library.nd.edu/',
 }
 
 # patterns we skip if the file matches these
@@ -22,6 +22,7 @@ skip_files = [
 # patterns that corrispond to urls we can parse
 valid_urls = [
     r"http[s]?:[/]{2}rarebooks[.]library.*",
+    r"http[s]?:[/]{2}rarebooks[.]nd.*",
 ]
 
 regexps = {
@@ -29,7 +30,7 @@ regexps = {
         r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
         r"([a-zA-Z]{3}_[0-9]{2,4}-[0-9]+)",
     ],
-    "bookreader": [
+    "digital": [
         r"(^El_Duende)",
         r"(^Newberry-Case_[a-zA-Z]{2}_[0-9]{3})",
         r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{1,3}))"
@@ -61,7 +62,10 @@ def id_from_url(url):
     for exp in test_expressions:
         test = re.findall(exp, file)
         if test:
-            return "%s://%s%s/%s" % (url.scheme, url.netloc, directory, test[0])
+            url_part = url.netloc
+            if url_part == 'rarebooks.nd.edu':
+                url_part = 'rarebooks.library.nd.edu'
+            return "%s://%s%s/%s" % (url.scheme, url_part, directory, test[0])
 
     return False
 
@@ -136,6 +140,9 @@ def crawl_available_files(config):
                 if is_jpg(obj.get('Key')):
                     url = bucket_to_url[bucket] + obj.get('Key')
                     id = id_from_url(url)
+                    if obj.get('Key') == 'digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg':
+                        print(url, id)
+
                     if id:
                         if not order_field.get(id, False):
                             order_field[id] = {
@@ -185,10 +192,9 @@ def test():
     event['local-path'] = "/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/"
 
     config = get_pipeline_config(event)
-    print(config)
-
     data = crawl_available_files(config)
-    print(data)
-    # data = crawl_available_files()
+    id = id_from_url("https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg")
+    print(id)
+    print(data[id])
 
     return

@@ -32,6 +32,7 @@ temp_ids_example = {
     'https://rarebooks.library.nd.edu/digital/bookreader/MSS_CodLat_e05/images/MSS_CodLat_e05-084r.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/MSS_CodLat_e05/images/MSS_CodLat_e05',
     'https://rarebooks.library.nd.edu/digital/bookreader/images/CodLat_c03/MSS_CodLat_c3_098r.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/images/CodLat_c03/MSS_CodLat_c3',
     'https://rarebooks.library.nd.edu/digital/bookreader/Newberry-Case_MS_181/images/Newberry-Case_MS_181-999d.jpg': 'https://rarebooks.library.nd.edu/digital/bookreader/Newberry-Case_MS_181/images/Newberry-Case_MS_181',
+    "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010",
 }
 
 valid_urls = [
@@ -40,8 +41,9 @@ valid_urls = [
 ]
 
 invalid_urls = [
-    'https://rarebooks.nd.edu/path/to/file.jpg',
-    'https://www.google.com/path/to/file.jpg'
+    'https://www.google.com/path/to/file.jpg',
+    'https://someurl.com/path/file.jpg',
+    'https://library.nd.edu/path/file.jpg',
 ]
 
 skipped_files = [

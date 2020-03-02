@@ -11,7 +11,7 @@ default_config = {
     "museum-server-password": "",
     "rbsc-image-buckets": {
         "rbsc-test-files": [
-            "digital/bookreader",
+            "digital",
             "collections/ead_xml/images"
         ]
     },

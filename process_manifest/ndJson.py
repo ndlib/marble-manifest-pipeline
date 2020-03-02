@@ -11,10 +11,10 @@ class ndJson():
 
     def _get_children(self, parent):
         output = self._fix_row(parent.object)
-        output['children'] = []
+        output['items'] = []
 
         for child in parent.children():
-            output['children'].append(self._get_children(child))
+            output['items'].append(self._get_children(child))
 
         return output
 

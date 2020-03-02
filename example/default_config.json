@@ -8,8 +8,8 @@
   "museum-server-password": "",
   "rbsc-image-buckets": {
     "rbsc-test-files": [
-      "digital/bookreader",
-      "collections/ead_xml/images"
+        "digital",
+        "collections/ead_xml/images"
     ]
   },
   "museum-server-base-url": "http://notredame.dom5182.com:8080",
