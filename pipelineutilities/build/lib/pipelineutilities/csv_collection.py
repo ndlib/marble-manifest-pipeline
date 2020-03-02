@@ -183,7 +183,7 @@ def _manifest_paths(row, config):
 def _add_image_dimensions(row, all_image_data, config):
     level = row.get('level')
     if level != "file":
-        row.update({"width": "", "height": ""})
+        row.update({"width": None, "height": None})
         return
 
     image_key = os.path.splitext(row.get('id'))[0]

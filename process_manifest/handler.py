@@ -1,20 +1,16 @@
+import _set_path  # noqa
 from pathlib import Path
 import os
-import sys
-where_i_am = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(where_i_am)
-sys.path.append(where_i_am + "/dependencies/")
-sys.path.append(where_i_am + "/dependencies/pipelineutilities/")
 from iiifManifest import iiifManifest
 from MetadataMappings import MetadataMappings
 from ToSchema import ToSchema
 from ndJson import ndJson
-from csv_collection import load_csv_data
-from pipeline_config import get_pipeline_config
-from s3_helpers import InprocessBucket
-
+from pipelineutilities.csv_collection import load_csv_data
+from pipelineutilities.pipeline_config import get_pipeline_config
+from pipelineutilities.s3_helpers import InprocessBucket
 import sentry_sdk
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+
 
 if 'SENTRY_DSN' in os.environ:
     sentry_sdk.init(
@@ -35,7 +31,6 @@ def run(event, context):
         inprocess_bucket = InprocessBucket(id, config)
 
         parent = load_csv_data(id, config)
-#        image = load_image_data(id, event)
 
         mapping = MetadataMappings(parent)
         iiif = iiifManifest(config, parent, mapping)
