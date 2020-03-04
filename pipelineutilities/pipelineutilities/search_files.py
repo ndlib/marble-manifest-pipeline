@@ -33,6 +33,7 @@ regexps = {
     "digital": [
         r"(^El_Duende)",
         r"(^Newberry-Case_[a-zA-Z]{2}_[0-9]{3})",
+        r"(^[0-9]{4}[-][0-9]{2})",
         r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{1,3}))"
     ]
 }
@@ -193,7 +194,7 @@ def test():
 
     config = get_pipeline_config(event)
     data = crawl_available_files(config)
-    id = id_from_url("https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg")
+    id = id_from_url("https://rarebooks.nd.edu/digital/civil_war/letters/images/barker/5040-01.a.150.jpg")
     print(id)
     print(data[id])
 
