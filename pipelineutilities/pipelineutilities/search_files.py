@@ -33,8 +33,9 @@ regexps = {
     "digital": [
         r"(^El_Duende)",
         r"(^Newberry-Case_[a-zA-Z]{2}_[0-9]{3})",
-        r"(^[0-9]{4}[-][0-9]{2})",
-        r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{1,3}))"
+        r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
+        r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{1,3}))",
+        r"(^[0-9]{4})",
     ]
 }
 # urls in this list do not have a group note in the output of the parse_filename function
