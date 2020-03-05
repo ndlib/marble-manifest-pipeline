@@ -23,7 +23,7 @@ def run(event, context):
     if config:
         resumption_token = event['resumptionToken']
         harvest_oai_eads_class = HarvestOaiEads(config, event)
-        mode = _check_environment_variable('MODE', 'full')
+        mode = event.get('mode', 'full')
         if not event['eadHarvestComplete']:
             resumption_token = harvest_oai_eads_class.harvest_relevant_eads(mode, resumption_token)
         event['resumptionToken'] = resumption_token
@@ -55,16 +55,8 @@ def _init_sentry():
         sentry_sdk.init(dsn=os.environ['SENTRY_DSN'], integrations=[AwsLambdaIntegration()])
 
 
-def _check_environment_variable(variable_name, default):
-    return_value = default
-    if variable_name in os.environ:
-        return_value = os.environ[variable_name]
-    return return_value
-
-
 # setup:
 # export SSM_KEY_BASE=/all/new-csv
-# export MODE=known
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
 def test(identifier=""):
@@ -75,10 +67,10 @@ def test(identifier=""):
             event = json.load(json_file)
     else:
         event = {}
-        mode = _check_environment_variable('MODE', 'full')
-        if mode == 'identifiers':
+        event['mode'] = 'full'
+        if event['mode'] == 'identifiers':
             event['ids'] = ['oai:und//repositories/3/resources/1644']
-        elif mode == 'ids':
+        elif event['mode'] == 'ids':
             event['ids'] = ['BPP1001_EAD', 'MSNEA8011_EAD']
 
     event = run(event, {})
