@@ -9,12 +9,7 @@ default_config = {
     "museum-google-drive-id": "",
     "museum-server-username": "",
     "museum-server-password": "",
-    "rbsc-image-buckets": {
-        "rbsc-test-files": [
-            "digital",
-            "collections/ead_xml/images"
-        ]
-    },
+    "rbsc-image-bucket": "rbsc-test-files",
     "museum-server-base-url": "http://notredame.dom5182.com:8080",
     "process-bucket-read-basepath": "process",
     "process-bucket-csv-basepath": "csv",
@@ -67,7 +62,6 @@ default_config = {
         "height",
         "md5Checksum",
         "children",
-        "location",
         "creationPlace"
     ],
     "museum-required-fields": {
@@ -85,7 +79,7 @@ default_config = {
         "Dedication": "dedication",
         "Thumbnail": "digitalAssets"
     },
-    "seconds-to-allow-for-processing": 780,
+    "seconds-to-allow-for-processing": 600,
     "hours-threshold-for-incremental-harvest": 72,
     "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai"
 }
