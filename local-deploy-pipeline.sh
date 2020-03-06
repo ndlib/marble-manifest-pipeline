@@ -4,6 +4,8 @@
 # this also requires blueprints
 #
 templatePath='deploy/cloudformation/manifest-pipeline-pipeline.yml'
+templatePath='../marble-blueprints/deploy/cloudformation/manifest-pipeline-pipeline.yml'
+
 stackName='marble-manifest-deployment'
 aws cloudformation deploy \
   --capabilities CAPABILITY_NAMED_IAM \
