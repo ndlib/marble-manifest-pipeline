@@ -53,6 +53,7 @@ RUN pip3 install --upgrade pip \
 # image transformation script
 COPY pyramid_generator/pyramid.py /usr/local/bin/
 COPY pyramid_generator/image_processor.py /usr/local/bin/
+COPY pyramid_generator/processor_factory.py /usr/local/bin/
 COPY pyramid_generator/s3_processor.py /usr/local/bin/
 COPY pyramid_generator/gdrive_processor.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/pipeline_config.py /usr/local/bin/

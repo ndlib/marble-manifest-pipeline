@@ -5,8 +5,7 @@ import sys
 import json
 import boto3
 from s3_helpers import upload_json
-from s3_processor import S3ImageProcessor
-from gdrive_processor import GoogleImageProcessor
+from processor_factory import ProcessorFactory
 from csv_collection import load_csv_data
 
 
@@ -17,50 +16,40 @@ class ImageRunner():
         self.csv_read_base = config['process-bucket-csv-basepath']
         self.img_write_base = config['process-bucket-read-basepath']
         self.img_file = config['image-data-file']
-        gdrive_ssm = f"{config['google_keys_ssm_base']}/credentials"
-        gdrive_creds = self._get_gdrive_credentials(gdrive_ssm)
+        self.gdrive_ssm = f"{config['google_keys_ssm_base']}/credentials"
         self.csv_config = config
-        self.s3_processor = S3ImageProcessor()
-        self.gdrive_processor = GoogleImageProcessor(gdrive_creds)
+        self.processor = None
 
     def process_images(self) -> None:
         for id in self.ids:
             id_results = {}
             for file in load_csv_data(id, self.csv_config).files():
-                if file.get('filePath').startswith('s3'):
-                    id_results.update(self._process_image(id, file, 's3'))
-                elif file.get('filePath').startswith('https://drive.google'):
-                    id_results.update(self._process_image(id, file, 'gdrive'))
-                else:
-                    print(f"{self.id} - skipping unknown file type - {file.get('id')}")
+                if not self.processor:
+                    processor_info = self._get_processor_info(file.get('filePath'))
+                    src = processor_info.get('type')
+                    cred = processor_info.get('cred', None)
+                    self.processor = ProcessorFactory().get_processor(src, cred=cred)
+                img_config = {
+                    'collection_id': id,
+                    'bucket': self.bucket,
+                    'img_write_base': self.img_write_base
+                }
+                self.processor.set_data(file, img_config)
+                id_results.update(self.processor.process())
             s3_file = f"{self.img_write_base}/{id}/{self.img_file}"
             upload_json(self.bucket, s3_file, id_results)
 
-    def _process_image(self, id, file, img_type) -> dict:
-        image_info = {}
-        image_info['id'] = id
-        image_info['file'] = file.get("filePath")
-        image_info['md5sum'] = file.get("md5Checksum", None)
-        image_info['bucket'] = self.bucket
-        image_info['img_write_base'] = self.img_write_base
-        image_info['usage'] = file.get("usage", None)
-        if img_type == 's3':
-            filename, ext = image_info['file'].split('/')[-1].rsplit('.', 1)
-            image_info['filename'] = filename
-            image_info['ext'] = f".{ext}"
-            self.s3_processor.set_data(image_info)
-            return self.s3_processor.process()
-        elif img_type == 'gdrive':
-            filename, ext = file.get('id').rsplit('.', maxsplit=1)
-            image_info['filename'] = filename
-            image_info['ext'] = f".{ext}"
-            self.gdrive_processor.set_data(image_info)
-            return self.gdrive_processor.process()
+    def _get_processor_info(self, filepath: str) -> dict:
+        img_type = {'type': 's3'}
+        if filepath.startswith('https://drive.google'):
+            img_type = {'type': 'gdrive', 'cred': _get_credentials(self.gdrive_ssm)}
+        return img_type
 
-    def _get_gdrive_credentials(self, ssm_key: str) -> dict:
-        ssm = boto3.client('ssm')
-        parameter = ssm.get_parameter(Name=ssm_key, WithDecryption=True)
-        return json.loads(parameter['Parameter']['Value'])
+
+def _get_credentials(ssm_key: str) -> dict:
+    ssm = boto3.client('ssm')
+    parameter = ssm.get_parameter(Name=ssm_key, WithDecryption=True)
+    return json.loads(parameter['Parameter']['Value'])
 
 
 if __name__ == "__main__":

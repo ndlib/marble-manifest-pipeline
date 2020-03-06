@@ -33,33 +33,11 @@ class ImageProcessor(ABC):
     def process(self) -> dict:
         pass
 
-    def set_data(self, config: dict) -> None:
-        self.id = config['id']
-        self.source_image = config['file']
-        self.filename = config['filename']
-        self.ext = config['ext']
-        self.local_file = f"TEMP_{self.filename}{self.ext}"
-        self.tif_file = f"{self.filename}.tif"
-        self.bucket = config['bucket']
-        self.img_write_base = config['img_write_base']
-        self.source_md5sum = config['md5sum']
-        # if copyrighted work scale height/width directed by aamd.org
-        if self._is_copyrighted(config['usage']):
-            self.max_img_height = 560.0
-            self.max_img_width = 843.0
-
     def _is_copyrighted(self, usage: str) -> bool:
         if usage and usage.lower().startswith('copyright'):
             return True
 
     def _log_result(self, key: str, info) -> None:
-        """
-        Log image progress
-
-        Args:
-            key: lookup value
-            info: object to note
-        """
         if self.image_result.get(self.filename):
             self.image_result[self.filename][key] = info
         else:
@@ -67,9 +45,6 @@ class ImageProcessor(ABC):
             self.image_result[self.filename][key] = info
 
     def _cleanup(self) -> None:
-        """
-        Remove temporary data/images
-        """
         os.remove(self.local_file)
         os.remove(self.tif_file)
 
@@ -97,14 +72,6 @@ class ImageProcessor(ABC):
                 print(f"Unexpected error {bucket}://{key}: {ce.response['Error']['Code']}")
 
     def _generate_pytiff(self, file: str, tif_filename: str) -> None:
-        """
-        Create a pyramid tiff from a source image, while enforcing constraints,
-        and record the image attributes.
-
-        Args:
-            file: local file to transform into pytiff
-            tif_filename: name of the resulting pytiff file
-        """
         image = self._preprocess_image(file)
         image.tiffsave(tif_filename, tile=True, pyramid=True, compression=self.COMPRESSION_TYPE,
                        tile_width=self.PYTIF_TILE_WIDTH, tile_height=self.PYTIF_TILE_HEIGHT)
@@ -114,15 +81,6 @@ class ImageProcessor(ABC):
         self._log_result('md5sum', self.source_md5sum)
 
     def _preprocess_image(self, file: str) -> Image:
-        """
-        Perform any preprocess work on the source image
-        prior to transforming that image into a pytif
-
-        Args:
-            file: full path/name of local file
-        Returns:
-            Image: Vips object of source file
-        """
         image = Image.new_from_file(file, access='sequential')
         if image.height > self.max_img_height or image.width > self.max_img_width:
             if image.height >= image.width:
