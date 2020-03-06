@@ -41,12 +41,12 @@
 				"otherNodes": "subjects",
 				"xpath": "./metadata/ead/archdesc/controlaccess/subject"
 			},
-			{ "label": "usage",
+			{ "label": "copyrightStatus",
 				"constant": "",
 				"format": "text"
 			},
 			{
-				"label": "license",
+				"label": "copyrightStatement",
 				"xpath": "./metadata/ead/archdesc/userestrict/p",
 				"format": "text"
 			},

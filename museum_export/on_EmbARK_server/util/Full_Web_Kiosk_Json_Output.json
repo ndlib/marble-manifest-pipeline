@@ -1,0 +1,91 @@
+{
+	"objects": [
+
+
+
+
+
+
+
+
+		{
+		"sourceSystem": "EmbARK",
+		"title": "Coronation of the Virgin",
+		"creator": "Unidentified German artist",
+		"dateCreated": "ca. 1460",
+		"classification": "Fine Arts",
+		"workType": "Sculpture",
+		"medium": "gilt polychrome over wood",
+
+		"uniqueIdentifier": "1934.007.001",
+
+		"repository": "museum",
+		"subjects": [
+
+
+
+					{"authority": "IA", "term": "Blessed Virgin Mary", "uri": "http://vocab.getty.edu/page/ia/901000032"}
+				,
+
+
+
+					{"authority": "AAT", "term": "crowns", "uri": "http://vocab.getty.edu/aat/300046020"}
+				,
+
+
+
+
+
+					{"authority": "IA", "term": "God the Father", "uri": "http://vocab.getty.edu/page/ia/901000593"}
+				,
+
+
+
+
+					{"authority": "IA", "term": "Jesus Christ", "uri": "http://vocab.getty.edu/page/ia/901000087"}
+				,
+
+
+
+					{"authority": "AAT", "term": "orbs", "uri": "http://vocab.getty.edu/aat/300211999"}
+				,
+
+
+
+
+					{"authority": "AAT", "term": "religion", "uri": "http://vocab.getty.edu/aat/300054300"}
+				,
+
+
+
+
+					{"authority": "AAT", "term": "scepters", "uri": "http://vocab.getty.edu/aat/300214161"}
+
+
+
+			 ],
+		"copyrightStatus": "Public domain",
+		"copyrightStatement": "",
+		"access":
+
+
+
+
+
+
+						"Galleries Ancient, Medieval, and Renaissance Art Gallery"
+
+
+				,
+ 		"format": "",
+		"dimensions": "43 x 34 x 12 in. (109.22 x 86.36 x 30.48 cm)",
+		"dedication": "Gift of Mrs. F. H. Wickett",
+		"description": "",
+		"creationPlace": {"continent": "",
+			"country": "",
+			"state": "",
+			"county": "",
+			"city": "",
+			"historic": ""
+			},
+	

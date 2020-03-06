@@ -5,18 +5,6 @@ echo "[Install phase] `date` in `pwd`"
 cp $BLUEPRINTS_DIR/deploy/cloudformation/manifest-pipeline.yml ./
 
 # install dependencies for specific lambdas
-pushd find_objects
-./local_install.sh
-popd
-
-pushd find_images_for_objects
-./local_install.sh
-popd
-
-pushd send_objects_to_pipeline
-./local_install.sh
-popd
-
 pushd process_manifest
 ./local_install.sh
 popd
@@ -34,5 +22,9 @@ pushd museum_export
 popd
 
 pushd harvest_eads
+./local_install.sh
+popd
+
+pushd aleph_export
 ./local_install.sh
 popd

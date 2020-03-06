@@ -3,7 +3,6 @@ import json
 import os
 import boto3
 from io import StringIO
-from .s3_helpers import read_s3_file_content
 
 
 def load_image_data(id, config):
@@ -29,7 +28,8 @@ def load_image_from_s3(s3Bucket, s3Path, id, config):
     s3Path = s3Path + "/" + id + "/" + config['image-data-file']
 
     try:
-        source = read_s3_file_content(s3Bucket, s3Path)
+        content_object = boto3.resource('s3').Object(s3Bucket, s3Path)
+        source = content_object.get()['Body'].read().decode('utf-8')
         return json.loads(source)
     except boto3.resource('s3').meta.client.exceptions.NoSuchKey:
         return {}
@@ -52,7 +52,8 @@ def load_csv_data(id, config):
 def load_id_from_s3(s3Bucket, s3Path, id):
     s3Path = s3Path + "/" + id + ".csv"
 
-    source = read_s3_file_content(s3Bucket, s3Path)
+    content_object = boto3.resource('s3').Object(s3Bucket, s3Path)
+    source = content_object.get()['Body'].read().decode('utf-8')
     f = StringIO(source)
 
     return list(csv.DictReader(f, delimiter=','))
@@ -85,7 +86,11 @@ class Item():
         return self._find_row(self.object.get('collectionId'))
 
     def parent(self):
-        return self._find_row(self.object.get('parentId'))
+        parent = self._find_row(self.object.get('parentId'))
+        if not parent:
+            parent = self
+
+        return parent
 
     def get(self, key, default=False):
         return self.object.get(key, default)
@@ -178,7 +183,7 @@ def _manifest_paths(row, config):
 def _add_image_dimensions(row, all_image_data, config):
     level = row.get('level')
     if level != "file":
-        row.update({"width": "", "height": ""})
+        row.update({"width": None, "height": None})
         return
 
     image_key = os.path.splitext(row.get('id'))[0]

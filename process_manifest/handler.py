@@ -1,24 +1,22 @@
-import sys
+import _set_path  # noqa
 from pathlib import Path
 import os
-from iiifCollection import iiifCollection
+from iiifManifest import iiifManifest
+from MetadataMappings import MetadataMappings
 from ToSchema import ToSchema
 from ndJson import ndJson
+from pipelineutilities.csv_collection import load_csv_data
+from pipelineutilities.pipeline_config import get_pipeline_config
+from pipelineutilities.s3_helpers import InprocessBucket
+import sentry_sdk
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 
-where_i_am = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(where_i_am)
-sys.path.append(where_i_am + "/dependencies")
 
-from dependencies.pipelineutilities.csv_collection import load_csv_data
-from dependencies.pipelineutilities.pipeline_config import get_pipeline_config
-from dependencies.pipelineutilities.s3_helpers import InprocessBucket
-
-import dependencies.sentry_sdk
-from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
-# sentry_sdk.init(
-#    dsn=os.environ['SENTRY_DSN'],
-#    integrations=[AwsLambdaIntegration()]
-# )
+if 'SENTRY_DSN' in os.environ:
+    sentry_sdk.init(
+        dsn=os.environ['SENTRY_DSN'],
+        integrations=[AwsLambdaIntegration()]
+    )
 
 
 def run(event, context):
@@ -33,10 +31,9 @@ def run(event, context):
         inprocess_bucket = InprocessBucket(id, config)
 
         parent = load_csv_data(id, config)
-#        image = load_image_data(id, event)
 
-        # a2s = AthenaToSchema(event, parent, [])
-        iiif = iiifCollection(config, parent)
+        mapping = MetadataMappings(parent)
+        iiif = iiifManifest(config, parent, mapping)
         manifest = iiif.manifest()
 
         # split the manifests

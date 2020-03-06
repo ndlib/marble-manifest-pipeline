@@ -10,8 +10,13 @@ from urllib.parse import urlparse
 
 bucket_to_url = {
     "libnd-smb-rbsc": 'https://rarebooks.library.nd.edu/',
-    "rbsc-test-files": 'https://rarebooks.library.nd.edu/'
+    "rbsc-test-files": 'https://rarebooks.library.nd.edu/',
 }
+
+folders_to_crawl = [
+    "digital",
+    "collections/ead_xml/images"
+]
 
 # patterns we skip if the file matches these
 skip_files = [
@@ -22,6 +27,7 @@ skip_files = [
 # patterns that corrispond to urls we can parse
 valid_urls = [
     r"http[s]?:[/]{2}rarebooks[.]library.*",
+    r"http[s]?:[/]{2}rarebooks[.]nd.*",
 ]
 
 regexps = {
@@ -29,10 +35,12 @@ regexps = {
         r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
         r"([a-zA-Z]{3}_[0-9]{2,4}-[0-9]+)",
     ],
-    "bookreader": [
+    "digital": [
         r"(^El_Duende)",
         r"(^Newberry-Case_[a-zA-Z]{2}_[0-9]{3})",
-        r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{1,3}))"
+        r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
+        r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{1,3}))",
+        r"(^[0-9]{4})",
     ]
 }
 # urls in this list do not have a group note in the output of the parse_filename function
@@ -61,7 +69,10 @@ def id_from_url(url):
     for exp in test_expressions:
         test = re.findall(exp, file)
         if test:
-            return "%s://%s%s/%s" % (url.scheme, url.netloc, directory, test[0])
+            url_part = url.netloc
+            if url_part == 'rarebooks.nd.edu':
+                url_part = 'rarebooks.library.nd.edu'
+            return "%s://%s%s/%s" % (url.scheme, url_part, directory, test[0])
 
     return False
 
@@ -128,37 +139,40 @@ def make_label(url, id):
 
 def crawl_available_files(config):
     order_field = {}
-    for bucket_info in config['rbsc-image-buckets'].items():
-        bucket = bucket_info[0]
-        for directory in bucket_info[1]:
-            objects = get_matching_s3_objects(bucket, directory)
-            for obj in objects:
-                if is_jpg(obj.get('Key')):
-                    url = bucket_to_url[bucket] + obj.get('Key')
-                    id = id_from_url(url)
-                    if id:
-                        if not order_field.get(id, False):
-                            order_field[id] = {
-                                "FileId": id,
-                                "Source": "RBSC",
-                                "LastModified": False,
-                                "files": [],
-                            }
+    bucket = config['rbsc-image-bucket']
+    print("crawling image files in this bucket: ", bucket)
+    for directory in folders_to_crawl:
+        objects = get_matching_s3_objects(bucket, directory)
+        for obj in objects:
+            if is_jpg(obj.get('Key')):
+                url = bucket_to_url[bucket] + obj.get('Key')
+                id = id_from_url(url)
+                # if obj.get('Key') == 'digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg':
+                #     print(url, id)
 
-                        obj['FileId'] = id
-                        obj['Label'] = make_label(url, id)
-                        # set the overall last modified to the most recent
-                        if not order_field[id]["LastModified"] or obj['LastModified'] > order_field[id]["LastModified"]:
-                            order_field[id]["LastModified"] = obj['LastModified']
+                if id:
+                    if not order_field.get(id, False):
+                        order_field[id] = {
+                            "FileId": id,
+                            "Source": "RBSC",
+                            "LastModified": False,
+                            "files": [],
+                        }
 
-                        # Athena timestamp 'YYYY-MM-DD HH:MM:SS' 24 hour time no timezone
-                        # here i am converting to utc because the timezone is lost,
-                        obj['LastModified'] = obj['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
-                        obj['Order'] = len(order_field[id]['files'])
-                        obj['Source'] = 'RBSC'
-                        obj['Path'] = "s3://" + os.path.join(bucket, obj['Key'])
+                    obj['FileId'] = id
+                    obj['Label'] = make_label(url, id)
+                    # set the overall last modified to the most recent
+                    if not order_field[id]["LastModified"] or obj['LastModified'] > order_field[id]["LastModified"]:
+                        order_field[id]["LastModified"] = obj['LastModified']
 
-                        order_field[id]['files'].append(obj)
+                    # Athena timestamp 'YYYY-MM-DD HH:MM:SS' 24 hour time no timezone
+                    # here i am converting to utc because the timezone is lost,
+                    obj['LastModified'] = obj['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
+                    obj['Order'] = len(order_field[id]['files'])
+                    obj['Source'] = 'RBSC'
+                    obj['Path'] = "s3://" + os.path.join(bucket, obj['Key'])
+
+                    order_field[id]['files'].append(obj)
 
     return order_field
 
@@ -183,12 +197,12 @@ def test():
     from pipeline_config import get_pipeline_config
     event = {"local": True}
     event['local-path'] = "/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/"
+    event['local-path'] = "../../example/"
 
     config = get_pipeline_config(event)
-    print(config)
-
     data = crawl_available_files(config)
-    print(data)
-    # data = crawl_available_files()
+    id = id_from_url("https://rarebooks.nd.edu/digital/civil_war/letters/images/barker/5040-01.a.150.jpg")
+    print(id)
+    print(data[id])
 
     return

@@ -44,7 +44,7 @@
         {
           "label": {
             "en": [
-              "Creator "
+              "Creator"
             ]
           },
           "value": {
@@ -62,18 +62,6 @@
           "value": {
             "en": [
               "dateCreated"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Classification "
-            ]
-          },
-          "value": {
-            "en": [
-              "Classification"
             ]
           }
         },
@@ -116,30 +104,6 @@
         {
           "label": {
             "en": [
-              "Usage"
-            ]
-          },
-          "value": {
-            "en": [
-              "usage"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Copyright"
-            ]
-          },
-          "value": {
-            "en": [
-              "license"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
               "Access"
             ]
           },
@@ -176,7 +140,7 @@
         {
           "label": {
             "en": [
-              "Credit line "
+              "Credit Line"
             ]
           },
           "value": {
@@ -206,11 +170,11 @@
         },
         "value": {
           "en": [
-            "usage"
+            "copyrightStatus"
           ]
         }
       },
-      "rights": "license",
+      "rights": "copyrightStatement",
       "summary": {
         "en": [
           "description"
@@ -243,7 +207,7 @@
     {
       "label": {
         "en": [
-          "Creator "
+          "Creator"
         ]
       },
       "value": {
@@ -261,18 +225,6 @@
       "value": {
         "en": [
           "dateCreated"
-        ]
-      }
-    },
-    {
-      "label": {
-        "en": [
-          "Classification "
-        ]
-      },
-      "value": {
-        "en": [
-          "Classification"
         ]
       }
     },
@@ -315,30 +267,6 @@
     {
       "label": {
         "en": [
-          "Usage"
-        ]
-      },
-      "value": {
-        "en": [
-          "usage"
-        ]
-      }
-    },
-    {
-      "label": {
-        "en": [
-          "Copyright"
-        ]
-      },
-      "value": {
-        "en": [
-          "license"
-        ]
-      }
-    },
-    {
-      "label": {
-        "en": [
           "Access"
         ]
       },
@@ -375,7 +303,7 @@
     {
       "label": {
         "en": [
-          "Credit line "
+          "Credit Line"
         ]
       },
       "value": {
@@ -423,16 +351,22 @@
     },
     "value": {
       "en": [
-        "usage"
+        "copyrightStatus"
       ]
     }
   },
-  "rights": "license",
+  "rights": "copyrightStatement",
   "seeAlso": [
     {
       "format": "application/xml",
       "id": "https://presentation-iiif.library.nd.edu/collectionId/mets.xml",
       "profile": "http://www.loc.gov/METS/",
+      "type": "Dataset"
+    },
+    {
+      "format": "application/ld+json",
+      "id": "https://presentation-iiif.library.nd.edu/collectionId",
+      "profile": "https://schema.org/",
       "type": "Dataset"
     }
   ],

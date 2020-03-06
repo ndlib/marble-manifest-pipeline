@@ -1,0 +1,33 @@
+{
+  "https://rarebooks.library.nd.edu/digital/bookreader/CodLat_b04/images/CodLat_b04": {
+    "FileId": "https://rarebooks.library.nd.edu/digital/bookreader/CodLat_b04/images/CodLat_b04",
+    "Source": "RBSC",
+    "LastModified": "2020-01-28 14:55:01+00:00",
+    "files": [
+      {
+        "Key": "digital/bookreader/CodLat_b04/images/CodLat_b04-000a_front_cover.jpg",
+        "LastModified": "2020-01-28 14:54:41",
+        "ETag": "\"3b16c210f529e33c3acffce66bc2268d\"",
+        "Size": 566619,
+        "StorageClass": "STANDARD",
+        "FileId": "https://rarebooks.library.nd.edu/digital/bookreader/CodLat_b04/images/CodLat_b04",
+        "Label": "000a front cover",
+        "Order": 0,
+        "Source": "RBSC",
+        "Path": "s3://rbsc-test-files/digital/bookreader/CodLat_b04/images/CodLat_b04-000a_front_cover.jpg"
+      },
+      {
+        "Key": "digital/bookreader/CodLat_b04/images/CodLat_b04-000b_front_pastedown.jpg",
+        "LastModified": "2020-01-28 14:54:41",
+        "ETag": "\"219b39e6ef543695f25543d7c5f9f171\"",
+        "Size": 810821,
+        "StorageClass": "STANDARD",
+        "FileId": "https://rarebooks.library.nd.edu/digital/bookreader/CodLat_b04/images/CodLat_b04",
+        "Label": "000b front pastedown",
+        "Order": 1,
+        "Source": "RBSC",
+        "Path": "s3://rbsc-test-files/digital/bookreader/CodLat_b04/images/CodLat_b04-000b_front_pastedown.jpg"
+      }
+    ]
+  }
+}

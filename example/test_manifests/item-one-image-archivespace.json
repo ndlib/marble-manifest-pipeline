@@ -92,30 +92,6 @@
         {
           "label": {
             "en": [
-              "Copyright"
-            ]
-          },
-          "value": {
-            "en": [
-              "usage"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Conditions Governing Use"
-            ]
-          },
-          "value": {
-            "en": [
-              "license"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
               "Link to finding aid"
             ]
           },
@@ -164,7 +140,7 @@
         {
           "label": {
             "en": [
-              "Extent"
+              "Dimensions"
             ]
           },
           "value": {
@@ -206,11 +182,11 @@
         },
         "value": {
           "en": [
-            "usage"
+            "copyrightStatus"
           ]
         }
       },
-      "rights": "license",
+      "rights": "copyrightStatement",
       "summary": {
         "en": [
           "description"
@@ -291,30 +267,6 @@
     {
       "label": {
         "en": [
-          "Copyright"
-        ]
-      },
-      "value": {
-        "en": [
-          "usage"
-        ]
-      }
-    },
-    {
-      "label": {
-        "en": [
-          "Conditions Governing Use"
-        ]
-      },
-      "value": {
-        "en": [
-          "license"
-        ]
-      }
-    },
-    {
-      "label": {
-        "en": [
           "Link to finding aid"
         ]
       },
@@ -363,7 +315,7 @@
     {
       "label": {
         "en": [
-          "Extent"
+          "Dimensions"
         ]
       },
       "value": {
@@ -423,16 +375,22 @@
     },
     "value": {
       "en": [
-        "usage"
+        "copyrightStatus"
       ]
     }
   },
-  "rights": "license",
+  "rights": "copyrightStatement",
   "seeAlso": [
     {
       "format": "application/xml",
       "id": "https://presentation-iiif.library.nd.edu/collectionId/mets.xml",
       "profile": "http://www.loc.gov/METS/",
+      "type": "Dataset"
+    },
+    {
+      "format": "application/ld+json",
+      "id": "https://presentation-iiif.library.nd.edu/collectionId",
+      "profile": "https://schema.org/",
       "type": "Dataset"
     }
   ],

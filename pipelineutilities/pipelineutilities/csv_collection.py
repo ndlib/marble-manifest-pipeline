@@ -86,7 +86,11 @@ class Item():
         return self._find_row(self.object.get('collectionId'))
 
     def parent(self):
-        return self._find_row(self.object.get('parentId'))
+        parent = self._find_row(self.object.get('parentId'))
+        if not parent:
+            parent = self
+
+        return parent
 
     def get(self, key, default=False):
         return self.object.get(key, default)
@@ -179,7 +183,7 @@ def _manifest_paths(row, config):
 def _add_image_dimensions(row, all_image_data, config):
     level = row.get('level')
     if level != "file":
-        row.update({"width": "", "height": ""})
+        row.update({"width": None, "height": None})
         return
 
     image_key = os.path.splitext(row.get('id'))[0]
