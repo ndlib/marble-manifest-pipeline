@@ -12,5 +12,4 @@ aws cloudformation deploy \
   --template-file $templatePath \
   --parameter-overrides \
       SentryDsn=https://136d489c91484b55be18e0a28d463b43@sentry.io/1831199 \
-      RBSCS3ProdImageBucketArn=arn:aws:s3:::rbsc-test-files \
-      RBSCS3TestImageBucketArn=arn:aws:s3:::rbsc-test-files
+      RBSCS3ImageBucketName="rbsc-test-files"
