@@ -35,7 +35,8 @@ temp_ids_example = {
     "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01",
     "https://rarebooks.nd.edu/digital/civil_war/letters/images/barker/5040-01.a.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/letters/images/barker/5040",
     "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg": "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01",
-    "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-2-B/images/MSN-EA_8011-02-B-000a.jpg": "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-2-B/images/MSN-EA_8011-02"
+    "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-2-B/images/MSN-EA_8011-02-B-000a.jpg": "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-2-B/images/MSN-EA_8011-02",
+    "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010"
 }
 
 valid_urls = [
