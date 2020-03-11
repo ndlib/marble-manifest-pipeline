@@ -56,6 +56,7 @@ COPY pyramid_generator/image_processor.py /usr/local/bin/
 COPY pyramid_generator/processor_factory.py /usr/local/bin/
 COPY pyramid_generator/s3_processor.py /usr/local/bin/
 COPY pyramid_generator/gdrive_processor.py /usr/local/bin/
+COPY pyramid_generator/bendo_processor.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/pipeline_config.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/csv_collection.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/s3_helpers.py /usr/local/bin/

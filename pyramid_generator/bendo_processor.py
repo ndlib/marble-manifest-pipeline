@@ -1,7 +1,8 @@
+import requests
 from image_processor import ImageProcessor
 
 
-class S3ImageProcessor(ImageProcessor):
+class BendoImageProcessor(ImageProcessor):
     def __init__(self) -> None:
         super().__init__()
 
@@ -17,10 +18,10 @@ class S3ImageProcessor(ImageProcessor):
             self._log_result('md5sum', md5sum)
             self._log_result('reason', 'no changes to image since last run')
         else:
-            img_bucket, key = self.source_image.split('/', 2)[-1].split('/', 1)
-            s3_file = f"{self.img_write_base}/{self.id}/images/{self.tif_file}"
-            self.S3_RESOURCE.Bucket(img_bucket).download_file(key, self.local_file)
+            with open(self.local_file, 'wb') as image_file:
+                image_file.write(requests.get(self.source_image).content)
             self._generate_pytiff(self.local_file, self.tif_file)
+            s3_file = f"{self.img_write_base}/{self.id}/images/{self.tif_file}"
             self.S3_RESOURCE.Bucket(self.bucket).upload_file(self.tif_file, s3_file)
             self._cleanup()
             self._log_result('status', 'processed')
