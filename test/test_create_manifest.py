@@ -30,17 +30,14 @@ class TestCreateManifest(unittest.TestCase):
         for id in self.ids:
             print("Testing id, {}".format(id))
             data = load_data_for_test(id)
-
+            # print("data = ", data)
             parent = load_csv_data(id, config)
             mapping = MetadataMappings(parent)
             iiif = iiifManifest(config, parent, mapping)
             manifest = iiif.manifest()
-
             debug_json(data['manifest_json'], manifest)
-
             manifest_json = "".join(json.dumps(data['manifest_json'], sort_keys=True).split())
             result_json = "".join(json.dumps(manifest, sort_keys=True).split())
-
             self.assertEqual(result_json, manifest_json)
 
     def test_addProvider(self):

@@ -24,3 +24,8 @@ export SSM_KEY_BASE=/all/manifest-pipeline-v3
 export SENTRY_DSN=1234567890
 aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 python -c 'from handler import *; test()'
+
+## To run blueprints:
+export S3_BUCKET=<s3 bucket>  e.g. testlibnd-cf
+aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
+./local-deploy.sh new-csv ../marble-blueprints

@@ -1,12 +1,13 @@
 # handler.py
 """ Module to launch application """
 
+import _set_path  # noqa
 import os
 from pathlib import Path
 from harvest_aleph_marc import HarvestAlephMarc  # noqa: #502
-from dependencies.pipelineutilities.pipeline_config import get_pipeline_config  # noqa: E402
-import dependencies.sentry_sdk as sentry_sdk  # noqa: E402
-from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
+from pipelineutilities.pipeline_config import get_pipeline_config  # noqa: E402
+import sentry_sdk   # noqa: E402
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
 
 
 if 'SENTRY_DSN' in os.environ:

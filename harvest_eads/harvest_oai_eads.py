@@ -25,6 +25,7 @@ class HarvestOaiEads():
         self.json_control = self._read_xml_to_json_translation_control_file("./xml_to_json_translation_control_file.json")  # noqa: E501
         self.base_oai_url = self.config['archive-space-server-base-url']
         self.start_time = time.time()
+        print("Will break after ", datetime.now() + timedelta(seconds=self.config['seconds-to-allow-for-processing']))
         self.jsonFromXMLClass = createJsonFromXml(self.config, self.json_control)
         self.eadToResourceDictFilename = self.config['process-bucket-ead-resource-mappings-file']
         self.repositories_of_interest = [3]
