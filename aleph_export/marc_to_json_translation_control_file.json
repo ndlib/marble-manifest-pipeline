@@ -41,6 +41,13 @@
 				"subfields": ["a", "b", "c", "d", "q"],
 				"format": "text"
 			},
+			{ "label": "creators",
+				"fields": ["100", "199"],
+				"selection": "range",
+				"subfields": ["a", "b", "c", "d", "q"],
+				"extraProcessing": "format_creators",
+				"format": "array"
+			},
 			{ "label": "dateCreated",
 				"fields": ["264", "260"],
 				"selection": "first",

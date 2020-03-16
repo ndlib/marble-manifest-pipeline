@@ -8,7 +8,7 @@ from additional_functions import check_for_inconsistent_dao_image_paths, file_na
     define_manifest_level, get_repository_name_from_ead_resource, return_None_if_needed, \
     get_seed_nodes_json, get_xml_node_value, get_value_from_labels, remove_nodes_from_dictionary, \
     enforce_required_descendants, exclude_if_pattern_matches, strip_unwanted_whitespace, \
-    get_json_value_as_string
+    get_json_value_as_string, format_creators
 from output_csv import OutputCsv
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am)
@@ -206,6 +206,9 @@ class createJsonFromXml():
         elif external_process_name == 'file_name_from_filePath':
             if 'filename' in parameters_json:
                 return_value = file_name_from_filePath(parameters_json['filename'])
+        elif external_process_name == "format_creators":
+            if 'creator' in parameters_json:
+                return_value = format_creators(parameters_json["creator"])
         return return_value
 
     def _process_get_files_from_uri(self, json_node, field, parameters_json):

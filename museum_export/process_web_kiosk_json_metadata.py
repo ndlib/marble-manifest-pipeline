@@ -20,8 +20,9 @@ class processWebKioskJsonMetadata():
         Individual json files are created, one per object.
         These individual json files are saved locally by object name.
         They are then uploaded to a Google Team Drive, and deleted locally. """
-    def __init__(self, config, google_connection):
+    def __init__(self, config, google_connection, event):
         self.config = config
+        self.event = event
         self.folder_name = "/tmp"
         self.file_name = 'web_kiosk_composite_metadata.json'
         self.composite_json = {}
@@ -90,6 +91,8 @@ class processWebKioskJsonMetadata():
                 pass
         if self.delete_local_copy:
             delete_file(self.folder_name, self.file_name)
+        if not self.event.get("local", False):
+            print("Saved to s3: ", os.path.join(self.config['process-bucket'], self.config['process-bucket-csv-basepath']))  # noqa: #501
         return objects_processed
 
     def _process_one_json_object(self, object):

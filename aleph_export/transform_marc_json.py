@@ -109,6 +109,8 @@ class TransformMarcJson():
             results = self._lookup_work_type(value)
         elif extra_processing == "format_subjects":
             results = self._format_subjects(value)
+        elif extra_processing == "format_creators":
+            results = self._format_creators(value)
         return results
 
     def _lookup_work_type(self, key_to_find):
@@ -131,7 +133,7 @@ class TransformMarcJson():
         return work_type_dict.get(key_to_find, "")
 
     def _format_subjects(self, value):
-        """ Subjects require special formatting.  We may need to expand this to include URI if subfield 0 is added """
+        """ Subjects require special formatting.  """
         results = []
         for each_value in value:
             node = {}
@@ -140,6 +142,17 @@ class TransformMarcJson():
                 node["uri"] = each_value.split("^^^")[1]
             else:
                 node['term'] = each_value
+            results.append(node)
+        return results
+
+    def _format_creators(self, value):
+        """ Creators require special formatting. """
+        results = []
+        for each_value in value:
+            node = {}
+            node["attribution"] = ""
+            node["role"] = "Primary"
+            node["fullName"] = each_value
             results.append(node)
         return results
 
