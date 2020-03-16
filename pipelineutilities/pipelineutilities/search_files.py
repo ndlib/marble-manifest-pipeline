@@ -35,6 +35,10 @@ regexps = {
         r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
         r"([a-zA-Z]{3}_[0-9]{2,4}-[0-9]+)",
     ],
+    "MARBLE-images": [
+        r"([a-zA-Z]{3}_[0-9]{9})",
+        r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{4})"
+    ],
     "moore": [
         r"(^MSN[-]CW[_]8010)"
     ],
@@ -205,7 +209,7 @@ def test():
 
     config = get_pipeline_config(event)
     #data = crawl_available_files(config)
-    id = id_from_url("https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg")
+    id = id_from_url("https://rarebooks.nd.edu/digital/MARBLE-images/MSE-REE_0006/MSE-REE_0006-002.a.jpg")
     print(id)
     #print(data[id])
 
