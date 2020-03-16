@@ -2,7 +2,7 @@ Label,Summary,Rights,Attribution,unique_identifier,Notify,Metadata_label,Metadat
 name,description,copyrightHolder,sponsor,identifier,creator@email.com,,,seeAlsoId1,seeAlsoLabel1,seeAlsoType1,seeAlsoFormat1,seeAlsoProfile1,snite,,
 ,,,,,,"creator","creator"
 ,,,,,,"dateCreated","dateCreated"
-,,,,,,"license","license"
+,,,,,,"license","copyrightStatement"
 ,,,,,,"provider","provider"
 ,,,,,,"subject","subject"
 ,,,,,,"conditionOfAccess","conditionOfAccess"

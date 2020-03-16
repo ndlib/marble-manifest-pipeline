@@ -6,9 +6,9 @@ def load_data_for_test(id):
     data = {}
     current_path = str(Path(__file__).parent.absolute())
 
-    #with open(current_path + "/../example/{}/image-data.json".format(id), 'r') as input_source:
+    # with open(current_path + "/../example/{}/image-data.json".format(id), 'r') as input_source:
     #    data['image_data'] = json.load(input_source)
-    #input_source.close()
+    # input_source.close()
 
     with open(current_path + '/../example/test_manifests/{}.json'.format(id), 'r') as input_source:
         data['manifest_json'] = json.load(input_source)

@@ -12,9 +12,9 @@ class OutputCsv():
                                          fieldnames=csv_field_names,
                                          extrasaction='ignore',
                                          quoting=csv.QUOTE_ALL)
-        self._write_csv_header()
+        self.write_csv_header()
 
-    def _write_csv_header(self):
+    def write_csv_header(self):
         """ Write header fields to csv string io """
         self.csv_string_io.truncate(0)  # truncate anything in the io buffer
         self.csv_string_io.seek(0)  # reposition the pointer to the beginning of the buffer

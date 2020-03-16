@@ -13,6 +13,11 @@ bucket_to_url = {
     "rbsc-test-files": 'https://rarebooks.library.nd.edu/',
 }
 
+folders_to_crawl = [
+    "digital",
+    "collections/ead_xml/images"
+]
+
 # patterns we skip if the file matches these
 skip_files = [
     r"^.*[.]100[.]jpg$",
@@ -142,40 +147,40 @@ def make_label(url, id):
 
 def crawl_available_files(config):
     order_field = {}
-    for bucket_info in config['rbsc-image-buckets'].items():
-        bucket = bucket_info[0]
-        for directory in bucket_info[1]:
-            objects = get_matching_s3_objects(bucket, directory)
-            for obj in objects:
-                if is_jpg(obj.get('Key')):
-                    url = bucket_to_url[bucket] + obj.get('Key')
-                    id = id_from_url(url)
-                    if obj.get('Key') == 'digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg':
-                        print(url, id)
+    bucket = config['rbsc-image-bucket']
+    print("crawling image files in this bucket: ", bucket)
+    for directory in folders_to_crawl:
+        objects = get_matching_s3_objects(bucket, directory)
+        for obj in objects:
+            if is_jpg(obj.get('Key')):
+                url = bucket_to_url[bucket] + obj.get('Key')
+                id = id_from_url(url)
+                # if obj.get('Key') == 'digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg':
+                #     print(url, id)
 
-                    if id:
-                        if not order_field.get(id, False):
-                            order_field[id] = {
-                                "FileId": id,
-                                "Source": "RBSC",
-                                "LastModified": False,
-                                "files": [],
-                            }
+                if id:
+                    if not order_field.get(id, False):
+                        order_field[id] = {
+                            "FileId": id,
+                            "Source": "RBSC",
+                            "LastModified": False,
+                            "files": [],
+                        }
 
-                        obj['FileId'] = id
-                        obj['Label'] = make_label(url, id)
-                        # set the overall last modified to the most recent
-                        if not order_field[id]["LastModified"] or obj['LastModified'] > order_field[id]["LastModified"]:
-                            order_field[id]["LastModified"] = obj['LastModified']
+                    obj['FileId'] = id
+                    obj['Label'] = make_label(url, id)
+                    # set the overall last modified to the most recent
+                    if not order_field[id]["LastModified"] or obj['LastModified'] > order_field[id]["LastModified"]:
+                        order_field[id]["LastModified"] = obj['LastModified']
 
-                        # Athena timestamp 'YYYY-MM-DD HH:MM:SS' 24 hour time no timezone
-                        # here i am converting to utc because the timezone is lost,
-                        obj['LastModified'] = obj['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
-                        obj['Order'] = len(order_field[id]['files'])
-                        obj['Source'] = 'RBSC'
-                        obj['Path'] = "s3://" + os.path.join(bucket, obj['Key'])
+                    # Athena timestamp 'YYYY-MM-DD HH:MM:SS' 24 hour time no timezone
+                    # here i am converting to utc because the timezone is lost,
+                    obj['LastModified'] = obj['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
+                    obj['Order'] = len(order_field[id]['files'])
+                    obj['Source'] = 'RBSC'
+                    obj['Path'] = "s3://" + os.path.join(bucket, obj['Key'])
 
-                        order_field[id]['files'].append(obj)
+                    order_field[id]['files'].append(obj)
 
     return order_field
 
@@ -200,6 +205,7 @@ def test():
     from pipeline_config import get_pipeline_config
     event = {"local": True}
     event['local-path'] = "/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/"
+    event['local-path'] = "../../example/"
 
     config = get_pipeline_config(event)
     #data = crawl_available_files(config)
