@@ -30,10 +30,19 @@ regexps = {
         r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
         r"([a-zA-Z]{3}_[0-9]{2,4}-[0-9]+)",
     ],
+    "MARBLE-images": [
+        r"([a-zA-Z]{3}_[0-9]{9})",
+        r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{4})"
+    ],
+    "moore": [
+        r"(^MSN[-]CW[_]8010)"
+    ],
     "digital": [
         r"(^El_Duende)",
         r"(^Newberry-Case_[a-zA-Z]{2}_[0-9]{3})",
-        r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{1,3}))"
+        r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
+        r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{1,3}))",
+        r"(^[0-9]{4})",
     ]
 }
 # urls in this list do not have a group note in the output of the parse_filename function
@@ -58,6 +67,7 @@ def id_from_url(url):
     for key in regexps:
         if key in url.path:
             test_expressions = regexps[key]
+            break
 
     for exp in test_expressions:
         test = re.findall(exp, file)
@@ -192,9 +202,9 @@ def test():
     event['local-path'] = "/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/"
 
     config = get_pipeline_config(event)
-    data = crawl_available_files(config)
-    id = id_from_url("https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg")
+    #data = crawl_available_files(config)
+    id = id_from_url("https://rarebooks.nd.edu/digital/MARBLE-images/MSE-REE_0006/MSE-REE_0006-002.a.jpg")
     print(id)
-    print(data[id])
+    #print(data[id])
 
     return
