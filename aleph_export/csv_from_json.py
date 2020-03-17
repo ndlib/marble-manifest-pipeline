@@ -28,7 +28,7 @@ class CsvFromJson():
             all related images. """
         each_file_dict = {}
         id = id_from_url(file_uri)
-        print("id_from_url = ", id, " file_uri = ", file_uri)
+        # print("id_from_url = ", id, " file_uri = ", file_uri)
         each_file_dict['collectionId'] = json_node['collectionId']
         each_file_dict['level'] = 'file'
         each_file_dict['parentId'] = json_node['id']
