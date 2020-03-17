@@ -44,7 +44,8 @@
 			{ "label": "creators",
 				"fields": ["100", "199"],
 				"selection": "range",
-				"subfields": ["a", "b", "c", "d", "q"],
+				"subfields": ["a", "b", "c", "q"],
+				"specialSubfields": ["d"],
 				"extraProcessing": "format_creators",
 				"format": "array"
 			},

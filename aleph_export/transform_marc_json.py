@@ -146,13 +146,23 @@ class TransformMarcJson():
         return results
 
     def _format_creators(self, value):
-        """ Creators require special formatting. """
+        """ Creators require special formatting.
+            $a	Personal name (ex: Griesinger, Peggy)
+            $b	Numeration (ex. III) (used for royalty or people who are Jrs. or Srs.)
+            $c	Titles and other words associated with a name (ex. King of England)
+            $d	Dates associated with a name (ex. 1989-2089) this is birth and death date, second date blank if the person is still alive
+            $q Fuller form of name (ex. Librarian) - this is used as a way to differentiate between people with very similar names who also share birthdays - it happens!
+            """
         results = []
         for each_value in value:
             node = {}
             node["attribution"] = ""
             node["role"] = "Primary"
-            node["fullName"] = each_value
+            if "^^^" in each_value:
+                node["fullName"] = each_value.split("^^^")[0]
+                node["lifeDates"] = each_value.split("^^^")[1]
+            else:
+                node['fullName'] = each_value
             results.append(node)
         return results
 

@@ -1,5 +1,6 @@
 import csv
 import io
+import json
 
 
 class OutputCsv():
@@ -11,7 +12,8 @@ class OutputCsv():
         self.csv_writer = csv.DictWriter(self.csv_string_io,
                                          fieldnames=csv_field_names,
                                          extrasaction='ignore',
-                                         quoting=csv.QUOTE_ALL)
+                                         quoting=csv.QUOTE_ALL,
+                                         doublequote=True)
         self.write_csv_header()
 
     def write_csv_header(self):

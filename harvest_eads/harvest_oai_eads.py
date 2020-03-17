@@ -181,7 +181,7 @@ class HarvestOaiEads():
         if self._digital_records_exist(record):
             ead_id = self._get_ead_id(record)
             json_summary = self.jsonFromXMLClass.extract_fields(record, 'root', {})
-            if json_summary != {}:
+            if json_summary:
                 ead_id = self._get_ead_id(record)
                 self.event['eadToResourceDictionary'][ead_id] = identifier
                 # print(ead_id, ' = ', self.event['eadToResourceDictionary'][ead_id])
@@ -195,7 +195,7 @@ class HarvestOaiEads():
                 local_xml_output_folder = "/tmp/ead/json/"
                 create_directory(local_xml_output_folder)
                 with open(local_xml_output_folder + ead_id + '.json', 'w') as f:
-                    f.write(ElementTree.tostring(record, encoding='unicode'))
+                    json.dump(json_summary, f, indent=2)
         return json_summary
 
     def _get_ead_id(self, record):
