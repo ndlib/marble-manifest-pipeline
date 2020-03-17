@@ -34,7 +34,7 @@ def main():
     print("What should the the id for the directory be?")
     data["rbsc_id"] = input(":> ")
 
-    data["items"] = []
+    data["items"] = {}
 
     print("")
     print("Writing Manifest")

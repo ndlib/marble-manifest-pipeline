@@ -9,36 +9,45 @@ import json
 
 def main():
     data = {}
+    new_item = {}
     pp = pprint.PrettyPrinter(indent=4)
 
     print("")
     print("-------------------")
     print("Add to what directory?")
-    id = input(":> ")
+    directory = input(":> ")
 
-    data = load_manifest(id)
+    data = load_manifest(directory)
     print(data)
+
+    print("")
+    print("-------------------")
+    print("What is the item id?")
+    new_item["id"] = input(":> ")
+    if not new_item["id"]:
+        print("Invalid systen id")
+        exit()
 
     print("")
     print("-------------------")
     print("What directory do you want to add?")
     possible_directories = look_for_directory(input(":> "))
-    current_directory = select_path(possible_directories)
+    new_item["current_directory"] = select_path(possible_directories)
 
-    print(f"Selected Directory: {current_directory}")
+    print(f"Selected Directory: {new_item.get('current_directory')}")
     print("...")
     print("...Searching directory Please Wait...")
-    files = get_directory_files(current_directory)
-    if not files:
+    new_item["files"] = get_directory_files(new_item["current_directory"])
+    if not new_item["files"]:
         print("Unable to find directory")
         exit()
 
     print("")
     print("-------------------")
     print("...Copying images please wait...")
-    copy_files(data, files)
+    copy_files(id, new_item)
 
-    data["items"].append(files)
+    data["items"][new_item["id"]].append(new_item)
 
     print("")
     print("-------------------")
@@ -52,36 +61,6 @@ def main():
     print("All Data")
     pp = pprint.PrettyPrinter(indent=4)
     pp.pprint(data)
-    return
-
-    input(":> Press Enter to Continue")
-
-    print("")
-    print("-------------------")
-    print("...Copying images please wait...")
-    clean_up(data)
-    copy_files(data)
-    print("Done")
-    input(":> Press Enter to Continue")
-
-    print("")
-    print("-------------------")
-    print("Renaming Files")
-    # rename_files(data)
-    print("Done")
-    input(":> Press Enter to Continue")
-
-
-    print("")
-    print("-------------------")
-    print("Moving Back")
-    print("Done")
-    input(":> Press Enter to Continue")
-
-    print("")
-    print("-------------------")
-    print("Cleaning Up")
-    clean_up(data)
 
     print("Done")
 
@@ -113,14 +92,6 @@ def select_path(possible_directories):
 
 
 def get_directory_files(current_directory):
-    print("")
-    print("-------------------")
-    print("What is the item id?")
-    item_id = input(":> ")
-    if not item_id:
-        print("Invalid systen id")
-        exit()
-
     files = [join(current_directory, f) for f in listdir(current_directory) if can_copy_file(current_directory, f)]
 
     return {
@@ -164,8 +135,8 @@ def validate_replacement_pattern(replacement_pattern, data):
     return replacement_pattern
 
 
-def copy_files(data, files):
-    path = os.path.join("./fixit/", data["rbsc_id"])
+def copy_files(directory, new_item):
+    path = os.path.join("./fixit/", directory)
 
     for file in files["files"]:
         copyfile(file, os.path.join(path, os.path.basename(file)))
