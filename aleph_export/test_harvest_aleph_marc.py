@@ -1,6 +1,6 @@
 # test_harvest_aleph_marc
 """ test harvest_aleph_marc """
-
+import _set_path  # noqa
 import unittest
 from pathlib import Path
 from harvest_aleph_marc import HarvestAlephMarc
