@@ -110,9 +110,13 @@ class processWebKioskJsonMetadata():
             output_csv_class.write_csv_row(object)
             sequence = 0
             if 'digitalAssets' in object:
+                object['digitalAssets'] = json.loads(object['digitalAssets'])  # starting 3/18/20, this became a string, where it should be a json object
                 for digital_asset in object['digitalAssets']:
-                    self._write_file_csv_record(object, digital_asset, sequence, output_csv_class)
-                    sequence += 1
+                    if isinstance(digital_asset, dict):
+                        self._write_file_csv_record(object, digital_asset, sequence, output_csv_class)
+                        sequence += 1
+                    else:
+                        print("not a dict")
             s3_file_name = os.path.join(self.config['process-bucket-csv-basepath'], csv_file_name)
             write_s3_file(self.config['process-bucket'], s3_file_name, output_csv_class.return_csv_value())
         return missing_fields
@@ -144,7 +148,7 @@ class processWebKioskJsonMetadata():
         each_file_dict['parentId'] = object['id']
         each_file_dict['sourceSystem'] = object['sourceSystem']
         each_file_dict['repository'] = object['repository']
-        file_name = (digital_asset['fileDescription'])
+        file_name = digital_asset.get("fileDescription", "")
         each_file_dict['id'] = file_name
         if file_name in self.image_files:
             google_image_info = self.image_files[file_name]
