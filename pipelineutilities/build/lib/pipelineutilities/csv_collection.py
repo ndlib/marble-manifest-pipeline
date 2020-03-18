@@ -124,14 +124,25 @@ class Item():
 
 
 def _augment_row_data(row, all_image_data, config):
+    _turn_strings_to_json(row)
     _check_creator(row)
     _add_additional_paths(row, config)
     _add_image_dimensions(row, all_image_data, config)
 
 
+def _turn_strings_to_json(row):
+    for key in row.keys():
+        try:
+            row[key] = json.loads(row[key])
+        # we are simply testing if this is valid json if it is not and fails do nothing
+        # i realize this is an antipattern
+        except (ValueError, TypeError):
+            pass
+
+
 def _check_creator(row):
-    if not (row.get("creator", False) or row.get('creator')):
-        row["creator"] = "unknown"
+    if not (row.get("creators", False) or row.get('creators')) and (row.get("level") == "collection" or row.get("level") == "manifest"):
+        row["creators"] = [{"fullName": "unknown"}]
 
 
 def _add_additional_paths(row, config):

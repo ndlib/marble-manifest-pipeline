@@ -73,4 +73,8 @@ def test():
     event['process-bucket-csv-basepath'] = 'csv'
     event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     event['local'] = False
-    run(event, {})
+    import json
+    v = [{"obj": "value"}]
+    print(json.dumps(v))
+    print(json.loads('[{"obj": "value"}]'))
+    # run(event, {})

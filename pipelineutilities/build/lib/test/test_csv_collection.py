@@ -3,13 +3,15 @@ import os
 import unittest
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am + "/../")
-from pipelineutilities.csv_collection import Item, _check_creator, _add_additional_paths, _add_image_dimensions
+from pipelineutilities.csv_collection import Item, _check_creator, _add_additional_paths, _add_image_dimensions, _turn_strings_to_json
 
 objects = [
     {"sourceSystem": "EmbARK", "repository": "repository", "id": "collectionId", "collectionId": "collectionId", "parentId": "root", "level": "collection"},
-    {"sourceSystem": "", "repository": "", "id": "itemId", "collectionId": "collectionId", "parentId": "collectionId", "level": "manifest", "creator": ""},
+    {"sourceSystem": "", "repository": "", "id": "itemId", "collectionId": "collectionId", "parentId": "collectionId", "level": "manifest", "creator": "", "creators": "[]"},
     {"sourceSystem": "", "repository": "", "id": "fileId1", "collectionId": "collectionId", "parentId": "itemId", "level": "file"},
-    {"sourceSystem": "", "repository": "", "id": "fileId2", "collectionId": "collectionId", "parentId": "itemId", "level": "file", "creator": "Bob Bobbers"}
+    {"sourceSystem": "", "repository": "", "id": "fileId2", "collectionId": "collectionId", "parentId": "itemId", "level": "file", "creators": ""},
+    {"sourceSystem": "", "repository": "", "id": "itemId", "collectionId": "collectionId", "parentId": "collectionId", "level": "manifest", "creator": ""},
+    {"sourceSystem": "", "repository": "", "id": "fileId2", "collectionId": "collectionId", "parentId": "itemId", "level": "manifest", "creators": '[{ "fullName": "Bob Bobbers" }]'},
 ]
 
 config = {
@@ -51,18 +53,66 @@ class TestCsvCollection(unittest.TestCase):
         self.assertEqual(files[0].object, objects[2])
         self.assertEqual(files[1].object, objects[3])
 
+    def test_converts_json_fields(self):
+        test = {'somejson': '[{"obj": "value"}]'}
+        _turn_strings_to_json(test)
+        self.assertEqual(test['somejson'], [{"obj": "value"}])
+
     def test_check_creator(self):
-        # if there is a creator it keeps it
-        _check_creator(objects[3])
-        self.assertEqual("Bob Bobbers", objects[3]['creator'])
+        # if there is a creators it keeps it no matter the level
+        test = {"creators": [{"fullName": "Bob Bobbers"}], "level": "collection"}
+        _check_creator(test)
+        self.assertEqual([{"fullName": "Bob Bobbers"}], test['creators'])
 
-        # if there is no creator key it sets it to unknown
-        _check_creator(objects[2])
-        self.assertEqual("unknown", objects[2]['creator'])
+        test = {"creators": [{"fullName": "Bob Bobbers"}], "level": "manifest"}
+        _check_creator(test)
+        self.assertEqual([{"fullName": "Bob Bobbers"}], test['creators'])
 
-        # if the key is empty it sets it to unknown
-        _check_creator(objects[1])
-        self.assertEqual("unknown", objects[1]['creator'])
+        test = {"creators": [{"fullName": "Bob Bobbers"}], "level": "file"}
+        _check_creator(test)
+        self.assertEqual([{"fullName": "Bob Bobbers"}], test['creators'])
+
+        # if there is no creators key at all set it if it is manifest or collection
+        test = {"level": "collection"}
+        _check_creator(test)
+        self.assertEqual([{"fullName": "unknown"}], test['creators'])
+
+        test = {"level": "manifest"}
+        _check_creator(test)
+        self.assertEqual([{"fullName": "unknown"}], test['creators'])
+
+        # but not if it is a file
+        test = {"level": "file"}
+        _check_creator(test)
+        self.assertEqual(None, test.get('creators', None))
+
+        # if the creators key is empty set it if it is a collection or manifest
+        test = {"level": "collection", "creators": ""}
+        _check_creator(test)
+        self.assertEqual([{"fullName": "unknown"}], test['creators'])
+
+        test = {"level": "manifest", "creators": ""}
+        _check_creator(test)
+        self.assertEqual([{"fullName": "unknown"}], test['creators'])
+
+        # but not if it is a file
+        test = {"level": "file", "creators": ""}
+        _check_creator(test)
+        self.assertEqual("", test['creators'])
+
+        # if the creators key is empty list it if it is a collection or manifest
+        test = {"level": "collection", "creators": []}
+        _check_creator(test)
+        self.assertEqual([{"fullName": "unknown"}], test['creators'])
+
+        test = {"level": "manifest", "creators": []}
+        _check_creator(test)
+        self.assertEqual([{"fullName": "unknown"}], test['creators'])
+
+        # but not if it is a file
+        test = {"level": "file", "creators": []}
+        _check_creator(test)
+        self.assertEqual([], test['creators'])
 
     def test_add_additional_paths_for_files(self):
         _add_additional_paths(objects[2], config)

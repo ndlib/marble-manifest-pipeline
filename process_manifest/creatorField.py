@@ -48,4 +48,3 @@ def test():
     data = [{'attribution': '', 'role': 'Primary', 'fullName': 'Marie Victoire Lemoine', 'nationality': 'French', 'lifeDates': '1754 - 1820', 'startDate': '1754', 'endDate': '1820', 'livingFlag': '0', 'lifeFlag': '1'}, {'attribution': 'Formerly attributed to', 'role': 'Primary', 'fullName': 'Elisabeth Louise Vigée-LeBrun', 'nationality': 'French', 'lifeDates': '1755 - 1842', 'startDate': '1755', 'endDate': '1842', 'livingFlag': '0', 'lifeFlag': '1'}]
     creator = creatorField(data)
     print(creator.to_iiif())
-    

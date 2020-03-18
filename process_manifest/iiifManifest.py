@@ -30,19 +30,16 @@ class iiifManifest():
             if key != 'creators':
                 value = self.data.get(key, False)
             else:
-                # simple fix until the files are formatted with out ''
                 value = self.data.get(key)
+                print(self.data.get("level"))
+                print(value)
                 if value:
-                    value = re.sub(r"'", '"', value)
-                    value = json.loads(value)
                     value = creatorField(value).to_iiif()
 
             label = mapper.get_by_athena(key, 'marble_title')
             if label and value and key not in keys_in_other_parts_of_manifest:
                 ret.append(self._convert_label_value(label, value))
 
-        print("------------")
-        print(ret)
         return ret
 
     def thumbnail(self):

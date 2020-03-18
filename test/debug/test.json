@@ -7,7 +7,7 @@
   "id": "https://presentation-iiif.library.nd.edu/collectionId/manifest",
   "items": [
     {
-      "height": 2000,
+      "height": 100,
       "id": "https://presentation-iiif.library.nd.edu/collectionId/file/canvas",
       "items": [
         {
@@ -44,18 +44,6 @@
         {
           "label": {
             "en": [
-              "Creator "
-            ]
-          },
-          "value": {
-            "en": [
-              "Creator"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
               "Date "
             ]
           },
@@ -68,7 +56,7 @@
         {
           "label": {
             "en": [
-              "Material Type"
+              "Classification "
             ]
           },
           "value": {
@@ -80,7 +68,19 @@
         {
           "label": {
             "en": [
-              "Identifier"
+              "Medium"
+            ]
+          },
+          "value": {
+            "en": [
+              "Medium"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Accession number "
             ]
           },
           "value": {
@@ -92,19 +92,7 @@
         {
           "label": {
             "en": [
-              "Link to finding aid"
-            ]
-          },
-          "value": {
-            "en": [
-              "linkToSource"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Conditions Governing Access"
+              "Access"
             ]
           },
           "value": {
@@ -116,24 +104,12 @@
         {
           "label": {
             "en": [
-              "Genre/Physical Characteristic"
+              "Format"
             ]
           },
           "value": {
             "en": [
               "format"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Collection"
-            ]
-          },
-          "value": {
-            "en": [
-              "Collectioninformation"
             ]
           }
         },
@@ -152,7 +128,7 @@
         {
           "label": {
             "en": [
-              "Immediate Source of Acquisition"
+              "Credit Line"
             ]
           },
           "value": {
@@ -207,7 +183,7 @@
       ],
       "type": "Canvas",
       "viewingDirection": "left-to-right",
-      "width": 2000
+      "width": 200
     }
   ],
   "label": {
@@ -219,12 +195,16 @@
     {
       "label": {
         "en": [
-          "Creator "
+          "Creator"
         ]
       },
       "value": {
         "en": [
-          "creator"
+          [
+            "primary (mars)",
+            "attr secondary",
+            "third (mars, 1900-2000)"
+          ]
         ]
       }
     },
@@ -243,7 +223,7 @@
     {
       "label": {
         "en": [
-          "Material Type"
+          "Classification "
         ]
       },
       "value": {
@@ -255,7 +235,19 @@
     {
       "label": {
         "en": [
-          "Identifier"
+          "Medium"
+        ]
+      },
+      "value": {
+        "en": [
+          "Medium"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Accession number "
         ]
       },
       "value": {
@@ -267,19 +259,7 @@
     {
       "label": {
         "en": [
-          "Link to finding aid"
-        ]
-      },
-      "value": {
-        "en": [
-          "linkToSource"
-        ]
-      }
-    },
-    {
-      "label": {
-        "en": [
-          "Conditions Governing Access"
+          "Access"
         ]
       },
       "value": {
@@ -291,24 +271,12 @@
     {
       "label": {
         "en": [
-          "Genre/Physical Characteristic"
+          "Format"
         ]
       },
       "value": {
         "en": [
           "format"
-        ]
-      }
-    },
-    {
-      "label": {
-        "en": [
-          "Collection"
-        ]
-      },
-      "value": {
-        "en": [
-          "Collectioninformation"
         ]
       }
     },
@@ -327,7 +295,7 @@
     {
       "label": {
         "en": [
-          "Immediate Source of Acquisition"
+          "Credit Line"
         ]
       },
       "value": {
@@ -341,26 +309,26 @@
     "homepage": [
       {
         "format": "text/html",
-        "id": "https://rarebooks.library.nd.edu/",
+        "id": "https://sniteartmuseum.nd.edu",
         "label": {
           "en": [
-            "Rare Books and Special Collections"
+            "Snite Museum of Art"
           ]
         },
         "type": "Text"
       }
     ],
-    "id": "https://rarebooks.library.nd.edu/using",
+    "id": "https://sniteartmuseum.nd.edu/about-us/contact-us/",
     "label": {
       "en": [
-        "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+        "Snite Museum of Art"
       ]
     },
     "logo": [
       {
         "format": "image/png",
         "height": 100,
-        "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+        "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
         "type": "Image",
         "width": 120
       }
