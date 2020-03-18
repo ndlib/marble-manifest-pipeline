@@ -1,7 +1,6 @@
 from iiifImage import iiifImage
 from creatorField import creatorField
-import json
-import re
+
 
 class iiifManifest():
     def __init__(self, config, data, mapping):
@@ -31,8 +30,6 @@ class iiifManifest():
                 value = self.data.get(key, False)
             else:
                 value = self.data.get(key)
-                print(self.data.get("level"))
-                print(value)
                 if value:
                     value = creatorField(value).to_iiif()
 
