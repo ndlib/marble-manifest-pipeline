@@ -1,4 +1,5 @@
 from iiifImage import iiifImage
+from creatorField import creatorField
 
 
 class iiifManifest():
@@ -25,10 +26,16 @@ class iiifManifest():
 
         ret = []
         for key in mapper.get_athena_keys():
-            value = self.data.get(key, False)
+            if key != 'creators':
+                value = self.data.get(key, False)
+            else:
+                value = self.data.get(key)
+                if value:
+                    value = creatorField(value).to_iiif()
+
             label = mapper.get_by_athena(key, 'marble_title')
             if label and value and key not in keys_in_other_parts_of_manifest:
-                ret.append(self._convert_label_value(label, self.data.get(key)))
+                ret.append(self._convert_label_value(label, value))
 
         return ret
 
@@ -63,7 +70,7 @@ class iiifManifest():
 
         metadata = self.metadata_array()
         if len(metadata) > 0:
-            self.manifest_hash['metadata'] = self.metadata_array()
+            self.manifest_hash['metadata'] = metadata
 
     def _items(self):
         ret = []
@@ -260,6 +267,7 @@ class iiifManifest():
         return [
             'title',
             'provider',
+            'creator',
             'description',
             'collectioninformation',
             'repository',

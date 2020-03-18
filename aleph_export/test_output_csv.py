@@ -18,6 +18,25 @@ class Test(unittest.TestCase):
         expected_output = '"a","b","c"\r\n"1","2","3"\r\n'
         self.assertTrue(csv_string == expected_output)
 
+    def test_outputs_json(self):
+        csv_field_names = ['fieldstr', 'fieldint', 'fieldjson', 'listjson']
+        json_record = {
+            "fieldstr": "str",
+            "fieldint": 4,
+            "fieldjson": {
+                "json1": "json",
+                "json2": "more json"
+            },
+            "listjson": [
+                "list1", "list2"
+            ]
+        }
+        output_csv_class = OutputCsv(csv_field_names)
+        output_csv_class.write_csv_row(json_record)
+        csv_string = output_csv_class.return_csv_value()
+        expected_output = '"fieldstr","fieldint","fieldjson","listjson"\r\n"str","4","{""json1"": ""json"", ""json2"": ""more json""}","[""list1"", ""list2""]"\r\n'
+        self.assertTrue(csv_string == expected_output)
+
 
 def suite():
     """ define test suite """

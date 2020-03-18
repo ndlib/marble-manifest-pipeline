@@ -44,18 +44,6 @@
         {
           "label": {
             "en": [
-              "Creator"
-            ]
-          },
-          "value": {
-            "en": [
-              "Creator"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
               "Date "
             ]
           },
@@ -212,7 +200,11 @@
       },
       "value": {
         "en": [
-          "creator"
+          [
+            "primary (mars)",
+            "attr secondary",
+            "third (mars, 1900-2000)"
+          ]
         ]
       }
     },
