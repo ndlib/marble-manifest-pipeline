@@ -127,3 +127,15 @@ def get_json_value_as_string(json_node, label):
     if label in json_node:
         value = json_node[label]
     return value
+
+
+def format_creators(value_found):
+    """ Return formatted creators node."""
+    results = []
+    if value_found:
+        node = {}
+        node["attribution"] = ""
+        node["role"] = "Primary"
+        node["fullName"] = value_found
+        results.append(node)
+    return results

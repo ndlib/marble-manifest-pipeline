@@ -27,7 +27,7 @@ def run(event, context):
         google_credentials = json.loads(config["museum-google-credentials"])
         google_connection = establish_connection_with_google_api(google_credentials)
         mode = event.get("mode", "full")
-        jsonWebKioskClass = processWebKioskJsonMetadata(config, google_connection)
+        jsonWebKioskClass = processWebKioskJsonMetadata(config, google_connection, event)
         composite_json = jsonWebKioskClass.get_composite_json_metadata(mode)
         if composite_json != {}:
             jsonWebKioskClass.process_composite_json_metadata()

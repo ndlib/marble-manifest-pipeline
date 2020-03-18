@@ -57,6 +57,7 @@ default_config = {
         "workType",
         "medium",
         "artists",
+        "creators",
         "digitalAssets",
         "width",
         "height",

@@ -15,8 +15,8 @@ class CsvFromJson():
         if json_record:
             output_csv_class = OutputCsv(self.csv_field_names)
             output_csv_class.write_csv_row(json_record)
-            image_uri = json_record.get('imageUri')
-            if image_uri is not None:
+            image_uri = json_record.get("imageUri", "")
+            if image_uri != "":
                 self._process_get_files_from_uri(json_record,
                                                  image_uri,
                                                  output_csv_class)
@@ -28,6 +28,7 @@ class CsvFromJson():
             all related images. """
         each_file_dict = {}
         id = id_from_url(file_uri)
+        # print("id_from_url = ", id, " file_uri = ", file_uri)
         each_file_dict['collectionId'] = json_node['collectionId']
         each_file_dict['level'] = 'file'
         each_file_dict['parentId'] = json_node['id']

@@ -220,6 +220,12 @@
 				"format": "text"
 			},
 			{
+				"label": "creators",
+				"externalProcess": "format_creators",
+				"passLabels": [{"creator": "creator"}],
+				"optional": true
+			},
+			{
 				"label": "dateCreated",
 				"xpath": "./unitdate[@type='inclusive']",
 				"optional": true,

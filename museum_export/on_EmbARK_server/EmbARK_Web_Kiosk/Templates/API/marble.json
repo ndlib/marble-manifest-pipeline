@@ -19,7 +19,7 @@
 		"workType": "<!--#4DTEXT [Objects_1]Class1-->",
 		"medium": "<!--#4DTEXT [Objects_1]Disp_Medium-->",
 		<!--#4DIF [Objects_1]Disp_Access_No#""--><!--#4DEVAL my_Id := [Objects_1]Disp_Access_No--><!--4DELSE--><!--#4DEVAL my_Id := [Objects_1]Temp_ID--><!--4DENDIF-->
-		"uniqueIdentifier": "<!--#4DEVAL my_Id==>",
+		"uniqueIdentifier": "<!--#4DEVAL my_Id-->",
 		"localIdentifier": "<!--#4DSCRIPT/SQL_Encode/[Objects_1]Disp_Access_No-->",
 		<!--#4DIF False -->
 		"repository": "<!--#4DTEXT <>vtInstitution-->",
@@ -88,6 +88,23 @@
 					  <!--#4DEVAL gsFunc_SpecialFieldQuery (->[Objects_1]_Objects_1_ID; string($currentObjectId))-->
 		],
 		"artists": [
+           			<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Object_Artist-->
+                      <!--#4DLOOP [Object_Artist]-->
+						{"attribution":	"<!--#4DTEXT [Object_Artist]Attribution-->",
+						"role": "<!--#4DTEXT [Object_Artist]Role-->",
+						<!--#4DSCRIPT/LoadRelatedRecords/Object_Artist:Artist_Maker-->
+						"fullName":	"<!--#4DTEXT [Artist_Maker]Full_Name-->",
+						"nationality": "<!--#4DTEXT [Artist_Maker]Nat_Culture_L2-->",
+						"lifeDates": "<!--#4DIF ([Artist_Maker]Start_Date_Disp#"")--><!--#4DTEXT [Artist_Maker]Start_Date_Disp--><!--#4DIF ([Artist_Maker]End_Date_Disp#"")--> - <!--#4DTEXT [Artist_Maker]End_Date_Disp--><!--#4DENDIF--><!--#4DENDIF-->",
+						"startDate": "<!--#4DTEXT [Artist_Maker]Start_Date_Disp-->",
+						"endDate": "<!--#4DTEXT [Artist_Maker]End_Date_Disp-->",
+						"livingFlag": "<!--#4DTEXT [Artist_Maker]Living_or_Dead-->",
+						"lifeFlag": "<!--#4DTEXT [Artist_Maker]Life-->"
+						}
+						<!--#4Dif (Selected Record Number([Object_Artist])< Records in Selection([Object_Artist])) -->,<!--#4Dendif-->
+                      <!--#4DENDLOOP-->
+		],
+		"creators": [
            			<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Object_Artist-->
                       <!--#4DLOOP [Object_Artist]-->
 						{"attribution":	"<!--#4DTEXT [Object_Artist]Attribution-->",
