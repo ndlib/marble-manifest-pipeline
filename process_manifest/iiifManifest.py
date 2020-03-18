@@ -1,5 +1,7 @@
 from iiifImage import iiifImage
-
+from creatorField import creatorField
+import json
+import re
 
 class iiifManifest():
     def __init__(self, config, data, mapping):
@@ -25,11 +27,22 @@ class iiifManifest():
 
         ret = []
         for key in mapper.get_athena_keys():
-            value = self.data.get(key, False)
+            if key != 'creators':
+                value = self.data.get(key, False)
+            else:
+                # simple fix until the files are formatted with out ''
+                value = self.data.get(key)
+                if value:
+                    value = re.sub(r"'", '"', value)
+                    value = json.loads(value)
+                    value = creatorField(value).to_iiif()
+
             label = mapper.get_by_athena(key, 'marble_title')
             if label and value and key not in keys_in_other_parts_of_manifest:
-                ret.append(self._convert_label_value(label, self.data.get(key)))
+                ret.append(self._convert_label_value(label, value))
 
+        print("------------")
+        print(ret)
         return ret
 
     def thumbnail(self):
@@ -63,7 +76,7 @@ class iiifManifest():
 
         metadata = self.metadata_array()
         if len(metadata) > 0:
-            self.manifest_hash['metadata'] = self.metadata_array()
+            self.manifest_hash['metadata'] = metadata
 
     def _items(self):
         ret = []
@@ -260,6 +273,7 @@ class iiifManifest():
         return [
             'title',
             'provider',
+            'creator',
             'description',
             'collectioninformation',
             'repository',
