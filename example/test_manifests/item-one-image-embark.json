@@ -200,11 +200,9 @@
       },
       "value": {
         "en": [
-          [
-            "primary (mars)",
-            "attr secondary",
-            "third (mars, 1900-2000)"
-          ]
+          "primary (mars)",
+          "attr secondary",
+          "third (mars, 1900-2000)"
         ]
       }
     },

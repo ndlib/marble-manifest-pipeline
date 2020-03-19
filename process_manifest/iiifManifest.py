@@ -111,7 +111,10 @@ class iiifManifest():
         return None
 
     def _lang_wrapper(self, line):
-        return {self.lang: [line]}
+        if type(line) != list:
+            line = [line]
+
+        return {self.lang: line}
 
     def add_context(self):
         if self.data.get('id') == self.data.parent().get('id'):
