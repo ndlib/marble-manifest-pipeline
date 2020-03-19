@@ -68,7 +68,7 @@ def test(identifier=""):
     else:
         event = {}
         event['mode'] = 'full'
-        # event['mode'] = 'known'
+        event['mode'] = 'known'
         if event['mode'] == 'identifiers':
             event['ids'] = ['oai:und//repositories/3/resources/1644']
         elif event['mode'] == 'ids':

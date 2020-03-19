@@ -31,8 +31,8 @@ class HarvestOaiEads():
         self.repositories_of_interest = [3]
         s3 = boto3.resource('s3')
         self.bucket = s3.Bucket(self.config['process-bucket'])
-        self.save_xml_locally = False
-        self.json_locally = False
+        self.save_xml_locally = True
+        self.json_locally = True
         self.temporary_local_path = '/tmp'
 
     def harvest_relevant_eads(self, mode, resumption_token):
@@ -68,13 +68,13 @@ class HarvestOaiEads():
         while resumption_token is not None:
             if int(time.time() - self.start_time) > (self.config['seconds-to-allow-for-processing']):
                 break
+            print("resumption_token = ", resumption_token)
             identifier, repository, resumption_token, xml_tree = self._get_next_records_data(resumption_token,
                                                                                              "",
                                                                                              "full")
+            print("ready to process identifier = ", identifier, repository, int(time.time() - self.start_time), 'seconds.')
             if repository in self.repositories_of_interest:
                 self._get_individual_ead(identifier)
-
-            print("identifier = ", identifier, repository, int(time.time() - self.start_time), 'seconds.')
         if resumption_token is None:
             self._save_ead_to_resource_dictionary()
         return resumption_token
