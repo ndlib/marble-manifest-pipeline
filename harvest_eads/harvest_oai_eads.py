@@ -71,10 +71,9 @@ class HarvestOaiEads():
             identifier, repository, resumption_token, xml_tree = self._get_next_records_data(resumption_token,
                                                                                              "",
                                                                                              "full")
+            print("ready to process identifier = ", identifier, repository, int(time.time() - self.start_time), 'seconds.')
             if repository in self.repositories_of_interest:
                 self._get_individual_ead(identifier)
-
-            print("identifier = ", identifier, repository, int(time.time() - self.start_time), 'seconds.')
         if resumption_token is None:
             self._save_ead_to_resource_dictionary()
         return resumption_token

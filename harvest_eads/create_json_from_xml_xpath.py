@@ -83,7 +83,9 @@ class createJsonFromXml():
             if 'seedNodes' in field:
                 seed_nodes_control = get_json_value_as_string(field, 'seedNodes')
                 seed_json = get_seed_nodes_json(json_output, seed_nodes_control)
-            value = self._get_node(xml_root, field, seed_json)
+            value, inconsistency_found_flag = self._get_node(xml_root, field, seed_json)
+            if inconsistency_found_flag:
+                print("after call to _get_node for field ", field)
             if get_json_value_as_string(field, 'format') == 'text' and value == []:
                 value = ""
         return value
@@ -144,6 +146,7 @@ class createJsonFromXml():
         """ This retrieves an individual value (or array) from XML
             , and saves to a JSON node or array.  If "otherNodes" are sepcified,
             call extract_fields to process those other nodes. """
+        inconsistency_found_flag = False
         xpath = get_json_value_as_string(field, 'xpath')
         return_attribute_name = get_json_value_as_string(field, 'returnAttributeName')
         process_other_nodes = get_json_value_as_string(field, 'otherNodes')
@@ -172,8 +175,10 @@ class createJsonFromXml():
                 else:
                     node.append(value_found)
             if process_other_nodes > "":
-                check_for_inconsistent_dao_image_paths(field, node)
-        return node
+                inconsistency_found_flag = check_for_inconsistent_dao_image_paths(field, node)
+                if inconsistency_found_flag:
+                    print("after check_for_inconsistent_dao_image_paths")
+        return node, inconsistency_found_flag
 
     def save_json_record(self, file_name, json_to_save):
         """ This lets us save the json record locally, for debugging purposes. """
