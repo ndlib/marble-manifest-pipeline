@@ -43,6 +43,8 @@ class ImageRunner():
         img_type = {'type': 's3'}
         if filepath.startswith('https://drive.google'):
             img_type = {'type': 'gdrive', 'cred': _get_credentials(self.gdrive_ssm)}
+        elif filepath.startswith('http://bendo'):
+            img_type = {'type': 'bendo'}
         return img_type
 
 

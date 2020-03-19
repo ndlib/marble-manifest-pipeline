@@ -92,3 +92,18 @@ class ImageProcessor(ABC):
             print(f'Original image width: {image.width}')
             image = image.shrink(shrink_by, shrink_by)
         return image
+
+    def set_data(self, img_data: dict, config: dict) -> None:
+        self.id = config.get('collection_id')
+        self.source_image = img_data.get('filePath')
+        self.filename, self.ext = self.source_image.split('/')[-1].rsplit('.', 1)
+        self.ext = f".{self.ext}"
+        self.local_file = f"TEMP_{self.filename}{self.ext}"
+        self.tif_file = f"{self.filename}.tif"
+        self.bucket = config.get('bucket')
+        self.img_write_base = config.get('img_write_base')
+        self.source_md5sum = img_data.get('md5Checksum', None)
+        # if copyrighted work scale height/width directed by aamd.org
+        if self._is_copyrighted(img_data.get('usage')):
+            self.max_img_height = 560.0
+            self.max_img_width = 843.0
