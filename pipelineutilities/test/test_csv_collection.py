@@ -3,7 +3,7 @@ import os
 import unittest
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am + "/../")
-from pipelineutilities.csv_collection import Item, _check_creator, _add_additional_paths, _add_image_dimensions, _turn_strings_to_json
+from pipelineutilities.csv_collection import Item, _check_creator, _add_additional_paths, _add_image_dimensions, _turn_strings_to_json, _fix_ids
 
 objects = [
     {"sourceSystem": "EmbARK", "repository": "repository", "id": "collectionId", "collectionId": "collectionId", "parentId": "root", "level": "collection"},
@@ -57,6 +57,17 @@ class TestCsvCollection(unittest.TestCase):
         test = {'somejson': '[{"obj": "value"}]'}
         _turn_strings_to_json(test)
         self.assertEqual(test['somejson'], [{"obj": "value"}])
+
+    def test_fix_ids(self):
+        # converts these to floats
+        test = {"id": 1998.34, "collectionId": 1442.23, "parentId": 2344.12}
+        _fix_ids(test)
+        self.assertEqual(test, {"id": "1998.34", "collectionId": "1442.23", "parentId": "2344.12"})
+
+        # does not convert other floats
+        test["other"] = 2342.32
+        _fix_ids(test)
+        self.assertEqual(test["other"], 2342.32)
 
     def test_check_creator(self):
         # if there is a creators it keeps it no matter the level
