@@ -124,10 +124,19 @@ class Item():
 
 
 def _augment_row_data(row, all_image_data, config):
+    _fix_ids(row)
     _turn_strings_to_json(row)
     _check_creator(row)
     _add_additional_paths(row, config)
     _add_image_dimensions(row, all_image_data, config)
+
+
+# turns out that some of the ids (probabluy assesion numbers)
+# can be changed into floats by the csv process
+def _fix_ids(row):
+    row["id"] = str(row["id"])
+    row["collectionId"] = str(row["collectionId"])
+    row["parentId"] = str(row["parentId"])
 
 
 def _turn_strings_to_json(row):
