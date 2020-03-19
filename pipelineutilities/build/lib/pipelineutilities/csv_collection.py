@@ -124,15 +124,15 @@ class Item():
 
 
 def _augment_row_data(row, all_image_data, config):
-    _fix_ids(row)
     _turn_strings_to_json(row)
+    _fix_ids(row)
     _check_creator(row)
     _add_additional_paths(row, config)
     _add_image_dimensions(row, all_image_data, config)
 
 
-# turns out that some of the ids (probabluy assesion numbers)
-# can be changed into floats by the csv process
+# turns out that the json method is changing these to floats
+# even though my initial test said they were going to fail with the type TypeError
 def _fix_ids(row):
     row["id"] = str(row["id"])
     row["collectionId"] = str(row["collectionId"])
@@ -184,6 +184,7 @@ def _file_paths(row, config):
 
 
 def _manifest_paths(row, config):
+    print(row['collectionId'], type(row['collectionId']), row.get('collectionId'), type(row.get('collectionId')))
     path = "/" + row.get('collectionId')
     if row.get('collectionId') != row.get('id'):
         path = path + "/" + row.get("id")
