@@ -31,7 +31,11 @@ class FinalizeStep():
         src_path = f"{self.config['process-bucket-read-basepath']}/{self.id}/images/"
         img_data_path = f"{self.config['process-bucket-read-basepath']}/{self.id}/image_data.json"
 
-        img_data = json.loads(read_s3_file_content(src_bucket, img_data_path))
+        try:
+            img_data = json.loads(read_s3_file_content(src_bucket, img_data_path))
+        except boto3.resource('s3').meta.client.exceptions.NoSuchKey:
+            img_data = {}
+
         all_objects = get_matching_s3_objects(src_bucket, src_path)
         for obj in all_objects:
             # only copy those files that have changed
@@ -59,9 +63,13 @@ class FinalizeStep():
             public.add(os.path.basename(image['Key']))
         for image in latest_images:
             latest.add(os.path.basename(image['Key']))
-        manifest_data = json.loads(read_s3_file_content(src_bucket, img_data))
-        for image in manifest_data:
-            manifest.add(f"{image}.tif")
+
+        try:
+            manifest_data = json.loads(read_s3_file_content(src_bucket, img_data))
+            for image in manifest_data:
+                manifest.add(f"{image}.tif")
+        except boto3.resource('s3').meta.client.exceptions.NoSuchKey:
+            pass
 
         # delete pyramids in process bucket but not in image_data.json
         self._delete_obsolete_pyramids(src_bucket, src_path, latest.difference(manifest))
