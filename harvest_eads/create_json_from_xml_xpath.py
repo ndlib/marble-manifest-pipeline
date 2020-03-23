@@ -25,7 +25,7 @@ class createJsonFromXml():
 
     def __init__(self, config, event, json_control):
         self.config = config
-        self.event = event
+        self.save_locally = event.get("local", False)
         self.json_control = json_control
         self.save_to_s3 = True
         self.delete_local_copy = False
@@ -34,7 +34,6 @@ class createJsonFromXml():
         self.temporary_local_path = "/tmp"
         self.sequences_within_parent = {}
         self.output_csv_class = OutputCsv(self.config["csv-field-names"])
-        self.event['local'] = event.get("local", False)
         self.save_json = False
 
     def extract_fields(self, xml_root, json_section, seeded_json_output):
@@ -185,7 +184,7 @@ class createJsonFromXml():
         """ This lets us save the json record  """
         results = False
         if json_to_save and self.save_json:
-            if self.event["local"]:
+            if self.save_locally:
                 local_folder = self.temporary_local_path
                 create_directory(local_folder)
                 local_file_name = os.path.join(local_folder, file_name)
