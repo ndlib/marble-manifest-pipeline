@@ -9,7 +9,7 @@ from additional_functions import check_for_inconsistent_dao_image_paths, file_na
     get_seed_nodes_json, get_xml_node_value, get_value_from_labels, remove_nodes_from_dictionary, \
     enforce_required_descendants, exclude_if_pattern_matches, strip_unwanted_whitespace, \
     get_json_value_as_string, format_creators
-from output_csv import OutputCsv
+from dependencies.pipelineutilities.output_csv import OutputCsv
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am)
 sys.path.append(where_i_am + "/dependencies")
@@ -23,8 +23,9 @@ class createJsonFromXml():
         the contents of that JSON into CSV files.  The fields for these CSV files
         are defined in config['csv-field-names'] """
 
-    def __init__(self, config, json_control):
+    def __init__(self, config, event, json_control):
         self.config = config
+        self.event = event
         self.json_control = json_control
         self.save_to_s3 = True
         self.delete_local_copy = False
@@ -33,6 +34,8 @@ class createJsonFromXml():
         self.temporary_local_path = "/tmp"
         self.sequences_within_parent = {}
         self.output_csv_class = OutputCsv(self.config["csv-field-names"])
+        self.event['local'] = event.get("local", False)
+        self.save_json = False
 
     def extract_fields(self, xml_root, json_section, seeded_json_output):
         """ This code processes translations defined in the portion of the
@@ -84,8 +87,6 @@ class createJsonFromXml():
                 seed_nodes_control = get_json_value_as_string(field, 'seedNodes')
                 seed_json = get_seed_nodes_json(json_output, seed_nodes_control)
             value, inconsistency_found_flag = self._get_node(xml_root, field, seed_json)
-            if inconsistency_found_flag:
-                print("after call to _get_node for field ", field)
             if get_json_value_as_string(field, 'format') == 'text' and value == []:
                 value = ""
         return value
@@ -127,7 +128,7 @@ class createJsonFromXml():
         file_name = ""
         required_descendants = get_json_value_as_string(field, 'requiredDescendants')
         json_node = enforce_required_descendants(json_node, required_descendants)
-        if json_node != {} and json_node is not None:
+        if json_node and json_node is not None:
             file_named_for_node = get_json_value_as_string(field, 'fileNamedForNode')
             if file_named_for_node in json_node:
                 file_name = json_node[file_named_for_node] + '.json'
@@ -176,18 +177,35 @@ class createJsonFromXml():
                     node.append(value_found)
             if process_other_nodes > "":
                 inconsistency_found_flag = check_for_inconsistent_dao_image_paths(field, node)
-                if inconsistency_found_flag:
-                    print("after check_for_inconsistent_dao_image_paths")
+                # if inconsistency_found_flag:
+                #     print("after check_for_inconsistent_dao_image_paths")
         return node, inconsistency_found_flag
 
     def save_json_record(self, file_name, json_to_save):
-        """ This lets us save the json record locally, for debugging purposes. """
-        local_folder = self.temporary_local_path
-        create_directory(local_folder)
-        local_file_name = os.path.join(local_folder, file_name)
-        with open(local_file_name, 'w') as f:
-            json.dump(json_to_save, f, indent=2)
-        return
+        """ This lets us save the json record  """
+        results = False
+        if json_to_save and self.save_json:
+            if self.event["local"]:
+                local_folder = self.temporary_local_path
+                create_directory(local_folder)
+                local_file_name = os.path.join(local_folder, file_name)
+                with open(local_file_name, 'w') as f:
+                    json.dump(json_to_save, f, indent=2)
+            else:
+                # This currently saves a json for each child item.  We may need to modify to save one master json per collection.
+                collection_id = json_to_save["collectionId"]
+                parent_id = json_to_save.get("parentId", "")
+                if parent_id == "root" or parent_id == collection_id:
+                    parent_id = ""
+                id = json_to_save["id"]
+                fully_qualified_file_name = os.path.join("json/" + collection_id + "/" + parent_id, id + '.json')
+                print("saving ", fully_qualified_file_name + " to ", self.config['process-bucket'])
+                try:
+                    write_s3_file(self.config['process-bucket'], fully_qualified_file_name, json.dumps(json_to_save))
+                    results = True
+                except Exception:
+                    results = False
+        return results
 
     def _call_external_process(self, json_node, field):  # noqa: C901
         """ This lets us call other named functions to do additional processing. """

@@ -27,7 +27,6 @@
     "parentId",
     "level",
     "title",
-    "creator",
     "dateCreated",
     "uniqueIdentifier",
     "dimensions",
@@ -62,7 +61,7 @@
   ],
   "museum-required-fields": {
     "Title": "title",
-    "Creator": "creator",
+    "Creators": "creators",
     "Date created": "dateCreated",
     "Work Type": "workType",
     "Medium": "medium",
