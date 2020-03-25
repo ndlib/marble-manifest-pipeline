@@ -6,7 +6,7 @@
   "museum-google-drive-id": "",
   "museum-server-username": "",
   "museum-server-password": "",
-  "rbsc-image-bucket": "libnd-smb-rbsc",
+  "rbsc-image-bucket": "rbsc-test-files",
   "museum-server-base-url": "http://notredame.dom5182.com:8080",
   "process-bucket-read-basepath": "process",
   "process-bucket-csv-basepath": "csv",
