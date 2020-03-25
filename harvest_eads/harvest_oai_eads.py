@@ -26,7 +26,7 @@ class HarvestOaiEads():
         self.base_oai_url = self.config['archive-space-server-base-url']
         self.start_time = time.time()
         print("Will break after ", datetime.now() + timedelta(seconds=self.config['seconds-to-allow-for-processing']))
-        self.jsonFromXMLClass = createJsonFromXml(self.config, self.json_control)
+        self.jsonFromXMLClass = createJsonFromXml(self.config, self.event, self.json_control)
         self.eadToResourceDictFilename = self.config['process-bucket-ead-resource-mappings-file']
         self.repositories_of_interest = [3]
         s3 = boto3.resource('s3')
@@ -159,9 +159,9 @@ class HarvestOaiEads():
         url = self._get_ead_url(identifier)
         json_summary = {}
         try:
-            print("before _get_individual_eads requests.get", datetime.now())
+            # print("before _get_individual_eads requests.get", datetime.now())
             xml_string = dependencies.requests.get(url, timeout=60).text
-            print("after _get_individual_eads requests.get", datetime.now())
+            # print("after _get_individual_eads requests.get", datetime.now())
             xml_string = self._strip_namespaces(xml_string)
             # xml_string = self._strip_namespaces(dependencies.requests.get(url, timeout=800).text)
         except ConnectionError:
@@ -233,9 +233,9 @@ class HarvestOaiEads():
             identifier_xpath = "./ListRecords/record/header/identifier"
         resumption_token_xpath = "./" + oai_verb + "/resumptionToken"
         url = self._get_next_url(oai_verb, resumption_token, change_date)
-        print("before _get_next_records_data requests.get", datetime.now())
+        # print("before _get_next_records_data requests.get", datetime.now())
         xml_string = dependencies.requests.get(url, timeout=60).text
-        print("after _get_next_records_data requests.get", datetime.now())
+        # print("after _get_next_records_data requests.get", datetime.now())
         xml_string = self._strip_namespaces(xml_string)
         xml_tree = ElementTree.fromstring(xml_string)
         next_resumption_token = self._get_resumption_token(xml_tree, resumption_token_xpath)
