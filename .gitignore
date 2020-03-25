@@ -7,3 +7,4 @@ dependencies/
 .env
 manifest_utils.py
 secrets/
+curate_export/
