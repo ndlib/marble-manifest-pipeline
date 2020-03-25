@@ -3,7 +3,7 @@ import os
 import unittest
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am + "/../")
-from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_jpg
+from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_image
 
 
 example_ids = {
@@ -35,7 +35,8 @@ temp_ids_example = {
     "https://rarebooks.nd.edu/digital/civil_war/letters/images/barker/5040-01.a.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/letters/images/barker/5040",
     "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg": "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01",
     "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-2-B/images/MSN-EA_8011-02-B-000a.jpg": "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-2-B/images/MSN-EA_8011-02",
-    "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010"
+    "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010",
+    "https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif": "https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305",
 }
 
 valid_urls = [
@@ -88,10 +89,11 @@ class TestSearchFiles(unittest.TestCase):
             'filename.jpeg',
             'filename.jpEg',
             'filename.JPG',
+            'BOO_000297305_000001.tif'
         ]
 
         for test in tests:
-            self.assertTrue(is_jpg(test))
+            self.assertTrue(is_image(test))
 
 
 if __name__ == '__main__':

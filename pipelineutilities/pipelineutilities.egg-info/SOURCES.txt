@@ -13,4 +13,5 @@ pipelineutilities.egg-info/dependency_links.txt
 pipelineutilities.egg-info/top_level.txt
 test/__init__.py
 test/test_csv_collection.py
+test/test_output_csv.py
 test/test_search_files.py
