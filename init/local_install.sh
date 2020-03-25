@@ -4,7 +4,7 @@
 magenta=`tput setaf 5`
 reset=`tput sgr0`
 
-echo "\n\n ${magenta}----- find_objects LOCAL_INSTALL.SH -----${reset}"
+echo "\n\n ${magenta}----- init LOCAL_INSTALL.SH -----${reset}"
 
 rm -rf ./dependencies
 
