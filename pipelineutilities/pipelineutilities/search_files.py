@@ -42,6 +42,9 @@ regexps = {
     "moore": [
         r"(^MSN[-]CW[_]8010)"
     ],
+    "letters": [
+        r"(^[0-9]{4}-[0-9]{2})",
+    ],
     "digital": [
         r"(^El_Duende)",
         r"(^Newberry-Case_[a-zA-Z]{2}_[0-9]{3})",
@@ -209,9 +212,12 @@ def test():
     event['local-path'] = "../../example/"
 
     config = get_pipeline_config(event)
+
+    config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     data = crawl_available_files(config)
-    id = id_from_url("https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif")
+    id = id_from_url("https://rarebooks.nd.edu/digital/civil_war/letters/images/mckinney/5003-01.a.150.jpg")
     print(id)
     print(data[id])
+    print(id)
 
     return
