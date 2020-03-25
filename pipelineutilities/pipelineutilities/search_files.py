@@ -138,6 +138,7 @@ def file_should_be_skipped(file):
 def make_label(url, id):
     label = url.replace(id, "")
     label = label.replace(".jpg", "")
+    label = label.replace(".tif", "")
     label = label.replace("-", " ")
     label = label.replace("_", " ")
     label = label.replace(".", " ")
@@ -152,7 +153,7 @@ def crawl_available_files(config):
     for directory in folders_to_crawl:
         objects = get_matching_s3_objects(bucket, directory)
         for obj in objects:
-            if is_jpg(obj.get('Key')):
+            if is_image(obj.get('Key')):
                 url = bucket_to_url[bucket] + obj.get('Key')
                 id = id_from_url(url)
                 # if obj.get('Key') == 'digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg':
@@ -185,8 +186,8 @@ def crawl_available_files(config):
     return order_field
 
 
-def is_jpg(file):
-    return re.match("^.*[.]jpe?g$", file, re.IGNORECASE)
+def is_image(file):
+    return re.match(r"^.*[.]((jpe?g)|(tif))$", file, re.IGNORECASE)
 
 
 def output_as_file():
@@ -208,9 +209,9 @@ def test():
     event['local-path'] = "../../example/"
 
     config = get_pipeline_config(event)
-    #data = crawl_available_files(config)
-    id = id_from_url("https://rarebooks.nd.edu/digital/MARBLE-images/MSE-REE_0006/MSE-REE_0006-002.a.jpg")
+    data = crawl_available_files(config)
+    id = id_from_url("https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif")
     print(id)
-    #print(data[id])
+    print(data[id])
 
     return

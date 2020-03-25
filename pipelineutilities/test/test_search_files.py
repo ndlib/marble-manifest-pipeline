@@ -35,7 +35,8 @@ temp_ids_example = {
     "https://rarebooks.nd.edu/digital/civil_war/letters/images/barker/5040-01.a.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/letters/images/barker/5040",
     "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg": "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01",
     "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-2-B/images/MSN-EA_8011-02-B-000a.jpg": "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-2-B/images/MSN-EA_8011-02",
-    "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010"
+    "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010",
+    "https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif": "https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305",
 }
 
 valid_urls = [
@@ -88,6 +89,7 @@ class TestSearchFiles(unittest.TestCase):
             'filename.jpeg',
             'filename.jpEg',
             'filename.JPG',
+            'BOO_000297305_000001.tif'
         ]
 
         for test in tests:
