@@ -184,7 +184,6 @@ def _file_paths(row, config):
 
 
 def _manifest_paths(row, config):
-    print(row['collectionId'], type(row['collectionId']), row.get('collectionId'), type(row.get('collectionId')))
     path = "/" + row.get('collectionId')
     if row.get('collectionId') != row.get('id'):
         path = path + "/" + row.get("id")

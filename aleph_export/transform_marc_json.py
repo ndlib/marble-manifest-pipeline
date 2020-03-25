@@ -1,3 +1,4 @@
+import os
 import json
 from csv_from_json import CsvFromJson
 
@@ -6,7 +7,8 @@ class TransformMarcJson():
     """ This performs all Marc-related processing """
     def __init__(self, csv_field_names, hash_of_available_files):
         """ Save values required for all calls """
-        self.json_control = read_marc_to_json_translation_control_file("./marc_to_json_translation_control_file.json")  # noqa: E501
+        local_folder = os.path.dirname(os.path.realpath(__file__))
+        self.json_control = read_marc_to_json_translation_control_file(local_folder + "/marc_to_json_translation_control_file.json")  # noqa: E501
         self.csv_from_json_class = CsvFromJson(csv_field_names, hash_of_available_files)
 
     def build_json_from_marc_json(self, marc_record_as_json):

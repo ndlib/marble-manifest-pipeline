@@ -12,7 +12,7 @@ from dependencies.sentry_sdk import capture_message, push_scope, capture_excepti
 from dependencies.pipelineutilities.google_utilities import execute_google_query
 from dependencies.pipelineutilities.s3_helpers import write_s3_file
 import dependencies.requests
-from output_csv import OutputCsv
+from dependencies.pipelineutilities.output_csv import OutputCsv
 
 
 class processWebKioskJsonMetadata():
@@ -110,11 +110,16 @@ class processWebKioskJsonMetadata():
             output_csv_class.write_csv_row(object)
             sequence = 0
             if 'digitalAssets' in object:
+                object['digitalAssets'] = json.loads(object['digitalAssets'])  # starting 3/18/20, this became a string, where it should be a json object
                 for digital_asset in object['digitalAssets']:
-                    self._write_file_csv_record(object, digital_asset, sequence, output_csv_class)
-                    sequence += 1
+                    if isinstance(digital_asset, dict):
+                        self._write_file_csv_record(object, digital_asset, sequence, output_csv_class)
+                        sequence += 1
+                    else:
+                        print("not a dict")
             s3_file_name = os.path.join(self.config['process-bucket-csv-basepath'], csv_file_name)
             write_s3_file(self.config['process-bucket'], s3_file_name, output_csv_class.return_csv_value())
+            self._save_json_to_s3(self.config['process-bucket'], object, object_id)
         return missing_fields
 
     def _augment_additional_fields(self, object):
@@ -144,7 +149,7 @@ class processWebKioskJsonMetadata():
         each_file_dict['parentId'] = object['id']
         each_file_dict['sourceSystem'] = object['sourceSystem']
         each_file_dict['repository'] = object['repository']
-        file_name = (digital_asset['fileDescription'])
+        file_name = digital_asset.get("fileDescription", "")
         each_file_dict['id'] = file_name
         if file_name in self.image_files:
             google_image_info = self.image_files[file_name]
@@ -207,6 +212,15 @@ class processWebKioskJsonMetadata():
             scope.set_tag('problem', 'missing_field')
             scope.level = 'warning'
             capture_message(object_id + ' is missing the follwing required field(s): \n' + missing_fields)
+
+    def _save_json_to_s3(self, s3_bucket_name, json_object, json_object_id):
+        fully_qualified_file_name = os.path.join("json/" + json_object_id, json_object_id + '.json')
+        try:
+            write_s3_file(s3_bucket_name, fully_qualified_file_name, json.dumps(json_object))
+            results = True
+        except Exception:
+            results = False
+        return results
 
 
 def delete_file(folder_name, file_name):

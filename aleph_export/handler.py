@@ -4,7 +4,7 @@
 import _set_path  # noqa
 import os
 from pathlib import Path
-from harvest_aleph_marc import HarvestAlephMarc  # noqa: #502
+from harvest_aleph_marc import HarvestAlephMarc  # noqa: #402
 from pipelineutilities.pipeline_config import get_pipeline_config  # noqa: E402
 import sentry_sdk   # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402

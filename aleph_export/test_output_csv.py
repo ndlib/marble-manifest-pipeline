@@ -1,8 +1,8 @@
 # test_output_csv.py
 """ test output_csv """
-
+import _set_path  # noqa
 import unittest
-from output_csv import OutputCsv
+from dependencies.pipelineutilities.output_csv import OutputCsv
 
 
 class Test(unittest.TestCase):

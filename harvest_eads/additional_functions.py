@@ -7,14 +7,18 @@ from nodes_exist_in_json_tree import nodes_exist_in_json_tree
 def check_for_inconsistent_dao_image_paths(field_record, json_output):
     """ Identify instances where different images in a given DAO record
         point to different directory paths. """
+    inconsistency_found_flag = False
     if 'checkForInconsistencies' in field_record:
         for field in field_record['checkForInconsistencies']:
             value_found = ""
             for record in json_output:  # each daogrp record
                 if value_found != "" and value_found != record[field]:
+                    inconsistency_found_flag = True
                     print("discrepancy found between ", value_found, ' and ', record[field])
                 value_found = record[field]
-    return
+        if inconsistency_found_flag:
+            print("continued after finding an inconsistency")
+    return inconsistency_found_flag
 
 
 def file_name_from_filePath(file_path):

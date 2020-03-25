@@ -26,13 +26,13 @@ class HarvestOaiEads():
         self.base_oai_url = self.config['archive-space-server-base-url']
         self.start_time = time.time()
         print("Will break after ", datetime.now() + timedelta(seconds=self.config['seconds-to-allow-for-processing']))
-        self.jsonFromXMLClass = createJsonFromXml(self.config, self.json_control)
+        self.jsonFromXMLClass = createJsonFromXml(self.config, self.event, self.json_control)
         self.eadToResourceDictFilename = self.config['process-bucket-ead-resource-mappings-file']
         self.repositories_of_interest = [3]
         s3 = boto3.resource('s3')
         self.bucket = s3.Bucket(self.config['process-bucket'])
-        self.save_xml_locally = False
-        self.json_locally = False
+        self.save_xml_locally = True
+        self.json_locally = True
         self.temporary_local_path = '/tmp'
 
     def harvest_relevant_eads(self, mode, resumption_token):
@@ -68,13 +68,13 @@ class HarvestOaiEads():
         while resumption_token is not None:
             if int(time.time() - self.start_time) > (self.config['seconds-to-allow-for-processing']):
                 break
+            print("resumption_token = ", resumption_token)
             identifier, repository, resumption_token, xml_tree = self._get_next_records_data(resumption_token,
                                                                                              "",
                                                                                              "full")
+            print("ready to process identifier = ", identifier, repository, int(time.time() - self.start_time), 'seconds.')
             if repository in self.repositories_of_interest:
                 self._get_individual_ead(identifier)
-
-            print("identifier = ", identifier, repository, int(time.time() - self.start_time), 'seconds.')
         if resumption_token is None:
             self._save_ead_to_resource_dictionary()
         return resumption_token
@@ -88,10 +88,10 @@ class HarvestOaiEads():
             identifier, repository, resumption_token, xml_tree = self._get_next_records_data(resumption_token,
                                                                                              change_date,
                                                                                              "incremental")
+            print("about to process identifier = ", identifier, repository, int(time.time() - self.start_time), 'seconds.')
             if repository in self.repositories_of_interest:
                 for record in xml_tree.findall('./ListRecords/record'):
                     self._process_record(identifier, record)
-            print("identifier = ", identifier, repository, int(time.time() - self.start_time), 'seconds.')
         return resumption_token
 
     def ids_oai_harvest(self, resumption_token):
@@ -159,7 +159,11 @@ class HarvestOaiEads():
         url = self._get_ead_url(identifier)
         json_summary = {}
         try:
-            xml_string = self._strip_namespaces(dependencies.requests.get(url, timeout=800).text)
+            # print("before _get_individual_eads requests.get", datetime.now())
+            xml_string = dependencies.requests.get(url, timeout=60).text
+            # print("after _get_individual_eads requests.get", datetime.now())
+            xml_string = self._strip_namespaces(xml_string)
+            # xml_string = self._strip_namespaces(dependencies.requests.get(url, timeout=800).text)
         except ConnectionError:
             print("ConnectionError calling " + url)  # eventually want to write to sentry and continue
             return json_summary
@@ -229,7 +233,10 @@ class HarvestOaiEads():
             identifier_xpath = "./ListRecords/record/header/identifier"
         resumption_token_xpath = "./" + oai_verb + "/resumptionToken"
         url = self._get_next_url(oai_verb, resumption_token, change_date)
-        xml_string = self._strip_namespaces(dependencies.requests.get(url).text)
+        # print("before _get_next_records_data requests.get", datetime.now())
+        xml_string = dependencies.requests.get(url, timeout=60).text
+        # print("after _get_next_records_data requests.get", datetime.now())
+        xml_string = self._strip_namespaces(xml_string)
         xml_tree = ElementTree.fromstring(xml_string)
         next_resumption_token = self._get_resumption_token(xml_tree, resumption_token_xpath)
         id_node = xml_tree.find(identifier_xpath)

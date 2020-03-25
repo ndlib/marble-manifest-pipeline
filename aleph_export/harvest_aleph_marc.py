@@ -45,12 +45,13 @@ class HarvestAlephMarc():
         for marc_record in marc_reader:
             marc_record_as_json = json.loads(marc_record.as_json())
             json_record = transform_marc_json_class.build_json_from_marc_json(marc_record_as_json)
-            if False:  # change to True to output test files.
+            if False:  # change to True to output test files locally.
                 filename = self._save_local_marc_json_for_testing(marc_record_as_json)
                 self._save_local_nd_json_for_testing(filename, json_record)
             if json_record:
                 csv_string = transform_marc_json_class.create_csv_from_json(json_record)
                 self._save_csv_record(json_record, csv_string)
+                self._save_json_record(json_record)
             processed_records_count += 1
             print("processed record ", processed_records_count, " - ", int(time.time() - self.start_time), " seconds.")
             if test_mode_flag:
@@ -96,3 +97,28 @@ class HarvestAlephMarc():
         fully_qualified_file_name = os.path.join(directory, csv_file_name)
         with open(fully_qualified_file_name, "w") as csv_file:
             csv_file.write(csv_string)
+
+    def _save_json_record(self, json_record):
+        if 'id' in json_record:
+            json_file_name = json_record['id'] + '.json'
+            if not self.event['local']:
+                self._save_json_to_s3(self.config['process-bucket'], json_file_name, json.dumps(json_record), json_record['id'])
+            else:
+                self._save_json_locally(json_file_name, json_record)
+
+    def _save_json_to_s3(self, s3_bucket_name, json_file_name, json_string, json_record_id):
+        fully_qualified_file_name = os.path.join("json/" + json_record_id, json_file_name)
+        try:
+            write_s3_file(s3_bucket_name, fully_qualified_file_name, json_string)
+            results = True
+        except Exception:
+            results = False
+        return results
+
+    def _save_json_locally(self, json_file_name, json_record):
+        directory = self.temporary_local_path + "/json"
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        fully_qualified_file_name = os.path.join(directory, json_file_name)
+        with open(os.path.join('test', fully_qualified_file_name), "w") as file1:
+            file1.write(json.dumps(json_record, indent=2))

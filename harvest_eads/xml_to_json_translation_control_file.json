@@ -110,12 +110,12 @@
 				"removeNodes": ["eadResource", "eadId"]
 			},
 			{
-				"saveCsvRecord": "true",
+				"saveRecordAsSeparateFile": "true",
 				"fileNamedForNode": "id"
 			},
 			{
-				"!saveRecordAsSeparateFile": "true",
-				"!fileNamedForNode": "id"
+				"saveCsvRecord": "true",
+				"fileNamedForNode": "id"
 			}
 		]
 	},
@@ -177,15 +177,15 @@
 				"passLabels": [{"children": "children"}]
 			},
 			{
-				"saveCsvRecord": "true",
-				"retainOnlyNodes": ["id"],
+				"saveRecordAsSeparateFile": "true",
+				"fileNamedForNode": "id",
+				"!retainOnlyNodes": ["id"],
 				"requiredDescendants": ["digitalAssets"]
 			},
 			{
-				"!saveRecordAsSeparateFile": "true",
-				"!fileNamedForNode": "id",
-				"!retainOnlyNodes": ["id"],
-				"!requiredDescendants": ["digitalAssets"]
+				"saveCsvRecord": "true",
+				"retainOnlyNodes": ["id"],
+				"requiredDescendants": ["digitalAssets"]
 			}
 		]
 	},

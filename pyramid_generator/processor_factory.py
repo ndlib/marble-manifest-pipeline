@@ -1,5 +1,6 @@
 from s3_processor import S3ImageProcessor
 from gdrive_processor import GoogleImageProcessor
+from bendo_processor import BendoImageProcessor
 
 
 class ProcessorFactory():
@@ -9,3 +10,5 @@ class ProcessorFactory():
             return S3ImageProcessor()
         elif format == 'gdrive':
             return GoogleImageProcessor(kwargs.get('cred'))
+        elif format == 'bendo':
+            return BendoImageProcessor()
