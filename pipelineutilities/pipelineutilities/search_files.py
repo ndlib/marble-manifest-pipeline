@@ -45,6 +45,9 @@ regexps = {
     "letters": [
         r"(^[0-9]{4}-[0-9]{2})",
     ],
+    "colonial_american": [
+            r"(^[0-9]{4}-[0-9]{2})",
+    ],
     "digital": [
         r"(^El_Duende)",
         r"(^Newberry-Case_[a-zA-Z]{2}_[0-9]{3})",
@@ -215,7 +218,7 @@ def test():
 
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     data = crawl_available_files(config)
-    id = id_from_url("https://rarebooks.nd.edu/digital/civil_war/letters/images/mckinney/5003-01.a.150.jpg")
+    id = id_from_url("https://rarebooks.nd.edu/digital/colonial_american/records/images/massachusetts/bristol/2717-01.a.150.jpg")
     print(id)
     print(data[id])
     print(id)

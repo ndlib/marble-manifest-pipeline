@@ -39,6 +39,7 @@ temp_ids_example = {
     "https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif": "https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305",
     "https://rarebooks.nd.edu/digital/civil_war/letters/images/jordan/5000-01.a.150.jpg": "https://rarebooks.nd.edu/digital/civil_war/letters/images/jordan/5000-01",
     "https://rarebooks.nd.edu/digital/civil_war/letters/images/mckinney/5003-02.a.150.jpg": "https://rarebooks.nd.edu/digital/civil_war/letters/images/mckinney/5003-02",
+    "https://rarebooks.nd.edu/digital/colonial_american/records/images/massachusetts/bristol/2717-01.a.150.jpg": "https://rarebooks.nd.edu/digital/colonial_american/records/images/massachusetts/bristol/2717-01",
 }
 
 valid_urls = [
