@@ -20,6 +20,7 @@ folders_to_crawl = [
 
 # patterns we skip if the file matches these
 skip_files = [
+    r"^.*[.]072[.]jpg$",
     r"^.*[.]100[.]jpg$",
     r"^[.]_.*$",
 ]
@@ -34,15 +35,23 @@ regexps = {
     "ead_xml": [
         r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
         r"([a-zA-Z]{3}_[0-9]{2,4}-[0-9]+)",
+        r"(^[0-9]{4}-[0-9]{2})",
     ],
     "MARBLE-images": [
         r"([a-zA-Z]{3}_[0-9]{9})",
         r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{4})"
     ],
-    "moore": [
-        r"(^MSN[-]CW[_]8010)"
-    ],
     "letters": [
+        r"(^[0-9]{4}-[0-9]{2})",
+    ],
+    "colonial_american": [
+        r"(^[0-9]{4}-[0-9]{2})",
+    ],
+    "diaries_journals": [
+        r"(^[0-9]{4})",
+        r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4})",
+    ],
+    "papers_personal": [
         r"(^[0-9]{4}-[0-9]{2})",
     ],
     "digital": [
@@ -214,10 +223,10 @@ def test():
     config = get_pipeline_config(event)
 
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
-    data = crawl_available_files(config)
-    id = id_from_url("https://rarebooks.nd.edu/digital/civil_war/letters/images/mckinney/5003-01.a.150.jpg")
+    # data = crawl_available_files(config)
+    id = id_from_url("https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001-01.150.jpg")
     print(id)
-    print(data[id])
-    print(id)
+    # print(data[id])
+    # print(id)
 
     return

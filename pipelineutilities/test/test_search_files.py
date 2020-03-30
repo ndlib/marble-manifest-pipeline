@@ -39,6 +39,12 @@ temp_ids_example = {
     "https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif": "https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305",  # noqa: #501
     "https://rarebooks.nd.edu/digital/civil_war/letters/images/jordan/5000-01.a.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/letters/images/jordan/5000-01",
     "https://rarebooks.nd.edu/digital/civil_war/letters/images/mckinney/5003-02.a.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/letters/images/mckinney/5003-02",
+    "https://rarebooks.nd.edu/digital/colonial_american/records/images/massachusetts/bristol/2717-01.a.150.jpg": "https://rarebooks.library.nd.edu/digital/colonial_american/records/images/massachusetts/bristol/2717-01",
+    "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001-01.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001",
+    "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001-001.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001",
+    "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001-001a.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001",
+    "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-00-cover2.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010",
+    "https://rarebooks.library.nd.edu/collections/ead_xml/images/MSN-EA_5002/5002-01.a.150.jpg": "https://rarebooks.library.nd.edu/collections/ead_xml/images/MSN-EA_5002/5002-01",
 }
 
 valid_urls = [
@@ -55,6 +61,7 @@ invalid_urls = [
 skipped_files = [
     '._filename.jpg',
     'filename.100.jpg',
+    'filename.072.jpg',
 ]
 
 valid_files = [
@@ -69,6 +76,7 @@ class TestSearchFiles(unittest.TestCase):
 
     def test_id_from_url(self):
         for url in temp_ids_example:
+            print(url)
             self.assertEqual(id_from_url(url), temp_ids_example[url])
 
     def test_url_can_be_harvested(self):
