@@ -43,7 +43,7 @@ temp_ids_example = {
     "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001-01.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001",
     "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001-001.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001",
     "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001-001a.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001",
-    "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-00-cover2.100.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010",
+    "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-00-cover2.150.jpg": "https://rarebooks.library.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010",
     "https://rarebooks.library.nd.edu/collections/ead_xml/images/MSN-EA_5002/5002-01.a.150.jpg": "https://rarebooks.library.nd.edu/collections/ead_xml/images/MSN-EA_5002/5002-01",
 }
 
