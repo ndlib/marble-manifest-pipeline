@@ -62,9 +62,9 @@ def run(event, context):
 # python -c 'from handler import *; test()'
 def test():
     data = {
-      "ids": ["parsons"],
-      "local": True,
-      "ssm_key_base": "ds",
-      "local-path": str(Path(__file__).parent.absolute()) + "/../example/"
+        "ids": ["parsons"],
+        "local": True,
+        "ssm_key_base": "ds",
+        "local-path": str(Path(__file__).parent.absolute()) + "/../example/"
     }
     print(run(data, {}))
