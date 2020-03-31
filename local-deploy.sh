@@ -36,7 +36,7 @@ aws cloudformation deploy --template-file output.yml --stack-name $stackname \
     ImageServerHostname="/all/stacks/marble-image-service-prod/hostname" \
     MarbleProcessingKeyPath="/all/marble-data-processing/test" \
     SentryDsn="https://136d489c91484b55be18e0a28d463b43@sentry.io/1831199" \
-    RBSCS3ImageBucketName="rbsc-test-files" \
+    RBSCS3ImageBucketArn="arn:aws:s3:::rbsc-test-files" \
   || { echo "${RED} FAILED FAILED LOOK UP ^${NC}"; exit 1; }
 
 rm -rf output.yml
