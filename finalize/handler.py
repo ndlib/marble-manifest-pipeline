@@ -1,17 +1,11 @@
+import _set_path  # noqa
 import os
-import sys
-import time
 from pathlib import Path
 from finalizeStep import FinalizeStep
-where_i_am = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(where_i_am)
-sys.path.append(where_i_am + "/dependencies")
-
 from dependencies.pipelineutilities.pipeline_config import get_pipeline_config
-
 import dependencies.sentry_sdk as sentry_sdk
 from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 
 sentry_sdk.init(
     dsn=os.environ['SENTRY_DSN'],
@@ -40,7 +34,7 @@ def run(event, context):
     event['finalized_run_number'] = event['finalized_run_number'] + 1
 
     if event['finalized_run_number'] > 5:
-        raise("Too many executrions")
+        raise Exception("Too many executions")
 
     for id in ids:
         if id not in event['finished_ids']:
