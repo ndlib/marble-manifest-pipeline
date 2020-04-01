@@ -26,7 +26,7 @@ class HarvestAlephMarc():
 
     def _open_marc_records_stream(self):
         """ Return marc records from URL."""
-        marc_records_stream = ""
+        marc_records_stream = b""  # MARCReader requires a byte string
         url = self.marc_records_url
         try:
             r = dependencies.requests.get(url, stream=True)
@@ -34,6 +34,8 @@ class HarvestAlephMarc():
                 marc_records_stream = r.raw
         except ConnectionRefusedError:
             capture_exception('Connection refused on url ' + url)
+        except ConnectionError:
+            capture_exception('ConnectionError when trying to call url ' + url)
         except:  # noqa E722 - intentionally ignore warning about bare except
             capture_exception('Error caught trying to process url ' + url)
         return marc_records_stream
