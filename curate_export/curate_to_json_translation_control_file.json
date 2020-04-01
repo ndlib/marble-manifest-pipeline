@@ -155,7 +155,7 @@
 				"extraProcessing": "link_to_source"
 			},
 			{ "label": "filePath",
-				"fields": ["fileUrl"],
+				"fields": ["downloadUrl"],
 				"format": "text"
 			},
 			{ "label": "mimeType",
@@ -174,11 +174,10 @@
 				"fields": ["bendoItem"],
 				"format": "text"
 			},
-			{ "label": "md5checksum",
+			{ "label": "md5Checksum",
 				"fields": ["characterization"],
 				"extraProcessing": "extract_field_from_characterization_xml",
 				"fieldToExtract": "./fileinfo/md5checksum",
-				"!fieldToExtract": "{http://hul.harvard.edu/ois/xml/ns/fits/fits_output}fits/{http://hul.harvard.edu/ois/xml/ns/fits/fits_output}fileinfo/{http://hul.harvard.edu/ois/xml/ns/fits/fits_output}md5checksum",
 				"format": "text"
 			}
 		]

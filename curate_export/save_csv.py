@@ -4,10 +4,10 @@ from dependencies.pipelineutilities.s3_helpers import write_s3_file
 
 
 class SaveCsv():
-    def __init__(self, config, event):
+    def __init__(self, config, event, temporary_local_path="."):
         self.config = config
         self.event = event
-        self.temporary_local_path = "/tmp"
+        self.temporary_local_path = temporary_local_path
 
     def save_csv_file(self, id, csv_string):
         csv_file_name = id + '.csv'

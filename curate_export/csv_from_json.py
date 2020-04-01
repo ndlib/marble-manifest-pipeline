@@ -1,4 +1,5 @@
 from dependencies.pipelineutilities.output_csv import OutputCsv
+import json
 
 
 class CsvFromJson():
@@ -20,6 +21,8 @@ class CsvFromJson():
         if json_node:
             self.output_csv_class.write_csv_row(json_node)
             if "children" in json_node:
+                if isinstance(json_node["children"], str):
+                    json_node["children"] = json.loads(json_node["children"])  # for some reason, this is a list of strings instead of dictionaries.
                 for child in json_node["children"]:
                     if isinstance(child, dict):
                         self._recursively_write_csv_from_json_tree(child)

@@ -1,16 +1,16 @@
 # Aleph Export
 
 ## Description
-This module harvests information from a CurateND batch ingest CSV into a CSV format of our own design.
-Eventually, once the CurateND API is extended to allow us to query all information associated with a work, we would like to be able to populate event["ids"] with Curate ids, and then harvest those.
-For now, we will accept event["files"], which we will process.
+This module harvests information from the CurateND API. We harvest collection information listed in event["ids"].
+If the CurateND API is too slow, we may need to revert to harvesting from CSV files that were used for Curate batch ingest.
 
 ## Setup
 Run local_install.sh to set up dependencies
 
 ## Process
-For each file in event["files"]:
-Read all available information
+For each file in event["ids"]:
+Read all available information on that item and any children using the Curate API.
+For each of the files referenced, access the Bendo API to retrieve md5checksum information.
 
 ## Execute
 export SSM_KEY_BASE=/all/<stack_name>  (e.g. new-csv)
