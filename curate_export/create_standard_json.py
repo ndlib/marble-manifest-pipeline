@@ -32,7 +32,7 @@ class CreateStandardJson():
         """ Append all child nodes for which parents are in the tree when a given "member" is attempted to be added. """
         parent_id = standard_json["id"]
         for member in members:
-            for member_key, member_value in member.items():
+            for _member_key, member_value in member.items():
                 if not member_value.get("processed", False):
                     ancestry_list = self._get_ancestry_list(member_value.get("partOf", []))
                     parent_node = self._get_parent_node(standard_json, ancestry_list)

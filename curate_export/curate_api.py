@@ -85,7 +85,7 @@ class CurateApi():
     def _get_members_details(self, members_json):
         """ For each member, do an API call to get all metadata details we know about. """
         for member in members_json:
-            for key, value in member.items():
+            for _key, value in member.items():
                 if "itemUrl" in value:
                     details_json = self._get_json_given_url(value["itemUrl"])
                     for details_key, details_value in details_json.items():
