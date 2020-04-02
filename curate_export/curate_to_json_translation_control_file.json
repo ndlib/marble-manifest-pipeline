@@ -1,0 +1,185 @@
+{
+	"root" : {
+		"FieldsToExtract": [
+			{ "label": "sourceSystem",
+				"constant": "Curate",
+				"format": "text"
+			},
+			{ "label": "repository",
+				"constant": "Curate",
+				"format": "text"
+			},
+			{ "label": "sequence",
+				"constant": 1,
+				"format": "text"
+			},
+			{ "label": "title",
+				"fields": ["title"],
+				"format": "text"
+			},
+			{ "label": "collectionId",
+				"fields": ["id"],
+				"format": "text"
+			},
+			{ "label": "parentId",
+				"constant": "root",
+				"format": "text"
+			},
+			{ "label": "id",
+				"fields": ["id"],
+				"format": "text"
+			},
+			{ "label": "level",
+				"constant": "manifest",
+				"format": "text"
+			},
+			{ "label": "creators",
+				"fields": ["contributor"],
+				"extraProcessing": "format_creators",
+				"format": "array"
+			},
+			{ "label": "access",
+				"fields": ["creator#administrative_unit"],
+				"format": "text"
+			},
+			{ "label": "dateCreated",
+				"fields": ["dateSubmitted"],
+				"format": "text",
+				"datePattern": "%Y-%m-%d"
+			},
+			{ "label": "modifiedDate",
+				"fields": ["modified"],
+				"format": "text",
+				"datePattern": "%Y-%m-%d"
+			},
+			{ "label": "workType",
+				"fields": ["hasModel"],
+				"format": "text"
+			},
+			{ "label": "subjects",
+				"fields": ["description"],
+				"extraProcessing": "format_subjects",
+				"format": "array"
+			},
+			{ "label": "membersUrl",
+				"fields": ["membersUrl"],
+				"format": "text"
+			},
+			{ "label": "linkToSource",
+				"fields": ["requestUrl"],
+				"format": "text",
+				"extraProcessing": "link_to_source"
+			},
+			{ "label": "publisher",
+				"fields": ["creator#administrative_unit"],
+				"format": "text"
+			},
+			{ "label": "languages",
+				"fields": ["language"],
+				"format": "array"
+			},
+			{ "label": "dedication",
+				"fields": ["contributor"],
+				"format": "text"
+			},
+			{ "label": "description",
+				"fields": ["description"],
+				"format": "text"
+			},
+			{ "label": "representativeImage",
+				"fields": ["representative"],
+				"format": "text"
+			},
+			{ "label": "partOf",
+				"fields": ["partOf"],
+				"format": "text"
+			},
+			{ "label": "bendoItem",
+				"fields": ["bendoItem"],
+				"format": "text"
+			},
+			{ "!label": "isMemberOfCollection",
+				"!fields": ["isMemberOfCollection"],
+				"!format": "text"
+			},
+			{ "label": "children",
+				"fields": ["containedFiles"],
+				"extraProcessing": "process_contained_files",
+				"format": "array"
+			}
+		]
+	},
+	"containedFiles" : {
+		"FieldsToExtract": [
+			{ "label": "sourceSystem",
+				"constant": "Curate",
+				"format": "text"
+			},
+			{ "label": "repository",
+				"constant": "Curate",
+				"format": "text"
+			},
+			{ "label": "title",
+				"fields": ["label"],
+				"format": "text"
+			},
+			{ "label": "description",
+				"fields": ["label"],
+				"format": "text"
+			},
+			{ "label": "id",
+				"fields": ["id"],
+				"format": "text"
+			},
+			{ "label": "level",
+				"constant": "file",
+				"format": "text"
+			},
+			{ "label": "dateCreated",
+				"fields": ["dateSubmitted"],
+				"format": "text",
+				"datePattern": "%Y-%m-%d"
+			},
+			{ "label": "modifiedDate",
+				"fields": ["modified"],
+				"format": "text",
+				"datePattern": "%Y-%m-%d"
+			},
+			{ "label": "workType",
+				"fields": ["hasModel"],
+				"format": "text"
+			},
+			{ "label": "linkToSource",
+				"fields": ["requestUrl"],
+				"format": "text",
+				"extraProcessing": "link_to_source"
+			},
+			{ "label": "filePath",
+				"fields": ["downloadUrl"],
+				"format": "text"
+			},
+			{ "label": "mimeType",
+				"fields": ["mimeType"],
+				"format": "text"
+			},
+			{ "label": "downloadUrl",
+				"fields": ["downloadUrl"],
+				"format": "text"
+			},
+			{ "label": "isPartOf",
+				"fields": ["isPartOf"],
+				"format": "text"
+			},
+			{ "label": "bendoItem",
+				"fields": ["bendoItem"],
+				"format": "text"
+			},
+			{ "label": "md5Checksum",
+				"fields": ["characterization"],
+				"extraProcessing": "extract_field_from_characterization_xml",
+				"fieldToExtract": "./fileinfo/md5checksum",
+				"format": "text"
+			}
+		]
+	}
+}

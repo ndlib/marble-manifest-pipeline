@@ -123,19 +123,19 @@ class processWebKioskJsonMetadata():
         return missing_fields
 
     def _augment_additional_fields(self, object):
-        self._define_creator(object)
+        # self._define_creator(object)
         self._define_worktype(object)
         if 'modifiedDate' in object:
             object['modifiedDate'] = datetime.strptime(object['modifiedDate'], '%m/%d/%Y %H:%M:%S').isoformat() + 'Z'
 
-    def _define_creator(self, object):
-        if "artists" in object:
-            for artist in object["artists"]:
-                role = artist.get("role", "")
-                if role == "Primary":
-                    object["creator"] = artist.get("fullName", "")
-                    break
-
+    # def _define_creator(self, object):
+    #     if "artists" in object:
+    #         for artist in object["artists"]:
+    #             role = artist.get("role", "")
+    #             if role == "Primary":
+    #                 object["creator"] = artist.get("fullName", "")
+    #                 break
+    #
     def _define_worktype(self, object):
         classifiction = object.get("classification", "")
         if classifiction == "Decorative Arts, Craft, and Design":
