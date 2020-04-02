@@ -36,7 +36,7 @@ def run(event, context):
             event["curateHarvestComplete"] = curate_api_class.get_curate_items(event["ids"])
         if event["curate_execution_count"] >= event["max_curate_executions"] and not event["curateHarvestComplete"]:
             event["curateHarvestComplete"] = True
-            sentry_sdk.capture_exception('Curate did not complete harvest after maximum executions threshold of ' + str(event["max_curate_executions"]))
+            sentry_sdk.capture_message('Curate did not complete harvest after maximum executions threshold of ' + str(event["max_curate_executions"]))
         if not event['local']:
             event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-csv-basepath'])
     return event

@@ -1,11 +1,8 @@
 # translate_curate_json_node.py
 import os
 import json
-import time
 from xml.etree import ElementTree
 from datetime import datetime
-# import dependencies.requests
-# from dependencies.sentry_sdk import capture_exception
 
 
 class TranslateCurateJsonNode():
@@ -13,7 +10,6 @@ class TranslateCurateJsonNode():
     def __init__(self, config, event):
         self.config = config
         self.event = event
-        self.start_time = time.time()
         local_folder = os.path.dirname(os.path.realpath(__file__))
         self.json_control = read_curate_to_json_translation_control_file(local_folder + "/curate_to_json_translation_control_file.json")  # noqa: E501
 

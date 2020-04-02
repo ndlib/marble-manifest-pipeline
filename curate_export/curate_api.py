@@ -105,8 +105,10 @@ class CurateApi():
         print("calling url =", url, int(time.time() - self.start_time), 'seconds.')
         try:
             json_response = dependencies.requests.get(url, headers=self.curate_header).json()
-        except ConnectionRefusedError:
-            capture_exception('Connection refused on url ' + url)
-        except:  # noqa E722 - intentionally ignore warning about bare except
-            capture_exception('Error caught trying to process url ' + url)
+        except ConnectionRefusedError as e:
+            print('Connection refused on url ' + url)
+            capture_exception(e)
+        except Exception as e:  # noqa E722 - intentionally ignore warning about bare except
+            print('Error caught trying to process url ' + url)
+            capture_exception(e)
         return json_response
