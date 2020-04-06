@@ -169,6 +169,9 @@ class iiifManifest():
         if not self.key_exists('repository'):
             return
 
+        if self.data.type() == 'file':
+            return
+
         provider = self.data.get('repository').lower()
         if (provider == 'embark' or provider == 'museum'):
             self.manifest_hash['provider'] = self._snite_proivider()

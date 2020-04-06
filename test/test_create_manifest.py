@@ -56,13 +56,29 @@ class TestCreateManifest(unittest.TestCase):
             mapping = MetadataMappings(parent)
             iiif = iiifManifest(config, parent, mapping)
             iiif.add_provider()
+            print(parent.object['level'])
             self.assertEqual(test.get("result"), iiif.manifest_hash['provider'].get('id'))
 
+        # if there is no repository there is no result
         del parent.object['repository']
         mapping = MetadataMappings(parent)
         iiif = iiifManifest(config, parent, mapping)
         iiif.add_provider()
         self.assertEqual("not here", iiif.manifest_hash.get('provider', "not here"))
+        # reset
+        parent.object['repository'] = 'rbsc'
+
+        # if the type is file we don't show anything either.
+        parent.object['level'] = 'file'
+        mapping = MetadataMappings(parent)
+        iiif = iiifManifest(config, parent, mapping)
+        iiif.add_provider()
+        self.assertEqual("not here", iiif.manifest_hash.get('provider', "not here"))
+        # reset
+        parent.object['level'] = 'collection'
+
+
+
 
 
 if __name__ == '__main__':
