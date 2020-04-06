@@ -47,13 +47,30 @@ class processWebKioskJsonMetadata():
     def _get_image_file_info(self):
         """ Get a list of files which we need to find on Google drive """
         image_files_list = []
+        image_files_to_find = 0
         if 'objects' in self.composite_json:
             for object in self.composite_json['objects']:
                 if 'digitalAssets' in object:
                     for digital_asset in object['digitalAssets']:
                         image_files_list.append(digital_asset['fileDescription'])
-        self._find_images_in_google_drive(image_files_list)
+                        image_files_to_find += 1
+        print("We need to find this many images on Google Drive: ", image_files_to_find)
+        # self._find_images_in_google_drive(image_files_list)
+        self._find_images_in_chunks(image_files_list)
         return image_files_list
+
+    def _find_images_in_chunks(self, image_files_list):
+        """ Because Google queries are limited, we have to chunk this process """
+        first_item_to_process = 0
+        chunk_size = 50
+        while first_item_to_process < len(image_files_list):
+            last_item_to_process = first_item_to_process + chunk_size
+            if last_item_to_process > len(image_files_list):
+                last_item_to_process = len(image_files_list)
+            list_to_process = []
+            list_to_process = image_files_list[first_item_to_process:last_item_to_process]
+            self._find_images_in_google_drive(list_to_process)
+            first_item_to_process += chunk_size
 
     def _find_images_in_google_drive(self, image_files_list):
         """ Go find the list of files from Google drive """
@@ -101,6 +118,7 @@ class processWebKioskJsonMetadata():
         object_id = object['uniqueIdentifier']
         print("Processing JSON: ", object_id)
         self._augment_additional_fields(object)
+        self._remove_bad_subjects(object)
         missing_fields = self._test_for_missing_fields(object_id,
                                                        object,
                                                        self.config['museum-required-fields'])
@@ -123,19 +141,18 @@ class processWebKioskJsonMetadata():
         return missing_fields
 
     def _augment_additional_fields(self, object):
-        # self._define_creator(object)
         self._define_worktype(object)
         if 'modifiedDate' in object:
             object['modifiedDate'] = datetime.strptime(object['modifiedDate'], '%m/%d/%Y %H:%M:%S').isoformat() + 'Z'
 
-    # def _define_creator(self, object):
-    #     if "artists" in object:
-    #         for artist in object["artists"]:
-    #             role = artist.get("role", "")
-    #             if role == "Primary":
-    #                 object["creator"] = artist.get("fullName", "")
-    #                 break
-    #
+    def _remove_bad_subjects(self, object):
+        if "subjects" in object:
+            i = len(object["subjects"])
+            while i > 0:
+                if object["subjects"][i - 1].get("authority", "") == "none":
+                    del object["subjects"][i - 1]
+                i -= 1
+
     def _define_worktype(self, object):
         classifiction = object.get("classification", "")
         if classifiction == "Decorative Arts, Craft, and Design":
@@ -172,10 +189,12 @@ class processWebKioskJsonMetadata():
         json_response = {}
         try:
             json_response = json.loads(dependencies.requests.get(url).text)
-        except ConnectionRefusedError:
-            capture_exception('Connection refused on url ' + url)
-        except:  # noqa E722 - intentionally ignore warning about bare except
-            capture_exception('Error caught trying to process url ' + url)
+        except ConnectionRefusedError as e:
+            print('Connection refused in process_web_kiosk_json_metadata/_get_metadata_given_url on url ', url)
+            capture_exception(e)
+        except Exception as e:  # noqa E722 - intentionally ignore warning about bare except
+            print('Error caught in process_web_kiosk_json_metadata/_get_metadata_given_url trying to process url ' + url)
+            capture_exception(e)
         return json_response
 
     def _get_embark_metadata_url(self, mode):

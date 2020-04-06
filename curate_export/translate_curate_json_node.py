@@ -3,6 +3,7 @@ import os
 import json
 from xml.etree import ElementTree
 from datetime import datetime
+from get_bendo_info import get_bendo_info
 
 
 class TranslateCurateJsonNode():
@@ -95,6 +96,7 @@ class TranslateCurateJsonNode():
         return results
 
     def _process_contained_files(self, contained_files_json):
+        """ For each file listed, retrieve information, including md5Checksum from Bendo """
         results = []
         sequence = 1
         for file_json_list in contained_files_json:  # for some reason, this is a list within a list
@@ -102,10 +104,16 @@ class TranslateCurateJsonNode():
                 json_results = self.build_json_from_curate_json(file_json, "containedFiles")
                 json_results["sequence"] = sequence
                 sequence += 1
+                if json_results.get("md5Checksum", "") == "" and \
+                        json_results.get("bendoItem", "") > "" and \
+                        json_results.get("title", "") > "":
+                    bendo_info = get_bendo_info(self.config.get("bendo-server-base-url", ""), json_results["bendoItem"], json_results["title"])
+                    json_results["md5Checksum"] = bendo_info.get("X-Content-Md5", "")
                 results.append(json_results)
         return results
 
     def _extract_field_from_characterization_xml(self, characterization_string, field_to_extract):
+        """ Extract a field from the XML characterization given the full path of the field_to_extract """
         characterization_string = self._strip_namespaces(characterization_string)
         results = ""
         if isinstance(characterization_string, list):

@@ -35,6 +35,10 @@
 					{"authority": "IA", "term": "<!--#4DTEXT [Keywords]Word-->", "uri": "http://vocab.getty.edu/page/ia/<!--#4DTEXT [Keywords]_AAT_SubjectiD-->"}
 				<!--#4Dif (Selected Record Number([Keywords])< Records in Selection([Keywords])) -->,<!--#4Dendif-->
 				<!--#4DENDIF-->
+				<!--#4DIF ([Keywords]_Path # "Art@") & ([Keywords]_Path # "Icon@")-->
+					{"authority": "none", "term": "<!--#4DTEXT [Keywords]Word-->", "uri": ""}
+				<!--#4Dif (Selected Record Number([Keywords])< Records in Selection([Keywords])) -->,<!--#4Dendif-->
+				<!--#4DENDIF-->
 			<!--#4DENDLOOP--> ],
 		"copyrightStatus": "<!--#4DTEXT [Objects_1]Copyright_Type-->",
 		"copyrightStatement": "<!--#4DTEXT [Objects_1]ID_Num-->",
@@ -51,8 +55,8 @@
 				<!--#4DENDLOOP-->,
  		"format": "<!--#4DTEXT [Objects_1]Disp_Obj_Type-->",
 		"dimensions": "<!--#4DTEXT [Objects_1]Disp_Dimen-->",
-		"dedication": "<!--#4DTEXT [Objects_1]Dedication-->",
-		"description": "<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Object_Notes--><!--#4DLOOP [Object_Notes]--><!--#4DIF [Object_Notes]Field_Name="Web Description"--><!--#4DEVAL $fieldString := [Object_Notes]Text --><!--#4DEVAL $fieldString := replace string($fieldString;char(tab);"";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(carriage return);"%20";*) --><!--#4DEVAL replace string($fieldString;char(line feed);"%20";*) --><!--4DENDIF--><!--#4DENDLOOP-->",
+		"dedication": "<!--#4DEVAL $fieldString := [Objects_1]Dedication --><!--#4DEVAL $fieldString := replace string($fieldString;char(tab);"";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(carriage return);"%20";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(line feed);"%20";*) --><!--#4DEVAL $fieldString -->",
+		"description": "<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Object_Notes--><!--#4DLOOP [Object_Notes]--><!--#4DIF [Object_Notes]Field_Name="Web Description"--><!--#4DEVAL $fieldString := [Object_Notes]Text --><!--#4DEVAL $fieldString := replace string($fieldString;char(tab);"";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(carriage return);"%20";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(line feed);"%20";*) --><!--#4DEVAL replace string($fieldString;char(double quote);"\\\"";*) --><!--4DENDIF--><!--#4DENDLOOP-->",
 		"creationPlace": {"continent": "<!--#4DTEXT [Objects_1]Creation_Place1-->",
 			"country": "<!--#4DTEXT [Objects_1]Creation_Place2-->",
 			"state": "<!--#4DTEXT [Objects_1]Creation_Place3-->",
