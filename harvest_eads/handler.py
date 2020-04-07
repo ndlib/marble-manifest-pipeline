@@ -69,7 +69,7 @@ def test(identifier=""):
             event = json.load(json_file)
     else:
         event = {}
-        event["local"] = True
+        event["local"] = False
         event["mode"] = "full"
         event["mode"] = "known"
         # event["mode"] = "identifiers"
