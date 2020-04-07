@@ -325,36 +325,38 @@
       }
     }
   ],
-  "provider": {
-    "homepage": [
-      {
-        "format": "text/html",
-        "id": "https://rarebooks.library.nd.edu/",
-        "label": {
-          "en": [
-            "Rare Books and Special Collections"
-          ]
-        },
-        "type": "Text"
-      }
-    ],
-    "id": "https://rarebooks.library.nd.edu/using",
-    "label": {
-      "en": [
-        "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
-      ]
-    },
-    "logo": [
-      {
-        "format": "image/png",
-        "height": 100,
-        "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
-        "type": "Image",
-        "width": 120
-      }
-    ],
-    "type": "Agent"
-  },
+  "provider": [
+    {
+      "homepage": [
+        {
+          "format": "text/html",
+          "id": "https://rarebooks.library.nd.edu/",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections"
+            ]
+          },
+          "type": "Text"
+        }
+      ],
+      "id": "https://rarebooks.library.nd.edu/using",
+      "label": {
+        "en": [
+          "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+        ]
+      },
+      "logo": [
+        {
+          "format": "image/png",
+          "height": 100,
+          "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+          "type": "Image",
+          "width": 120
+        }
+      ],
+      "type": "Agent"
+    }
+  ],
   "requiredStatement": {
     "label": {
       "en": [
