@@ -6,6 +6,7 @@
 
 import json
 from datetime import datetime, timedelta
+import time
 import boto3
 import os
 from dependencies.sentry_sdk import capture_message, push_scope, capture_exception
@@ -32,6 +33,7 @@ class processWebKioskJsonMetadata():
         self.image_files = {}
         self.delete_local_copy = True
         self.save_despite_missing_fields = False
+        self.start_time = time.time()
 
     def get_composite_json_metadata(self, mode):
         """ Build URL, call URL, save resulting output to disk """
@@ -54,7 +56,7 @@ class processWebKioskJsonMetadata():
                     for digital_asset in object['digitalAssets']:
                         image_files_list.append(digital_asset['fileDescription'])
                         image_files_to_find += 1
-        print("We need to find this many images on Google Drive: ", image_files_to_find)
+        print(image_files_to_find, " images to locate on Google Drive.", int(time.time() - self.start_time), 'seconds.')
         # self._find_images_in_google_drive(image_files_list)
         self._find_images_in_chunks(image_files_list)
         return image_files_list
@@ -116,7 +118,7 @@ class processWebKioskJsonMetadata():
         """ For each object, check for missing fields.  If there are none,
             save information as CSV to S3, and delete the local copy. """
         object_id = object['uniqueIdentifier']
-        print("Processing JSON: ", object_id)
+        print("Museum identifier = ", object_id, int(time.time() - self.start_time), 'seconds.')
         self._augment_additional_fields(object)
         self._remove_bad_subjects(object)
         missing_fields = self._test_for_missing_fields(object_id,
