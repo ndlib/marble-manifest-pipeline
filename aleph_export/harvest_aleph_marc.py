@@ -26,7 +26,7 @@ class HarvestAlephMarc():
 
     def _open_marc_records_stream(self):
         """ Return marc records from URL."""
-        marc_records_stream = ""
+        marc_records_stream = b""  # MARCReader requires a byte string
         url = self.marc_records_url
         try:
             r = dependencies.requests.get(url, stream=True)
@@ -34,14 +34,20 @@ class HarvestAlephMarc():
                 marc_records_stream = r.raw
         except ConnectionRefusedError:
             capture_exception('Connection refused on url ' + url)
+        except ConnectionError:
+            capture_exception('ConnectionError when trying to call url ' + url)
         except:  # noqa E722 - intentionally ignore warning about bare except
             capture_exception('Error caught trying to process url ' + url)
         return marc_records_stream
 
     def process_marc_records_from_stream(self, test_mode_flag=False):
-        marc_reader = MARCReader(self.marc_records_stream)
-        transform_marc_json_class = TransformMarcJson(self.config["csv-field-names"], self.hash_of_available_files)
         processed_records_count = 0
+        try:
+            marc_reader = MARCReader(self.marc_records_stream)
+        except TypeError:
+            capture_exception('TypeError reading from marc_records_stream.  The Aleph server may be down.')
+            return processed_records_count
+        transform_marc_json_class = TransformMarcJson(self.config["csv-field-names"], self.hash_of_available_files)
         for marc_record in marc_reader:
             marc_record_as_json = json.loads(marc_record.as_json())
             json_record = transform_marc_json_class.build_json_from_marc_json(marc_record_as_json)

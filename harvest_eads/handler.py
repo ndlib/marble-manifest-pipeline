@@ -24,6 +24,8 @@ def run(event, context):
         resumption_token = event['resumptionToken']
         harvest_oai_eads_class = HarvestOaiEads(config, event)
         mode = event.get('mode', 'full')
+        if mode not in ["full", "incremental", "ids", "identifiers", "known"]:
+            mode = "full"
         if not event['eadHarvestComplete']:
             resumption_token = harvest_oai_eads_class.harvest_relevant_eads(mode, resumption_token)
         event['resumptionToken'] = resumption_token
@@ -67,13 +69,15 @@ def test(identifier=""):
             event = json.load(json_file)
     else:
         event = {}
-        event['mode'] = 'full'
-        event['mode'] = 'known'
-        event['mode'] = 'identifiers'
-        if event['mode'] == 'identifiers':
-            event['ids'] = ['oai:und//repositories/3/resources/1644']
-        elif event['mode'] == 'ids':
-            event['ids'] = ['BPP1001_EAD', 'MSNEA8011_EAD']
+        event["local"] = False
+        event["mode"] = "full"
+        event["mode"] = "known"
+        # event["mode"] = "identifiers"
+        if event["mode"] == "identifiers":
+            event["ids"] = ["oai:und//repositories/3/resources/1644"]
+            event["ids"] = ["oai:und//repositories/3/resources/1631"]
+        elif event["mode"] == "ids":
+            event["ids"] = ["BPP1001_EAD", "MSNEA8011_EAD"]
 
     event = run(event, {})
 

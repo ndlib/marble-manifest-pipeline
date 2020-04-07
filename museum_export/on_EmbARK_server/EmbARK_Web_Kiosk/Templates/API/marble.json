@@ -13,7 +13,6 @@
 		{
 		"sourceSystem": "EmbARK",
 		"title": "<!--#4DTEXT [Objects_1]Disp_Title-->",
-		"creator": "<!--#4DTEXT [Objects_1]Disp_Maker_1-->",
 		"dateCreated": "<!--#4DTEXT [Objects_1]Disp_Create_DT-->",
 		"classification": "<!--#4DTEXT [Objects_1]Class_System-->",
 		"workType": "<!--#4DTEXT [Objects_1]Class1-->",
@@ -35,6 +34,10 @@
 					{"authority": "IA", "term": "<!--#4DTEXT [Keywords]Word-->", "uri": "http://vocab.getty.edu/page/ia/<!--#4DTEXT [Keywords]_AAT_SubjectiD-->"}
 				<!--#4Dif (Selected Record Number([Keywords])< Records in Selection([Keywords])) -->,<!--#4Dendif-->
 				<!--#4DENDIF-->
+				<!--#4DIF ([Keywords]_Path # "Art@") & ([Keywords]_Path # "Icon@")-->
+					{"authority": "none", "term": "<!--#4DTEXT [Keywords]Word-->", "uri": ""}
+				<!--#4Dif (Selected Record Number([Keywords])< Records in Selection([Keywords])) -->,<!--#4Dendif-->
+				<!--#4DENDIF-->
 			<!--#4DENDLOOP--> ],
 		"copyrightStatus": "<!--#4DTEXT [Objects_1]Copyright_Type-->",
 		"copyrightStatement": "<!--#4DTEXT [Objects_1]ID_Num-->",
@@ -51,8 +54,8 @@
 				<!--#4DENDLOOP-->,
  		"format": "<!--#4DTEXT [Objects_1]Disp_Obj_Type-->",
 		"dimensions": "<!--#4DTEXT [Objects_1]Disp_Dimen-->",
-		"dedication": "<!--#4DTEXT [Objects_1]Dedication-->",
-		"description": "<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Object_Notes--><!--#4DLOOP [Object_Notes]--><!--#4DIF [Object_Notes]Field_Name="Web Description"--><!--#4DEVAL $fieldString := [Object_Notes]Text --><!--#4DEVAL $fieldString := replace string($fieldString;char(tab);"";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(carriage return);"%20";*) --><!--#4DEVAL replace string($fieldString;char(line feed);"%20";*) --><!--4DENDIF--><!--#4DENDLOOP-->",
+		"dedication": "<!--#4DEVAL $fieldString := [Objects_1]Dedication --><!--#4DEVAL $fieldString := replace string($fieldString;char(tab);"";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(carriage return);"%20";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(line feed);"%20";*) --><!--#4DEVAL $fieldString -->",
+		"description": "<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Object_Notes--><!--#4DLOOP [Object_Notes]--><!--#4DIF [Object_Notes]Field_Name="Web Description"--><!--#4DEVAL $fieldString := [Object_Notes]Text --><!--#4DEVAL $fieldString := replace string($fieldString;char(tab);"";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(carriage return);"%20";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(line feed);"%20";*) --><!--#4DEVAL replace string($fieldString;char(double quote);"\\\"";*) --><!--4DENDIF--><!--#4DENDLOOP-->",
 		"creationPlace": {"continent": "<!--#4DTEXT [Objects_1]Creation_Place1-->",
 			"country": "<!--#4DTEXT [Objects_1]Creation_Place2-->",
 			"state": "<!--#4DTEXT [Objects_1]Creation_Place3-->",
@@ -86,23 +89,6 @@
                           <!--#4DENDLOOP-->
                       <!--#4Dendif-->
 					  <!--#4DEVAL gsFunc_SpecialFieldQuery (->[Objects_1]_Objects_1_ID; string($currentObjectId))-->
-		],
-		"artists": [
-           			<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Object_Artist-->
-                      <!--#4DLOOP [Object_Artist]-->
-						{"attribution":	"<!--#4DTEXT [Object_Artist]Attribution-->",
-						"role": "<!--#4DTEXT [Object_Artist]Role-->",
-						<!--#4DSCRIPT/LoadRelatedRecords/Object_Artist:Artist_Maker-->
-						"fullName":	"<!--#4DTEXT [Artist_Maker]Full_Name-->",
-						"nationality": "<!--#4DTEXT [Artist_Maker]Nat_Culture_L2-->",
-						"lifeDates": "<!--#4DIF ([Artist_Maker]Start_Date_Disp#"")--><!--#4DTEXT [Artist_Maker]Start_Date_Disp--><!--#4DIF ([Artist_Maker]End_Date_Disp#"")--> - <!--#4DTEXT [Artist_Maker]End_Date_Disp--><!--#4DENDIF--><!--#4DENDIF-->",
-						"startDate": "<!--#4DTEXT [Artist_Maker]Start_Date_Disp-->",
-						"endDate": "<!--#4DTEXT [Artist_Maker]End_Date_Disp-->",
-						"livingFlag": "<!--#4DTEXT [Artist_Maker]Living_or_Dead-->",
-						"lifeFlag": "<!--#4DTEXT [Artist_Maker]Life-->"
-						}
-						<!--#4Dif (Selected Record Number([Object_Artist])< Records in Selection([Object_Artist])) -->,<!--#4Dendif-->
-                      <!--#4DENDLOOP-->
 		],
 		"creators": [
            			<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Object_Artist-->

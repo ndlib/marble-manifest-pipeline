@@ -31,8 +31,8 @@ class HarvestOaiEads():
         self.repositories_of_interest = [3]
         s3 = boto3.resource('s3')
         self.bucket = s3.Bucket(self.config['process-bucket'])
-        self.save_xml_locally = True
-        self.json_locally = True
+        self.save_xml_locally = False
+        self.json_locally = False
         self.temporary_local_path = '/tmp'
 
     def harvest_relevant_eads(self, mode, resumption_token):
@@ -45,9 +45,9 @@ class HarvestOaiEads():
         elif mode == 'ids':
             resumption_token = self.ids_oai_harvest(resumption_token)
         elif mode == 'identifiers':
-            ids = self.event.get("ids")
+            ids = self.event.get("ids", None)
             while len(ids) > 0:
-                resumption_token = ids[0]
+                resumption_token = ids[0]  # We just need something non-None until we're done.  We don't actually use the value.
                 self._get_individual_ead(ids[0])
                 del ids[0]
             if len(ids) == 0:
@@ -126,7 +126,6 @@ class HarvestOaiEads():
         """ Save ead_to_resource_dictionary.json """
         file_name = self.eadToResourceDictFilename
         fully_qualified_file_name = get_full_path_file_name(self.temporary_local_path, file_name)
-        # print('saving dictionary ', self.event['eadToResourceDictionary'])
         with open(fully_qualified_file_name, 'w') as f:
             json.dump(self.event['eadToResourceDictionary'], f, indent=2)
         if copy_file_from_local_to_s3(self.bucket, file_name, self.temporary_local_path, file_name):
@@ -189,7 +188,7 @@ class HarvestOaiEads():
                 ead_id = self._get_ead_id(record)
                 self.event['eadToResourceDictionary'][ead_id] = identifier
                 # print(ead_id, ' = ', self.event['eadToResourceDictionary'][ead_id])
-                print("identifier = ", identifier, int(time.time() - self.start_time), 'seconds.')
+                print("ArchivesSpace identifier = ", identifier, int(time.time() - self.start_time), 'seconds.')
             if self.save_xml_locally:
                 local_xml_output_folder = "/tmp/ead/xml/"
                 create_directory(local_xml_output_folder)

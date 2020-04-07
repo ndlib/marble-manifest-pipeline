@@ -19,6 +19,7 @@
   "noreply-email-addr": "noreply@nd.edu",
   "google_keys_ssm_base": "/all/marble/google",
   "museum_keys_ssm_base": "/all/marble/museum",
+  "curate_keys_ssm_base": "/all/marble/curate/pprd",
   "csv-field-names": [
     "id",
     "sourceSystem",
@@ -45,18 +46,13 @@
     "sequence",
     "collectionInformation",
     "fileId",
-    "fileInfo",
-    "imageUri",
     "mimeType",
     "workType",
     "medium",
-    "artists",
     "creators",
-    "digitalAssets",
     "width",
     "height",
     "md5Checksum",
-    "children",
     "creationPlace"
   ],
   "museum-required-fields": {
