@@ -26,16 +26,17 @@ class iiifManifest():
 
         ret = []
         for key in mapper.get_athena_keys():
-            if key != 'creators':
-                value = self.data.get(key, False)
-            else:
-                value = self.data.get(key)
-                if value:
-                    value = creatorField(value).to_iiif()
+            if key.lower() != 'n/a':
+                if key != 'creators':
+                    value = self.data.get(key, False)
+                else:
+                    value = self.data.get(key)
+                    if value:
+                        value = creatorField(value).to_iiif()
 
-            label = mapper.get_by_athena(key, 'marble_title')
-            if label and value and key not in keys_in_other_parts_of_manifest:
-                ret.append(self._convert_label_value(label, value))
+                label = mapper.get_by_athena(key, 'marble_title')
+                if label and value and key not in keys_in_other_parts_of_manifest:
+                    ret.append(self._convert_label_value(label, value))
 
         return ret
 
@@ -114,6 +115,7 @@ class iiifManifest():
         if type(line) != list:
             line = [line]
 
+        line = list(map(lambda x: str(x), iter(line)))
         return {self.lang: line}
 
     def add_context(self):
@@ -174,11 +176,11 @@ class iiifManifest():
 
         provider = self.data.get('repository').lower()
         if (provider == 'embark' or provider == 'museum'):
-            self.manifest_hash['provider'] = self._snite_proivider()
+            self.manifest_hash['provider'] = [self._snite_proivider()]
         elif (provider == 'unda'):
-            self.manifest_hash['provider'] = self._archives_proivider()
+            self.manifest_hash['provider'] = [self._archives_proivider()]
         elif (provider == 'rbsc' or provider == 'rare' or provider == 'spec' or provider == 'mrare'):
-            self.manifest_hash['provider'] = self._rbsc_proivider()
+            self.manifest_hash['provider'] = [self._rbsc_proivider()]
         else:
             raise Exception("bad provider " + provider.lower())
 

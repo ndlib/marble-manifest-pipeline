@@ -57,7 +57,7 @@ class TestCreateManifest(unittest.TestCase):
             iiif = iiifManifest(config, parent, mapping)
             iiif.add_provider()
             print(parent.object['level'])
-            self.assertEqual(test.get("result"), iiif.manifest_hash['provider'].get('id'))
+            self.assertEqual(test.get("result"), iiif.manifest_hash['provider'][0].get('id'))
 
         # if there is no repository there is no result
         del parent.object['repository']
@@ -76,6 +76,19 @@ class TestCreateManifest(unittest.TestCase):
         self.assertEqual("not here", iiif.manifest_hash.get('provider', "not here"))
         # reset
         parent.object['level'] = 'collection'
+
+    def test_metadata_mappings(self):
+        # it converts floats to strings
+        parent = load_csv_data("item-one-image-embark", config)
+        parent.object["uniqueIdentifier"] = 1999.2312
+
+        mapping = MetadataMappings(parent)
+        iiif = iiifManifest(config, parent, mapping)
+        iiif.metadata_array()
+        print(iiif.manifest_hash.get("metadata")[4].get("value").get("en")[0])
+        self.assertEqual("1999.2312", iiif.manifest_hash.get("metadata")[4].get("value").get("en")[0])
+
+
 
 
 

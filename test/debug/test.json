@@ -303,36 +303,38 @@
       }
     }
   ],
-  "provider": {
-    "homepage": [
-      {
-        "format": "text/html",
-        "id": "https://sniteartmuseum.nd.edu",
-        "label": {
-          "en": [
-            "Snite Museum of Art"
-          ]
-        },
-        "type": "Text"
-      }
-    ],
-    "id": "https://sniteartmuseum.nd.edu/about-us/contact-us/",
-    "label": {
-      "en": [
-        "Snite Museum of Art"
-      ]
-    },
-    "logo": [
-      {
-        "format": "image/png",
-        "height": 100,
-        "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
-        "type": "Image",
-        "width": 120
-      }
-    ],
-    "type": "Agent"
-  },
+  "provider": [
+    {
+      "homepage": [
+        {
+          "format": "text/html",
+          "id": "https://sniteartmuseum.nd.edu",
+          "label": {
+            "en": [
+              "Snite Museum of Art"
+            ]
+          },
+          "type": "Text"
+        }
+      ],
+      "id": "https://sniteartmuseum.nd.edu/about-us/contact-us/",
+      "label": {
+        "en": [
+          "Snite Museum of Art"
+        ]
+      },
+      "logo": [
+        {
+          "format": "image/png",
+          "height": 100,
+          "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
+          "type": "Image",
+          "width": 120
+        }
+      ],
+      "type": "Agent"
+    }
+  ],
   "requiredStatement": {
     "label": {
       "en": [
