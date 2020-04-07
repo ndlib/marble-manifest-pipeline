@@ -87,10 +87,5 @@ class TestCreateManifest(unittest.TestCase):
         self.assertEqual("1999.2312", iiif.manifest_hash.get("metadata")[4].get("value").get("en")[0])
 
 
-
-
-
-
-
 if __name__ == '__main__':
     unittest.main()
