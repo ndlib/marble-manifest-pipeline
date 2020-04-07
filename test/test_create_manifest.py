@@ -85,7 +85,6 @@ class TestCreateManifest(unittest.TestCase):
         mapping = MetadataMappings(parent)
         iiif = iiifManifest(config, parent, mapping)
         iiif.metadata_array()
-        print(iiif.manifest_hash.get("metadata")[4].get("value").get("en")[0])
         self.assertEqual("1999.2312", iiif.manifest_hash.get("metadata")[4].get("value").get("en")[0])
 
 
