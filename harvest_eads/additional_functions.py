@@ -141,5 +141,6 @@ def format_creators(value_found):
         node["attribution"] = ""
         node["role"] = "Primary"
         node["fullName"] = value_found
+        node["display"] = value_found
         results.append(node)
     return results
