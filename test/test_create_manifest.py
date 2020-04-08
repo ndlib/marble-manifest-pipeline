@@ -56,7 +56,6 @@ class TestCreateManifest(unittest.TestCase):
             mapping = MetadataMappings(parent)
             iiif = iiifManifest(config, parent, mapping)
             iiif.add_provider()
-            print(parent.object['level'])
             self.assertEqual(test.get("result"), iiif.manifest_hash['provider'][0].get('id'))
 
         # if there is no repository there is no result
@@ -86,11 +85,6 @@ class TestCreateManifest(unittest.TestCase):
         iiif = iiifManifest(config, parent, mapping)
         iiif.metadata_array()
         self.assertEqual("1999.2312", iiif.manifest_hash.get("metadata")[4].get("value").get("en")[0])
-
-
-
-
-
 
 
 if __name__ == '__main__':
