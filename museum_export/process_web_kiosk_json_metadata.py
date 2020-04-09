@@ -7,7 +7,6 @@
 import json
 from datetime import datetime, timedelta
 import time
-import boto3
 import os
 from find_google_images import FindGoogleImages
 from clean_up_content import CleanUpContent
@@ -73,8 +72,7 @@ class processWebKioskJsonMetadata():
             save information as CSV to S3, and delete the local copy. """
         object_id = object['uniqueIdentifier']
         print("Museum identifier = ", object_id, int(time.time() - self.start_time), 'seconds.')
-        clean_up_content_class = CleanUpContent()
-        clean_up_content_class.clean_up_content(object)
+        object = CleanUpContent(object).cleaned_up_content
         missing_fields = self._test_for_missing_fields(object_id,
                                                        object,
                                                        self.config['museum-required-fields'])

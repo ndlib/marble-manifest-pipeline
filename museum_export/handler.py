@@ -29,8 +29,8 @@ def run(event, context):
         mode = event.get("mode", "full")
         jsonWebKioskClass = processWebKioskJsonMetadata(config, google_connection, event)
         composite_json = jsonWebKioskClass.get_composite_json_metadata(mode)
-        if composite_json != {}:
-            jsonWebKioskClass.process_composite_json_metadata()
+        if composite_json:
+            jsonWebKioskClass.process_composite_json_metadata(composite_json)
         else:
             print('No JSON to process')
     else:
