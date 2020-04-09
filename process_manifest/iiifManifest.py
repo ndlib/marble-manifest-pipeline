@@ -1,5 +1,5 @@
 from iiifImage import iiifImage
-from creatorField import creatorField
+from dependencies.pipelineutilities.creatorField import creatorField  # noqa: E402
 
 
 class iiifManifest():

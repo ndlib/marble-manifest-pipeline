@@ -7,10 +7,10 @@
 import json
 from datetime import datetime, timedelta
 import time
-import boto3
 import os
+from find_google_images import FindGoogleImages
+from clean_up_content import CleanUpContent
 from dependencies.sentry_sdk import capture_message, push_scope, capture_exception
-from dependencies.pipelineutilities.google_utilities import execute_google_query
 from dependencies.pipelineutilities.s3_helpers import write_s3_file
 import dependencies.requests
 from dependencies.pipelineutilities.output_csv import OutputCsv
@@ -26,9 +26,6 @@ class processWebKioskJsonMetadata():
         self.event = event
         self.folder_name = "/tmp"
         self.file_name = 'web_kiosk_composite_metadata.json'
-        self.composite_json = {}
-        s3 = boto3.resource('s3')
-        self.bucket = s3.Bucket(self.config['process-bucket'])
         self.google_connection = google_connection
         self.image_files = {}
         self.delete_local_copy = True
@@ -38,65 +35,21 @@ class processWebKioskJsonMetadata():
     def get_composite_json_metadata(self, mode):
         """ Build URL, call URL, save resulting output to disk """
         url = self._get_embark_metadata_url(mode)
-        self.composite_json = self._get_metadata_given_url(url)
-        if self.composite_json:
+        composite_json = self._get_metadata_given_url(url)
+        if composite_json:
             fully_qualified_file_name = os.path.join(self.folder_name, self.file_name)
             with open(fully_qualified_file_name, 'w') as f:
-                json.dump(self.composite_json, f)
-            self._get_image_file_info()
-        return self.composite_json
+                json.dump(composite_json, f)
+            find_google_images_class = FindGoogleImages(self.config, self.google_connection, self.start_time)
+            self.image_files = find_google_images_class.get_image_file_info(composite_json)
+        return composite_json
 
-    def _get_image_file_info(self):
-        """ Get a list of files which we need to find on Google drive """
-        image_files_list = []
-        image_files_to_find = 0
-        if 'objects' in self.composite_json:
-            for object in self.composite_json['objects']:
-                if 'digitalAssets' in object:
-                    for digital_asset in object['digitalAssets']:
-                        image_files_list.append(digital_asset['fileDescription'])
-                        image_files_to_find += 1
-        print(image_files_to_find, " images to locate on Google Drive.", int(time.time() - self.start_time), 'seconds.')
-        # self._find_images_in_google_drive(image_files_list)
-        self._find_images_in_chunks(image_files_list)
-        return image_files_list
-
-    def _find_images_in_chunks(self, image_files_list):
-        """ Because Google queries are limited, we have to chunk this process """
-        first_item_to_process = 0
-        chunk_size = 50
-        while first_item_to_process < len(image_files_list):
-            last_item_to_process = first_item_to_process + chunk_size
-            if last_item_to_process > len(image_files_list):
-                last_item_to_process = len(image_files_list)
-            list_to_process = []
-            list_to_process = image_files_list[first_item_to_process:last_item_to_process]
-            self._find_images_in_google_drive(list_to_process)
-            first_item_to_process += chunk_size
-
-    def _find_images_in_google_drive(self, image_files_list):
-        """ Go find the list of files from Google drive """
-        if len(image_files_list) > 0:
-            query_string = "trashed = False and mimeType contains 'image' and ("
-            first_pass = True
-            for image_file_name in image_files_list:
-                if not first_pass:
-                    query_string += " or "
-                query_string += " name = '" + image_file_name + "'"
-                first_pass = False
-            query_string += ")"
-            drive_id = self.config['museum-google-drive-id']
-            results = execute_google_query(self.google_connection, drive_id, query_string)
-            for record in results:
-                self.image_files[record['name']] = record
-        return self.image_files
-
-    def process_composite_json_metadata(self, running_unit_tests=False):
+    def process_composite_json_metadata(self, composite_json, running_unit_tests=False):
         """ Split big composite metadata file into individual small metadata files """
         objects_processed = 0
         accumulated_missing_fields = ''
-        if 'objects' in self.composite_json:
-            for object in self.composite_json['objects']:
+        if 'objects' in composite_json:
+            for object in composite_json['objects']:
                 if 'uniqueIdentifier' in object:
                     missing_fields = self._process_one_json_object(object)
                     objects_processed += 1
@@ -119,8 +72,7 @@ class processWebKioskJsonMetadata():
             save information as CSV to S3, and delete the local copy. """
         object_id = object['uniqueIdentifier']
         print("Museum identifier = ", object_id, int(time.time() - self.start_time), 'seconds.')
-        self._augment_additional_fields(object)
-        self._remove_bad_subjects(object)
+        object = CleanUpContent(object).cleaned_up_content
         missing_fields = self._test_for_missing_fields(object_id,
                                                        object,
                                                        self.config['museum-required-fields'])
@@ -141,25 +93,6 @@ class processWebKioskJsonMetadata():
             write_s3_file(self.config['process-bucket'], s3_file_name, output_csv_class.return_csv_value())
             self._save_json_to_s3(self.config['process-bucket'], object, object_id)
         return missing_fields
-
-    def _augment_additional_fields(self, object):
-        self._define_worktype(object)
-        if 'modifiedDate' in object:
-            object['modifiedDate'] = datetime.strptime(object['modifiedDate'], '%m/%d/%Y %H:%M:%S').isoformat() + 'Z'
-
-    def _remove_bad_subjects(self, object):
-        if "subjects" in object:
-            i = len(object["subjects"])
-            while i > 0:
-                if object["subjects"][i - 1].get("authority", "") == "none":
-                    del object["subjects"][i - 1]
-                i -= 1
-
-    def _define_worktype(self, object):
-        classifiction = object.get("classification", "")
-        if classifiction == "Decorative Arts, Craft, and Design":
-            object['workType'] = classifiction
-        del object['classification']
 
     def _write_file_csv_record(self, object, digital_asset, sequence, output_csv_class):
         """ Write file-related information in the CSV file for each image file found for this object. """

@@ -1,6 +1,7 @@
 README.md
 setup.py
 pipelineutilities/__init__.py
+pipelineutilities/creatorField.py
 pipelineutilities/csv_collection.py
 pipelineutilities/google_utilities.py
 pipelineutilities/output_csv.py
@@ -12,6 +13,7 @@ pipelineutilities.egg-info/SOURCES.txt
 pipelineutilities.egg-info/dependency_links.txt
 pipelineutilities.egg-info/top_level.txt
 test/__init__.py
+test/test_creatorField.py
 test/test_csv_collection.py
 test/test_output_csv.py
 test/test_search_files.py

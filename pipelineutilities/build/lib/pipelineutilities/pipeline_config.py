@@ -20,7 +20,7 @@ default_config = {
     "noreply-email-addr": "noreply@nd.edu",
     "google_keys_ssm_base": "/all/marble/google",
     "museum_keys_ssm_base": "/all/marble/museum",
-    "curate_keys_ssm_base": "/all/marble/curate/pprd",
+    "curate_keys_ssm_base": "/all/marble/curate/prod",
     "local-path": "please set me",
     "csv-field-names": [
         "id",

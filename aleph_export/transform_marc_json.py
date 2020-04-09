@@ -165,6 +165,7 @@ class TransformMarcJson():
                 node["lifeDates"] = each_value.split("^^^")[1]
             else:
                 node['fullName'] = each_value
+            node['display'] = node.get("fullName", "")
             results.append(node)
         return results
 
