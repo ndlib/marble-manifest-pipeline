@@ -56,7 +56,7 @@
 				"format": "text"
 			},
 			{ "label": "workType",
-				"fields": ["LDR"],
+				"fields": ["leader"],
 				"positions": [6],
 				"extraProcessing": "lookup_work_type",
 				"format": "text"
@@ -126,6 +126,7 @@
 				"fields": ["AVA"],
 				"subfields": ["d"],
 				"format": "text"
-			}		]
+			}
+		]
 	}
 }

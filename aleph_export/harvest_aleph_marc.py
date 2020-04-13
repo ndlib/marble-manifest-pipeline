@@ -58,8 +58,8 @@ class HarvestAlephMarc():
                 csv_string = transform_marc_json_class.create_csv_from_json(json_record)
                 self._save_csv_record(json_record, csv_string)
                 self._save_json_record(json_record)
-            processed_records_count += 1
-            print("processed record ", processed_records_count, " - ", int(time.time() - self.start_time), " seconds.")
+                processed_records_count += 1
+                print("Aleph identifier ", json_record.get("id", ""), " - ", int(time.time() - self.start_time), " seconds.")
             if test_mode_flag:
                 break
         if not self.event['local']:

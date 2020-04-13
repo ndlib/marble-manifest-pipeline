@@ -188,7 +188,7 @@ class HarvestOaiEads():
                 ead_id = self._get_ead_id(record)
                 self.event['eadToResourceDictionary'][ead_id] = identifier
                 # print(ead_id, ' = ', self.event['eadToResourceDictionary'][ead_id])
-                print("ArchivesSpace identifier = ", identifier, int(time.time() - self.start_time), 'seconds.')
+                print("ArchivesSpace ead_id = ", ead_id, " identifier = ", identifier, int(time.time() - self.start_time), 'seconds.')
             if self.save_xml_locally:
                 local_xml_output_folder = "/tmp/ead/xml/"
                 create_directory(local_xml_output_folder)

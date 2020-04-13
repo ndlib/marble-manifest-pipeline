@@ -14,6 +14,7 @@ class TransformMarcJson():
     def build_json_from_marc_json(self, marc_record_as_json):
         """ Build our own json object representing marc information we're interested in """
         json_record = {}
+        marc_record_as_json = self._mutate_marc_record_as_json(marc_record_as_json)
         for json_field_definition in self.json_control['root']['FieldsToExtract']:
             if 'label' in json_field_definition:
                 json_record[json_field_definition['label']] = self._get_json_node_value_from_marc(json_field_definition, marc_record_as_json)  # noqa: E501
@@ -23,6 +24,14 @@ class TransformMarcJson():
         """ Return csv string from json input """
         csv_string = self.csv_from_json_class.return_csv_from_json(json_record)
         return csv_string
+
+    def _mutate_marc_record_as_json(self, marc_record_as_json):
+        """ For expediency, I will add the leader key to the fields array to capture workType. """
+        if "leader" in marc_record_as_json and "fields" in marc_record_as_json:
+            node_to_add = {}
+            node_to_add["leader"] = marc_record_as_json["leader"]
+            marc_record_as_json["fields"].append(node_to_add)
+        return marc_record_as_json
 
     def _get_json_node_value_from_marc(self, json_field_definition, marc_record_as_json):
         """ Return an individual json node value from the json representation of the marc record. """
