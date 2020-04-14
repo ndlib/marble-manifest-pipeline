@@ -49,7 +49,7 @@ def run(event, context):
             mapping = MetadataMappings(parent)
             iiif = iiifManifest(config, parent, mapping)
             manifest = iiif.manifest()
-
+            
             # split the manifests
             for item in sub_manifests(manifest):
                 inprocess_bucket.write_sub_manifest(item)
@@ -90,9 +90,7 @@ def test():
     # pp = pprint.PrettyPrinter(indent=4)
     event = {}
     event['ids'] = ['1988.012']
-    event['ssm_key_base'] = '/all/new-csv'
-    event['process-bucket'] = 'new-csv-processbucket-10dr776tnq9be'
-    event['process-bucket-csv-basepath'] = 'csv'
+    event['ssm_key_base'] = "/all/marble-manifest-deployment/prod"
     event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     event['local'] = False
     run(event, {})
