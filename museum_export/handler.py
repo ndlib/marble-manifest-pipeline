@@ -27,6 +27,8 @@ def run(event, context):
         google_credentials = json.loads(config["museum-google-credentials"])
         google_connection = establish_connection_with_google_api(google_credentials)
         mode = event.get("mode", "full")
+        if mode not in ["full", "incremental"]:
+            mode = "full"
         jsonWebKioskClass = processWebKioskJsonMetadata(config, google_connection, event)
         composite_json = jsonWebKioskClass.get_composite_json_metadata(mode)
         if composite_json:
@@ -55,5 +57,5 @@ def _suplement_event(event):
 def test():
     """ test exection """
     event = {}
-
+    # Test these temp IDs:  IL2019.006.002, IL1992.065.004, L1986.032.002, AA1966.031
     print(run(event, {}))
