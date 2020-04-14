@@ -62,9 +62,14 @@
 				"format": "text"
 			},
 			{
+				"!label": "format",
+				"!xpath": "./metadata/ead/archdesc/controlaccess/genreform",
+				"!optional": true,
+				"!format": "text"
+			},
+			{
 				"label": "format",
-				"xpath": "./metadata/ead/archdesc/controlaccess/genreform",
-				"optional": true,
+				"constant": "Mixed Materials",
 				"format": "text"
 			},
 			{

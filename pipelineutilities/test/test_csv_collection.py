@@ -3,7 +3,7 @@ import os
 import unittest
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am + "/../")
-from pipelineutilities.csv_collection import Item, _check_creator, _add_additional_paths, _add_image_dimensions, _turn_strings_to_json, _fix_ids
+from pipelineutilities.csv_collection import Item, _check_creator, _add_additional_paths, _add_image_dimensions, _turn_strings_to_json, _fix_ids  # noqa: E402
 
 objects = [
     {"sourceSystem": "EmbARK", "repository": "repository", "id": "collectionId", "collectionId": "collectionId", "parentId": "root", "level": "collection"},

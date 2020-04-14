@@ -46,7 +46,7 @@
 				<!--#4DLOOP [Location]-->
 				<!--#4DIF [Location]Current_Loc-->
 					<!--#4DIF ([Location]Location_Type="Exhibition")-->
-						"<!--#4DTEXT [Location]Location_1--> <!--#4DTEXT [Location]Location_2-->"
+						"<!--#4DTEXT [Location]Location_1-->: <!--#4DTEXT [Location]Location_2-->"
 					<!--#4DELSE-->
 						"<!--#4DTEXT [Location]Location_Type-->"
 					<!--4DENDIF-->

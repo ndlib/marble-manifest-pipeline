@@ -3,7 +3,7 @@ import os
 import unittest
 where_i_am = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(where_i_am + "/../")
-from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_image
+from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_image  # noqa: E402
 
 
 example_ids = {
@@ -13,7 +13,7 @@ example_ids = {
     'https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-018.jpg': {'id': 'BPP_1001-', 'group': '018', 'label': ''},
     'https://rarebooks.nd.edu/digital/colonial_american/records/images/massachusetts/swansea/2718-05.a.150.jpg': {'id': '2718-', 'group': '05', 'label': 'a'},
     'https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8006-1-B/images/MSN-EA_8006-01-B-00a.jpg': {'id': 'MSN-EA_8006-', 'group': '01', 'label': 'B 00a'},
-    'https://rarebooks.library.nd.edu/digital/bookreader/CodeLat_b04/images/CodeLat_b04-000a-front_cover.jpg': {'id': 'CodeLat_b04-', 'group': '', 'label': '000a front cover'} ,
+    'https://rarebooks.library.nd.edu/digital/bookreader/CodeLat_b04/images/CodeLat_b04-000a-front_cover.jpg': {'id': 'CodeLat_b04-', 'group': '', 'label': '000a front cover'},
     'https://rarebooks.nd.edu/digital/civil_war/papers_personal/images/edwards/1004-51.a_cvr.150.jpg': {'id': '1004-', 'group': '51', 'label': 'a cvr'},
     'https://rarebooks.nd.edu/digital/civil_war/letters/images/reeves/5012-23.bc.150.jpg': {'id': '5012-', 'group': '23', 'label': 'bc'},
     'https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/boardman/8000-00_cover_outside.150.jpg': {'id': '8000-', 'group': '00', 'label': 'cover outside'},

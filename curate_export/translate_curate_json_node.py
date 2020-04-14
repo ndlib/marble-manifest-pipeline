@@ -92,6 +92,7 @@ class TranslateCurateJsonNode():
                 node["uri"] = "http" + each_value.split("(http")[1].replace(")", "")
             else:
                 node['fullName'] = each_value
+            node["display"] = node.get("fullName", "")
             results.append(node)
         return results
 
