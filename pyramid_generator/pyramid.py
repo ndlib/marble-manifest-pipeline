@@ -7,6 +7,7 @@ import boto3
 from s3_helpers import upload_json
 from processor_factory import ProcessorFactory
 from csv_collection import load_csv_data
+from pipeline_config import load_cached_config
 
 
 class ImageRunner():
@@ -56,6 +57,8 @@ def _get_credentials(ssm_key: str) -> dict:
 
 if __name__ == "__main__":
     try:
+        event = json.loads(sys.argv[1])
+        config = load_cached_config(event)
         runner = ImageRunner(json.loads(sys.argv[1]))
         runner.process_images()
     except Exception as e:

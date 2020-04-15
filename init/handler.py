@@ -1,42 +1,46 @@
+import _set_path  # noqa
 import os
-import json
-from pathlib import Path
-import sys
 from helpers import get_file_ids_to_be_processed, get_all_file_ids
 
-where_i_am = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(where_i_am)
-sys.path.append(where_i_am + "/dependencies")
+from pipelineutilities.pipeline_config import get_pipeline_config, cache_config, generate_config_filename
+from pipelineutilities.s3_helpers import get_matching_s3_objects
 
-from dependencies.pipelineutilities.pipeline_config import get_pipeline_config
-from dependencies.pipelineutilities.s3_helpers import get_matching_s3_objects
+import sentry_sdk as sentry_sdk
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 
-import dependencies.sentry_sdk as sentry_sdk
-from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
-
-sentry_sdk.init(
-    dsn=os.environ['SENTRY_DSN'],
-    integrations=[AwsLambdaIntegration()]
-)
+if 'SENTRY_DSN' in os.environ:
+    sentry_sdk.init(
+        dsn=os.environ['SENTRY_DSN'],
+        integrations=[AwsLambdaIntegration()]
+    )
 
 
 def run(event, context):
     if 'ssm_key_base' not in event and not event.get('local', False):
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
 
+    event['config-file'] = generate_config_filename()
+    event['errors'] = []
     config = get_pipeline_config(event)
 
-    event['errors'] = []
-
-    if not event.get('ids'):
+    if event.get('ids'):
+        config['ids'] = event['ids']
+    else:
         all_files = get_matching_s3_objects(config['process-bucket'], config['process-bucket-csv-basepath'] + "/")
         if event.get("run_all_ids", False):
-            event['ids'] = list(get_all_file_ids(all_files, config))
+            config['ids'] = list(get_all_file_ids(all_files, config))
         else:
-            event['ids'] = list(get_file_ids_to_be_processed(all_files, config))
+            config['ids'] = list(get_file_ids_to_be_processed(all_files, config))
 
-    config['ids'] = event['ids']
-    event['ecs-args'] = [json.dumps(config)]
+    cache_config(config, event)
+
+    # reset the event because the data has been moved to config
+    event = {
+        'config-file': config['config-file'],
+        'process-bucket': config['process-bucket'],
+        'errors': config['errors']
+    }
+    event['ecs-args'] = [event]
 
     return event
 
@@ -44,7 +48,11 @@ def run(event, context):
 # python -c 'from handler import *; test()'
 def test():
     data = {}
-    data['local'] = True
-    data['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
-    data['process-bucket-csv-basepath'] = ""
+    # data['local'] = True
+    # data['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
+    # data['process-bucket-csv-basepath'] = ""
+    data['ssm_key_base'] = '/all/marble-manifest-prod'
+    data['ids'] = [
+        '1934.007.001'
+    ]
     print(run(data, {}))

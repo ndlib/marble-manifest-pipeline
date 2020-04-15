@@ -1,5 +1,6 @@
 import boto3
 import json
+import datetime
 
 default_config = {
     # "process-bucket": "marble-manifest-prod-processbucket-13bond538rnnb",
@@ -96,6 +97,29 @@ def get_pipeline_config(event):
 
     config.update(event)
     return config
+
+
+def generate_config_filename():
+    return str(datetime.datetime.now()).replace(" ", "-") + ".json"
+
+
+def load_cached_config(event):
+    s3Path = s3Path + "/" + id + "/" + config['image-data-file']
+    s3Bucket = event['process-bucket']
+    try:
+        content_object = boto3.resource('s3').Object(s3Bucket, s3Path)
+        source = content_object.get()['Body'].read().decode('utf-8')
+        return json.loads(source)
+    except boto3.resource('s3').meta.client.exceptions.NoSuchKey:
+        return {}
+
+
+def cache_config(config, event):
+    s3Path = "pipeline_runs/" + config['config-file']
+    s3Bucket = config['process-bucket']
+    print(s3Bucket, s3Path)
+    s3 = boto3.resource('s3')
+    s3.Object(s3Bucket, s3Path).put(Body=json.dumps(config), ContentType='text/json')
 
 
 def load_config_local(local_path):

@@ -2,9 +2,9 @@ import _set_path  # noqa
 import os
 from pathlib import Path
 from finalizeStep import FinalizeStep
-from dependencies.pipelineutilities.pipeline_config import get_pipeline_config
-import dependencies.sentry_sdk as sentry_sdk
-from dependencies.sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+from pipelineutilities.pipeline_config import load_cached_config, cache_config
+import sentry_sdk as sentry_sdk
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 from datetime import datetime, timedelta
 
 sentry_sdk.init(
@@ -14,57 +14,58 @@ sentry_sdk.init(
 
 
 def run(event, context):
-    # s3_bucket = event['process-bucket']
-    # s3_schema_path = os.path.join(event['process-bucket-read-basepath'], id, event["schema-file"])
+    # required keys
+    for key in ['config-file', 'process-bucket']:
+        if key not in event:
+            raise Exception(key + " required for finalize")
 
-    if 'ssm_key_base' not in event:
-        event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
-
-    config = get_pipeline_config(event)
-    ids = event.get("ids")
+    config = load_cached_config(event)
+    ids = config.get("ids")
 
     quittime = datetime.utcnow() + timedelta(seconds=config['seconds-to-allow-for-processing'])
-    event['finalize_complete'] = False
+    config['finalize_complete'] = False
 
-    if 'finished_ids' not in event:
-        event['finished_ids'] = []
+    if 'finished_ids' not in config:
+        config['finished_ids'] = []
 
-    if 'finalized_run_number' not in event:
-        event['finalized_run_number'] = 0
-    event['finalized_run_number'] = event['finalized_run_number'] + 1
+    if 'finalized_run_number' not in config:
+        config['finalized_run_number'] = 0
+    config['finalized_run_number'] = config['finalized_run_number'] + 1
 
-    if event['finalized_run_number'] > 5:
+    if config['finalized_run_number'] > 5:
         raise Exception("Too many executions")
 
     for id in ids:
-        if id not in event['finished_ids']:
+        if id not in config['finished_ids']:
             step = FinalizeStep(id, config)
-            # step.error = event.get("unexpected", "")
+            # step.error = congig.get("unexpected", "")
             # if not step.error:
             #    step.manifest_metadata = json.loads(mu.s3_read_file_content(s3_bucket, s3_schema_path))
             step.run()
-            event['finished_ids'].append(id)
+            config['finished_ids'].append(id)
 
         if quittime <= datetime.utcnow():
             break
 
-    if len(config['ids']) == len(event['finished_ids']):
-        event['finalize_complete'] = True
+    if len(config['ids']) == len(config['finished_ids']):
+        config['finalize_complete'] = True
 
     if "unexpected" in event:
-        event['error_found'] = True
+        config['error_found'] = True
     else:
-        event['error_found'] = False
+        config['error_found'] = False
 
+    cache_config(config)
     return event
 
 
 # python -c 'from handler import *; test()'
 def test():
-    data = {
-        "ids": ["parsons"],
-        "local": True,
-        "ssm_key_base": "ds",
-        "local-path": str(Path(__file__).parent.absolute()) + "/../example/"
+    event = {
+        'ssm_key_base': '/all/marble-manifest-prod',
+        'config-file': '2020-04-15-13:15:10.365990.json',
+        'process-bucket': 'marble-manifest-prod-processbucket-13bond538rnnb',
+        'errors': []
     }
-    print(run(data, {}))
+
+    print(run(event, {}))

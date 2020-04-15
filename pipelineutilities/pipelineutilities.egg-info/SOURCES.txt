@@ -8,6 +8,7 @@ pipelineutilities/output_csv.py
 pipelineutilities/pipeline_config.py
 pipelineutilities/s3_helpers.py
 pipelineutilities/search_files.py
+pipelineutilities/step_functions_helpers.py
 pipelineutilities.egg-info/PKG-INFO
 pipelineutilities.egg-info/SOURCES.txt
 pipelineutilities.egg-info/dependency_links.txt

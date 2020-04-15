@@ -1,12 +1,11 @@
 import _set_path  # noqa
-from pathlib import Path
 import os
 from iiifManifest import iiifManifest
 from MetadataMappings import MetadataMappings
 from ToSchema import ToSchema
 from ndJson import ndJson
 from pipelineutilities.csv_collection import load_csv_data
-from pipelineutilities.pipeline_config import get_pipeline_config
+from pipelineutilities.pipeline_config import load_cached_config, cache_config
 from pipelineutilities.s3_helpers import InprocessBucket
 import sentry_sdk
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
@@ -21,27 +20,30 @@ if 'SENTRY_DSN' in os.environ:
 
 
 def run(event, context):
-    if 'ssm_key_base' not in event and not event.get('local', False):
-        event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
 
-    config = get_pipeline_config(event)
-    ids = event.get("ids")
+    # required keys
+    for key in ['config-file', 'process-bucket']:
+        if key not in event:
+            raise Exception(key + " required for finalize")
+
+    config = load_cached_config(event)
+    ids = config.get("ids")
 
     quittime = datetime.utcnow() + timedelta(seconds=config['seconds-to-allow-for-processing'])
-    event['process_manifest_complete'] = False
+    config['process_manifest_complete'] = False
 
-    if 'processed_ids' not in event:
-        event['processed_ids'] = []
+    if 'processed_ids' not in config:
+        config['processed_ids'] = []
 
-    if 'process_manifest_run_number' not in event:
-        event['process_manifest_run_number'] = 0
-    event['process_manifest_run_number'] = event['process_manifest_run_number'] + 1
+    if 'process_manifest_run_number' not in config:
+        config['process_manifest_run_number'] = 0
+    config['process_manifest_run_number'] = config['process_manifest_run_number'] + 1
 
-    if event['process_manifest_run_number'] > 5:
+    if config['process_manifest_run_number'] > 5:
         raise Exception("Too many executions")
 
     for id in ids:
-        if id not in event['processed_ids']:
+        if id not in config['processed_ids']:
             inprocess_bucket = InprocessBucket(id, config)
 
             parent = load_csv_data(id, config)
@@ -49,7 +51,7 @@ def run(event, context):
             mapping = MetadataMappings(parent)
             iiif = iiifManifest(config, parent, mapping)
             manifest = iiif.manifest()
-            
+
             # split the manifests
             for item in sub_manifests(manifest):
                 inprocess_bucket.write_sub_manifest(item)
@@ -62,13 +64,15 @@ def run(event, context):
             schema = ToSchema(id, config, parent)
             inprocess_bucket.write_schema_json(schema.get_json())
 
-            event['processed_ids'].append(id)
+            config['processed_ids'].append(id)
 
         if quittime <= datetime.utcnow():
             break
 
-    if len(config['ids']) == len(event['processed_ids']):
-        event['process_manifest_complete'] = True
+    if len(config['ids']) == len(config['processed_ids']):
+        config['process_manifest_complete'] = True
+
+    cache_config(config, event)
 
     return event
 
@@ -88,9 +92,10 @@ def sub_manifests(manifest):
 def test():
     # import pprint
     # pp = pprint.PrettyPrinter(indent=4)
-    event = {}
-    event['ids'] = ['1988.012']
-    event['ssm_key_base'] = "/all/marble-manifest-deployment/prod"
-    event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
-    event['local'] = False
+    event = {
+        'ssm_key_base': '/all/marble-manifest-prod',
+        'config-file': '2020-04-15-13:15:10.365990.json',
+        'process-bucket': 'marble-manifest-prod-processbucket-13bond538rnnb',
+        'errors': []
+    }
     run(event, {})
