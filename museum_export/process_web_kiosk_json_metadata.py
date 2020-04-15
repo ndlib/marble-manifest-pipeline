@@ -139,7 +139,7 @@ class processWebKioskJsonMetadata():
         if mode == 'full':
             url = base_url + "&query=_ID=ALL"
         else:  # incremental
-            recent_past = datetime.utcnow() - timedelta(hours=self.config['hoursThreshold'])
+            recent_past = datetime.utcnow() - timedelta(hours=self.config["hours-threshold-for-incremental-harvest"])
             recent_past_string = recent_past.strftime('%m/%d/%Y')
             url = base_url + "&query=mod_date%3E%22" + recent_past_string + "%22"
         return(url)
