@@ -1,16 +1,16 @@
 import _set_path  # noqa
 import os
-from pathlib import Path
 from finalizeStep import FinalizeStep
 from pipelineutilities.pipeline_config import load_cached_config, cache_config
 import sentry_sdk as sentry_sdk
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 from datetime import datetime, timedelta
 
-sentry_sdk.init(
-    dsn=os.environ['SENTRY_DSN'],
-    integrations=[AwsLambdaIntegration()]
-)
+if 'SENTRY_DSN' in os.environ:
+    sentry_sdk.init(
+        dsn=os.environ['SENTRY_DSN'],
+        integrations=[AwsLambdaIntegration()]
+    )
 
 
 def run(event, context):
