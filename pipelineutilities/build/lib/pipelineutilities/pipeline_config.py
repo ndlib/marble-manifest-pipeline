@@ -104,8 +104,9 @@ def generate_config_filename():
 
 
 def load_cached_config(event):
-    s3Path = s3Path + "/" + id + "/" + config['image-data-file']
+    s3Path = "pipeline_runs/" + event['config-file']
     s3Bucket = event['process-bucket']
+
     try:
         content_object = boto3.resource('s3').Object(s3Bucket, s3Path)
         source = content_object.get()['Body'].read().decode('utf-8')
@@ -117,7 +118,7 @@ def load_cached_config(event):
 def cache_config(config, event):
     s3Path = "pipeline_runs/" + config['config-file']
     s3Bucket = config['process-bucket']
-    print(s3Bucket, s3Path)
+
     s3 = boto3.resource('s3')
     s3.Object(s3Bucket, s3Path).put(Body=json.dumps(config), ContentType='text/json')
 
