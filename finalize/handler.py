@@ -23,7 +23,7 @@ def run(event, context):
     for id in config.get("ids"):
         if id not in config['finalize_completed_ids']:
             step = FinalizeStep(id, config)
-            # step.error = congig.get("unexpected", "")
+            # step.error = config.get("unexpected", "")
             # if not step.error:
             #    step.manifest_metadata = json.loads(mu.s3_read_file_content(s3_bucket, s3_schema_path))
             step.run()
