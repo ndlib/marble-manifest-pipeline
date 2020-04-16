@@ -30,7 +30,7 @@ def run(event, context):
     ids = config.get("ids")
 
     quittime = datetime.utcnow() + timedelta(seconds=config['seconds-to-allow-for-processing'])
-    config['process_manifest_complete'] = False
+    event['process_manifest_complete'] = False
 
     if 'processed_ids' not in config:
         config['processed_ids'] = []
@@ -70,7 +70,7 @@ def run(event, context):
             break
 
     if len(config['ids']) == len(config['processed_ids']):
-        config['process_manifest_complete'] = True
+        event['process_manifest_complete'] = True
 
     cache_config(config, event)
 
