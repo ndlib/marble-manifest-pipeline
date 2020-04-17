@@ -13,7 +13,6 @@ if 'SENTRY_DSN' in os.environ:
     )
 
 
-
 def run(event, context):
     config = load_pipeline_config(event)
 
