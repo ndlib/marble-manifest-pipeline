@@ -33,8 +33,7 @@ def run(event, context):
             break
 
     # have we processed all the fields.
-    if len(config['ids']) == len(config['finalize_completed_ids']):
-        event['finalize_complete'] = True
+    event['finalize_complete'] = finalize_is_complete(config)
 
     if "unexpected" in event:
         config['error_found'] = True
@@ -50,6 +49,10 @@ def test_required_fields(event):
     for key in ['config-file', 'process-bucket']:
         if key not in event:
             raise Exception(key + " required for finalize")
+
+
+def finalize_is_complete(config):
+    return set(config['ids']) == set(config['finalize_completed_ids'])
 
 
 def break_to_restart_step(config):

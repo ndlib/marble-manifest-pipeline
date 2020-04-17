@@ -79,6 +79,14 @@ default_config = {
     "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai"
 }
 
+local_ssm = {
+    "process-bucket": "marble-manifest-prod-processbucket-13bond538rnnb",
+    "manifest-server-bucket": "marble-manifest-prod-manifestbucket-lpnnaj4jaxl5",
+    "image-server-bucket": "marble-data-broker-publicbucket-1kvqtwnvkhra2",
+    "image-server-base-url": "https://image-iiif.library.nd.edu/iiif/2",
+    "manifest-server-base-url": "https://presentation-iiif.library.nd.edu"
+}
+
 # currently only used as reference here could be used for validation in the future
 ssm_only_keys = [
     "process-bucket",
@@ -91,7 +99,8 @@ ssm_only_keys = [
 
 def get_pipeline_config(event):
     if 'local' in event and event['local']:
-        config = load_config_local(event['local-path'])
+        config = default_config
+        config.update(local_ssm)
     else:
         config = load_config_ssm(event['ssm_key_base'], default_config)
 
@@ -104,31 +113,29 @@ def generate_config_filename():
 
 
 def load_cached_config(event):
+    if event.get('local', False):
+        return get_pipeline_config(event)
+
     s3Path = "pipeline_runs/" + event['config-file']
     s3Bucket = event['process-bucket']
 
     try:
         content_object = boto3.resource('s3').Object(s3Bucket, s3Path)
         source = content_object.get()['Body'].read().decode('utf-8')
-        return json.loads(source)
+        return json.loads(source).update(event)
     except boto3.resource('s3').meta.client.exceptions.NoSuchKey:
         return {}
 
 
 def cache_config(config, event):
+    if event.get('local', False):
+        return
+
     s3Path = "pipeline_runs/" + config['config-file']
     s3Bucket = config['process-bucket']
 
     s3 = boto3.resource('s3')
     s3.Object(s3Bucket, s3Path).put(Body=json.dumps(config), ContentType='text/json')
-
-
-def load_config_local(local_path):
-    with open(local_path + "default_config.json", 'r') as input_source:
-        source = json.loads(input_source.read())
-    input_source.close()
-    source['local'] = True
-    return source
 
 
 def load_config_ssm(ssm_key_base, default_config):

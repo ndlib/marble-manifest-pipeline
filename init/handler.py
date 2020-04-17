@@ -38,7 +38,8 @@ def run(event, context):
     event = {
         'config-file': config['config-file'],
         'process-bucket': config['process-bucket'],
-        'errors': config['errors']
+        'errors': config['errors'],
+        'local': event.get('local', False)
     }
     event['ecs-args'] = [event]
 
@@ -55,4 +56,6 @@ def test():
     data['ids'] = [
         '1934.007.001'
     ]
+    data['local'] = True
+
     print(run(data, {}))

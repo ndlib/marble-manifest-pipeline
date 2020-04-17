@@ -96,6 +96,11 @@ def test():
         'ssm_key_base': '/all/marble-manifest-prod',
         'config-file': '2020-04-15-13:15:10.365990.json',
         'process-bucket': 'marble-manifest-prod-processbucket-13bond538rnnb',
+        'ids': [
+            'item-one-image-embark'
+        ],
+        'local': True,
+        'local-path': '../example/',
         'errors': []
     }
     run(event, {})
