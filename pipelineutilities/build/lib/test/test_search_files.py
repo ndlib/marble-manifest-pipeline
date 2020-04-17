@@ -1,8 +1,5 @@
-import sys
-import os
+import _set_path  # noqa
 import unittest
-where_i_am = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(where_i_am + "/../")
 from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_image  # noqa: E402
 
 
@@ -76,7 +73,6 @@ class TestSearchFiles(unittest.TestCase):
 
     def test_id_from_url(self):
         for url in temp_ids_example:
-            print(url)
             self.assertEqual(id_from_url(url), temp_ids_example[url])
 
     def test_url_can_be_harvested(self):

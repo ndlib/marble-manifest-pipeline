@@ -215,12 +215,12 @@ def output_as_file():
 
 # python -c 'from search_files import *; test()'
 def test():
-    from pipeline_config import get_pipeline_config
+    from pipeline_config import setup_pipeline_config
     event = {"local": True}
     event['local-path'] = "/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/"
     event['local-path'] = "../../example/"
 
-    config = get_pipeline_config(event)
+    config = setup_pipeline_config(event)
 
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     # data = crawl_available_files(config)

@@ -1,7 +1,8 @@
+import _set_test_path  # noqa
 import unittest
 from datetime import datetime, timedelta
 from finalize.finalizeStep import FinalizeStep
-from finalize.handler import setup_config_for_restarting_step, break_to_restart_step, finalize_is_complete, test_required_fields
+from finalize.handler import setup_config_for_restarting_step, break_to_restart_step, finalize_is_complete
 
 test_id = "sample"
 
@@ -63,20 +64,6 @@ class TestFinalize(unittest.TestCase):
         # missing is not true
         test = {"ids": ["id1", "id2"], "finalize_completed_ids": ["id1"]}
         self.assertEqual(finalize_is_complete(test), False)
-
-    def test_test_required_fields(self):
-        test = {
-            'config-file': "value",
-            'process-bucket': "value"
-        }
-        # no exception
-        test_required_fields(test)
-
-        with self.assertRaises(Exception):
-            test_required_fields({'process-bucket': "value"})
-
-        with self.assertRaises(Exception):
-            test_required_fields({'config-file': "value"})
 
 
 if __name__ == '__main__':

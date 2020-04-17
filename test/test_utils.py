@@ -1,3 +1,4 @@
+import _set_test_path  # noqa
 import json
 from pathlib import Path
 

@@ -5,7 +5,7 @@ from MetadataMappings import MetadataMappings
 from ToSchema import ToSchema
 from ndJson import ndJson
 from pipelineutilities.csv_collection import load_csv_data
-from pipelineutilities.pipeline_config import load_cached_config, cache_config
+from pipelineutilities.pipeline_config import load_pipeline_config, cache_pipeline_config
 from pipelineutilities.s3_helpers import InprocessBucket
 import sentry_sdk
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
@@ -20,13 +20,7 @@ if 'SENTRY_DSN' in os.environ:
 
 
 def run(event, context):
-
-    # required keys
-    for key in ['config-file', 'process-bucket']:
-        if key not in event:
-            raise Exception(key + " required for finalize")
-
-    config = load_cached_config(event)
+    config = load_pipeline_config(event)
     ids = config.get("ids")
 
     quittime = datetime.utcnow() + timedelta(seconds=config['seconds-to-allow-for-processing'])
@@ -72,7 +66,7 @@ def run(event, context):
     if len(config['ids']) == len(config['processed_ids']):
         event['process_manifest_complete'] = True
 
-    cache_config(config, event)
+    cache_pipeline_config(config, event)
 
     return event
 

@@ -2,7 +2,7 @@ import _set_path  # noqa
 import os
 from datetime import datetime, timedelta
 from finalizeStep import FinalizeStep
-from pipelineutilities.pipeline_config import load_cached_config, cache_config
+from pipeline_config import load_pipeline_config, cache_pipeline_config
 import sentry_sdk as sentry_sdk
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 
@@ -13,12 +13,12 @@ if 'SENTRY_DSN' in os.environ:
     )
 
 
+
 def run(event, context):
-    test_required_fields(event)
+    config = load_pipeline_config(event)
 
     # used to indicate to the choice in the step functions if the step has finished yet
     event['finalize_complete'] = False
-    config = load_cached_config(event)
 
     for id in config.get("ids"):
         if id not in config['finalize_completed_ids']:
@@ -40,15 +40,9 @@ def run(event, context):
     else:
         config['error_found'] = False
 
-    cache_config(config)
+    cache_pipeline_config(config)
 
     return event
-
-
-def test_required_fields(event):
-    for key in ['config-file', 'process-bucket']:
-        if key not in event:
-            raise Exception(key + " required for finalize")
 
 
 def finalize_is_complete(config):
