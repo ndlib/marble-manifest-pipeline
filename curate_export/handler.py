@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from curate_api import CurateApi
 from read_batch_ingest_combined_csv import read_batch_ingest_combined_csv  # noqa: #402
-from pipelineutilities.pipeline_config import get_pipeline_config, load_config_ssm  # noqa: E402
+from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm  # noqa: E402
 import sentry_sdk   # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
 
@@ -21,7 +21,7 @@ def run(event, context):
     """ Run the process to retrieve and process Aleph metadata. """
     _supplement_event(event)
 
-    config = get_pipeline_config(event)
+    config = setup_pipeline_config(event)
     if config:
         time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
         print("Will break after ", time_to_break)

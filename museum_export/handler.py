@@ -6,7 +6,7 @@ import os
 import json
 from pathlib import Path
 from process_web_kiosk_json_metadata import processWebKioskJsonMetadata  # noqa: E402
-from pipelineutilities.pipeline_config import get_pipeline_config, load_config_ssm  # noqa: E402
+from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm  # noqa: E402
 from pipelineutilities.google_utilities import establish_connection_with_google_api  # noqa: E402
 import sentry_sdk  # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
@@ -19,7 +19,7 @@ if 'SENTRY_DSN' in os.environ:
 def run(event, context):
     """ run the process to retrieve and process web kiosk metadata """
     _suplement_event(event)
-    config = get_pipeline_config(event)
+    config = setup_pipeline_config(event)
     config = load_config_ssm(config['google_keys_ssm_base'], config)
     config = load_config_ssm(config['museum_keys_ssm_base'], config)
 

@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 from harvest_oai_eads import HarvestOaiEads  # noqa: #502
 from file_system_utilities import delete_file  # noqa: E402
-from pipelineutilities.pipeline_config import get_pipeline_config  # noqa: E402
+from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
 import sentry_sdk as sentry_sdk  # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
 
@@ -19,7 +19,7 @@ def run(event, context):
         http://archivesspace.github.io/archivesspace/api/ """
     _supplement_event(event)
     _init_sentry()
-    config = get_pipeline_config(event)
+    config = setup_pipeline_config(event)
     if config:
         resumption_token = event['resumptionToken']
         harvest_oai_eads_class = HarvestOaiEads(config, event)

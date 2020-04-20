@@ -1,10 +1,11 @@
+import _set_test_path  # noqa
 import unittest
 import json
 from test.test_utils import load_data_for_test
 from test.test_utils import debug_json
 from pathlib import Path
 from csv_collection import load_csv_data
-from pipeline_config import get_pipeline_config
+from pipeline_config import setup_pipeline_config
 from iiifManifest import iiifManifest
 from MetadataMappings import MetadataMappings
 
@@ -12,7 +13,7 @@ from MetadataMappings import MetadataMappings
 base_config = {}
 base_config['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
 base_config['local'] = True
-config = get_pipeline_config(base_config)
+config = setup_pipeline_config(base_config)
 
 
 class TestCreateManifest(unittest.TestCase):

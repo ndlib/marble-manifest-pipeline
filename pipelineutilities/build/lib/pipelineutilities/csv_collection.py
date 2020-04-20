@@ -141,12 +141,13 @@ def _fix_ids(row):
 
 def _turn_strings_to_json(row):
     for key in row.keys():
-        try:
-            row[key] = json.loads(row[key])
-        # we are simply testing if this is valid json if it is not and fails do nothing
-        # i realize this is an antipattern
-        except (ValueError, TypeError):
-            pass
+        if ("{" in row[key] and "}" in row[key]):
+            try:
+                row[key] = json.loads(row[key])
+            # we are simply testing if this is valid json if it is not and fails do nothing
+            # i realize this is an antipattern
+            except (ValueError, TypeError):
+                pass
 
 
 def _check_creator(row):
@@ -225,19 +226,19 @@ def _add_image_dimensions(row, all_image_data, config):
 
 # python -c 'from csv_collection import *; test()'
 def test():
-    from pipeline_config import get_pipeline_config
-    event = {"local": True}
+    from pipeline_config import setup_pipeline_config
+    event = {"local": False}
     event['local-path'] = '/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/'
 
-    config = get_pipeline_config(event)
+    event['ssm_key_base'] = "/all/marble-manifest-deployment/prod"
+    config = setup_pipeline_config(event)
 
     # s3 libnd
     config['local'] = False
-    for id in ['BPP1001_EAD', 'MSNCOL8500_EAD']:
+    for id in ['1954.030']:
         parent = load_csv_data(id, config)
-        for file in parent.files():
-            print(file.get("height"))
-
+        print(parent.object['creators'][0])
+    return
     # local
     config['local'] = True
     for id in ['parsons', '1976.057']:

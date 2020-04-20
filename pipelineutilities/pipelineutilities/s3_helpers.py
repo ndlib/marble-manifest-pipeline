@@ -85,6 +85,14 @@ def read_s3_file_content(s3Bucket, s3Path):
     return content_object.get()['Body'].read().decode('utf-8')
 
 
+def read_s3_json(s3Bucket, s3Path):
+    return json.loads(read_s3_file_content(s3Bucket, s3Path))
+
+
+def read_s3_xml(s3Bucket, s3Path):
+    return read_s3_file_content(s3Bucket, s3Path)
+
+
 def write_s3_file(s3Bucket, s3Path, file):
     s3 = boto3.resource('s3')
     s3.Object(s3Bucket, s3Path).put(Body=file)

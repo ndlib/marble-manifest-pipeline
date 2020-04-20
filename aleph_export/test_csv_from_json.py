@@ -6,7 +6,7 @@ import json
 import os
 from pathlib import Path
 from csv_from_json import CsvFromJson
-from dependencies.pipelineutilities.pipeline_config import get_pipeline_config  # noqa: E402
+from dependencies.pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
 from dependencies.pipelineutilities.search_files import crawl_available_files
 
 
@@ -18,7 +18,7 @@ class Test(unittest.TestCase):
     def setUp(self):
         self.event = {"local": True}
         self.event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
-        self.config = get_pipeline_config(self.event)
+        self.config = setup_pipeline_config(self.event)
         self.csv_field_names = self.config["csv-field-names"]
         self.hash_of_available_files = {}
         if not self.event['local']:

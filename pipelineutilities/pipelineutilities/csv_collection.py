@@ -226,12 +226,12 @@ def _add_image_dimensions(row, all_image_data, config):
 
 # python -c 'from csv_collection import *; test()'
 def test():
-    from pipeline_config import get_pipeline_config
+    from pipeline_config import setup_pipeline_config
     event = {"local": False}
     event['local-path'] = '/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/'
 
     event['ssm_key_base'] = "/all/marble-manifest-deployment/prod"
-    config = get_pipeline_config(event)
+    config = setup_pipeline_config(event)
 
     # s3 libnd
     config['local'] = False

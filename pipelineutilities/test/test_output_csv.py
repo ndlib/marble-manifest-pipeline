@@ -1,8 +1,5 @@
-import sys
-import os
+import _set_path  # noqa
 import unittest
-where_i_am = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(where_i_am + "/../")
 from pipelineutilities.output_csv import OutputCsv  # noqa: E402
 
 

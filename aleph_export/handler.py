@@ -5,7 +5,7 @@ import _set_path  # noqa
 import os
 from pathlib import Path
 from harvest_aleph_marc import HarvestAlephMarc  # noqa: #402
-from pipelineutilities.pipeline_config import get_pipeline_config  # noqa: E402
+from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
 import sentry_sdk   # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
 
@@ -17,7 +17,7 @@ if 'SENTRY_DSN' in os.environ:
 def run(event, context):
     """ Run the process to retrieve and process Aleph metadata. """
     _supplement_event(event)
-    config = get_pipeline_config(event)
+    config = setup_pipeline_config(event)
     if config:
         marc_records_url = "https://alephprod.library.nd.edu/aleph_tmp/marble.mrc"
         harvest_marc_class = HarvestAlephMarc(config, event, marc_records_url)
