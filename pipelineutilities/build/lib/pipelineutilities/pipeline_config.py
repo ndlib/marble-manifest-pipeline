@@ -136,8 +136,8 @@ def cache_pipeline_config(config, event):
         return
 
     test_required_fields(event)
-    s3Path = "pipeline_runs/" + config['config-file']
-    s3Bucket = config['process-bucket']
+    s3Path = "pipeline_runs/" + event['config-file']
+    s3Bucket = event['process-bucket']
     write_s3_json(s3Bucket, s3Path, config)
 
 

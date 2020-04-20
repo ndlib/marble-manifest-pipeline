@@ -34,7 +34,6 @@ def run(event, context):
         else:
             config['ids'] = list(get_file_ids_to_be_processed(all_files, config))
 
-    cache_pipeline_config(config, event)
 
     # reset the event because the data has been moved to config
     event = {
@@ -43,6 +42,8 @@ def run(event, context):
         'errors': config['errors'],
         'local': event.get('local', False)
     }
+
+    cache_pipeline_config(config, event)
     event['ecs-args'] = [event]
 
     return event
