@@ -35,3 +35,7 @@ def get_if_from_file_key(key):
     id = os.path.splitext(key)
     # get the basename (filename)
     return os.path.basename(id[0])
+
+
+def generate_config_filename():
+    return str(datetime.now()).replace(" ", "-") + ".json"
