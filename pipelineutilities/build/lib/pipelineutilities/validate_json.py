@@ -14,7 +14,7 @@ def validate_json(json_to_test, schema_to_use, print_error_message=False):
     except ValidationError as e:
         results = False
         if print_error_message:
-            print("Validate_json failed with this error message: ", e.message)
+            print("Validate_json failed with this error message: ", str(e))
         capture_exception(e)
     return results
 
