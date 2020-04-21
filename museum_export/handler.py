@@ -20,8 +20,10 @@ def run(event, context):
     """ run the process to retrieve and process web kiosk metadata """
     _suplement_event(event)
     config = setup_pipeline_config(event)
-    config = load_config_ssm(config['google_keys_ssm_base'], config)
-    config = load_config_ssm(config['museum_keys_ssm_base'], config)
+    google_config = load_config_ssm(config['google_keys_ssm_base'])
+    config.update(google_config)
+    museum_config = load_config_ssm(config['museum_keys_ssm_base'])
+    config.update(museum_config)
 
     if config:
         google_credentials = json.loads(config["museum-google-credentials"])
