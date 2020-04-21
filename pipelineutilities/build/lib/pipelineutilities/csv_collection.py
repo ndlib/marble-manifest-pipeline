@@ -141,7 +141,7 @@ def _fix_ids(row):
 
 def _turn_strings_to_json(row):
     for key in row.keys():
-        if ("{" in row[key] and "}" in row[key]):
+        if ("{" in row[key] and "}" in row[key] or "[" in row[key] and "]" in row[key]):
             try:
                 row[key] = json.loads(row[key])
             # we are simply testing if this is valid json if it is not and fails do nothing

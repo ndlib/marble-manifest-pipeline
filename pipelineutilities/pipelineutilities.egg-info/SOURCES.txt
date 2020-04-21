@@ -12,6 +12,7 @@ pipelineutilities/search_files.py
 pipelineutilities.egg-info/PKG-INFO
 pipelineutilities.egg-info/SOURCES.txt
 pipelineutilities.egg-info/dependency_links.txt
+pipelineutilities.egg-info/requires.txt
 pipelineutilities.egg-info/top_level.txt
 test/__init__.py
 test/_set_path.py
