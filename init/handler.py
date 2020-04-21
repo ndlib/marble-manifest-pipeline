@@ -1,8 +1,9 @@
+"""This module is used in the step functions init lambda to setup data for the manifest part of the pipeline."""
+
 import _set_path  # noqa
 import os
-import datetime
 import json
-from helpers import get_file_ids_to_be_processed, get_all_file_ids
+from helpers import get_file_ids_to_be_processed, get_all_file_ids, generate_config_filename
 
 from pipelineutilities.pipeline_config import setup_pipeline_config, cache_pipeline_config
 from pipelineutilities.s3_helpers import get_matching_s3_objects
@@ -35,7 +36,6 @@ def run(event, context):
         else:
             config['ids'] = list(get_file_ids_to_be_processed(all_files, config))
 
-
     # reset the event because the data has been moved to config
     event = {
         'config-file': config['config-file'],
@@ -48,10 +48,6 @@ def run(event, context):
     event['ecs-args'] = [json.dumps(event)]
 
     return event
-
-
-def generate_config_filename():
-    return str(datetime.datetime.now()).replace(" ", "-") + ".json"
 
 
 # python -c 'from handler import *; test()'
