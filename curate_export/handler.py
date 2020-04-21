@@ -25,7 +25,8 @@ def run(event, context):
     if config:
         time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
         print("Will break after ", time_to_break)
-        config = load_config_ssm(config['curate_keys_ssm_base'], config)
+        curate_config = load_config_ssm(config['curate_keys_ssm_base'])
+        config.update(curate_config)
         # if "filenames" in event:
         #     for filename in event["filenames"]:
         #         json_curate_item = read_batch_ingest_combined_csv(filename)
@@ -76,12 +77,13 @@ def test(identifier=""):
         event = {}
         event['local'] = False
         # event['seconds-to-allow-for-processing'] = 30
-        # event['filenames'] = ["Commencement_Programs.csv"]
-        # ks65h992w12 = Epistemological Letters
         # und:zp38w953h0s = Commencement Programs
+        # und:zp38w953p3c = Chinese Catholic-themed paintings
+        # und:qz20sq9094h = Architectural Lantern Slides
+        # ks65h992w12 = Epistemological Letters
         # 1z40ks6792x = Varieties of Democracy - has sub-collections
         # event['ids'] = ["und:1z40ks6792x"]
-        event['ids'] = ["und:zp38w953h0s", "und:ks65h992w12"]
+        event['ids'] = ["und:zp38w953h0s", "und:zp38w953p3c"]
 
     event = run(event, {})
 
