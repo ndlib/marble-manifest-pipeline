@@ -56,6 +56,22 @@ class TestCsvCollection(unittest.TestCase):
         _turn_strings_to_json(test)
         self.assertEqual(test['somejson'], [{"obj": "value"}])
 
+        test = {'somejson': '[{}]'}
+        _turn_strings_to_json(test)
+        self.assertEqual(test['somejson'], [{}])
+
+        test = {'somejson': '{}'}
+        _turn_strings_to_json(test)
+        self.assertEqual(test['somejson'], {})
+
+        test = {'somearrrayjson': '["obj"]'}
+        _turn_strings_to_json(test)
+        self.assertEqual(test['somearrrayjson'], ["obj"])
+
+        test = {'somearrrayjson': '[]'}
+        _turn_strings_to_json(test)
+        self.assertEqual(test['somearrrayjson'], [])
+
     def test_fix_ids(self):
         # converts these to floats
         test = {"id": 1998.34, "collectionId": 1442.23, "parentId": 2344.12}
