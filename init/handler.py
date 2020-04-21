@@ -1,6 +1,7 @@
 import _set_path  # noqa
 import os
 import datetime
+import json
 from helpers import get_file_ids_to_be_processed, get_all_file_ids
 
 from pipelineutilities.pipeline_config import setup_pipeline_config, cache_pipeline_config
@@ -44,7 +45,7 @@ def run(event, context):
     }
 
     cache_pipeline_config(config, event)
-    event['ecs-args'] = [event]
+    event['ecs-args'] = [json.dumps(event)]
 
     return event
 
