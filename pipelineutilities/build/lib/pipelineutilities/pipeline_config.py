@@ -109,11 +109,24 @@ def setup_pipeline_config(event):
     else:
         if "ssm_key_base" not in event:
             raise Exception("ssm_key_base required to be in the event dictionary to setup a pipeline config")
+        config = default_config.copy()
+        config.update(load_config_ssm(event['ssm_key_base']))
+        config.update(_fix_config_url_keys(config))
 
-        config = load_config_ssm(event['ssm_key_base'])
+        config['local'] = False  # ensure it is set and false
 
     # merge the current event
     config.update(event)
+    return config
+
+
+def _fix_config_url_keys(config):
+    if config.get('image-server-base-url'):
+        config['image-server-base-url'] = "https://" + config['image-server-base-url'] + '/iiif/2'
+
+    if config.get('manifest-server-base-url'):
+        config['manifest-server-base-url'] = "https://" + config['manifest-server-base-url']
+
     return config
 
 
@@ -148,7 +161,7 @@ def load_config_local():
 
 
 def load_config_ssm(ssm_key_base):
-    config = default_config.copy()
+    config = {}
 
     # read the keys we want out of ssm
     client = boto3.client('ssm')
@@ -169,10 +182,6 @@ def load_config_ssm(ssm_key_base):
         key = ps['Name'].replace(path, '')
         # add the key/value pair
         config[key] = value
-
-    config['image-server-base-url'] = "https://" + config['image-server-base-url'] + '/iiif/2'
-    config['manifest-server-base-url'] = "https://" + config['manifest-server-base-url']
-    config['local'] = False
 
     return config
 
