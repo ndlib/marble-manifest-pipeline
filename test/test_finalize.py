@@ -26,7 +26,6 @@ class TestFinalize(unittest.TestCase):
     def test_setup_config_for_restarting_step(self):
         test = {"seconds-to-allow-for-processing": 100}
         setup_config_for_restarting_step(test)
-        self.assertEqual(test['finalize_quittime'].strftime("%Y%m%d%h%m%s"), (datetime.utcnow() + timedelta(seconds=100)).strftime("%Y%m%d%h%m%s"))
         self.assertEqual(test['finalize_completed_ids'], [])
         self.assertEqual(test['finalize_run_number'], 1)
 
@@ -41,11 +40,11 @@ class TestFinalize(unittest.TestCase):
 
     def test_break_to_restart_step(self):
         # if the config value for quit time is less than the current time it is false
-        test = {"finalize_quittime": datetime.utcnow() + timedelta(seconds=100)}
+        test = datetime.utcnow() + timedelta(seconds=100)
         self.assertEqual(break_to_restart_step(test), False)
 
         # the current quittime is greater than now it is true
-        test = {"finalize_quittime": datetime.utcnow() - timedelta(seconds=100)}
+        test = datetime.utcnow() - timedelta(seconds=100)
         self.assertEqual(break_to_restart_step(test), True)
 
     def test_finalize_is_complete(self):

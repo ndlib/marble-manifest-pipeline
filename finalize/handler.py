@@ -18,6 +18,9 @@ def run(event, context):
 
     # used to indicate to the choice in the step functions if the step has finished yet
     event['finalize_complete'] = False
+    finalize_quittime = datetime.utcnow() + timedelta(seconds=config['seconds-to-allow-for-processing'])
+
+    setup_config_for_restarting_step(config)
 
     for id in config.get("ids"):
         if id not in config['finalize_completed_ids']:
@@ -28,18 +31,18 @@ def run(event, context):
             step.run()
             config['finalize_completed_ids'].append(id)
 
-        if break_to_restart_step(config):
+        if break_to_restart_step(finalize_quittime):
             break
 
     # have we processed all the fields.
     event['finalize_complete'] = finalize_is_complete(config)
 
     if "unexpected" in event:
-        config['error_found'] = True
+        event['error_found'] = True
     else:
-        config['error_found'] = False
+        event['error_found'] = False
 
-    cache_pipeline_config(config)
+    cache_pipeline_config(config, event)
 
     return event
 
@@ -48,13 +51,11 @@ def finalize_is_complete(config):
     return set(config['ids']) == set(config['finalize_completed_ids'])
 
 
-def break_to_restart_step(config):
-    return config['finalize_quittime'] <= datetime.utcnow()
+def break_to_restart_step(finalize_quittime):
+    return finalize_quittime <= datetime.utcnow()
 
 
 def setup_config_for_restarting_step(config):
-    config['finalize_quittime'] = datetime.utcnow() + timedelta(seconds=config['seconds-to-allow-for-processing'])
-
     if 'finalize_completed_ids' not in config:
         config['finalize_completed_ids'] = []
 
