@@ -34,19 +34,27 @@ nd_json_schema = {
         "level": {"type": "string"},
         "title": {"type": "string"},
         "dateCreated": {
+            "description": "Ultimately, we want dates, like 'c. 1900' or '2020-04-22'.  Once that happens, we will remove array and number types. ",
             "anyOf": [
+                {"type": "number"},
                 {"type": "string"},
-                {"type": "number"}
+                {
+                    "type": "array",
+                    "description": "Validating dates like [1841] (which we will eventually correct and remove)",
+                    "items": {
+                        "type": "number"
+                    }
+                }
             ]
         },
         "uniqueIdentifier": {
             "anyOf": [
                 {"type": "string"},
-                {"type": "number"}
             ]
         },
         "dimensions": {"type": "string"},
         "languages": {
+            "description": "Ultimately, we want languages, like ['english'] or ['english', 'french'].  Once that happens, we will remove string types. ",
             "anyOf": [
                 {"type": "array",
                     "items": {"type": "string"}
@@ -60,7 +68,7 @@ nd_json_schema = {
                 {
                     "type": "array",
                     "items": {
-                        "description": "Schema for validating subject",
+                        "description": "Ideally, subjects contain URIs, unfortunately, many do not.",
                         "type": "object",
                         "properties": {
                             "authority": {"type": "string"},
@@ -96,7 +104,7 @@ nd_json_schema = {
                 {
                     "type": "array",
                     "items": {
-                        "description": "Schema for validating creator",
+                        "description": "Schema for validating creator - Note:  We need to require display once that is added uniformly.",
                         "type": "object",
                         "properties": {
                             "attribution": {"type": "string"},
@@ -110,7 +118,7 @@ nd_json_schema = {
                             "role": {"type": "string"},
                             "startDate": {"type": "string"}
                         },
-                        "required": ["fullName", "display"],
+                        "required": ["fullName"],
                         "additionalProperties": False
                     }
                 },
@@ -146,24 +154,22 @@ nd_json_schema = {
             ]
         },
         "width": {
-            "description": "TODO - remove string - but verify",
+            "description": "Image width",
             "anyOf": [
-                {"type": "string"},
                 {"type": "number"},
                 {"type": "null"}
             ]
         },
         "height": {
-            "description": "TODO - remove string - but verify",
+            "description": "Image height",
             "anyOf": [
-                {"type": "string"},
                 {"type": "number"},
                 {"type": "null"}
             ]
         },
         "md5Checksum": {"type": "string"},
         "creationPlace": {
-            "description": "TODO - remove string",
+            "description": "TODO - remove string once source systems are updated to include creationPlace array, even if empty",
             "anyOf": [
                 {"type": "string"},
                 {
@@ -207,7 +213,7 @@ nd_json_schema = {
             ]
         },
         "classification": {
-            "description": "Not currently in CSV, but potentially useful",
+            "description": "Not currently in CSV, but potentially useful - from Museum content",
             "type": "string"
         }
     },
@@ -226,11 +232,11 @@ def get_nd_json_schema():
 def test(identifier=""):
     """ test various known cases for schema validation success or failure """
     schema_to_use = get_nd_json_schema()
-    optional_test_mode_parameter = True
+    optional_test_mode_parameter = False
     data = [
         {},
         {"id": "123", "parentId": "root", "collectionId": "123"},
-        # test subjects
+        # # test subjects
         {"id": "123", "parentId": "root", "collectionId": "123", "subjects": ""},
         {"id": "123", "parentId": "root", "collectionId": "123", "subjects": [""]},
         {"id": "123", "parentId": "root", "collectionId": "123", "subjects": [{"term": "abc"}]},
@@ -238,11 +244,16 @@ def test(identifier=""):
         # test creators
         {"id": "123", "parentId": "root", "collectionId": "123", "creators": ""},
         {"id": "123", "parentId": "root", "collectionId": "123", "creators": [""]},
-        {"id": "123", "parentId": "root", "collectionId": "123", "creators": [{"fullName": "name"}]},
         {"id": "123", "parentId": "root", "collectionId": "123", "creators": [{"fullName": "name", "display": "show_me"}]}
     ]
-    result = [False, True, True, False, True, False, True, False, False, True
+
+    # once we add display as a required field in creators again, the following should return False
+    # {"id": "123", "parentId": "root", "collectionId": "123", "creators": [{"fullName": "name"}]},
+
+    result = [False, True, True, False, True, False, True, False, True
               ]
     for index, json_to_test in enumerate(data):
         validation_results = validate_json(json_to_test, schema_to_use, optional_test_mode_parameter)
+        if validation_results != result[index]:
+            print("Expected ", result[index], " when validating ", json_to_test)
         assert(result[index] == validation_results)
