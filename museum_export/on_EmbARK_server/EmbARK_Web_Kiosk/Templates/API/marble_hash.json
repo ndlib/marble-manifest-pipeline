@@ -1,0 +1,139 @@
+{
+	"templateModifiedDate": "2020-04-21",
+	"objects": [
+	<!--#4DEVAL gsFunc_StoreSelectionForLoop (->[Objects_1]) -->
+	<!--#4DEVAL $firstRecord := 1 -->
+	<!--#4DLOOP gsFunc_LoopSelection-->
+		<!--#4DEVAL $childrenExist := 0 -->
+		<!--#4DEVAL $currentObjectId := [Objects_1]_Objects_1_ID)-->
+		<!--#4DIF $firstRecord = 1 -->
+			<!--#4DEVAL $firstRecord := 0 -->
+		<!--#4DELSE -->
+		,
+		<!--#4DENDIF -->
+		<!--#4DIF [Objects_1]Disp_Access_No#""--><!--#4DEVAL my_Id := [Objects_1]Disp_Access_No--><!--4DELSE--><!--#4DEVAL my_Id := [Objects_1]Temp_ID--><!--4DENDIF-->
+		{
+		  "<!--#4DEVAL my_Id-->":
+			{
+			"sourceSystem": "EmbARK",
+			"title": "<!--#4DTEXT [Objects_1]Disp_Title-->",
+			"dateCreated": "<!--#4DTEXT [Objects_1]Disp_Create_DT-->",
+			"classification": "<!--#4DTEXT [Objects_1]Class_System-->",
+			"workType": "<!--#4DTEXT [Objects_1]Class1-->",
+			"medium": "<!--#4DTEXT [Objects_1]Disp_Medium-->",
+			<!--#4DIF [Objects_1]Disp_Access_No#""--><!--#4DEVAL my_Id := [Objects_1]Disp_Access_No--><!--4DELSE--><!--#4DEVAL my_Id := [Objects_1]Temp_ID--><!--4DENDIF-->
+			"uniqueIdentifier": "<!--#4DEVAL my_Id-->",
+			<!--#4DIF False -->
+			"repository": "<!--#4DTEXT <>vtInstitution-->",
+			<!--#4DENDIF -->
+			"repository": "museum",
+			"subjects": [<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Keywords-->
+				<!--#4DLOOP [Keywords]-->
+					<!--#4DIF [Keywords]_Path="Art@"-->
+						{"authority": "AAT", "term": "<!--#4DTEXT [Keywords]Word-->", "uri": "http://vocab.getty.edu/aat/<!--#4DTEXT [Keywords]_AAT_SubjectiD-->"}
+					<!--#4Dif (Selected Record Number([Keywords])< Records in Selection([Keywords])) -->,<!--#4Dendif-->
+					<!--#4DENDIF-->
+					<!--#4DIF [Keywords]_Path="Icon@"-->
+						{"authority": "IA", "term": "<!--#4DTEXT [Keywords]Word-->", "uri": "http://vocab.getty.edu/page/ia/<!--#4DTEXT [Keywords]_AAT_SubjectiD-->"}
+					<!--#4Dif (Selected Record Number([Keywords])< Records in Selection([Keywords])) -->,<!--#4Dendif-->
+					<!--#4DENDIF-->
+					<!--#4DIF ([Keywords]_Path # "Art@") & ([Keywords]_Path # "Icon@")-->
+						{"authority": "none", "term": "<!--#4DTEXT [Keywords]Word-->", "uri": ""}
+					<!--#4Dif (Selected Record Number([Keywords])< Records in Selection([Keywords])) -->,<!--#4Dendif-->
+					<!--#4DENDIF-->
+				<!--#4DENDLOOP--> ],
+			"copyrightStatus": "<!--#4DTEXT [Objects_1]Copyright_Type-->",
+			"copyrightStatement": "<!--#4DTEXT [Objects_1]ID_Num-->",
+			"access":
+				<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Location-->
+					<!--#4DLOOP [Location]-->
+					<!--#4DIF [Location]Current_Loc-->
+						<!--#4DIF ([Location]Location_Type="Exhibition")-->
+							"<!--#4DTEXT [Location]Location_1-->: <!--#4DTEXT [Location]Location_2-->"
+						<!--#4DELSE-->
+							"<!--#4DTEXT [Location]Location_Type-->"
+						<!--4DENDIF-->
+					<!--4DENDIF-->
+					<!--#4DENDLOOP-->,
+			"format": "<!--#4DTEXT [Objects_1]Disp_Obj_Type-->",
+			"dimensions": "<!--#4DTEXT [Objects_1]Disp_Dimen-->",
+			"dedication": "<!--#4DEVAL $fieldString := [Objects_1]Dedication --><!--#4DEVAL $fieldString := replace string($fieldString;char(tab);"";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(carriage return);"%20";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(line feed);"%20";*) --><!--#4DEVAL $fieldString -->",
+			"description": "<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Object_Notes--><!--#4DLOOP [Object_Notes]--><!--#4DIF [Object_Notes]Field_Name="Web Description"--><!--#4DEVAL $fieldString := [Object_Notes]Text --><!--#4DEVAL $fieldString := replace string($fieldString;char(tab);"";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(carriage return);"%20";*) --><!--#4DEVAL $fieldString := replace string($fieldString;char(line feed);"%20";*) --><!--#4DEVAL replace string($fieldString;char(double quote);"\\\"";*) --><!--4DENDIF--><!--#4DENDLOOP-->",
+			"creationPlace": {"continent": "<!--#4DTEXT [Objects_1]Creation_Place1-->",
+				"country": "<!--#4DTEXT [Objects_1]Creation_Place2-->",
+				"state": "<!--#4DTEXT [Objects_1]Creation_Place3-->",
+				"county": "<!--#4DTEXT [Objects_1]Creation_Place4-->",
+				"city": "<!--#4DTEXT [Objects_1]Creation_Place5-->",
+				"historic": "<!--#4DTEXT [Objects_1]Creation_PlaceH-->"
+				},
+			"id": "<!--#4DEVAL my_Id-->",
+			 <!--#4Dif gsFunc_ObjectHasRelatedObjects ($currentObjectId; "Parent")-->
+				<!--#4Dif True-->
+				  <!--#4DEVAL gsFunc_SortRecords(->[Objects_1]Disp_Access_No; ">")-->
+					  <!--#4DLOOP [Objects_1]-->
+					"collectionId": "<!--#4DIF [Objects_1]Disp_Access_No#""--><!--#4DEVAL [Objects_1]Disp_Access_No--><!--4DELSE--><!--#4DEVAL [Objects_1]Temp_ID--><!--4DENDIF-->",
+					"parentId": "<!--#4DIF [Objects_1]Disp_Access_No#""--><!--#4DEVAL [Objects_1]Disp_Access_No--><!--4DELSE--><!--#4DEVAL [Objects_1]Temp_ID--><!--4DENDIF-->",
+					  <!--#4DENDLOOP-->
+				 <!--#4Delse-->
+					"collectionId": "<!--#4DEVAL my_Id-->",
+					"parentId": "root",
+				<!--#4DEndIf-->
+			 <!--#4Delse-->
+				"collectionId": "<!--#4DEVAL my_Id-->",
+				"parentId": "root",
+			 <!--#4Dendif-->
+			"children":[
+						  <!--#4Dif gsFunc_ObjectHasRelatedObjects ($currentObjectId; "Children")-->
+						  <!--#4DEVAL $childrenExist := 1 -->
+							<!--#4DEVAL gsFunc_SortRecords(->[Objects_1]Disp_Access_No; ">")-->
+							  <!--#4DLOOP [Objects_1]-->
+								  {"id": "<!--#4DIF [Objects_1]Disp_Access_No#""--><!--#4DEVAL [Objects_1]Disp_Access_No--><!--4DELSE--><!--#4DEVAL [Objects_1]Temp_ID--><!--4DENDIF-->"}
+								<!--#4Dif (Selected Record Number([Objects_1])< Records in Selection([Objects_1])) -->,<!--#4Dendif-->
+							  <!--#4DENDLOOP-->
+						  <!--#4Dendif-->
+						  <!--#4DEVAL gsFunc_SpecialFieldQuery (->[Objects_1]_Objects_1_ID; string($currentObjectId))-->
+			],
+			"creators": [
+						<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Object_Artist-->
+						  <!--#4DLOOP [Object_Artist]-->
+							{"attribution":	"<!--#4DTEXT [Object_Artist]Attribution-->",
+							"role": "<!--#4DTEXT [Object_Artist]Role-->",
+							<!--#4DSCRIPT/LoadRelatedRecords/Object_Artist:Artist_Maker-->
+							"fullName":	"<!--#4DTEXT [Artist_Maker]Full_Name-->",
+							"nationality": "<!--#4DTEXT [Artist_Maker]Nat_Culture_L2-->",
+							"lifeDates": "<!--#4DIF ([Artist_Maker]Start_Date_Disp#"")--><!--#4DTEXT [Artist_Maker]Start_Date_Disp--><!--#4DIF ([Artist_Maker]End_Date_Disp#"")--> - <!--#4DTEXT [Artist_Maker]End_Date_Disp--><!--#4DENDIF--><!--#4DENDIF-->",
+							"startDate": "<!--#4DTEXT [Artist_Maker]Start_Date_Disp-->",
+							"endDate": "<!--#4DTEXT [Artist_Maker]End_Date_Disp-->",
+							"livingFlag": "<!--#4DTEXT [Artist_Maker]Living_or_Dead-->",
+							"lifeFlag": "<!--#4DTEXT [Artist_Maker]Life-->"
+							}
+							<!--#4Dif (Selected Record Number([Object_Artist])< Records in Selection([Object_Artist])) -->,<!--#4Dendif-->
+						  <!--#4DENDLOOP-->
+			],
+			"modifiedDate": "<!--#4DTEXT [Objects_1]Mod_Date--> <!--#4DTEXT [Objects_1]Mod_Time-->",
+			"digitalAssets": [
+					<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Surrogates-->
+					<!--#4DEVAL gsFunc_SortRecords(->[Surrogates]IsPrimary; "<")-->
+					<!--#4DEVAL $fileSequence := 0 -->
+					<!--#4DLOOP [Surrogates]-->
+						<!--#4DIF [Surrogates]Web_Access-->
+							<!--#4DEVAL $fileSequence := $fileSequence + 1 -->
+							{"sequence": <!--#4DEVAL $fileSequence -->,
+							"thumbnail": <!--#4DIF [Surrogates]IsPrimary-->true<!--#4DELSE-->false<!--#4DENDIF-->,
+							"fileDescription": "<!--#4DTEXT Filename("Surrogates")-->",
+							"filePath": "<!--#4DTEXT ImagePath("Surrogates")-->"}
+							<!--#4Dif (Selected Record Number([Surrogates])< Records in Selection([Surrogates])) -->,<!--#4Dendif-->
+						<!--#4DENDIF-->
+					<!--#4DENDLOOP-->
+			],
+			<!--#4DIF $childrenExist = 1 -->
+				"level": "collection"
+			<!--#4DELSE -->
+				"level": "manifest"
+			<!--#4DENDIF -->
+			}
+		}
+		<!--#4Dif (Selected Record Number([Objects_1])< Records in Selection([Objects_1])) -->,<!--#4Dendif-->
+	<!--#4DENDLOOP-->
+	]
+}
