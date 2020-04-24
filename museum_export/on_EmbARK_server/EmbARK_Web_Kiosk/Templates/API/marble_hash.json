@@ -1,6 +1,6 @@
 {
 	"templateModifiedDate": "2020-04-21",
-	"objects": [
+	"objects": {
 	<!--#4DEVAL gsFunc_StoreSelectionForLoop (->[Objects_1]) -->
 	<!--#4DEVAL $firstRecord := 1 -->
 	<!--#4DLOOP gsFunc_LoopSelection-->
@@ -12,7 +12,7 @@
 		,
 		<!--#4DENDIF -->
 		<!--#4DIF [Objects_1]Disp_Access_No#""--><!--#4DEVAL my_Id := [Objects_1]Disp_Access_No--><!--4DELSE--><!--#4DEVAL my_Id := [Objects_1]Temp_ID--><!--4DENDIF-->
-		{
+
 		  "<!--#4DEVAL my_Id-->":
 			{
 			"sourceSystem": "EmbARK",
@@ -132,8 +132,8 @@
 				"level": "manifest"
 			<!--#4DENDIF -->
 			}
-		}
+
 		<!--#4Dif (Selected Record Number([Objects_1])< Records in Selection([Objects_1])) -->,<!--#4Dendif-->
 	<!--#4DENDLOOP-->
-	]
+	}
 }

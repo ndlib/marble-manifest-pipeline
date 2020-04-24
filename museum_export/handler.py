@@ -7,7 +7,6 @@ import json
 from pathlib import Path
 from process_web_kiosk_json_metadata import processWebKioskJsonMetadata  # noqa: E402
 from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm  # noqa: E402
-from pipelineutilities.google_utilities import establish_connection_with_google_api  # noqa: E402
 import sentry_sdk  # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
 
@@ -26,12 +25,11 @@ def run(event, context):
     config.update(museum_config)
 
     if config:
-        google_credentials = json.loads(config["museum-google-credentials"])
-        google_connection = establish_connection_with_google_api(google_credentials)
-        mode = event.get("mode", "full")
-        if mode not in ["full", "incremental"]:
+        mode = event.get("mode", "ids")
+        event["ids"] = ["1990.005.001", "1990.005.001.a", "1990.005.001.b"]
+        if mode not in ["full", "incremental", "ids"]:
             mode = "full"
-        jsonWebKioskClass = processWebKioskJsonMetadata(config, google_connection, event)
+        jsonWebKioskClass = processWebKioskJsonMetadata(config, event)
         composite_json = jsonWebKioskClass.get_composite_json_metadata(mode)
         if composite_json:
             jsonWebKioskClass.process_composite_json_metadata(composite_json)

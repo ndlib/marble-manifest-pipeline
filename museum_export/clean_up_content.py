@@ -12,13 +12,20 @@ class CleanUpContent():
     def _clean_up_content(object):
         """ This calls all other modules locally """
         object = CleanUpContent._define_worktype(object)
+        object = CleanUpContent._fix_modified_date(object)
+        object = CleanUpContent._fix_creators(object)
+        object = CleanUpContent._remove_bad_subjects(object)
+        object = CleanUpContent._add_missing_required_fields(object)
+        return object
+
+    @staticmethod
+    def _fix_modified_date(object):
+        """ force iso format for  modifedDate """
         if 'modifiedDate' in object:
             try:
                 object['modifiedDate'] = datetime.strptime(object['modifiedDate'], '%m/%d/%Y %H:%M:%S').isoformat() + 'Z'
             except ValueError:
                 pass
-        object = CleanUpContent._fix_creators(object)
-        object = CleanUpContent._remove_bad_subjects(object)
         return object
 
     @staticmethod
@@ -49,4 +56,13 @@ class CleanUpContent():
             object['workType'] = classifiction
         if "classification" in object:
             del object['classification']
+        return object
+
+    @staticmethod
+    def _add_missing_required_fields(object):
+        """If an object is a child, but the parent isn't web-enabled, we have no parentId and collectionId defined."""
+        if "parentId" not in object:
+            object["parentId"] = "root"
+        if "collectionId" not in object:
+            object["collectionId"] = object.get("id", "")
         return object
