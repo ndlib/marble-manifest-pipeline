@@ -104,6 +104,6 @@ class ImageProcessor(ABC):
         self.img_write_base = config.get('img_write_base')
         self.source_md5sum = img_data.get('md5Checksum', None)
         # if copyrighted work scale height/width directed by aamd.org
-        if self._is_copyrighted(img_data.get('usage')):
+        if self._is_copyrighted(img_data.get('copyrightStatus')):
             self.max_img_height = 560.0
             self.max_img_width = 843.0
