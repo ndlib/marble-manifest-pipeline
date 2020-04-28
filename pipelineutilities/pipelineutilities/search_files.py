@@ -217,16 +217,14 @@ def output_as_file():
 def test():
     from pipeline_config import setup_pipeline_config
     event = {"local": True}
-    event['local-path'] = "/Users/jhartzle/Workspace/mellon-manifest-pipeline/process_manifest/../example/"
-    event['local-path'] = "../../example/"
 
     config = setup_pipeline_config(event)
-
+    # change to the prod bucket
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
-    # data = crawl_available_files(config)
-    id = id_from_url("https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001-01.150.jpg")
+    data = crawl_available_files(config)
+    id = id_from_url("https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_002468275/BOO_002468275_000001.tif")
     print(id)
-    # print(data[id])
+    print(data[id])
     # print(id)
 
     return

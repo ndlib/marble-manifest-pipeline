@@ -28,6 +28,7 @@ class ImageProcessor(ABC):
         self.image_result = {}
         self.max_img_height = 8500.0
         self.max_img_width = 8500.0
+        self.copyrighted = False
 
     @abstractmethod
     def process(self) -> dict:
@@ -105,5 +106,6 @@ class ImageProcessor(ABC):
         self.source_md5sum = img_data.get('md5Checksum', None)
         # if copyrighted work scale height/width directed by aamd.org
         if self._is_copyrighted(img_data.get('copyrightStatus')):
+            self.copyrighted = True
             self.max_img_height = 560.0
             self.max_img_width = 843.0

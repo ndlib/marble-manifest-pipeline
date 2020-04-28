@@ -19,11 +19,12 @@ class GoogleImageProcessor(ImageProcessor):
         self.source_md5sum = img_data.get('md5Checksum', None)
         # if copyrighted work scale height/width directed by aamd.org
         if self._is_copyrighted(img_data.get('usage')):
+            self.copyrighted = True
             self.max_img_height = 560.0
             self.max_img_width = 843.0
 
     def process(self) -> dict:
-        if self._previously_processed():
+        if self._previously_processed() and not self.copyrighted:
             file_info = self.prior_results.get(self.id).get(self.filename)
             height = file_info.get('height', 2000)
             width = file_info.get('width', 2000)
