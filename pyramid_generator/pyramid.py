@@ -23,11 +23,8 @@ class ImageRunner():
 
     def process_images(self) -> None:
         for id in self.ids:
-            print(id)
-            print(load_csv_data(id, self.csv_config))
             id_results = {}
             for file in load_csv_data(id, self.csv_config).files():
-                print(file)
                 if not self.processor:
                     processor_info = self._get_processor_info(file.get('filePath'))
                     src = processor_info.get('type')
