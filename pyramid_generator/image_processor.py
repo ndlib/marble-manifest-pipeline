@@ -55,6 +55,8 @@ class ImageProcessor(ABC):
             img_data = f"{self.img_write_base}/{self.id}/image_data.json"
             self._set_prior_run_data(self.bucket, img_data, self.id)
         prior_md5sum = self.prior_results.get(self.id).get(self.filename, {}).get('md5sum', 'nomatch')
+        if self.copyrighted:
+            return False
         if self.source_md5sum == prior_md5sum:
             return True
         return False

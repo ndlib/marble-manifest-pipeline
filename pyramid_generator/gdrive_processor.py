@@ -24,7 +24,7 @@ class GoogleImageProcessor(ImageProcessor):
             self.max_img_width = 843.0
 
     def process(self) -> dict:
-        if self._previously_processed() and not self.copyrighted:
+        if self._previously_processed():
             file_info = self.prior_results.get(self.id).get(self.filename)
             height = file_info.get('height', 2000)
             width = file_info.get('width', 2000)
