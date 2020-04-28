@@ -50,13 +50,15 @@ class ImageProcessor(ABC):
         os.remove(self.tif_file)
 
     def _previously_processed(self) -> bool:
+        if self.copyrighted:
+            return False
+
         if self.id not in self.prior_results:
             self.prior_results.update({self.id: {}})
             img_data = f"{self.img_write_base}/{self.id}/image_data.json"
             self._set_prior_run_data(self.bucket, img_data, self.id)
         prior_md5sum = self.prior_results.get(self.id).get(self.filename, {}).get('md5sum', 'nomatch')
-        if self.copyrighted:
-            return False
+
         if self.source_md5sum == prior_md5sum:
             return True
         return False
@@ -93,6 +95,7 @@ class ImageProcessor(ABC):
             print(f'Resizing original image by: {shrink_by}')
             print(f'Original image height: {image.height}')
             print(f'Original image width: {image.width}')
+
             image = image.shrink(shrink_by, shrink_by)
         return image
 
@@ -107,7 +110,7 @@ class ImageProcessor(ABC):
         self.img_write_base = config.get('img_write_base')
         self.source_md5sum = img_data.get('md5Checksum', None)
         # if copyrighted work scale height/width directed by aamd.org
-        if self._is_copyrighted(img_data.get('copyrightStatus')):
+        if self._is_copyrighted(img_data.collection().get('copyrightStatus')):
             self.copyrighted = True
             self.max_img_height = 560.0
             self.max_img_width = 843.0
