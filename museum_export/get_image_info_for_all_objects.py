@@ -11,7 +11,7 @@ class GetImageInfoForAllObjects():
         self.image_file_info = GetImageInfoForAllObjects._find_images_for_all_objects(image_files_list, google_credentials, drive_id)
 
     @staticmethod
-    def _find_images_for_all_objects(image_files_list, google_credentials, drive_id):
+    def _find_images_for_all_objects(image_files_list: list, google_credentials: dict, drive_id: str) -> dict:
         find_google_images_class = FindGoogleImages(google_credentials, drive_id)
         image_files = find_google_images_class.get_image_file_info(image_files_list)
         if not image_files:
@@ -19,7 +19,7 @@ class GetImageInfoForAllObjects():
         return image_files
 
     @staticmethod
-    def _get_image_files_list(objects):
+    def _get_image_files_list(objects: dict) -> list:
         image_files_list = []
         for _object_key, object_value in objects.items():
             if 'digitalAssets' in object_value:

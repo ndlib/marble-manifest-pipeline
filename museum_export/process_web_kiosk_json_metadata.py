@@ -20,7 +20,7 @@ class processWebKioskJsonMetadata():
         Individual json files are created, one per object.
         These individual json files are saved locally by object name.
         They are then uploaded to a Google Team Drive, and deleted locally. """
-    def __init__(self, config, event):
+    def __init__(self, config: dict, event: dict):
         self.config = config
         self.event = event
         self.folder_name = "/tmp"
@@ -29,7 +29,7 @@ class processWebKioskJsonMetadata():
         self.delete_local_copy = True
         self.start_time = time.time()
 
-    def get_composite_json_metadata(self, mode):
+    def get_composite_json_metadata(self, mode: str) -> dict:
         """ Build URL, call URL, save resulting output to disk """
         if mode == "ids":
             composite_json = self._get_composite_json_for_all_named_ids(mode)
@@ -43,7 +43,7 @@ class processWebKioskJsonMetadata():
             print("Completed retrieving composite metadata from WebKiosk after", int(time.time() - self.start_time), 'seconds.')
         return composite_json
 
-    def _get_composite_json_for_all_named_ids(self, mode):
+    def _get_composite_json_for_all_named_ids(self, mode: str) -> dict:
         composite_json = {}
         id_to_process = ""
         if mode == 'ids':
@@ -58,7 +58,7 @@ class processWebKioskJsonMetadata():
                         composite_json["objects"].update(this_composite_json["objects"])
         return composite_json
 
-    def process_composite_json_metadata(self, composite_json, running_unit_tests=False):
+    def process_composite_json_metadata(self, composite_json: dict, running_unit_tests: bool = False) -> int:
         """ Split big composite metadata file into individual small metadata files """
         objects_processed = 0
         accumulated_missing_fields = ''
@@ -67,6 +67,7 @@ class processWebKioskJsonMetadata():
             google_credentials = json.loads(self.config["museum-google-credentials"])
             drive_id = self.config['museum-google-drive-id']
             image_file_info = GetImageInfoForAllObjects(objects, google_credentials, drive_id).image_file_info
+            # print("image_file_info = ", image_file_info)
             print("Completed retrieving Google image file info after", int(time.time() - self.start_time), 'seconds.')
             composite_json = CleanUpCompositeJson(composite_json).cleaned_up_content
             process_one_museum_object_class = ProcessOneMuseumObject(self.config, image_file_info, self.start_time)
@@ -88,7 +89,7 @@ class processWebKioskJsonMetadata():
             print("Saved to s3: ", os.path.join(self.config['process-bucket'], self.config['process-bucket-csv-basepath']))  # noqa: #501
         return objects_processed
 
-    def _get_metadata_given_url(self, url):
+    def _get_metadata_given_url(self, url: str) -> dict:
         """ Return json from URL."""
         json_response = {}
         json_response = json.loads(dependencies.requests.get(url).text)
@@ -102,7 +103,7 @@ class processWebKioskJsonMetadata():
             capture_exception(e)
         return json_response
 
-    def _get_embark_metadata_url(self, mode, id_to_process=""):
+    def _get_embark_metadata_url(self, mode: str, id_to_process: str = "") -> str:
         """ Get url for retrieving museum metadata """
         base_url = self.config['museum-server-base-url'] \
             + "/results.html?layout=marble_hash&format=json&maximumrecords=-1&recordType=objects_1"
@@ -117,7 +118,7 @@ class processWebKioskJsonMetadata():
         return(url)
 
 
-def delete_file(folder_name, file_name):
+def delete_file(folder_name: str, file_name: str):
     """ Delete temparary intermediate file """
     full_path_file_name = os.path.join(folder_name, file_name)
     try:

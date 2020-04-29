@@ -1,0 +1,78 @@
+{
+  "properties": {
+    "children": {
+      "description": "Not currently in CSV, but present in source systems.  This facilitates defining hierarchy from Museum content.",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "id": {
+              "type": "string"
+            },
+            "sequence": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "classification": {
+      "description": "Not currently in CSV, but potentially useful - from Museum content",
+      "type": "string"
+    },
+    "digitalAssets": {
+      "description": "Not in CSV, but present in EAD_Harvest.  TODO - remove once Harvest_EAD is updated.",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "description": "Schema for validating digitalAsset - I believe this can be removed soon.",
+            "type": "object",
+            "properties": {
+              "collectionId": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "fileDescription": {
+                "type": "string"
+              },
+              "fileId": {
+                "type": "string"
+              },
+              "filePath": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "level": {
+                "type": "string"
+              },
+              "parentId": {
+                "type": "string"
+              },
+              "repository": {
+                "type": "string"
+              },
+              "sequence": {
+                "type": "number"
+              },
+              "sourceSystem": {
+                "type": "string"
+              },
+              "thumbnail": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ]
+    }
+  }
+}

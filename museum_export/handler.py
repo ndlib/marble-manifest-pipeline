@@ -3,7 +3,7 @@
 
 import _set_path  # noqa
 import os
-import json
+# import json
 from pathlib import Path
 from process_web_kiosk_json_metadata import processWebKioskJsonMetadata  # noqa: E402
 from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm  # noqa: E402
@@ -29,6 +29,7 @@ def run(event, context):
         event["ids"] = ["1990.005.001", "1990.005.001.a", "1990.005.001.b"]
         if mode not in ["full", "incremental", "ids"]:
             mode = "full"
+        # mode = "full"
         jsonWebKioskClass = processWebKioskJsonMetadata(config, event)
         composite_json = jsonWebKioskClass.get_composite_json_metadata(mode)
         if composite_json:

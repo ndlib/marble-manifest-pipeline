@@ -36,6 +36,7 @@ class CsvFromJson():
         each_file_dict['sourceSystem'] = json_node['sourceSystem']
         each_file_dict['repository'] = json_node['repository']
         if id in self.hash_of_available_files:
+            # print("hash_of_available_files: ", self.hash_of_available_files[id])
             if 'files' in self.hash_of_available_files[id]:
                 for obj in self.hash_of_available_files[id]['files']:
                     each_file_dict['id'] = self._file_name_from_filePath(obj['Key'])
@@ -51,6 +52,10 @@ class CsvFromJson():
                     each_file_dict['modifiedDate'] = datetime.strptime(obj['LastModified'], '%Y-%m-%d %H:%M:%S').isoformat() + 'Z'  # noqa: E501
                     each_file_dict['md5Checksum'] = obj['ETag'].replace("'", "").replace('"', '')  # strip duplicated quotes: {'ETag': '"8b50cfed39b7d8bcb4bd652446fe8adf"'}  # noqa: E501
                     output_csv_class.write_csv_row(each_file_dict)
+            else:
+                print("No hash of available files.")
+        else:
+            print(id, "not in hash of available files")
         return None
 
     def _file_name_from_filePath(self, file_path):

@@ -11,13 +11,13 @@ class FindGoogleImages():
         self.drive_id = drive_id
         self.image_files = {}
 
-    def get_image_file_info(self, image_files_list):
+    def get_image_file_info(self, image_files_list: list) -> dict:
         """ Get a file information given a list of files which we need to find on Google drive """
         self.image_files = {}
         self._find_images_in_chunks(image_files_list)
         return self.image_files
 
-    def _find_images_in_chunks(self, image_files_list):
+    def _find_images_in_chunks(self, image_files_list: list):
         """ Because Google queries are limited, we have to chunk this process """
         first_item_to_process = 0
         chunk_size = 50
@@ -30,7 +30,7 @@ class FindGoogleImages():
             self._find_images_in_google_drive(list_to_process)
             first_item_to_process += chunk_size
 
-    def _find_images_in_google_drive(self, image_files_list):
+    def _find_images_in_google_drive(self, image_files_list: list) -> dict:
         """ Go find the list of files from Google drive """
         if len(image_files_list) > 0:
             query_string = self._build_google_query_string(image_files_list)
@@ -39,7 +39,7 @@ class FindGoogleImages():
             self._save_file_info_to_hash(query_results)
         return self.image_files
 
-    def _build_google_query_string(self, image_files_list):
+    def _build_google_query_string(self, image_files_list: list) -> str:
         """ Given the list of image files to search, return the Google query string needed """
         query_string = "trashed = False and mimeType contains 'image' and ("
         first_pass = True
@@ -51,7 +51,7 @@ class FindGoogleImages():
         query_string += ")"
         return query_string
 
-    def _save_file_info_to_hash(self, query_results):
+    def _save_file_info_to_hash(self, query_results: dict) -> list:
         """ Save query results into hash for later use """
         for record in query_results:
             self.image_files[record['name']] = record
