@@ -5,9 +5,9 @@ import time
 import json
 from clean_up_content import CleanUpContent
 from convert_json_to_csv import ConvertJsonToCsv
-from dependencies.pipelineutilities.validate_json import validate_json, get_nd_json_schema
-from dependencies.pipelineutilities.s3_helpers import write_s3_file
-from dependencies.sentry_sdk import capture_message, push_scope
+from pipelineutilities.validate_json import validate_json, get_nd_json_schema
+from pipelineutilities.s3_helpers import write_s3_file, write_s3_json
+from sentry_sdk import capture_message, push_scope
 
 
 class ProcessOneMuseumObject():
@@ -30,7 +30,7 @@ class ProcessOneMuseumObject():
             cleaned_up_object = clean_up_content_class.clean_up_content(museum_object)
             if not validate_nd_json(cleaned_up_object):
                 print("Validation Error validating modified object", object_id)
-            write_s3_file(self.config['process-bucket'], os.path.join("json/", object_id + '.json'), json.dumps(cleaned_up_object))
+            write_s3_json(self.config['process-bucket'], os.path.join("json/", object_id + '.json'), cleaned_up_object)
             # with open("cleaned_up_object.json", 'w') as f:
             #     json.dump(cleaned_up_object, f, indent=4)
             self._save_csv(object_id, cleaned_up_object)

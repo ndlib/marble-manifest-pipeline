@@ -1,6 +1,4 @@
 # clean_up_composite_json.py
-# from datetime import datetime
-# from dependencies.pipelineutilities.creatorField import creatorField  # noqa: E402
 
 
 class CleanUpCompositeJson():

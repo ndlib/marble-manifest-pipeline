@@ -109,8 +109,8 @@
 							"lifeDates": "<!--#4DIF ([Artist_Maker]Start_Date_Disp#"")--><!--#4DTEXT [Artist_Maker]Start_Date_Disp--><!--#4DIF ([Artist_Maker]End_Date_Disp#"")--> - <!--#4DTEXT [Artist_Maker]End_Date_Disp--><!--#4DENDIF--><!--#4DENDIF-->",
 							"startDate": "<!--#4DTEXT [Artist_Maker]Start_Date_Disp-->",
 							"endDate": "<!--#4DTEXT [Artist_Maker]End_Date_Disp-->",
-							"livingFlag": "<!--#4DTEXT [Artist_Maker]Living_or_Dead-->",
-							"lifeFlag": "<!--#4DTEXT [Artist_Maker]Life-->"
+							"human": <!--#4DIF [Artist_Maker]Life-->true<!--4DELSE-->false<!--#4DENDIF-->,
+							"alive": <!--#4DIF [Artist_Maker]Living_or_Dead-->true<!--4DELSE-->false<!--#4DENDIF-->
 							}
 							<!--#4Dif (Selected Record Number([Object_Artist])< Records in Selection([Object_Artist])) -->,<!--#4Dendif-->
 						  <!--#4DENDLOOP-->

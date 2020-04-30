@@ -3,6 +3,7 @@ from datetime import datetime
 from add_image_records_as_child_items import AddImageRecordsAsChildItems
 from dependencies.pipelineutilities.creatorField import creatorField  # noqa: E402
 from pipelineutilities.csv_collection import _add_additional_paths
+from html.parser import HTMLParser
 
 
 class CleanUpContent():
@@ -46,8 +47,9 @@ class CleanUpContent():
         return object
 
     def _replace_special_characters(self, field_string: str) -> str:
-        field_string = field_string.replace("&#39;", "'")
         field_string = field_string.replace("%20", " ")
+        h = HTMLParser()
+        field_string = h.unescape(field_string)
         return field_string
 
     def _fix_modified_date(self, object: dict) -> dict:
