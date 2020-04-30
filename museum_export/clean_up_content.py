@@ -19,12 +19,11 @@ class CleanUpContent():
         object = self._fix_creators(object)
         object = self._remove_bad_subjects(object)
         object = self._add_missing_required_fields(object)
+        object = self._clean_up_creation_place(object)
+        object = self._clean_up_object_special_characters(object)
         if object.get("level", "manifest") != "file" and "digitalAssets" in object:
             add_image_records_as_child_items_class = AddImageRecordsAsChildItems(self.image_files)
             object = add_image_records_as_child_items_class.add_images_as_children(object)
-        #
-        # object = add_image_records_as_child_items_class.add_images_items_to_all_children(object)
-        # object = self._recursively_fix_remaining_problems(object)
         if "children" in object and len(object["children"]) == 0:
             del object["children"]
         _add_additional_paths(object, self.config)
@@ -32,6 +31,24 @@ class CleanUpContent():
             for item in object["items"]:
                 self.clean_up_content(item)
         return object
+
+    def _clean_up_object_special_characters(self, object: dict) -> dict:
+        field_names_to_clean = ["title", "copyrightStatement", "description"]
+        for name in field_names_to_clean:
+            if name in object:
+                object[name] = self._replace_special_characters(object[name])
+        return object
+
+    def _clean_up_creation_place(self, object: dict) -> dict:
+        if "creationPlace" in object:
+            if "county" in object["creationPlace"]:
+                object["creationPlace"]["county"] = self._replace_special_characters(object["creationPlace"]["county"])
+        return object
+
+    def _replace_special_characters(self, field_string: str) -> str:
+        field_string = field_string.replace("&#39;", "'")
+        field_string = field_string.replace("%20", " ")
+        return field_string
 
     def _fix_modified_date(self, object: dict) -> dict:
         """ force iso format for  modifedDate """
@@ -50,6 +67,8 @@ class CleanUpContent():
             creators = object["creators"]
             if len(creators) == 0:
                 creators = [{"fullName": "unknown"}]
+            for creator in creators:
+                creator["fullName"] = self._replace_special_characters(creator["fullName"])
             creator_field_class = creatorField(creators)
             object["creators"] = creator_field_class.add_displays()
         return object
@@ -80,14 +99,4 @@ class CleanUpContent():
             object["parentId"] = "root"
         if "collectionId" not in object:
             object["collectionId"] = object.get("id", "")
-        return object
-
-    def _recursively_fix_remaining_problems(self, object: dict) -> dict:
-        """ Remove any blank children nodes, and add additional paths needed. """
-        if "children" in object and len(object["children"]) == 0:
-            del object["children"]
-        _add_additional_paths(object, self.config)
-        if "items" in object:
-            for item in object["items"]:
-                self._recursively_fix_remaining_problems(item)
         return object

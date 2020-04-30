@@ -44,6 +44,7 @@ class processWebKioskJsonMetadata():
         return composite_json
 
     def _get_composite_json_for_all_named_ids(self, mode: str) -> dict:
+        """ Create a single unified composite_json for all ids in a list """
         composite_json = {}
         id_to_process = ""
         if mode == 'ids':
@@ -67,7 +68,6 @@ class processWebKioskJsonMetadata():
             google_credentials = json.loads(self.config["museum-google-credentials"])
             drive_id = self.config['museum-google-drive-id']
             image_file_info = GetImageInfoForAllObjects(objects, google_credentials, drive_id).image_file_info
-            # print("image_file_info = ", image_file_info)
             print("Completed retrieving Google image file info after", int(time.time() - self.start_time), 'seconds.')
             composite_json = CleanUpCompositeJson(composite_json).cleaned_up_content
             process_one_museum_object_class = ProcessOneMuseumObject(self.config, image_file_info, self.start_time)

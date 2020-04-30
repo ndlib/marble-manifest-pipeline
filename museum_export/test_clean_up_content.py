@@ -61,6 +61,13 @@ class Test(unittest.TestCase):
         fixed_object = self.clean_up_content_class._fix_modified_date(object)
         self.assertTrue(fixed_object["modifiedDate"] == "not a date, like circa sometime")
 
+    def test_6_replace_special_characters(self):
+        """ test _replace_special_characters """
+        starting_string = "something&#39;s wrong with%20special characters"
+        fixed_string = self.clean_up_content_class._replace_special_characters(starting_string)
+        expected_string = "something's wrong with special characters"
+        self.assertTrue(fixed_string == expected_string)
+
 
 def suite():
     """ define test suite """

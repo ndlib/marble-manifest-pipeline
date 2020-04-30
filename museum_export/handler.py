@@ -3,7 +3,6 @@
 
 import _set_path  # noqa
 import os
-# import json
 from pathlib import Path
 from process_web_kiosk_json_metadata import processWebKioskJsonMetadata  # noqa: E402
 from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm  # noqa: E402
@@ -25,11 +24,9 @@ def run(event, context):
     config.update(museum_config)
 
     if config:
-        mode = event.get("mode", "ids")
-        event["ids"] = ["1990.005.001", "1990.005.001.a", "1990.005.001.b"]
+        mode = event.get("mode", "full")
         if mode not in ["full", "incremental", "ids"]:
             mode = "full"
-        # mode = "full"
         jsonWebKioskClass = processWebKioskJsonMetadata(config, event)
         composite_json = jsonWebKioskClass.get_composite_json_metadata(mode)
         if composite_json:
@@ -58,5 +55,11 @@ def _suplement_event(event):
 def test():
     """ test exection """
     event = {}
+    event["mode"] = "full"
+    # event["mode"] = "ids"
+    # event["ids"] = ["1990.005.001", "1990.005.001.a", "1990.005.001.b"]  # parent / child objects
+    # event["ids"] = ["1979.032.003"]  # objects with special characters to strip
+    # event["ids"] = ["L1986.032.002"]  # objects with missing Google images on Google Drive
+    # event["ids"] = ["2017.039.005", "1986.052.007.005", "1978.062.002.003"]  # Objects with hidden parents
     # Test these temp IDs:  IL2019.006.002, IL1992.065.004, L1986.032.002, AA1966.031
     print(run(event, {}))

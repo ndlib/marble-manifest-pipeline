@@ -15,7 +15,7 @@ class Test(unittest.TestCase):
         }
         clean_up_content_class = CleanUpCompositeJson({})
         families_array = clean_up_content_class._find_parent_child_relationships(objects)
-        expected_object = [{'parentId': 'abc', 'childId': 'abc.a'}, {'parentId': 'abc', 'childId': 'abc.b'}]
+        expected_object = [{'parentId': 'abc', 'childId': 'abc.a', 'sequence': 0}, {'parentId': 'abc', 'childId': 'abc.b', 'sequence': 0}]
         self.assertTrue(families_array == expected_object)
 
     def test_2_remove_child_node_from_objects(self):
@@ -51,7 +51,7 @@ class Test(unittest.TestCase):
         }
         clean_up_content_class = CleanUpCompositeJson({})
         fixed_objects = clean_up_content_class._fix_parent_child_relationships(objects)
-        expected_object = {'abc': {'id': 'abc', 'items': [{'id': 'abc.a', 'title': 'thing a'}, {'id': 'abc.b', 'title': 'thing b'}]}}
+        expected_object = {'abc': {'id': 'abc', 'items': [{'id': 'abc.a', 'title': 'thing a', 'sequence': 0}, {'id': 'abc.b', 'title': 'thing b', 'sequence': 0}]}}
         self.assertTrue(fixed_objects == expected_object)
 
     def test_5_clean_up_composite_json(self):
@@ -66,7 +66,7 @@ class Test(unittest.TestCase):
         }
         clean_up_content_class = CleanUpCompositeJson({})
         fixed_composite_json = clean_up_content_class._clean_up_composite_json(composite_json)
-        expected_composite_json = {'objects': {'abc': {'id': 'abc', 'items': [{'id': 'abc.a', 'title': 'thing a'}, {'id': 'abc.b', 'title': 'thing b'}]}}}
+        expected_composite_json = {'objects': {'abc': {'id': 'abc', 'items': [{'id': 'abc.a', 'title': 'thing a', 'sequence': 0}, {'id': 'abc.b', 'title': 'thing b', 'sequence': 0}]}}}
         self.assertTrue(fixed_composite_json == expected_composite_json)
 
     def test_6_cleaned_up_content(self):
@@ -80,7 +80,7 @@ class Test(unittest.TestCase):
                 }
         }
         fixed_composite_json = CleanUpCompositeJson(composite_json).cleaned_up_content
-        expected_composite_json = {'objects': {'abc': {'id': 'abc', 'items': [{'id': 'abc.a', 'title': 'thing a'}, {'id': 'abc.b', 'title': 'thing b'}]}}}
+        expected_composite_json = {'objects': {'abc': {'id': 'abc', 'items': [{'id': 'abc.a', 'title': 'thing a', 'sequence': 0}, {'id': 'abc.b', 'title': 'thing b', 'sequence': 0}]}}}
         self.assertTrue(fixed_composite_json == expected_composite_json)
 
 

@@ -36,15 +36,15 @@ nd_json_schema = {
         "dateCreated": {
             "description": "Ultimately, we want dates, like 'c. 1900' or '2020-04-22'.  Once that happens, we will remove array and number types. ",
             "anyOf": [
-                {"type": "number"},
+                # {"type": "number"},
                 {"type": "string"},
-                {
-                    "type": "array",
-                    "description": "Validating dates like [1841] (which we will eventually correct and remove)",
-                    "items": {
-                        "type": "number"
-                    }
-                }
+                # {
+                #     "type": "array",
+                #     "description": "Validating dates like [1841] (which we will eventually correct and remove)",
+                #     "items": {
+                #         "type": "number"
+                #     }
+                # }
             ]
         },
         "uniqueIdentifier": {
@@ -59,7 +59,7 @@ nd_json_schema = {
                 {"type": "array",
                     "items": {"type": "string"}
                  },
-                {"type": "string"}
+                # {"type": "string"}
             ]
         },
         "subjects": {
@@ -79,7 +79,7 @@ nd_json_schema = {
                         "additionalProperties": False
                     }
                 },
-                {"type": "string"}
+                # {"type": "string"}
             ]
         },
         "copyrightStatus": {"type": "string"},
@@ -90,7 +90,7 @@ nd_json_schema = {
         "dedication": {"type": "string"},
         "description": {"type": "string"},
         "modifiedDate": {"type": "string"},
-        "thumbnail": {"type": "string"},
+        "thumbnail": {"type": "boolean"},
         "filePath": {"type": "string"},
         "sequence": {"type": ["number", "string"]},
         "collectionInformation": {"type": "string"},
@@ -122,56 +122,56 @@ nd_json_schema = {
                         "additionalProperties": False
                     }
                 },
-                {"type": "string"}
+                # {"type": "string"}
             ]
         },
-        "digitalAssets": {
-            "description": "Not in CSV, but present in EAD_Harvest.  TODO - remove once Harvest_EAD is updated.",
-            "anyOf": [
-                {
-                    "type": "array",
-                    "items": {
-                        "description": "Schema for validating digitalAsset - I believe this can be removed soon.",
-                        "type": "object",
-                        "properties": {
-                            "collectionId": {"type": "string"},
-                            "description": {"type": "string"},
-                            "fileDescription": {"type": "string"},
-                            "fileId": {"type": "string"},
-                            "filePath": {"type": "string"},
-                            "id": {"type": "string"},
-                            "level": {"type": "string"},
-                            "parentId": {"type": "string"},
-                            "repository": {"type": "string"},
-                            "sequence": {"type": "number"},
-                            "sourceSystem": {"type": "string"},
-                            "thumbnail": {"type": "boolean"}
-                        },
-                        "additionalProperties": False
-                    }
-                },
-                {"type": "string"}
-            ]
-        },
-        "width": {
-            "description": "Image width",
-            "anyOf": [
-                {"type": "number"},
-                {"type": "null"}
-            ]
-        },
-        "height": {
-            "description": "Image height",
-            "anyOf": [
-                {"type": "number"},
-                {"type": "null"}
-            ]
-        },
+        # "digitalAssets": {
+        #     "description": "Not in CSV, but present in EAD_Harvest.  TODO - remove once Harvest_EAD is updated.",
+        #     "anyOf": [
+        #         {
+        #             "type": "array",
+        #             "items": {
+        #                 "description": "Schema for validating digitalAsset - I believe this can be removed soon.",
+        #                 "type": "object",
+        #                 "properties": {
+        #                     "collectionId": {"type": "string"},
+        #                     "description": {"type": "string"},
+        #                     "fileDescription": {"type": "string"},
+        #                     "fileId": {"type": "string"},
+        #                     "filePath": {"type": "string"},
+        #                     "id": {"type": "string"},
+        #                     "level": {"type": "string"},
+        #                     "parentId": {"type": "string"},
+        #                     "repository": {"type": "string"},
+        #                     "sequence": {"type": "number"},
+        #                     "sourceSystem": {"type": "string"},
+        #                     "thumbnail": {"type": "boolean"}
+        #                 },
+        #                 "additionalProperties": False
+        #             }
+        #         },
+        #         # {"type": "string"}
+        #     ]
+        # },
+        # "width": {
+        #     "description": "Image width",
+        #     "anyOf": [
+        #         {"type": "number"},
+        #         {"type": "null"}
+        #     ]
+        # },
+        # "height": {
+        #     "description": "Image height",
+        #     "anyOf": [
+        #         {"type": "number"},
+        #         {"type": "null"}
+        #     ]
+        # },
         "md5Checksum": {"type": "string"},
         "creationPlace": {
             "description": "TODO - remove string once source systems are updated to include creationPlace array, even if empty",
             "anyOf": [
-                {"type": "string"},
+                # {"type": "string"},
                 {
                     "type": "object",
                     "description": "Schema for validating creationPlace",
@@ -199,23 +199,23 @@ nd_json_schema = {
             "type": "array",
             "items": {"$ref": "#"},
             "default": []
-        },
-        "children": {
-            "description": "Not currently in CSV, but present in source systems.  This facilitates defining hierarchy from Museum content.",
-            "anyOf": [
-                {"type": "string"},
-                {
-                    "type": "array",
-                    "items": {
-                        "id": {"type": "string"}
-                    }
-                }
-            ]
-        },
-        "classification": {
-            "description": "Not currently in CSV, but potentially useful - from Museum content",
-            "type": "string"
         }
+        # "children": {
+        #     "description": "Not currently in CSV, but present in source systems.  This facilitates defining hierarchy from Museum content.",
+        #     "anyOf": [
+        #         {"type": "string"},
+        #         {
+        #             "type": "array",
+        #             "items": {
+        #                 "id": {"type": "string"}
+        #             }
+        #         }
+        #     ]
+        # },
+        # "classification": {
+        #     "description": "Not currently in CSV, but potentially useful - from Museum content",
+        #     "type": "string"
+        # }
     },
     "required": ["id", "parentId", "collectionId"],
     "additionalProperties": False
