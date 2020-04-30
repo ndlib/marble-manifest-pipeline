@@ -71,7 +71,7 @@ class processWebKioskJsonMetadata():
             print("Completed retrieving Google image file info after", int(time.time() - self.start_time), 'seconds.')
             composite_json = CleanUpCompositeJson(composite_json).cleaned_up_content
             process_one_museum_object_class = ProcessOneMuseumObject(self.config, image_file_info, self.start_time)
-            for object_key, object_value in objects.items():
+            for _object_key, object_value in objects.items():
                 if 'uniqueIdentifier' in object_value:
                     missing_fields = process_one_museum_object_class.process_object(object_value)
                     objects_processed += 1
