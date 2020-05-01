@@ -39,13 +39,13 @@ class creatorField():
         ""
 
     def _make_lifeDate(self, creator):
-        # living_flag = creator.get("livingFlag", "0")
+        """ build lifeDate from startDate and endDate """
         start_date = creator.get("startDate", "")
         end_date = creator.get("endDate", "")
         results = ""
         if start_date:
             results = self._b_for_person_birthdate(creator) + self._active_for_corporate_creator(creator) + start_date
-            if creator.get("livingFlag", "1") == "0" or creator.get("endDate", ""):
+            if not creator.get("alive", True) or creator.get("endDate", ""):
                 results += " - " + end_date
         if not results:
             results = creator.get("lifeDates", "")
@@ -61,13 +61,13 @@ class creatorField():
             creator["display"] = self.make_string(creator)
 
     def _b_for_person_birthdate(self, creator):
-        if creator.get("lifeFlag", "0") == "1" and creator.get("livingFlag", "0") == "1" and creator.get("endDate", "") == "":
+        if creator.get("human", False) and creator.get("alive", False) and creator.get("endDate", "") == "":
             return "b. "
         return ""
 
     def _active_for_corporate_creator(self, creator):
-        """ Only return "active " if lifeFlag is supplied and has the value of "0". """
-        if creator.get("lifeFlag", "1") == "0":
+        """ Only return "active " if not human """
+        if not creator.get("human", True):
             return "active "
         return ""
 
@@ -83,8 +83,8 @@ def test():
     # import pprint
     # pp = pprint.PrettyPrinter(indent=4)
     data = [
-        {'attribution': '', 'role': 'Primary', 'fullName': 'Marie Victoire Lemoine', 'nationality': 'French', 'lifeDates': '1754 - 1820', 'startDate': '1754', 'endDate': '1820', 'livingFlag': '0', 'lifeFlag': '1'},
-        {'attribution': 'Formerly attributed to', 'role': 'Primary', 'fullName': 'Elisabeth Louise Vigée-LeBrun', 'nationality': 'French', 'lifeDates': '1755 - 1842', 'startDate': '1755', 'endDate': '1842', 'livingFlag': '0', 'lifeFlag': '1'}  # noqa: E501
+        {'attribution': '', 'role': 'Primary', 'fullName': 'Marie Victoire Lemoine', 'nationality': 'French', 'lifeDates': '1754 - 1820', 'startDate': '1754', 'endDate': '1820', 'alive': False, 'human': True},
+        {'attribution': 'Formerly attributed to', 'role': 'Primary', 'fullName': 'Elisabeth Louise Vigée-LeBrun', 'nationality': 'French', 'lifeDates': '1755 - 1842', 'startDate': '1755', 'endDate': '1842', 'alive': False, 'human': True}  # noqa: E501
     ]
     creator = creatorField(data)
     print(creator.to_iiif())
