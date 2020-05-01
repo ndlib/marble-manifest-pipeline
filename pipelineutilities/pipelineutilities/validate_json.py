@@ -19,6 +19,11 @@ def validate_json(json_to_test, schema_to_use, print_error_message=False):
     return results
 
 
+def schema_api_version():
+    """ Define schema version (to be included in json being validated) """
+    return 1
+
+
 nd_json_schema = {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "description": "Schema for validating ND.json",
@@ -26,6 +31,8 @@ nd_json_schema = {
     "id": "nd.schema.json",
     "type": "object",
     "properties": {
+        "apiVersion": {"type": "integer"},
+        "fileCreatedDate": {"type": "string"},
         "id": {"type": "string"},
         "sourceSystem": {"type": "string"},
         "repository": {"type": "string"},
@@ -123,7 +130,7 @@ nd_json_schema = {
             "default": []
         }
     },
-    "required": ["id", "parentId", "collectionId"],
+    "required": ["id", "parentId", "collectionId", "apiVersion", "fileCreatedDate"],
     "additionalProperties": False
 
 }

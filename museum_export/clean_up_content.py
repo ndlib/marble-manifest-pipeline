@@ -1,5 +1,5 @@
 # clean_up_content.py
-from datetime import datetime
+from datetime import datetime, date
 from add_image_records_as_child_items import AddImageRecordsAsChildItems
 from dependencies.pipelineutilities.creatorField import creatorField  # noqa: E402
 from pipelineutilities.csv_collection import _add_additional_paths
@@ -8,9 +8,10 @@ from html.parser import HTMLParser
 
 class CleanUpContent():
     """ This class accepts a JSON object representing one item of museum content and massages that to fit our needs for processing. """
-    def __init__(self, config: dict, image_files: dict):
+    def __init__(self, config: dict, image_files: dict, api_version: int):
         self.config = config
         self.image_files = image_files
+        self.api_version = api_version
         # self.cleaned_up_content = CleanUpContent._clean_up_content(object, image_files)
 
     def clean_up_content(self, object: dict) -> dict:
@@ -101,4 +102,6 @@ class CleanUpContent():
             object["parentId"] = "root"
         if "collectionId" not in object:
             object["collectionId"] = object.get("id", "")
+        object["apiVersion"] = self.api_version
+        object["fileCreatedDate"] = str(date.today())
         return object

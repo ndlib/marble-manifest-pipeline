@@ -3,9 +3,10 @@
 import os
 import time
 import json
+import copy
 from clean_up_content import CleanUpContent
 from convert_json_to_csv import ConvertJsonToCsv
-from pipelineutilities.validate_json import validate_json, get_nd_json_schema
+from dependencies.pipelineutilities.validate_json import validate_json, get_nd_json_schema, schema_api_version
 from pipelineutilities.s3_helpers import write_s3_file, write_s3_json
 from sentry_sdk import capture_message, push_scope
 
@@ -15,7 +16,8 @@ class ProcessOneMuseumObject():
         self.config = config
         self.image_files = image_files
         self.start_time = start_time
-        self.save_despite_missing_fields = False
+        self.save_despite_missing_fields = True
+        self.api_version = schema_api_version()
 
     def process_object(self, museum_object: dict):
         """ For each object, check for missing fields.  If there are none,
@@ -26,7 +28,7 @@ class ProcessOneMuseumObject():
             if not validate_museum_json(museum_object):
                 print("Validation Error validating ", object_id)
             print("Museum identifier = ", object_id, int(time.time() - self.start_time), 'seconds.')
-            clean_up_content_class = CleanUpContent(self.config, self.image_files)
+            clean_up_content_class = CleanUpContent(self.config, self.image_files, self.api_version)
             cleaned_up_object = clean_up_content_class.clean_up_content(museum_object)
             if not validate_nd_json(cleaned_up_object):
                 print("Validation Error validating modified object", object_id)
@@ -90,7 +92,7 @@ def validate_museum_json(json_to_test: dict) -> bool:
 
 def get_museum_json_schema() -> dict:
     """ get schema appropriate for checking EmbARK json """
-    schema_to_use = get_nd_json_schema()
+    schema_to_use = copy.deepcopy(get_nd_json_schema())
     with open('./museum_specific_schema_fields.json') as f:
         museum_specific_schema_fields = json.load(f)
     schema_to_use["required"] = ["id"]  # explicitly remove parentId and collectionId, since objects with hidden parents don't have these

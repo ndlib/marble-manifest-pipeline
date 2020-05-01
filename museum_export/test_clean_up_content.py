@@ -3,18 +3,20 @@
 import _set_path  # noqa
 import unittest
 from clean_up_content import CleanUpContent
+from datetime import date
 
 
 class Test(unittest.TestCase):
     """ Class for test fixtures """
     def setUp(self):
-        self.clean_up_content_class = CleanUpContent({}, {})
+        self.api_version = 1
+        self.clean_up_content_class = CleanUpContent({}, {}, self.api_version)
 
     def test_1_add_missing_required_fields(self):
         """ test add_missing_required_fields """
         object = {"id": "test"}
         fixed_object = self.clean_up_content_class._add_missing_required_fields(object)
-        expected_object = {"id": "test", "collectionId": "test", "parentId": "root"}
+        expected_object = {"id": "test", "collectionId": "test", "parentId": "root", "apiVersion": self.api_version, "fileCreatedDate": str(date.today())}
         self.assertTrue(fixed_object == expected_object)
 
     def test_2_define_worktype(self):
