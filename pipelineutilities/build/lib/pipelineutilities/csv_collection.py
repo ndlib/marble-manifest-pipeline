@@ -92,6 +92,9 @@ class Item():
 
         return parent
 
+    def root(self):
+        return self.get("parentId", False) == "root"
+
     def get(self, key, default=False):
         return self.object.get(key, default)
 

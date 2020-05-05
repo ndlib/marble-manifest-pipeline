@@ -11,7 +11,7 @@ def load_data_for_test(id):
     #    data['image_data'] = json.load(input_source)
     # input_source.close()
 
-    with open(current_path + '/../example/test_manifests/{}.json'.format(id), 'r') as input_source:
+    with open(current_path + '/../example/{}/manifest.json'.format(id), 'r') as input_source:
         data['manifest_json'] = json.load(input_source)
     input_source.close()
 

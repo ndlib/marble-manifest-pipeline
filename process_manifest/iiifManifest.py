@@ -97,7 +97,7 @@ class iiifManifest():
         elif self.data.type() == 'file':
             return 'Canvas'
 
-        raise "invalid schema processor type"
+        raise Exception("invalid schema processor type: " + self.data.type())
 
     def _manifest_id(self):
         return self.data.get('iiifUri')
@@ -118,7 +118,7 @@ class iiifManifest():
         return {self.lang: line}
 
     def add_context(self):
-        if self.data.get('id') == self.data.parent().get('id'):
+        if self.data.root():
             self.manifest_hash["@context"] = [
                 "http://www.w3.org/ns/anno.jsonld",
                 "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
@@ -281,5 +281,6 @@ class iiifManifest():
             'copyrightStatus',
             'copyrightStatement',
             'usage',
-            'license'
+            'license',
+            'thumbnail',
         ]
