@@ -1,0 +1,121 @@
+{
+  "sourceSystem": "EmbARK",
+  "title": "Master Clitherow",
+  "dateCreated": "late 1790s",
+  "workType": "Paintings",
+  "medium": "oil on canvas",
+  "uniqueIdentifier": "1951.004.009",
+  "sequence": 0,
+  "repository": "museum",
+  "subjects": [
+    {
+      "authority": "AAT",
+      "term": "boys",
+      "uri": "http://vocab.getty.edu/aat/300247598"
+    },
+    {
+      "authority": "AAT",
+      "term": "children",
+      "uri": "http://vocab.getty.edu/aat/300025945"
+    },
+    {
+      "authority": "AAT",
+      "term": "portraits",
+      "uri": "http://vocab.getty.edu/aat/300015637"
+    }
+  ],
+  "copyrightStatus": "Public domain",
+  "copyrightStatement": "",
+  "access": "Galleries: Virginia A. Marten Gallery of 18th Century Art",
+  "format": "",
+  "dimensions": "39 x 34 in. (99.06 x 86.36 cm)",
+  "dedication": "Gift of Mrs. Fred J. Fisher",
+  "description": "",
+  "creationPlace": {
+    "continent": "",
+    "country": "",
+    "state": "",
+    "county": "",
+    "city": "",
+    "historic": ""
+  },
+  "id": "1951.004.009",
+  "collectionId": "1951.004.009",
+  "parentId": "root",
+  "creators": [
+    {
+      "attribution": "",
+      "role": "Primary",
+      "fullName": "George Romney",
+      "nationality": "English",
+      "lifeDates": "1734 - 1802",
+      "startDate": "1734",
+      "endDate": "1802",
+      "livingFlag": "0",
+      "lifeFlag": "1",
+      "display": "George Romney (English, 1734 - 1802)"
+    }
+  ],
+  "modifiedDate": "2020-04-02T10:44:45Z",
+  "level": "manifest",
+  "items": [
+    {
+      "id": "1951_004_009-v0002.jpg",
+      "level": "file",
+      "sequence": 1,
+      "title": "1951_004_009-v0002.jpg",
+      "description": "1951_004_009-v0002.jpg",
+      "thumbnail": true,
+      "md5Checksum": "f3c5acb22d97aee18a11736c00d1d7fb",
+      "filePath": "https://drive.google.com/a/nd.edu/file/d/1wSyloVEcMJ3Jn8hM-noVnFFwDZOtCnG-/view",
+      "fileId": "1wSyloVEcMJ3Jn8hM-noVnFFwDZOtCnG-",
+      "modifiedDate": "2019-06-25T15:07:42.495Z",
+      "mimeType": "image/jpeg",
+      "collectionId": "1951.004.009",
+      "parentId": "1951.004.009",
+      "sourceSystem": "EmbARK",
+      "repository": "museum",
+      "iiifImageUri": "https://image-iiif.libraries.nd.edu/iiif/2/1951.004.009%2F1951_004_009-v0002",
+      "iiifImageFilePath": "s3://marble-data-broker-publicbucket-kebe5zkimvyg/1951.004.009/1951_004_009-v0002",
+      "iiifUri": "https://new-csv.libraries.nd.edu/1951.004.009/1951_004_009-v0002/canvas",
+      "iiifFilePath": "s3://new-csv-manifestbucket-1yl2v7keuoip/1951.004.009/1951_004_009-v0002/canvas/index.json",
+      "metsUri": "",
+      "metsFilePath": "",
+      "schemaUri": "",
+      "schemaPath": ""
+    },
+    {
+      "id": "1951_004_009-v0001.jpg",
+      "level": "file",
+      "sequence": 2,
+      "title": "1951_004_009-v0001.jpg",
+      "description": "1951_004_009-v0001.jpg",
+      "thumbnail": false,
+      "md5Checksum": "3d3458f1a8c2cf0da0c1a0887747b790",
+      "filePath": "https://drive.google.com/a/nd.edu/file/d/1iypusB70AR-F1RFGbL4pRRD81CmpET2U/view",
+      "fileId": "1iypusB70AR-F1RFGbL4pRRD81CmpET2U",
+      "modifiedDate": "2019-06-25T15:07:40.640Z",
+      "mimeType": "image/jpeg",
+      "collectionId": "1951.004.009",
+      "parentId": "1951.004.009",
+      "sourceSystem": "EmbARK",
+      "repository": "museum",
+      "iiifImageUri": "https://image-iiif.libraries.nd.edu/iiif/2/1951.004.009%2F1951_004_009-v0001",
+      "iiifImageFilePath": "s3://marble-data-broker-publicbucket-kebe5zkimvyg/1951.004.009/1951_004_009-v0001",
+      "iiifUri": "https://new-csv.libraries.nd.edu/1951.004.009/1951_004_009-v0001/canvas",
+      "iiifFilePath": "s3://new-csv-manifestbucket-1yl2v7keuoip/1951.004.009/1951_004_009-v0001/canvas/index.json",
+      "metsUri": "",
+      "metsFilePath": "",
+      "schemaUri": "",
+      "schemaPath": ""
+    }
+  ],
+  "iiifImageUri": "",
+  "iiifImageFilePath": "",
+  "iiifUri": "https://new-csv.libraries.nd.edu/1951.004.009/manifest",
+  "iiifFilePath": "s3://new-csv-manifestbucket-1yl2v7keuoip/1951.004.009/manifest/index.json",
+  "metsUri": "https://new-csv.libraries.nd.edu/1951.004.009/mets.xml",
+  "metsFilePath": "s3://new-csv-manifestbucket-1yl2v7keuoip/1951.004.009/mets.xml",
+  "schemaUri": "https://new-csv.libraries.nd.edu/1951.004.009",
+  "schemaPath": "s3://new-csv-manifestbucket-1yl2v7keuoip/1951.004.009/index.json"
+}
