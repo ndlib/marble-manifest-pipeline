@@ -196,7 +196,7 @@ def _manifest_paths(row, config):
         "iiifImageUri": "",
         "iiifImageFilePath": "",
         "iiifUri": config["manifest-server-base-url"] + path + "/manifest",
-        "iiifFilePath": "s3://" + config['manifest-server-bucket'] + path + "/manifest/index.json",
+        "iiifFilePath": "s3://" + config['manifest-server-bucket'] + path + "/manifest",
         "metsUri": config["manifest-server-base-url"] + path + "/mets.xml",
         "metsFilePath": "s3://" + config['manifest-server-bucket'] + path + "/mets.xml",
         "schemaUri": config["manifest-server-base-url"] + path,

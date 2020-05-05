@@ -1,33 +1,23 @@
 # find_google_images.py
-import time
-from dependencies.pipelineutilities.google_utilities import execute_google_query
+from pipelineutilities.google_utilities import execute_google_query, establish_connection_with_google_api
 
 
 class FindGoogleImages():
-    """ This class accepts a JSON object representing one item of museum content and massages that to fit our needs for processing. """
+    """ This class retrieves Google file information given passed list of files.
+        Init Parameters:  google_credentials json object, as well as the drive_id to be searched """
 
-    def __init__(self, config, google_connection, start_time):
-        self.config = config
-        self.google_connection = google_connection
-        self.start_time = start_time
+    def __init__(self, google_credentials, drive_id):
+        self.google_credentials = google_credentials
+        self.drive_id = drive_id
         self.image_files = {}
 
-    def get_image_file_info(self, composite_json):
-        """ Get a list of files which we need to find on Google drive """
+    def get_image_file_info(self, image_files_list: list) -> dict:
+        """ Get a file information given a list of files which we need to find on Google drive """
         self.image_files = {}
-        image_files_list = []
-        image_files_to_find = 0
-        if 'objects' in composite_json:
-            for object in composite_json['objects']:
-                if 'digitalAssets' in object:
-                    for digital_asset in object['digitalAssets']:
-                        image_files_list.append(digital_asset['fileDescription'])
-                        image_files_to_find += 1
-        print(image_files_to_find, " images to locate on Google Drive.", int(time.time() - self.start_time), 'seconds.')
         self._find_images_in_chunks(image_files_list)
         return self.image_files
 
-    def _find_images_in_chunks(self, image_files_list):
+    def _find_images_in_chunks(self, image_files_list: list):
         """ Because Google queries are limited, we have to chunk this process """
         first_item_to_process = 0
         chunk_size = 50
@@ -40,19 +30,29 @@ class FindGoogleImages():
             self._find_images_in_google_drive(list_to_process)
             first_item_to_process += chunk_size
 
-    def _find_images_in_google_drive(self, image_files_list):
+    def _find_images_in_google_drive(self, image_files_list: list) -> dict:
         """ Go find the list of files from Google drive """
         if len(image_files_list) > 0:
-            query_string = "trashed = False and mimeType contains 'image' and ("
-            first_pass = True
-            for image_file_name in image_files_list:
-                if not first_pass:
-                    query_string += " or "
-                query_string += " name = '" + image_file_name + "'"
-                first_pass = False
-            query_string += ")"
-            drive_id = self.config['museum-google-drive-id']
-            results = execute_google_query(self.google_connection, drive_id, query_string)
-            for record in results:
-                self.image_files[record['name']] = record
+            query_string = self._build_google_query_string(image_files_list)
+            google_connection = establish_connection_with_google_api(self.google_credentials)
+            query_results = execute_google_query(google_connection, self.drive_id, query_string)
+            self._save_file_info_to_hash(query_results)
+        return self.image_files
+
+    def _build_google_query_string(self, image_files_list: list) -> str:
+        """ Given the list of image files to search, return the Google query string needed """
+        query_string = "trashed = False and mimeType contains 'image' and ("
+        first_pass = True
+        for image_file_name in image_files_list:
+            if not first_pass:
+                query_string += " or "
+            query_string += " name = '" + image_file_name + "'"
+            first_pass = False
+        query_string += ")"
+        return query_string
+
+    def _save_file_info_to_hash(self, query_results: dict) -> list:
+        """ Save query results into hash for later use """
+        for record in query_results:
+            self.image_files[record['name']] = record
         return self.image_files
