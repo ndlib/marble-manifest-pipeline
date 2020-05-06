@@ -25,6 +25,7 @@ class TestCreateManifest(unittest.TestCase):
             "002097132",
             "004862474",
             "MSNCOL8501_EAD",
+            "pdf"
         ]
         pass
 
@@ -43,7 +44,7 @@ class TestCreateManifest(unittest.TestCase):
             self.assertEqual(result_json, manifest_json)
 
     def test_build_nd_json(self):
-        for id in ["1999.024", "1952.019"]:
+        for id in ["1999.024", "1952.019", "pdf"]:
             print("Testing id, {}".format(id))
             data = load_data_for_test(id)
             # print("data = ", data)

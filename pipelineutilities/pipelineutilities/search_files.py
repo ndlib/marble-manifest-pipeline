@@ -165,11 +165,9 @@ def crawl_available_files(config):
     for directory in folders_to_crawl:
         objects = get_matching_s3_objects(bucket, directory)
         for obj in objects:
-            if is_image(obj.get('Key')):
+            if is_tracked_file(obj.get('Key')):
                 url = bucket_to_url[bucket] + obj.get('Key')
                 id = id_from_url(url)
-                # if obj.get('Key') == 'digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg':
-                #     print(url, id)
 
                 if id:
                     if not order_field.get(id, False):
@@ -198,8 +196,8 @@ def crawl_available_files(config):
     return order_field
 
 
-def is_image(file):
-    return re.match(r"^.*[.]((jpe?g)|(tif))$", file, re.IGNORECASE)
+def is_tracked_file(file):
+    return re.match(r"^.*[.]((jpe?g)|(tif)|(pdf))$", file, re.IGNORECASE)
 
 
 def output_as_file():

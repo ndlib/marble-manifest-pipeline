@@ -1,6 +1,6 @@
 import _set_path  # noqa
 import unittest
-from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_image  # noqa: E402
+from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_tracked_file  # noqa: E402
 
 
 example_ids = {
@@ -64,6 +64,9 @@ skipped_files = [
 valid_files = [
     'filename.150.jpg',
     'filename.150.jpeg',
+    'filename.tif',
+    'filename.150.tif',
+    'somepdf.something.pdf'
 ]
 
 
@@ -99,7 +102,7 @@ class TestSearchFiles(unittest.TestCase):
         ]
 
         for test in tests:
-            self.assertTrue(is_image(test))
+            self.assertTrue(is_tracked_file(test))
 
 
 if __name__ == '__main__':
