@@ -220,7 +220,7 @@ def test():
     # change to the prod bucket
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     data = crawl_available_files(config)
-    id = id_from_url("https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_002468275/BOO_002468275_000001.tif")
+    id = id_from_url("https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_001016383/BOO_001016383.pdf")
     print(id)
     print(data[id])
     # print(id)
