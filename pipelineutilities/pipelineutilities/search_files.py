@@ -221,8 +221,10 @@ def test():
     config = setup_pipeline_config(event)
     # change to the prod bucket
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
+    # config['rbsc-image-bucket'] = "rbsc-test-files"
     data = crawl_available_files(config)
     id = id_from_url("https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_002468275/BOO_002468275_000001.tif")
+    id = id_from_url("https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg")
     print(id)
     print(data[id])
     # print(id)
