@@ -1,3 +1,4 @@
+import os
 
 
 class iiifImage():
@@ -13,11 +14,11 @@ class iiifImage():
                     self._service()
                 ]
             }
-            
+
         return {}
 
     def is_image(self):
-        return self.data.get('mimeType') != 'application/pdf'
+        return self.data.get('mimeType') != 'application/pdf' and os.path.splitext(self.data.get('filePath', ''))[1] != '.pdf'
 
     def annotation(self, canvas_url_id):
         return {

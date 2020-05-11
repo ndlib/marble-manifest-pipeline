@@ -1,3 +1,4 @@
+import os
 from iiifImage import iiifImage
 
 
@@ -86,7 +87,7 @@ class iiifManifest():
             })
         else:
             for item_data in self.data.children():
-                if item_data.get('mimeType') != 'application/pdf':
+                if not self.item_has_pdf(item_data):
                     ret.append(iiifManifest(self.config, item_data, self.mapping).manifest())
 
         return ret
@@ -156,7 +157,7 @@ class iiifManifest():
         if self.type == 'Manifest':
             pdfs = []
             for item_data in self.data.children():
-                if item_data.get('mimeType') == 'application/pdf':
+                if self.item_has_pdf(item_data):
                     pdfs.append({
                         "id": item_data.get("filePath"),
                         "type": "Text",
@@ -302,3 +303,6 @@ class iiifManifest():
             'license',
             'thumbnail',
         ]
+
+    def item_has_pdf(self, item_data):
+return item_data.get('mimeType') == 'application/pdf' or item_data.get('filePath', '').endswith('.pdf')
