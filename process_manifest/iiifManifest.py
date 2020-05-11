@@ -167,7 +167,6 @@ class iiifManifest():
             if len(pdfs) > 0:
                 self.manifest_hash['rendering'] = pdfs
 
-
     def add_width_height(self):
         if self.key_exists('height') and self.key_exists('width') and self.type == 'Canvas':
             self.manifest_hash['height'] = self.data.get('height')
