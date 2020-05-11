@@ -87,7 +87,7 @@ class iiifManifest():
             })
         else:
             for item_data in self.data.children():
-                if item_data.get('mimeType') != 'application/pdf':
+                if not self.item_has_pdf(item_data):
                     ret.append(iiifManifest(self.config, item_data, self.mapping).manifest())
 
         return ret
@@ -157,8 +157,7 @@ class iiifManifest():
         if self.type == 'Manifest':
             pdfs = []
             for item_data in self.data.children():
-                if item_data.get('mimeType') == 'application/pdf' or os.path.splitext(item_data.get('filePath', ''))[1] == '.pdf':
-                    print("here=", item_data.get('mimeType'), os.path.splitext(item_data.get('filePath', ''))[1])
+                if self.item_has_pdf(item_data):
                     pdfs.append({
                         "id": item_data.get("filePath"),
                         "type": "Text",
@@ -168,7 +167,6 @@ class iiifManifest():
 
             if len(pdfs) > 0:
                 self.manifest_hash['rendering'] = pdfs
-
 
     def add_width_height(self):
         if self.key_exists('height') and self.key_exists('width') and self.type == 'Canvas':
@@ -305,3 +303,6 @@ class iiifManifest():
             'license',
             'thumbnail',
         ]
+
+    def item_has_pdf(self, item_data):
+        return item_data.get('mimeType') == 'application/pdf' or os.path.splitext(item_data.get('filePath', ''))[1] == '.pdf'
