@@ -57,6 +57,21 @@ class TestCreateManifest(unittest.TestCase):
             result_json = "".join(json.dumps(manifest, sort_keys=True).split())
             self.assertEqual(result_json, manifest_json)
 
+    def test_manifest_that_is_a_pdf_without_a_mime_type(self):
+        data = load_data_for_test('pdf')
+        # remove the mime type
+        parent = load_nd_json('pdf', config)
+        parent.object['items'][0]['mimeType'] = ''
+
+        mapping = MetadataMappings(parent)
+        iiif = iiifManifest(config, parent, mapping)
+        manifest = iiif.manifest()
+        debug_json(data['manifest_json'], manifest)
+        manifest_json = "".join(json.dumps(data['manifest_json'], sort_keys=True).split())
+        result_json = "".join(json.dumps(manifest, sort_keys=True).split())
+        self.assertEqual(result_json, manifest_json)
+
+
     def test_addProvider(self):
         tests = [
             {"provider": "rbsc", "result": "https://rarebooks.library.nd.edu/using"},
