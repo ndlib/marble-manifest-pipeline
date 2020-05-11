@@ -1,24 +1,15 @@
-import json
-import time
-from datetime import datetime, timedelta
 from xml.etree import ElementTree
 from create_json_from_xml import createJsonFromXml
-from file_system_utilities import create_directory
 import requests  # noqa: E402
 from dependencies.sentry_sdk import capture_exception
 
 
 class HarvestOaiEads():
     """ This performs all EAD-related processing """
-    def __init__(self, config: dict, event: dict):
+    def __init__(self, config: dict):
         self.config = config
-        self.event = event
         self.base_oai_url = self.config['archive-space-server-base-url']
-        self.start_time = time.time()
-        print("Will break after ", datetime.now() + timedelta(seconds=self.config['seconds-to-allow-for-processing']))
         self.jsonFromXMLClass = createJsonFromXml()
-        self.save_xml_locally = True
-        self.json_locally = True
         self.temporary_local_path = '/tmp'
         self.require_dao_flag = False
 
@@ -73,33 +64,5 @@ class HarvestOaiEads():
     def _process_record(self, source_system_url: str, xml_record: ElementTree) -> dict:
         """ Call a process to create ND.JSON from complex ArchivesSpace EAD xml """
         nd_json = {}
-        if not self.require_dao_flag or self._digital_records_exist(xml_record):
-            ead_id = self._get_ead_id(xml_record)
-            nd_json = self.jsonFromXMLClass.get_nd_json_from_xml(xml_record)
-            if nd_json:
-                print("ArchivesSpace ead_id = ", ead_id, " source_system_url = ", source_system_url, int(time.time() - self.start_time), 'seconds.')
-            if self.save_xml_locally:
-                local_xml_output_folder = "/tmp/ead/xml/"
-                create_directory(local_xml_output_folder)
-                with open(local_xml_output_folder + ead_id + '.xml', 'w') as f:
-                    f.write(ElementTree.tostring(xml_record, encoding='unicode'))
-            if self.json_locally:
-                local_xml_output_folder = "/tmp/ead/json/"
-                create_directory(local_xml_output_folder)
-                with open(local_xml_output_folder + ead_id + '.json', 'w') as f:
-                    json.dump(nd_json, f, indent=2)
+        nd_json = self.jsonFromXMLClass.get_nd_json_from_xml(xml_record)
         return nd_json
-
-    def _get_ead_id(self, xml_record: ElementTree) -> str:
-        """ Retrieve EAD id from an ArchivesSpace record.  We will use this to identify this intellectual object."""
-        ead_id = ""
-        ead_id = xml_record.find('./metadata/ead/eadheader/eadid').text
-        return ead_id
-
-    def _digital_records_exist(self, xml_root):
-        """ Test to see if a digital asset object record exists in the object """
-        result = False
-        for _dao in xml_root.findall('.//daogrp'):
-            result = True
-            break
-        return result

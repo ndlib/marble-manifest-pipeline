@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import datetime
 from pipelineutilities.search_files import id_from_url, crawl_available_files  # noqa: #402
 from additional_functions import file_name_from_filePath
@@ -7,10 +8,14 @@ from additional_functions import file_name_from_filePath
 class AddFilesToNdJson():
     def __init__(self, config: dict):
         self.config = config
-        self.processing_dao_for_parent_id = ""
-        self.hash_of_available_files = crawl_available_files(self.config)
-        # with open('hash_of_available_files.json', 'w') as f:
-        #     json.dump(self.hash_of_available_files, f, indent=2, default=str)
+        local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
+        if config.get("local", False):
+            with open(local_folder + 'test/hash_of_available_files.json', 'r') as input_source:
+                self.hash_of_available_files = json.load(input_source)
+        else:
+            self.hash_of_available_files = crawl_available_files(self.config)
+            # with open(local_folder + 'test/hash_of_available_files.json', 'w') as f:
+            #     json.dump(self.hash_of_available_files, f, indent=2, default=str)
 
     def add_files(self, nd_json: dict) -> dict:
         """ recursively go through all of nd_json finding files, and adding additional files """
@@ -26,7 +31,7 @@ class AddFilesToNdJson():
         return nd_json
 
     def _add_other_files_given_uri(self, file_items: list, index: int, file_path: str):
-        """ This accepts an image uri, and finds (and appends to the csv)
+        """ This accepts an image uri, and finds (and appends to the nd_json)
             all related images. """
         each_file_dict = {}
         id_to_find = id_from_url(file_path)
@@ -39,7 +44,6 @@ class AddFilesToNdJson():
             api_version = file_items[index]["apiVersion"]
             file_created_date = file_items[index]["fileCreatedDate"]
             parent_id = file_items[index]["parentId"]
-
             if 'files' in self.hash_of_available_files[id_to_find]:
                 file_items.pop(index)
                 for obj in self.hash_of_available_files[id_to_find]['files']:
@@ -60,15 +64,5 @@ class AddFilesToNdJson():
                     each_file_dict['modifiedDate'] = obj['LastModified']
                     each_file_dict['modifiedDate'] = datetime.strptime(obj['LastModified'], '%Y-%m-%d %H:%M:%S').isoformat() + 'Z'  # noqa: E501
                     each_file_dict['md5Checksum'] = obj['ETag'].replace("'", "").replace('"', '')  # strip duplicated quotes: {'ETag': '"8b50cfed39b7d8bcb4bd652446fe8adf"'}  # noqa: E501
-                    # print("appending dict")
                     file_items.append(dict(each_file_dict))
         return file_items
-    #
-    # def _is_this_first_dao_in_object(self, my_parent_id):
-    #     """ This identifies the first DAO image in a DAO object
-    #         so we can use this as the representative thumbnail. """
-    #     return_value = True
-    #     if my_parent_id == self.processing_dao_for_parent_id:
-    #         return_value = False
-    #     self.processing_dao_for_parent_id = my_parent_id
-    #     return return_value

@@ -121,7 +121,6 @@
 		]
 	},
 	"items": {
-		"!requiredDescendants": ["digitalAssets"],
 		"FieldsToExtract": [
 			{
 				"label": "id",
@@ -142,7 +141,6 @@
 				"xpath": "./did",
 				"optional": true,
 				"collapseTree": true,
-				"!requiredDescendants": ["digitalAssets"],
 				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
 					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}]
 			},
@@ -184,7 +182,6 @@
 		]
 	},
 	"childDetails": {
-		"!requiredDescendants": ["digitalAssets"],
 		"FieldsToExtract": [
 			{
 				"label": "child",
@@ -298,19 +295,6 @@
 				"label": "id",
 				"externalProcess": "file_name_from_filePath",
 				"passLabels": [{"filename": "filePath"}]
-			},
-			{
-				"!externalProcess": "getFilesFromUri",
-				"!passLabels": [{"filename": "filePath"}],
-				"!seedNodes": [{"collectionId": "collectionId"}, {"level": "level"},
-					{"parentId": "parentId"}, {"fileId": "fileId"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
-					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}
-				]
-			},
-			{
-				"!label": "fileId",
-				"!externalProcess": "id_from_url",
-				"!passLabels": [{"filename": "filePath"}]
 			}
 		]
 	},

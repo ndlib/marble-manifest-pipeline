@@ -4,9 +4,9 @@ import _set_path  # noqa
 import json
 import io
 import os
-from pathlib import Path
+import time
+from datetime import datetime, timedelta
 from harvest_oai_eads import HarvestOaiEads  # noqa: #502
-from file_system_utilities import delete_file  # noqa: E402
 from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
 import sentry_sdk as sentry_sdk  # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
@@ -15,7 +15,8 @@ from convert_json_to_csv import ConvertJsonToCsv
 from pipelineutilities.search_files import id_from_url, crawl_available_files  # noqa: #402
 from add_files_to_nd_json import AddFilesToNdJson
 
-def run(event, context):
+
+def run(event: dict, context: dict):
     """ Run the process to retrieve and process ArchivesSpace metadata.
 
     Information on the API can be found here:
@@ -23,47 +24,42 @@ def run(event, context):
     _supplement_event(event)
     _init_sentry()
     config = setup_pipeline_config(event)
-    config['rbsc-image-bucket'] = "libnd-smb-rbsc"
+    # config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     if config:
-        harvest_oai_eads_class = HarvestOaiEads(config, event)
-        # convert_json_to_csv_class = ConvertJsonToCsv(config["csv-field-names"])
+        start_time = time.time()
+        time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
+        print("Will break after ", time_to_break)
+        harvest_oai_eads_class = HarvestOaiEads(config)
+        add_files_to_nd_json_class = AddFilesToNdJson(config)
         ids = event.get("ids", [])
-        while len(ids) > 0:
-            # hash_of_available_files = crawl_available_files(config)
-            # with open('./test/hash_of_available_files.json', 'w') as f:
-            #     json.dump(hash_of_available_files, f, indent=2, default=str)
-
+        while len(ids) > 0 and datetime.now() < time_to_break:
             nd_json = harvest_oai_eads_class.get_nd_json_from_archives_space_url(ids[0])
             if nd_json:
-                with open(nd_json["id"] + '.json', 'w') as f:
-                    json.dump(nd_json, f, indent=2)
-                add_files_to_nd_json_class = AddFilesToNdJson(config)
-                nd_json_with_files = add_files_to_nd_json_class.add_files(nd_json)
-                with open(nd_json_with_files["id"] + '_with_files.json', 'w') as f:
-                    json.dump(nd_json_with_files, f, indent=2)
-                # write_s3_json(config['process-bucket'], os.path.join("json/", nd_json["id"] + '.json'), nd_json)
-                # event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-csv-basepath'])
-                # csv_string = convert_json_to_csv_class.convert_json_to_csv(nd_json)
-                # s3_csv_file_name = os.path.join(config['process-bucket-csv-basepath'], nd_json["id"] + '.csv')
-                # write_s3_file(config['process-bucket'], s3_csv_file_name, csv_string)
-                # subsequent steps:
-                # prune if no files
-                # add files
+                nd_json = add_files_to_nd_json_class.add_files(nd_json)
+                write_s3_json(config['process-bucket'], os.path.join("json/", nd_json["id"] + '.json'), nd_json)
+                print("ArchivesSpace ead_id = ", nd_json.get("id", ""), " source_system_url = ", ids[0], int(time.time() - start_time), 'seconds.')
+                if False:  # in case we need to create CSVs
+                    _export_json_as_csv(config, nd_json)
             del ids[0]
         event['eadHarvestComplete'] = (len(ids) == 0)
+        event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-csv-basepath'])
     return event
 
 
-def _supplement_event(event):
+def _export_json_as_csv(config: dict, nd_json: dict):
+    """ I'm leaving this here for now in case we need to create a CSV from the nd_json """
+    convert_json_to_csv_class = ConvertJsonToCsv(config["csv-field-names"])
+    csv_string = convert_json_to_csv_class.convert_json_to_csv(nd_json)
+    s3_csv_file_name = os.path.join(config['process-bucket-csv-basepath'], nd_json["id"] + '.csv')
+    write_s3_file(config['process-bucket'], s3_csv_file_name, csv_string)
+
+
+def _supplement_event(event: dict) -> dict:
     if 'eadHarvestComplete' not in event:
         event['eadHarvestComplete'] = False
-    if 'local' not in event:
-        event['local'] = False
     if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
-    if 'local-path' not in event:
-        event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
-    return
+    return event
 
 
 def _init_sentry():
@@ -143,14 +139,14 @@ def test(identifier=""):
             "https://archivesspace.library.nd.edu/repositories/3/resources/1994",
             "https://archivesspace.library.nd.edu/repositories/3/resources/1995",
             "https://archivesspace.library.nd.edu/repositories/3/resources/2000",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/2008",
             "https://archivesspace.library.nd.edu/repositories/3/resources/2038"
         ]
-        event["ids"] = [
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1631",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1644"
-        ]
-        event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1492"]  # Parsons Journals
+        # event["ids"] = [
+        #     "https://archivesspace.library.nd.edu/repositories/3/resources/1631",
+        #     "https://archivesspace.library.nd.edu/repositories/3/resources/1644"
+        # ]
+        # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1492"]  # Parsons Journals
+        # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/2/resources/1366"]
 
     event = run(event, {})
 
@@ -158,5 +154,8 @@ def test(identifier=""):
         with open('event.json', 'w') as f:
             json.dump(event, f, indent=2)
     else:
-        delete_file('.', 'event.json')
+        try:
+            os.remove('event.json')
+        except FileNotFoundError:
+            pass
     print(event)

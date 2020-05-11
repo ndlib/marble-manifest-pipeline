@@ -21,9 +21,11 @@ class createJsonFromXml():
 
     def get_nd_json_from_xml(self, xml_root: ElementTree) -> dict:
         """ Call function to recursively create json from xml root.  Validate, and return either validated json or {} """
-        nd_json = self.extract_fields(xml_root, 'root', {})
-        if not validate_nd_json(nd_json):
-            nd_json = {}
+        nd_json = {}
+        if xml_root:
+            nd_json = self.extract_fields(xml_root, 'root', {})
+            if not validate_nd_json(nd_json):
+                nd_json = {}
         return nd_json
 
     def extract_fields(self, xml_root: ElementTree, json_section: str, seeded_json_output: dict) -> dict:
