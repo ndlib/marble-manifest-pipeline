@@ -5,6 +5,7 @@ from test.test_utils import load_data_for_test
 from test.test_utils import debug_json
 from pathlib import Path
 from csv_collection import load_csv_data
+from load_nd_json import load_nd_json
 from pipeline_config import setup_pipeline_config
 from iiifManifest import iiifManifest
 from MetadataMappings import MetadataMappings
@@ -19,11 +20,12 @@ config = setup_pipeline_config(base_config)
 class TestCreateManifest(unittest.TestCase):
     def setUp(self):
         self.ids = [
-            # 'collection-small',
-            'item-one-image-archivespace',
-            'item-one-image-embark',
-            # 'item-multiple-images',
-            # 'item-minimal-data'
+            "1999.024",
+            "1952.019",
+            "002097132",
+            "004862474",
+            "MSNCOL8501_EAD",
+            "pdf"
         ]
         pass
 
@@ -33,6 +35,20 @@ class TestCreateManifest(unittest.TestCase):
             data = load_data_for_test(id)
             # print("data = ", data)
             parent = load_csv_data(id, config)
+            mapping = MetadataMappings(parent)
+            iiif = iiifManifest(config, parent, mapping)
+            manifest = iiif.manifest()
+            debug_json(data['manifest_json'], manifest)
+            manifest_json = "".join(json.dumps(data['manifest_json'], sort_keys=True).split())
+            result_json = "".join(json.dumps(manifest, sort_keys=True).split())
+            self.assertEqual(result_json, manifest_json)
+
+    def test_build_nd_json(self):
+        for id in ["1999.024", "1952.019", "pdf"]:
+            print("Testing id, {}".format(id))
+            data = load_data_for_test(id)
+            # print("data = ", data)
+            parent = load_nd_json(id, config)
             mapping = MetadataMappings(parent)
             iiif = iiifManifest(config, parent, mapping)
             manifest = iiif.manifest()

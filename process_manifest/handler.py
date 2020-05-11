@@ -88,12 +88,12 @@ def test():
     # pp = pprint.PrettyPrinter(indent=4)
     event = {
         'ssm_key_base': '/all/marble-manifest-prod',
-        'config-file': '2020-04-15-13:15:10.365990.json',
-        'process-bucket': 'marble-manifest-prod-processbucket-13bond538rnnb',
+        'config-file': '2020-04-15-13:10:11.652565.json',
+        'process-bucket': 'new-csv-processbucket-10dr776tnq9be',
         'ids': [
-            'item-one-image-embark'
+            '1951.004.009'
         ],
-        'local': True,
+        'local': False,
         'local-path': '../example/',
         'errors': []
     }

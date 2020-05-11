@@ -67,6 +67,7 @@ class iiifManifest():
         self.add_width_height()
         self.add_mets()
         self.add_schema_org()
+        self.add_pdf()
 
         metadata = self.metadata_array()
         if len(metadata) > 0:
@@ -85,7 +86,8 @@ class iiifManifest():
             })
         else:
             for item_data in self.data.children():
-                ret.append(iiifManifest(self.config, item_data, self.mapping).manifest())
+                if item_data.get('mimeType') != 'application/pdf':
+                    ret.append(iiifManifest(self.config, item_data, self.mapping).manifest())
 
         return ret
 
@@ -97,7 +99,7 @@ class iiifManifest():
         elif self.data.type() == 'file':
             return 'Canvas'
 
-        raise "invalid schema processor type"
+        raise Exception("invalid schema processor type: " + self.data.type())
 
     def _manifest_id(self):
         return self.data.get('iiifUri')
@@ -118,7 +120,7 @@ class iiifManifest():
         return {self.lang: line}
 
     def add_context(self):
-        if self.data.get('id') == self.data.parent().get('id'):
+        if self.data.root():
             self.manifest_hash["@context"] = [
                 "http://www.w3.org/ns/anno.jsonld",
                 "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
@@ -145,9 +147,26 @@ class iiifManifest():
             self.manifest_hash['seeAlso'].append({
                 "id": self.data.get('metsUri'),
                 "type": "Dataset",
+                "profile": "http://www.loc.gov/METS/",
                 "format": "application/xml",
-                "profile": "http://www.loc.gov/METS/"
             })
+
+    def add_pdf(self):
+        # if we are a manifest and we have a child that is a pdf add them to a render section.
+        if self.type == 'Manifest':
+            pdfs = []
+            for item_data in self.data.children():
+                if item_data.get('mimeType') == 'application/pdf':
+                    pdfs.append({
+                        "id": item_data.get("filePath"),
+                        "type": "Text",
+                        "label": {"en": ["PDF Rendering"]},
+                        "format": "application/pdf"
+                    })
+
+            if len(pdfs) > 0:
+                self.manifest_hash['rendering'] = pdfs
+
 
     def add_width_height(self):
         if self.key_exists('height') and self.key_exists('width') and self.type == 'Canvas':
@@ -281,5 +300,6 @@ class iiifManifest():
             'copyrightStatus',
             'copyrightStatement',
             'usage',
-            'license'
+            'license',
+            'thumbnail',
         ]

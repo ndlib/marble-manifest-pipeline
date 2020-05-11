@@ -5,13 +5,19 @@ class iiifImage():
         self.data = data
 
     def thumbnail(self, width="250", height=""):
-        return {
-            'id': self._image_url_id() + '/full/' + width + ',' + height + '/0/default.jpg',
-            'type': 'Image',
-            'service': [
-                self._service()
-            ]
-        }
+        if (self.is_image()):
+            return {
+                'id': self._image_url_id() + '/full/' + width + ',' + height + '/0/default.jpg',
+                'type': 'Image',
+                'service': [
+                    self._service()
+                ]
+            }
+            
+        return {}
+
+    def is_image(self):
+        return self.data.get('mimeType') != 'application/pdf'
 
     def annotation(self, canvas_url_id):
         return {

@@ -4,191 +4,11 @@
     "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
     "http://iiif.io/api/presentation/3/context.json"
   ],
-  "id": "https://presentation-iiif.library.nd.edu/collectionId/manifest",
-  "items": [
-    {
-      "height": 100,
-      "id": "https://presentation-iiif.library.nd.edu/collectionId/file/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/collectionId/file/canvas/annotation_page/file.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/collectionId/file/canvas/annotation/file.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/collectionId/file/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "title"
-        ]
-      },
-      "metadata": [
-        {
-          "label": {
-            "en": [
-              "Date "
-            ]
-          },
-          "value": {
-            "en": [
-              "dateCreated"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Classification "
-            ]
-          },
-          "value": {
-            "en": [
-              "workType"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Medium"
-            ]
-          },
-          "value": {
-            "en": [
-              "Medium"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Accession number "
-            ]
-          },
-          "value": {
-            "en": [
-              "uniqueIdentifier"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Access"
-            ]
-          },
-          "value": {
-            "en": [
-              "Access"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Format"
-            ]
-          },
-          "value": {
-            "en": [
-              "format"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Dimensions"
-            ]
-          },
-          "value": {
-            "en": [
-              "dimensions"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "Credit Line"
-            ]
-          },
-          "value": {
-            "en": [
-              "dedication"
-            ]
-          }
-        },
-        {
-          "label": {
-            "en": [
-              "N/a"
-            ]
-          },
-          "value": {
-            "en": [
-              "True"
-            ]
-          }
-        }
-      ],
-      "requiredStatement": {
-        "label": {
-          "en": [
-            "Copyright"
-          ]
-        },
-        "value": {
-          "en": [
-            "copyrightStatus"
-          ]
-        }
-      },
-      "rights": "copyrightStatement",
-      "summary": {
-        "en": [
-          "description"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 200
-    }
-  ],
+  "id": "https://presentation-iiif.library.nd.edu/pdf/manifest",
+  "items": [],
   "label": {
     "en": [
-      "title"
+      "Memento Mori: Death Comes to the Table"
     ]
   },
   "metadata": [
@@ -200,9 +20,7 @@
       },
       "value": {
         "en": [
-          "primary (mars)",
-          "attr secondary",
-          "third (mars, 1900-2000)"
+          "Giovanni Martinelli (Italian, 1600 - 1659)"
         ]
       }
     },
@@ -214,7 +32,7 @@
       },
       "value": {
         "en": [
-          "dateCreated"
+          "1620-1659"
         ]
       }
     },
@@ -226,7 +44,7 @@
       },
       "value": {
         "en": [
-          "workType"
+          "Paintings"
         ]
       }
     },
@@ -238,7 +56,7 @@
       },
       "value": {
         "en": [
-          "Medium"
+          "oil on canvas"
         ]
       }
     },
@@ -250,7 +68,7 @@
       },
       "value": {
         "en": [
-          "uniqueIdentifier"
+          "pdf"
         ]
       }
     },
@@ -262,19 +80,7 @@
       },
       "value": {
         "en": [
-          "access"
-        ]
-      }
-    },
-    {
-      "label": {
-        "en": [
-          "Format"
-        ]
-      },
-      "value": {
-        "en": [
-          "format"
+          "Galleries: 16th and 17th Century Art Gallery"
         ]
       }
     },
@@ -286,7 +92,7 @@
       },
       "value": {
         "en": [
-          "dimensions"
+          "48 x 57 1/4 x 4 3/8 in. (121.92 x 145.42 x 11.11 cm)"
         ]
       }
     },
@@ -298,7 +104,7 @@
       },
       "value": {
         "en": [
-          "dedication"
+          "Partial gift by an anonymous donor; gift of Mrs. James Alsdorf, by Exchange; Mr. and Mrs. Robert Raclin, Mr. and Mrs. Russell G. Ashbaugh, Mr. Joseph Richard Skelton funds"
         ]
       }
     }
@@ -335,6 +141,18 @@
       "type": "Agent"
     }
   ],
+  "rendering": [
+    {
+      "format": "application/pdf",
+      "id": "https://library.nd.edu/pdfs/pdf.pdf",
+      "label": {
+        "en": [
+          "PDF Rendering"
+        ]
+      },
+      "type": "Text"
+    }
+  ],
   "requiredStatement": {
     "label": {
       "en": [
@@ -343,42 +161,26 @@
     },
     "value": {
       "en": [
-        "copyrightStatus"
+        "Public domain"
       ]
     }
   },
-  "rights": "copyrightStatement",
   "seeAlso": [
     {
       "format": "application/xml",
-      "id": "https://presentation-iiif.library.nd.edu/collectionId/mets.xml",
+      "id": "https://presentation-iiif.library.nd.edu/pdf/mets.xml",
       "profile": "http://www.loc.gov/METS/",
       "type": "Dataset"
     },
     {
       "format": "application/ld+json",
-      "id": "https://presentation-iiif.library.nd.edu/collectionId",
+      "id": "https://presentation-iiif.library.nd.edu/pdf",
       "profile": "https://schema.org/",
       "type": "Dataset"
     }
   ],
-  "summary": {
-    "en": [
-      "description"
-    ]
-  },
   "thumbnail": [
-    {
-      "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile/full/250,/0/default.jpg",
-      "service": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/collectionId%2Ffile",
-          "profile": "http://iiif.io/api/image/2/level2.json",
-          "type": "ImageService2"
-        }
-      ],
-      "type": "Image"
-    }
+    {}
   ],
   "type": "Manifest",
   "viewingDirection": "left-to-right"

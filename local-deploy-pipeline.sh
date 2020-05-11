@@ -4,9 +4,9 @@
 # this also requires blueprints
 #
 templatePath='deploy/cloudformation/manifest-pipeline-pipeline.yml'
-templatePath='../marble-blueprints/deploy/cloudformation/manifest-pipeline-pipeline.yml'
+templatePath='../mellon-blueprints/deploy/cloudformation/manifest-pipeline-pipeline.yml'
 
-stackName='marble-manifest-deployment'
+stackName='new-csv'
 aws cloudformation deploy \
   --capabilities CAPABILITY_NAMED_IAM \
   --region us-east-1 \

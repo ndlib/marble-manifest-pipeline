@@ -1,0 +1,2695 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/anno.jsonld",
+    "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
+    "http://iiif.io/api/presentation/3/context.json"
+  ],
+  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/manifest",
+  "items": [
+    {
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_cbaf46313e6793df7d3161f155e86ff2/manifest",
+      "items": [
+        {
+          "height": 1153,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-01.a.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-01.a.150/canvas/annotation_page/MSN-COL_8501-01.a.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-01.a.150/canvas/annotation/MSN-COL_8501-01.a.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-01.a.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 01 a 150"
+            ]
+          },
+          "summary": {
+            "en": [
+              "Page 1 and Address Leaf. Abigail Williams to Sarah Williams"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1822
+        }
+      ],
+      "label": {
+        "en": [
+          "Letter. Abigail Williams, Waltham, Massachusetts, to Sarah Williams, Deerfield, Massachusetts"
+        ]
+      },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              ""
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "1760 November 10"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "MSN/COL 8501-1"
+            ]
+          }
+        }
+      ],
+      "provider": [
+        {
+          "homepage": [
+            {
+              "format": "text/html",
+              "id": "https://rarebooks.library.nd.edu/",
+              "label": {
+                "en": [
+                  "Rare Books and Special Collections"
+                ]
+              },
+              "type": "Text"
+            }
+          ],
+          "id": "https://rarebooks.library.nd.edu/using",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+            ]
+          },
+          "logo": [
+            {
+              "format": "image/png",
+              "height": 100,
+              "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+              "type": "Image",
+              "width": 120
+            }
+          ],
+          "type": "Agent"
+        }
+      ],
+      "seeAlso": [
+        {
+          "format": "application/xml",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_cbaf46313e6793df7d3161f155e86ff2/mets.xml",
+          "profile": "http://www.loc.gov/METS/",
+          "type": "Dataset"
+        },
+        {
+          "format": "application/ld+json",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_cbaf46313e6793df7d3161f155e86ff2",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+        }
+      ],
+      "summary": {
+        "en": [
+          "A personal letter to Sarah Williams from her mother, Abigail Leonard Williams. At the time Sarah Williams was visiting in Deerfield, where her paternal grandfather, Rev. John Williams, was minister at the turn of the eighteenth century. John Williams, his wife, and seven of his children, including Sarah's father Warham Williams, were among those made captive in the famous Deerfield raid of 1703/4. The letter includes a brief postscript in an unidentified masculine hand."
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Manifest",
+      "viewingDirection": "left-to-right"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_f26866710ced1b93877c99c494c8d15b/manifest",
+      "items": [
+        {
+          "height": 1138,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-02.a.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-02.a.150/canvas/annotation_page/MSN-COL_8501-02.a.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-02.a.150/canvas/annotation/MSN-COL_8501-02.a.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-02.a.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 02 a 150"
+            ]
+          },
+          "summary": {
+            "en": [
+              "Page 1 and Address leaf. Hannah Dickinson to Sarah Williams"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1877
+        }
+      ],
+      "label": {
+        "en": [
+          "Letter. Hannah Dickinson, Dearfield [Deerfield], Massachusetts, to Sarah Williams, Waltham, Massachusetts"
+        ]
+      },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              ""
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "1761 August 19"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "MSN/COL 8501-2"
+            ]
+          }
+        }
+      ],
+      "provider": [
+        {
+          "homepage": [
+            {
+              "format": "text/html",
+              "id": "https://rarebooks.library.nd.edu/",
+              "label": {
+                "en": [
+                  "Rare Books and Special Collections"
+                ]
+              },
+              "type": "Text"
+            }
+          ],
+          "id": "https://rarebooks.library.nd.edu/using",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+            ]
+          },
+          "logo": [
+            {
+              "format": "image/png",
+              "height": 100,
+              "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+              "type": "Image",
+              "width": 120
+            }
+          ],
+          "type": "Agent"
+        }
+      ],
+      "seeAlso": [
+        {
+          "format": "application/xml",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_f26866710ced1b93877c99c494c8d15b/mets.xml",
+          "profile": "http://www.loc.gov/METS/",
+          "type": "Dataset"
+        },
+        {
+          "format": "application/ld+json",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_f26866710ced1b93877c99c494c8d15b",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+        }
+      ],
+      "summary": {
+        "en": [
+          "A personal letter to Williams from a friend in Deerfield. Dickinson acknowledges receipt of a letter and conveys family news, including the death of her father."
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Manifest",
+      "viewingDirection": "left-to-right"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_88ae0040643d981a2e6c77e8267df16c/manifest",
+      "items": [
+        {
+          "height": 1162,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-03.a.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-03.a.150/canvas/annotation_page/MSN-COL_8501-03.a.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-03.a.150/canvas/annotation/MSN-COL_8501-03.a.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-03.a.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 03 a 150"
+            ]
+          },
+          "summary": {
+            "en": [
+              "Page 1 and Address Leaf. Lydia Williams to \"Sally Williams\" [Sarah Williams]"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1859
+        }
+      ],
+      "label": {
+        "en": [
+          "Letter. Lydia Williams, Dearfield [Deerfield], Massachusetts, to \"Sally Williams\" [Sarah Williams], Waltham, Massachusetts"
+        ]
+      },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              ""
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "1762 January 15"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "MSN/COL 8501-3"
+            ]
+          }
+        }
+      ],
+      "provider": [
+        {
+          "homepage": [
+            {
+              "format": "text/html",
+              "id": "https://rarebooks.library.nd.edu/",
+              "label": {
+                "en": [
+                  "Rare Books and Special Collections"
+                ]
+              },
+              "type": "Text"
+            }
+          ],
+          "id": "https://rarebooks.library.nd.edu/using",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+            ]
+          },
+          "logo": [
+            {
+              "format": "image/png",
+              "height": 100,
+              "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+              "type": "Image",
+              "width": 120
+            }
+          ],
+          "type": "Agent"
+        }
+      ],
+      "seeAlso": [
+        {
+          "format": "application/xml",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_88ae0040643d981a2e6c77e8267df16c/mets.xml",
+          "profile": "http://www.loc.gov/METS/",
+          "type": "Dataset"
+        },
+        {
+          "format": "application/ld+json",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_88ae0040643d981a2e6c77e8267df16c",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+        }
+      ],
+      "summary": {
+        "en": [
+          "A personal letter from Deerfield: \". . . Sally I hear you are like to break the promise you made me of liveing an old maid . . . .\""
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Manifest",
+      "viewingDirection": "left-to-right"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_424b93c46ef6d59496826365264d64f3/manifest",
+      "items": [
+        {
+          "height": 1215,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-04.a.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-04.a.150/canvas/annotation_page/MSN-COL_8501-04.a.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-04.a.150/canvas/annotation/MSN-COL_8501-04.a.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-04.a.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 04 a 150"
+            ]
+          },
+          "summary": {
+            "en": [
+              "Page 1. Joseph Parsons [Jr.] to \"Honored Sir\" [Joseph Parsons]"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 863
+        }
+      ],
+      "label": {
+        "en": [
+          "Letter. Joseph Parsons [Jr.], Brookfield, Massachusetts, to \"Honored Sir\" [Joseph Parsons], n. p."
+        ]
+      },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              ""
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "1762 April 9"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "MSN/COL 8501-4"
+            ]
+          }
+        }
+      ],
+      "provider": [
+        {
+          "homepage": [
+            {
+              "format": "text/html",
+              "id": "https://rarebooks.library.nd.edu/",
+              "label": {
+                "en": [
+                  "Rare Books and Special Collections"
+                ]
+              },
+              "type": "Text"
+            }
+          ],
+          "id": "https://rarebooks.library.nd.edu/using",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+            ]
+          },
+          "logo": [
+            {
+              "format": "image/png",
+              "height": 100,
+              "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+              "type": "Image",
+              "width": 120
+            }
+          ],
+          "type": "Agent"
+        }
+      ],
+      "seeAlso": [
+        {
+          "format": "application/xml",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_424b93c46ef6d59496826365264d64f3/mets.xml",
+          "profile": "http://www.loc.gov/METS/",
+          "type": "Dataset"
+        },
+        {
+          "format": "application/ld+json",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_424b93c46ef6d59496826365264d64f3",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+        }
+      ],
+      "summary": {
+        "en": [
+          "The author explains that he will be unable to make a scheduled payment to his father for land in Rutland, Massachusetts; inquires after the health of his family; and describes his recovery from a case of the mumps."
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Manifest",
+      "viewingDirection": "left-to-right"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_06ff7ea76e79cc7b46637f36cb132d6b/manifest",
+      "items": [
+        {
+          "height": 1213,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.a.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.a.150/canvas/annotation_page/MSN-COL_8501-05.a.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.a.150/canvas/annotation/MSN-COL_8501-05.a.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.a.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 05 a 150"
+            ]
+          },
+          "summary": {
+            "en": [
+              "Page 1 and Address Leaf. Joseph Parsons [Jr.] to Joseph Parsons"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1885
+        },
+        {
+          "height": 1189,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.b.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.b.150/canvas/annotation_page/MSN-COL_8501-05.b.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.b.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.b.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.b.150/canvas/annotation/MSN-COL_8501-05.b.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.b.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 05 b 150"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.b.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.b.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1880
+        }
+      ],
+      "label": {
+        "en": [
+          "Letter. Joseph Parsons [Jr.], Brookfield, Massachusetts, to Joseph Parsons, Bradford, Massachusetts"
+        ]
+      },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              ""
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "1763 January 7"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "MSN/COL 8501-5"
+            ]
+          }
+        }
+      ],
+      "provider": [
+        {
+          "homepage": [
+            {
+              "format": "text/html",
+              "id": "https://rarebooks.library.nd.edu/",
+              "label": {
+                "en": [
+                  "Rare Books and Special Collections"
+                ]
+              },
+              "type": "Text"
+            }
+          ],
+          "id": "https://rarebooks.library.nd.edu/using",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+            ]
+          },
+          "logo": [
+            {
+              "format": "image/png",
+              "height": 100,
+              "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+              "type": "Image",
+              "width": 120
+            }
+          ],
+          "type": "Agent"
+        }
+      ],
+      "seeAlso": [
+        {
+          "format": "application/xml",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_06ff7ea76e79cc7b46637f36cb132d6b/mets.xml",
+          "profile": "http://www.loc.gov/METS/",
+          "type": "Dataset"
+        },
+        {
+          "format": "application/ld+json",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_06ff7ea76e79cc7b46637f36cb132d6b",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+        }
+      ],
+      "summary": {
+        "en": [
+          "Parsons Jr. describes arrangements for selling a parcel of land in Rutland, Massachusetts, and more generally, of settling his debts to his father."
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Manifest",
+      "viewingDirection": "left-to-right"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_bdb4d109f8b70107210dc38675d78192/manifest",
+      "items": [
+        {
+          "height": 1207,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-06.a.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-06.a.150/canvas/annotation_page/MSN-COL_8501-06.a.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-06.a.150/canvas/annotation/MSN-COL_8501-06.a.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-06.a.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 06 a 150"
+            ]
+          },
+          "summary": {
+            "en": [
+              "Page 1 and Address Leaf. Joseph Parsons [Jr.] to 'Sally Williams' [Sarah Williams]"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1894
+        }
+      ],
+      "label": {
+        "en": [
+          "Letter. Joseph Parsons [Jr.], Brookfield, Massachusetts, to \"Sally Williams\" [Sarah Williams], Waltham, Massachusetts"
+        ]
+      },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              ""
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "1763 November 12"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "MSN/COL 8501-6"
+            ]
+          }
+        }
+      ],
+      "provider": [
+        {
+          "homepage": [
+            {
+              "format": "text/html",
+              "id": "https://rarebooks.library.nd.edu/",
+              "label": {
+                "en": [
+                  "Rare Books and Special Collections"
+                ]
+              },
+              "type": "Text"
+            }
+          ],
+          "id": "https://rarebooks.library.nd.edu/using",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+            ]
+          },
+          "logo": [
+            {
+              "format": "image/png",
+              "height": 100,
+              "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+              "type": "Image",
+              "width": 120
+            }
+          ],
+          "type": "Agent"
+        }
+      ],
+      "seeAlso": [
+        {
+          "format": "application/xml",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_bdb4d109f8b70107210dc38675d78192/mets.xml",
+          "profile": "http://www.loc.gov/METS/",
+          "type": "Dataset"
+        },
+        {
+          "format": "application/ld+json",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_bdb4d109f8b70107210dc38675d78192",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+        }
+      ],
+      "summary": {
+        "en": [
+          "Shortly before their wedding, Parsons, Jr. explains to Williams that he will send a teamster to pick up items she wishes to move to Brookfield. He also describes his father's poor health, and plans for his own arrival at Waltham."
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Manifest",
+      "viewingDirection": "left-to-right"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_2c2b4f5d7d7dd938ab1327151c2938a3/manifest",
+      "items": [
+        {
+          "height": 1201,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.a.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.a.150/canvas/annotation_page/MSN-COL_8501-07.a.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.a.150/canvas/annotation/MSN-COL_8501-07.a.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.a.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 07 a 150"
+            ]
+          },
+          "summary": {
+            "en": [
+              "Page 1 and Address Leaf. Amos Throg to Jacob Cushing"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1898
+        },
+        {
+          "height": 1207,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.b.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.b.150/canvas/annotation_page/MSN-COL_8501-07.b.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.b.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.b.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.b.150/canvas/annotation/MSN-COL_8501-07.b.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.b.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 07 b 150"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.b.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.b.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1907
+        }
+      ],
+      "label": {
+        "en": [
+          "Letter. Amos Throg, Brookfield, Massachusetts, to Jacob Cushing, Waltham, Massachusetts"
+        ]
+      },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              ""
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "1764 April 3"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "MSN/COL 8501-7"
+            ]
+          }
+        }
+      ],
+      "provider": [
+        {
+          "homepage": [
+            {
+              "format": "text/html",
+              "id": "https://rarebooks.library.nd.edu/",
+              "label": {
+                "en": [
+                  "Rare Books and Special Collections"
+                ]
+              },
+              "type": "Text"
+            }
+          ],
+          "id": "https://rarebooks.library.nd.edu/using",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+            ]
+          },
+          "logo": [
+            {
+              "format": "image/png",
+              "height": 100,
+              "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+              "type": "Image",
+              "width": 120
+            }
+          ],
+          "type": "Agent"
+        }
+      ],
+      "seeAlso": [
+        {
+          "format": "application/xml",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_2c2b4f5d7d7dd938ab1327151c2938a3/mets.xml",
+          "profile": "http://www.loc.gov/METS/",
+          "type": "Dataset"
+        },
+        {
+          "format": "application/ld+json",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_2c2b4f5d7d7dd938ab1327151c2938a3",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+        }
+      ],
+      "summary": {
+        "en": [
+          "Writing on behalf of the ill Joseph Parsons, Jr., Throg requests that Cushing send a messenger to Joseph Parsons, asking the latter to come to Brookfield without delay."
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Manifest",
+      "viewingDirection": "left-to-right"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_d1c96d18d5eac8fb587bae9f01cce23d/manifest",
+      "items": [
+        {
+          "height": 1192,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.a.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.a.150/canvas/annotation_page/MSN-COL_8501-08.a.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.a.150/canvas/annotation/MSN-COL_8501-08.a.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.a.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 08 a 150"
+            ]
+          },
+          "summary": {
+            "en": [
+              "Page 1. Jacob Cushing to \"The Revd Mr. Parsons\" [Joseph Parsons, Jr.]"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1903
+        },
+        {
+          "height": 1906,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.b.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.b.150/canvas/annotation_page/MSN-COL_8501-08.b.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.b.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.b.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.b.150/canvas/annotation/MSN-COL_8501-08.b.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.b.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 08 b 150"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.b.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.b.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1201
+        }
+      ],
+      "label": {
+        "en": [
+          "Letter. Jacob Cushing, Waltham, Massachusetts, to \"The Revd Mr. Parsons\" [Joseph Parsons, Jr.], Brookfield, Massachusetts"
+        ]
+      },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              ""
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "1764 April 18"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "MSN/COL 8501-8"
+            ]
+          }
+        }
+      ],
+      "provider": [
+        {
+          "homepage": [
+            {
+              "format": "text/html",
+              "id": "https://rarebooks.library.nd.edu/",
+              "label": {
+                "en": [
+                  "Rare Books and Special Collections"
+                ]
+              },
+              "type": "Text"
+            }
+          ],
+          "id": "https://rarebooks.library.nd.edu/using",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+            ]
+          },
+          "logo": [
+            {
+              "format": "image/png",
+              "height": 100,
+              "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+              "type": "Image",
+              "width": 120
+            }
+          ],
+          "type": "Agent"
+        }
+      ],
+      "seeAlso": [
+        {
+          "format": "application/xml",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_d1c96d18d5eac8fb587bae9f01cce23d/mets.xml",
+          "profile": "http://www.loc.gov/METS/",
+          "type": "Dataset"
+        },
+        {
+          "format": "application/ld+json",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_d1c96d18d5eac8fb587bae9f01cce23d",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+        }
+      ],
+      "summary": {
+        "en": [
+          "Cushing writes Parsons, Jr. to inform him that Parsons and his wife have just left Waltham and are traveling towards Bradford. \"Brother Leonard\"\u2014Sarah Williams' brother\u2014recommends that Parsons, Jr. use some \"mild Physick\" to alleviate his illness."
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Manifest",
+      "viewingDirection": "left-to-right"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_e0bcba7e1715709236a859bf43ccc143/manifest",
+      "items": [
+        {
+          "height": 1207,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-09.a.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-09.a.150/canvas/annotation_page/MSN-COL_8501-09.a.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-09.a.150/canvas/annotation/MSN-COL_8501-09.a.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-09.a.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 09 a 150"
+            ]
+          },
+          "summary": {
+            "en": [
+              "Pge 1 and Address Leaf. Joseph Parsons [Jr.] to Joseph Parsons"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1880
+        }
+      ],
+      "label": {
+        "en": [
+          "Letter. Joseph Parsons [Jr.], Brookfield, Massachusetts, to Joseph Parsons, Bradford, Massachusetts"
+        ]
+      },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              ""
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "1764 July 4"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "MSN/COL 8501-9"
+            ]
+          }
+        }
+      ],
+      "provider": [
+        {
+          "homepage": [
+            {
+              "format": "text/html",
+              "id": "https://rarebooks.library.nd.edu/",
+              "label": {
+                "en": [
+                  "Rare Books and Special Collections"
+                ]
+              },
+              "type": "Text"
+            }
+          ],
+          "id": "https://rarebooks.library.nd.edu/using",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+            ]
+          },
+          "logo": [
+            {
+              "format": "image/png",
+              "height": 100,
+              "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+              "type": "Image",
+              "width": 120
+            }
+          ],
+          "type": "Agent"
+        }
+      ],
+      "seeAlso": [
+        {
+          "format": "application/xml",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_e0bcba7e1715709236a859bf43ccc143/mets.xml",
+          "profile": "http://www.loc.gov/METS/",
+          "type": "Dataset"
+        },
+        {
+          "format": "application/ld+json",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_e0bcba7e1715709236a859bf43ccc143",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+        }
+      ],
+      "summary": {
+        "en": [
+          "More on Parsons, Jr.'s plans for settling his debts to his father, and news of his health following his illnes of the spring."
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Manifest",
+      "viewingDirection": "left-to-right"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_246f53532b96ed9c3718375177300b50/manifest",
+      "items": [
+        {
+          "height": 1377,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.a.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.a.150/canvas/annotation_page/MSN-COL_8501-10.a.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.a.150/canvas/annotation/MSN-COL_8501-10.a.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.a.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 10 a 150"
+            ]
+          },
+          "summary": {
+            "en": [
+              "Page 1. Sally Rogers to \"My Dear Sally\" [Sarah Williams], n. p."
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1151
+        },
+        {
+          "height": 1372,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.b.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.b.150/canvas/annotation_page/MSN-COL_8501-10.b.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.b.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.b.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.b.150/canvas/annotation/MSN-COL_8501-10.b.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.b.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 10 b 150"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.b.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.b.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1144
+        }
+      ],
+      "label": {
+        "en": [
+          "Letter. Sally Rogers, Boston, to \"My Dear Sally\" [Sarah Williams], n. p."
+        ]
+      },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              ""
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "1766 January 17"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "MSN/COL 8501-10"
+            ]
+          }
+        }
+      ],
+      "provider": [
+        {
+          "homepage": [
+            {
+              "format": "text/html",
+              "id": "https://rarebooks.library.nd.edu/",
+              "label": {
+                "en": [
+                  "Rare Books and Special Collections"
+                ]
+              },
+              "type": "Text"
+            }
+          ],
+          "id": "https://rarebooks.library.nd.edu/using",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+            ]
+          },
+          "logo": [
+            {
+              "format": "image/png",
+              "height": 100,
+              "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+              "type": "Image",
+              "width": 120
+            }
+          ],
+          "type": "Agent"
+        }
+      ],
+      "seeAlso": [
+        {
+          "format": "application/xml",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_246f53532b96ed9c3718375177300b50/mets.xml",
+          "profile": "http://www.loc.gov/METS/",
+          "type": "Dataset"
+        },
+        {
+          "format": "application/ld+json",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_246f53532b96ed9c3718375177300b50",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+        }
+      ],
+      "summary": {
+        "en": [
+          "Rogers expresses her concern at Williams' recent diagnosis of rheumatism; discusses family and mutual friends; and asks for further news."
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Manifest",
+      "viewingDirection": "left-to-right"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_ebbac27693f6e513034a52c0cc8a1acd/manifest",
+      "items": [
+        {
+          "height": 1371,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.a.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.a.150/canvas/annotation_page/MSN-COL_8501-11.a.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.a.150/canvas/annotation/MSN-COL_8501-11.a.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.a.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 11 a 150"
+            ]
+          },
+          "summary": {
+            "en": [
+              "Page 1. Anne Williams to Sarah Williams"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1104
+        },
+        {
+          "height": 1104,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.b.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.b.150/canvas/annotation_page/MSN-COL_8501-11.b.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.b.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.b.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.b.150/canvas/annotation/MSN-COL_8501-11.b.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.b.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 11 b 150"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.b.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.b.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 1371
+        }
+      ],
+      "label": {
+        "en": [
+          "Letter. Anne Williams, n. p., to Sarah Williams, Hartford, Connecticut"
+        ]
+      },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              ""
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "1777 July 28"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "MSN/COL 8501-11"
+            ]
+          }
+        }
+      ],
+      "provider": [
+        {
+          "homepage": [
+            {
+              "format": "text/html",
+              "id": "https://rarebooks.library.nd.edu/",
+              "label": {
+                "en": [
+                  "Rare Books and Special Collections"
+                ]
+              },
+              "type": "Text"
+            }
+          ],
+          "id": "https://rarebooks.library.nd.edu/using",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+            ]
+          },
+          "logo": [
+            {
+              "format": "image/png",
+              "height": 100,
+              "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+              "type": "Image",
+              "width": 120
+            }
+          ],
+          "type": "Agent"
+        }
+      ],
+      "seeAlso": [
+        {
+          "format": "application/xml",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_ebbac27693f6e513034a52c0cc8a1acd/mets.xml",
+          "profile": "http://www.loc.gov/METS/",
+          "type": "Dataset"
+        },
+        {
+          "format": "application/ld+json",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_ebbac27693f6e513034a52c0cc8a1acd",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+        }
+      ],
+      "summary": {
+        "en": [
+          "A letter from Sarah Williams' step-daughter, Anne, regarding current visits with family and friends."
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Manifest",
+      "viewingDirection": "left-to-right"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_5f8776f4d72f794e64ef9023530bc4a6/manifest",
+      "items": [
+        {
+          "height": 1215,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.a.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.a.150/canvas/annotation_page/MSN-COL_8501-12.a.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.a.150/canvas/annotation/MSN-COL_8501-12.a.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.a.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 12 a 150"
+            ]
+          },
+          "summary": {
+            "en": [
+              "Page 1. Town Meeting Minutes. Brookfield, Massachusetts"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 962
+        },
+        {
+          "height": 1225,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.b.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.b.150/canvas/annotation_page/MSN-COL_8501-12.b.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.b.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.b.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.b.150/canvas/annotation/MSN-COL_8501-12.b.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.b.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 12 b 150"
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.b.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.b.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 962
+        }
+      ],
+      "label": {
+        "en": [
+          "Town Meeting Minutes. Brookfield, Massachusetts"
+        ]
+      },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              ""
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "1757 September 9"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "MSN/COL 8501-12"
+            ]
+          }
+        }
+      ],
+      "provider": [
+        {
+          "homepage": [
+            {
+              "format": "text/html",
+              "id": "https://rarebooks.library.nd.edu/",
+              "label": {
+                "en": [
+                  "Rare Books and Special Collections"
+                ]
+              },
+              "type": "Text"
+            }
+          ],
+          "id": "https://rarebooks.library.nd.edu/using",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+            ]
+          },
+          "logo": [
+            {
+              "format": "image/png",
+              "height": 100,
+              "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+              "type": "Image",
+              "width": 120
+            }
+          ],
+          "type": "Agent"
+        }
+      ],
+      "seeAlso": [
+        {
+          "format": "application/xml",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_5f8776f4d72f794e64ef9023530bc4a6/mets.xml",
+          "profile": "http://www.loc.gov/METS/",
+          "type": "Dataset"
+        },
+        {
+          "format": "application/ld+json",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_5f8776f4d72f794e64ef9023530bc4a6",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+        }
+      ],
+      "summary": {
+        "en": [
+          "Joseph Parsons, Jr.'s copy of the minutes of the Brookfield town meeting in which he was elected minister (September 1757). The minutes outline conditions to which Parsons must agree before acceptance, and stipulate his remuneration. The document is in the hand of precinct clerk Jedediah Trosten."
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Manifest",
+      "viewingDirection": "left-to-right"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_85abb2ffdbe27f547131e9a898dd911d/manifest",
+      "items": [
+        {
+          "height": 592,
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-13.a.150/canvas",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-13.a.150/canvas/annotation_page/MSN-COL_8501-13.a.150.jpg",
+              "items": [
+                {
+                  "body": {
+                    "format": "image/jpeg",
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150/full/full/0/default.jpg",
+                    "service": [
+                      {
+                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150",
+                        "profile": "http://iiif.io/api/image/2/level2.json",
+                        "type": "ImageService2"
+                      }
+                    ],
+                    "type": "Image"
+                  },
+                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-13.a.150/canvas/annotation/MSN-COL_8501-13.a.150.jpg",
+                  "motivation": "painting",
+                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-13.a.150/canvas",
+                  "type": "Annotation"
+                }
+              ],
+              "type": "AnnotationPage"
+            }
+          ],
+          "label": {
+            "en": [
+              "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 13 a 150"
+            ]
+          },
+          "summary": {
+            "en": [
+              "Receipt, Page 1."
+            ]
+          },
+          "thumbnail": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150/full/250,/0/default.jpg",
+              "service": [
+                {
+                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150",
+                  "profile": "http://iiif.io/api/image/2/level2.json",
+                  "type": "ImageService2"
+                }
+              ],
+              "type": "Image"
+            }
+          ],
+          "type": "Canvas",
+          "viewingDirection": "left-to-right",
+          "width": 962
+        }
+      ],
+      "label": {
+        "en": [
+          "Receipt. Joseph Parsons, Bradford, Massachusetts"
+        ]
+      },
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Creator "
+            ]
+          },
+          "value": {
+            "en": [
+              ""
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Date "
+            ]
+          },
+          "value": {
+            "en": [
+              "1759 November 30"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Identifier"
+            ]
+          },
+          "value": {
+            "en": [
+              "MSN/COL 8501-13"
+            ]
+          }
+        }
+      ],
+      "provider": [
+        {
+          "homepage": [
+            {
+              "format": "text/html",
+              "id": "https://rarebooks.library.nd.edu/",
+              "label": {
+                "en": [
+                  "Rare Books and Special Collections"
+                ]
+              },
+              "type": "Text"
+            }
+          ],
+          "id": "https://rarebooks.library.nd.edu/using",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+            ]
+          },
+          "logo": [
+            {
+              "format": "image/png",
+              "height": 100,
+              "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+              "type": "Image",
+              "width": 120
+            }
+          ],
+          "type": "Agent"
+        }
+      ],
+      "seeAlso": [
+        {
+          "format": "application/xml",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_85abb2ffdbe27f547131e9a898dd911d/mets.xml",
+          "profile": "http://www.loc.gov/METS/",
+          "type": "Dataset"
+        },
+        {
+          "format": "application/ld+json",
+          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_85abb2ffdbe27f547131e9a898dd911d",
+          "profile": "https://schema.org/",
+          "type": "Dataset"
+        }
+      ],
+      "summary": {
+        "en": [
+          "A receipt written and signed by Jospeh Parsons indicating that Joseph Parsons, Jr. has paid his father \u00a340 for land purchased in Rutland, Massachusetts. This may be the land referred to in items 8501-4 and 8501-5."
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Manifest",
+      "viewingDirection": "left-to-right"
+    }
+  ],
+  "label": {
+    "en": [
+      "Parsons-Williams Family Correspondence"
+    ]
+  },
+  "metadata": [
+    {
+      "label": {
+        "en": [
+          "Creator "
+        ]
+      },
+      "value": {
+        "en": [
+          "Parsons, Joseph, 1702-1765"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Date "
+        ]
+      },
+      "value": {
+        "en": [
+          "1755-1757"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Identifier"
+        ]
+      },
+      "value": {
+        "en": [
+          "MSN/COL 8501"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Link to finding aid"
+        ]
+      },
+      "value": {
+        "en": [
+          "https://archivesspace.library.nd.edu/repositories/3/resources/1567"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Conditions Governing Access"
+        ]
+      },
+      "value": {
+        "en": [
+          "None."
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Genre/Physical Characteristic"
+        ]
+      },
+      "value": {
+        "en": [
+          "Mixed Materials"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Collection"
+        ]
+      },
+      "value": {
+        "en": [
+          "Parsons-Williams Family Correspondence"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Dimensions"
+        ]
+      },
+      "value": {
+        "en": [
+          ".5 Cubic Feet"
+        ]
+      }
+    }
+  ],
+  "provider": [
+    {
+      "homepage": [
+        {
+          "format": "text/html",
+          "id": "https://rarebooks.library.nd.edu/",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections"
+            ]
+          },
+          "type": "Text"
+        }
+      ],
+      "id": "https://rarebooks.library.nd.edu/using",
+      "label": {
+        "en": [
+          "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+        ]
+      },
+      "logo": [
+        {
+          "format": "image/png",
+          "height": 100,
+          "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+          "type": "Image",
+          "width": 120
+        }
+      ],
+      "type": "Agent"
+    }
+  ],
+  "seeAlso": [
+    {
+      "format": "application/xml",
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/mets.xml",
+      "profile": "http://www.loc.gov/METS/",
+      "type": "Dataset"
+    },
+    {
+      "format": "application/ld+json",
+      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD",
+      "profile": "https://schema.org/",
+      "type": "Dataset"
+    }
+  ],
+  "summary": {
+    "en": [
+      "The collection consists of eleven letters and two records dating from 1757 to 1777. Six of the letters are directed to Sarah Williams (four from the years before her marriage to Parsons, one from the time of the marriage, and one from after Parsons' death). Most are from female friends or relatives. There are three letters from Joseph Parsons, Jr. to his father, mostly relating to land and debts. Two additional letters (April 1764) were provoked by the ill health of Joseph Parsons, Jr. There are also two records, one relating to Parsons Jr.'s election as minister of Brookfield, and one to his financial arrangements with his father."
+    ]
+  },
+  "thumbnail": [
+    {
+      "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150/full/250,/0/default.jpg",
+      "service": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150",
+          "profile": "http://iiif.io/api/image/2/level2.json",
+          "type": "ImageService2"
+        }
+      ],
+      "type": "Image"
+    }
+  ],
+  "type": "Collection",
+  "viewingDirection": "left-to-right"
+}

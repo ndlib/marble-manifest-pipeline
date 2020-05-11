@@ -5,6 +5,7 @@ pipelineutilities/_set_pipelineutilities_path.py
 pipelineutilities/creatorField.py
 pipelineutilities/csv_collection.py
 pipelineutilities/google_utilities.py
+pipelineutilities/load_nd_json.py
 pipelineutilities/output_csv.py
 pipelineutilities/pipeline_config.py
 pipelineutilities/s3_helpers.py
