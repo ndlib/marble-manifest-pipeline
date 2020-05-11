@@ -5,7 +5,64 @@
     "http://iiif.io/api/presentation/3/context.json"
   ],
   "id": "https://presentation-iiif.library.nd.edu/pdf/manifest",
-  "items": [],
+  "items": [
+    {
+      "height": 2000,
+      "id": "https://presentation-iiif.library.nd.edu/pdf/1999_024-v0001/canvas",
+      "items": [
+        {
+          "id": "https://presentation-iiif.library.nd.edu/pdf/1999_024-v0001/canvas/annotation_page/pdf.pdf",
+          "items": [
+            {
+              "body": {
+                "format": "image/jpeg",
+                "id": "https://library.nd.edu/pdfs/pdf.pdf/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "id": "https://library.nd.edu/pdfs/pdf.pdf",
+                    "profile": "http://iiif.io/api/image/2/level2.json",
+                    "type": "ImageService2"
+                  }
+                ],
+                "type": "Image"
+              },
+              "id": "https://presentation-iiif.library.nd.edu/pdf/1999_024-v0001/canvas/annotation/pdf.pdf",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.library.nd.edu/pdf/1999_024-v0001/canvas",
+              "type": "Annotation"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "label": {
+        "en": [
+          "1999_024-v0001.jpg"
+        ]
+      },
+      "summary": {
+        "en": [
+          "1999_024-v0001.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://library.nd.edu/pdfs/pdf.pdf/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://library.nd.edu/pdfs/pdf.pdf",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Canvas",
+      "viewingDirection": "left-to-right",
+      "width": 2000
+    }
+  ],
   "label": {
     "en": [
       "Memento Mori: Death Comes to the Table"
@@ -180,7 +237,17 @@
     }
   ],
   "thumbnail": [
-    {}
+    {
+      "id": "https://library.nd.edu/pdfs/pdf.pdf/full/250,/0/default.jpg",
+      "service": [
+        {
+          "id": "https://library.nd.edu/pdfs/pdf.pdf",
+          "profile": "http://iiif.io/api/image/2/level2.json",
+          "type": "ImageService2"
+        }
+      ],
+      "type": "Image"
+    }
   ],
   "type": "Manifest",
   "viewingDirection": "left-to-right"

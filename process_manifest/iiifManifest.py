@@ -1,3 +1,4 @@
+import os
 from iiifImage import iiifImage
 
 
@@ -156,7 +157,8 @@ class iiifManifest():
         if self.type == 'Manifest':
             pdfs = []
             for item_data in self.data.children():
-                if item_data.get('mimeType') == 'application/pdf':
+                if item_data.get('mimeType') == 'application/pdf' or os.path.splitext(item_data.get('filePath', ''))[1] == '.pdf':
+                    print("here=", item_data.get('mimeType'), os.path.splitext(item_data.get('filePath', ''))[1])
                     pdfs.append({
                         "id": item_data.get("filePath"),
                         "type": "Text",
