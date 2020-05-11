@@ -305,4 +305,4 @@ class iiifManifest():
         ]
 
     def item_has_pdf(self, item_data):
-        return item_data.get('mimeType') == 'application/pdf' or os.path.splitext(item_data.get('filePath', ''))[1] == '.pdf'
+return item_data.get('mimeType') == 'application/pdf' or item_data.get('filePath', '').endswith('.pdf')
