@@ -198,7 +198,7 @@ class iiifManifest():
             self.manifest_hash['provider'] = [self._snite_proivider()]
         elif (provider == 'unda'):
             self.manifest_hash['provider'] = [self._archives_proivider()]
-        elif (provider == 'rbsc' or provider == 'rare' or provider == 'spec' or provider == 'mrare'):
+        elif (provider == 'rbsc' or provider == 'rare' or provider == 'spec' or provider == 'mrare' or provider == 'hesb'):
             self.manifest_hash['provider'] = [self._rbsc_proivider()]
         else:
             raise Exception("bad provider " + provider.lower())
