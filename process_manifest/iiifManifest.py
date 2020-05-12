@@ -1,4 +1,4 @@
-import os
+import re
 from iiifImage import iiifImage
 
 
@@ -158,8 +158,9 @@ class iiifManifest():
             pdfs = []
             for item_data in self.data.children():
                 if self.item_has_pdf(item_data):
+                    fileUrl = re.sub(r"^(s3:\/\/[a-zA-z_-]*?\/)", "https://rbsc.library.nd.edu/", item_data.get("filePath"))
                     pdfs.append({
-                        "id": item_data.get("filePath"),
+                        "id": fileUrl,
                         "type": "Text",
                         "label": {"en": ["PDF Rendering"]},
                         "format": "application/pdf"
