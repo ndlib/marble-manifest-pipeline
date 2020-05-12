@@ -26,7 +26,7 @@ class Test(unittest.TestCase):
                         <daodesc> \
                             <p>Theophilus Parsons, Journal, vol. 1</p> \
                         </daodesc> \
-                        <daoloc audience="external" href="https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/?back=true&amp;2up=false#page/1/mode/1up" title="Theophilus Parsons, Journal, vol. 1" type="locator" /> \
+                <daoloc audience="external" href="https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/?back=true&amp;2up=false#page/1/mode/1up" title="Theophilus Parsons, Journal, vol. 1" type="locator" /> \
                         <daoloc audience="external" href="https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg" title="Theophilus Parsons, Journal, vol. 1" type="locator" /> \
                     </daogrp> \
                 </did> \
@@ -42,7 +42,7 @@ class Test(unittest.TestCase):
                         <daodesc> \
                             <p>Theophilius Parsons, Journal, vol. 2</p> \
                         </daodesc> \
-                        <daoloc audience="external" href="https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-2-B/?back=true&amp;2up=false#page/1/mode/1up" title="Theophilius Parsons, Journal, vol. 2" type="locator" /> \
+                <daoloc audience="external" href="https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-2-B/?back=true&amp;2up=false#page/1/mode/1up" title="Theophilius Parsons, Journal, vol. 2" type="locator" /> \
                     <daoloc audience="external" href="https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-2-B/images/MSN-EA_8011-02-B-000a.jpg" title="Theophilius Parsons, Journal, vol. 2" type="locator" /> \
                     </daogrp> \
                 </did> \
@@ -73,9 +73,9 @@ class Test(unittest.TestCase):
     def test_3_test_extracting_items(self):
         xml_record = ET.fromstring(self.xml)
         create_json_from_xml_class = createJsonFromXml()
-        for index, xml_item in enumerate(xml_record.findall('./c01')):
+        for _index, xml_item in enumerate(xml_record.findall('./c01')):
             actual_results = create_json_from_xml_class.extract_fields(xml_item, "items", {})
-            expected_results = {'id': 'aspace_8f5be6708c2e98e57a60eddf20e36679', 'title': 'Theophilus Parsons, Journal, vol. 1', 'dateCreated': 'January 1819-December 1820', 'uniqueIdentifier': 'MSN/EA 8011-1-B', 'items': [{'level': 'file', 'thumbnail': True, 'description': 'Theophilus Parsons, Journal, vol. 1', 'filePath': 'https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg', 'parentId': 'aspace_8f5be6708c2e98e57a60eddf20e36679', 'id': 'MSN-EA_8011-01-B-000a.jpg'}], 'level': 'manifest'}
+            expected_results = {'id': 'aspace_8f5be6708c2e98e57a60eddf20e36679', 'title': 'Theophilus Parsons, Journal, vol. 1', 'dateCreated': 'January 1819-December 1820', 'uniqueIdentifier': 'MSN/EA 8011-1-B', 'items': [{'level': 'file', 'thumbnail': True, 'description': 'Theophilus Parsons, Journal, vol. 1', 'filePath': 'https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg', 'parentId': 'aspace_8f5be6708c2e98e57a60eddf20e36679', 'id': 'MSN-EA_8011-01-B-000a.jpg'}], 'level': 'manifest'}  # noqa: E501
             self.assertTrue(expected_results == actual_results)
             break
 
