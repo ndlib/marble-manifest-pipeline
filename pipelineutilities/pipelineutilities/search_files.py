@@ -2,6 +2,7 @@ import boto3
 import re
 import os
 import json
+from datetime import datetime, timedelta, timezone
 from hashlib import md5
 from urllib.parse import urlparse
 
@@ -178,22 +179,54 @@ def crawl_available_files(config):
                             "files": [],
                         }
 
-                    obj['FileId'] = id
-                    obj['Label'] = make_label(url, id)
-                    # set the overall last modified to the most recent
                     if not order_field[id]["LastModified"] or obj['LastModified'] > order_field[id]["LastModified"]:
                         order_field[id]["LastModified"] = obj['LastModified']
 
-                    # Athena timestamp 'YYYY-MM-DD HH:MM:SS' 24 hour time no timezone
-                    # here i am converting to utc because the timezone is lost,
-                    obj['LastModified'] = obj['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
-                    obj['Order'] = len(order_field[id]['files'])
-                    obj['Source'] = 'RBSC'
-                    obj['Path'] = "s3://" + os.path.join(bucket, obj['Key'])
+                    augement_file_record(obj, id, url, config)
 
                     order_field[id]['files'].append(obj)
 
     return order_field
+
+
+def list_updated_files(config: dict, minutes_to_test: int):
+    bucket = config['rbsc-image-bucket']
+    print("crawling image files in this bucket: ", bucket)
+    time_threshold_for_processing = determine_time_threshold_for_processing(minutes_to_test)
+    for directory in folders_to_crawl:
+        files = get_matching_s3_objects(bucket, directory)
+        for file in files:
+            if is_tracked_file(file.get('Key')):
+                url = bucket_to_url[bucket] + file.get('Key')
+                id = id_from_url(url)
+
+                if id and file['LastModified'] >= time_threshold_for_processing:
+                    augement_file_record(file, id, url, config)
+                    yield file
+
+
+def augement_file_record(obj, id, url, config):
+    bucket = config['rbsc-image-bucket']
+
+    obj['FileId'] = id
+    obj['Label'] = make_label(url, id)
+    # Athena timestamp 'YYYY-MM-DD HH:MM:SS' 24 hour time no timezone
+    # here i am converting to utc because the timezone is lost,
+    obj['LastModified'] = obj['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
+    obj['Source'] = 'RBSC'
+    obj['Path'] = "s3://" + os.path.join(bucket, obj['Key'])
+    obj['SourceUri'] = url
+    obj["iiifImageUri"] = os.path.join(config['image-server-base-url'], obj.get('Key'))
+    obj["iiifImageFilePath"] = "s3://" + os.path.join(config['image-server-bucket'], obj.get('Key'))
+
+
+def determine_time_threshold_for_processing(time_in_min):
+    """ Creates the datetime object that is used to test all the files against """
+
+    time_threshold_for_processing = datetime.utcnow() - timedelta(minutes=time_in_min)
+    # since this is utc already but there is no timezone add it in so
+    # the data can be compared to the timze zone aware date in file
+    return time_threshold_for_processing.replace(tzinfo=timezone.utc)
 
 
 def is_tracked_file(file):
@@ -219,10 +252,9 @@ def test():
     config = setup_pipeline_config(event)
     # change to the prod bucket
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
-    data = crawl_available_files(config)
-    id = id_from_url("https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_001016383/BOO_001016383.pdf")
-    print(id)
-    print(data[id])
-    # print(id)
+    data = list_updated_files(config, 1000000)
+
+    for obj in data:
+        print(obj)
 
     return
