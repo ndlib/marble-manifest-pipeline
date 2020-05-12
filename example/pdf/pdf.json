@@ -89,7 +89,7 @@
       "description": "1999_024-v0001.jpg",
       "thumbnail": true,
       "md5Checksum": "34a26ae84db719648e66a32cb2f8af38",
-      "filePath": "https://library.nd.edu/pdfs/pdf.pdf",
+      "filePath": "s3://libnd_rbsc/pdfs/pdf.pdf",
       "fileId": "10JWnCbb62Omt9PXHDdvq948rprafNi3J",
       "modifiedDate": "2019-07-02T13:17:50.303Z",
       "mimeType": "application/pdf",

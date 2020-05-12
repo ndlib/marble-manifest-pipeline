@@ -26,17 +26,15 @@ class ImageRunner():
             id_results = {}
             for file in load_csv_data(id, self.csv_config).files():
                 if not self.processor:
-                    processor_info = self._get_processor_info(file.get('filePath'))
-                    src = processor_info.get('type')
-                    cred = processor_info.get('cred', None)
-                    self.processor = ProcessorFactory().get_processor(src, cred=cred)
+                    self._set_processor(file)
+
                 img_config = {
                     'collection_id': id,
                     'bucket': self.bucket,
                     'img_write_base': self.img_write_base
                 }
                 self.processor.set_data(file, img_config)
-                id_results.update(self.processor.process())
+                # id_results.update(self.processor.process())
             s3_file = f"{self.img_write_base}/{id}/{self.img_file}"
             upload_json(self.bucket, s3_file, id_results)
 
@@ -47,6 +45,12 @@ class ImageRunner():
         elif filepath.startswith('http://bendo'):
             img_type = {'type': 'bendo'}
         return img_type
+
+    def _set_processor(self, file):
+        processor_info = self._get_processor_info(file.get('filePath'))
+        src = processor_info.get('type')
+        cred = processor_info.get('cred', None)
+        self.processor = ProcessorFactory().get_processor(src, cred=cred)
 
 
 def _get_credentials(ssm_key: str) -> dict:
