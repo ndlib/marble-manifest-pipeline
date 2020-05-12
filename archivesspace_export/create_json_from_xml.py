@@ -1,10 +1,10 @@
 # create_json_from_xml.py
 import json
+import os
 from perform_additional_processing import perform_additional_processing
 from additional_functions import return_None_if_needed, \
     get_seed_nodes_json, get_value_from_labels, remove_nodes_from_dictionary, \
-    exclude_if_pattern_matches, strip_unwanted_whitespace, \
-    get_json_value_as_string
+    exclude_if_pattern_matches, strip_unwanted_whitespace
 from pipelineutilities.validate_json import schema_api_version, validate_nd_json
 from xml.etree import ElementTree
 
@@ -16,7 +16,8 @@ class createJsonFromXml():
         or an empty dictionary. """
 
     def __init__(self):
-        self.json_control = self._read_xml_to_json_translation_control_file("./xml_to_json_translation_control_file.json")  # noqa: E501
+        local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
+        self.json_control = self._read_xml_to_json_translation_control_file(local_folder + "xml_to_json_translation_control_file.json")  # noqa: E501
         self.schema_api_version = schema_api_version()
 
     def get_nd_json_from_xml(self, xml_root: ElementTree) -> dict:
@@ -36,8 +37,8 @@ class createJsonFromXml():
         json_control_root = self.json_control[json_section]
         for field in json_control_root['FieldsToExtract']:
             value = self._process_extract_fields(field, json_output, xml_root)
-            optional = get_json_value_as_string(field, 'optional')
-            collapse_tree = get_json_value_as_string(field, 'collapseTree')
+            optional = field.get('optional', False)
+            collapse_tree = field.get('collapseTree', False)
             if value is not None:
                 if collapse_tree and len(value) > 0:
                     json_output.update(value[0])
@@ -51,7 +52,7 @@ class createJsonFromXml():
         """ This contains more of the detailed logic for the extract_fields function. """
         value = None
         if 'constant' in field:
-            value = get_json_value_as_string(field, 'constant')
+            value = field.get('constant', '')
         elif 'fromLabels' in field:
             value = get_value_from_labels(json_output, field)
         elif 'externalProcess' in field:
@@ -61,10 +62,10 @@ class createJsonFromXml():
         else:
             seed_json = {}
             if 'seedNodes' in field:
-                seed_nodes_control = get_json_value_as_string(field, 'seedNodes')
+                seed_nodes_control = field.get('seedNodes', '')
                 seed_json = get_seed_nodes_json(json_output, seed_nodes_control)
             value = self._get_node(xml_root, field, seed_json)
-            if get_json_value_as_string(field, 'format') == 'text' and value == []:
+            if field.get('format', '') == 'text' and value == []:
                 value = ""
         return value
 
@@ -72,13 +73,13 @@ class createJsonFromXml():
         """ This retrieves an individual value (or array) from XML
             , and saves to a JSON node or array.  If "otherNodes" are sepcified,
             call extract_fields to process those other nodes. """
-        xpath = get_json_value_as_string(field, 'xpath')
-        return_attribute_name = get_json_value_as_string(field, 'returnAttributeName')
-        process_other_nodes = get_json_value_as_string(field, 'otherNodes')
-        optional = get_json_value_as_string(field, 'optional')
-        remove_duplicates = get_json_value_as_string(field, 'removeDuplicates')
-        exclude_pattern = get_json_value_as_string(field, 'excludePattern')
-        format = get_json_value_as_string(field, 'format')
+        xpath = field.get('xpath', '')
+        return_attribute_name = field.get('returnAttributeName', '')
+        process_other_nodes = field.get('otherNodes', '')
+        optional = field.get('optional', False)
+        remove_duplicates = field.get('removeDuplicates', False)
+        exclude_pattern = field.get('excludePattern', '')
+        format = field.get('format', 'array')
         node = []
         for xml_item in xml.findall(xpath):
             value_found = ""
@@ -87,7 +88,7 @@ class createJsonFromXml():
                 value_found = return_None_if_needed(value_found, field)
             else:
                 value_found = get_xml_node_value(xml_item, return_attribute_name, exclude_pattern)
-                if remove_duplicates and value_found is not None:
+                if remove_duplicates and value_found:
                     if value_found in node:
                         value_found = None
             if not(optional and value_found is None):
@@ -102,7 +103,6 @@ class createJsonFromXml():
         try:
             with open(filename, 'r') as input_source:
                 data = json.load(input_source)
-            input_source.close()
         except IOError:
             print('Cannot open ' + filename)
             raise
@@ -112,7 +112,6 @@ class createJsonFromXml():
 def get_xml_node_value(item: ElementTree, return_attribute_name: str, exclude_pattern: list) -> str:
     """ This returns the xml text or attribute as specified
         and returns an empty string if not found."""
-    value_found = ""
     if return_attribute_name in item.attrib:
         value_found = item.attrib[return_attribute_name]
     else:

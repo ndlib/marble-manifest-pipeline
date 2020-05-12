@@ -1,9 +1,9 @@
 # test_add_image_records_as_child_items.py
 """ test add_image_records_as_child_items """
 import unittest
-from additional_functions import get_seed_nodes_json, get_json_value_as_string, return_None_if_needed, \
-    get_value_from_labels, remove_nodes_from_dictionary, exclude_if_pattern_matches, strip_unwanted_whitespace, \
-    file_name_from_filePath
+import os
+from additional_functions import get_seed_nodes_json, return_None_if_needed, \
+    get_value_from_labels, remove_nodes_from_dictionary, exclude_if_pattern_matches, strip_unwanted_whitespace
 
 
 class Test(unittest.TestCase):
@@ -35,18 +35,6 @@ class Test(unittest.TestCase):
                 "size": "5651708"
             }
         }
-
-    def test_1_get_json_value_as_string(self):
-        """ test get_json_value_as_string """
-        json_node = {
-            'label': 'items', 'otherNodes': 'items', 'xpath': './c04', 'optional': True,
-            'seedNodes': [
-                {'collectionId': 'collectionId'}, {'parentId': 'id'}, {'sourceSystem': 'sourceSystem'}, {'repository': 'repository'}, {'apiVersion': 'apiVersion'}, {'fileCreatedDate': 'fileCreatedDate'}
-            ]
-        }
-        seed_nodes_control = get_json_value_as_string(json_node, 'seedNodes')
-        expected_value = [{'collectionId': 'collectionId'}, {'parentId': 'id'}, {'sourceSystem': 'sourceSystem'}, {'repository': 'repository'}, {'apiVersion': 'apiVersion'}, {'fileCreatedDate': 'fileCreatedDate'}]
-        self.assertTrue(seed_nodes_control == expected_value)
 
     def test_2_get_seed_nodes_json(self):
         """ test_1 _get_seed_nodes_json """
@@ -124,7 +112,7 @@ class Test(unittest.TestCase):
     def test_8_file_name_from_filePath(self):
         """ test_8 file_name_from_filePath """
         value_passed = "some/long/path/plus/filename.pdf"
-        returned_value = file_name_from_filePath(value_passed)
+        returned_value = os.path.basename(value_passed)
         expected_value = "filename.pdf"
         self.assertTrue(returned_value == expected_value)
 

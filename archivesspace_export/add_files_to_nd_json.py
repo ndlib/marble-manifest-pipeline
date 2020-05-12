@@ -2,7 +2,6 @@ import json
 import os
 from datetime import datetime
 from pipelineutilities.search_files import id_from_url, crawl_available_files  # noqa: #402
-from additional_functions import file_name_from_filePath
 
 
 class AddFilesToNdJson():
@@ -53,7 +52,7 @@ class AddFilesToNdJson():
                     each_file_dict['apiVersion'] = api_version
                     each_file_dict['fileCreatedDate'] = file_created_date
                     each_file_dict['parentId'] = parent_id
-                    each_file_dict['id'] = file_name_from_filePath(obj['Key'])
+                    each_file_dict['id'] = os.path.basename(obj['Key'])
                     each_file_dict['thumbnail'] = (each_file_dict['id'] == item_id)
                     each_file_dict['description'] = ""
                     if each_file_dict['id'] == item_id:

@@ -28,7 +28,6 @@ class Test(unittest.TestCase):
         #     json.dump(nd_json_with_files, f, indent=2)
         with open(local_folder + 'test/MSNEA8011_EAD_with_files.json', 'r') as input_source:
             expected_json = json.load(input_source)
-        input_source.close()
         self.assertTrue(expected_json == nd_json_with_files)
 
 

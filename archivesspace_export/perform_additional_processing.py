@@ -1,11 +1,12 @@
-from additional_functions import get_json_value_as_string, get_seed_nodes_json, file_name_from_filePath
+import os
+from additional_functions import get_seed_nodes_json
 from datetime import date
 
 
 def perform_additional_processing(json_node: dict, field: dict, schema_api_version: int) -> dict:  # noqa: C901
     """ This lets us call other named functions to do additional processing. """
     return_value = ""
-    external_process_name = get_json_value_as_string(field, 'externalProcess')
+    external_process_name = field.get('externalProcess', '')
     parameters_json = {}
     if 'passLabels' in field:
         parameters_json = get_seed_nodes_json(json_node, field['passLabels'])
@@ -22,7 +23,7 @@ def perform_additional_processing(json_node: dict, field: dict, schema_api_versi
             return_value = define_manifest_level(parameters_json['children'])
     elif external_process_name == 'file_name_from_filePath':
         if 'filename' in parameters_json:
-            return_value = file_name_from_filePath(parameters_json['filename'])
+            return_value = os.path.basename(parameters_json['filename'])
     elif external_process_name == "format_creators":
         if 'creator' in parameters_json:
             return_value = format_creators(parameters_json["creator"])

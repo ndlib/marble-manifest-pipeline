@@ -36,8 +36,10 @@ class HarvestOaiEads():
         try:
             xml_string = requests.get(oai_url, timeout=60).text
             xml_string = self._strip_namespaces(xml_string)
-        except ConnectionError:
-            print("ConnectionError calling " + oai_url)  # eventually want to write to sentry and continue
+        except ConnectionError as e:
+            capture_exception(e)
+            xml_string = ""
+            print("ConnectionError calling " + oai_url)
         return xml_string
 
     def _strip_namespaces(self, xml_string: str) -> str:
@@ -63,6 +65,5 @@ class HarvestOaiEads():
 
     def _process_record(self, source_system_url: str, xml_record: ElementTree) -> dict:
         """ Call a process to create ND.JSON from complex ArchivesSpace EAD xml """
-        nd_json = {}
         nd_json = self.jsonFromXMLClass.get_nd_json_from_xml(xml_record)
         return nd_json

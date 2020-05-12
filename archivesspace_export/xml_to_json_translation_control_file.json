@@ -310,7 +310,7 @@
 			{
 				"label": "term",
 				"xpath": ".",
-				"optional": true,
+				"optional": false,
 				"format": "text"
 			},
 			{

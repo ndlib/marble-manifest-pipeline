@@ -25,24 +25,23 @@ def run(event: dict, context: dict):
     _init_sentry()
     config = setup_pipeline_config(event)
     # config['rbsc-image-bucket'] = "libnd-smb-rbsc"
-    if config:
-        start_time = time.time()
-        time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
-        print("Will break after ", time_to_break)
-        harvest_oai_eads_class = HarvestOaiEads(config)
-        add_files_to_nd_json_class = AddFilesToNdJson(config)
-        ids = event.get("ids", [])
-        while len(ids) > 0 and datetime.now() < time_to_break:
-            nd_json = harvest_oai_eads_class.get_nd_json_from_archives_space_url(ids[0])
-            if nd_json:
-                nd_json = add_files_to_nd_json_class.add_files(nd_json)
-                write_s3_json(config['process-bucket'], os.path.join("json/", nd_json["id"] + '.json'), nd_json)
-                print("ArchivesSpace ead_id = ", nd_json.get("id", ""), " source_system_url = ", ids[0], int(time.time() - start_time), 'seconds.')
-                if False:  # in case we need to create CSVs
-                    _export_json_as_csv(config, nd_json)
-            del ids[0]
-        event['eadHarvestComplete'] = (len(ids) == 0)
-        event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-csv-basepath'])
+    start_time = time.time()
+    time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
+    print("Will break after ", time_to_break)
+    harvest_oai_eads_class = HarvestOaiEads(config)
+    add_files_to_nd_json_class = AddFilesToNdJson(config)
+    ids = event.get("ids", [])
+    while len(ids) > 0 and datetime.now() < time_to_break:
+        nd_json = harvest_oai_eads_class.get_nd_json_from_archives_space_url(ids[0])
+        if nd_json:
+            nd_json = add_files_to_nd_json_class.add_files(nd_json)
+            write_s3_json(config['process-bucket'], os.path.join("json/", nd_json["id"] + '.json'), nd_json)
+            print("ArchivesSpace ead_id = ", nd_json.get("id", ""), " source_system_url = ", ids[0], int(time.time() - start_time), 'seconds.')
+            # in case we need to create CSVs
+            # _export_json_as_csv(config, nd_json)
+        del ids[0]
+    event['eadHarvestComplete'] = (len(ids) == 0)
+    event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-csv-basepath'])
     return event
 
 
@@ -59,27 +58,7 @@ def _supplement_event(event: dict) -> dict:
         event['eadHarvestComplete'] = False
     if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
-    return event
-
-
-def _init_sentry():
-    if 'SENTRY_DSN' in os.environ:
-        sentry_sdk.init(dsn=os.environ['SENTRY_DSN'], integrations=[AwsLambdaIntegration()])
-
-
-# setup:
-# export SSM_KEY_BASE=/all/new-csv
-# aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
-# python -c 'from handler import *; test()'
-def test(identifier=""):
-    """ test exection """
-    filename = 'event.json'
-    if os.path.exists(filename):
-        with io.open(filename, 'r', encoding='utf-8') as json_file:
-            event = json.load(json_file)
-    else:
-        event = {}
-        event["local"] = False
+    if 'ids' not in event:  # seed with all archvesspace records we have been exporting prior to 5/12/2020
         event["ids"] = [
             "https://archivesspace.library.nd.edu/repositories/3/resources/1644",
             "https://archivesspace.library.nd.edu/repositories/3/resources/1390",
@@ -141,6 +120,28 @@ def test(identifier=""):
             "https://archivesspace.library.nd.edu/repositories/3/resources/2000",
             "https://archivesspace.library.nd.edu/repositories/3/resources/2038"
         ]
+
+    return event
+
+
+def _init_sentry():
+    if 'SENTRY_DSN' in os.environ:
+        sentry_sdk.init(dsn=os.environ['SENTRY_DSN'], integrations=[AwsLambdaIntegration()])
+
+
+# setup:
+# export SSM_KEY_BASE=/all/new-csv
+# aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
+# python -c 'from handler import *; test()'
+def test(identifier=""):
+    """ test exection """
+    filename = 'event.json'
+    if os.path.exists(filename):
+        with io.open(filename, 'r', encoding='utf-8') as json_file:
+            event = json.load(json_file)
+    else:
+        event = {}
+        event["local"] = False
         # event["ids"] = [
         #     "https://archivesspace.library.nd.edu/repositories/3/resources/1631",
         #     "https://archivesspace.library.nd.edu/repositories/3/resources/1644"
