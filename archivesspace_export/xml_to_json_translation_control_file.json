@@ -1,0 +1,324 @@
+{
+	"root" : {
+		"FieldsToExtract": [
+			{ "label": "apiVersion",
+				"externalProcess": "schema_api_version",
+				"format": "text"
+			},
+			{ "label": "fileCreatedDate",
+				"externalProcess": "file_created_date",
+				"format": "text"
+			},
+			{ "label": "sourceSystem",
+				"constant": "ArchivesSpace",
+				"format": "text"
+			},
+			{ "label": "sequence",
+				"constant": 0,
+				"format": "text"
+			},
+			{
+				"label": "eadResource",
+				"xpath": "./header/identifier",
+				"format": "text"
+			},
+			{
+				"label": "eadId",
+				"xpath": "./metadata/ead/eadheader/eadid",
+				"format": "text"
+			},
+			{
+				"label": "collectionInformation",
+				"xpath": "./metadata/ead/eadheader/filedesc/titlestmt/titleproper",
+				"format": "text"
+			},
+			{
+				"label": "",
+				"otherNodes": "did",
+				"xpath": "./metadata/ead/archdesc/did",
+				"optional": true,
+				"collapseTree": true
+			},
+			{
+				"label": "repository",
+				"externalProcess": "get_repository_name_from_ead_resource",
+				"passLabels": [{"resource": "eadResource"}]
+			},
+			{
+				"label": "subjects",
+				"otherNodes": "subjects",
+				"xpath": "./metadata/ead/archdesc/controlaccess/subject"
+			},
+			{ "label": "copyrightStatus",
+				"constant": "",
+				"format": "text"
+			},
+			{
+				"label": "copyrightStatement",
+				"xpath": "./metadata/ead/archdesc/userestrict/p",
+				"format": "text"
+			},
+			{
+				"label": "linkToSource",
+				"xpath": "./metadata/ead/eadheader/eadid",
+				"returnAttributeName": "url",
+				"format": "text"
+			},
+			{
+				"label": "access",
+				"xpath": "./metadata/ead/archdesc/accessrestrict/p",
+				"format": "text"
+			},
+			{
+				"label": "format",
+				"constant": "Mixed Materials",
+				"format": "text"
+			},
+			{
+				"label": "dedication",
+				"xpath": "./metadata/ead/archdesc/acqinfo/p",
+				"format": "text"
+			},
+			{
+				"label": "description",
+				"xpath": "./metadata/ead/archdesc/scopecontent/p",
+				"format": "text"
+			},
+			{
+				"label": "modifiedDate",
+				"xpath": "./header/datestamp",
+				"format": "text"
+			},
+			{ "label": "id",
+				"fromLabels": ["eadId", "uniqueIdentifier"],
+				"format": "text"
+			},
+			{	"label": "collectionId",
+				"fromLabels": ["id"],
+				"format": "text"
+			},
+			{ "label": "parentId",
+				"constant": "root",
+				"format": "text"
+			},
+			{
+				"label": "items",
+				"otherNodes": "items",
+				"xpath": "./metadata/ead/archdesc/dsc/c01",
+				"optional": true,
+				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
+					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}]
+			},
+			{
+				"label": "level",
+				"note": "This must run after items are added above, since children define level.",
+				"externalProcess": "define_level",
+				"passLabels": [{"items": "items"}]
+			},
+			{
+				"removeNodes": ["eadResource", "eadId"]
+			}
+		]
+	},
+	"items": {
+		"FieldsToExtract": [
+			{
+				"label": "id",
+				"xpath": ".",
+				"optional": true,
+				"returnAttributeName": "id",
+				"format": "text"
+			},
+			{
+				"label": "description",
+				"xpath": "./scopecontent/p",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "child",
+				"otherNodes": "childDetails",
+				"xpath": "./did",
+				"optional": true,
+				"collapseTree": true,
+				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
+					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}]
+			},
+			{
+				"removeNodes": ["passedParentId"]
+			},
+			{
+				"label": "items",
+				"otherNodes": "items",
+				"xpath": "./c02",
+				"optional": true,
+				"collapseTree": false,
+				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
+					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}]
+			},
+			{
+				"label": "items",
+				"otherNodes": "items",
+				"xpath": "./c03",
+				"optional": true,
+				"collapseTree": false,
+				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
+					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}]
+			},
+			{
+				"label": "items",
+				"otherNodes": "items",
+				"xpath": "./c04",
+				"optional": true,
+				"collapseTree": false,
+				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
+					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}]
+			},
+			{
+				"label": "level",
+				"externalProcess": "define_level",
+				"passLabels": [{"items": "items"}]
+			}
+		]
+	},
+	"childDetails": {
+		"FieldsToExtract": [
+			{
+				"label": "child",
+				"otherNodes": "did",
+				"xpath": ".",
+				"optional": true,
+				"collapseTree": true,
+				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "passedParentId"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
+					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}]
+			},
+			{
+				"removeNodes": ["passedParentId"]
+			}
+		]
+	},
+	"did": {
+		"FieldsToExtract": [
+			{
+				"label": "title",
+				"xpath": "./unittitle",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "creators",
+				"externalProcess": "format_creators",
+				"passLabels": [{"creator": "creator"}],
+				"optional": true
+			},
+			{
+				"label": "dateCreated",
+				"xpath": "./unitdate[@type='inclusive']",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "uniqueIdentifier",
+				"xpath": "./unitid",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "dimensions",
+				"xpath": "./physdesc/extent",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "linkToSource",
+				"xpath": "./unitid/extref",
+				"returnAttributeName": "href",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "languages",
+				"xpath": "./langmaterial",
+				"optional": true
+			},
+			{
+				"label": "languages",
+				"xpath": "./langmaterial/language",
+				"optional": true
+			},
+			{
+				"label": "items",
+				"otherNodes": "daogrp",
+				"xpath": "./daogrp",
+				"optional": true,
+				"collapseTree": false,
+				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "passedParentId"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
+					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}, {"passedParentId": "id"}],
+				"checkForInconsistencies": ["fileId"]
+			}
+		]
+	},
+	"daogrp": {
+		"FieldsToExtract": [
+			{ "label": "level",
+				"constant": "file",
+				"format": "text"
+			},
+			{
+				"label": "thumbnail",
+				"constant": true,
+				"format": "text"
+			},
+			{
+				"label": "description",
+				"xpath": "./daodesc/p",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "filePath",
+				"xpath": "./daoloc",
+				"optional": true,
+				"returnAttributeName": "href",
+				"removeDuplicates": true,
+				"excludePattern": [".shtml"],
+				"format": "text"
+			},
+			{ "label": "parentId",
+				"fromLabels": ["passedParentId"],
+				"format": "text"
+			},
+			{
+				"removeNodes": ["passedParentId"]
+			},
+			{
+				"label": "id",
+				"externalProcess": "file_name_from_filePath",
+				"passLabels": [{"filename": "filePath"}]
+			}
+		]
+	},
+	"subjects": {
+		"FieldsToExtract": [
+			{
+				"label": "authority",
+				"xpath": ".",
+				"returnAttributeName": "source",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "term",
+				"xpath": ".",
+				"optional": false,
+				"format": "text"
+			},
+			{
+				"label": "uri",
+				"constant": "",
+				"optional": false,
+				"format": "text"
+			}
+		]
+	}
+}

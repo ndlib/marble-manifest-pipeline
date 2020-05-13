@@ -32,3 +32,7 @@ popd
 pushd curate_export
 ./local_install.sh
 popd
+
+pushd archivesspace_export
+./local_install.sh
+popd

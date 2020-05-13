@@ -24,6 +24,12 @@ def schema_api_version():
     return 1
 
 
+def validate_nd_json(json_to_test: dict) -> bool:
+    """ validate fixed json against nd_json_schema """
+    valid_json_flag = validate_json(json_to_test, get_nd_json_schema(), True)
+    return valid_json_flag
+
+
 nd_json_schema = {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "description": "Schema for validating ND.json",
@@ -77,7 +83,7 @@ nd_json_schema = {
         "filePath": {"type": "string"},
         "sequence": {"type": ["number", "string"]},
         "collectionInformation": {"type": "string"},
-        "fileId": {"type": "string"},
+        "fileId": {"anyOf": [{"type": "string"}, {"type": "boolean"}]},
         "mimeType": {"type": "string"},
         "workType": {"type": "string"},
         "medium": {"type": "string"},
