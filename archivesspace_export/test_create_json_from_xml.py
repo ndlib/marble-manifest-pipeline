@@ -54,11 +54,11 @@ class Test(unittest.TestCase):
         xml_record = ET.parse(local_folder + 'test/MSNEA8011_EAD.xml').getroot()
         create_json_from_xml_class = createJsonFromXml()
         nd_json = create_json_from_xml_class.get_nd_json_from_xml(xml_record)
+        # with open(local_folder + 'test/MSNEA8011_EAD.json', 'w') as output_source:
+        #     json.dump(nd_json, output_source, indent=2)
         with open(local_folder + 'test/MSNEA8011_EAD.json', 'r') as input_source:
             expected_json = json.load(input_source)
         nd_json = self.fix_file_created_date(nd_json, expected_json["fileCreatedDate"])
-        # with open(local_folder + 'test/actual_MSNEA8011_EAD.json', 'w') as output_source:
-        #     json.dump(nd_json, output_source, indent=2)
         self.assertTrue(expected_json == nd_json)
 
     def test_2_test_extracting_id(self):

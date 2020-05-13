@@ -206,10 +206,20 @@
 				"format": "text"
 			},
 			{
+				"label": "creator",
+				"xpath": "./origination[@label='Creator']/persname",
+				"optional": true,
+				"format": "text"
+			},
+			{
 				"label": "creators",
 				"externalProcess": "format_creators",
 				"passLabels": [{"creator": "creator"}],
-				"optional": true
+				"optional": true,
+				"forat": "array"
+			},
+			{
+				"removeNodes": ["creator"]
 			},
 			{
 				"label": "dateCreated",

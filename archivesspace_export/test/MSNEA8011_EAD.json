@@ -1,10 +1,18 @@
 {
   "apiVersion": 1,
-  "fileCreatedDate": "2020-05-08",
+  "fileCreatedDate": "2020-05-13",
   "sourceSystem": "ArchivesSpace",
   "sequence": 0,
   "collectionInformation": "Theophilus Parsons Journal",
   "title": "Theophilus Parsons Journal",
+  "creators": [
+    {
+      "attribution": "",
+      "role": "Primary",
+      "fullName": "Parsons, Theophilus, 1797-1882",
+      "display": "Parsons, Theophilus, 1797-1882"
+    }
+  ],
   "dateCreated": "1819-1823",
   "uniqueIdentifier": "MSN/EA 8011",
   "dimensions": ".25 Cubic Feet",
@@ -37,7 +45,7 @@
       "sourceSystem": "ArchivesSpace",
       "repository": "RARE",
       "apiVersion": 1,
-      "fileCreatedDate": "2020-05-08",
+      "fileCreatedDate": "2020-05-13",
       "id": "aspace_8f5be6708c2e98e57a60eddf20e36679",
       "title": "Theophilus Parsons, Journal, vol. 1",
       "dateCreated": "January 1819-December 1820",
@@ -48,7 +56,7 @@
           "sourceSystem": "ArchivesSpace",
           "repository": "RARE",
           "apiVersion": 1,
-          "fileCreatedDate": "2020-05-08",
+          "fileCreatedDate": "2020-05-13",
           "level": "file",
           "thumbnail": true,
           "description": "Theophilus Parsons, Journal, vol. 1",
@@ -65,7 +73,7 @@
       "sourceSystem": "ArchivesSpace",
       "repository": "RARE",
       "apiVersion": 1,
-      "fileCreatedDate": "2020-05-08",
+      "fileCreatedDate": "2020-05-13",
       "id": "aspace_5cc53e5bc083823390135923b389d00c",
       "title": "Theophilus Parsons, Journal, vol. 2",
       "dateCreated": "January 1821-March 1823",
@@ -76,7 +84,7 @@
           "sourceSystem": "ArchivesSpace",
           "repository": "RARE",
           "apiVersion": 1,
-          "fileCreatedDate": "2020-05-08",
+          "fileCreatedDate": "2020-05-13",
           "level": "file",
           "thumbnail": true,
           "description": "Theophilius Parsons, Journal, vol. 2",
@@ -88,5 +96,5 @@
       "level": "manifest"
     }
   ],
-  "level": "manifest"
+  "level": "collection"
 }

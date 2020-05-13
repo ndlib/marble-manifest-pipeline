@@ -19,8 +19,8 @@ def perform_additional_processing(json_node: dict, field: dict, schema_api_versi
             return_value = get_repository_name_from_ead_resource(parameters_json['resource'])
     elif external_process_name == 'define_level':
         return_value = 'manifest'
-        if 'children' in parameters_json:
-            return_value = define_manifest_level(parameters_json['children'])
+        if 'items' in parameters_json:
+            return_value = define_manifest_level(parameters_json['items'])
     elif external_process_name == 'file_name_from_filePath':
         if 'filename' in parameters_json:
             return_value = os.path.basename(parameters_json['filename'])
@@ -53,12 +53,13 @@ def define_manifest_level(items: list) -> str:
 
 def format_creators(value_found: str) -> dict:
     """ Return formatted creators node."""
+    if not value_found:
+        value_found = "unknown"
     results = []
-    if value_found:
-        node = {}
-        node["attribution"] = ""
-        node["role"] = "Primary"
-        node["fullName"] = value_found
-        node["display"] = value_found
-        results.append(node)
+    node = {}
+    node["attribution"] = ""
+    node["role"] = "Primary"
+    node["fullName"] = value_found
+    node["display"] = value_found
+    results.append(node)
     return results
