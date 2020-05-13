@@ -34,7 +34,7 @@ class ImageRunner():
                     'img_write_base': self.img_write_base
                 }
                 self.processor.set_data(file, img_config)
-                # id_results.update(self.processor.process())
+                id_results.update(self.processor.process())
             s3_file = f"{self.img_write_base}/{id}/{self.img_file}"
             upload_json(self.bucket, s3_file, id_results)
 
