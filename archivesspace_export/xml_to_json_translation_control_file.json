@@ -216,7 +216,7 @@
 				"externalProcess": "format_creators",
 				"passLabels": [{"creator": "creator"}],
 				"optional": true,
-				"forat": "array"
+				"format": "array"
 			},
 			{
 				"removeNodes": ["creator"]
