@@ -51,6 +51,7 @@ class AddFilesToNdJson():
                     each_file_dict['repository'] = repository
                     each_file_dict['apiVersion'] = api_version
                     each_file_dict['fileCreatedDate'] = file_created_date
+                    each_file_dict['level'] = 'file'
                     each_file_dict['parentId'] = parent_id
                     each_file_dict['id'] = os.path.basename(obj['Key'])
                     each_file_dict['thumbnail'] = (each_file_dict['id'] == item_id)

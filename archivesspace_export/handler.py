@@ -14,6 +14,7 @@ from pipelineutilities.s3_helpers import write_s3_json, write_s3_file
 from convert_json_to_csv import ConvertJsonToCsv
 from pipelineutilities.search_files import id_from_url, crawl_available_files  # noqa: #402
 from add_files_to_nd_json import AddFilesToNdJson
+from add_paths_to_nd_json import AddPathsToNdJson
 
 
 def run(event: dict, context: dict):
@@ -30,17 +31,19 @@ def run(event: dict, context: dict):
     print("Will break after ", time_to_break)
     harvest_oai_eads_class = HarvestOaiEads(config)
     add_files_to_nd_json_class = AddFilesToNdJson(config)
+    add_paths_to_nd_json_class = AddPathsToNdJson(config)
     ids = event.get("ids", [])
     while len(ids) > 0 and datetime.now() < time_to_break:
         nd_json = harvest_oai_eads_class.get_nd_json_from_archives_space_url(ids[0])
         if nd_json:
             nd_json = add_files_to_nd_json_class.add_files(nd_json)
+            nd_json = add_paths_to_nd_json_class.add_paths(nd_json)
             write_s3_json(config['process-bucket'], os.path.join("json/", nd_json["id"] + '.json'), nd_json)
             print("ArchivesSpace ead_id = ", nd_json.get("id", ""), " source_system_url = ", ids[0], int(time.time() - start_time), 'seconds.')
             # in case we need to create CSVs
             # _export_json_as_csv(config, nd_json)
         del ids[0]
-    event['eadHarvestComplete'] = (len(ids) == 0)
+    event['archivesSpaceHarvestComplete'] = (len(ids) == 0)
     event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-csv-basepath'])
     return event
 
@@ -54,8 +57,8 @@ def _export_json_as_csv(config: dict, nd_json: dict):
 
 
 def _supplement_event(event: dict) -> dict:
-    if 'eadHarvestComplete' not in event:
-        event['eadHarvestComplete'] = False
+    if 'archivesSpaceHarvestComplete' not in event:
+        event['archivesSpaceHarvestComplete'] = False
     if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
     if 'ids' not in event:  # seed with all archvesspace records we have been exporting prior to 5/12/2020
@@ -151,7 +154,7 @@ def test(identifier=""):
 
     event = run(event, {})
 
-    if not event['eadHarvestComplete']:
+    if not event['archivesSpaceHarvestComplete']:
         with open('event.json', 'w') as f:
             json.dump(event, f, indent=2)
     else:
