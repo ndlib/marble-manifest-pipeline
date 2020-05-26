@@ -252,9 +252,17 @@ def test():
     config = setup_pipeline_config(event)
     # change to the prod bucket
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
-    data = list_updated_files(config, 1000000)
-
-    for obj in data:
-        print(obj)
+    # data = list_updated_files(config, 1000000)
+    data = crawl_available_files(config)
+    data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-001']['LastModified'] = data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-001']['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
+    data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-002']['LastModified'] = data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-002']['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
+    data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-003']['LastModified'] = data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-003']['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
+    data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-004']['LastModified'] = data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-004']['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
+    print(json.dumps(data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-001']))
+    print(json.dumps(data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-002']))
+    print(json.dumps(data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-003']))
+    print(json.dumps(data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-004']))
+    #for obj in data:
+    #    print(obj)
 
     return

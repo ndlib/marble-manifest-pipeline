@@ -1,0 +1,33 @@
+Examples of json data for the api. 
+
+/collections - get
+Lists all the collections that have been added to RedBox
+
+/collections/id  - get
+Gets the metadata for the Item.
+
+/collections/id - put
+updates collection (top level metadata) such as partially_digitized
+you set the data you want to change in the format that is expected.  i.e. if it is an array you send the new array
+Returns collection/id - get
+
+/collections/id/items/id - put
+save item level data.  such as default_image and imageDirectoryId
+i.e. if it is an array you send the new array
+Returns collection/id - get
+
+/collections - post
+send a new id to create a new record in redbox.
+
+/directories  -  get
+lists all the directories in the rbsc mount
+
+/directories/id - get
+all the trackable objects in that directory
+
+/directories/id/object/id - get
+returns all the files in one object.
+
+/directories/id/object/id/file/id - put
+updates the file info from another source such as the file description.
+returns /directories/id/object/id or maybe /directories/id
