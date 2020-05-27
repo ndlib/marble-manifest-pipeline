@@ -44,7 +44,7 @@ class TestCreateManifest(unittest.TestCase):
             self.assertEqual(result_json, manifest_json)
 
     def test_build_nd_json(self):
-        for id in []: # ["1999.024", "1952.019", "pdf"]:
+        for id in ["1999.024", "1952.019", "pdf"]:
             print("Testing id, {}".format(id))
             data = load_data_for_test(id)
             # print("data = ", data)
@@ -58,7 +58,6 @@ class TestCreateManifest(unittest.TestCase):
             self.assertEqual(result_json, manifest_json)
 
     def test_manifest_that_is_a_pdf_without_a_mime_type(self):
-        return
         data = load_data_for_test('pdf')
         # remove the mime type
         parent = load_nd_json('pdf', config)
