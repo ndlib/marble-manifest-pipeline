@@ -132,6 +132,24 @@
     {
       "label": {
         "en": [
+          "Subject"
+        ]
+      },
+      "value": {
+        "en": [
+          "allegory",
+          "Baroque",
+          "food",
+          "glassware",
+          "grape",
+          "skeletons",
+          "tables"
+        ]
+      }
+    },    
+    {
+      "label": {
+        "en": [
           "Access"
         ]
       },

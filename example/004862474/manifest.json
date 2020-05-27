@@ -1,28 +1,40 @@
 {
-  "type": "Manifest",
-  "id": "https://presentation-iiif.library.nd.edu/004862474/manifest",
-  "label": {
-    "en": [
-      "Reading the Emancipation Proclamation /"
-    ]
-  },
-  "thumbnail": [
-    {
-      "id": "https://image-iiif.library.nd.edu/iiif/2/004862474%2FPRI_004560152a/full/250,/0/default.jpg",
-      "type": "Image",
-      "service": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/004862474%2FPRI_004560152a",
-          "type": "ImageService2",
-          "profile": "http://iiif.io/api/image/2/level2.json"
-        }
-      ]
-    }
+  "@context": [
+    "http://www.w3.org/ns/anno.jsonld",
+    "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
+    "http://iiif.io/api/presentation/3/context.json"
   ],
+  "id": "https://presentation-iiif.library.nd.edu/004862474/manifest",
   "items": [
     {
-      "type": "Canvas",
+      "height": 6062,
       "id": "https://presentation-iiif.library.nd.edu/004862474/PRI_004560152a/canvas",
+      "items": [
+        {
+          "id": "https://presentation-iiif.library.nd.edu/004862474/PRI_004560152a/canvas/annotation_page/PRI_004560152a.tif",
+          "items": [
+            {
+              "body": {
+                "format": "image/jpeg",
+                "id": "https://image-iiif.library.nd.edu/iiif/2/004862474%2FPRI_004560152a/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/004862474%2FPRI_004560152a",
+                    "profile": "http://iiif.io/api/image/2/level2.json",
+                    "type": "ImageService2"
+                  }
+                ],
+                "type": "Image"
+              },
+              "id": "https://presentation-iiif.library.nd.edu/004862474/PRI_004560152a/canvas/annotation/PRI_004560152a.tif",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.library.nd.edu/004862474/PRI_004560152a/canvas",
+              "type": "Annotation"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
       "label": {
         "en": [
           "a"
@@ -31,104 +43,26 @@
       "thumbnail": [
         {
           "id": "https://image-iiif.library.nd.edu/iiif/2/004862474%2FPRI_004560152a/full/250,/0/default.jpg",
-          "type": "Image",
           "service": [
             {
               "id": "https://image-iiif.library.nd.edu/iiif/2/004862474%2FPRI_004560152a",
-              "type": "ImageService2",
-              "profile": "http://iiif.io/api/image/2/level2.json"
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
             }
-          ]
+          ],
+          "type": "Image"
         }
       ],
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/004862474/PRI_004560152a/canvas/annotation_page/PRI_004560152a.tif",
-          "type": "AnnotationPage",
-          "items": [
-            {
-              "id": "https://presentation-iiif.library.nd.edu/004862474/PRI_004560152a/canvas/annotation/PRI_004560152a.tif",
-              "type": "Annotation",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/004862474/PRI_004560152a/canvas",
-              "body": {
-                "id": "https://image-iiif.library.nd.edu/iiif/2/004862474%2FPRI_004560152a/full/full/0/default.jpg",
-                "type": "Image",
-                "format": "image/jpeg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/004862474%2FPRI_004560152a",
-                    "type": "ImageService2",
-                    "profile": "http://iiif.io/api/image/2/level2.json"
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ],
+      "type": "Canvas",
       "viewingDirection": "left-to-right",
-      "height": 6062,
       "width": 7445
     }
   ],
-  "viewingDirection": "left-to-right",
-  "@context": [
-    "http://www.w3.org/ns/anno.jsonld",
-    "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
-    "http://iiif.io/api/presentation/3/context.json"
-  ],
-  "provider": [
-    {
-      "id": "https://rarebooks.library.nd.edu/using",
-      "type": "Agent",
-      "label": {
-        "en": [
-          "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
-        ]
-      },
-      "homepage": [
-        {
-          "id": "https://rarebooks.library.nd.edu/",
-          "type": "Text",
-          "label": {
-            "en": [
-              "Rare Books and Special Collections"
-            ]
-          },
-          "format": "text/html"
-        }
-      ],
-      "logo": [
-        {
-          "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
-          "type": "Image",
-          "format": "image/png",
-          "height": 100,
-          "width": 120
-        }
-      ]
-    }
-  ],
-  "summary": {
+  "label": {
     "en": [
-      "Wood engraving depicting the reaction of a group of slaves to hearing the Emancipation Proclamation read to them by a Union soldier. Below this image is a small portrait of Abraham Lincoln. Drawn by H.W. Herrick and engraved by J.W. Watts."
+      "Reading the Emancipation Proclamation /"
     ]
   },
-  "seeAlso": [
-    {
-      "id": "https://presentation-iiif.library.nd.edu/004862474/mets.xml",
-      "type": "Dataset",
-      "format": "application/xml",
-      "profile": "http://www.loc.gov/METS/"
-    },
-    {
-      "id": "https://presentation-iiif.library.nd.edu/004862474",
-      "type": "Dataset",
-      "format": "application/ld+json",
-      "profile": "https://schema.org/"
-    }
-  ],
   "metadata": [
     {
       "label": {
@@ -169,6 +103,21 @@
     {
       "label": {
         "en": [
+          "Subject "
+        ]
+      },
+      "value": {
+        "en": [
+          "Lincoln, Abraham, 1809-1865 Portraits.",
+          "United States. President (1861-1865 : Lincoln). Emancipation Proclamation.",
+          "Slaves Emancipation United States Pictorial works.",
+          "Prints."
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
           "Link to source"
         ]
       },
@@ -202,5 +151,71 @@
         ]
       }
     }
-  ]
+  ],
+  "provider": [
+    {
+      "homepage": [
+        {
+          "format": "text/html",
+          "id": "https://rarebooks.library.nd.edu/",
+          "label": {
+            "en": [
+              "Rare Books and Special Collections"
+            ]
+          },
+          "type": "Text"
+        }
+      ],
+      "id": "https://rarebooks.library.nd.edu/using",
+      "label": {
+        "en": [
+          "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
+        ]
+      },
+      "logo": [
+        {
+          "format": "image/png",
+          "height": 100,
+          "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+          "type": "Image",
+          "width": 120
+        }
+      ],
+      "type": "Agent"
+    }
+  ],
+  "seeAlso": [
+    {
+      "format": "application/xml",
+      "id": "https://presentation-iiif.library.nd.edu/004862474/mets.xml",
+      "profile": "http://www.loc.gov/METS/",
+      "type": "Dataset"
+    },
+    {
+      "format": "application/ld+json",
+      "id": "https://presentation-iiif.library.nd.edu/004862474",
+      "profile": "https://schema.org/",
+      "type": "Dataset"
+    }
+  ],
+  "summary": {
+    "en": [
+      "Wood engraving depicting the reaction of a group of slaves to hearing the Emancipation Proclamation read to them by a Union soldier. Below this image is a small portrait of Abraham Lincoln. Drawn by H.W. Herrick and engraved by J.W. Watts."
+    ]
+  },
+  "thumbnail": [
+    {
+      "id": "https://image-iiif.library.nd.edu/iiif/2/004862474%2FPRI_004560152a/full/250,/0/default.jpg",
+      "service": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/004862474%2FPRI_004560152a",
+          "profile": "http://iiif.io/api/image/2/level2.json",
+          "type": "ImageService2"
+        }
+      ],
+      "type": "Image"
+    }
+  ],
+  "type": "Manifest",
+  "viewingDirection": "left-to-right"
 }

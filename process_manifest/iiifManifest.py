@@ -27,12 +27,16 @@ class iiifManifest():
         ret = []
         for key in mapper.get_athena_keys():
             if key.lower() != 'n/a':
-                if key != 'creators':
-                    value = self.data.get(key, False)
-                else:
+                if key == 'creators':
                     value = self.data.get(key)
                     if value:
                         value = list(map(lambda row: row.get('display', ''), value))
+                elif key == 'subjects':
+                    value = self.data.get(key, [])
+                    if value and len(value) != 0:
+                        value = list(map(lambda row: row.get('term', ''), value))
+                else:
+                    value = self.data.get(key, False)
 
                 label = mapper.get_by_athena(key, 'marble_title')
                 if label and value and key not in keys_in_other_parts_of_manifest:
