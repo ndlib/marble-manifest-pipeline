@@ -46,8 +46,6 @@ def run(event, context):
             iiif = iiifManifest(config, parent, mapping)
             manifest = iiif.manifest()
 
-            print(manifest['metadata'])
-            return
             # split the manifests
             for item in sub_manifests(manifest):
                 inprocess_bucket.write_sub_manifest(item)
