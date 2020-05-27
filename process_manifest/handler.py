@@ -46,6 +46,8 @@ def run(event, context):
             iiif = iiifManifest(config, parent, mapping)
             manifest = iiif.manifest()
 
+            print(manifest['metadata'])
+            return
             # split the manifests
             for item in sub_manifests(manifest):
                 inprocess_bucket.write_sub_manifest(item)
@@ -91,9 +93,9 @@ def test():
         'config-file': '2020-04-15-13:10:11.652565.json',
         'process-bucket': 'new-csv-processbucket-10dr776tnq9be',
         'ids': [
-            '1951.004.009'
+            '1952.019'
         ],
-        'local': False,
+        'local': True,
         'local-path': '../example/',
         'errors': []
     }
