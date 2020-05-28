@@ -1,8 +1,8 @@
-# add_paths_to_nd_json.py
-from pipelineutilities.csv_collection import _add_additional_paths
+# add_paths_to_json_object.py
+from csv_collection import _add_additional_paths
 
 
-class AddPathsToNdJson():
+class AddPathsToJsonObject():
     """ This class accepts a JSON object and adds paths necessary for creating manifests. """
     def __init__(self, config: dict):
         self.config = config

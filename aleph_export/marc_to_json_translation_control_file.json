@@ -1,6 +1,14 @@
 {
 	"root" : {
 		"FieldsToExtract": [
+			{ "label": "apiVersion",
+				"externalProcess": "schema_api_version",
+				"format": "text"
+			},
+			{ "label": "fileCreatedDate",
+				"externalProcess": "file_created_date",
+				"format": "text"
+			},
 			{ "label": "sourceSystem",
 				"constant": "Aleph",
 				"format": "text"
@@ -8,6 +16,7 @@
 			{ "label": "repository",
 				"fields": ["852"],
 				"subfields": ["b"],
+				"extraProcessing": "translate_repository",
 				"format": "text"
 			},
 			{ "label": "sequence",
@@ -31,23 +40,23 @@
 				"fields": ["001"],
 				"format": "text"
 			},
-			{ "label": "level",
-				"constant": "manifest",
-				"format": "text"
-			},
-			{ "label": "creator",
-				"fields": ["100", "199"],
-				"selection": "range",
-				"subfields": ["a", "b", "c", "d", "q"],
-				"format": "text"
-			},
 			{ "label": "creators",
 				"fields": ["100", "199"],
 				"selection": "range",
-				"subfields": ["a", "b", "c", "q"],
+				"subfields": ["a", "b", "c", "e", "q"],
 				"specialSubfields": ["d"],
 				"extraProcessing": "format_creators",
-				"format": "array"
+				"format": "array",
+				"note": "added e 5/15/20 sm"
+			},
+			{ "label": "contributors",
+				"fields": ["700", "710"],
+				"selection": "range",
+				"subfields": ["a", "b", "c", "d", "e", "q"],
+				"specialSubfields": ["d"],
+				"extraProcessing": "format_creators",
+				"format": "array",
+				"note": "added 5/15/20 sm"
 			},
 			{ "label": "dateCreated",
 				"fields": ["264", "260"],
@@ -85,11 +94,9 @@
 				"format": "text",
 				"extraProcessing": "link_to_source"
 			},
-			{ "label": "publisher",
-				"fields": ["264", "260"],
-				"selection": "first",
-				"subfields": ["b"],
-				"format": "text"
+			{"label": "publisher",
+				"otherNodes": "publisher",
+				"format": "node"
 			},
 			{ "label": "format",
 				"fields": ["300"],
@@ -116,15 +123,76 @@
 				"subfields": ["a", "b"],
 				"format": "text"
 			},
-			{ "label": "imageUri",
+			{ "!label": "filePath",
+				"!fields": ["956"],
+				"!subfields": ["u"],
+				"!verifySubfieldsMatch": {"subfield": "x", "value": "MARBLE"},
+				"!format": "text"
+			},
+			{
+				"label": "items",
+				"otherNodes": "items",
+				"optional": true,
+				"seedNodes": [{"collectionId": "collectionId"}, {"parentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
+					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}],
+				"format": "array"
+			},
+			{
+				"label": "level",
+				"note": "This must run after items are added above, since children define level.",
+				"externalProcess": "define_level",
+				"passLabels": [{"items": "items"}],
+				"format": "text"
+			}
+		]
+	},
+	"publisher" : {
+		"FieldsToExtract": [
+			{ "label": "publisherName",
+				"fields": ["264", "260"],
+				"selection": "first",
+				"subfields": ["b"],
+				"format": "text"
+			},
+			{ "label": "publisherLocation",
+				"fields": ["264", "260"],
+				"selection": "first",
+				"subfields": ["a"],
+				"format": "text"
+			}
+		],
+	"note": "added 5/15/20 sm"
+	},
+	"items": {
+		"FieldsToExtract": [
+			{ "label": "level",
+				"constant": "file",
+				"format": "text"
+			},
+			{ "label": "sequence",
+				"constant": "1",
+				"format": "text"
+			},
+			{ "label": "thumbnail",
+				"constant": true,
+				"format": "text"
+			},
+			{ "label": "filePath",
 				"fields": ["956"],
 				"subfields": ["u"],
 				"verifySubfieldsMatch": {"subfield": "x", "value": "MARBLE"},
 				"format": "text"
 			},
-			{ "label": "anotherID",
-				"fields": ["AVA"],
-				"subfields": ["d"],
+			{
+				"label": "id",
+				"externalProcess": "file_name_from_filePath",
+				"passLabels": [{"filename": "filePath"}],
+				"format": "text"
+			},
+			{
+				"label": "description",
+				"externalProcess": "file_name_from_filePath",
+				"passLabels": [{"filename": "filePath"}],
 				"format": "text"
 			}
 		]

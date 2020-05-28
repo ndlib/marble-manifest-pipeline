@@ -16,6 +16,7 @@ class HarvestOaiEads():
     def get_nd_json_from_archives_space_url(self, id_url: str) -> dict:
         """ Retrieve one EAD xml record given the ArchivesSpace identifier """
         oai_url = self._get_oai_url_given_id_url(id_url)
+        print("oai_url = ", oai_url)
         nd_json = {}
         xml_string = self._get_xml_string_given_oai_url(oai_url)
         if xml_string:
@@ -48,7 +49,8 @@ class HarvestOaiEads():
                                "xlink:", "xmlns=\"http://www.openarchives.org/OAI/2.0/\"",
                                "xmlns=\"urn:isbn:1-931666-22-9\"",
                                "xmlns:ns1=\"http://www.w3.org/1999/xlink\"",
-                               "xmlns:xlink=\"http://www.w3.org/1999/xlink\""]
+                               "xmlns:xlink=\"http://www.w3.org/1999/xlink\"",
+                               "<i>", "</i>", '<emph render="italic">', '</emph>']
         for string in namespaces_to_strip:
             xml_string = xml_string.replace(string, "")
         return xml_string

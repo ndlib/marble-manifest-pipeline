@@ -1,7 +1,7 @@
 # Aleph Export
 
 ## Description
-This module harvests MARC records from Aleph into a CSV format of our own design.  Only records with 956 records will be harvested.
+This module harvests MARC records from Aleph into nd.json and a CSV format of our own design.  Only records with 956 records will be harvested.
 This requires additional work to create a required MARC file on our Aleph server:
   1.  Populating a 956 field in MARC records of interest
   2.  Creating a query on the Aleph server which harvests all MARC records containing our populated 956 field

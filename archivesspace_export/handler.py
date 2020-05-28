@@ -13,8 +13,8 @@ from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E40
 from pipelineutilities.s3_helpers import write_s3_json, write_s3_file
 from convert_json_to_csv import ConvertJsonToCsv
 from pipelineutilities.search_files import id_from_url, crawl_available_files  # noqa: #402
-from add_files_to_nd_json import AddFilesToNdJson
-from add_paths_to_nd_json import AddPathsToNdJson
+from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
+from pipelineuntilties.add_paths_to_json_object import AddPathsToJsonObject
 
 
 def run(event: dict, context: dict):
@@ -30,14 +30,14 @@ def run(event: dict, context: dict):
     time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
     print("Will break after ", time_to_break)
     harvest_oai_eads_class = HarvestOaiEads(config)
-    add_files_to_nd_json_class = AddFilesToNdJson(config)
-    add_paths_to_nd_json_class = AddPathsToNdJson(config)
+    add_files_to_json_object_class = AddFilesToJsonObject(config)
+    add_paths_to_json_object_class = AddPathsToJsonObject(config)
     ids = event.get("ids", [])
     while len(ids) > 0 and datetime.now() < time_to_break:
         nd_json = harvest_oai_eads_class.get_nd_json_from_archives_space_url(ids[0])
         if nd_json:
-            nd_json = add_files_to_nd_json_class.add_files(nd_json)
-            nd_json = add_paths_to_nd_json_class.add_paths(nd_json)
+            nd_json = add_files_to_json_object_class.add_files(nd_json)
+            nd_json = add_paths_to_json_object_class.add_paths(nd_json)
             write_s3_json(config['process-bucket'], os.path.join("json/", nd_json["id"] + '.json'), nd_json)
             print("ArchivesSpace ead_id = ", nd_json.get("id", ""), " source_system_url = ", ids[0], int(time.time() - start_time), 'seconds.')
             # in case we need to create CSVs
@@ -150,7 +150,7 @@ def test(identifier=""):
         #     "https://archivesspace.library.nd.edu/repositories/3/resources/1644"
         # ]
         # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1492"]  # Parsons Journals
-        # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/2/resources/1366"]
+        event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1524"]
 
     event = run(event, {})
 

@@ -1,48 +1,67 @@
 import os
 import json
-from csv_from_json import CsvFromJson
+# from csv_from_json import CsvFromJson
+from do_extra_processing import do_extra_processing
+from pipelineutilities.validate_json import schema_api_version, validate_nd_json
+from perform_additional_processing import perform_additional_processing, get_seed_nodes_json
 
 
 class TransformMarcJson():
     """ This performs all Marc-related processing """
-    def __init__(self, csv_field_names, hash_of_available_files):
+    def __init__(self, csv_field_names: list):
         """ Save values required for all calls """
         local_folder = os.path.dirname(os.path.realpath(__file__))
         self.json_control = read_marc_to_json_translation_control_file(local_folder + "/marc_to_json_translation_control_file.json")  # noqa: E501
-        self.csv_from_json_class = CsvFromJson(csv_field_names, hash_of_available_files)
+        self.schema_api_version = schema_api_version()
 
-    def build_json_from_marc_json(self, marc_record_as_json):
+    def build_json_from_marc_json(self, marc_record_as_json: dict) -> dict:
         """ Build our own json object representing marc information we're interested in """
-        json_record = {}
         marc_record_as_json = self._mutate_marc_record_as_json(marc_record_as_json)
-        for json_field_definition in self.json_control['root']['FieldsToExtract']:
+        nd_json = self.build_json_for_control_section(marc_record_as_json, 'root', {})
+        if not validate_nd_json(nd_json):
+            nd_json = {}
+        return nd_json
+
+    def build_json_for_control_section(self, marc_record_as_json: dict, section_name: str, seeded_json: dict) -> dict:
+        # json_record = {}
+        json_record = seeded_json.copy()
+        for json_field_definition in self.json_control[section_name]['FieldsToExtract']:
             if 'label' in json_field_definition:
-                json_record[json_field_definition['label']] = self._get_json_node_value_from_marc(json_field_definition, marc_record_as_json)  # noqa: E501
+                json_record[json_field_definition['label']] = self._get_json_node_value_from_marc(json_field_definition, marc_record_as_json, json_record)  # noqa: E501
         return json_record
 
-    def create_csv_from_json(self, json_record):
-        """ Return csv string from json input """
-        csv_string = self.csv_from_json_class.return_csv_from_json(json_record)
-        return csv_string
-
-    def _mutate_marc_record_as_json(self, marc_record_as_json):
-        """ For expediency, I will add the leader key to the fields array to capture workType. """
+    def _mutate_marc_record_as_json(self, marc_record_as_json: dict) -> dict:
+        """ For expediency, I will add the leader key to the fields array to capture workType.
+        Then, everything I need will be under the "fields" array. """
         if "leader" in marc_record_as_json and "fields" in marc_record_as_json:
             node_to_add = {}
             node_to_add["leader"] = marc_record_as_json["leader"]
             marc_record_as_json["fields"].append(node_to_add)
         return marc_record_as_json
 
-    def _get_json_node_value_from_marc(self, json_field_definition, marc_record_as_json):
+    def _get_json_node_value_from_marc(self, json_field_definition: dict, marc_record_as_json: dict, json_record: dict) -> str:
         """ Return an individual json node value from the json representation of the marc record. """
         results = ""
         if 'constant' in json_field_definition:
             results = json_field_definition.get("constant", "")
+        elif 'externalProcess' in json_field_definition:
+            results = perform_additional_processing(json_record, json_field_definition, self.schema_api_version)
+        elif 'otherNodes' in json_field_definition:
+            seed_json = {}
+            if 'seedNodes' in json_field_definition:
+                seed_nodes_control = json_field_definition.get('seedNodes', '')
+                seed_json = get_seed_nodes_json(json_record, seed_nodes_control)
+            preliminary_results = self.build_json_for_control_section(marc_record_as_json, json_field_definition.get('otherNodes', ''), seed_json)
+            if json_field_definition.get("format", "") == "array":
+                results = []
+                results.append(preliminary_results)
+            else:
+                results = preliminary_results
         else:
             results = self._get_value_from_marc_field(json_field_definition, marc_record_as_json)
         return results
 
-    def _get_value_from_marc_field(self, json_field_definition, marc_record_as_json):
+    def _get_value_from_marc_field(self, json_field_definition: dict, marc_record_as_json: dict) -> dict:
         """ More detailed logic to extract value from json representation of marc record,
             as defined by marc_to_json_translation_control_file.json """
         subfields_needed = json_field_definition.get("subfields", "")
@@ -70,10 +89,10 @@ class TransformMarcJson():
                 continue  # only executed if inner loop did NOT break
             break  # only executed if inner loop DID break
         if extra_processing != "":
-            node = self._do_extra_processing(node, extra_processing)
+            node = do_extra_processing(node, extra_processing)
         return node
 
-    def _process_this_field(self, json_field_definition, key, value):
+    def _process_this_field(self, json_field_definition: dict, key: str, value: str) -> str:
         """ This returns a boolean indicating whether or not this field should be processed """
         results = False
         fields = json_field_definition.get("fields", "")
@@ -92,11 +111,13 @@ class TransformMarcJson():
             # print("results from verify_subfields_match", results)
         return results
 
-    def _verify_subfields_match(self, verify_subfields_match, subfields):
+    def _verify_subfields_match(self, verify_subfields_match: dict, subfields: dict) -> bool:
         """ For Marc field 956, we only want to harvest those records with a subfield for MARBLE.
-            This returns a boolean value after applying this logic. """
+            This returns a boolean value after applying this logic.
+            Note this has a loop, which seem rediculous, but we really do need a loop in case an image
+            will be used by multiple systems, say MARBLE and something else.  We need to loop through all
+            possibe cases, in case there are multiples. """
         results = False
-        # print("subfields = ", subfields)
         if 'subfields' in subfields:
             for subfield in subfields['subfields']:
                 for key, value in subfield.items():
@@ -104,81 +125,14 @@ class TransformMarcJson():
                         results = True
         return results
 
-    def _default_to_appropriate_data_type(self, format):
+    def _default_to_appropriate_data_type(self, format: str) -> str:
         """ Create a node with the appropriate data type defined in the control file. """
         node = []
         if format == "text":
             node = ""
         return node
 
-    def _do_extra_processing(self, value, extra_processing):
-        """ If extra processing is required, make appropriate calls to perform that additional processing. """
-        results = ""
-        if extra_processing == "link_to_source":
-            results = "https://onesearch.library.nd.edu/primo-explore/fulldisplay?docid=ndu_aleph" + value + "&context=L&vid=NDU&lang=en_US&search_scope=malc_blended&adaptor=Local%20Search%20Engine&tab=onesearch&query=any,contains,ndu_aleph002097132&mode=basic"  # noqa: E501
-        elif extra_processing == "lookup_work_type":
-            results = self._lookup_work_type(value)
-        elif extra_processing == "format_subjects":
-            results = self._format_subjects(value)
-        elif extra_processing == "format_creators":
-            results = self._format_creators(value)
-        return results
-
-    def _lookup_work_type(self, key_to_find):
-        """ Worktype requires translation using this dictionary. """
-        work_type_dict = {"a": "Language material",
-                          "t": "Manuscript language material",
-                          "m": "Computer file",
-                          "e": "Cartographic material",
-                          "f": "Manuscript cartographic material",
-                          "p": "Mixed materials",
-                          "i": "Nonmusical sound recording",
-                          "j": "Musical sound recording",
-                          "c": "Notated music",
-                          "d": "Manuscript notated music",
-                          "g": "Projected medium",
-                          "k": "Two-dimensional nonprojected graphic",
-                          "o": "Kit",
-                          "r": "Three-dimensional artifact or naturally occuring object"
-                          }
-        return work_type_dict.get(key_to_find, "")
-
-    def _format_subjects(self, value):
-        """ Subjects require special formatting.  """
-        results = []
-        for each_value in value:
-            node = {}
-            if "^^^" in each_value:
-                node["term"] = each_value.split("^^^")[0]
-                node["uri"] = each_value.split("^^^")[1]
-            else:
-                node['term'] = each_value
-            results.append(node)
-        return results
-
-    def _format_creators(self, value):
-        """ Creators require special formatting.
-            $a	Personal name (ex: Griesinger, Peggy)
-            $b	Numeration (ex. III) (used for royalty or people who are Jrs. or Srs.)
-            $c	Titles and other words associated with a name (ex. King of England)
-            $d	Dates associated with a name (ex. 1989-2089) this is birth and death date, second date blank if the person is still alive
-            $q Fuller form of name (ex. Librarian) - this is used as a way to differentiate between people with very similar names who also share birthdays - it happens!
-            """
-        results = []
-        for each_value in value:
-            node = {}
-            node["attribution"] = ""
-            node["role"] = "Primary"
-            if "^^^" in each_value:
-                node["fullName"] = each_value.split("^^^")[0]
-                node["lifeDates"] = each_value.split("^^^")[1]
-            else:
-                node['fullName'] = each_value
-            node['display'] = node.get("fullName", "")
-            results.append(node)
-        return results
-
-    def _get_required_positions(self, value, positions_needed):
+    def _get_required_positions(self, value: str, positions_needed: list) -> str:
         """ Extract values from specific positions within a string """
         results = ""
         for position in positions_needed:
@@ -186,7 +140,7 @@ class TransformMarcJson():
                 results += value[position]
         return results
 
-    def _get_required_subfields(self, subfields, subfields_needed, special_subfields):
+    def _get_required_subfields(self, subfields: dict, subfields_needed: list, special_subfields: list) -> dict:
         """ Append values from subfields we're interested in """
         results = ""
         for subfield in subfields['subfields']:
@@ -196,12 +150,14 @@ class TransformMarcJson():
                         results = value
                     else:
                         results += " " + value
-                if key in special_subfields:
-                    results += "^^^" + value
+        if special_subfields:  # separate special subfields, at the end of the string
+            subfield_results = self._get_required_subfields(subfields, special_subfields, [])
+            if subfield_results:
+                results += "^^^" + subfield_results
         return results
 
 
-def read_marc_to_json_translation_control_file(filename):
+def read_marc_to_json_translation_control_file(filename: str):
     """ Read json file which defines marc_json to json translation """
     try:
         with open(filename, 'r') as input_source:
