@@ -1,4 +1,6 @@
 {
+  "apiVersion": 1,
+  "fileCreatedDate": "2020-05-29",
   "sourceSystem": "Aleph",
   "repository": "RARE",
   "sequence": 1,
@@ -6,14 +8,46 @@
   "collectionId": "000297305",
   "parentId": "root",
   "id": "000297305",
-  "level": "manifest",
-  "creator": "Bunting, Edward.",
   "creators": [
     {
       "attribution": "",
-      "role": "Primary",
       "fullName": "Bunting, Edward.",
       "display": "Bunting, Edward."
+    }
+  ],
+  "contributors": [
+    {
+      "attribution": "",
+      "fullName": "Bunting, Edward, 1773-1843",
+      "lifeDates": "1773-1843",
+      "display": "Bunting, Edward, 1773-1843"
+    },
+    {
+      "attribution": "",
+      "fullName": "Carolan, Turlough, 1670-1738.",
+      "lifeDates": "1670-1738.",
+      "display": "Carolan, Turlough, 1670-1738."
+    },
+    {
+      "attribution": "",
+      "fullName": "Connellan, William.",
+      "display": "Connellan, William."
+    },
+    {
+      "attribution": "",
+      "fullName": "Connellan, Thomas.",
+      "display": "Connellan, Thomas."
+    },
+    {
+      "attribution": "",
+      "fullName": "O'Neill, Francis, 1848-1936 donor.",
+      "lifeDates": "1848-1936",
+      "display": "O'Neill, Francis, 1848-1936 donor."
+    },
+    {
+      "attribution": "",
+      "fullName": "Capt. Francis O'Neill Collection of Irish Studies (University of Notre Dame. Library)",
+      "display": "Capt. Francis O'Neill Collection of Irish Studies (University of Notre Dame. Library)"
     }
   ],
   "dateCreated": "[1796?]",
@@ -37,7 +71,10 @@
   "copyrightStatus": "",
   "copyrightStatement": "",
   "linkToSource": "https://onesearch.library.nd.edu/primo-explore/fulldisplay?docid=ndu_aleph000297305&context=L&vid=NDU&lang=en_US&search_scope=malc_blended&adaptor=Local%20Search%20Engine&tab=onesearch&query=any,contains,ndu_aleph002097132&mode=basic",
-  "publisher": "published by I. Willis",
+  "publisher": {
+    "publisherName": "published by I. Willis",
+    "publisherLocation": "Dublin,"
+  },
   "format": "1 score ([2], iv, 36 pages) ;",
   "languages": [
     "eng"
@@ -45,6 +82,21 @@
   "dimensions": "35 cm",
   "dedication": "Donated to the Library by Capt. Francis O'Neill in 1931.",
   "description": "",
-  "imageUri": "",
-  "anotherID": ""
+  "items": [
+    {
+      "collectionId": "000297305",
+      "parentId": "000297305",
+      "sourceSystem": "Aleph",
+      "repository": "RARE",
+      "apiVersion": 1,
+      "fileCreatedDate": "2020-05-29",
+      "level": "file",
+      "sequence": "1",
+      "thumbnail": true,
+      "filePath": "",
+      "id": "",
+      "description": ""
+    }
+  ],
+  "level": "manifest"
 }

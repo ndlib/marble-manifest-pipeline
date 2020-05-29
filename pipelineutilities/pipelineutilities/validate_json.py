@@ -87,6 +87,36 @@ nd_json_schema = {
         "mimeType": {"type": "string"},
         "workType": {"type": "string"},
         "medium": {"type": "string"},
+        "publisher": {
+            "type": "object",
+            "properties": {
+                "publisherName": {"type": "string"},
+                "publisherLocation": {"type": "string"}
+            },
+            "required": ["publisherName"],
+            "additionalProperties": False
+        },
+        "contributors": {
+            "type": "array",
+            "items": {
+                "description": "Schema for validating creator - Note:  We need to require display once that is added uniformly.",
+                "type": "object",
+                "properties": {
+                    "attribution": {"type": "string"},
+                    "display": {"type": "string"},
+                    "endDate": {"type": "string"},
+                    "fullName": {"type": "string"},
+                    "lifeDates": {"type": "string"},
+                    "human": {"type": "boolean"},
+                    "alive": {"type": "boolean"},
+                    "nationality": {"type": "string"},
+                    "role": {"type": "string"},
+                    "startDate": {"type": "string"}
+                },
+                "required": ["fullName"],
+                "additionalProperties": False
+            }
+        },
         "creators": {
             "type": "array",
             "items": {

@@ -2,6 +2,8 @@ README.md
 setup.py
 pipelineutilities/__init__.py
 pipelineutilities/_set_pipelineutilities_path.py
+pipelineutilities/add_files_to_json_object.py
+pipelineutilities/add_paths_to_json_object.py
 pipelineutilities/creatorField.py
 pipelineutilities/csv_collection.py
 pipelineutilities/google_utilities.py
@@ -18,6 +20,8 @@ pipelineutilities.egg-info/requires.txt
 pipelineutilities.egg-info/top_level.txt
 test/__init__.py
 test/_set_path.py
+test/test_add_files_to_json_object.py
+test/test_add_paths_to_json_object.py
 test/test_creatorField.py
 test/test_csv_collection.py
 test/test_output_csv.py

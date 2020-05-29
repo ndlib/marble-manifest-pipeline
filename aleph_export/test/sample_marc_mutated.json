@@ -1,0 +1,460 @@
+{
+  "leader": "02167ccm a2200409Ki 4500",
+  "fields": [
+    {
+      "001": "000297305"
+    },
+    {
+      "005": "20191121125041.0"
+    },
+    {
+      "007": "cr  n         "
+    },
+    {
+      "008": "000107s1796    ie uuu         n    eng d"
+    },
+    {
+      "035": {
+        "subfields": [
+          {
+            "a": "ABG6376^^^^^"
+          }
+        ],
+        "ind1": "9",
+        "ind2": " "
+      }
+    },
+    {
+      "035": {
+        "subfields": [
+          {
+            "a": "(OCoLC)43209189"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "040": {
+        "subfields": [
+          {
+            "a": "N6I"
+          },
+          {
+            "b": "eng"
+          },
+          {
+            "e": "rda"
+          },
+          {
+            "c": "N6I"
+          },
+          {
+            "d": "OCLCQ"
+          },
+          {
+            "d": "IND"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "049": {
+        "subfields": [
+          {
+            "a": "INDU"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "050": {
+        "subfields": [
+          {
+            "a": "M1744"
+          }
+        ],
+        "ind1": " ",
+        "ind2": "4"
+      }
+    },
+    {
+      "100": {
+        "subfields": [
+          {
+            "a": "Bunting, Edward."
+          },
+          {
+            "0": "http://id.loc.gov/authorities/names/n86068741"
+          }
+        ],
+        "ind1": "1",
+        "ind2": " "
+      }
+    },
+    {
+      "245": {
+        "subfields": [
+          {
+            "a": "New edition of a general Collection of the ancient Irish music :"
+          },
+          {
+            "b": "containing a variety of Irish Airs, never before published, and also the compositions of Conolan and Carolan, collected from the harpers, etc., in the different provinces of Ireland, and adapted for the pianoforte /"
+          },
+          {
+            "c": "with a prefatory introduction by Edward Bunting. Vol. I."
+          }
+        ],
+        "ind1": "1",
+        "ind2": "0"
+      }
+    },
+    {
+      "264": {
+        "subfields": [
+          {
+            "a": "Dublin,"
+          },
+          {
+            "b": "published by I. Willis"
+          },
+          {
+            "c": "[1796?]"
+          }
+        ],
+        "ind1": " ",
+        "ind2": "1"
+      }
+    },
+    {
+      "300": {
+        "subfields": [
+          {
+            "a": "1 score ([2], iv, 36 pages) ;"
+          },
+          {
+            "c": "35 cm"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "336": {
+        "subfields": [
+          {
+            "a": "notated music"
+          },
+          {
+            "b": "ntm"
+          },
+          {
+            "2": "rdacontent"
+          },
+          {
+            "0": "http://id.loc.gov/vocabulary/contentTypes/ntm"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "337": {
+        "subfields": [
+          {
+            "a": "unmediated"
+          },
+          {
+            "b": "n"
+          },
+          {
+            "2": "rdamedia"
+          },
+          {
+            "0": "http://id.loc.gov/vocabulary/mediaTypes/n"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "338": {
+        "subfields": [
+          {
+            "a": "volume"
+          },
+          {
+            "b": "nc"
+          },
+          {
+            "2": "rdacarrier"
+          },
+          {
+            "0": "http://id.loc.gov/vocabulary/carriers/nc"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "561": {
+        "subfields": [
+          {
+            "a": "Donated to the Library by Capt. Francis O'Neill in 1931."
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "599": {
+        "subfields": [
+          {
+            "a": "MARBLE"
+          }
+        ],
+        "ind1": "9",
+        "ind2": "9"
+      }
+    },
+    {
+      "650": {
+        "subfields": [
+          {
+            "a": "Folk songs"
+          },
+          {
+            "z": "Ireland"
+          },
+          {
+            "v": "Instrumental settings."
+          }
+        ],
+        "ind1": " ",
+        "ind2": "0"
+      }
+    },
+    {
+      "650": {
+        "subfields": [
+          {
+            "a": "Songs, Irish"
+          },
+          {
+            "z": "Ireland"
+          },
+          {
+            "v": "Instrumental settings."
+          }
+        ],
+        "ind1": " ",
+        "ind2": "0"
+      }
+    },
+    {
+      "650": {
+        "subfields": [
+          {
+            "a": "Piano music, Arranged."
+          },
+          {
+            "0": "http://id.loc.gov/authorities/subjects/sh85101791"
+          }
+        ],
+        "ind1": " ",
+        "ind2": "0"
+      }
+    },
+    {
+      "650": {
+        "subfields": [
+          {
+            "a": "Folk music"
+          },
+          {
+            "z": "Ireland."
+          },
+          {
+            "0": "http://id.loc.gov/authorities/subjects/sh98002834"
+          }
+        ],
+        "ind1": " ",
+        "ind2": "0"
+      }
+    },
+    {
+      "700": {
+        "subfields": [
+          {
+            "a": "Bunting, Edward,"
+          },
+          {
+            "d": "1773-1843"
+          },
+          {
+            "0": "http://id.loc.gov/authorities/names/n82080086"
+          }
+        ],
+        "ind1": "1",
+        "ind2": " "
+      }
+    },
+    {
+      "700": {
+        "subfields": [
+          {
+            "a": "Carolan, Turlough,"
+          },
+          {
+            "d": "1670-1738."
+          },
+          {
+            "t": "Songs."
+          }
+        ],
+        "ind1": "1",
+        "ind2": " "
+      }
+    },
+    {
+      "700": {
+        "subfields": [
+          {
+            "a": "Connellan, William."
+          },
+          {
+            "t": "Songs."
+          }
+        ],
+        "ind1": "1",
+        "ind2": " "
+      }
+    },
+    {
+      "700": {
+        "subfields": [
+          {
+            "a": "Connellan, Thomas."
+          },
+          {
+            "t": "Songs."
+          }
+        ],
+        "ind1": "1",
+        "ind2": " "
+      }
+    },
+    {
+      "700": {
+        "subfields": [
+          {
+            "a": "O'Neill, Francis,"
+          },
+          {
+            "d": "1848-1936"
+          },
+          {
+            "e": "donor."
+          },
+          {
+            "4": "dnr"
+          },
+          {
+            "0": "http://id.loc.gov/authorities/names/n50002984"
+          }
+        ],
+        "ind1": "1",
+        "ind2": " "
+      }
+    },
+    {
+      "710": {
+        "subfields": [
+          {
+            "a": "Capt. Francis O'Neill Collection of Irish Studies (University of Notre Dame. Library)"
+          }
+        ],
+        "ind1": "2",
+        "ind2": " "
+      }
+    },
+    {
+      "856": {
+        "subfields": [
+          {
+            "u": "http://www.mdz-nbn-resolving.de/urn/resolver.pl?urn=urn:nbn:de:bvb:12-bsb11304311-4"
+          },
+          {
+            "y": "Online Access"
+          }
+        ],
+        "ind1": "4",
+        "ind2": "1"
+      }
+    },
+    {
+      "852": {
+        "subfields": [
+          {
+            "a": "InNd"
+          },
+          {
+            "b": "RARE"
+          },
+          {
+            "c": "RB6XL"
+          },
+          {
+            "h": "M 1744 .B868"
+          },
+          {
+            "i": "G4 1796"
+          }
+        ],
+        "ind1": "0",
+        "ind2": "1"
+      }
+    },
+    {
+      "866": {
+        "subfields": [
+          {
+            "8": "0"
+          },
+          {
+            "a": "v.1"
+          }
+        ],
+        "ind1": "4",
+        "ind2": "1"
+      }
+    },
+    {
+      "994": {
+        "subfields": [
+          {
+            "a": "C0"
+          },
+          {
+            "b": "IND"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "leader": "02167ccm a2200409Ki 4500"
+    }
+  ]
+}

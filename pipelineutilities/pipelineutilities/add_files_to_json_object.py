@@ -1,19 +1,19 @@
 import json
 import os
 from datetime import datetime
-from pipelineutilities.search_files import id_from_url, crawl_available_files  # noqa: #402
+from search_files import id_from_url, crawl_available_files  # noqa: #402
 
 
-class AddFilesToNdJson():
+class AddFilesToJsonObject():
     def __init__(self, config: dict):
         self.config = config
-        local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
+        parent_folder = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/"
         if config.get("local", False):
-            with open(local_folder + 'test/hash_of_available_files.json', 'r') as input_source:
+            with open(parent_folder + 'test/hash_of_available_files.json', 'r') as input_source:
                 self.hash_of_available_files = json.load(input_source)
         else:
             self.hash_of_available_files = crawl_available_files(self.config)
-            # with open(local_folder + 'test/hash_of_available_files.json', 'w') as f:
+            # with open(parent_folder + 'test/hash_of_available_files.json', 'w') as f:
             #     json.dump(self.hash_of_available_files, f, indent=2, default=str)
 
     def add_files(self, nd_json: dict) -> dict:
