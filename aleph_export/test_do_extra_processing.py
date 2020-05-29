@@ -42,7 +42,7 @@ class Test(unittest.TestCase):
         expected_output = "RARE"
         self.assertTrue(actual_output == expected_output)
         actual_output = _translate_repository("hesb")
-        expected_output = "RARE"
+        expected_output = "hesb"
         self.assertTrue(actual_output == expected_output)
         actual_output = _translate_repository("something_else")
         expected_output = "something_else"

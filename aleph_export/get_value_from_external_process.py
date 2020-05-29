@@ -2,7 +2,7 @@ import os
 from datetime import date
 
 
-def perform_additional_processing(json_node: dict, field: dict, schema_api_version: int) -> dict:
+def get_value_from_external_process(json_node: dict, field: dict, schema_api_version: int) -> dict:
     """ This lets us call other named functions to do additional processing. """
     return_value = ""
     external_process_name = field.get('externalProcess', '')

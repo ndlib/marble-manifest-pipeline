@@ -3,7 +3,7 @@ import json
 # from csv_from_json import CsvFromJson
 from do_extra_processing import do_extra_processing
 from pipelineutilities.validate_json import schema_api_version, validate_nd_json
-from perform_additional_processing import perform_additional_processing, get_seed_nodes_json
+from get_value_from_external_process import get_value_from_external_process, get_seed_nodes_json
 
 
 class TransformMarcJson():
@@ -45,7 +45,7 @@ class TransformMarcJson():
         if 'constant' in json_field_definition:
             results = json_field_definition.get("constant", "")
         elif 'externalProcess' in json_field_definition:
-            results = perform_additional_processing(json_record, json_field_definition, self.schema_api_version)
+            results = get_value_from_external_process(json_record, json_field_definition, self.schema_api_version)
         elif 'otherNodes' in json_field_definition:
             seed_json = {}
             if 'seedNodes' in json_field_definition:
