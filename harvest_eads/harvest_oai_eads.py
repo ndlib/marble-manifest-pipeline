@@ -137,7 +137,8 @@ class HarvestOaiEads():
                                "xlink:", "xmlns=\"http://www.openarchives.org/OAI/2.0/\"",
                                "xmlns=\"urn:isbn:1-931666-22-9\"",
                                "xmlns:ns1=\"http://www.w3.org/1999/xlink\"",
-                               "xmlns:xlink=\"http://www.w3.org/1999/xlink\""]
+                               "xmlns:xlink=\"http://www.w3.org/1999/xlink\"",
+                               "<i>", "</i>", '<emph render="italic">', '</emph>']
         for string in namespaces_to_strip:
             xml_string = xml_string.replace(string, "")
         return xml_string

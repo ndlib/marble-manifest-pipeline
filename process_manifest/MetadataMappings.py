@@ -22,7 +22,6 @@ class MetadataMappings():
             if reader.line_num != 1:
                 athena_key = "".join(this_row['Preferred Name'].title().split())
                 athena_key = athena_key[0].lower() + athena_key[1:]
-
                 line = {
                     "preferred_name": this_row['Preferred Name'],
                     "schema.org": this_row['Schema.org mapping'],

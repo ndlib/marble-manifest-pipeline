@@ -27,12 +27,16 @@ class iiifManifest():
         ret = []
         for key in mapper.get_athena_keys():
             if key.lower() != 'n/a':
-                if key != 'creators':
-                    value = self.data.get(key, False)
-                else:
+                if key == 'creators':
                     value = self.data.get(key)
                     if value:
                         value = list(map(lambda row: row.get('display', ''), value))
+                elif key == 'subjects':
+                    value = self.data.get(key, [])
+                    if value and len(value) != 0:
+                        value = list(map(lambda row: row.get('term', ''), value))
+                else:
+                    value = self.data.get(key, False)
 
                 label = mapper.get_by_athena(key, 'marble_title')
                 if label and value and key not in keys_in_other_parts_of_manifest:
@@ -194,12 +198,14 @@ class iiifManifest():
             return
 
         provider = self.data.get('repository').lower()
-        if (provider == 'embark' or provider == 'museum'):
+        if (provider == 'museum'):
             self.manifest_hash['provider'] = [self._snite_proivider()]
         elif (provider == 'unda'):
             self.manifest_hash['provider'] = [self._archives_proivider()]
-        elif (provider == 'rbsc' or provider == 'rare' or provider == 'spec' or provider == 'mrare' or provider == 'hesb'):
+        elif (provider == 'rare'):
             self.manifest_hash['provider'] = [self._rbsc_proivider()]
+        elif (provider == 'hesb'):
+            self.manifest_hash['provider'] = [self._hesb_proivider()]
         else:
             raise Exception("bad provider " + provider.lower())
 
@@ -236,7 +242,7 @@ class iiifManifest():
                 {
                   "id": "https://rarebooks.library.nd.edu/",
                   "type": "Text",
-                  "label": {"en": ["Rare Books and Special Collections"]},
+                  "label": {"en": ["Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"]},
                   "format": "text/html"
                 }
             ],
@@ -267,6 +273,30 @@ class iiifManifest():
             "logo": [
                 {
                     "id": "https://rarebooks.library.nd.edu/images/hesburgh_mark.png",
+                    "type": "Image",
+                    "format": "image/png",
+                    "height": 100,
+                    "width": 120
+                }
+            ]
+        }
+
+    def _hesb_proivider(self):
+        return {
+            "id": "https://library.nd.edu",
+            "type": "Agent",
+            "label": {"en": ["General Collection, Hesburgh Libraries"]},
+            "homepage": [
+                {
+                  "id": "https://library.nd.edu/",
+                  "type": "Text",
+                  "label": {"en": ["General Collection, Hesburgh Libraries"]},
+                  "format": "text/html"
+                }
+            ],
+            "logo": [
+                {
+                    "id": "https://library.nd.edu/static/media/library.logo.43a05388.png",
                     "type": "Image",
                     "format": "image/png",
                     "height": 100,

@@ -1888,6 +1888,19 @@
     {
       "label": {
         "en": [
+          "Subject "
+        ]
+      },
+      "value": {
+        "en": [
+          "Songs Peru Texts.",
+          "Popular music Peru."
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
           "Link to source"
         ]
       },
@@ -1942,7 +1955,7 @@
           "id": "https://rarebooks.library.nd.edu/",
           "label": {
             "en": [
-              "Rare Books and Special Collections"
+              "Rare Books and Special Collections, Hesburgh Libraries, University of Notre Dame"
             ]
           },
           "type": "Text"

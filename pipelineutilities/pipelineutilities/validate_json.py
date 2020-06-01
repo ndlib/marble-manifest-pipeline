@@ -24,6 +24,12 @@ def schema_api_version():
     return 1
 
 
+def validate_nd_json(json_to_test: dict) -> bool:
+    """ validate fixed json against nd_json_schema """
+    valid_json_flag = validate_json(json_to_test, get_nd_json_schema(), True)
+    return valid_json_flag
+
+
 nd_json_schema = {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "description": "Schema for validating ND.json",
@@ -77,10 +83,40 @@ nd_json_schema = {
         "filePath": {"type": "string"},
         "sequence": {"type": ["number", "string"]},
         "collectionInformation": {"type": "string"},
-        "fileId": {"type": "string"},
+        "fileId": {"anyOf": [{"type": "string"}, {"type": "boolean"}]},
         "mimeType": {"type": "string"},
         "workType": {"type": "string"},
         "medium": {"type": "string"},
+        "publisher": {
+            "type": "object",
+            "properties": {
+                "publisherName": {"type": "string"},
+                "publisherLocation": {"type": "string"}
+            },
+            "required": ["publisherName"],
+            "additionalProperties": False
+        },
+        "contributors": {
+            "type": "array",
+            "items": {
+                "description": "Schema for validating creator - Note:  We need to require display once that is added uniformly.",
+                "type": "object",
+                "properties": {
+                    "attribution": {"type": "string"},
+                    "display": {"type": "string"},
+                    "endDate": {"type": "string"},
+                    "fullName": {"type": "string"},
+                    "lifeDates": {"type": "string"},
+                    "human": {"type": "boolean"},
+                    "alive": {"type": "boolean"},
+                    "nationality": {"type": "string"},
+                    "role": {"type": "string"},
+                    "startDate": {"type": "string"}
+                },
+                "required": ["fullName"],
+                "additionalProperties": False
+            }
+        },
         "creators": {
             "type": "array",
             "items": {

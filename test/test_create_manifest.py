@@ -24,6 +24,7 @@ class TestCreateManifest(unittest.TestCase):
             "1952.019",
             "002097132",
             "004862474",
+            "004476467",  # has HESB
             "MSNCOL8501_EAD",
             "pdf"
         ]
@@ -41,7 +42,7 @@ class TestCreateManifest(unittest.TestCase):
             debug_json(data['manifest_json'], manifest)
             manifest_json = "".join(json.dumps(data['manifest_json'], sort_keys=True).split())
             result_json = "".join(json.dumps(manifest, sort_keys=True).split())
-            self.assertEqual(result_json, manifest_json)
+            self.assertEqual(result_json, manifest_json, msg="%s did not match see test/debug for output" % (id))
 
     def test_build_nd_json(self):
         for id in ["1999.024", "1952.019", "pdf"]:
@@ -52,10 +53,10 @@ class TestCreateManifest(unittest.TestCase):
             mapping = MetadataMappings(parent)
             iiif = iiifManifest(config, parent, mapping)
             manifest = iiif.manifest()
-            debug_json(data['manifest_json'], manifest)
+            # debug_json(data['manifest_json'], manifest)
             manifest_json = "".join(json.dumps(data['manifest_json'], sort_keys=True).split())
             result_json = "".join(json.dumps(manifest, sort_keys=True).split())
-            self.assertEqual(result_json, manifest_json)
+            self.assertEqual(result_json, manifest_json, msg="%s did not match see test/debug for output" % (id))
 
     def test_manifest_that_is_a_pdf_without_a_mime_type(self):
         data = load_data_for_test('pdf')
@@ -66,17 +67,15 @@ class TestCreateManifest(unittest.TestCase):
         mapping = MetadataMappings(parent)
         iiif = iiifManifest(config, parent, mapping)
         manifest = iiif.manifest()
-        debug_json(data['manifest_json'], manifest)
+        # debug_json(data['manifest_json'], manifest)
         manifest_json = "".join(json.dumps(data['manifest_json'], sort_keys=True).split())
         result_json = "".join(json.dumps(manifest, sort_keys=True).split())
         self.assertEqual(result_json, manifest_json)
 
     def test_addProvider(self):
         tests = [
-            {"provider": "rbsc", "result": "https://rarebooks.library.nd.edu/using"},
             {"provider": "rare", "result": "https://rarebooks.library.nd.edu/using"},
-            {"provider": "mrare", "result": "https://rarebooks.library.nd.edu/using"},
-            {"provider": "embark", "result": "https://sniteartmuseum.nd.edu/about-us/contact-us/"},
+            {"provider": "hesb", "result": "https://library.nd.edu"},
             {"provider": "museum", "result": "https://sniteartmuseum.nd.edu/about-us/contact-us/"},
             {"provider": "unda", "result": "http://archives.nd.edu/about/"}
         ]
