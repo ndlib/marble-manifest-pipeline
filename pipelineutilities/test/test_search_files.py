@@ -1,6 +1,6 @@
 import _set_path  # noqa
 import unittest
-from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_tracked_file  # noqa: E402
+from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_tracked_file, is_directory   # noqa: E402
 
 
 example_ids = {
@@ -103,6 +103,31 @@ class TestSearchFiles(unittest.TestCase):
 
         for test in tests:
             self.assertTrue(is_tracked_file(test))
+
+    def test_is_directory(self):
+        true_tests = [
+            'someththing/',
+            'witha.ext/',
+            '_underscore/',
+            'multi/level/',
+            'multi/level/with.ext/',
+        ]
+
+        for test in true_tests:
+            self.assertTrue(is_directory(test))
+
+    def test_is_not_a_directory(self):
+        false_tests = [
+            'someththing',
+            '.withaleadingdot.ext/',
+            '_underscore',
+            'multi/level',
+            'multi/level/with.ex',
+            'multi/level/image.jpg',
+        ]
+
+        for test in false_tests:
+            self.assertFalse(is_directory(test), msg="Test: {}" % {test})
 
 
 if __name__ == '__main__':

@@ -71,7 +71,6 @@ class TestCreateManifest(unittest.TestCase):
         result_json = "".join(json.dumps(manifest, sort_keys=True).split())
         self.assertEqual(result_json, manifest_json)
 
-
     def test_addProvider(self):
         tests = [
             {"provider": "rbsc", "result": "https://rarebooks.library.nd.edu/using"},

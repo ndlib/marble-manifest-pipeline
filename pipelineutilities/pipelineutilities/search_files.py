@@ -205,6 +205,20 @@ def list_updated_files(config: dict, minutes_to_test: int):
                     yield file
 
 
+def list_all_directories(config: dict):
+    bucket = config['rbsc-image-bucket']
+    print("crawling image files in this bucket: ", bucket)
+    for directory in folders_to_crawl:
+        files = get_matching_s3_objects(bucket, directory)
+        for file in files:
+            if (is_directory(file.get("Key", False))):
+                yield file['Key']
+
+
+def is_directory(file):
+    return file and re.match(".*[/]$", file) and not re.match("^[.]$", file)
+
+
 def augement_file_record(obj, id, url, config):
     bucket = config['rbsc-image-bucket']
 
@@ -244,7 +258,7 @@ def output_as_file():
             json.dump(obj, outfile)
 
 
-# python -c 'from search_files import *; test()'
+    # python -c 'from search_files import *; test()'
 def test():
     from pipeline_config import setup_pipeline_config
     event = {"local": True}
@@ -253,16 +267,8 @@ def test():
     # change to the prod bucket
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     # data = list_updated_files(config, 1000000)
-    data = crawl_available_files(config)
-    data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-001']['LastModified'] = data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-001']['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
-    data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-002']['LastModified'] = data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-002']['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
-    data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-003']['LastModified'] = data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-003']['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
-    data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-004']['LastModified'] = data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-004']['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
-    print(json.dumps(data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-001']))
-    print(json.dumps(data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-002']))
-    print(json.dumps(data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-003']))
-    print(json.dumps(data['https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-004']))
-    #for obj in data:
-    #    print(obj)
+    data = list_all_directories(config)
+    for obj in data:
+        print(obj)
 
     return
