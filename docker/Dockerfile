@@ -45,8 +45,9 @@ RUN apk add \
 	py3-pip
 
 # and now pyvips can go on
-RUN pip3 install --upgrade pip \
-  && pip3 install pyvips boto3 oauth2client==4.1.3 google==2.0.2 \
+RUN pip3 install --upgrade pip
+RUN pip3 install wheel --no-cache-dir
+RUN pip3 install pyvips boto3 oauth2client==4.1.3 google==2.0.2 \
 	google-api-python-client==1.7.11 google-auth-httplib2==0.0.3 \
 	google-auth-oauthlib==0.4.0
 
