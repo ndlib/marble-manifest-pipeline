@@ -9,6 +9,7 @@ import requests
 from pipelineutilities.s3_helpers import write_s3_file, write_s3_json
 from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject
+from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject
 
 
 class HarvestAlephMarc():
@@ -50,12 +51,14 @@ class HarvestAlephMarc():
         transform_marc_json_class = TransformMarcJson(self.config["csv-field-names"])
         add_files_to_json_object_class = AddFilesToJsonObject(self.config)
         add_paths_to_json_object_class = AddPathsToJsonObject(self.config)
+        fix_creators_in_json_object_class = FixCreatorsInJsonObject(self.config)
         for marc_record in marc_reader:
             marc_record_as_json = json.loads(marc_record.as_json())
             json_record = transform_marc_json_class.build_json_from_marc_json(marc_record_as_json)
             if json_record:
                 json_record = add_files_to_json_object_class.add_files(json_record)
                 json_record = add_paths_to_json_object_class.add_paths(json_record)
+                json_record = fix_creators_in_json_object_class.fix_creators(json_record)
                 self._save_json_record(json_record)
                 _export_json_as_csv(self.config, json_record)  # Note: hopefully we can remove this soon.
                 processed_records_count += 1

@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "fileCreatedDate": "2020-05-29",
+  "fileCreatedDate": "2020-06-02",
   "sourceSystem": "Aleph",
   "repository": "RARE",
   "sequence": 1,
@@ -8,6 +8,7 @@
   "collectionId": "000297305",
   "parentId": "root",
   "id": "000297305",
+  "uniqueIdentifier": "M 1744 .B868 G4 1796",
   "creators": [
     {
       "attribution": "",
@@ -89,7 +90,7 @@
       "sourceSystem": "Aleph",
       "repository": "RARE",
       "apiVersion": 1,
-      "fileCreatedDate": "2020-05-29",
+      "fileCreatedDate": "2020-06-02",
       "level": "file",
       "sequence": "1",
       "thumbnail": true,
