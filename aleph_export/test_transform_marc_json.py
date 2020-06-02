@@ -113,6 +113,25 @@ class Test(unittest.TestCase):
         actual_results = self.transform_marc_json_class._process_this_field(json_field_definition, key, value)
         self.assertTrue(actual_results)
 
+    def test_05a_process_this_field(self):
+        """ Test restricting based on ind1 """
+        json_field_definition = {
+            "label": "uniqueIdentifier",
+            "fields": ["852"],
+            "subfields": ["h"],
+            "specialSubfields": ["i"],
+            "ind1": ["0"],
+            "extraProcessing": "format_call_number",
+            "format": "text"
+        }
+        key = "852"
+        value = {'subfields': [{'h': 'M 1744 .B868'}, {'i': 'G4 1796'}], 'ind1': '0', 'ind2': '1'}
+        actual_results = self.transform_marc_json_class._process_this_field(json_field_definition, key, value)
+        self.assertTrue(actual_results)
+        value = {'subfields': [{'h': 'M 1744 .B868'}, {'i': 'G4 1796'}], 'ind1': '4', 'ind2': '1'}
+        actual_results = self.transform_marc_json_class._process_this_field(json_field_definition, key, value)
+        self.assertFalse(actual_results)
+
     def test_06_get_value_from_marc_field(self):
         json_field_definition = {"label": "title", "fields": ["245"], "subfields": ["a", "b"], "format": "text"}
         actual_results = self.transform_marc_json_class._get_value_from_marc_field(json_field_definition, self.marc_record_as_json)

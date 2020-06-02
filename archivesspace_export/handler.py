@@ -14,7 +14,8 @@ from pipelineutilities.s3_helpers import write_s3_json, write_s3_file
 from convert_json_to_csv import ConvertJsonToCsv
 from pipelineutilities.search_files import id_from_url, crawl_available_files  # noqa: #402
 from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
-from pipelineuntilties.add_paths_to_json_object import AddPathsToJsonObject
+from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject
+from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject
 
 
 def run(event: dict, context: dict):
@@ -32,12 +33,14 @@ def run(event: dict, context: dict):
     harvest_oai_eads_class = HarvestOaiEads(config)
     add_files_to_json_object_class = AddFilesToJsonObject(config)
     add_paths_to_json_object_class = AddPathsToJsonObject(config)
+    fix_creators_in_json_object_class = FixCreatorsInJsonObject(config)
     ids = event.get("ids", [])
     while len(ids) > 0 and datetime.now() < time_to_break:
         nd_json = harvest_oai_eads_class.get_nd_json_from_archives_space_url(ids[0])
         if nd_json:
             nd_json = add_files_to_json_object_class.add_files(nd_json)
             nd_json = add_paths_to_json_object_class.add_paths(nd_json)
+            nd_json = fix_creators_in_json_object_class.fix_creators(nd_json)
             write_s3_json(config['process-bucket'], os.path.join("json/", nd_json["id"] + '.json'), nd_json)
             print("ArchivesSpace ead_id = ", nd_json.get("id", ""), " source_system_url = ", ids[0], int(time.time() - start_time), 'seconds.')
             # in case we need to create CSVs

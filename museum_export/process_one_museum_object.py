@@ -9,6 +9,9 @@ from convert_json_to_csv import ConvertJsonToCsv
 from dependencies.pipelineutilities.validate_json import validate_json, get_nd_json_schema, schema_api_version
 from pipelineutilities.s3_helpers import write_s3_file, write_s3_json
 from sentry_sdk import capture_message, push_scope
+# from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
+from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject
+from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject
 
 
 class ProcessOneMuseumObject():
@@ -18,6 +21,9 @@ class ProcessOneMuseumObject():
         self.start_time = start_time
         self.save_despite_missing_fields = True
         self.api_version = schema_api_version()
+        # self.add_files_to_json_object_class = AddFilesToJsonObject(config)
+        self.add_paths_to_json_object_class = AddPathsToJsonObject(config)
+        self.fix_creators_in_json_object_class = FixCreatorsInJsonObject(config)
 
     def process_object(self, museum_object: dict):
         """ For each object, check for missing fields.  If there are none,
@@ -32,6 +38,10 @@ class ProcessOneMuseumObject():
             cleaned_up_object = clean_up_content_class.clean_up_content(museum_object)
             if not validate_nd_json(cleaned_up_object):
                 print("Validation Error validating modified object", object_id)
+            else:
+                # cleaned_up_object = self.add_files_to_json_object_class.add_files(cleaned_up_object)
+                cleaned_up_object = self.add_paths_to_json_object_class.add_paths(cleaned_up_object)
+                cleaned_up_object = self.fix_creators_in_json_object_class.fix_creators(cleaned_up_object)
             write_s3_json(self.config['process-bucket'], os.path.join("json/", object_id + '.json'), cleaned_up_object)
             # with open("cleaned_up_object.json", 'w') as f:
             #     json.dump(cleaned_up_object, f, indent=4)
