@@ -1,9 +1,7 @@
 import boto3
 import re
 import os
-import json
 from datetime import datetime, timedelta, timezone
-from hashlib import md5
 from urllib.parse import urlparse
 
 # saved live path
@@ -93,7 +91,7 @@ def id_from_url(url):
             url_part = url.netloc
             if url_part == 'rarebooks.nd.edu':
                 url_part = 'rarebooks.library.nd.edu'
-            return "%s://%s%s/%s" % (url.scheme, url_part, directory, test[0])
+            return "%s/%s" % (directory, test[0])
 
     return False
 
@@ -206,17 +204,59 @@ def list_updated_files(config: dict, minutes_to_test: int):
 
 
 def list_all_directories(config: dict):
+    order_field = {}
     bucket = config['rbsc-image-bucket']
     print("crawling image files in this bucket: ", bucket)
     for directory in folders_to_crawl:
-        files = get_matching_s3_objects(bucket, directory)
-        for file in files:
-            if (is_directory(file.get("Key", False))):
-                yield file['Key']
+        objects = get_matching_s3_objects(bucket, directory)
+        for obj in objects:
+            if is_tracked_file(obj.get('Key')):
+                key = obj.get('Key')
+                url = bucket_to_url[bucket] + key
+                if is_directory(key):
+                    directory = key
+                else:
+                    directory = os.path.dirname(key)
+                directory_id = key_to_id(directory)
+
+                id = id_from_url(url)
+
+                if id:
+                    id = key_to_id(id)
+                    if not order_field.get(directory_id, False):
+                        order_field[directory_id] = {
+                            "id": directory_id,
+                            "path": directory,
+                            "objects": {},
+                        }
+
+                    if not order_field[directory_id]['objects'].get(id, False):
+                        order_field[directory_id]['objects'][id] = {
+                            "id": id,
+                            "path": directory,
+                            "label": id.replace(directory_id, "").ltrim("-").replace("-", " "),
+                            "directory_id": directory,
+                            "Source": "RBSC",
+                            "LastModified": False,
+                            "files": [],
+                        }
+
+                    if not order_field[directory_id]['objects'][id]["LastModified"] or obj['LastModified'] > order_field[directory_id]['objects'][id]["LastModified"]:
+                        order_field[directory_id]['objects'][id]["LastModified"] = obj['LastModified']
+
+                    augement_file_record(obj, id, url, config)
+
+                    order_field[directory_id]['objects'][id]['files'].append(obj)
+
+    return order_field
+
+
+def key_to_id(key):
+    return key.lstrip("/").replace("/", "-")
 
 
 def is_directory(file):
-    return file and re.match(".*[/]$", file) and not re.match("^[.]$", file)
+    return file and re.match(".*[/]$", file) and not re.match("^[.]", file)
 
 
 def augement_file_record(obj, id, url, config):
@@ -224,9 +264,6 @@ def augement_file_record(obj, id, url, config):
 
     obj['FileId'] = id
     obj['Label'] = make_label(url, id)
-    # Athena timestamp 'YYYY-MM-DD HH:MM:SS' 24 hour time no timezone
-    # here i am converting to utc because the timezone is lost,
-    obj['LastModified'] = obj['LastModified'].strftime('%Y-%m-%d %H:%M:%S')
     obj['Source'] = 'RBSC'
     obj['Path'] = "s3://" + os.path.join(bucket, obj['Key'])
     obj['SourceUri'] = url
@@ -247,18 +284,7 @@ def is_tracked_file(file):
     return re.match(r"^.*[.]((jpe?g)|(tif)|(pdf))$", file, re.IGNORECASE)
 
 
-def output_as_file():
-    for row in crawl_available_files().items():
-        id = row[0]
-        obj = row[1]
-
-        file = "./data/" + md5(id.encode()).hexdigest() + ".json"
-        with open(file, 'w') as outfile:
-            obj["LastModified"] = obj["LastModified"].strftime('%Y-%m-%d %H:%M:%S')
-            json.dump(obj, outfile)
-
-
-    # python -c 'from search_files import *; test()'
+    #  python -c 'from search_files import *; test()'
 def test():
     from pipeline_config import setup_pipeline_config
     event = {"local": True}
@@ -267,8 +293,8 @@ def test():
     # change to the prod bucket
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     # data = list_updated_files(config, 1000000)
-    data = list_all_directories(config)
-    for obj in data:
-        print(obj)
+    objs = list_all_directories(config)
+    for key, value in objs["collections/ead_xml/images/BPP_1001"]["objects"].items():
+        print(key)
 
     return

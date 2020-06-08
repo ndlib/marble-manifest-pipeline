@@ -124,10 +124,12 @@ class TestSearchFiles(unittest.TestCase):
             'multi/level',
             'multi/level/with.ex',
             'multi/level/image.jpg',
+            '',
+            0
         ]
 
         for test in false_tests:
-            self.assertFalse(is_directory(test), msg="Test: {}" % {test})
+            self.assertFalse(is_directory(test), msg="Should Fail Test: %s" % test)
 
 
 if __name__ == '__main__':

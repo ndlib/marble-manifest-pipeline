@@ -1,0 +1,3194 @@
+[
+  {
+    "id": "collections-ead_xml-images-BPP_1001",
+    "mode": "single-volume",
+    "numberOfFiles": 472,
+    "path": "collections/ead_xml/images/BPP_1001",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-BPP_1001"
+  },
+  {
+    "id": "collections-ead_xml-images-BPP_1001-resource.frk",
+    "mode": "single-volume",
+    "numberOfFiles": 472,
+    "path": "collections/ead_xml/images/BPP_1001/resource.frk",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-BPP_1001-resource.frk"
+  },
+  {
+    "id": "collections-ead_xml-images-EPH_5007",
+    "mode": "single-volume",
+    "numberOfFiles": 72,
+    "path": "collections/ead_xml/images/EPH_5007",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-EPH_5007"
+  },
+  {
+    "id": "collections-ead_xml-images-EPH_5007-resourc7.frk",
+    "mode": "single-volume",
+    "numberOfFiles": 72,
+    "path": "collections/ead_xml/images/EPH_5007/resourc7.frk",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-EPH_5007-resourc7.frk"
+  },
+  {
+    "id": "collections-ead_xml-images-MSE-MD_3811",
+    "mode": "single-volume",
+    "numberOfFiles": 24,
+    "path": "collections/ead_xml/images/MSE-MD_3811",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-MSE-MD_3811"
+  },
+  {
+    "id": "collections-ead_xml-images-MSN-COL_0500",
+    "mode": "single-volume",
+    "numberOfFiles": 32,
+    "path": "collections/ead_xml/images/MSN-COL_0500",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-MSN-COL_0500"
+  },
+  {
+    "id": "collections-ead_xml-images-MSN-COL_8500",
+    "mode": "single-volume",
+    "numberOfFiles": 12,
+    "path": "collections/ead_xml/images/MSN-COL_8500",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-MSN-COL_8500"
+  },
+  {
+    "id": "collections-ead_xml-images-MSN-COL_8500-resource.frk",
+    "mode": "single-volume",
+    "numberOfFiles": 12,
+    "path": "collections/ead_xml/images/MSN-COL_8500/resource.frk",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-MSN-COL_8500-resource.frk"
+  },
+  {
+    "id": "collections-ead_xml-images-MSN-COL_8501",
+    "mode": "single-volume",
+    "numberOfFiles": 19,
+    "path": "collections/ead_xml/images/MSN-COL_8501",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-MSN-COL_8501"
+  },
+  {
+    "id": "collections-ead_xml-images-MSN-CW_5061",
+    "mode": "single-volume",
+    "numberOfFiles": 195,
+    "path": "collections/ead_xml/images/MSN-CW_5061",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-MSN-CW_5061"
+  },
+  {
+    "id": "collections-ead_xml-images-MSN-EA_0500",
+    "mode": "single-volume",
+    "numberOfFiles": 127,
+    "path": "collections/ead_xml/images/MSN-EA_0500",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-MSN-EA_0500"
+  },
+  {
+    "id": "collections-ead_xml-images-MSN-EA_0504",
+    "mode": "single-volume",
+    "numberOfFiles": 263,
+    "path": "collections/ead_xml/images/MSN-EA_0504",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-MSN-EA_0504"
+  },
+  {
+    "id": "collections-ead_xml-images-MSN-EA_5002",
+    "mode": "single-volume",
+    "numberOfFiles": 167,
+    "path": "collections/ead_xml/images/MSN-EA_5002",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-MSN-EA_5002"
+  },
+  {
+    "id": "collections-ead_xml-images-MSN-EA_5022",
+    "mode": "single-volume",
+    "numberOfFiles": 51,
+    "path": "collections/ead_xml/images/MSN-EA_5022",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-MSN-EA_5022"
+  },
+  {
+    "id": "collections-ead_xml-images-MSN-EA_5026",
+    "mode": "single-volume",
+    "numberOfFiles": 62,
+    "path": "collections/ead_xml/images/MSN-EA_5026",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-MSN-EA_5026"
+  },
+  {
+    "id": "collections-ead_xml-images-MSN-EA_5031",
+    "mode": "single-volume",
+    "numberOfFiles": 146,
+    "path": "collections/ead_xml/images/MSN-EA_5031",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-MSN-EA_5031"
+  },
+  {
+    "id": "collections-ead_xml-images-MSN-MN_5004",
+    "mode": "single-volume",
+    "numberOfFiles": 132,
+    "path": "collections/ead_xml/images/MSN-MN_5004",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/collections-ead_xml-images-MSN-MN_5004"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_000297305",
+    "mode": "multi-volume",
+    "numberOfFiles": 50,
+    "path": "digital/MARBLE-images/BOO_000297305",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_000297305"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_000362236",
+    "mode": "multi-volume",
+    "numberOfFiles": 14,
+    "path": "digital/MARBLE-images/BOO_000362236",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_000362236"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_001016383",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/BOO_001016383",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_001016383"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_002097132",
+    "mode": "multi-volume",
+    "numberOfFiles": 36,
+    "path": "digital/MARBLE-images/BOO_002097132",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_002097132"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_002468275",
+    "mode": "multi-volume",
+    "numberOfFiles": 14,
+    "path": "digital/MARBLE-images/BOO_002468275",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_002468275"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_002468275-JPEG",
+    "mode": "multi-volume",
+    "numberOfFiles": 14,
+    "path": "digital/MARBLE-images/BOO_002468275/JPEG",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_002468275-JPEG"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_002468275-PDF",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/BOO_002468275/PDF",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_002468275-PDF"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_002468275-Source",
+    "mode": "multi-volume",
+    "numberOfFiles": 14,
+    "path": "digital/MARBLE-images/BOO_002468275/Source",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_002468275-Source"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_004476467",
+    "mode": "multi-volume",
+    "numberOfFiles": 130,
+    "path": "digital/MARBLE-images/BOO_004476467",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_004476467"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_004607040",
+    "mode": "multi-volume",
+    "numberOfFiles": 40,
+    "path": "digital/MARBLE-images/BOO_004607040",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_004607040"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_004607047",
+    "mode": "multi-volume",
+    "numberOfFiles": 32,
+    "path": "digital/MARBLE-images/BOO_004607047",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_004607047"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_004607050",
+    "mode": "multi-volume",
+    "numberOfFiles": 44,
+    "path": "digital/MARBLE-images/BOO_004607050",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_004607050"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_004788660",
+    "mode": "multi-volume",
+    "numberOfFiles": 146,
+    "path": "digital/MARBLE-images/BOO_004788660",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_004788660"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/BOO_005063486",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005065260",
+    "mode": "multi-volume",
+    "numberOfFiles": 20,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005065260",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005065260"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005192368",
+    "mode": "multi-volume",
+    "numberOfFiles": 20,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005192368",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005192368"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005192369",
+    "mode": "multi-volume",
+    "numberOfFiles": 24,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005192369",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005192369"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005192370",
+    "mode": "multi-volume",
+    "numberOfFiles": 16,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005192370",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005192370"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005192371",
+    "mode": "multi-volume",
+    "numberOfFiles": 20,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005192371",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005192371"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005192373",
+    "mode": "multi-volume",
+    "numberOfFiles": 20,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005192373",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005192373"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005192399",
+    "mode": "multi-volume",
+    "numberOfFiles": 24,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005192399",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005192399"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005192410",
+    "mode": "multi-volume",
+    "numberOfFiles": 28,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005192410",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005192410"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005192411",
+    "mode": "multi-volume",
+    "numberOfFiles": 24,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005192411",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005192411"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005192429",
+    "mode": "multi-volume",
+    "numberOfFiles": 28,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005192429",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005192429"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005192434",
+    "mode": "multi-volume",
+    "numberOfFiles": 28,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005192434",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005192434"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005193683",
+    "mode": "multi-volume",
+    "numberOfFiles": 28,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005193683",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005193683"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005193687",
+    "mode": "multi-volume",
+    "numberOfFiles": 28,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005193687",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005193687"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005193691",
+    "mode": "multi-volume",
+    "numberOfFiles": 28,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005193691",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005193691"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005193697",
+    "mode": "multi-volume",
+    "numberOfFiles": 28,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005193697",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005193697"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005193699",
+    "mode": "multi-volume",
+    "numberOfFiles": 28,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005193699",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005193699"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005193712",
+    "mode": "multi-volume",
+    "numberOfFiles": 24,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005193712",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005193712"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005193761",
+    "mode": "multi-volume",
+    "numberOfFiles": 28,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005193761",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005193761"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005193799",
+    "mode": "multi-volume",
+    "numberOfFiles": 20,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005193799",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005193799"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005194927",
+    "mode": "multi-volume",
+    "numberOfFiles": 24,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005194927",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005194927"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005194932",
+    "mode": "multi-volume",
+    "numberOfFiles": 24,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005194932",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005194932"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005194941",
+    "mode": "multi-volume",
+    "numberOfFiles": 24,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005194941",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005194941"
+  },
+  {
+    "id": "digital-MARBLE-images-BOO_005063486-BOO_005194943",
+    "mode": "multi-volume",
+    "numberOfFiles": 24,
+    "path": "digital/MARBLE-images/BOO_005063486/BOO_005194943",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BOO_005063486-BOO_005194943"
+  },
+  {
+    "id": "digital-MARBLE-images-BSD_002824648",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/BSD_002824648",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BSD_002824648"
+  },
+  {
+    "id": "digital-MARBLE-images-BSD_004318784",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/BSD_004318784",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BSD_004318784"
+  },
+  {
+    "id": "digital-MARBLE-images-BSD_004544796",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/BSD_004544796",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BSD_004544796"
+  },
+  {
+    "id": "digital-MARBLE-images-BSD_004746702",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/BSD_004746702",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BSD_004746702"
+  },
+  {
+    "id": "digital-MARBLE-images-BSD_004746712",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/BSD_004746712",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-BSD_004746712"
+  },
+  {
+    "id": "digital-MARBLE-images-INQ_001591353",
+    "mode": "multi-volume",
+    "numberOfFiles": 5,
+    "path": "digital/MARBLE-images/INQ_001591353",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-INQ_001591353"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002201785",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002201785",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002201785"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002202427",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002202427",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002202427"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002202548",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002202548",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002202548"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002202558",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002202558",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002202558"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203043",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002203043",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203043"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203079",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002203079",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203079"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203084",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002203084",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203084"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203090",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002203090",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203090"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203265",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002203265",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203265"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203292",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002203292",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203292"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203306",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002203306",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203306"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203434",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002203434",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203434"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203518",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002203518",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203518"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203894",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002203894",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203894"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203917",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002203917",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203917"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203932",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002203932",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203932"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203935",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002203935",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203935"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203941",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002203941",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203941"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002203943",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002203943",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002203943"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204104",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204104",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204104"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204121",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204121",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204121"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204223",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204223",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204223"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204270",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204270",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204270"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204291",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204291",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204291"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204310",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204310",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204310"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204366",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204366",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204366"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204371",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204371",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204371"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204373",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204373",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204373"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204454",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204454",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204454"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204488",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204488",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204488"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204510",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204510",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204510"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204554",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002204554",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204554"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204579",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204579",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204579"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204603",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204603",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204603"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204607",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002204607",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204607"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204679",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002204679",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204679"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204685",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002204685",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204685"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204714",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204714",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204714"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204763",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002204763",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204763"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204790",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204790",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204790"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204843",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204843",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204843"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204845",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204845",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204845"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204946",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002204946",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204946"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002204979",
+    "mode": "multi-volume",
+    "numberOfFiles": 4,
+    "path": "digital/MARBLE-images/MAN/MAN_002204979",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002204979"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002205005",
+    "mode": "multi-volume",
+    "numberOfFiles": 4,
+    "path": "digital/MARBLE-images/MAN/MAN_002205005",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002205005"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002205056",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002205056",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002205056"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002205101",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002205101",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002205101"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002205128",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002205128",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002205128"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002205202",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002205202",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002205202"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002205209",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002205209",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002205209"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002205688",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002205688",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002205688"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002205696",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002205696",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002205696"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002205927",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002205927",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002205927"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002205929",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002205929",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002205929"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002205942",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002205942",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002205942"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002205973",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002205973",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002205973"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002206009",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002206009",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002206009"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002206027",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002206027",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002206027"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002206056",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002206056",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002206056"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002206089",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002206089",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002206089"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002206108",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002206108",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002206108"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002206117",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002206117",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002206117"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002206132",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002206132",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002206132"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002206134",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002206134",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002206134"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207077",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207077",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207077"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207147",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207147",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207147"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207206",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207206",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207206"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207215",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207215",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207215"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207223",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207223",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207223"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207228",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207228",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207228"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207229",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207229",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207229"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207293",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002207293",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207293"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207299",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207299",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207299"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207301",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207301",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207301"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207318",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002207318",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207318"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207324",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207324",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207324"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207340",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207340",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207340"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207344",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207344",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207344"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207345",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207345",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207345"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207474",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207474",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207474"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207487",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207487",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207487"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207515",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207515",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207515"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207562",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002207562",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207562"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207617",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207617",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207617"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207621",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207621",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207621"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207663",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207663",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207663"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207669",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002207669",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207669"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002207711",
+    "mode": "multi-volume",
+    "numberOfFiles": 4,
+    "path": "digital/MARBLE-images/MAN/MAN_002207711",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002207711"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002208083",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002208083",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002208083"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002208105",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002208105",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002208105"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002208111",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN/MAN_002208111",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002208111"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002208115",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002208115",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002208115"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002208136",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002208136",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002208136"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002208263",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002208263",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002208263"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002208274",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002208274",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002208274"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN-MAN_002208362",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN/MAN_002208362",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN-MAN_002208362"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002201785",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002201785",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002201785"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002202427",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002202427",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002202427"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002202548",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002202548",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002202548"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002202558",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002202558",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002202558"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203043",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002203043",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203043"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203079",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002203079",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203079"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203084",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002203084",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203084"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203090",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002203090",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203090"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203265",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002203265",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203265"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203292",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002203292",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203292"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203306",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002203306",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203306"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203434",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002203434",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203434"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203518",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002203518",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203518"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203894",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002203894",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203894"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203917",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002203917",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203917"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203932",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002203932",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203932"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203935",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002203935",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203935"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203941",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002203941",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203941"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002203943",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002203943",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002203943"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204104",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204104",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204104"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204121",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204121",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204121"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204223",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204223",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204223"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204270",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204270",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204270"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204291",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204291",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204291"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204310",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204310",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204310"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204366",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204366",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204366"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204371",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204371",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204371"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204373",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204373",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204373"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204454",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204454",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204454"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204488",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204488",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204488"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204510",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204510",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204510"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204554",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002204554",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204554"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204579",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204579",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204579"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204603",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204603",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204603"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204607",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002204607",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204607"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204679",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002204679",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204679"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204685",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002204685",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204685"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204714",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204714",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204714"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204763",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002204763",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204763"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204790",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204790",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204790"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204843",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204843",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204843"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204845",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204845",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204845"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204946",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002204946",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204946"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002204979",
+    "mode": "multi-volume",
+    "numberOfFiles": 4,
+    "path": "digital/MARBLE-images/MAN_002204979",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002204979"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002205005",
+    "mode": "multi-volume",
+    "numberOfFiles": 4,
+    "path": "digital/MARBLE-images/MAN_002205005",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002205005"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002205056",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002205056",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002205056"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002205101",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002205101",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002205101"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002205128",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002205128",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002205128"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002205202",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002205202",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002205202"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002205209",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002205209",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002205209"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002205688",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002205688",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002205688"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002205696",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002205696",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002205696"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002205927",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002205927",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002205927"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002205929",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002205929",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002205929"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002205942",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002205942",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002205942"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002205973",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002205973",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002205973"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002206009",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002206009",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002206009"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002206027",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002206027",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002206027"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002206056",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002206056",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002206056"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002206089",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002206089",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002206089"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002206108",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002206108",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002206108"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002206117",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002206117",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002206117"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002206132",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002206132",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002206132"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002206134",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002206134",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002206134"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207077",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207077",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207077"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207147",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207147",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207147"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207206",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207206",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207206"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207215",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207215",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207215"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207223",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207223",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207223"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207228",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207228",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207228"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207229",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207229",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207229"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207293",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002207293",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207293"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207299",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207299",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207299"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207301",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207301",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207301"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207318",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002207318",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207318"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207324",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207324",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207324"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207340",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207340",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207340"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207344",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207344",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207344"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207345",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207345",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207345"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207474",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207474",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207474"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207487",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207487",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207487"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207515",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207515",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207515"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207562",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002207562",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207562"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207617",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207617",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207617"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207621",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207621",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207621"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207663",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207663",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207663"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207669",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002207669",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207669"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002207711",
+    "mode": "multi-volume",
+    "numberOfFiles": 4,
+    "path": "digital/MARBLE-images/MAN_002207711",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002207711"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208083",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208083",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208083"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208105",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002208105",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208105"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208111",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002208111",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208111"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208115",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208115",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208115"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208136",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208136",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208136"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208263",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208263",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208263"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208274",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208274",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208274"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208362",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208362",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208362"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208436",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002208436",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208436"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208457",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208457",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208457"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208479",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208479",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208479"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208480",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208480",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208480"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208483",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208483",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208483"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208546",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208546",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208546"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208553",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002208553",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208553"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208561",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002208561",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208561"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208593",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208593",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208593"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208596",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208596",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208596"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208599",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002208599",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208599"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208673",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208673",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208673"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208681",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208681",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208681"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208686",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002208686",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208686"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208759",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208759",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208759"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208761",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208761",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208761"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208764",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208764",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208764"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208783",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208783",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208783"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208787",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208787",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208787"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208791",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208791",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208791"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208810",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208810",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208810"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208836",
+    "mode": "multi-volume",
+    "numberOfFiles": 3,
+    "path": "digital/MARBLE-images/MAN_002208836",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208836"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208841",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002208841",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208841"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208844",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208844",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208844"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208903",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208903",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208903"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208913",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208913",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208913"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208943",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208943",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208943"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208980",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208980",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208980"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002208981",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002208981",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002208981"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209014",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209014",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209014"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209027",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209027",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209027"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209069",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209069",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209069"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209079",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209079",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209079"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209083",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209083",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209083"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209173",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209173",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209173"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209207",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209207",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209207"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209497",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002209497",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209497"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209543",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209543",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209543"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209573",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002209573",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209573"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209657",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002209657",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209657"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209668",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209668",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209668"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209674",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209674",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209674"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209705",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209705",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209705"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209763",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209763",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209763"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209799",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209799",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209799"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209818",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209818",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209818"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209843",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209843",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209843"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209871",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209871",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209871"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209879",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209879",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209879"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209941",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209941",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209941"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002209977",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002209977",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002209977"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002210038",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002210038",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002210038"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002210082",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002210082",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002210082"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002210104",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002210104",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002210104"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002210115",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002210115",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002210115"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002210162",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002210162",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002210162"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002210178",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002210178",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002210178"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002210186",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002210186",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002210186"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002210447",
+    "mode": "multi-volume",
+    "numberOfFiles": 17,
+    "path": "digital/MARBLE-images/MAN_002210447",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002210447"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002210480",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002210480",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002210480"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002210638",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/MARBLE-images/MAN_002210638",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002210638"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002210658",
+    "mode": "multi-volume",
+    "numberOfFiles": 4,
+    "path": "digital/MARBLE-images/MAN_002210658",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002210658"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002210682",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002210682",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002210682"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002211088",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002211088",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002211088"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002211100",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002211100",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002211100"
+  },
+  {
+    "id": "digital-MARBLE-images-MAN_002211170",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/MAN_002211170",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MAN_002211170"
+  },
+  {
+    "id": "digital-MARBLE-images-MSE-REE_0006",
+    "mode": "multi-volume",
+    "numberOfFiles": 401,
+    "path": "digital/MARBLE-images/MSE-REE_0006",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MSE-REE_0006"
+  },
+  {
+    "id": "digital-MARBLE-images-MSN\uf022COL-9101-1-B",
+    "mode": "multi-volume",
+    "numberOfFiles": 266,
+    "path": "digital/MARBLE-images/MSN\uf022COL-9101-1-B",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-MSN\uf022COL-9101-1-B"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_004737082",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_004737082",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_004737082"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005069928",
+    "mode": "multi-volume",
+    "numberOfFiles": 30,
+    "path": "digital/MARBLE-images/POR_005069928",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005069928"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005095838",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005095838",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005095838"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005095843",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005095843",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005095843"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005095911",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005095911",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005095911"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005095915",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005095915",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005095915"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005095918",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005095918",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005095918"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005095928",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005095928",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005095928"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005095930",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005095930",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005095930"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005095932",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005095932",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005095932"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005095934",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005095934",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005095934"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005095938",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005095938",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005095938"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005095940",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005095940",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005095940"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096108",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096108",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096108"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096109",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096109",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096109"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096110",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096110",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096110"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096112",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096112",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096112"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096119",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096119",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096119"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096122",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096122",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096122"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096144",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096144",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096144"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096149",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096149",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096149"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096154",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096154",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096154"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096155",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096155",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096155"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096156",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096156",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096156"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096456",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096456",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096456"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096468",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096468",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096468"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096477",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096477",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096477"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096489",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096489",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096489"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096503",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096503",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096503"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096746",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096746",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096746"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096748",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096748",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096748"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096749",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096749",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096749"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096751",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096751",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096751"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096754",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096754",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096754"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096767",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096767",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096767"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096795",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096795",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096795"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096796",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096796",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096796"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096797",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096797",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096797"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096910",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096910",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096910"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096912",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096912",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096912"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096931",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096931",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096931"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096939",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096939",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096939"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096941",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096941",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096941"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096943",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096943",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096943"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096944",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096944",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096944"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096945",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096945",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096945"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096951",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096951",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096951"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096952",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096952",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096952"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096954",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096954",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096954"
+  },
+  {
+    "id": "digital-MARBLE-images-POR_005096957",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/POR_005096957",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-POR_005096957"
+  },
+  {
+    "id": "digital-MARBLE-images-PRI_003504839",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/PRI_003504839",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-PRI_003504839"
+  },
+  {
+    "id": "digital-MARBLE-images-PRI_004560152",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/PRI_004560152",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-PRI_004560152"
+  },
+  {
+    "id": "digital-MARBLE-images-PRI_004789783",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/PRI_004789783",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-PRI_004789783"
+  },
+  {
+    "id": "digital-MARBLE-images-PRI_004862496",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/PRI_004862496",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-PRI_004862496"
+  },
+  {
+    "id": "digital-MARBLE-images-PRI_004932484",
+    "mode": "multi-volume",
+    "numberOfFiles": 1,
+    "path": "digital/MARBLE-images/PRI_004932484",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-MARBLE-images-PRI_004932484"
+  },
+  {
+    "id": "digital-bookreader-CodLat_b04-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 722,
+    "path": "digital/bookreader/CodLat_b04/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-CodLat_b04-images"
+  },
+  {
+    "id": "digital-bookreader-CodLat_b13-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 531,
+    "path": "digital/bookreader/CodLat_b13/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-CodLat_b13-images"
+  },
+  {
+    "id": "digital-bookreader-CodLat_c02-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 470,
+    "path": "digital/bookreader/CodLat_c02/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-CodLat_c02-images"
+  },
+  {
+    "id": "digital-bookreader-CodLat_c03-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 284,
+    "path": "digital/bookreader/CodLat_c03/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-CodLat_c03-images"
+  },
+  {
+    "id": "digital-bookreader-El_Duende-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 4,
+    "path": "digital/bookreader/El_Duende/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-El_Duende-images"
+  },
+  {
+    "id": "digital-bookreader-MSE-MD_3821-077-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 74,
+    "path": "digital/bookreader/MSE-MD_3821-077/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSE-MD_3821-077-images"
+  },
+  {
+    "id": "digital-bookreader-MSE-MD_3821-081-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 28,
+    "path": "digital/bookreader/MSE-MD_3821-081/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSE-MD_3821-081-images"
+  },
+  {
+    "id": "digital-bookreader-MSE_1434-1-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 44,
+    "path": "digital/bookreader/MSE_1434-1/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSE_1434-1-images"
+  },
+  {
+    "id": "digital-bookreader-MSE_1434-2-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 74,
+    "path": "digital/bookreader/MSE_1434-2/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSE_1434-2-images"
+  },
+  {
+    "id": "digital-bookreader-MSN-COL_9101-1-B-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 270,
+    "path": "digital/bookreader/MSN-COL_9101-1-B/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSN-COL_9101-1-B-images"
+  },
+  {
+    "id": "digital-bookreader-MSN-CW_8010-1-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 58,
+    "path": "digital/bookreader/MSN-CW_8010-1/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSN-CW_8010-1-images"
+  },
+  {
+    "id": "digital-bookreader-MSN-EA_8000-1-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 128,
+    "path": "digital/bookreader/MSN-EA_8000-1/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSN-EA_8000-1-images"
+  },
+  {
+    "id": "digital-bookreader-MSN-EA_8006-1-B-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 172,
+    "path": "digital/bookreader/MSN-EA_8006-1-B/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSN-EA_8006-1-B-images"
+  },
+  {
+    "id": "digital-bookreader-MSN-EA_8011-1-B-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 206,
+    "path": "digital/bookreader/MSN-EA_8011-1-B/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSN-EA_8011-1-B-images"
+  },
+  {
+    "id": "digital-bookreader-MSN-EA_8011-2-B-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 208,
+    "path": "digital/bookreader/MSN-EA_8011-2-B/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSN-EA_8011-2-B-images"
+  },
+  {
+    "id": "digital-bookreader-MSN-EA_8012-1-B-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 88,
+    "path": "digital/bookreader/MSN-EA_8012-1-B/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSN-EA_8012-1-B-images"
+  },
+  {
+    "id": "digital-bookreader-MSN-EA_8013-2-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 116,
+    "path": "digital/bookreader/MSN-EA_8013-2/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSN-EA_8013-2-images"
+  },
+  {
+    "id": "digital-bookreader-MSN-EA_8013-3-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 24,
+    "path": "digital/bookreader/MSN-EA_8013-3/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSN-EA_8013-3-images"
+  },
+  {
+    "id": "digital-bookreader-MSN-EA_8014-1-B-images",
+    "mode": "single-volume",
+    "numberOfFiles": 112,
+    "path": "digital/bookreader/MSN-EA_8014-1-B/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSN-EA_8014-1-B-images"
+  },
+  {
+    "id": "digital-bookreader-MSN-MN_8004-1-B-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 376,
+    "path": "digital/bookreader/MSN-MN_8004-1-B/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSN-MN_8004-1-B-images"
+  },
+  {
+    "id": "digital-bookreader-MSN-MN_8008-1-B-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 332,
+    "path": "digital/bookreader/MSN-MN_8008-1-B/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSN-MN_8008-1-B-images"
+  },
+  {
+    "id": "digital-bookreader-MSN-MN_8009-1-B-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 196,
+    "path": "digital/bookreader/MSN-MN_8009-1-B/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSN-MN_8009-1-B-images"
+  },
+  {
+    "id": "digital-bookreader-MSSP_7000-01-B-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 236,
+    "path": "digital/bookreader/MSSP_7000-01-B/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSSP_7000-01-B-images"
+  },
+  {
+    "id": "digital-bookreader-MSS_CodLat_e05-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 468,
+    "path": "digital/bookreader/MSS_CodLat_e05/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-MSS_CodLat_e05-images"
+  },
+  {
+    "id": "digital-bookreader-Newberry-Case_MS_181-images",
+    "mode": "multi-volume",
+    "numberOfFiles": 438,
+    "path": "digital/bookreader/Newberry-Case_MS_181/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-Newberry-Case_MS_181-images"
+  },
+  {
+    "id": "digital-bookreader-images-CodLat_b13",
+    "mode": "multi-volume",
+    "numberOfFiles": 531,
+    "path": "digital/bookreader/images/CodLat_b13",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-images-CodLat_b13"
+  },
+  {
+    "id": "digital-bookreader-images-CodLat_c02",
+    "mode": "multi-volume",
+    "numberOfFiles": 474,
+    "path": "digital/bookreader/images/CodLat_c02",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-images-CodLat_c02"
+  },
+  {
+    "id": "digital-bookreader-images-CodLat_c03",
+    "mode": "multi-volume",
+    "numberOfFiles": 284,
+    "path": "digital/bookreader/images/CodLat_c03",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-images-CodLat_c03"
+  },
+  {
+    "id": "digital-bookreader-images-MSE_1434-1",
+    "mode": "multi-volume",
+    "numberOfFiles": 44,
+    "path": "digital/bookreader/images/MSE_1434-1",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-images-MSE_1434-1"
+  },
+  {
+    "id": "digital-bookreader-images-MSE_1434-2",
+    "mode": "multi-volume",
+    "numberOfFiles": 74,
+    "path": "digital/bookreader/images/MSE_1434-2",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-images-MSE_1434-2"
+  },
+  {
+    "id": "digital-bookreader-images-Newberry-Case_MS_181",
+    "mode": "multi-volume",
+    "numberOfFiles": 438,
+    "path": "digital/bookreader/images/Newberry-Case_MS_181",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-bookreader-images-Newberry-Case_MS_181"
+  },
+  {
+    "id": "digital-civil_war-diaries_journals-images-alexander",
+    "mode": "multi-volume",
+    "numberOfFiles": 60,
+    "path": "digital/civil_war/diaries_journals/images/alexander",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-diaries_journals-images-alexander"
+  },
+  {
+    "id": "digital-civil_war-diaries_journals-images-arthur",
+    "mode": "multi-volume",
+    "numberOfFiles": 65,
+    "path": "digital/civil_war/diaries_journals/images/arthur",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-diaries_journals-images-arthur"
+  },
+  {
+    "id": "digital-civil_war-diaries_journals-images-barb",
+    "mode": "multi-volume",
+    "numberOfFiles": 21,
+    "path": "digital/civil_war/diaries_journals/images/barb",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-diaries_journals-images-barb"
+  },
+  {
+    "id": "digital-civil_war-diaries_journals-images-boardman",
+    "mode": "multi-volume",
+    "numberOfFiles": 68,
+    "path": "digital/civil_war/diaries_journals/images/boardman",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-diaries_journals-images-boardman"
+  },
+  {
+    "id": "digital-civil_war-diaries_journals-images-cline",
+    "mode": "multi-volume",
+    "numberOfFiles": 127,
+    "path": "digital/civil_war/diaries_journals/images/cline",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-diaries_journals-images-cline"
+  },
+  {
+    "id": "digital-civil_war-diaries_journals-images-moore",
+    "mode": "multi-volume",
+    "numberOfFiles": 59,
+    "path": "digital/civil_war/diaries_journals/images/moore",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-diaries_journals-images-moore"
+  },
+  {
+    "id": "digital-civil_war-diaries_journals-images-murphy",
+    "mode": "multi-volume",
+    "numberOfFiles": 32,
+    "path": "digital/civil_war/diaries_journals/images/murphy",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-diaries_journals-images-murphy"
+  },
+  {
+    "id": "digital-civil_war-letters-images-anderson-reavis",
+    "mode": "single-volume",
+    "numberOfFiles": 42,
+    "path": "digital/civil_war/letters/images/anderson-reavis",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-anderson-reavis"
+  },
+  {
+    "id": "digital-civil_war-letters-images-aubin",
+    "mode": "single-volume",
+    "numberOfFiles": 63,
+    "path": "digital/civil_war/letters/images/aubin",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-aubin"
+  },
+  {
+    "id": "digital-civil_war-letters-images-barker",
+    "mode": "multi-volume",
+    "numberOfFiles": 5,
+    "path": "digital/civil_war/letters/images/barker",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-barker"
+  },
+  {
+    "id": "digital-civil_war-letters-images-bettle",
+    "mode": "multi-volume",
+    "numberOfFiles": 11,
+    "path": "digital/civil_war/letters/images/bettle",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-bettle"
+  },
+  {
+    "id": "digital-civil_war-letters-images-caley",
+    "mode": "single-volume",
+    "numberOfFiles": 121,
+    "path": "digital/civil_war/letters/images/caley",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-caley"
+  },
+  {
+    "id": "digital-civil_war-letters-images-combs",
+    "mode": "single-volume",
+    "numberOfFiles": 23,
+    "path": "digital/civil_war/letters/images/combs",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-combs"
+  },
+  {
+    "id": "digital-civil_war-letters-images-croft",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/civil_war/letters/images/croft",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-croft"
+  },
+  {
+    "id": "digital-civil_war-letters-images-crowell",
+    "mode": "multi-volume",
+    "numberOfFiles": 4,
+    "path": "digital/civil_war/letters/images/crowell",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-crowell"
+  },
+  {
+    "id": "digital-civil_war-letters-images-figures",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/civil_war/letters/images/figures",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-figures"
+  },
+  {
+    "id": "digital-civil_war-letters-images-harvey",
+    "mode": "multi-volume",
+    "numberOfFiles": 3,
+    "path": "digital/civil_war/letters/images/harvey",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-harvey"
+  },
+  {
+    "id": "digital-civil_war-letters-images-harvey-ma",
+    "mode": "multi-volume",
+    "numberOfFiles": 4,
+    "path": "digital/civil_war/letters/images/harvey-ma",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-harvey-ma"
+  },
+  {
+    "id": "digital-civil_war-letters-images-jackson",
+    "mode": "single-volume",
+    "numberOfFiles": 129,
+    "path": "digital/civil_war/letters/images/jackson",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-jackson"
+  },
+  {
+    "id": "digital-civil_war-letters-images-jordan",
+    "mode": "multi-volume",
+    "numberOfFiles": 4,
+    "path": "digital/civil_war/letters/images/jordan",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-jordan"
+  },
+  {
+    "id": "digital-civil_war-letters-images-maley",
+    "mode": "single-volume",
+    "numberOfFiles": 142,
+    "path": "digital/civil_war/letters/images/maley",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-maley"
+  },
+  {
+    "id": "digital-civil_war-letters-images-mckinney",
+    "mode": "single-volume",
+    "numberOfFiles": 21,
+    "path": "digital/civil_war/letters/images/mckinney",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-mckinney"
+  },
+  {
+    "id": "digital-civil_war-letters-images-meek",
+    "mode": "single-volume",
+    "numberOfFiles": 77,
+    "path": "digital/civil_war/letters/images/meek",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-meek"
+  },
+  {
+    "id": "digital-civil_war-letters-images-morgan",
+    "mode": "multi-volume",
+    "numberOfFiles": 3,
+    "path": "digital/civil_war/letters/images/morgan",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-morgan"
+  },
+  {
+    "id": "digital-civil_war-letters-images-parkison",
+    "mode": "single-volume",
+    "numberOfFiles": 38,
+    "path": "digital/civil_war/letters/images/parkison",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-parkison"
+  },
+  {
+    "id": "digital-civil_war-letters-images-peed",
+    "mode": "single-volume",
+    "numberOfFiles": 32,
+    "path": "digital/civil_war/letters/images/peed",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-peed"
+  },
+  {
+    "id": "digital-civil_war-letters-images-pratt",
+    "mode": "single-volume",
+    "numberOfFiles": 22,
+    "path": "digital/civil_war/letters/images/pratt",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-pratt"
+  },
+  {
+    "id": "digital-civil_war-letters-images-pugh",
+    "mode": "single-volume",
+    "numberOfFiles": 42,
+    "path": "digital/civil_war/letters/images/pugh",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-pugh"
+  },
+  {
+    "id": "digital-civil_war-letters-images-randall",
+    "mode": "single-volume",
+    "numberOfFiles": 190,
+    "path": "digital/civil_war/letters/images/randall",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-randall"
+  },
+  {
+    "id": "digital-civil_war-letters-images-read",
+    "mode": "single-volume",
+    "numberOfFiles": 117,
+    "path": "digital/civil_war/letters/images/read",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-read"
+  },
+  {
+    "id": "digital-civil_war-letters-images-reeves",
+    "mode": "single-volume",
+    "numberOfFiles": 292,
+    "path": "digital/civil_war/letters/images/reeves",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-reeves"
+  },
+  {
+    "id": "digital-civil_war-letters-images-savage",
+    "mode": "multi-volume",
+    "numberOfFiles": 6,
+    "path": "digital/civil_war/letters/images/savage",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-savage"
+  },
+  {
+    "id": "digital-civil_war-letters-images-shipman",
+    "mode": "single-volume",
+    "numberOfFiles": 40,
+    "path": "digital/civil_war/letters/images/shipman",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-shipman"
+  },
+  {
+    "id": "digital-civil_war-letters-images-shriver",
+    "mode": "single-volume",
+    "numberOfFiles": 14,
+    "path": "digital/civil_war/letters/images/shriver",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-shriver"
+  },
+  {
+    "id": "digital-civil_war-letters-images-sillers-holmes",
+    "mode": "single-volume",
+    "numberOfFiles": 47,
+    "path": "digital/civil_war/letters/images/sillers-holmes",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-sillers-holmes"
+  },
+  {
+    "id": "digital-civil_war-letters-images-taylor",
+    "mode": "single-volume",
+    "numberOfFiles": 5,
+    "path": "digital/civil_war/letters/images/taylor",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-taylor"
+  },
+  {
+    "id": "digital-civil_war-letters-images-thomas",
+    "mode": "single-volume",
+    "numberOfFiles": 177,
+    "path": "digital/civil_war/letters/images/thomas",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-thomas"
+  },
+  {
+    "id": "digital-civil_war-letters-images-tyson",
+    "mode": "single-volume",
+    "numberOfFiles": 29,
+    "path": "digital/civil_war/letters/images/tyson",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-tyson"
+  },
+  {
+    "id": "digital-civil_war-letters-images-unided_union_soldier",
+    "mode": "multi-volume",
+    "numberOfFiles": 3,
+    "path": "digital/civil_war/letters/images/unided_union_soldier",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-unided_union_soldier"
+  },
+  {
+    "id": "digital-civil_war-letters-images-white",
+    "mode": "multi-volume",
+    "numberOfFiles": 2,
+    "path": "digital/civil_war/letters/images/white",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-letters-images-white"
+  },
+  {
+    "id": "digital-civil_war-papers_personal-images-edwards",
+    "mode": "single-volume",
+    "numberOfFiles": 236,
+    "path": "digital/civil_war/papers_personal/images/edwards",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-papers_personal-images-edwards"
+  },
+  {
+    "id": "digital-civil_war-papers_personal-images-leonard",
+    "mode": "single-volume",
+    "numberOfFiles": 35,
+    "path": "digital/civil_war/papers_personal/images/leonard",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-papers_personal-images-leonard"
+  },
+  {
+    "id": "digital-civil_war-papers_personal-images-mcchesney",
+    "mode": "single-volume",
+    "numberOfFiles": 52,
+    "path": "digital/civil_war/papers_personal/images/mcchesney",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-papers_personal-images-mcchesney"
+  },
+  {
+    "id": "digital-civil_war-records_military-images-bloodgood",
+    "mode": "multi-volume",
+    "numberOfFiles": 10,
+    "path": "digital/civil_war/records_military/images/bloodgood",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-records_military-images-bloodgood"
+  },
+  {
+    "id": "digital-civil_war-records_military-images-quin",
+    "mode": "multi-volume",
+    "numberOfFiles": 19,
+    "path": "digital/civil_war/records_military/images/quin",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-records_military-images-quin"
+  },
+  {
+    "id": "digital-civil_war-records_military-images-ruggles",
+    "mode": "multi-volume",
+    "numberOfFiles": 7,
+    "path": "digital/civil_war/records_military/images/ruggles",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-records_military-images-ruggles"
+  },
+  {
+    "id": "digital-civil_war-topical_collections-images-andersonville",
+    "mode": "multi-volume",
+    "numberOfFiles": 34,
+    "path": "digital/civil_war/topical_collections/images/andersonville",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-civil_war-topical_collections-images-andersonville"
+  },
+  {
+    "id": "digital-colonial_american-records-images-massachusetts-bristol",
+    "mode": "single-volume",
+    "numberOfFiles": 186,
+    "path": "digital/colonial_american/records/images/massachusetts/bristol",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-colonial_american-records-images-massachusetts-bristol"
+  },
+  {
+    "id": "digital-colonial_american-records-images-massachusetts-swansea",
+    "mode": "single-volume",
+    "numberOfFiles": 82,
+    "path": "digital/colonial_american/records/images/massachusetts/swansea",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-colonial_american-records-images-massachusetts-swansea"
+  },
+  {
+    "id": "digital-heraldry-images",
+    "mode": "single-volume",
+    "numberOfFiles": 4,
+    "path": "digital/heraldry/images",
+    "uri": "https://presentation-iiif.library.nd.edu/directories/digital-heraldry-images"
+  }
+]
