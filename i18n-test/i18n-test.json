@@ -16,7 +16,8 @@
     "title",
     "description",
     "fallback",
-    "nokey"
+    "nokey",
+    "creators"
   ],
   "items": [
     {
@@ -127,7 +128,10 @@
     "en": {
       "title": "title-en",
       "description": "description-en",
-      "fallback": "fallback-en"
+      "fallback": "fallback-en",
+      "creators": [
+        "1", "2"
+      ]
     },
     "es": {
       "title": "título-es",
