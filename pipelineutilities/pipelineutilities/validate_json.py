@@ -160,6 +160,7 @@ nd_json_schema = {
         "metsFilePath": {"type": "string"},
         "schemaUri": {"type": "string"},
         "schemaPath": {"type": "string"},
+        "bendoItem": {"type": "string"},  # added 6/10/2020 to support Curate, and subsequent bendo processing
         "items": {
             "type": "array",
             "items": {"$ref": "#"},

@@ -12,13 +12,13 @@ class CleanUpContent():
         self.config = config
         self.image_files = image_files
         self.api_version = api_version
-        # self.cleaned_up_content = CleanUpContent._clean_up_content(object, image_files)
 
     def clean_up_content(self, object: dict) -> dict:
         """ This calls all other modules locally """
         object = self._define_worktype(object)
         object = self._fix_modified_date(object)
         object = self._fix_creators(object)
+        object = self._fix_subjects(object)
         object = self._remove_bad_subjects(object)
         object = self._add_missing_required_fields(object)
         object = self._clean_up_creation_place(object)
@@ -73,6 +73,14 @@ class CleanUpContent():
                 creator["fullName"] = self._replace_special_characters(creator["fullName"])
             creator_field_class = creatorField(creators)
             object["creators"] = creator_field_class.add_displays()
+        return object
+
+    def _fix_subjects(self, object: dict) -> dict:
+        """ Remove special html characters from subjects. """
+        if "subjects" in object:
+            for subject in object["subjects"]:
+                if "term" in subject:
+                    subject["term"] = self._replace_special_characters(subject["term"])
         return object
 
     def _remove_bad_subjects(self, object: dict) -> dict:

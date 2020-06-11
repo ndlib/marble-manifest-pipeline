@@ -305,6 +305,105 @@ class Test(unittest.TestCase):
         }
         self.assertTrue(actual_results == expected_results)
 
+    def test_18_test_fix_creators(self):
+        """ test 18 test_fix_creators """
+        nd_json = {
+            "id": "1",
+            "creators": [
+                {
+                    "attribution": "",
+                    "role": "Primary",
+                    "fullName": "Sorin, Edward",
+                    "display": "Sorin, Edward"
+                },
+                {
+                    "fullName": "unknown",
+                    "display": "unknown"
+                }
+            ],
+            "level": "manifest"
+        }
+        actual_results = self.fix_creators_in_json_object_class.fix_creators(nd_json)
+        expected_results = {
+            "id": "1",
+            "creators": [
+                {
+                    "attribution": "",
+                    "role": "Primary",
+                    "fullName": "Sorin, Edward",
+                    "display": "Sorin, Edward"
+                }],
+            "level": "manifest"
+        }
+        # print("actual_results = ", actual_results)
+        self.assertTrue(actual_results == expected_results)
+
+    def test_19_remove_unknown_creators(self):
+        """ test 19 remove_unknown_creators """
+        nd_json = {
+            "id": "1",
+            "creators": [
+                {
+                    "attribution": "",
+                    "role": "Primary",
+                    "fullName": "Sorin, Edward",
+                    "display": "Sorin, Edward"
+                },
+                {
+                    "fullName": "unknown",
+                    "display": "unknown"
+                }
+            ],
+            "level": "manifest"
+        }
+        actual_results = self.fix_creators_in_json_object_class.remove_unknown_creators(nd_json)
+        expected_results = {
+            "id": "1",
+            "creators": [
+                {
+                    "attribution": "",
+                    "role": "Primary",
+                    "fullName": "Sorin, Edward",
+                    "display": "Sorin, Edward"
+                }],
+            "level": "manifest"
+        }
+        # print("actual_results = ", actual_results)
+        self.assertTrue(actual_results == expected_results)
+
+    def test_20_remove_unknown_creators_if_known_creators_exist(self):
+        """ test 20 remove_unknown_creators_if_known_creators_exist """
+        nd_json = {
+            "id": "1",
+            "creators": [
+                {
+                    "attribution": "",
+                    "role": "Primary",
+                    "fullName": "Sorin, Edward",
+                    "display": "Sorin, Edward"
+                },
+                {
+                    "fullName": "unknown",
+                    "display": "unknown"
+                }
+            ],
+            "level": "manifest"
+        }
+        actual_results = self.fix_creators_in_json_object_class.remove_unknown_creators_if_known_creators_exist(nd_json)
+        expected_results = {
+            "id": "1",
+            "creators": [
+                {
+                    "attribution": "",
+                    "role": "Primary",
+                    "fullName": "Sorin, Edward",
+                    "display": "Sorin, Edward"
+                }],
+            "level": "manifest"
+        }
+        # print("actual_results = ", actual_results)
+        self.assertTrue(actual_results == expected_results)
+
 
 def suite():
     """ define test suite """
