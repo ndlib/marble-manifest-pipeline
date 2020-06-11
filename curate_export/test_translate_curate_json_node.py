@@ -59,8 +59,8 @@ class Test(unittest.TestCase):
             curate_json = json.load(input_source)
         curate_member_json = curate_json["members"][0]
         for _member_key, member_value in curate_member_json.items():
+            actual_results = self.translate_curate_json_node_class.build_json_from_curate_json(member_value, "root", {})
             break  # only get the first one
-        actual_results = self.translate_curate_json_node_class.build_json_from_curate_json(member_value, "root", {})
         # print("actual_results = ", actual_results)
         filename = local_folder + 'test/zp38w953h0s_one_node_nd.json'
         # with open(filename, "w") as output_file:
