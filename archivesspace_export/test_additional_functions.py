@@ -37,7 +37,7 @@ class Test(unittest.TestCase):
         }
 
     def test_2_get_seed_nodes_json(self):
-        """ test_1 _get_seed_nodes_json """
+        """ test_2 _get_seed_nodes_json """
         json_node = {
             "id": "id1", "collectionId": "col1", "sourceSystem": "system1", "repository": "repo1",
             "app_version": "appV1", "fileCreatedDate": "today"

@@ -36,9 +36,12 @@ class FixCreatorsInJsonObject():
             If neither Creators nor Contributors exist, add Creators unknown node. """
         nd_json = self.remove_unknown_creators_if_known_creators_exist(nd_json)
         unknown_creators_exist_flag = self.unknown_creators_exist(nd_json)
+        known_creators_exist_flag = self.known_creators_exist(nd_json)
         if self.contributors_exist(nd_json):
             if unknown_creators_exist_flag:
                 nd_json = self.remove_unknown_creators(nd_json)
+        elif known_creators_exist_flag:
+            pass
         elif not unknown_creators_exist_flag:
             nd_json = self.add_unknown_creators(nd_json)
         return nd_json

@@ -23,7 +23,6 @@ class Test(unittest.TestCase):
         filename = local_folder + 'test/sample_marc.json'
         with open(filename, 'r') as input_source:
             self.marc_record_as_json = json.load(input_source)
-        input_source.close()
 
     def test_01_get_required_subfields(self):
         subfields_dict = {
@@ -167,8 +166,8 @@ class Test(unittest.TestCase):
 
     def test_10_build_json_from_marc_json(self):
         actual_results = self.transform_marc_json_class.build_json_from_marc_json(self.marc_record_as_json)
-        with open(local_folder + 'test/sample_nd.json', 'w') as output_file:
-            json.dump(actual_results, output_file, indent=2, default=str)
+        # with open(local_folder + 'test/sample_nd.json', 'w') as output_file:
+        #     json.dump(actual_results, output_file, indent=2, default=str)
         with open(local_folder + 'test/sample_nd.json', 'r') as input_source:
             expected_json = json.load(input_source)
         file_created_date_from_sample = expected_json.get("fileCreatedDate", "")

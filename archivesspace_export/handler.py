@@ -5,6 +5,7 @@ import json
 import io
 import os
 import time
+import botocore
 from datetime import datetime, timedelta
 from harvest_oai_eads import HarvestOaiEads  # noqa: #502
 from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
@@ -16,6 +17,7 @@ from pipelineutilities.search_files import id_from_url, crawl_available_files  #
 from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject
 from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject
+from pipelineutilities.s3_helpers import read_s3_json
 
 
 def run(event: dict, context: dict):
@@ -26,6 +28,8 @@ def run(event: dict, context: dict):
     _supplement_event(event)
     _init_sentry()
     config = setup_pipeline_config(event)
+    if "ids" not in event:
+        event["ids"] = read_ids_from_s3(config['process-bucket'], "source_system_export_ids.json", "ArchivesSpace")
     # config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     start_time = time.time()
     time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
@@ -64,70 +68,19 @@ def _supplement_event(event: dict) -> dict:
         event['archivesSpaceHarvestComplete'] = False
     if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
-    if 'ids' not in event:  # seed with all archvesspace records we have been exporting prior to 5/12/2020
-        event["ids"] = [
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1644",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1390",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1409",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1411",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1412",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1414",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1421",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1424",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1425",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1426",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1428",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1429",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1430",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1431",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1432",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1433",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1434",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1435",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1436",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1437",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1439",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1441",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1442",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1443",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1444",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1445",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1446",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1447",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1448",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1450",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1452",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1453",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1454",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1462",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1466",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1473",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1479",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1484",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1492",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1495",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1506",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1517",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1524",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1528",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1567",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1568",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1569",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1570",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1571",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1576",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1582",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1631",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1644",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1989",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1993",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1994",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1995",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/2000",
-            "https://archivesspace.library.nd.edu/repositories/3/resources/2038"
-        ]
-
     return event
+
+
+def read_ids_from_s3(process_bucket: str, s3_path: str, section: str) -> list:
+    ids = []
+    try:
+        json_hash = read_s3_json(process_bucket, s3_path)
+        if section in json_hash:
+            ids = json_hash[section]
+    except botocore.errorfactory.NoSuchKey as e:
+        sentry_sdk.capture_exception(e)
+        print("Control file does not exit:", process_bucket, s3_path)
+    return ids
 
 
 def _init_sentry():
@@ -153,7 +106,7 @@ def test(identifier=""):
         #     "https://archivesspace.library.nd.edu/repositories/3/resources/1644"
         # ]
         # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1492"]  # Parsons Journals
-        event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1524"]
+        # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1524"]
 
     event = run(event, {})
 
