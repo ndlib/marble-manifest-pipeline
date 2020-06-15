@@ -75,9 +75,11 @@ class InprocessBucket():
         path = self.basepath + "/" + id + ".csv"
         write_s3_file(self.process_bucket, path, csv)
 
-    def write_nd_json(self, data):
-        path = self.basepath + "/metadata/nd/index.json"
-        write_s3_json(self.process_bucket, path, data)
+    def write_nd_json(self):
+        to_path = self.basepath + "/metadata/nd/index.json"
+        from_path = "json/" + self.id + ".json"
+        
+        s3_copy_data(self.process_bucket, to_path, self.process_bucket, from_path)
 
 
 def read_s3_file_content(s3Bucket, s3Path):
