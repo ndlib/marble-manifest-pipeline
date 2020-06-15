@@ -78,7 +78,7 @@ class InprocessBucket():
     def write_nd_json(self):
         to_path = self.basepath + "/metadata/nd/index.json"
         from_path = "json/" + self.id + ".json"
-        
+
         s3_copy_data(self.process_bucket, to_path, self.process_bucket, from_path)
 
 
