@@ -40,6 +40,9 @@ def run(event, context):
         if id not in config['processed_ids']:
             inprocess_bucket = InprocessBucket(id, config)
 
+            # move the nd json into the process bucket.
+            inprocess_bucket.write_nd_json()
+
             parent = load_csv_data(id, config)
 
             mapping = MetadataMappings(parent)
@@ -51,9 +54,6 @@ def run(event, context):
                 inprocess_bucket.write_sub_manifest(item)
 
             inprocess_bucket.write_manifest(manifest)
-
-            nd = ndJson(id, config, parent)
-            inprocess_bucket.write_nd_json(nd.to_hash())
 
             schema = ToSchema(id, config, parent)
             inprocess_bucket.write_schema_json(schema.get_json())
