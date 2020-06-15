@@ -41,24 +41,28 @@ def run(event, context):
             inprocess_bucket = InprocessBucket(id, config)
 
             # move the nd json into the process bucket.
-            inprocess_bucket.write_nd_json()
+            try:
+                inprocess_bucket.write_nd_json()
 
-            parent = load_csv_data(id, config)
+                parent = load_csv_data(id, config)
 
-            mapping = MetadataMappings(parent)
-            iiif = iiifManifest(config, parent, mapping)
-            manifest = iiif.manifest()
+                mapping = MetadataMappings(parent)
+                iiif = iiifManifest(config, parent, mapping)
+                manifest = iiif.manifest()
 
-            # split the manifests
-            for item in sub_manifests(manifest):
-                inprocess_bucket.write_sub_manifest(item)
+                # split the manifests
+                for item in sub_manifests(manifest):
+                    inprocess_bucket.write_sub_manifest(item)
 
-            inprocess_bucket.write_manifest(manifest)
+                inprocess_bucket.write_manifest(manifest)
 
-            schema = ToSchema(id, config, parent)
-            inprocess_bucket.write_schema_json(schema.get_json())
+                schema = ToSchema(id, config, parent)
+                inprocess_bucket.write_schema_json(schema.get_json())
 
-            config['processed_ids'].append(id)
+                config['processed_ids'].append(id)
+
+            except Exception:
+                print("error on {}" % (id))
 
         if quittime <= datetime.utcnow():
             break
