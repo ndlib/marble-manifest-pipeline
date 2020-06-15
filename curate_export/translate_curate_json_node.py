@@ -3,7 +3,7 @@ import os
 import json
 from datetime import datetime
 # from get_bendo_info import get_bendo_info
-from pipelineutilities.validate_json import schema_api_version, validate_nd_json
+from pipelineutilities.validate_json import schema_api_version, validate_standard_json
 from do_extra_processing import do_extra_processing, get_seed_nodes_json
 
 
@@ -31,7 +31,7 @@ class TranslateCurateJsonNode():
                                 standard_json[json_field_definition['label']].append(results)
                         else:
                             standard_json[json_field_definition['label']] = results
-        if not validate_nd_json(standard_json):
+        if not validate_standard_json(standard_json):
             standard_json = {}
         return standard_json
 

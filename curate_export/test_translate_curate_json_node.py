@@ -62,7 +62,7 @@ class Test(unittest.TestCase):
             actual_results = self.translate_curate_json_node_class.build_json_from_curate_json(member_value, "root", {})
             break  # only get the first one
         # print("actual_results = ", actual_results)
-        filename = local_folder + 'test/zp38w953h0s_one_node_nd.json'
+        filename = local_folder + 'test/zp38w953h0s_one_node_standard.json'
         # with open(filename, "w") as output_file:
         #     json.dump(actual_results, output_file, indent=2, ensure_ascii=False)
         with open(filename, 'r') as input_source:

@@ -53,13 +53,13 @@ class Test(unittest.TestCase):
         """ test test_creating_json_from_xml """
         xml_record = ET.parse(local_folder + 'test/MSNEA8011_EAD.xml').getroot()
         create_json_from_xml_class = createJsonFromXml()
-        nd_json = create_json_from_xml_class.get_nd_json_from_xml(xml_record)
+        standard_json = create_json_from_xml_class.get_standard_json_from_xml(xml_record)
         # with open(local_folder + 'test/MSNEA8011_EAD.json', 'w') as output_source:
-        #     json.dump(nd_json, output_source, indent=2)
+        #     json.dump(standard_json, output_source, indent=2)
         with open(local_folder + 'test/MSNEA8011_EAD.json', 'r') as input_source:
             expected_json = json.load(input_source)
-        nd_json = self.fix_file_created_date(nd_json, expected_json["fileCreatedDate"])
-        self.assertTrue(expected_json == nd_json)
+        standard_json = self.fix_file_created_date(standard_json, expected_json["fileCreatedDate"])
+        self.assertTrue(expected_json == standard_json)
 
     def test_2_test_extracting_id(self):
         xml_record = ET.fromstring(self.xml)
@@ -79,13 +79,13 @@ class Test(unittest.TestCase):
             self.assertTrue(expected_results == actual_results)
             break
 
-    def fix_file_created_date(self, nd_json: dict, file_created_date: str) -> dict:
-        if "fileCreatedDate" in nd_json:
-            nd_json["fileCreatedDate"] = file_created_date
-        if "items" in nd_json:
-            for item in nd_json["items"]:
+    def fix_file_created_date(self, standard_json: dict, file_created_date: str) -> dict:
+        if "fileCreatedDate" in standard_json:
+            standard_json["fileCreatedDate"] = file_created_date
+        if "items" in standard_json:
+            for item in standard_json["items"]:
                 item = self.fix_file_created_date(item, file_created_date)
-        return nd_json
+        return standard_json
 
 
 def suite():

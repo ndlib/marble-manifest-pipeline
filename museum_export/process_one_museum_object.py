@@ -6,12 +6,13 @@ import json
 import copy
 from clean_up_content import CleanUpContent
 from convert_json_to_csv import ConvertJsonToCsv
-from dependencies.pipelineutilities.validate_json import validate_json, get_nd_json_schema, schema_api_version
+from dependencies.pipelineutilities.validate_json import validate_json, get_standard_json_schema, schema_api_version
 from pipelineutilities.s3_helpers import write_s3_file, write_s3_json
 from sentry_sdk import capture_message, push_scope
 # from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject
 from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject
+from pipelineutilities.save_standard_json import save_standard_json
 
 
 class ProcessOneMuseumObject():
@@ -35,17 +36,17 @@ class ProcessOneMuseumObject():
                 print("Validation Error validating ", object_id)
             print("Museum identifier = ", object_id, int(time.time() - self.start_time), 'seconds.')
             clean_up_content_class = CleanUpContent(self.config, self.image_files, self.api_version)
-            cleaned_up_object = clean_up_content_class.clean_up_content(museum_object)
-            if not validate_nd_json(cleaned_up_object):
+            standard_json = clean_up_content_class.clean_up_content(museum_object)
+            if not validate_standard_json(standard_json):
                 print("Validation Error validating modified object", object_id)
             else:
-                # cleaned_up_object = self.add_files_to_json_object_class.add_files(cleaned_up_object)
-                cleaned_up_object = self.add_paths_to_json_object_class.add_paths(cleaned_up_object)
-                cleaned_up_object = self.fix_creators_in_json_object_class.fix_creators(cleaned_up_object)
-            write_s3_json(self.config['process-bucket'], os.path.join("json/", object_id + '.json'), cleaned_up_object)
-            # with open("cleaned_up_object.json", 'w') as f:
-            #     json.dump(cleaned_up_object, f, indent=4)
-            self._save_csv(object_id, cleaned_up_object)
+                # standard_json = self.add_files_to_json_object_class.add_files(standard_json)
+                standard_json = self.add_paths_to_json_object_class.add_paths(standard_json)
+                standard_json = self.fix_creators_in_json_object_class.fix_creators(standard_json)
+            save_standard_json(self.config, standard_json)
+            # with open("standard_json.json", 'w') as f:
+            #     json.dump(standard_json, f, indent=4)
+            self._save_csv(object_id, standard_json)
         return missing_fields
 
     def _test_for_missing_fields(self, object_id: dict, json_object: dict, required_fields: dict) -> str:
@@ -102,7 +103,7 @@ def validate_museum_json(json_to_test: dict) -> bool:
 
 def get_museum_json_schema() -> dict:
     """ get schema appropriate for checking EmbARK json """
-    schema_to_use = copy.deepcopy(get_nd_json_schema())
+    schema_to_use = copy.deepcopy(get_standard_json_schema())
     with open('./museum_specific_schema_fields.json') as f:
         museum_specific_schema_fields = json.load(f)
     schema_to_use["required"] = ["id"]  # explicitly remove parentId and collectionId, since objects with hidden parents don't have these
@@ -110,9 +111,9 @@ def get_museum_json_schema() -> dict:
     return schema_to_use
 
 
-def validate_nd_json(json_to_test: dict) -> bool:
+def validate_standard_json(json_to_test: dict) -> bool:
     """ validate fixed json against schema """
     valid_json_flag = False
-    schema_to_use = get_nd_json_schema()
+    schema_to_use = get_standard_json_schema()
     valid_json_flag = validate_json(json_to_test, schema_to_use, True)
     return valid_json_flag

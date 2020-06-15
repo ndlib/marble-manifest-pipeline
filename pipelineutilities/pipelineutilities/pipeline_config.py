@@ -14,6 +14,7 @@ default_config = {
     "museum-server-base-url": "http://notredame.dom5182.com:8080",
     "process-bucket-read-basepath": "process",
     "process-bucket-csv-basepath": "csv",
+    "process-bucket-data-basepath": "json",
     "process-bucket-ead-resource-mappings-file": "ead_to_resource_dictionary.json",
     "canvas-default-height": 2000,
     "canvas-default-width": 2000,

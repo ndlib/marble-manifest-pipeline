@@ -6,10 +6,11 @@ from convert_json_to_csv import ConvertJsonToCsv
 from pymarc import MARCReader
 from sentry_sdk import capture_exception
 import requests
-from pipelineutilities.s3_helpers import write_s3_file, write_s3_json
+from pipelineutilities.s3_helpers import write_s3_file
 from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject
 from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject
+from pipelineutilities.save_standard_json import save_standard_json
 
 
 class HarvestAlephMarc():
@@ -65,7 +66,7 @@ class HarvestAlephMarc():
                 print("Aleph identifier ", json_record.get("id", ""), " - ", int(time.time() - self.start_time), " seconds.")
             if False:  # change to True to output test files locally.
                 filename = self._save_local_marc_json_for_testing(marc_record_as_json)
-                self._save_local_nd_json_for_testing(filename, json_record)
+                self._save_local_standard_json_for_testing(filename, json_record)
             if test_mode_flag:
                 break
         if not self.event['local']:
@@ -80,8 +81,8 @@ class HarvestAlephMarc():
                     file1.write(json.dumps(marc_record_as_json, indent=2))
         return filename
 
-    def _save_local_nd_json_for_testing(self, filename: str, json_record: dict):
-        filename = filename.replace(".json", "_nd.json")
+    def _save_local_standard_json_for_testing(self, filename: str, json_record: dict):
+        filename = filename.replace(".json", "_standard.json")
         with open(os.path.join('test', filename), "w") as file1:
             file1.write(json.dumps(json_record, indent=2, sort_keys=True))
 
@@ -89,17 +90,9 @@ class HarvestAlephMarc():
         if 'id' in json_record:
             json_file_name = json_record['id'] + '.json'
             if not self.event['local']:
-                self._save_json_to_s3(self.config['process-bucket'], json_file_name, json_record)
+                save_standard_json(self.config, json_record)
             else:
                 self._save_json_locally(json_file_name, json_record)
-
-    def _save_json_to_s3(self, s3_bucket_name: str, json_file_name: str, json_record: dict) -> bool:
-        try:
-            write_s3_json(self.config['process-bucket'], os.path.join("json/", json_file_name), json_record)
-            results = True
-        except Exception:
-            results = False
-        return results
 
     def _save_json_locally(self, json_file_name: str, json_record: dict):
         directory = self.temporary_local_path + "/json"
@@ -110,9 +103,9 @@ class HarvestAlephMarc():
             file1.write(json.dumps(json_record, indent=2))
 
 
-def _export_json_as_csv(config: dict, nd_json: dict):
-    """ I'm leaving this here for now until we no longer need to create a CSV from the nd_json """
+def _export_json_as_csv(config: dict, standard_json: dict):
+    """ I'm leaving this here for now until we no longer need to create a CSV from the standard_json """
     convert_json_to_csv_class = ConvertJsonToCsv(config["csv-field-names"])
-    csv_string = convert_json_to_csv_class.convert_json_to_csv(nd_json)
-    s3_csv_file_name = os.path.join(config['process-bucket-csv-basepath'], nd_json["id"] + '.csv')
+    csv_string = convert_json_to_csv_class.convert_json_to_csv(standard_json)
+    s3_csv_file_name = os.path.join(config['process-bucket-csv-basepath'], standard_json["id"] + '.csv')
     write_s3_file(config['process-bucket'], s3_csv_file_name, csv_string)

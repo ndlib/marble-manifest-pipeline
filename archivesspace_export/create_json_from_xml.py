@@ -5,14 +5,14 @@ from perform_additional_processing import perform_additional_processing
 from additional_functions import return_None_if_needed, \
     get_seed_nodes_json, get_value_from_labels, remove_nodes_from_dictionary, \
     exclude_if_pattern_matches, strip_unwanted_whitespace
-from pipelineutilities.validate_json import schema_api_version, validate_nd_json
+from pipelineutilities.validate_json import schema_api_version, validate_standard_json
 from xml.etree import ElementTree
 
 
 class createJsonFromXml():
     """ This class uses a control file (xml_to_json_translation_control_file.json)
         to guide translation from ArchivesSpace OAI xml to JSON.  We then validate
-        the created json against our nd_json schema and either return validated json
+        the created json against our standard_json schema and either return validated json
         or an empty dictionary. """
 
     def __init__(self):
@@ -20,14 +20,14 @@ class createJsonFromXml():
         self.json_control = self._read_xml_to_json_translation_control_file(local_folder + "xml_to_json_translation_control_file.json")  # noqa: E501
         self.schema_api_version = schema_api_version()
 
-    def get_nd_json_from_xml(self, xml_root: ElementTree) -> dict:
+    def get_standard_json_from_xml(self, xml_root: ElementTree) -> dict:
         """ Call function to recursively create json from xml root.  Validate, and return either validated json or {} """
-        nd_json = {}
+        standard_json = {}
         if xml_root:
-            nd_json = self.extract_fields(xml_root, 'root', {})
-            if not validate_nd_json(nd_json):
-                nd_json = {}
-        return nd_json
+            standard_json = self.extract_fields(xml_root, 'root', {})
+            if not validate_standard_json(standard_json):
+                standard_json = {}
+        return standard_json
 
     def extract_fields(self, xml_root: ElementTree, json_section: str, seeded_json_output: dict) -> dict:
         """ This code processes translations defined in the portion of the
