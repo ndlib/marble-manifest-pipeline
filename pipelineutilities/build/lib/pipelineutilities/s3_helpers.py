@@ -146,3 +146,14 @@ def upload_json(s3Bucket, s3Path, json_data) -> None:
 
 def upload_file(s3Bucket, s3Path, local_file):
     boto3.resource('s3').Bucket(s3Bucket).upload_file(local_file, s3Path)
+
+
+def s3_file_exists(bucket_name: str, key_name: str) -> bool:
+    s3 = boto3.client('s3')
+    try:
+        s3.head_object(Bucket=bucket_name, Key=key_name)
+        results = True
+    except Exception:
+        results = False
+        pass
+    return results

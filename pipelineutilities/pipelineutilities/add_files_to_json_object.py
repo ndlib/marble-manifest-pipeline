@@ -16,21 +16,21 @@ class AddFilesToJsonObject():
             # with open(parent_folder + 'test/hash_of_available_files.json', 'w') as f:
             #     json.dump(self.hash_of_available_files, f, indent=2, default=str)
 
-    def add_files(self, nd_json: dict) -> dict:
-        """ recursively go through all of nd_json finding files, and adding additional files """
-        if "items" in nd_json:
-            for index, item in enumerate(nd_json["items"]):
+    def add_files(self, standard_json: dict) -> dict:
+        """ recursively go through all of standard_json finding files, and adding additional files """
+        if "items" in standard_json:
+            for index, item in enumerate(standard_json["items"]):
                 if item.get("level", "") in ["manifest", "collection"]:
                     self.add_files(item)
                 elif item.get("level", "") == "file":
                     file_path = item.get("filePath", "")
                     if file_path:
-                        self._add_other_files_given_uri(nd_json["items"], index, file_path)
+                        self._add_other_files_given_uri(standard_json["items"], index, file_path)
                         break  # assumption is that we process only the first item to find additional files
-        return nd_json
+        return standard_json
 
     def _add_other_files_given_uri(self, file_items: list, index: int, file_path: str):
-        """ This accepts an image uri, and finds (and appends to the nd_json)
+        """ This accepts an image uri, and finds (and appends to the standard_json)
             all related images. """
         each_file_dict = {}
         id_to_find = id_from_url(file_path)

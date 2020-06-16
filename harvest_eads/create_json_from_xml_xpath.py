@@ -1,9 +1,9 @@
 # create_json_from_xml_xpath.py
-import json
+# import json
 import os
 import sys
 from datetime import datetime
-from file_system_utilities import create_directory
+# from file_system_utilities import create_directory
 from additional_functions import check_for_inconsistent_dao_image_paths, file_name_from_filePath, \
     define_manifest_level, get_repository_name_from_ead_resource, return_None_if_needed, \
     get_seed_nodes_json, get_xml_node_value, get_value_from_labels, remove_nodes_from_dictionary, \
@@ -183,27 +183,28 @@ class createJsonFromXml():
     def save_json_record(self, file_name, json_to_save):
         """ This lets us save the json record  """
         results = False
-        if json_to_save and self.save_json:
-            if self.save_locally:
-                local_folder = self.temporary_local_path
-                create_directory(local_folder)
-                local_file_name = os.path.join(local_folder, file_name)
-                with open(local_file_name, 'w') as f:
-                    json.dump(json_to_save, f, indent=2)
-            else:
-                # This currently saves a json for each child item.  We may need to modify to save one master json per collection.
-                collection_id = json_to_save["collectionId"]
-                parent_id = json_to_save.get("parentId", "")
-                if parent_id == "root" or parent_id == collection_id:
-                    parent_id = ""
-                id = json_to_save["id"]
-                fully_qualified_file_name = os.path.join("json/" + collection_id + "/" + parent_id, id + '.json')
-                print("saving ", fully_qualified_file_name + " to ", self.config['process-bucket'])
-                try:
-                    write_s3_file(self.config['process-bucket'], fully_qualified_file_name, json.dumps(json_to_save))
-                    results = True
-                except Exception:
-                    results = False
+        return results  # early out - we don't want to save json in this old process because archivesspace_export now creates nd.json
+        # if json_to_save and self.save_json:
+        #     if self.save_locally:
+        #         local_folder = self.temporary_local_path
+        #         create_directory(local_folder)
+        #         local_file_name = os.path.join(local_folder, file_name)
+        #         with open(local_file_name, 'w') as f:
+        #             json.dump(json_to_save, f, indent=2)
+        #     else:
+        #         # This currently saves a json for each child item.  We may need to modify to save one master json per collection.
+        #         collection_id = json_to_save["collectionId"]
+        #         parent_id = json_to_save.get("parentId", "")
+        #         if parent_id == "root" or parent_id == collection_id:
+        #             parent_id = ""
+        #         id = json_to_save["id"]
+        #         fully_qualified_file_name = os.path.join("json/" + collection_id + "/" + parent_id, id + '.json')
+        #         print("saving ", fully_qualified_file_name + " to ", self.config['process-bucket'])
+        #         try:
+        #             write_s3_file(self.config['process-bucket'], fully_qualified_file_name, json.dumps(json_to_save))
+        #             results = True
+        #         except Exception:
+        #             results = False
         return results
 
     def _call_external_process(self, json_node, field):  # noqa: C901

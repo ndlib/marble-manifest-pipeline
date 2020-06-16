@@ -2,7 +2,7 @@ import os
 import json
 # from csv_from_json import CsvFromJson
 from do_extra_processing import do_extra_processing
-from pipelineutilities.validate_json import schema_api_version, validate_nd_json
+from pipelineutilities.validate_json import schema_api_version, validate_standard_json
 from get_value_from_external_process import get_value_from_external_process, get_seed_nodes_json
 
 
@@ -17,10 +17,10 @@ class TransformMarcJson():
     def build_json_from_marc_json(self, marc_record_as_json: dict) -> dict:
         """ Build our own json object representing marc information we're interested in """
         marc_record_as_json = self._mutate_marc_record_as_json(marc_record_as_json)
-        nd_json = self.build_json_for_control_section(marc_record_as_json, 'root', {})
-        if not validate_nd_json(nd_json):
-            nd_json = {}
-        return nd_json
+        standard_json = self.build_json_for_control_section(marc_record_as_json, 'root', {})
+        if not validate_standard_json(standard_json):
+            standard_json = {}
+        return standard_json
 
     def build_json_for_control_section(self, marc_record_as_json: dict, section_name: str, seeded_json: dict) -> dict:
         # json_record = {}

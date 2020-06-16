@@ -1,6 +1,6 @@
 # create_standard_json.py
 from translate_curate_json_node import TranslateCurateJsonNode
-from pipelineutilities.validate_json import validate_nd_json
+from pipelineutilities.validate_json import validate_standard_json
 from clean_up_standard_json import clean_up_standard_json
 
 
@@ -31,7 +31,7 @@ class CreateStandardJson():
                 if self._count_unprocessed_members(members, report_unprocessed_members_flag) == 0:
                     break
             standard_json = clean_up_standard_json(standard_json, self.config)
-        if not validate_nd_json(standard_json):
+        if not validate_standard_json(standard_json):
             standard_json = {}
         return standard_json
 

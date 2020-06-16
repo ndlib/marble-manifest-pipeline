@@ -8,7 +8,8 @@ from dependencies.sentry_sdk import capture_exception
 from translate_curate_json_node import TranslateCurateJsonNode
 from create_standard_json import CreateStandardJson
 from convert_json_to_csv import ConvertJsonToCsv
-from pipelineutilities.s3_helpers import write_s3_file, write_s3_json
+from pipelineutilities.s3_helpers import write_s3_file
+from pipelineutilities.save_standard_json import save_standard_json
 
 
 class CurateApi():
@@ -59,10 +60,10 @@ class CurateApi():
         standard_json = self.create_standard_json_class.build_standard_json_tree(standard_json, members)
         if standard_json:
             if self.save_standard_json_locally:
-                with open(self.local_folder + "test/" + id + "_nd.json", "w") as output_file:
+                with open(self.local_folder + "test/" + id + "_standard.json", "w") as output_file:
                     json.dump(standard_json, output_file, indent=2, ensure_ascii=False)
             else:
-                _save_json_to_s3(self.config['process-bucket'], os.path.join("json/", standard_json['id'] + '.json'), standard_json)
+                save_standard_json(self.config, standard_json)
                 _export_json_as_csv(self.config, standard_json)
         return standard_json
 
@@ -128,18 +129,9 @@ class CurateApi():
         return json_response
 
 
-def _export_json_as_csv(config: dict, nd_json: dict):
-    """ I'm leaving this here for now until we no longer need to create a CSV from the nd_json """
+def _export_json_as_csv(config: dict, standard_json: dict):
+    """ I'm leaving this here for now until we no longer need to create a CSV from the standard_json """
     convert_json_to_csv_class = ConvertJsonToCsv(config["csv-field-names"])
-    csv_string = convert_json_to_csv_class.convert_json_to_csv(nd_json)
-    s3_csv_file_name = os.path.join(config['process-bucket-csv-basepath'], nd_json["id"] + '.csv')
+    csv_string = convert_json_to_csv_class.convert_json_to_csv(standard_json)
+    s3_csv_file_name = os.path.join(config['process-bucket-csv-basepath'], standard_json["id"] + '.csv')
     write_s3_file(config['process-bucket'], s3_csv_file_name, csv_string)
-
-
-def _save_json_to_s3(s3_bucket_name: str, json_file_name: str, json_record: dict) -> bool:
-    try:
-        write_s3_json(s3_bucket_name, json_file_name, json_record)
-        results = True
-    except Exception:
-        results = False
-    return results

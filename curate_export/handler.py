@@ -5,7 +5,7 @@ import _set_path  # noqa
 import os
 import io
 import json
-import botocore
+# import botocore
 from datetime import datetime, timedelta
 from pathlib import Path
 from curate_api import CurateApi
@@ -37,6 +37,7 @@ def run(event: dict, context: dict) -> dict:
         #             json.dump(json_curate_item, f, indent=2)
         if "ids" not in event:
             event["ids"] = read_ids_from_s3(config['process-bucket'], "source_system_export_ids.json", "Curate")
+        # print("event after ids added = ", event)
         if "ids" in event:
             curate_api_class = CurateApi(config, event, time_to_break)
             event["curateHarvestComplete"] = curate_api_class.get_curate_items(event["ids"])
@@ -69,7 +70,7 @@ def read_ids_from_s3(process_bucket: str, s3_path: str, section: str) -> list:
         json_hash = read_s3_json(process_bucket, s3_path)
         if section in json_hash:
             ids = json_hash[section]
-    except botocore.errorfactory.NoSuchKey as e:
+    except Exception as e:
         sentry_sdk.capture_exception(e)
         print("Control file does not exit:", process_bucket, s3_path)
     return ids

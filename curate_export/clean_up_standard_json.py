@@ -4,7 +4,7 @@ import os
 from do_extra_processing import define_manifest_level
 from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject
 from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject
-from pipelineutilities.validate_json import validate_nd_json
+from pipelineutilities.validate_json import validate_standard_json
 
 
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
@@ -18,7 +18,7 @@ def clean_up_standard_json(standard_json: dict, config: dict) -> dict:
     fix_creators_in_json_object_class = FixCreatorsInJsonObject(config)
     standard_json = add_paths_to_json_object_class.add_paths(standard_json)
     standard_json = fix_creators_in_json_object_class.fix_creators(standard_json)
-    if not validate_nd_json(standard_json):
+    if not validate_standard_json(standard_json):
         standard_json = {}
     return standard_json
 
