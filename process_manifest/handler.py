@@ -40,25 +40,29 @@ def run(event, context):
         if id not in config['processed_ids']:
             inprocess_bucket = InprocessBucket(id, config)
 
-            parent = load_csv_data(id, config)
+            # move the nd json into the process bucket.
+            try:
+                inprocess_bucket.write_nd_json()
 
-            mapping = MetadataMappings(parent)
-            iiif = iiifManifest(config, parent, mapping)
-            manifest = iiif.manifest()
+                parent = load_csv_data(id, config)
 
-            # split the manifests
-            for item in sub_manifests(manifest):
-                inprocess_bucket.write_sub_manifest(item)
+                mapping = MetadataMappings(parent)
+                iiif = iiifManifest(config, parent, mapping)
+                manifest = iiif.manifest()
 
-            inprocess_bucket.write_manifest(manifest)
+                # split the manifests
+                for item in sub_manifests(manifest):
+                    inprocess_bucket.write_sub_manifest(item)
 
-            nd = ndJson(id, config, parent)
-            inprocess_bucket.write_nd_json(nd.to_hash())
+                inprocess_bucket.write_manifest(manifest)
 
-            schema = ToSchema(id, config, parent)
-            inprocess_bucket.write_schema_json(schema.get_json())
+                schema = ToSchema(id, config, parent)
+                inprocess_bucket.write_schema_json(schema.get_json())
 
-            config['processed_ids'].append(id)
+                config['processed_ids'].append(id)
+
+            except Exception:
+                print("error on {}" % (id))
 
         if quittime <= datetime.utcnow():
             break

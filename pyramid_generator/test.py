@@ -10,7 +10,7 @@ from pipeline_config import load_pipeline_config
 try:
     event = json.loads("{\"config-file\": \"2020-04-28-12:43:07.205855.json\", \"process-bucket\": \"marble-manifest-prod-processbucket-kskqchthxshg\", \"errors\": [], \"local\": false}")
     config = load_pipeline_config(event)
-    config['ids'] = ['1999.024']
+    config['ids'] = ['002207293']
     print(config['ids'])
 
     runner = ImageRunner(config)
