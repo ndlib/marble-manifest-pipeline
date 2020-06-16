@@ -46,7 +46,7 @@ standard_json_schema = {
         "parentId": {"type": "string"},
         "level": {"type": "string"},
         "title": {"type": "string"},
-        "dateCreated": {
+        "createdDate": {
             "description": "We want dates, like 'c. 1900' or '2020-04-22'.",
             "type": "string"
         },

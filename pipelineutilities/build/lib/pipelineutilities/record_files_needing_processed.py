@@ -28,7 +28,7 @@ class FilesNeedingProcessed():
 
     def _create_files_dict(self, standard_json: dict, export_all_files_flag: bool, export_since_date: datetime) -> list:
         """ If export_all_files_flag is True, we will export all records with level = "file",
-            also, export all children files for all items with a dateCreated or modifiedDate
+            also, export all children files for all items with a createdDate or modifiedDate
             more recent than export_since_date"""
         image_list = {}
         if not export_since_date:
@@ -38,7 +38,7 @@ class FilesNeedingProcessed():
 
     def _optionally_append_to_file_list(self, standard_json: dict, export_all_files_flag: bool, export_since_date: datetime, image_dict: dict):
         """ If export_all_files_flag is True, we will export all records with level = "file",
-            also, export all children files for all items with a dateCreated or modifiedDate
+            also, export all children files for all items with a createdDate or modifiedDate
             more recent than export_since_date"""
         if self._record_has_been_updated_recently(standard_json, export_since_date):
             export_all_files_flag = True
@@ -70,8 +70,8 @@ class FilesNeedingProcessed():
         """ Note: dates will be passed in this format:  2018-11-16T00:00:00Z """
         if "modifiedDate" in standard_json:
             date_to_check = self._get_date_from_date_field(standard_json["modifiedDate"])
-        elif "dateCreated" in standard_json:
-            date_to_check = self._get_date_from_date_field(standard_json["dateCreated"])
+        elif "createdDate" in standard_json:
+            date_to_check = self._get_date_from_date_field(standard_json["createdDate"])
         else:
             date_to_check = datetime.now()
         return (date_to_check >= export_since_date)

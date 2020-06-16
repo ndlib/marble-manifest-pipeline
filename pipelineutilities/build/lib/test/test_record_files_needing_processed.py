@@ -32,13 +32,13 @@ class Test(unittest.TestCase):
 
     def test_02_record_has_been_updated_recently(self):
         export_since_date = self.files_needing_processed_class._default_export_since_date()
-        standard_json = {"dateCreated": "2018-11-16T00:00:00Z", "modifiedDate": "2019-11-16T00:00:00Z"}
+        standard_json = {"createdDate": "2018-11-16T00:00:00Z", "modifiedDate": "2019-11-16T00:00:00Z"}
         actual_results = self.files_needing_processed_class._record_has_been_updated_recently(standard_json, export_since_date)
         self.assertFalse(actual_results)
         export_since_date = datetime.strptime("2019-11-16T00:00:00Z", '%Y-%m-%dT%H:%M:%SZ')
         actual_results = self.files_needing_processed_class._record_has_been_updated_recently(standard_json, export_since_date)
         self.assertTrue(actual_results)
-        standard_json = {"dateCreated": "2018-11-16T00:00:00Z"}
+        standard_json = {"createdDate": "2018-11-16T00:00:00Z"}
         actual_results = self.files_needing_processed_class._record_has_been_updated_recently(standard_json, export_since_date)
         self.assertFalse(actual_results)
         export_since_date = datetime.strptime("2018-11-16T00:00:00Z", '%Y-%m-%dT%H:%M:%SZ')

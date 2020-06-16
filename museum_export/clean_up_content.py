@@ -48,7 +48,7 @@ class CleanUpContent():
         return object
 
     def _replace_special_characters(self, field_string: str) -> str:
-        field_string = field_string.replace("%20", " ")
+        field_string = field_string.replace("%20", "\n")
         field_string = html.unescape(field_string)
         return field_string
 

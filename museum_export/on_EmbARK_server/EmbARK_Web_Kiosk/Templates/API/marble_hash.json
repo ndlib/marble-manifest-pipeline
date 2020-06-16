@@ -17,7 +17,7 @@
 			{
 			"sourceSystem": "EmbARK",
 			"title": "<!--#4DTEXT [Objects_1]Disp_Title-->",
-			"dateCreated": "<!--#4DTEXT [Objects_1]Disp_Create_DT-->",
+			"createdDate": "<!--#4DTEXT [Objects_1]Disp_Create_DT-->",
 			"classification": "<!--#4DTEXT [Objects_1]Class_System-->",
 			"workType": "<!--#4DTEXT [Objects_1]Class1-->",
 			"medium": "<!--#4DTEXT [Objects_1]Disp_Medium-->",

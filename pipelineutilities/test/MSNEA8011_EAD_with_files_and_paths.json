@@ -13,7 +13,7 @@
       "display": "Parsons, Theophilus, 1797-1882"
     }
   ],
-  "dateCreated": "1819-1823",
+  "createdDate": "1819-1823",
   "uniqueIdentifier": "MSN/EA 8011",
   "dimensions": ".25 Cubic Feet",
   "languages": [
@@ -48,7 +48,7 @@
       "fileCreatedDate": "2020-05-13",
       "id": "aspace_8f5be6708c2e98e57a60eddf20e36679",
       "title": "Theophilus Parsons, Journal, vol. 1",
-      "dateCreated": "January 1819-December 1820",
+      "createdDate": "January 1819-December 1820",
       "uniqueIdentifier": "MSN/EA 8011-1-B",
       "items": [
         {
@@ -5221,7 +5221,7 @@
       "fileCreatedDate": "2020-05-13",
       "id": "aspace_5cc53e5bc083823390135923b389d00c",
       "title": "Theophilus Parsons, Journal, vol. 2",
-      "dateCreated": "January 1821-March 1823",
+      "createdDate": "January 1821-March 1823",
       "uniqueIdentifier": "MSN/EA 8011-2-B",
       "items": [
         {

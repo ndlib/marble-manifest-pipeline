@@ -7,7 +7,7 @@
   "creator" : "creator",
   "date" : "temporalCoverage",
   "dates" : "temporalCoverage",
-  "creation date" : "dateCreated",
+  "creation date" : "createdDate",
   "classification" : "description",
   "media" : "description",
   "format" : "material",

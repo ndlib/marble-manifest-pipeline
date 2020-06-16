@@ -106,7 +106,7 @@ class processWebKioskJsonMetadata():
     def _get_embark_metadata_url(self, mode: str, id_to_process: str = "") -> str:
         """ Get url for retrieving museum metadata """
         base_url = self.config['museum-server-base-url'] \
-            + "/results.html?layout=marble_hash&format=json&maximumrecords=-1&recordType=objects_1"
+            + "/results.html?layout=marble&format=json&maximumrecords=-1&recordType=objects_1"
         if mode == 'full':
             url = base_url + "&query=_ID=ALL"
         elif mode == 'ids':

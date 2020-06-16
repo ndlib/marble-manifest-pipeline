@@ -4,8 +4,65 @@
     "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
     "http://iiif.io/api/presentation/3/context.json"
   ],
-  "id": "https://presentation-iiif.library.nd.edu/pdf/manifest",
-  "items": [],
+  "id": "https://presentation-iiif.library.nd.edu/1999.024/manifest",
+  "items": [
+    {
+      "height": 688,
+      "id": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas",
+      "items": [
+        {
+          "id": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas/annotation_page/1999_024-v0001.jpg",
+          "items": [
+            {
+              "body": {
+                "format": "image/jpeg",
+                "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
+                    "profile": "http://iiif.io/api/image/2/level2.json",
+                    "type": "ImageService2"
+                  }
+                ],
+                "type": "Image"
+              },
+              "id": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas/annotation/1999_024-v0001.jpg",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas",
+              "type": "Annotation"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "label": {
+        "en": [
+          "1999_024-v0001.jpg"
+        ]
+      },
+      "summary": {
+        "en": [
+          "1999_024-v0001.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/250,/0/default.jpg",
+          "service": [
+            {
+              "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
+              "profile": "http://iiif.io/api/image/2/level2.json",
+              "type": "ImageService2"
+            }
+          ],
+          "type": "Image"
+        }
+      ],
+      "type": "Canvas",
+      "viewingDirection": "left-to-right",
+      "width": 843
+    }
+  ],
   "label": {
     "en": [
       "Memento Mori: Death Comes to the Table"
@@ -68,7 +125,7 @@
       },
       "value": {
         "en": [
-          "pdf"
+          "1999.024"
         ]
       }
     },
@@ -159,18 +216,6 @@
       "type": "Agent"
     }
   ],
-  "rendering": [
-    {
-      "format": "application/pdf",
-      "id": "https://rbsc.library.nd.edu/pdfs/pdf.pdf",
-      "label": {
-        "en": [
-          "PDF Rendering"
-        ]
-      },
-      "type": "Text"
-    }
-  ],
   "requiredStatement": {
     "label": {
       "en": [
@@ -186,19 +231,29 @@
   "seeAlso": [
     {
       "format": "application/xml",
-      "id": "https://presentation-iiif.library.nd.edu/pdf/mets.xml",
+      "id": "https://presentation-iiif.library.nd.edu/1999.024/mets.xml",
       "profile": "http://www.loc.gov/METS/",
       "type": "Dataset"
     },
     {
       "format": "application/ld+json",
-      "id": "https://presentation-iiif.library.nd.edu/pdf",
+      "id": "https://presentation-iiif.library.nd.edu/1999.024",
       "profile": "https://schema.org/",
       "type": "Dataset"
     }
   ],
   "thumbnail": [
-    {}
+    {
+      "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/250,/0/default.jpg",
+      "service": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
+          "profile": "http://iiif.io/api/image/2/level2.json",
+          "type": "ImageService2"
+        }
+      ],
+      "type": "Image"
+    }
   ],
   "type": "Manifest",
   "viewingDirection": "left-to-right"

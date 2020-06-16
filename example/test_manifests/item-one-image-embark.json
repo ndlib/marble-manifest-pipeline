@@ -49,7 +49,7 @@
           },
           "value": {
             "en": [
-              "dateCreated"
+              "createdDate"
             ]
           }
         },
@@ -214,7 +214,7 @@
       },
       "value": {
         "en": [
-          "dateCreated"
+          "createdDate"
         ]
       }
     },

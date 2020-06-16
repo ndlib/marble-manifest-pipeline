@@ -38,6 +38,7 @@ class MetadataMappings():
                 self.schema[line['schema.org'].lower()] = line
                 self.element[line['element'].lower()] = line
                 self.athena[athena_key] = line
+                print("athena_key = ", athena_key, line)
 
     def get_by_prefered(self, name, field):
         return self.preferred.get(name.lower()).get(field, False)

@@ -75,7 +75,7 @@ class Test(unittest.TestCase):
         create_json_from_xml_class = createJsonFromXml()
         for _index, xml_item in enumerate(xml_record.findall('./c01')):
             actual_results = create_json_from_xml_class.extract_fields(xml_item, "items", {})
-            expected_results = {'id': 'aspace_8f5be6708c2e98e57a60eddf20e36679', 'title': 'Theophilus Parsons, Journal, vol. 1', 'dateCreated': 'January 1819-December 1820', 'uniqueIdentifier': 'MSN/EA 8011-1-B', 'items': [{'level': 'file', 'thumbnail': True, 'description': 'Theophilus Parsons, Journal, vol. 1', 'filePath': 'https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg', 'parentId': 'aspace_8f5be6708c2e98e57a60eddf20e36679', 'id': 'MSN-EA_8011-01-B-000a.jpg'}], 'level': 'manifest'}  # noqa: E501
+            expected_results = {'id': 'aspace_8f5be6708c2e98e57a60eddf20e36679', 'title': 'Theophilus Parsons, Journal, vol. 1', 'createdDate': 'January 1819-December 1820', 'uniqueIdentifier': 'MSN/EA 8011-1-B', 'items': [{'level': 'file', 'thumbnail': True, 'description': 'Theophilus Parsons, Journal, vol. 1', 'filePath': 'https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg', 'parentId': 'aspace_8f5be6708c2e98e57a60eddf20e36679', 'id': 'MSN-EA_8011-01-B-000a.jpg'}], 'level': 'manifest'}  # noqa: E501
             self.assertTrue(expected_results == actual_results)
             break
 
