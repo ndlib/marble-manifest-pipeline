@@ -166,9 +166,9 @@ class Test(unittest.TestCase):
 
     def test_10_build_json_from_marc_json(self):
         actual_results = self.transform_marc_json_class.build_json_from_marc_json(self.marc_record_as_json)
-        # with open(local_folder + 'test/sample_nd.json', 'w') as output_file:
+        # with open(local_folder + 'test/sample_standard.json', 'w') as output_file:
         #     json.dump(actual_results, output_file, indent=2, default=str)
-        with open(local_folder + 'test/sample_nd.json', 'r') as input_source:
+        with open(local_folder + 'test/sample_standard.json', 'r') as input_source:
             expected_json = json.load(input_source)
         file_created_date_from_sample = expected_json.get("fileCreatedDate", "")
         actual_results = self.fix_file_created_date(actual_results, file_created_date_from_sample)

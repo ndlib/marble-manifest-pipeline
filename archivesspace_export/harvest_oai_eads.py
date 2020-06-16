@@ -13,17 +13,17 @@ class HarvestOaiEads():
         self.temporary_local_path = '/tmp'
         self.require_dao_flag = False
 
-    def get_nd_json_from_archives_space_url(self, id_url: str) -> dict:
+    def get_standard_json_from_archives_space_url(self, id_url: str) -> dict:
         """ Retrieve one EAD xml record given the ArchivesSpace identifier """
         oai_url = self._get_oai_url_given_id_url(id_url)
         print("oai_url = ", oai_url)
-        nd_json = {}
+        standard_json = {}
         xml_string = self._get_xml_string_given_oai_url(oai_url)
         if xml_string:
             xml_tree = self._get_xml_tree_given_xml_string(xml_string, id_url)
             xml_record = xml_tree.find('./GetRecord/record')
-            nd_json = self._process_record(oai_url, xml_record)
-        return nd_json
+            standard_json = self._process_record(oai_url, xml_record)
+        return standard_json
 
     def _get_oai_url_given_id_url(self, user_interface_url: str) -> str:
         """ Define the ArchivesSpace URL to retrive a given identifier.
@@ -67,5 +67,5 @@ class HarvestOaiEads():
 
     def _process_record(self, source_system_url: str, xml_record: ElementTree) -> dict:
         """ Call a process to create ND.JSON from complex ArchivesSpace EAD xml """
-        nd_json = self.jsonFromXMLClass.get_nd_json_from_xml(xml_record)
-        return nd_json
+        standard_json = self.jsonFromXMLClass.get_standard_json_from_xml(xml_record)
+        return standard_json

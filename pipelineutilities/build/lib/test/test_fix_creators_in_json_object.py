@@ -17,7 +17,7 @@ class Test(unittest.TestCase):
 
     def test_01_test_known_creators_exist(self):
         """ test 1 test_known_creators_exist """
-        nd_json = {
+        standard_json = {
             "creators": [
                 {
                     "fullName": "Bunting, Edward.",
@@ -25,12 +25,12 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        results = self.fix_creators_in_json_object_class.known_creators_exist(nd_json)
+        results = self.fix_creators_in_json_object_class.known_creators_exist(standard_json)
         self.assertTrue(results)
 
     def test_02_test_known_creators_exist(self):
         """ test 2 test_known_creators_exist """
-        nd_json = {
+        standard_json = {
             "creators": [
                 {
                     "fullName": "unknown",
@@ -38,18 +38,18 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        results = self.fix_creators_in_json_object_class.known_creators_exist(nd_json)
+        results = self.fix_creators_in_json_object_class.known_creators_exist(standard_json)
         self.assertFalse(results)
 
     def test_03_test_known_creators_exist(self):
         """ test 3 test_known_creators_exist """
-        nd_json = {"creators": []}
-        results = self.fix_creators_in_json_object_class.known_creators_exist(nd_json)
+        standard_json = {"creators": []}
+        results = self.fix_creators_in_json_object_class.known_creators_exist(standard_json)
         self.assertFalse(results)
 
     def test_04_test_known_creators_exist(self):
         """ test 4 test_known_creators_exist """
-        nd_json = {
+        standard_json = {
             "creators": [
                 {
                     "fullName": "Bunting, Edward.",
@@ -61,12 +61,12 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        results = self.fix_creators_in_json_object_class.known_creators_exist(nd_json)
+        results = self.fix_creators_in_json_object_class.known_creators_exist(standard_json)
         self.assertTrue(results)
 
     def test_05_test_contributors_exist(self):
         """ test 5 contributors_exist """
-        nd_json = {
+        standard_json = {
             "contributors": [
                 {
                     "fullName": "Bunting, Edward, 1773-1843",
@@ -75,18 +75,18 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        results = self.fix_creators_in_json_object_class.contributors_exist(nd_json)
+        results = self.fix_creators_in_json_object_class.contributors_exist(standard_json)
         self.assertTrue(results)
 
     def test_06_test_contributors_exist(self):
         """ test 6 contributors_exist """
-        nd_json = {"contributors": []}
-        results = self.fix_creators_in_json_object_class.contributors_exist(nd_json)
+        standard_json = {"contributors": []}
+        results = self.fix_creators_in_json_object_class.contributors_exist(standard_json)
         self.assertFalse(results)
 
     def test_07_test_unknown_creators_exist(self):
         """ test 7 test_unknown_creators_exist """
-        nd_json = {
+        standard_json = {
             "creators": [
                 {
                     "fullName": "Bunting, Edward.",
@@ -94,12 +94,12 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        results = self.fix_creators_in_json_object_class.unknown_creators_exist(nd_json)
+        results = self.fix_creators_in_json_object_class.unknown_creators_exist(standard_json)
         self.assertFalse(results)
 
     def test_08_test_unknown_creators_exist(self):
         """ test 8 test_unknown_creators_exist """
-        nd_json = {
+        standard_json = {
             "creators": [
                 {
                     "fullName": "Bunting, Edward.",
@@ -111,12 +111,12 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        results = self.fix_creators_in_json_object_class.unknown_creators_exist(nd_json)
+        results = self.fix_creators_in_json_object_class.unknown_creators_exist(standard_json)
         self.assertTrue(results)
 
     def test_09_test_remove_unknown_creator(self):
         """ test 9 test_remove_unknown_creator """
-        nd_json = {
+        standard_json = {
             "creators": [
                 {
                     "fullName": "unknown",
@@ -132,7 +132,7 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        actual_results = self.fix_creators_in_json_object_class.remove_unknown_creators(nd_json)
+        actual_results = self.fix_creators_in_json_object_class.remove_unknown_creators(standard_json)
         expected_results = {
             "creators": [
                 {
@@ -145,8 +145,8 @@ class Test(unittest.TestCase):
 
     def test_10_test_add_unknown_creator(self):
         """ test 10 add_unknown_creator """
-        nd_json = {}
-        actual_results = self.fix_creators_in_json_object_class.add_unknown_creators(nd_json)
+        standard_json = {}
+        actual_results = self.fix_creators_in_json_object_class.add_unknown_creators(standard_json)
         expected_results = {
             "creators": [
                 {
@@ -159,8 +159,8 @@ class Test(unittest.TestCase):
 
     def test_11_test_add_unknown_creator(self):
         """ test 11 add_unknown_creator """
-        nd_json = {"creators": []}
-        actual_results = self.fix_creators_in_json_object_class.add_unknown_creators(nd_json)
+        standard_json = {"creators": []}
+        actual_results = self.fix_creators_in_json_object_class.add_unknown_creators(standard_json)
         expected_results = {
             "creators": [
                 {
@@ -173,7 +173,7 @@ class Test(unittest.TestCase):
 
     def test_12_test_remove_unknown_creators_if_known_creators_exist(self):
         """ test 12 test_remove_unknown_creators_if_known_creators_exist """
-        nd_json = {
+        standard_json = {
             "creators": [
                 {
                     "fullName": "unknown",
@@ -189,7 +189,7 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        actual_results = self.fix_creators_in_json_object_class.remove_unknown_creators_if_known_creators_exist(nd_json)
+        actual_results = self.fix_creators_in_json_object_class.remove_unknown_creators_if_known_creators_exist(standard_json)
         expected_results = {
             "creators": [
                 {
@@ -202,7 +202,7 @@ class Test(unittest.TestCase):
 
     def test_13_test_fix_creators_for_manifest(self):
         """ test 13 test_fix_creators_for_manifest """
-        nd_json = {
+        standard_json = {
             "contributors": [
                 {
                     "fullName": "Bunting, Edward.",
@@ -216,7 +216,7 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        actual_results = self.fix_creators_in_json_object_class.fix_creators_for_manifest(nd_json)
+        actual_results = self.fix_creators_in_json_object_class.fix_creators_for_manifest(standard_json)
         expected_results = {
             "contributors": [
                 {
@@ -230,8 +230,8 @@ class Test(unittest.TestCase):
 
     def test_14_test_fix_creators_for_manifest(self):
         """ test 14 test_fix_creators_for_manifest """
-        nd_json = {}
-        actual_results = self.fix_creators_in_json_object_class.fix_creators_for_manifest(nd_json)
+        standard_json = {}
+        actual_results = self.fix_creators_in_json_object_class.fix_creators_for_manifest(standard_json)
         expected_results = {
             "creators": [
                 {
@@ -244,7 +244,7 @@ class Test(unittest.TestCase):
 
     def test_15_test_fix_creators_for_manifest(self):
         """ test 15 test_fix_creators_for_manifest """
-        nd_json = {
+        standard_json = {
             "contributors": [
                 {
                     "fullName": "Bunting, Edward.",
@@ -252,7 +252,7 @@ class Test(unittest.TestCase):
                 },
             ]
         }
-        actual_results = self.fix_creators_in_json_object_class.fix_creators_for_manifest(nd_json)
+        actual_results = self.fix_creators_in_json_object_class.fix_creators_for_manifest(standard_json)
         expected_results = {
             "contributors": [
                 {
@@ -265,7 +265,7 @@ class Test(unittest.TestCase):
 
     def test_16_test_fix_creators_for_collection(self):
         """ test 16 test_fix_creators_for_collection """
-        nd_json = {
+        standard_json = {
             "creators": [
                 {
                     "fullName": "unknown",
@@ -273,13 +273,13 @@ class Test(unittest.TestCase):
                 },
             ]
         }
-        actual_results = self.fix_creators_in_json_object_class.fix_creators_for_collection(nd_json)
+        actual_results = self.fix_creators_in_json_object_class.fix_creators_for_collection(standard_json)
         expected_results = {"creators": []}
         self.assertTrue(actual_results == expected_results)
 
     def test_17_test_fix_creators(self):
         """ test 17 test_fix_creators """
-        nd_json = {
+        standard_json = {
             "id": 1,
             "level": "collection",
             "creators": [
@@ -293,7 +293,7 @@ class Test(unittest.TestCase):
                 {"id": 3, "level": "manifest", "creators": [{"fullName": "unknown"}], "contributors": [{"fullName": "someone"}]}
             ]
         }
-        actual_results = self.fix_creators_in_json_object_class.fix_creators(nd_json)
+        actual_results = self.fix_creators_in_json_object_class.fix_creators(standard_json)
         expected_results = {
             "id": 1,
             "level": "collection",
@@ -307,7 +307,7 @@ class Test(unittest.TestCase):
 
     def test_18_test_fix_creators(self):
         """ test 18 test_fix_creators """
-        nd_json = {
+        standard_json = {
             "id": "1",
             "creators": [
                 {
@@ -323,7 +323,7 @@ class Test(unittest.TestCase):
             ],
             "level": "manifest"
         }
-        actual_results = self.fix_creators_in_json_object_class.fix_creators(nd_json)
+        actual_results = self.fix_creators_in_json_object_class.fix_creators(standard_json)
         expected_results = {
             "id": "1",
             "creators": [
@@ -340,7 +340,7 @@ class Test(unittest.TestCase):
 
     def test_19_remove_unknown_creators(self):
         """ test 19 remove_unknown_creators """
-        nd_json = {
+        standard_json = {
             "id": "1",
             "creators": [
                 {
@@ -356,7 +356,7 @@ class Test(unittest.TestCase):
             ],
             "level": "manifest"
         }
-        actual_results = self.fix_creators_in_json_object_class.remove_unknown_creators(nd_json)
+        actual_results = self.fix_creators_in_json_object_class.remove_unknown_creators(standard_json)
         expected_results = {
             "id": "1",
             "creators": [
@@ -373,7 +373,7 @@ class Test(unittest.TestCase):
 
     def test_20_remove_unknown_creators_if_known_creators_exist(self):
         """ test 20 remove_unknown_creators_if_known_creators_exist """
-        nd_json = {
+        standard_json = {
             "id": "1",
             "creators": [
                 {
@@ -389,7 +389,7 @@ class Test(unittest.TestCase):
             ],
             "level": "manifest"
         }
-        actual_results = self.fix_creators_in_json_object_class.remove_unknown_creators_if_known_creators_exist(nd_json)
+        actual_results = self.fix_creators_in_json_object_class.remove_unknown_creators_if_known_creators_exist(standard_json)
         expected_results = {
             "id": "1",
             "creators": [
