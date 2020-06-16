@@ -3,7 +3,7 @@ import os
 from iiifManifest import iiifManifest
 from MetadataMappings import MetadataMappings
 from ToSchema import ToSchema
-from pipelineutilities.csv_collection import load_standard_json
+from pipelineutilities.load_standard_json import load_standard_json
 from pipelineutilities.pipeline_config import load_pipeline_config, cache_pipeline_config
 from pipelineutilities.s3_helpers import InprocessBucket
 import sentry_sdk
