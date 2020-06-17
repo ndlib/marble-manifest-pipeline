@@ -89,3 +89,5 @@ def _load_json_from_s3(s3_bucket, s3_path):
         return read_s3_json(s3_bucket, s3_path)
     except boto3.resource('s3').meta.client.exceptions.NoSuchKey:
         return {}
+    except Exception:
+        return {}
