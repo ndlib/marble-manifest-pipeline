@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 import boto3
 from botocore.stub import Stubber
-from pipelineutilities.s3_helpers import s3_file_exists, write_s3_file, write_s3_xml, filedata_is_already_on_s3, md5_checksum
+from pipelineutilities.s3_helpers import s3_file_exists, write_s3_xml, filedata_is_already_on_s3, md5_checksum
 import datetime
 from dateutil.tz import tzutc
 
@@ -37,20 +37,6 @@ class TestS3Helpers(unittest.TestCase):
             response = s3_file_exists("bucket", "key")
 
         self.assertEqual(response, head_response)
-
-    @patch('pipelineutilities.s3_helpers.s3_resource')
-    @patch('pipelineutilities.s3_helpers.filedata_is_already_on_s3')
-    def test_write_s3_file_writes_new_data_to_s3(self, mock_filedata_is_already_on_s3, mock_s3_resource):
-        ""
-        # s3 = boto3.resource("s3")
-        # stubber = Stubber(s3)
-
-        # mock_filedata_is_already_on_s3.return_value = s3
-        # stubber.add_response('Object', expected_params={'Bucket': 'bucket', 'Key': 'key'}, service_response={"eTag": "etag"})
-
-        # write_s3_file("bucket", "key", "data")
-        # print(mock_s3_resource.Object("bucket", "key"))
-        # print(mock_s3_resource.Object().put.called)
 
     @patch('pipelineutilities.s3_helpers.write_s3_file')
     def test_write_s3_xml(self, mock_write_s3_file):
