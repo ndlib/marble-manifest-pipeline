@@ -1,5 +1,5 @@
 {
-	"templateModifiedDate": "2020-04-21",
+	"templateModifiedDate": "2020-06=17",
 	"objects": {
 	<!--#4DEVAL gsFunc_StoreSelectionForLoop (->[Objects_1]) -->
 	<!--#4DEVAL $firstRecord := 1 -->
@@ -17,7 +17,7 @@
 			{
 			"sourceSystem": "EmbARK",
 			"title": "<!--#4DTEXT [Objects_1]Disp_Title-->",
-			"createdDate": "<!--#4DTEXT [Objects_1]Disp_Create_DT-->",
+			"dateCreated": "<!--#4DTEXT [Objects_1]Disp_Create_DT-->",
 			"classification": "<!--#4DTEXT [Objects_1]Class_System-->",
 			"workType": "<!--#4DTEXT [Objects_1]Class1-->",
 			"medium": "<!--#4DTEXT [Objects_1]Disp_Medium-->",
@@ -120,14 +120,19 @@
 					<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Surrogates-->
 					<!--#4DEVAL gsFunc_SortRecords(->[Surrogates]IsPrimary; "<")-->
 					<!--#4DEVAL $fileSequence := 0 -->
+					<!--#4DEVAL $firstDigitalAsset := 1 -->
 					<!--#4DLOOP [Surrogates]-->
 						<!--#4DIF [Surrogates]Web_Access-->
+							<!--#4DIF $firstDigitalAsset = 1 -->
+								<!--#4DEVAL $firstDigitalAsset := 0 -->
+							<!--#4DELSE -->
+							,
+							<!--#4DENDIF -->
 							<!--#4DEVAL $fileSequence := $fileSequence + 1 -->
 							{"sequence": <!--#4DEVAL $fileSequence -->,
 							"thumbnail": <!--#4DIF [Surrogates]IsPrimary-->true<!--#4DELSE-->false<!--#4DENDIF-->,
 							"fileDescription": "<!--#4DTEXT Filename("Surrogates")-->",
 							"filePath": "<!--#4DTEXT ImagePath("Surrogates")-->"}
-							<!--#4Dif (Selected Record Number([Surrogates])< Records in Selection([Surrogates])) -->,<!--#4Dendif-->
 						<!--#4DENDIF-->
 					<!--#4DENDLOOP-->
 			],

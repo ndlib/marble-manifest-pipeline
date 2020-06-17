@@ -63,7 +63,7 @@ default_config = {
     "museum-required-fields": {
         "Title": "title",
         "Creators": "creators",
-        "Date created": "createdDate",
+        "Created date": "createdDate",
         "Work Type": "workType",
         "Medium": "medium",
         "Unique identifier": "uniqueIdentifier",

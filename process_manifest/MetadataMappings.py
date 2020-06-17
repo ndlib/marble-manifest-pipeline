@@ -19,6 +19,7 @@ class MetadataMappings():
         f = StringIO(self.file())
         reader = csv.DictReader(f, delimiter=',')
         for this_row in reader:
+            # if "date" in this_row['Preferred Name']:
             if reader.line_num != 1:
                 athena_key = "".join(this_row['Preferred Name'].title().split())
                 athena_key = athena_key[0].lower() + athena_key[1:]
@@ -38,7 +39,6 @@ class MetadataMappings():
                 self.schema[line['schema.org'].lower()] = line
                 self.element[line['element'].lower()] = line
                 self.athena[athena_key] = line
-                print("athena_key = ", athena_key, line)
 
     def get_by_prefered(self, name, field):
         return self.preferred.get(name.lower()).get(field, False)
@@ -63,6 +63,7 @@ class MetadataMappings():
 
     def file(self):
         current_path = str(Path(__file__).parent.absolute())
+        # print("filename = ", current_path + "/" + self.provider.lower() + ".csv")
         with open(current_path + "/" + self.provider.lower() + ".csv", 'r') as input_source:
             source = input_source.read()
         input_source.close()

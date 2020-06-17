@@ -92,7 +92,6 @@ class processWebKioskJsonMetadata():
     def _get_metadata_given_url(self, url: str) -> dict:
         """ Return json from URL."""
         json_response = {}
-        json_response = json.loads(dependencies.requests.get(url).text)
         try:
             json_response = json.loads(dependencies.requests.get(url).text)
         except ConnectionRefusedError as e:

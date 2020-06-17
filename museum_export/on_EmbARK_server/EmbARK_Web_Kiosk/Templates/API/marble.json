@@ -1,5 +1,8 @@
 {
-	"templateModifiedDate": "2020-06-16",
+	"templateModifiedDate": "2020-06-17",
+	"changeLog": [
+		{"changeDate": "2020-06-17", "change": ["changed dateCreated to createdDate", "changed wording for access:", "added $firstDigitalAsset to fix comma problem"]}
+	],
 	"objects": {
 	<!--#4DEVAL gsFunc_StoreSelectionForLoop (->[Objects_1]) -->
 	<!--#4DEVAL $firstRecord := 1 -->
@@ -120,14 +123,19 @@
 					<!--#4DSCRIPT/LoadRelatedRecords/Objects_1:Surrogates-->
 					<!--#4DEVAL gsFunc_SortRecords(->[Surrogates]IsPrimary; "<")-->
 					<!--#4DEVAL $fileSequence := 0 -->
+					<!--#4DEVAL $firstDigitalAsset := 1 -->
 					<!--#4DLOOP [Surrogates]-->
 						<!--#4DIF [Surrogates]Web_Access-->
+							<!--#4DIF $firstDigitalAsset = 1 -->
+								<!--#4DEVAL $firstDigitalAsset := 0 -->
+							<!--#4DELSE -->
+							,
+							<!--#4DENDIF -->
 							<!--#4DEVAL $fileSequence := $fileSequence + 1 -->
 							{"sequence": <!--#4DEVAL $fileSequence -->,
 							"thumbnail": <!--#4DIF [Surrogates]IsPrimary-->true<!--#4DELSE-->false<!--#4DENDIF-->,
 							"fileDescription": "<!--#4DTEXT Filename("Surrogates")-->",
 							"filePath": "<!--#4DTEXT ImagePath("Surrogates")-->"}
-							<!--#4Dif (Selected Record Number([Surrogates])< Records in Selection([Surrogates])) -->,<!--#4Dendif-->
 						<!--#4DENDIF-->
 					<!--#4DENDLOOP-->
 			],
