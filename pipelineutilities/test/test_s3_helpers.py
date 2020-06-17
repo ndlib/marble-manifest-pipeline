@@ -1,7 +1,6 @@
 import _set_path  # noqa
 import unittest
 from unittest.mock import patch
-from unittest.mock import MagicMock
 import boto3
 from botocore.stub import Stubber
 from pipelineutilities.s3_helpers import s3_file_exists, write_s3_file, write_s3_xml, filedata_is_already_on_s3, md5_checksum
