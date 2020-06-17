@@ -51,7 +51,7 @@
 				"fields": ["creator#administrative_unit"],
 				"format": "text"
 			},
-			{ "label": "dateCreated",
+			{ "label": "createdDate",
 				"fields": ["dateSubmitted"],
 				"format": "text",
 				"datePattern": "%Y-%m-%d"
@@ -158,7 +158,7 @@
 				"constant": "file",
 				"format": "text"
 			},
-			{ "label": "dateCreated",
+			{ "label": "createdDate",
 				"fields": ["dateSubmitted"],
 				"format": "text",
 				"datePattern": "%Y-%m-%d"

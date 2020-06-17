@@ -16,7 +16,6 @@ class ConvertJsonToCsv():
 
     def _save_json_record_to_csv(self, json_object: dict):
         """ Recursively save this json_object as a csv string """
-        # print("calling write_csv_row passing ", json_object)
         self.output_csv_class.write_csv_row(json_object)
         if "items" in json_object:
             if "[" in json_object["items"] and "]" in json_object["items"]:

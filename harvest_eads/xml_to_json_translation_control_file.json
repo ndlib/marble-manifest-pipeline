@@ -231,7 +231,7 @@
 				"optional": true
 			},
 			{
-				"label": "dateCreated",
+				"label": "createdDate",
 				"xpath": "./unitdate[@type='inclusive']",
 				"optional": true,
 				"format": "text"

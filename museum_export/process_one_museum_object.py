@@ -7,7 +7,7 @@ import copy
 from clean_up_content import CleanUpContent
 from convert_json_to_csv import ConvertJsonToCsv
 from dependencies.pipelineutilities.validate_json import validate_json, get_standard_json_schema, schema_api_version
-from pipelineutilities.s3_helpers import write_s3_file, write_s3_json
+from pipelineutilities.s3_helpers import write_s3_file
 from sentry_sdk import capture_message, push_scope
 # from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject

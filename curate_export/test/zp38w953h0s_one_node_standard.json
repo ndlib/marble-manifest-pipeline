@@ -15,7 +15,7 @@
     }
   ],
   "access": "University of Notre Dame::Hesburgh Libraries::University Archives",
-  "dateCreated": "2018-12-10T00:00:00Z",
+  "createdDate": "2018-12-10T00:00:00Z",
   "modifiedDate": "2020-01-29T00:00:00Z",
   "workType": "Document",
   "linkToSource": "https://curate.nd.edu/show/pv63fx74g23",
@@ -39,7 +39,7 @@
       "description": "1845-08-02_Commencement.pdf",
       "id": "pz50gt57r3h",
       "level": "file",
-      "dateCreated": "2018-12-10T00:00:00Z",
+      "createdDate": "2018-12-10T00:00:00Z",
       "modifiedDate": "2020-01-29T00:00:00Z",
       "workType": "GenericFile",
       "filePath": "https://curate.nd.edu/api/items/download/pz50gt57r3h",

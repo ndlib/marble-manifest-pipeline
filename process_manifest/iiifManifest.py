@@ -26,6 +26,7 @@ class iiifManifest():
 
         ret = []
         for key in mapper.get_athena_keys():
+            # print("key = ", key, self.data.get(key))
             if key.lower() != 'n/a':
                 if key == 'creators':
                     value = self.data.get(key)

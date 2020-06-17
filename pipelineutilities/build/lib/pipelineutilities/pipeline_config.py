@@ -32,7 +32,7 @@ default_config = {
         "parentId",
         "level",
         "title",
-        "dateCreated",
+        "createdDate",
         "uniqueIdentifier",
         "dimensions",
         "languages",
@@ -63,7 +63,7 @@ default_config = {
     "museum-required-fields": {
         "Title": "title",
         "Creators": "creators",
-        "Date created": "dateCreated",
+        "Created date": "createdDate",
         "Work Type": "workType",
         "Medium": "medium",
         "Unique identifier": "uniqueIdentifier",

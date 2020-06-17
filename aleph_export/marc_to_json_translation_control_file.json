@@ -67,7 +67,7 @@
 				"format": "array",
 				"note": "added 5/15/20 sm"
 			},
-			{ "label": "dateCreated",
+			{ "label": "createdDate",
 				"fields": ["264", "260"],
 				"selection": "first",
 				"subfields": ["c"],
