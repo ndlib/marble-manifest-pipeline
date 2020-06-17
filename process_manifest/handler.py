@@ -37,26 +37,8 @@ def run(event, context):
 
     for id in ids:
         if id not in config['processed_ids']:
-            inprocess_bucket = InprocessBucket(id, config)
-
-            # move the nd json into the process bucket.
             try:
-                inprocess_bucket.write_nd_json()
-
-                parent = load_standard_json(id, config)
-
-                mapping = MetadataMappings(parent)
-                iiif = iiifManifest(config, parent, mapping)
-                manifest = iiif.manifest()
-
-                # split the manifests
-                for item in sub_manifests(manifest):
-                    inprocess_bucket.write_sub_manifest(item)
-
-                inprocess_bucket.write_manifest(manifest)
-
-                schema = ToSchema(id, config, parent)
-                inprocess_bucket.write_schema_json(schema.get_json())
+                process_manifest(id, config)
             except Exception:
                 print("error on {}".format(id))
 
@@ -71,6 +53,27 @@ def run(event, context):
     cache_pipeline_config(config, event)
 
     return event
+
+
+def process_manifest(id, config):
+    inprocess_bucket = InprocessBucket(id, config)
+
+    inprocess_bucket.write_nd_json()
+
+    parent = load_standard_json(id, config)
+
+    mapping = MetadataMappings(parent)
+    iiif = iiifManifest(config, parent, mapping)
+    manifest = iiif.manifest()
+
+    # split the manifests
+    for item in sub_manifests(manifest):
+        inprocess_bucket.write_sub_manifest(item)
+
+    inprocess_bucket.write_manifest(manifest)
+
+    schema = ToSchema(id, config, parent)
+    inprocess_bucket.write_schema_json(schema.get_json())
 
 
 def sub_manifests(manifest):

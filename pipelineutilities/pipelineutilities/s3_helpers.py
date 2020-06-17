@@ -16,7 +16,7 @@ def get_matching_s3_objects(bucket: str, prefix: str = "", suffix: str = "") -> 
     :param suffix: Only fetch objects whose keys end with
         this suffix (optional).
     """
-    s3 = boto3.client("s3")
+    s3 = s3_client()
     paginator = s3.get_paginator("list_objects_v2")
 
     kwargs = {'Bucket': bucket}
@@ -93,7 +93,8 @@ def read_s3_file_content(s3_bucket: str, s3_key: str) -> str:
     :param s3_bucket: Name of the S3 bucket.
     :param s3_key: Key to write to s3.
     """
-    content_object = boto3.resource('s3').Object(s3_bucket, s3_key)
+    resource = s3_resource()
+    content_object = resource.Object(s3_bucket, s3_key)
     return content_object.get()['Body'].read().decode('utf-8')
 
 
@@ -131,13 +132,17 @@ def write_s3_file(s3_bucket: str, s3_key: str, filedata: str, **kwargs) -> None:
     :param filedata: String file data to add
     :param kwargs: Additional params to pass to boto object.put
     """
+    print("outside")
     if not filedata_is_already_on_s3(s3_bucket, s3_key, filedata):
+        print("hi")
         kwargs['Body'] = filedata
-        s3 = boto3.resource('s3')
+
+        s3 = s3_resource()
+        print("this=>", s3.Object("", "").put(""))
         s3.Object(s3_bucket, s3_key).put(**kwargs)
 
 
-def write_xml_file(s3_bucket: str, s3_key: str, filedata: str, **kwargs) -> None:
+def write_s3_xml(s3_bucket: str, s3_key: str, filedata: str, **kwargs) -> None:
     """
     Writes a string xml file to s3.
     Tests if the file is already on s3
@@ -187,7 +192,6 @@ def filedata_is_already_on_s3(s3_bucket: str, s3_key: str, filedata: str) -> boo
         raise Exception("Etag from aws is in large file format and cant' be tested with our current method.")
 
     file_etag = md5_checksum(filedata)
-
     # if the etags match the file is on s3
     return (etag == file_etag)
 
@@ -235,7 +239,8 @@ def delete_s3_key(s3_bucket: str, s3_key: str) -> None:
     :param s3_bucket: Name of the S3 bucket.
     :param s3_key: Key to delete from
     """
-    return boto3.client('s3').delete_object(
+    s3 = s3_client()
+    return s3.delete_object(
         Bucket=s3_bucket,
         Key=s3_key,
     )
@@ -245,7 +250,8 @@ def delete_file(s3Bucket, s3Path):
     """
     Depreciated use delete_s3_key
     """
-    return boto3.client('s3').delete_object(
+    s3 = s3_client()
+    return s3.delete_object(
         Bucket=s3Bucket,
         Key=s3Path,
     )
@@ -270,7 +276,8 @@ def upload_file_to_s3(s3_bucket: str, s3_key: str, local_filepath: str) -> None:
     :param s3_key: Key to delete from
     :param local_filepath: path to the local file
     """
-    boto3.resource('s3').Bucket(s3_bucket).upload_file(local_filepath, s3_key)
+    resource = s3_resource()
+    resource.Bucket(s3_bucket).upload_file(local_filepath, s3_key)
 
 
 def upload_file(s3_bucket: str, s3_key: str, local_filepath: str) -> None:
@@ -278,13 +285,19 @@ def upload_file(s3_bucket: str, s3_key: str, local_filepath: str) -> None:
     Depreciated
     use upload_file_to_s3
     """
-    boto3.resource('s3').Bucket(s3_bucket).upload_file(local_filepath, s3_key)
+    resource = s3_resource()
+    resource.Bucket(s3_bucket).upload_file(local_filepath, s3_key)
 
 
-# returns the head object if found
-# False if it does not exist
 def s3_file_exists(s3_bucket: str, s3_key: str) -> dict:
-    s3 = boto3.client('s3')
+    """
+    tells you if an object is in s3.
+    Returns the head metadata on true
+    Traps the client error and returns false if it does not exist
+    :param s3_bucket: Name of the S3 bucket.
+    :param s3_key: Key to delete from
+    """
+    s3 = s3_client()
     try:
         return s3.head_object(Bucket=s3_bucket, Key=s3_key)
 
@@ -292,12 +305,20 @@ def s3_file_exists(s3_bucket: str, s3_key: str) -> dict:
         return False
 
 
+def s3_client():
+    return boto3.client('s3')
+
+
+def s3_resource():
+    return boto3.resource('s3')
+
+
 # python -c 'from s3_helpers import *; test()'
 def test():
-    bucket_name = "marble-manifest-prod-processbucket-13bond538rnnb"
-    your_key = "test/test.json"
-    file = '{"sourceSystem": "EmbARK", "title": "Crucifixion", "dateCreated": "ca. 1360", "workType": "Paintings", "medium": "tempera on panel, gold ground", "uniqueIdentifier": "1961.047.004", "sequence": 0, "repository": "museum", "subjects": [{"authority": "IA", "term": "Bible, New Testament", "uri": "http://vocab.getty.edu/page/ia/901000254"}, {"authority": "AAT", "term": "crucifixions", "uri": "http://vocab.getty.edu/aat/300404300"}, {"authority": "AAT", "term": "deaths", "uri": "http://vocab.getty.edu/aat/300151836"}, {"authority": "AAT", "term": "religions", "uri": "http://vocab.getty.edu/aat/300073708"}], "copyrightStatus": "Public domain", "copyrightStatement": "", "access": "Galleries: Ancient, Medieval, and Renaissance Art Gallery", "format": "", "dimensions": "15 1/2 x 5 1/2 in. (39.37 x 13.97 cm)", "dedication": "Gift of the Samuel H. Kress Foundation", "description": "", "creationPlace": {"continent": "", "country": "", "state": "", "county": "", "city": "", "historic": ""}, "id": "1961.047.004", "collectionId": "1961.047.004", "parentId": "root", "creators": [{"attribution": "", "role": "Primary", "fullName": "Puccio di Simone", "nationality": "Italian", "lifeDates": "active ca. 1345 - 1365", "startDate": "ca. 1345", "endDate": "1365", "human": false, "alive": false, "display": "Puccio di Simone (Italian, active ca. 1345 - 1365)"}], "modifiedDate": "2020-06-15T11:01:00Z", "level": "manifest", "apiVersion": 1, "fileCreatedDate": "2020-06-16", "items": [{"id": "1961_047_004-v0001.jpg", "level": "file", "sequence": 1, "title": "1961_047_004-v0001.jpg", "description": "1961_047_004-v0001.jpg", "thumbnail": true, "md5Checksum": "8e912c79ed64b040c52e2a0f8a9782d5", "filePath": "https://drive.google.com/a/nd.edu/file/d/1mcmtmW8M9gCiL6uQ--XUbDSVCgwy9qzw/view", "fileId": "1mcmtmW8M9gCiL6uQ--XUbDSVCgwy9qzw", "modifiedDate": "2019-06-25T17:58:34.840Z", "mimeType": "image/jpeg", "collectionId": "1961.047.004", "parentId": "1961.047.004", "sourceSystem": "EmbARK", "repository": "museum", "apiVersion": 1, "fileCreatedDate": "2020-06-16", "iiifImageUri": "https://image-iiif.library.nd.edu/iiif/2/1961.047.004%2F1961_047_004-v0001", "iiifImageFilePath": "s3://marble-data-broker-publicbucket-1kvqtwnvkhra2/1961.047.004/1961_047_004-v0001", "iiifUri": "https://presentation-iiif.library.nd.edu/1961.047.004/1961_047_004-v0001/canvas", "iiifFilePath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1961.047.004/1961_047_004-v0001/canvas/index.json", "metsUri": "", "metsFilePath": "", "schemaUri": "", "schemaPath": ""}], "iiifImageUri": "", "iiifImageFilePath": "", "iiifUri": "https://presentation-iiif.library.nd.edu/1961.047.004/manifest", "iiifFilePath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1961.047.004/manifest", "metsUri": "https://presentation-iiif.library.nd.edu/1961.047.004/mets.xml", "metsFilePath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1961.047.004/mets.xml", "schemaUri": "https://presentation-iiif.library.nd.edu/1961.047.004", "schemaPath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1961.047.004/index.json"}'
+    bucket_name = "marble-manifest-prod-processbucket-kskqchthxshg"
+    your_key = "json/000297305.json"
+    file = '{"sourceSystem": "EmbARK", "title": "Crucifixion", "dateCreated": "ca. 1360", "workType": "Paintings", "medium": "tempera on panel, gold ground", "uniqueIdentifier": "1961.047.004", "sequence": 0, "repository": "museum", "subjects": [{"authority": "IA", "term": "Bible, New Testament", "uri": "http://vocab.getty.edu/page/ia/901000254"}, {"authority": "AAT", "term": "crucifixions", "uri": "http://vocab.getty.edu/aat/300404300"}, {"authority": "AAT", "term": "deaths", "uri": "http://vocab.getty.edu/aat/300151836"}, {"authority": "AAT", "term": "religions", "uri": "http://vocab.getty.edu/aat/300073708"}], "copyrightStatus": "Public domain", "copyrightStatement": "", "access": "Galleries: Ancient, Medieval, and Renaissance Art Gallery", "format": "", "dimensions": "15 1/2 x 5 1/2 in. (39.37 x 13.97 cm)", "dedication": "Gift of the Samuel H. Kress Foundation", "description": "", "creationPlace": {"continent": "", "country": "", "state": "", "county": "", "city": "", "historic": ""}, "id": "1961.047.004", "collectionId": "1961.047.004", "parentId": "root", "creators": [{"attribution": "", "role": "Primary", "fullName": "Puccio di Simone", "nationality": "Italian", "lifeDates": "active ca. 1345 - 1365", "startDate": "ca. 1345", "endDate": "1365", "human": false, "alive": false, "display": "Puccio di Simone (Italian, active ca. 1345 - 1365)"}], "modifiedDate": "2020-06-15T11:01:00Z", "level": "manifest", "apiVersion": 1, "fileCreatedDate": "2020-06-16", "items": [{"id": "1961_047_004-v0001.jpg", "level": "file", "sequence": 1, "title": "1961_047_004-v0001.jpg", "description": "1961_047_004-v0001.jpg", "thumbnail": true, "md5Checksum": "8e912c79ed64b040c52e2a0f8a9782d5", "filePath": "https://drive.google.com/a/nd.edu/file/d/1mcmtmW8M9gCiL6uQ--XUbDSVCgwy9qzw/view", "fileId": "1mcmtmW8M9gCiL6uQ--XUbDSVCgwy9qzw", "modifiedDate": "2019-06-25T17:58:34.840Z", "mimeType": "image/jpeg", "collectionId": "1961.047.004", "parentId": "1961.047.004", "sourceSystem": "EmbARK", "repository": "museum", "apiVersion": 1, "fileCreatedDate": "2020-06-16", "iiifImageUri": "https://image-iiif.library.nd.edu/iiif/2/1961.047.004%2F1961_047_004-v0001", "iiifImageFilePath": "s3://marble-data-broker-publicbucket-1kvqtwnvkhra2/1961.047.004/1961_047_004-v0001", "iiifUri": "https://presentation-iiif.library.nd.edu/1961.047.004/1961_047_004-v0001/canvas", "iiifFilePath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1961.047.004/1961_047_004-v0001/canvas/index.json", "metsUri": "", "metsFilePath": "", "schemaUri": "", "schemaPath": ""}], "iiifImageUri": "", "iiifImageFilePath": "", "iiifUri": "https://presentation-iiif.library.nd.edu/1961.047.004/manifest", "iiifFilePath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1961.047.004/manifest", "metsUri": "https://presentation-iiif.library.nd.edu/1961.047.004/mets.xml", "metsFilePath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1961.047.004/mets.xml", "schemaUri": "https://presentation-iiif.library.nd.edu/1961.047.004", "schemaPath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1961.047.004/index.json"}'  # noqa
 
-    write_s3_json(bucket_name, your_key, file)
+    print(s3_file_exists(bucket_name, your_key))
 
     # etag_checksum(filename, chunk_size=8 * 1024 * 1024)
