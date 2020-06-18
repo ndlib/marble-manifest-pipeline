@@ -117,18 +117,6 @@ def read_s3_json(s3_bucket: str, s3_key: str) -> str:
     return json.loads(content)
 
 
-def read_s3_xml(s3_bucket: str, s3_key: str) -> str:
-    """
-    Returns an s3 file as a decoded utf-8 string
-    Note: Does not trap botocore.exceptions.ClientError errors.
-    Use s3_file_exists
-
-    :param s3_bucket: Name of the S3 bucket.
-    :param s3_key: Key to write to s3.
-    """
-    return read_s3_file_content(s3_bucket, s3_key)
-
-
 def write_s3_file(s3_bucket: str, s3_key: str, filedata: str, **kwargs) -> None:
     """
     Writes a string file to s3.

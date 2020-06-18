@@ -222,19 +222,6 @@ class TestS3Helpers(unittest.TestCase):
         stubber.assert_no_pending_responses()
 
     @patch('pipelineutilities.s3_helpers.read_s3_file_content')
-    def test_read_s3_xml(self, mock_read_s3_file_content):
-        """
-        read_s3_xml
-        Returns xml from a file
-        """
-        mock_read_s3_file_content.return_value = "<xml>"
-
-        content = read_s3_xml("bucket", "key")
-
-        mock_read_s3_file_content.assert_called_once_with("bucket", "key")
-        self.assertEqual("<xml>", content)
-
-    @patch('pipelineutilities.s3_helpers.read_s3_file_content')
     def test_read_s3_json(self, mock_read_s3_file_content):
         """
         read_s3_json
