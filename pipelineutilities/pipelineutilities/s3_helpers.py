@@ -132,13 +132,10 @@ def write_s3_file(s3_bucket: str, s3_key: str, filedata: str, **kwargs) -> None:
     :param filedata: String file data to add
     :param kwargs: Additional params to pass to boto object.put
     """
-    print("outside")
     if not filedata_is_already_on_s3(s3_bucket, s3_key, filedata):
-        print("hi")
         kwargs['Body'] = filedata
 
         s3 = s3_resource()
-        print("this=>", s3.Object("", "").put(""))
         s3.Object(s3_bucket, s3_key).put(**kwargs)
 
 
