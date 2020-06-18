@@ -4,7 +4,7 @@ from unittest.mock import patch, Mock
 import boto3
 import botocore
 from botocore.stub import Stubber
-from pipelineutilities.s3_helpers import s3_file_exists, write_s3_file, write_s3_xml, write_s3_json, filedata_is_already_on_s3, md5_checksum, read_s3_file_content, read_s3_xml, read_s3_json
+from pipelineutilities.s3_helpers import s3_file_exists, write_s3_file, write_s3_xml, write_s3_json, filedata_is_already_on_s3, md5_checksum, read_s3_file_content, read_s3_json
 import datetime
 from dateutil.tz import tzutc
 
