@@ -13,6 +13,11 @@ class TestS3Helpers(unittest.TestCase):
 
     @patch('pipelineutilities.s3_helpers.s3_client')
     def test_s3_file_exists_false_when_no_key(self, mock_s3_client):
+        """
+        s3_file_exists
+        Tests that s3_file_exits returns False when there is no file in s3
+        Mocks s3_helpers.s3_client - to mock the request
+        """
         s3 = boto3.client("s3")
         stubber = Stubber(s3)
         stubber.add_client_error('head_object', service_message="message", expected_params={'Bucket': 'bucketnot', 'Key': 'key_not'})
@@ -26,6 +31,11 @@ class TestS3Helpers(unittest.TestCase):
 
     @patch('pipelineutilities.s3_helpers.s3_client')
     def test_s3_file_exists_returns_head_object_when_exists(self, mock_s3_client):
+        """
+        s3_file_exists
+        Tests that s3_file_exits returns the head object data when it exists on s3
+        Mocks s3_helpers.s3_client - to mock the request
+        """
         s3 = boto3.client("s3")
         stubber = Stubber(s3)
 
@@ -41,7 +51,11 @@ class TestS3Helpers(unittest.TestCase):
 
     @patch('pipelineutilities.s3_helpers.filedata_is_already_on_s3')
     @patch('pipelineutilities.s3_helpers.s3_resource')
-    def test_write_s3_file(self, mock_s3_resource, mock_filedata_is_already_on_s3):
+    def test_write_s3_file_basic(self, mock_s3_resource, mock_filedata_is_already_on_s3):
+        """
+        write_s3_file
+        Tests that s3 put_object gets called with the basic parameters
+        """
         s3 = boto3.resource('s3')
         stubber = Stubber(s3.meta.client)
         mock_response = {'ResponseMetadata': {'RequestId': '2CA0C8ABC59ED601', 'HostId': 'W81yYPFfh/26bdCJGImLxHYIKQxKIABbu6uLSF8XhuDoPL3gtRsP9x39VyePZeP/XE4C8LHrp6Q=', 'HTTPStatusCode': 200}}
@@ -57,7 +71,17 @@ class TestS3Helpers(unittest.TestCase):
 
         stubber.assert_no_pending_responses()
 
-        # TEST that it passes kwargs to put_object
+    @patch('pipelineutilities.s3_helpers.filedata_is_already_on_s3')
+    @patch('pipelineutilities.s3_helpers.s3_resource')
+    def test_write_s3_file_complex(self, mock_s3_resource, mock_filedata_is_already_on_s3):
+        """
+        write_s3_file
+        Tests that s3 put_object gets called with passing kwargs to it
+        """
+        s3 = boto3.resource('s3')
+        stubber = Stubber(s3.meta.client)
+
+        mock_response = {'ResponseMetadata': {'RequestId': '2CA0C8ABC59ED601', 'HostId': 'W81yYPFfh/26bdCJGImLxHYIKQxKIABbu6uLSF8XhuDoPL3gtRsP9x39VyePZeP/XE4C8LHrp6Q=', 'HTTPStatusCode': 200}}
         stubber.add_response('put_object', expected_params={'Bucket': 'bucket', 'Key': 'key', 'Body': "data", "ContentType": "contenttype"}, service_response=mock_response)
 
         mock_s3_resource.return_value = s3
@@ -68,7 +92,16 @@ class TestS3Helpers(unittest.TestCase):
 
         stubber.assert_no_pending_responses()
 
-        # TEST that it does not call
+    @patch('pipelineutilities.s3_helpers.filedata_is_already_on_s3')
+    @patch('pipelineutilities.s3_helpers.s3_resource')
+    def test_write_s3_file_file_exists(self, mock_s3_resource, mock_filedata_is_already_on_s3):
+        """
+        write_s3_file
+        Tests that s3 put_object does not get called if the file already exists.
+        """
+        s3 = boto3.resource('s3')
+        stubber = Stubber(s3.meta.client)
+
         mock_filedata_is_already_on_s3.return_value = True
         try:
             with stubber:
@@ -79,6 +112,10 @@ class TestS3Helpers(unittest.TestCase):
 
     @patch('pipelineutilities.s3_helpers.write_s3_file')
     def test_write_s3_xml(self, mock_write_s3_file):
+        """
+        write_s3_xml
+        Tests that the correct data is handed off to write_s3_file
+        """
         mock_write_s3_file.return_value = None
 
         write_s3_xml("bucket", "key", "xml")
@@ -88,17 +125,24 @@ class TestS3Helpers(unittest.TestCase):
 
     @patch('pipelineutilities.s3_helpers.write_s3_file')
     def test_write_s3_json(self, mock_write_s3_file):
+        """
+        write_s3_json
+        Tests that the correct data is handed off to write_s3_file
+        """
         mock_write_s3_file.return_value = None
 
-        write_s3_json("bucket", "key", "json")
+        write_s3_json("bucket", "key", {"json": "json"})
 
-        mock_write_s3_file.assert_called_once_with("bucket", "key", '"json"', ContentType='text/json')
-        ""
+        mock_write_s3_file.assert_called_once_with("bucket", "key", '"json"', ContentType="text/json")
 
     @patch('pipelineutilities.s3_helpers.s3_file_exists')
     @patch('pipelineutilities.s3_helpers.md5_checksum')
     @patch('pipelineutilities.s3_helpers.s3_client')
     def test_filedata_is_already_on_s3_false_if_the_file_does_not_exist(self, mock_s3_client, mock_md5_checksum, mock_s3_file_exists):
+        """
+        filedata_is_already_on_s3
+        Tests that it returns false if the file is not on s3.
+        """
         # it is always false no matter if the etag matches.
         mock_s3_file_exists.return_value = False
         self.assertFalse(filedata_is_already_on_s3('bucket', 'key', 'data'))
@@ -107,7 +151,10 @@ class TestS3Helpers(unittest.TestCase):
     @patch('pipelineutilities.s3_helpers.md5_checksum')
     @patch('pipelineutilities.s3_helpers.s3_client')
     def test_filedata_is_already_on_s3_true_if_the_etags_match(self, mock_s3_client, mock_md5_checksum, mock_s3_file_exists):
-        # it is true if the etags match
+        """
+        filedata_is_already_on_s3
+        Tests that it returns true if the file is on s3 and the etags match
+        """
         mock_s3_file_exists.return_value = {'ETag': '"etag"'}
         mock_md5_checksum.return_value = 'etag'
 
@@ -117,12 +164,19 @@ class TestS3Helpers(unittest.TestCase):
     @patch('pipelineutilities.s3_helpers.md5_checksum')
     @patch('pipelineutilities.s3_helpers.s3_client')
     def test_filedata_is_already_on_s3_false_if_the_etags_do_not_match(self, mock_s3_client, mock_md5_checksum, mock_s3_file_exists):
-        # it is false if the etags don't match
+        """
+        filedata_is_already_on_s3
+        Tests that it returns false if the file is on s3 but the etags do not match
+        """
         mock_s3_file_exists.return_value = {'ETag': '"etag"'}
         mock_md5_checksum.return_value = 'new_etag'
 
         self.assertFalse(filedata_is_already_on_s3('bucket', 'key', 'data'))
 
     def test_md5_checksum_does_hex_md5(self):
+        """
+        md5_checksum
+        Tests that it returns the correct checksum value
+        """
         result = "098f6bcd4621d373cade4e832627b4f6"
         self.assertEqual(result, md5_checksum("test"))
