@@ -1,10 +1,10 @@
 import _set_path  # noqa
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 import boto3
 import botocore
 from botocore.stub import Stubber
-from pipelineutilities.s3_helpers import s3_file_exists, write_s3_file, write_s3_xml, write_s3_json, filedata_is_already_on_s3, md5_checksum
+from pipelineutilities.s3_helpers import s3_file_exists, write_s3_file, write_s3_xml, write_s3_json, filedata_is_already_on_s3, md5_checksum, read_s3_file_content, read_s3_xml, read_s3_json
 import datetime
 from dateutil.tz import tzutc
 
@@ -121,7 +121,6 @@ class TestS3Helpers(unittest.TestCase):
         write_s3_xml("bucket", "key", "xml")
 
         mock_write_s3_file.assert_called_once_with("bucket", "key", "xml", ContentType='application/xml')
-        ""
 
     @patch('pipelineutilities.s3_helpers.write_s3_file')
     def test_write_s3_json(self, mock_write_s3_file):
@@ -133,7 +132,7 @@ class TestS3Helpers(unittest.TestCase):
 
         write_s3_json("bucket", "key", {"json": "json"})
 
-        mock_write_s3_file.assert_called_once_with("bucket", "key", '"json"', ContentType="text/json")
+        mock_write_s3_file.assert_called_once_with("bucket", "key", '{"json": "json"}', ContentType="text/json")
 
     @patch('pipelineutilities.s3_helpers.s3_file_exists')
     @patch('pipelineutilities.s3_helpers.md5_checksum')
@@ -180,3 +179,83 @@ class TestS3Helpers(unittest.TestCase):
         """
         result = "098f6bcd4621d373cade4e832627b4f6"
         self.assertEqual(result, md5_checksum("test"))
+
+    @patch('pipelineutilities.s3_helpers.s3_resource')
+    def test_read_s3_file_content_exists(self, mock_s3_resource):
+        """
+        read_s3_file_content
+        Tests that s3 file is read correctly
+        """
+        body_mock = Mock()
+        body_mock.read.return_value.decode.return_value = "body"
+
+        s3 = boto3.resource('s3')
+        stubber = Stubber(s3.meta.client)
+
+        mock_response = {'Body': body_mock, 'ResponseMetadata': {'RequestId': '2CA0C8ABC59ED601', 'HostId': 'W81yYPFfh/26bdCJGImLxHYIKQxKIABbu6uLSF8XhuDoPL3gtRsP9x39VyePZeP/XE4C8LHrp6Q=', 'HTTPStatusCode': 200}}
+        stubber.add_response('get_object', expected_params={'Bucket': 'bucket', 'Key': 'key'}, service_response=mock_response)
+
+        mock_s3_resource.return_value = s3
+
+        with stubber:
+            content = read_s3_file_content("bucket", "key")
+
+        self.assertEqual('body', content)
+        stubber.assert_no_pending_responses()
+
+    @patch('pipelineutilities.s3_helpers.s3_resource')
+    def test_read_s3_file_content_does_not_exists(self, mock_s3_resource):
+        """
+        read_s3_file_content
+        Tests that it returns "" when the object does not exist
+        """
+        s3 = boto3.resource('s3')
+        stubber = Stubber(s3.meta.client)
+        stubber.add_client_error('get_object', service_message="message", expected_params={'Bucket': 'bucketnot', 'Key': 'key_not'})
+
+        mock_s3_resource.return_value = s3
+
+        with stubber:
+            content = read_s3_file_content("bucketnot", "key_not")
+
+        self.assertEqual("", content)
+        stubber.assert_no_pending_responses()
+
+    @patch('pipelineutilities.s3_helpers.read_s3_file_content')
+    def test_read_s3_xml(self, mock_read_s3_file_content):
+        """
+        read_s3_xml
+        Returns xml from a file
+        """
+        mock_read_s3_file_content.return_value = "<xml>"
+
+        content = read_s3_xml("bucket", "key")
+
+        mock_read_s3_file_content.assert_called_once_with("bucket", "key")
+        self.assertEqual("<xml>", content)
+
+    @patch('pipelineutilities.s3_helpers.read_s3_file_content')
+    def test_read_s3_json(self, mock_read_s3_file_content):
+        """
+        read_s3_json
+        Tests that the json as a hash is returned.
+        """
+        mock_read_s3_file_content.return_value = '{"json": "json"}'
+
+        content = read_s3_json("bucket", "key")
+
+        mock_read_s3_file_content.assert_called_once_with("bucket", "key")
+        self.assertEqual({"json": "json"}, content)
+
+    @patch('pipelineutilities.s3_helpers.read_s3_file_content')
+    def test_read_s3_json_empty(self, mock_read_s3_file_content):
+        """
+        read_s3_json
+        Tests that an empty file becomes and empty dict
+        """
+        mock_read_s3_file_content.return_value = ''
+
+        content = read_s3_json("bucket", "key")
+
+        mock_read_s3_file_content.assert_called_once_with("bucket", "key")
+        self.assertEqual({}, content)

@@ -94,8 +94,11 @@ def read_s3_file_content(s3_bucket: str, s3_key: str) -> str:
     :param s3_key: Key to write to s3.
     """
     resource = s3_resource()
-    content_object = resource.Object(s3_bucket, s3_key)
-    return content_object.get()['Body'].read().decode('utf-8')
+    try:
+        return resource.Object(s3_bucket, s3_key).get()['Body'].read().decode('utf-8')
+
+    except botocore.exceptions.ClientError:
+        return ""
 
 
 def read_s3_json(s3_bucket: str, s3_key: str) -> str:
@@ -107,7 +110,11 @@ def read_s3_json(s3_bucket: str, s3_key: str) -> str:
     :param s3_bucket: Name of the S3 bucket.
     :param s3_key: Key to write to s3.
     """
-    return json.loads(read_s3_file_content(s3_bucket, s3_key))
+    content = read_s3_file_content(s3_bucket, s3_key)
+    if not content:
+        return {}
+
+    return json.loads(content)
 
 
 def read_s3_xml(s3_bucket: str, s3_key: str) -> str:
