@@ -6,7 +6,7 @@ import json
 import boto3
 from s3_helpers import upload_json
 from processor_factory import ProcessorFactory
-from csv_collection import load_csv_data
+from load_standard_json import load_standard_json
 from pipeline_config import load_pipeline_config
 
 
@@ -14,17 +14,16 @@ class ImageRunner():
     def __init__(self, config: dict) -> None:
         self.ids = config['ids']
         self.bucket = config['process-bucket']
-        self.csv_read_base = config['process-bucket-csv-basepath']
         self.img_write_base = config['process-bucket-read-basepath']
         self.img_file = config['image-data-file']
         self.gdrive_ssm = f"{config['google_keys_ssm_base']}/credentials"
-        self.csv_config = config
+        self.config = config
         self.processor = None
 
     def process_images(self) -> None:
         for id in self.ids:
             id_results = {}
-            for file in load_csv_data(id, self.csv_config).files():
+            for file in load_standard_json(id, self.config).files():
                 if not self.processor:
                     self._set_processor(file)
 

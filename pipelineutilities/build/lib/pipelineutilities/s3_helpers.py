@@ -100,7 +100,7 @@ def write_s3_file(s3Bucket, s3Path, file):
     s3.Object(s3Bucket, s3Path).put(Body=file)
 
 
-def write_xml_file(s3Bucket, s3Path, file):
+def write_s3_xml(s3Bucket, s3Path, file):
     s3 = boto3.resource('s3')
     s3.Object(s3Bucket, s3Path).put(Body=file, ContentType='application/xml')
 

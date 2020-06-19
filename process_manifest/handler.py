@@ -3,8 +3,7 @@ import os
 from iiifManifest import iiifManifest
 from MetadataMappings import MetadataMappings
 from ToSchema import ToSchema
-from ndJson import ndJson
-from pipelineutilities.csv_collection import load_csv_data
+from pipelineutilities.load_standard_json import load_standard_json
 from pipelineutilities.pipeline_config import load_pipeline_config, cache_pipeline_config
 from pipelineutilities.s3_helpers import InprocessBucket
 import sentry_sdk
@@ -33,36 +32,17 @@ def run(event, context):
         config['process_manifest_run_number'] = 0
     config['process_manifest_run_number'] = config['process_manifest_run_number'] + 1
 
-    if config['process_manifest_run_number'] > 5:
+    if config['process_manifest_run_number'] > 10:
         raise Exception("Too many executions")
 
     for id in ids:
         if id not in config['processed_ids']:
-            inprocess_bucket = InprocessBucket(id, config)
-
-            # move the nd json into the process bucket.
             try:
-                inprocess_bucket.write_nd_json()
-
-                parent = load_csv_data(id, config)
-
-                mapping = MetadataMappings(parent)
-                iiif = iiifManifest(config, parent, mapping)
-                manifest = iiif.manifest()
-
-                # split the manifests
-                for item in sub_manifests(manifest):
-                    inprocess_bucket.write_sub_manifest(item)
-
-                inprocess_bucket.write_manifest(manifest)
-
-                schema = ToSchema(id, config, parent)
-                inprocess_bucket.write_schema_json(schema.get_json())
-
-                config['processed_ids'].append(id)
-
+                process_manifest(id, config)
             except Exception:
-                print("error on {}" % (id))
+                print("error on {}".format(id))
+
+            config['processed_ids'].append(id)
 
         if quittime <= datetime.utcnow():
             break
@@ -73,6 +53,27 @@ def run(event, context):
     cache_pipeline_config(config, event)
 
     return event
+
+
+def process_manifest(id, config):
+    inprocess_bucket = InprocessBucket(id, config)
+
+    inprocess_bucket.write_nd_json()
+
+    parent = load_standard_json(id, config)
+
+    mapping = MetadataMappings(parent)
+    iiif = iiifManifest(config, parent, mapping)
+    manifest = iiif.manifest()
+
+    # split the manifests
+    for item in sub_manifests(manifest):
+        inprocess_bucket.write_sub_manifest(item)
+
+    inprocess_bucket.write_manifest(manifest)
+
+    schema = ToSchema(id, config, parent)
+    inprocess_bucket.write_schema_json(schema.get_json())
 
 
 def sub_manifests(manifest):

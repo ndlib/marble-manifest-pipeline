@@ -7,7 +7,7 @@ from init.helpers import get_file_ids_to_be_processed, get_all_file_ids
 from init.handler import run
 
 test_config = {
-    "process-bucket-csv-basepath": "csv",
+    "process-bucket-json-basepath": "json",
     "hours-threshold-for-incremental-harvest": 72
 }
 
@@ -15,9 +15,9 @@ now = datetime.utcnow()
 now = now.replace(tzinfo=timezone.utc)
 
 s3_query_result = [
-    {"Key": "csv/file_in_range.csv", "LastModified": (now - timedelta(hours=test_config['hours-threshold-for-incremental-harvest'] - 5))},
-    {"Key": "csv/file_out_of_range.csv", "LastModified": (now - timedelta(hours=test_config['hours-threshold-for-incremental-harvest'] + 5))},
-    {"Key": "csv/", "LastModified": (now - timedelta(hours=test_config['hours-threshold-for-incremental-harvest'] - 5))}
+    {"Key": "json/file_in_range.json", "LastModified": (now - timedelta(hours=test_config['hours-threshold-for-incremental-harvest'] - 5))},
+    {"Key": "json/file_out_of_range.json", "LastModified": (now - timedelta(hours=test_config['hours-threshold-for-incremental-harvest'] + 5))},
+    {"Key": "json/", "LastModified": (now - timedelta(hours=test_config['hours-threshold-for-incremental-harvest'] - 5))}
 ]
 
 

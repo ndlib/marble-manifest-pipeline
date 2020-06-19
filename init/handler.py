@@ -30,7 +30,7 @@ def run(event, context):
     if event.get('ids'):
         config['ids'] = event['ids']
     else:
-        all_files = get_matching_s3_objects(config['process-bucket'], config['process-bucket-csv-basepath'] + "/")
+        all_files = get_matching_s3_objects(config['process-bucket'], config['process-bucket-data-basepath'] + "/")
         if event.get("run_all_ids", False):
             config['ids'] = list(get_all_file_ids(all_files, config))
         else:

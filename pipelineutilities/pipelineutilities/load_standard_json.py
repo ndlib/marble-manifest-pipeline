@@ -34,11 +34,11 @@ def load_image_from_s3(s3Bucket, s3Path, id, config):
         return {}
 
 
-def load_nd_json(id, config):
+def load_standard_json(id, config):
     if config.get('local', False):
         tree = _load_json_from_file(id, config['local-path'])
     else:
-        tree = _load_json_from_s3(config['process-bucket'], 'json', id)
+        tree = _load_json_from_s3(config['process-bucket'], config['process-bucket-data-basepath'], id)
 
     images = load_image_data(id, config)
     _augment_row_data(tree, images, config)

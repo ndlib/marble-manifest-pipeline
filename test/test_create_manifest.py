@@ -5,7 +5,7 @@ from test.test_utils import load_data_for_test
 from test.test_utils import debug_json
 from pathlib import Path
 from csv_collection import load_csv_data
-from load_nd_json import load_nd_json
+from load_standard_json import load_standard_json
 from pipeline_config import setup_pipeline_config
 from iiifManifest import iiifManifest
 from MetadataMappings import MetadataMappings
@@ -49,7 +49,7 @@ class TestCreateManifest(unittest.TestCase):
             print("Testing id, {}".format(id))
             data = load_data_for_test(id)
             # print("data = ", data)
-            parent = load_nd_json(id, config)
+            parent = load_standard_json(id, config)
             mapping = MetadataMappings(parent)
             iiif = iiifManifest(config, parent, mapping)
             manifest = iiif.manifest()
@@ -61,7 +61,7 @@ class TestCreateManifest(unittest.TestCase):
     def test_manifest_that_is_a_pdf_without_a_mime_type(self):
         data = load_data_for_test('pdf')
         # remove the mime type
-        parent = load_nd_json('pdf', config)
+        parent = load_standard_json('pdf', config)
         parent.object['items'][0]['mimeType'] = ''
 
         mapping = MetadataMappings(parent)

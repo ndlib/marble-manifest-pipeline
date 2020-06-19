@@ -10,13 +10,13 @@ def get_file_ids_to_be_processed(files, config):
     for file in files:
         # if it is not the basedirectory which is returned in the list and
         # the time is more recent than out test threshold
-        if file['Key'] != config['process-bucket-csv-basepath'] + "/" and file['LastModified'] >= time_threshold_for_processing:
+        if file['Key'] != config['process-bucket-json-basepath'] + "/" and file['LastModified'] >= time_threshold_for_processing:
             yield get_if_from_file_key(file['Key'])
 
 
 def get_all_file_ids(files, config):
     for file in files:
-        if file['Key'] != config['process-bucket-csv-basepath'] + "/":
+        if file['Key'] != config['process-bucket-json-basepath'] + "/":
             yield get_if_from_file_key(file['Key'])
 
 
