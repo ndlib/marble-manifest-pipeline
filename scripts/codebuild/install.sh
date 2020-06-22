@@ -36,3 +36,7 @@ popd
 pushd archivesspace_export
 ./local_install.sh
 popd
+
+pushd bendo_export
+./local_install.sh
+popd
