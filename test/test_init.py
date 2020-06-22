@@ -7,7 +7,7 @@ from init.helpers import get_file_ids_to_be_processed, get_all_file_ids
 from init.handler import run
 
 test_config = {
-    "process-bucket-json-basepath": "json",
+    "process-bucket-data-basepath": "json",
     "hours-threshold-for-incremental-harvest": 72
 }
 
