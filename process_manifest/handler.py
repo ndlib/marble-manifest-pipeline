@@ -34,13 +34,13 @@ def run(event, context):
 
     if config['process_manifest_run_number'] > 10:
         raise Exception("Too many executions")
-
     for id in ids:
         if id not in config['processed_ids']:
             try:
                 process_manifest(id, config)
-            except Exception:
+            except Exception as err:
                 print("error on {}".format(id))
+                print("Error: {}".format(err))
 
             config['processed_ids'].append(id)
 
@@ -93,13 +93,11 @@ def test():
     # pp = pprint.PrettyPrinter(indent=4)
     event = {
         'ssm_key_base': '/all/marble-manifest-prod',
-        'config-file': '2020-04-15-13:10:11.652565.json',
-        'process-bucket': 'new-csv-processbucket-10dr776tnq9be',
+        'config-file': '2020-06-22-13:55:36.698390.json',
+        'process-bucket': 'marble-manifest-prod-processbucket-kskqchthxshg',
         'ids': [
-            '1952.019'
+            'qz20sq9094h'
         ],
-        'local': True,
-        'local-path': '../example/',
         'errors': []
     }
     run(event, {})

@@ -100,15 +100,19 @@ class ImageProcessor(ABC):
         return image
 
     def set_data(self, img_data: dict, config: dict) -> None:
+        print("begin")
         self.id = config.get('collection_id')
         self.source_image = img_data.get('filePath')
-        self.filename, self.ext = self.source_image.split('/')[-1].rsplit('.', 1)
+        print(self.source_image)
+        self.file_path, self.ext = os.path.splitext(self.source_image)
+        self.filename = os.path.basename(self.file_path)
         self.ext = f".{self.ext}"
         self.local_file = f"TEMP_{self.filename}{self.ext}"
         self.tif_file = f"{self.filename}.tif"
         self.bucket = config.get('bucket')
         self.img_write_base = config.get('img_write_base')
         self.source_md5sum = img_data.get('md5Checksum', None)
+        print("here")
         # if copyrighted work scale height/width directed by aamd.org
         if self._is_copyrighted(img_data.collection().get('copyrightStatus')):
             self.copyrighted = True

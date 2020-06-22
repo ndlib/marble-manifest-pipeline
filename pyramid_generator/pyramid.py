@@ -26,22 +26,25 @@ class ImageRunner():
             for file in load_standard_json(id, self.config).files():
                 if not self.processor:
                     self._set_processor(file)
-
                 img_config = {
                     'collection_id': id,
                     'bucket': self.bucket,
                     'img_write_base': self.img_write_base
                 }
-                self.processor.set_data(file, img_config)
-                id_results.update(self.processor.process())
+                if self._can_process_file(file):
+                    self.processor.set_data(file, img_config)
+                    id_results.update(self.processor.process())
             s3_file = f"{self.img_write_base}/{id}/{self.img_file}"
             upload_json(self.bucket, s3_file, id_results)
+
+    def _can_process_file(self, file):
+        return not file.get("mimeType", "") == "application/xml"
 
     def _get_processor_info(self, filepath: str) -> dict:
         img_type = {'type': 's3'}
         if filepath.startswith('https://drive.google'):
             img_type = {'type': 'gdrive', 'cred': _get_credentials(self.gdrive_ssm)}
-        elif filepath.startswith('http://bendo'):
+        elif filepath.startswith('https://curate'):
             img_type = {'type': 'bendo'}
         return img_type
 
