@@ -90,7 +90,6 @@ def _load_json_from_file(id, local_path):
 
 def _load_json_from_s3(s3_bucket, s3_path, id):
     s3_path = os.path.join(s3_path, id + ".json")
-    print(s3_path)
     return read_s3_json(s3_bucket, s3_path)
 
 

@@ -20,7 +20,6 @@ class BendoImageProcessor(ImageProcessor):
         else:
             with open(self.local_file, 'wb') as image_file:
                 image_file.write(requests.get(self.source_image).content)
-            print("going")
             self._generate_pytiff(self.local_file, self.tif_file)
             s3_file = f"{self.img_write_base}/{self.id}/images/{self.tif_file}"
             self.S3_RESOURCE.Bucket(self.bucket).upload_file(self.tif_file, s3_file)
