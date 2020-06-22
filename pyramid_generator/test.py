@@ -7,13 +7,16 @@ sys.path.append(where_i_am + "/../pipelineutilities/pipelineutilities")
 from pyramid import ImageRunner
 from pipeline_config import load_pipeline_config
 
-try:
-    event = json.loads("{\"config-file\": \"2020-04-28-12:43:07.205855.json\", \"process-bucket\": \"marble-manifest-prod-processbucket-kskqchthxshg\", \"errors\": [], \"local\": false}")
-    config = load_pipeline_config(event)
-    config['ids'] = ['002207293']
-    print(config['ids'])
-
-    runner = ImageRunner(config)
-    runner.process_images()
-except Exception as e:
-    print(e)
+event = {
+    'ssm_key_base': '/all/marble-manifest-prod',
+    'config-file': '2020-06-22-13:55:36.698390.json',
+    'process-bucket': 'marble-manifest-prod-processbucket-kskqchthxshg',
+    'ids': [
+        'qz20sq9094h'
+    ],
+    'errors': []
+}
+config = load_pipeline_config(event)
+config['ids'] = ['qz20sq9094h']
+runner = ImageRunner(config)
+runner.process_images()

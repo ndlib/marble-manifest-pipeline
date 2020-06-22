@@ -102,7 +102,8 @@ class ImageProcessor(ABC):
     def set_data(self, img_data: dict, config: dict) -> None:
         self.id = config.get('collection_id')
         self.source_image = img_data.get('filePath')
-        self.filename, self.ext = self.source_image.split('/')[-1].rsplit('.', 1)
+        self.file_path, self.ext = os.path.splitext(self.source_image)
+        self.filename = os.path.basename(self.file_path)
         self.ext = f".{self.ext}"
         self.local_file = f"TEMP_{self.filename}{self.ext}"
         self.tif_file = f"{self.filename}.tif"

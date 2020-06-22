@@ -203,7 +203,7 @@ class iiifManifest():
             self.manifest_hash['provider'] = [self._snite_proivider()]
         elif (provider == 'unda'):
             self.manifest_hash['provider'] = [self._archives_proivider()]
-        elif (provider == 'rare'):
+        elif (provider == 'rare' or provider == 'curate'):
             self.manifest_hash['provider'] = [self._rbsc_proivider()]
         elif (provider == 'hesb'):
             self.manifest_hash['provider'] = [self._hesb_proivider()]
