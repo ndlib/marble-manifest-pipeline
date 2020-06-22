@@ -22,13 +22,13 @@ RUN apk add \
 	libpng-dev \
 	libwebp-dev \
 	orc-dev \
-	libgsf-dev 
+	libgsf-dev
 
 # text rendering, PDF rendering, SVG rendering
 RUN apk add \
 	gdk-pixbuf-dev \
 	poppler-dev \
-	librsvg-dev 
+	librsvg-dev
 
 # install vips
 ARG VIPS_VERSION=8.8.3
@@ -63,5 +63,6 @@ COPY pipelineutilities/pipelineutilities/csv_collection.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/s3_helpers.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/search_files.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/google_utilities.py /usr/local/bin/
+COPY pipelineutilities/pipelineutilities/load_standard_json.py /usr/local/bin/
 RUN chmod u+x /usr/local/bin/pyramid.py
 ENTRYPOINT ["pyramid.py"]
