@@ -4,6 +4,7 @@ import json
 from datetime import datetime
 import dependencies.requests
 import os
+import io
 from dependencies.sentry_sdk import capture_exception
 from translate_curate_json_node import TranslateCurateJsonNode
 from create_standard_json import CreateStandardJson
@@ -39,20 +40,43 @@ class CurateApi():
                 break
         return not(aborted_processing)
 
-    def get_curate_item(self, id: str) -> dict:
+    def get_curate_item(self, id: str) -> dict:  # noqa: C901  - Added code to accommodate export architectural lantern slides looping and restarting
         """ Get json metadata for a curate item given an item id
             Note: query is of the form: curate-server-base-url + "/api/items/<pid>" """
         standard_json = {}
         url = self.config["curate-server-base-url"] + "/api/items/" + id
-        curate_json = self._get_json_given_url(url)
+        filename = self.local_folder + "test/" + id + "_curate.json"
+        file_exists_flag = os.path.exists(filename)
+        if self.save_standard_json_locally:
+            if id == "qz20sq9094h" and file_exists_flag:
+                with io.open(filename, 'r', encoding='utf-8') as json_file:
+                    curate_json = json.load(json_file)
+            else:
+                curate_json = self._get_json_given_url(url)
+                with open(self.local_folder + "test/" + id + "_curate.json", "w") as output_file:
+                    json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
         members = []
         if "membersUrl" in curate_json:
-            members = self._get_members_list(curate_json['membersUrl'], id, 100, False)
-            members = self._get_members_details(members)
-            curate_json["members"] = members
-        if self.save_curate_json_locally:
-            with open(self.local_folder + "test/" + id + "_curate.json", "w") as output_file:
-                json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
+            if not curate_json["members"]:
+                print("getting members list")
+                members = self._get_members_list(curate_json['membersUrl'], id, 100, False)
+                curate_json["members"] = members
+                if self.save_standard_json_locally:
+                    with open(self.local_folder + "test/" + id + "_curate_with_members_list.json", "w") as output_file:
+                        json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
+            else:
+                members = curate_json["members"]
+            filename = self.local_folder + "test/" + id + "_members_json.json"
+            file_exists_flag = os.path.exists(filename)
+            if file_exists_flag:
+                with io.open(filename, 'r', encoding='utf-8') as json_file:
+                    members = json.load(json_file)
+            while self._more_unprocessed_members_exist(members):
+                members = self._get_members_details(members, False, id, 10)
+                curate_json["members"] = members
+                if self.save_curate_json_locally:
+                    with open(self.local_folder + "test/" + id + "_curate.json", "w") as output_file:
+                        json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
         standard_json = self.translate_curate_json_node_class.build_json_from_curate_json(curate_json, "root", {})
         if self.save_standard_json_locally:
             with open(self.local_folder + "test/" + id + "_preliminary_standard.json", "w") as output_file:
@@ -66,6 +90,12 @@ class CurateApi():
                 save_standard_json(self.config, standard_json)
                 _export_json_as_csv(self.config, standard_json)
         return standard_json
+
+    def _more_unprocessed_members_exist(self, members: dict) -> bool:
+        for member in members:
+            if not member.get("detailsRetrieved", False):
+                return True
+        return False
 
     def _get_members_list(self, url: str, parent_id: str, rows_to_return: int, testing_mode: bool = False) -> list:
         """ Call API to return members of a collection (or sub-collection)
@@ -92,19 +122,29 @@ class CurateApi():
                 break
         return results
 
-    def _get_members_details(self, members_json: dict, testing_mode: bool = False) -> dict:
+    def _get_members_details(self, members_json: dict, testing_mode: bool = False, id: str = "", limit_record_count: int = 99999) -> dict:
         """ For each member, do an API call to get all metadata details we know about. """
+        i = 0
         for member in members_json:
-            for _key, value in member.items():
-                # Intentionally skip datasets, since the API will not allow us to download those.
-                if "itemUrl" in value and value.get("type", "") not in ["Dataset"]:
-                    details_json = self._get_json_given_url(value["itemUrl"])
-                    for details_key, details_value in details_json.items():
-                        value[details_key] = details_value
-                    if testing_mode:
-                        break
-            if testing_mode:
-                break
+            if not member.get("detailsRetrieved", False):
+                for _key, value in member.items():
+                    # Intentionally skip datasets, since the API will not allow us to download those.
+                    if "itemUrl" in value and value.get("type", "") not in ["Dataset"]:
+                        details_json = self._get_json_given_url(value["itemUrl"])
+                        for details_key, details_value in details_json.items():
+                            value[details_key] = details_value
+                        if testing_mode:
+                            break
+                if testing_mode:
+                    break
+                i += 1
+                member["detailsRetrieved"] = True
+                if i > limit_record_count:
+                    print("i, limit = ", i, limit_record_count)
+                    if self.save_standard_json_locally:
+                        with open(self.local_folder + "test/" + id + "_members_json.json", "w") as output_file:
+                            json.dump(members_json, output_file, indent=2, ensure_ascii=False)
+                    break
         return members_json
 
     def _get_next_page_url(self, json_member_results: dict) -> str:

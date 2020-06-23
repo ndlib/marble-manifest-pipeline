@@ -39,7 +39,7 @@ class CreateStandardJson():
         """ Append all child nodes for which parents are in the tree when a given "member" is attempted to be added. """
         for member in members:
             for _member_key, member_value in member.items():
-                if not member_value.get("processed", False):
+                if not isinstance(member_value, bool) and not member_value.get("processed", False):
                     ancestry_list = self._get_ancestry_list(member_value.get("partOf", []))
                     parent_node = self._get_parent_node(standard_json, ancestry_list)
                     if parent_node:
@@ -79,7 +79,7 @@ class CreateStandardJson():
         count_unprocessed = 0
         for member in members:
             for member_key, member_value in member.items():
-                if not member_value.get("processed", False):
+                if not isinstance(member_value, bool) and not member_value.get("processed", False):
                     count_unprocessed += 1
                     if report_missing_members:
                         print("Member did not process: ", member_key, member_value.get("partOf", ""))

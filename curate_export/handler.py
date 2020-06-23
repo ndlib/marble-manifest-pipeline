@@ -91,7 +91,7 @@ def test(identifier=""):
             event = json.load(json_file)
     else:
         event = {}
-        event['local'] = False
+        event['local'] = True
         if event['local']:
             # event['seconds-to-allow-for-processing'] = 30
             # und:zp38w953h0s = Commencement Programs
@@ -102,6 +102,7 @@ def test(identifier=""):
             # event['ids'] = ["und:1z40ks6792x"]
             event['ids'] = ["und:zp38w953h0s"]
             # event['ids'] = ["und:zp38w953h0s", "und:zp38w953p3c"]
+            event['ids'] = ["und:qz20sq9094h"]  # export Architectural Lantern Slides
 
     event = run(event, {})
 
