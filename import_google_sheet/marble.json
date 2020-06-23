@@ -1,0 +1,14 @@
+{
+  "googleSpreadsheetId": "1gKUkoG921EW0AAa-9c58Yn3wGyx8UXLnlFCWHs3G7E4",
+  "fieldForKey": "standard json field name",
+  "columnsToExport": [
+    "preferred name",
+    "schema.org mapping",
+    "element",
+    "marble display name",
+    "required",
+    "vra mapping",
+    "standard json field name",
+    "display order"
+  ]
+}
