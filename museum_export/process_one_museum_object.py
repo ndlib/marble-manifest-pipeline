@@ -61,7 +61,7 @@ class ProcessOneMuseumObject():
                 missing_fields += preferred_name + ' - at json path location ' + json_path + '\n'
         if missing_fields > '':
             self._log_missing_field(object_id, missing_fields)
-            missing_fields_notification = object_id + ' is missing the follwing required field(s): \n' + missing_fields + '\n'
+            missing_fields_notification = object_id + ' is missing the following required field(s): \n' + missing_fields + '\n'
             print("Missing fields = ", missing_fields)
             return missing_fields_notification
         return missing_fields
@@ -72,7 +72,7 @@ class ProcessOneMuseumObject():
             scope.set_tag('repository', 'museum')
             scope.set_tag('problem', 'missing_field')
             scope.level = 'warning'
-            capture_message(object_id + ' is missing the follwing required field(s): \n' + missing_fields)
+            capture_message(object_id + ' is missing the following required field(s): \n' + missing_fields)
 
     def _save_csv(self, object_id: str, object: dict):
         """ save csv string as a csv file """

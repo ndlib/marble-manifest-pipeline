@@ -33,12 +33,15 @@ class TestCreateManifest(unittest.TestCase):
     def test_buildJson(self):
         for id in self.ids:
             print("Testing id, {}".format(id))
-            data = load_data_for_test(id)
-            # print("data = ", data)
             parent = load_csv_data(id, config)
             mapping = MetadataMappings(parent)
             iiif = iiifManifest(config, parent, mapping)
             manifest = iiif.manifest()
+            # current_path = str(Path(__file__).parent.absolute())
+            # with open(current_path + '/../example/{}/manifest.json'.format(id), "w") as output_file:
+            #     json.dump(manifest, output_file, indent=2, ensure_ascii=False)
+            data = load_data_for_test(id)
+            # print("data = ", data)
             debug_json(data['manifest_json'], manifest)
             manifest_json = "".join(json.dumps(data['manifest_json'], sort_keys=True).split())
             result_json = "".join(json.dumps(manifest, sort_keys=True).split())
@@ -46,14 +49,14 @@ class TestCreateManifest(unittest.TestCase):
 
     def test_build_nd_json(self):
         for id in ["1999.024", "1952.019", "pdf"]:
-            print("Testing id, {}".format(id))
-            data = load_data_for_test(id)
-            # print("data = ", data)
+            # print("Testing id, {}".format(id))
             parent = load_standard_json(id, config)
             mapping = MetadataMappings(parent)
             iiif = iiifManifest(config, parent, mapping)
             manifest = iiif.manifest()
-            # debug_json(data['manifest_json'], manifest)
+            data = load_data_for_test(id)
+            # print("data = ", data)
+            debug_json(data['manifest_json'], manifest)
             manifest_json = "".join(json.dumps(data['manifest_json'], sort_keys=True).split())
             result_json = "".join(json.dumps(manifest, sort_keys=True).split())
             self.assertEqual(result_json, manifest_json, msg="%s did not match see test/debug for output" % (id))

@@ -8,16 +8,16 @@
     "marble display name": "Title",
     "display order": ""
   },
-  "creators.display": {
+  "creators": {
     "preferred name": "Creator",
     "required": "Required",
     "element": "dcterms:creator",
     "vra mapping": "",
     "schema.org mapping": "creator",
-    "marble display name": "Creator ",
+    "marble display name": "Creator",
     "display order": ""
   },
-  "contributors.display": {
+  "contributors": {
     "preferred name": "Contributor",
     "required": "",
     "element": "",
@@ -26,16 +26,16 @@
     "marble display name": "",
     "display order": ""
   },
-  "createddate": {
+  "createdDate": {
     "preferred name": "Date created",
     "required": "Required",
     "element": "dcterms:created",
     "vra mapping": "",
     "schema.org mapping": "dateCreated",
-    "marble display name": "Date ",
+    "marble display name": "Date",
     "display order": ""
   },
-  "worktype": {
+  "workType": {
     "preferred name": "Work Type",
     "required": "Required",
     "element": "dcterms:type",
@@ -53,8 +53,14 @@
     "marble display name": "",
     "display order": ""
   },
-  "uniqueidentifier": {
-    "preferred name": "Call number"
+  "uniqueIdentifier": {
+    "preferred name": "Unique identifier",
+    "required": "Required",
+    "element": "dcterms:identifier",
+    "vra mapping": "",
+    "schema.org mapping": "identifier",
+    "marble display name": "Identifier",
+    "display order": ""
   },
   "repository": {
     "preferred name": "Repository",
@@ -65,16 +71,16 @@
     "marble display name": "Campus Location",
     "display order": ""
   },
-  "subject.term": {
+  "subjects": {
     "preferred name": "Subject",
     "required": "Required",
     "element": "dcterms:subject",
     "vra mapping": "",
     "schema.org mapping": "keywords",
-    "marble display name": "Subject ",
+    "marble display name": "Subject",
     "display order": ""
   },
-  "copyrightstatus": {
+  "copyrightStatus": {
     "preferred name": "Copyright Status",
     "required": "Required",
     "element": "dcterms:rights",
@@ -83,7 +89,7 @@
     "marble display name": "Copyright Status",
     "display order": ""
   },
-  "copyrightstatement": {
+  "copyrightStatement": {
     "preferred name": "Copyright Statement",
     "required": "",
     "element": "",
@@ -92,7 +98,7 @@
     "marble display name": "",
     "display order": ""
   },
-  "linktosource": {
+  "linkToSource": {
     "preferred name": "Link to source",
     "required": "Required",
     "element": "dcterms:source",
@@ -101,7 +107,7 @@
     "marble display name": "Link to source",
     "display order": ""
   },
-  "publisher.publishername": {
+  "publisher": {
     "preferred name": "Publisher",
     "required": "Optional",
     "element": "dcterms:contributor",
@@ -129,12 +135,13 @@
     "display order": ""
   },
   "languages": {
-    "preferred name": "Collection Information",
+    "preferred name": "Language",
     "required": "Optional",
-    "element": "dcterms:isPartOf",
+    "element": "dcterms:language",
     "vra mapping": "",
-    "schema.org mapping": "isPartOf",
-    "marble display name": "Collection"
+    "schema.org mapping": "inLanguage",
+    "marble display name": "Language",
+    "display order": ""
   },
   "dimensions": {
     "preferred name": "Dimensions",
@@ -163,11 +170,8 @@
     "marble display name": "Description",
     "display order": ""
   },
-  "creationplace": {
-    "preferred name": "Related"
-  },
-  "creators.attribution": {
-    "preferred name": "Attribution",
+  "modifiedDate": {
+    "preferred name": "Modification Date",
     "required": "",
     "element": "",
     "vra mapping": "",
@@ -175,19 +179,22 @@
     "marble display name": "",
     "display order": ""
   },
-  "modifieddate": {
-    "preferred name": "Modification time"
-  },
   "thumbnail": {
     "preferred name": "Thumbnail",
     "required": "",
     "element": "",
     "vra mapping": "",
     "schema.org mapping": "thumbnailURL",
-    "marble display name": "N/a ",
+    "marble display name": "N/a",
     "display order": ""
   },
-  "filepath": {
-    "preferred name": "Life dates?"
+  "filePath": {
+    "preferred name": "Filepath",
+    "required": "",
+    "element": "",
+    "vra mapping": "",
+    "schema.org mapping": "",
+    "marble display name": "",
+    "display order": ""
   }
 }

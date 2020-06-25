@@ -8,16 +8,16 @@
     "marble display name": "Title",
     "display order": "1"
   },
-  "creators.display": {
-    "preferred name": "Creator",
-    "required": "Required",
-    "element": "dcterms:creator",
-    "vra mapping": "vracore:agent:name",
-    "schema.org mapping": "creator",
+  "creators": {
+    "preferred name": "Attribution",
+    "required": "Optional",
+    "element": "",
+    "vra mapping": "vracore:attribution",
+    "schema.org mapping": "",
     "marble display name": "Creator",
     "display order": "2"
   },
-  "contributors.display": {
+  "contributors": {
     "preferred name": "Contributor",
     "required": "",
     "element": "",
@@ -26,22 +26,22 @@
     "marble display name": "",
     "display order": ""
   },
-  "createddate": {
+  "createdDate": {
     "preferred name": "Date created",
     "required": "Required",
     "element": "dcterms:created",
     "vra mapping": "vracore:date",
     "schema.org mapping": "dateCreated",
-    "marble display name": "Date ",
+    "marble display name": "Date",
     "display order": "3"
   },
-  "worktype": {
+  "workType": {
     "preferred name": "Work Type",
     "required": "Required",
     "element": "dcterms:type",
     "vra mapping": "vracore:worktype",
     "schema.org mapping": "artMedium",
-    "marble display name": "Classification ",
+    "marble display name": "Classification",
     "display order": "6"
   },
   "medium": {
@@ -53,8 +53,14 @@
     "marble display name": "Medium",
     "display order": "8"
   },
-  "uniqueidentifier": {
-    "preferred name": "Call number"
+  "uniqueIdentifier": {
+    "preferred name": "Unique identifier",
+    "required": "Required",
+    "element": "dcterms:identifier",
+    "vra mapping": "vracore:refid",
+    "schema.org mapping": "identifier",
+    "marble display name": "Accession number",
+    "display order": "11"
   },
   "repository": {
     "preferred name": "Repository",
@@ -65,7 +71,7 @@
     "marble display name": "Campus Location",
     "display order": "12"
   },
-  "subject.term": {
+  "subjects": {
     "preferred name": "Subject",
     "required": "Required",
     "element": "dcterms:subject",
@@ -74,7 +80,7 @@
     "marble display name": "Subject",
     "display order": "17"
   },
-  "copyrightstatus": {
+  "copyrightStatus": {
     "preferred name": "Copyright Status",
     "required": "Required",
     "element": "dcterms:rights",
@@ -83,7 +89,7 @@
     "marble display name": "Copyright Status",
     "display order": "14"
   },
-  "copyrightstatement": {
+  "copyrightStatement": {
     "preferred name": "Copyright Statement",
     "required": "Optional",
     "element": "dcterms:license",
@@ -92,7 +98,7 @@
     "marble display name": "Copyright Statement",
     "display order": "15"
   },
-  "linktosource": {
+  "linkToSource": {
     "preferred name": "Link to source",
     "required": "n/a",
     "element": "",
@@ -101,7 +107,7 @@
     "marble display name": "",
     "display order": ""
   },
-  "publisher.publishername": {
+  "publisher": {
     "preferred name": "Publisher",
     "required": "n/a",
     "element": "",
@@ -120,12 +126,13 @@
     "display order": "13"
   },
   "format": {
-    "preferred name": "Collection Information",
-    "required": "n/a",
-    "element": "dcterms:isPartOf",
-    "vra mapping": "",
-    "schema.org mapping": "isPartOf",
-    "marble display name": ""
+    "preferred name": "Format",
+    "required": "Optional",
+    "element": "dcterms:format",
+    "vra mapping": "vracore:technique",
+    "schema.org mapping": "artMedium",
+    "marble display name": "Format",
+    "display order": "7"
   },
   "dimensions": {
     "preferred name": "Dimensions",
@@ -154,31 +161,14 @@
     "marble display name": "Description",
     "display order": "16"
   },
-  "creationplace": {
-    "preferred name": "Related",
-    "required": "Optional",
-    "element": "",
-    "vra mapping": "vracore:relation",
-    "schema.org mapping": "hasPart",
-    "marble display name": "N/a",
-    "display order": "18"
-  },
-  "creators.attribution": {
-    "preferred name": "Attribution",
-    "required": "Optional",
-    "element": "",
-    "vra mapping": "vracore:attribution",
-    "schema.org mapping": "",
-    "marble display name": "Creator",
-    "display order": "2"
-  },
-  "modifieddate": {
-    "preferred name": "Modification time",
+  "modifiedDate": {
+    "preferred name": "Modification Date",
     "required": "internally created",
     "element": "",
     "vra mapping": "",
     "schema.org mapping": "dateModified",
-    "marble display name": "N/a"
+    "marble display name": "N/a",
+    "display order": ""
   },
   "thumbnail": {
     "preferred name": "Thumbnail",
@@ -189,13 +179,13 @@
     "marble display name": "N/a",
     "display order": ""
   },
-  "filepath": {
-    "preferred name": "Life dates?",
-    "required": "Optional",
+  "filePath": {
+    "preferred name": "Filepath",
+    "required": "internally created",
     "element": "",
     "vra mapping": "",
     "schema.org mapping": "",
-    "marble display name": "Creator ",
-    "display order": "2"
+    "marble display name": "N/a",
+    "display order": ""
   }
 }

@@ -1,4 +1,4 @@
-# Import Google Sheet
+# Metadata Rules
 
 ## Description
 This module harvests information from a google sheet which describes metadata to display on a website.
