@@ -278,6 +278,8 @@ def upload_file_to_s3(s3_bucket: str, s3_key: str, local_filepath: str) -> bool:
         success = False
     except boto3.exceptions.S3UploadFailedError:
         success = False
+    except botocore.exceptions.NoCredentialsError:
+        success = False
     return success
 
 
