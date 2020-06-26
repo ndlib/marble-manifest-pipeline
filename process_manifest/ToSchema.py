@@ -26,9 +26,9 @@ class ToSchema():
         fieldmap = self.mappings()
 
         main = {"@id": self.base_url, "@type": "CreativeWork"}
-        for key in fieldmap.get_athena_keys():
+        for key in fieldmap.get_standard_json_keys():
             if self.dict.get(key):
-                main.update({fieldmap.get_by_athena(key, 'schema.org'): self.dict.get(key)})
+                main.update({fieldmap.get_by_standard_json(key, 'schema.org'): self.dict.get(key)})
             else:
                 self.errors.append(key + ' has no value assigned \n')
 

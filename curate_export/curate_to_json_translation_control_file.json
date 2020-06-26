@@ -185,6 +185,10 @@
 				"fields": ["mimeType"],
 				"format": "text"
 			},
+			{ "label": "mimeType",
+				"fields": ["mimeType"],
+				"format": "text"
+			},
 			{ "!label": "isPartOf",
 				"!fields": ["isPartOf"],
 				"!format": "text"

@@ -1,0 +1,200 @@
+{
+  "title": {
+    "preferred name": "Title",
+    "required": "Required",
+    "element": "dcterms:title",
+    "vra mapping": "",
+    "schema.org mapping": "name",
+    "marble display name": "Title",
+    "display order": ""
+  },
+  "creators": {
+    "preferred name": "Creator",
+    "required": "Required",
+    "element": "dcterms:creator",
+    "vra mapping": "",
+    "schema.org mapping": "creator",
+    "marble display name": "Creator",
+    "display order": ""
+  },
+  "contributors": {
+    "preferred name": "Contributor",
+    "required": "",
+    "element": "",
+    "vra mapping": "",
+    "schema.org mapping": "",
+    "marble display name": "",
+    "display order": ""
+  },
+  "createdDate": {
+    "preferred name": "Date created",
+    "required": "Required",
+    "element": "dcterms:created",
+    "vra mapping": "",
+    "schema.org mapping": "dateCreated",
+    "marble display name": "Date",
+    "display order": ""
+  },
+  "workType": {
+    "preferred name": "Work Type",
+    "required": "Required",
+    "element": "dcterms:type",
+    "vra mapping": "",
+    "schema.org mapping": "artMedium",
+    "marble display name": "Material Type",
+    "display order": ""
+  },
+  "medium": {
+    "preferred name": "Medium",
+    "required": "",
+    "element": "",
+    "vra mapping": "",
+    "schema.org mapping": "material",
+    "marble display name": "",
+    "display order": ""
+  },
+  "uniqueIdentifier": {
+    "preferred name": "Unique identifier",
+    "required": "Required",
+    "element": "dcterms:identifier",
+    "vra mapping": "",
+    "schema.org mapping": "identifier",
+    "marble display name": "Identifier",
+    "display order": ""
+  },
+  "repository": {
+    "preferred name": "Repository",
+    "required": "Required",
+    "element": "dcterms:publisher",
+    "vra mapping": "",
+    "schema.org mapping": "provider",
+    "marble display name": "Campus Location",
+    "display order": ""
+  },
+  "subjects": {
+    "preferred name": "Subject",
+    "required": "Required",
+    "element": "dcterms:subject",
+    "vra mapping": "",
+    "schema.org mapping": "keywords",
+    "marble display name": "Subject",
+    "display order": ""
+  },
+  "copyrightStatus": {
+    "preferred name": "Copyright Status",
+    "required": "Required",
+    "element": "dcterms:rights",
+    "vra mapping": "",
+    "schema.org mapping": "copyrightHolder",
+    "marble display name": "Copyright Status",
+    "display order": ""
+  },
+  "copyrightStatement": {
+    "preferred name": "Copyright Statement",
+    "required": "",
+    "element": "",
+    "vra mapping": "",
+    "schema.org mapping": "",
+    "marble display name": "",
+    "display order": ""
+  },
+  "linkToSource": {
+    "preferred name": "Link to source",
+    "required": "Required",
+    "element": "dcterms:source",
+    "vra mapping": "",
+    "schema.org mapping": "url",
+    "marble display name": "Link to source",
+    "display order": ""
+  },
+  "publisher": {
+    "preferred name": "Publisher",
+    "required": "Optional",
+    "element": "dcterms:contributor",
+    "vra mapping": "",
+    "schema.org mapping": "publisher",
+    "marble display name": "Publisher",
+    "display order": ""
+  },
+  "access": {
+    "preferred name": "Access",
+    "required": "",
+    "element": "",
+    "vra mapping": "",
+    "schema.org mapping": "",
+    "marble display name": "",
+    "display order": ""
+  },
+  "format": {
+    "preferred name": "Format",
+    "required": "Optional",
+    "element": "dcterms:format",
+    "vra mapping": "",
+    "schema.org mapping": "artMedium",
+    "marble display name": "Format",
+    "display order": ""
+  },
+  "languages": {
+    "preferred name": "Language",
+    "required": "Optional",
+    "element": "dcterms:language",
+    "vra mapping": "",
+    "schema.org mapping": "inLanguage",
+    "marble display name": "Language",
+    "display order": ""
+  },
+  "dimensions": {
+    "preferred name": "Dimensions",
+    "required": "Optional",
+    "element": "dcterms:extent",
+    "vra mapping": "",
+    "schema.org mapping": "materialExtent",
+    "marble display name": "Dimensions",
+    "display order": ""
+  },
+  "dedication": {
+    "preferred name": "Dedication",
+    "required": "",
+    "element": "",
+    "vra mapping": "",
+    "schema.org mapping": "",
+    "marble display name": "",
+    "display order": ""
+  },
+  "description": {
+    "preferred name": "Description",
+    "required": "Optional",
+    "element": "dcterms:description",
+    "vra mapping": "",
+    "schema.org mapping": "description",
+    "marble display name": "Description",
+    "display order": ""
+  },
+  "modifiedDate": {
+    "preferred name": "Modification Date",
+    "required": "",
+    "element": "",
+    "vra mapping": "",
+    "schema.org mapping": "",
+    "marble display name": "",
+    "display order": ""
+  },
+  "thumbnail": {
+    "preferred name": "Thumbnail",
+    "required": "",
+    "element": "",
+    "vra mapping": "",
+    "schema.org mapping": "thumbnailURL",
+    "marble display name": "N/a",
+    "display order": ""
+  },
+  "filePath": {
+    "preferred name": "Filepath",
+    "required": "",
+    "element": "",
+    "vra mapping": "",
+    "schema.org mapping": "",
+    "marble display name": "",
+    "display order": ""
+  }
+}

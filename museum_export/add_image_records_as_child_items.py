@@ -57,4 +57,8 @@ class AddImageRecordsAsChildItems():
         from_parent_item['parentId'] = object['id']
         from_parent_item['sourceSystem'] = object['sourceSystem']
         from_parent_item['repository'] = object['repository']
+        if 'copyrightStatus' in object:
+            from_parent_item['copyrightStatus'] = object['copyrightStatus']
+        if 'copyrightStatemtnt' in object:
+            from_parent_item['copyrightStatement'] = object['copyrightStatement']
         return from_parent_item
