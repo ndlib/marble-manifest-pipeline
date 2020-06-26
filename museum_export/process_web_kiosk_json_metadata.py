@@ -70,7 +70,7 @@ class processWebKioskJsonMetadata():
             image_file_info = GetImageInfoForAllObjects(objects, google_credentials, drive_id).image_file_info
             print("Completed retrieving Google image file info after", int(time.time() - self.start_time), 'seconds.')
             composite_json = CleanUpCompositeJson(composite_json).cleaned_up_content
-            process_one_museum_object_class = ProcessOneMuseumObject(self.config, image_file_info, self.start_time)
+            process_one_museum_object_class = ProcessOneMuseumObject(self.config, image_file_info, self.start_time, self.event)
             for _object_key, object_value in objects.items():
                 if 'uniqueIdentifier' in object_value:
                     missing_fields = process_one_museum_object_class.process_object(object_value)

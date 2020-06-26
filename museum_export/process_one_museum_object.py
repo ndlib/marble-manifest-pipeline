@@ -16,10 +16,11 @@ from pipelineutilities.save_standard_json import save_standard_json
 
 
 class ProcessOneMuseumObject():
-    def __init__(self, config: dict, image_files: dict, start_time: str):
+    def __init__(self, config: dict, image_files: dict, start_time: str, event: dict):
         self.config = config
         self.image_files = image_files
         self.start_time = start_time
+        self.event = event
         self.save_despite_missing_fields = True
         self.api_version = schema_api_version()
         # self.add_files_to_json_object_class = AddFilesToJsonObject(config)
@@ -43,7 +44,8 @@ class ProcessOneMuseumObject():
                 # standard_json = self.add_files_to_json_object_class.add_files(standard_json)
                 standard_json = self.add_paths_to_json_object_class.add_paths(standard_json)
                 standard_json = self.fix_creators_in_json_object_class.fix_creators(standard_json)
-            save_standard_json(self.config, standard_json)
+            export_all_files_flag = self.event.get('export_all_files_flag', False)
+            save_standard_json(self.config, standard_json, export_all_files_flag)
             # with open("standard_json.json", 'w') as f:
             #     json.dump(standard_json, f, indent=4)
             self._save_csv(object_id, standard_json)
