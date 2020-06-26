@@ -38,8 +38,10 @@ class HarvestMetadataRules():
         try:
             with open(filename, 'r') as input_source:
                 site_control_json = json.load(input_source)
-        except Exception as e:
+        except FileNotFoundError as e:
             print('Unable to load site_harvest_control_json (' + filename + ').')
+            capture_exception(e)
+        except EnvironmentError as e:
             capture_exception(e)
         return site_control_json
 

@@ -13,6 +13,7 @@ pipelineutilities/output_csv.py
 pipelineutilities/pipeline_config.py
 pipelineutilities/record_files_needing_processed.py
 pipelineutilities/s3_helpers.py
+pipelineutilities/s3_sync.py
 pipelineutilities/save_standard_json.py
 pipelineutilities/search_files.py
 pipelineutilities/validate_json.py
@@ -32,4 +33,5 @@ test/test_output_csv.py
 test/test_pipeline_config.py
 test/test_record_files_needing_processed.py
 test/test_s3_helpers.py
+test/test_s3_sync.py
 test/test_search_files.py

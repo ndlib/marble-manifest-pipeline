@@ -260,7 +260,7 @@ def upload_json(s3Bucket, s3Path, json_data) -> None:
     remove(local_file)
 
 
-def upload_file_to_s3(s3_bucket: str, s3_key: str, local_filepath: str) -> None:
+def upload_file_to_s3(s3_bucket: str, s3_key: str, local_filepath: str) -> bool:
     """
     Uploads as file from the local file system to s3.
 
@@ -268,8 +268,17 @@ def upload_file_to_s3(s3_bucket: str, s3_key: str, local_filepath: str) -> None:
     :param s3_key: Key to delete from
     :param local_filepath: path to the local file
     """
-    resource = s3_resource()
-    resource.Bucket(s3_bucket).upload_file(local_filepath, s3_key)
+    success = True
+    try:
+        resource = s3_resource()
+        resource.Bucket(s3_bucket).upload_file(local_filepath, s3_key)
+    except FileNotFoundError:
+        success = False
+    except botocore.exceptions.ClientError:
+        success = False
+    except boto3.exceptions.S3UploadFailedError:
+        success = False
+    return success
 
 
 def upload_file(s3_bucket: str, s3_key: str, local_filepath: str) -> None:

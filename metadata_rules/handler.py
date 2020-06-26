@@ -5,12 +5,13 @@ import _set_path  # noqa
 import os
 import json
 from pathlib import Path
-from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm  # noqa: E402
-import sentry_sdk  # noqa: E402
-from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
+from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm
+import sentry_sdk
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 from harvest_metadata_rules import HarvestMetadataRules
 from dependencies.sentry_sdk import capture_exception
 from distutils.dir_util import copy_tree
+from pipelineutilities.s3_sync import s3_sync
 
 
 if 'SENTRY_DSN' in os.environ:
@@ -28,20 +29,11 @@ def run(event, context):
     local_folder = os.path.dirname(os.path.realpath(__file__)) + '/'
     for site_name in event['sites']:
         harvest_metadata_rules_class.harvest_google_spreadsheet_info(site_name)
-    _save_sites_info_to_s3(local_folder + "sites/", "s3://" + config["process-bucket"] + "/sites/")
+    s3_sync(config["process-bucket"], "sites", local_folder + "sites")
     try:
         copy_tree(local_folder + "sites/", local_folder + "../process_manifest/sites/")
-    except Exception:
+    except EnvironmentError as e:
         print('Unable to sync sites files to process_manifest ')
-        pass
-
-
-def _save_sites_info_to_s3(sites_folder, s3_key):
-    try:
-        sync_command = f"aws s3 sync " + sites_folder + " " + s3_key
-        os.system(sync_command)
-    except Exception as e:
-        print('Unable to sync sites files (' + sites_folder + ') to the process bucket here:', s3_key)
         capture_exception(e)
 
 
@@ -60,7 +52,6 @@ def _suplement_event(event):
 # export SSM_KEY_BASE=/all/new-csv
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
-# python 'run_all_tests.py'
 def test():
     """ test exection """
     event = {}
