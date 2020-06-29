@@ -3,8 +3,7 @@ import os
 from iiifManifest import iiifManifest
 from MetadataMappings import MetadataMappings
 from ToSchema import ToSchema
-from ndJson import ndJson
-from pipelineutilities.csv_collection import load_csv_data
+from pipelineutilities.load_standard_json import load_standard_json
 from pipelineutilities.pipeline_config import load_pipeline_config, cache_pipeline_config
 from pipelineutilities.s3_helpers import InprocessBucket
 import sentry_sdk
@@ -33,30 +32,15 @@ def run(event, context):
         config['process_manifest_run_number'] = 0
     config['process_manifest_run_number'] = config['process_manifest_run_number'] + 1
 
-    if config['process_manifest_run_number'] > 5:
+    if config['process_manifest_run_number'] > 10:
         raise Exception("Too many executions")
-
     for id in ids:
         if id not in config['processed_ids']:
-            inprocess_bucket = InprocessBucket(id, config)
-
-            parent = load_csv_data(id, config)
-
-            mapping = MetadataMappings(parent)
-            iiif = iiifManifest(config, parent, mapping)
-            manifest = iiif.manifest()
-
-            # split the manifests
-            for item in sub_manifests(manifest):
-                inprocess_bucket.write_sub_manifest(item)
-
-            inprocess_bucket.write_manifest(manifest)
-
-            nd = ndJson(id, config, parent)
-            inprocess_bucket.write_nd_json(nd.to_hash())
-
-            schema = ToSchema(id, config, parent)
-            inprocess_bucket.write_schema_json(schema.get_json())
+            try:
+                process_manifest(id, config)
+            except Exception as err:
+                print("error on {}".format(id))
+                print("Error: {}".format(err))
 
             config['processed_ids'].append(id)
 
@@ -69,6 +53,27 @@ def run(event, context):
     cache_pipeline_config(config, event)
 
     return event
+
+
+def process_manifest(id, config):
+    inprocess_bucket = InprocessBucket(id, config)
+
+    inprocess_bucket.write_nd_json()
+
+    parent = load_standard_json(id, config)
+
+    mapping = MetadataMappings(parent)
+    iiif = iiifManifest(config, parent, mapping)
+    manifest = iiif.manifest()
+
+    # split the manifests
+    for item in sub_manifests(manifest):
+        inprocess_bucket.write_sub_manifest(item)
+
+    inprocess_bucket.write_manifest(manifest)
+
+    schema = ToSchema(id, config, parent)
+    inprocess_bucket.write_schema_json(schema.get_json())
 
 
 def sub_manifests(manifest):
@@ -88,13 +93,11 @@ def test():
     # pp = pprint.PrettyPrinter(indent=4)
     event = {
         'ssm_key_base': '/all/marble-manifest-prod',
-        'config-file': '2020-04-15-13:10:11.652565.json',
-        'process-bucket': 'new-csv-processbucket-10dr776tnq9be',
+        'config-file': '2020-06-22-13:55:36.698390.json',
+        'process-bucket': 'marble-manifest-prod-processbucket-kskqchthxshg',
         'ids': [
-            '1952.019'
+            'qz20sq9094h'
         ],
-        'local': True,
-        'local-path': '../example/',
         'errors': []
     }
     run(event, {})

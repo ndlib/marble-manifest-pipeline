@@ -16,6 +16,8 @@ def do_extra_processing(value: str, extra_processing: str) -> str:
         results = _format_creators(value)
     elif extra_processing == "translate_repository":
         results = _translate_repository(value)
+    elif extra_processing == "format_call_number":
+        results = _format_call_number(value)
     return results
 
 
@@ -73,6 +75,16 @@ def _format_creators(value: list) -> dict:
             node['fullName'] = each_value
         node['display'] = node.get("fullName", "")
         results.append(node)
+    return results
+
+
+def _format_call_number(value: str) -> str:
+    """ Call numbers have a space between sub-fields h and i.  """
+    results = ""
+    if "^^^" in value:
+        results = value.split("^^^")[0] + " " + value.split("^^^")[1]
+    else:
+        results = value
     return results
 
 

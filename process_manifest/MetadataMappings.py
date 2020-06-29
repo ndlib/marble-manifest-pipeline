@@ -1,5 +1,4 @@
-import csv
-from io import StringIO
+import json
 from pathlib import Path
 
 
@@ -8,36 +7,31 @@ class MetadataMappings():
     def __init__(self, data):
         self.data = data
         self.provider = data.repository()
-        self.lookup = self.loadFile()
+        self.lookup = self.loadMetadataRules()
 
-    def loadFile(self):
+    def loadMetadataRules(self):
         self.preferred = {}
         self.vracore = {}
         self.schema = {}
         self.element = {}
-        self.athena = {}
-        f = StringIO(self.file())
-        reader = csv.DictReader(f, delimiter=',')
-        for this_row in reader:
-            if reader.line_num != 1:
-                athena_key = "".join(this_row['Preferred Name'].title().split())
-                athena_key = athena_key[0].lower() + athena_key[1:]
-                line = {
-                    "preferred_name": this_row['Preferred Name'],
-                    "schema.org": this_row['Schema.org mapping'],
-                    "element": this_row['Element'],
-                    "marble_title": this_row['MARBLE Display Name'],
-                    "required": this_row['Required'],
-                    "athena_name": athena_key
-                }
-                if this_row.get('VRA Mapping', False):
-                    line["vracore"] = this_row['VRA Mapping']
-                    self.vracore[line['vracore'].lower()] = line
+        self.standard_json = {}
+        field_definitions_json = self.load_json_file("marble", self.provider.lower())
+        for key, value in field_definitions_json.items():
+            line = {
+                "preferred_name": value['preferred name'],
+                "schema.org": value['schema.org mapping'],
+                "element": value['element'],
+                "marble_title": value['marble display name'],
+                "required": value['required']
+            }
+            if value.get('vra mapping', False):
+                line["vracore"] = value['vra mapping']
+                self.vracore[line['vracore'].lower()] = line
 
-                self.preferred[line['preferred_name'].lower()] = line
-                self.schema[line['schema.org'].lower()] = line
-                self.element[line['element'].lower()] = line
-                self.athena[athena_key] = line
+            self.preferred[line['preferred_name'].lower()] = line
+            self.schema[line['schema.org'].lower()] = line
+            self.element[line['element'].lower()] = line
+            self.standard_json[key] = line
 
     def get_by_prefered(self, name, field):
         return self.preferred.get(name.lower()).get(field, False)
@@ -51,18 +45,17 @@ class MetadataMappings():
     def get_by_element(self, name, field):
         return self.element.get(name.lower()).get(field, False)
 
-    def get_by_athena(self, name, field):
-        return self.athena.get(name).get(field, False)
+    def get_by_standard_json(self, name, field):
+        return self.standard_json.get(name).get(field, False)
 
     def get_prefered_keys(self):
         return self.preferred.keys()
 
-    def get_athena_keys(self):
-        return self.athena.keys()
+    def get_standard_json_keys(self):
+        return self.standard_json.keys()
 
-    def file(self):
+    def load_json_file(self, site_name: str, source_name: str) -> dict:
         current_path = str(Path(__file__).parent.absolute())
-        with open(current_path + "/" + self.provider.lower() + ".csv", 'r') as input_source:
-            source = input_source.read()
-        input_source.close()
+        with open(current_path + "/sites/" + site_name + "/" + source_name.lower() + ".json", 'r') as input_source:
+            source = json.load(input_source)
         return source

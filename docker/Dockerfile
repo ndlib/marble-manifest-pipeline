@@ -22,13 +22,13 @@ RUN apk add \
 	libpng-dev \
 	libwebp-dev \
 	orc-dev \
-	libgsf-dev 
+	libgsf-dev
 
 # text rendering, PDF rendering, SVG rendering
 RUN apk add \
 	gdk-pixbuf-dev \
 	poppler-dev \
-	librsvg-dev 
+	librsvg-dev
 
 # install vips
 ARG VIPS_VERSION=8.8.3
@@ -45,8 +45,9 @@ RUN apk add \
 	py3-pip
 
 # and now pyvips can go on
-RUN pip3 install --upgrade pip \
-  && pip3 install pyvips boto3 oauth2client==4.1.3 google==2.0.2 \
+RUN pip3 install --upgrade pip
+RUN pip3 install wheel --no-cache-dir
+RUN pip3 install pyvips boto3 oauth2client==4.1.3 google==2.0.2 \
 	google-api-python-client==1.7.11 google-auth-httplib2==0.0.3 \
 	google-auth-oauthlib==0.4.0
 
@@ -62,5 +63,6 @@ COPY pipelineutilities/pipelineutilities/csv_collection.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/s3_helpers.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/search_files.py /usr/local/bin/
 COPY pipelineutilities/pipelineutilities/google_utilities.py /usr/local/bin/
+COPY pipelineutilities/pipelineutilities/load_standard_json.py /usr/local/bin/
 RUN chmod u+x /usr/local/bin/pyramid.py
 ENTRYPOINT ["pyramid.py"]

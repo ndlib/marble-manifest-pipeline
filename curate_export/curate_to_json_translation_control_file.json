@@ -1,6 +1,14 @@
 {
 	"root" : {
 		"FieldsToExtract": [
+			{ "label": "apiVersion",
+				"extraProcessing": "schema_api_version",
+				"format": "text"
+			},
+			{ "label": "fileCreatedDate",
+				"extraProcessing": "file_created_date",
+				"format": "text"
+			},
 			{ "label": "sourceSystem",
 				"constant": "Curate",
 				"format": "text"
@@ -29,11 +37,12 @@
 				"fields": ["id"],
 				"format": "text"
 			},
-			{ "label": "level",
-				"constant": "manifest",
-				"format": "text"
-			},
 			{ "label": "creators",
+				"fields": ["creator"],
+				"extraProcessing": "format_creators",
+				"format": "array"
+			},
+			{ "label": "contributors",
 				"fields": ["contributor"],
 				"extraProcessing": "format_creators",
 				"format": "array"
@@ -42,7 +51,7 @@
 				"fields": ["creator#administrative_unit"],
 				"format": "text"
 			},
-			{ "label": "dateCreated",
+			{ "label": "createdDate",
 				"fields": ["dateSubmitted"],
 				"format": "text",
 				"datePattern": "%Y-%m-%d"
@@ -56,14 +65,14 @@
 				"fields": ["hasModel"],
 				"format": "text"
 			},
-			{ "label": "subjects",
-				"fields": ["description"],
-				"extraProcessing": "format_subjects",
-				"format": "array"
+			{ "!label": "subjects",
+				"!fields": ["description"],
+				"!extraProcessing": "format_subjects",
+				"!format": "array"
 			},
-			{ "label": "membersUrl",
-				"fields": ["membersUrl"],
-				"format": "text"
+			{ "!label": "membersUrl",
+				"!fields": ["membersUrl"],
+				"!format": "text"
 			},
 			{ "label": "linkToSource",
 				"fields": ["requestUrl"],
@@ -72,52 +81,66 @@
 			},
 			{ "label": "publisher",
 				"fields": ["creator#administrative_unit"],
+				"extraProcessing": "format_publisher",
 				"format": "text"
 			},
 			{ "label": "languages",
 				"fields": ["language"],
 				"format": "array"
 			},
-			{ "label": "dedication",
-				"fields": ["contributor"],
-				"format": "text"
-			},
 			{ "label": "description",
 				"fields": ["description"],
 				"format": "text"
 			},
-			{ "label": "representativeImage",
+			{ "label": "filePath",
 				"fields": ["representative"],
 				"format": "text"
 			},
-			{ "label": "partOf",
-				"fields": ["partOf"],
-				"format": "text"
+			{ "!label": "partOf",
+				"!fields": ["partOf"],
+				"!optional": true,
+				"!format": "text"
 			},
 			{ "label": "bendoItem",
 				"fields": ["bendoItem"],
 				"format": "text"
 			},
-			{ "!label": "isMemberOfCollection",
-				"!fields": ["isMemberOfCollection"],
-				"!format": "text"
-			},
-			{ "label": "children",
+			{ "label": "items",
 				"fields": ["containedFiles"],
-				"extraProcessing": "process_contained_files",
+				"passSourceNodes": [{"containedFiles": "containedFiles"}],
+				"seedNodes": [
+		            {"collectionId": "collectionId"}, {"parentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
+		            {"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}
+		        ],
+				"externalProcess": "process_contained_files",
 				"format": "array"
+			},
+			{
+				"label": "level",
+				"note": "This must run after items are added above, since children define level.",
+				"extraProcessing": "define_level",
+				"passLabels": [{"items": "items"}],
+				"format": "text"
 			}
 		]
 	},
 	"containedFiles" : {
 		"FieldsToExtract": [
-			{ "label": "sourceSystem",
-				"constant": "Curate",
-				"format": "text"
+			{ "!label": "apiVersion",
+				"!extraProcessing": "schema_api_version",
+				"!format": "text"
 			},
-			{ "label": "repository",
-				"constant": "Curate",
-				"format": "text"
+			{ "!label": "fileCreatedDate",
+				"!extraProcessing": "file_created_date",
+				"!format": "text"
+			},
+			{ "!label": "sourceSystem",
+				"!constant": "Curate",
+				"!format": "text"
+			},
+			{ "!label": "repository",
+				"!constant": "Curate",
+				"!format": "text"
 			},
 			{ "label": "title",
 				"fields": ["label"],
@@ -135,7 +158,7 @@
 				"constant": "file",
 				"format": "text"
 			},
-			{ "label": "dateCreated",
+			{ "label": "createdDate",
 				"fields": ["dateSubmitted"],
 				"format": "text",
 				"datePattern": "%Y-%m-%d"
@@ -162,13 +185,13 @@
 				"fields": ["mimeType"],
 				"format": "text"
 			},
-			{ "label": "downloadUrl",
-				"fields": ["downloadUrl"],
+			{ "label": "mimeType",
+				"fields": ["mimeType"],
 				"format": "text"
 			},
-			{ "label": "isPartOf",
-				"fields": ["isPartOf"],
-				"format": "text"
+			{ "!label": "isPartOf",
+				"!fields": ["isPartOf"],
+				"!format": "text"
 			},
 			{ "label": "bendoItem",
 				"fields": ["bendoItem"],

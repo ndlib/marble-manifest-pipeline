@@ -23,10 +23,12 @@ class iiifManifest():
     def metadata_array(self):
         mapper = self.mapping
         keys_in_other_parts_of_manifest = self._metadata_keys_that_have_top_level_values()
-
+        # print("self.data.object = ", self.data.object)
         ret = []
-        for key in mapper.get_athena_keys():
+        for key in mapper.get_standard_json_keys():
+            # print("key = ", key, self.data.get(key))
             if key.lower() != 'n/a':
+                # print("key = ", key, " value = ", self.data.get(key, 'no value'))
                 if key == 'creators':
                     value = self.data.get(key)
                     if value:
@@ -38,8 +40,9 @@ class iiifManifest():
                 else:
                     value = self.data.get(key, False)
 
-                label = mapper.get_by_athena(key, 'marble_title')
-                if label and value and key not in keys_in_other_parts_of_manifest:
+                label = mapper.get_by_standard_json(key, 'marble_title')
+
+                if label and value and key not in keys_in_other_parts_of_manifest and label.lower() != 'n/a':
                     ret.append(self._convert_label_value(label, value))
 
         return ret
@@ -202,7 +205,7 @@ class iiifManifest():
             self.manifest_hash['provider'] = [self._snite_proivider()]
         elif (provider == 'unda'):
             self.manifest_hash['provider'] = [self._archives_proivider()]
-        elif (provider == 'rare'):
+        elif (provider == 'rare' or provider == 'curate'):
             self.manifest_hash['provider'] = [self._rbsc_proivider()]
         elif (provider == 'hesb'):
             self.manifest_hash['provider'] = [self._hesb_proivider()]

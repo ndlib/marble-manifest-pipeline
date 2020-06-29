@@ -1,5 +1,5 @@
 # validate_json.py
-""" Common code to retrieve the nd_json_schema and to perform basic json validation against any json schema"""
+""" Common code to retrieve the standard_json_schema and to perform basic json validation against any json schema"""
 
 from jsonschema import validate, ValidationError
 from sentry_sdk import capture_exception
@@ -24,13 +24,13 @@ def schema_api_version():
     return 1
 
 
-def validate_nd_json(json_to_test: dict) -> bool:
-    """ validate fixed json against nd_json_schema """
-    valid_json_flag = validate_json(json_to_test, get_nd_json_schema(), True)
+def validate_standard_json(json_to_test: dict) -> bool:
+    """ validate fixed json against standard_json_schema """
+    valid_json_flag = validate_json(json_to_test, get_standard_json_schema(), True)
     return valid_json_flag
 
 
-nd_json_schema = {
+standard_json_schema = {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "description": "Schema for validating ND.json",
     "title": "Tester for ND.json schema",
@@ -46,7 +46,7 @@ nd_json_schema = {
         "parentId": {"type": "string"},
         "level": {"type": "string"},
         "title": {"type": "string"},
-        "dateCreated": {
+        "createdDate": {
             "description": "We want dates, like 'c. 1900' or '2020-04-22'.",
             "type": "string"
         },
@@ -160,6 +160,7 @@ nd_json_schema = {
         "metsFilePath": {"type": "string"},
         "schemaUri": {"type": "string"},
         "schemaPath": {"type": "string"},
+        "bendoItem": {"type": "string"},  # added 6/10/2020 to support Curate, and subsequent bendo processing
         "items": {
             "type": "array",
             "items": {"$ref": "#"},
@@ -172,15 +173,15 @@ nd_json_schema = {
 }
 
 
-def get_nd_json_schema():
+def get_standard_json_schema():
     """ Return our nd.json schema """
-    return(nd_json_schema)
+    return(standard_json_schema)
 
 
 # python -c 'from validate_json import *; test()'
 def test(identifier=""):
     """ test various known cases for schema validation success or failure """
-    schema_to_use = get_nd_json_schema()
+    schema_to_use = get_standard_json_schema()
     optional_test_mode_parameter = False
     data = [
         {},

@@ -67,7 +67,7 @@ class Test(unittest.TestCase):
         """ test _replace_special_characters """
         starting_string = "something&#39;s wrong with%20special characters"
         fixed_string = self.clean_up_content_class._replace_special_characters(starting_string)
-        expected_string = "something's wrong with special characters"
+        expected_string = "something's wrong with\nspecial characters"
         self.assertTrue(fixed_string == expected_string)
 
 

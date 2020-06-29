@@ -70,7 +70,7 @@ class processWebKioskJsonMetadata():
             image_file_info = GetImageInfoForAllObjects(objects, google_credentials, drive_id).image_file_info
             print("Completed retrieving Google image file info after", int(time.time() - self.start_time), 'seconds.')
             composite_json = CleanUpCompositeJson(composite_json).cleaned_up_content
-            process_one_museum_object_class = ProcessOneMuseumObject(self.config, image_file_info, self.start_time)
+            process_one_museum_object_class = ProcessOneMuseumObject(self.config, image_file_info, self.start_time, self.event)
             for _object_key, object_value in objects.items():
                 if 'uniqueIdentifier' in object_value:
                     missing_fields = process_one_museum_object_class.process_object(object_value)
@@ -92,7 +92,6 @@ class processWebKioskJsonMetadata():
     def _get_metadata_given_url(self, url: str) -> dict:
         """ Return json from URL."""
         json_response = {}
-        json_response = json.loads(dependencies.requests.get(url).text)
         try:
             json_response = json.loads(dependencies.requests.get(url).text)
         except ConnectionRefusedError as e:
@@ -106,7 +105,7 @@ class processWebKioskJsonMetadata():
     def _get_embark_metadata_url(self, mode: str, id_to_process: str = "") -> str:
         """ Get url for retrieving museum metadata """
         base_url = self.config['museum-server-base-url'] \
-            + "/results.html?layout=marble_hash&format=json&maximumrecords=-1&recordType=objects_1"
+            + "/results.html?layout=marble&format=json&maximumrecords=-1&recordType=objects_1"
         if mode == 'full':
             url = base_url + "&query=_ID=ALL"
         elif mode == 'ids':

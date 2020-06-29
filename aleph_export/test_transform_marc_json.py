@@ -23,7 +23,6 @@ class Test(unittest.TestCase):
         filename = local_folder + 'test/sample_marc.json'
         with open(filename, 'r') as input_source:
             self.marc_record_as_json = json.load(input_source)
-        input_source.close()
 
     def test_01_get_required_subfields(self):
         subfields_dict = {
@@ -113,6 +112,25 @@ class Test(unittest.TestCase):
         actual_results = self.transform_marc_json_class._process_this_field(json_field_definition, key, value)
         self.assertTrue(actual_results)
 
+    def test_05a_process_this_field(self):
+        """ Test restricting based on ind1 """
+        json_field_definition = {
+            "label": "uniqueIdentifier",
+            "fields": ["852"],
+            "subfields": ["h"],
+            "specialSubfields": ["i"],
+            "ind1": ["0"],
+            "extraProcessing": "format_call_number",
+            "format": "text"
+        }
+        key = "852"
+        value = {'subfields': [{'h': 'M 1744 .B868'}, {'i': 'G4 1796'}], 'ind1': '0', 'ind2': '1'}
+        actual_results = self.transform_marc_json_class._process_this_field(json_field_definition, key, value)
+        self.assertTrue(actual_results)
+        value = {'subfields': [{'h': 'M 1744 .B868'}, {'i': 'G4 1796'}], 'ind1': '4', 'ind2': '1'}
+        actual_results = self.transform_marc_json_class._process_this_field(json_field_definition, key, value)
+        self.assertFalse(actual_results)
+
     def test_06_get_value_from_marc_field(self):
         json_field_definition = {"label": "title", "fields": ["245"], "subfields": ["a", "b"], "format": "text"}
         actual_results = self.transform_marc_json_class._get_value_from_marc_field(json_field_definition, self.marc_record_as_json)
@@ -148,9 +166,9 @@ class Test(unittest.TestCase):
 
     def test_10_build_json_from_marc_json(self):
         actual_results = self.transform_marc_json_class.build_json_from_marc_json(self.marc_record_as_json)
-        with open(local_folder + 'test/sample_nd.json', 'w') as output_file:
-            json.dump(actual_results, output_file, indent=2, default=str)
-        with open(local_folder + 'test/sample_nd.json', 'r') as input_source:
+        # with open(local_folder + 'test/sample_standard.json', 'w') as output_file:
+        #     json.dump(actual_results, output_file, indent=2, default=str)
+        with open(local_folder + 'test/sample_standard.json', 'r') as input_source:
             expected_json = json.load(input_source)
         file_created_date_from_sample = expected_json.get("fileCreatedDate", "")
         actual_results = self.fix_file_created_date(actual_results, file_created_date_from_sample)

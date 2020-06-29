@@ -3,7 +3,8 @@
 import _set_path  # noqa
 import unittest
 import os
-from do_extra_processing import do_extra_processing, _lookup_work_type, _format_subjects, _format_creators, _translate_repository
+from do_extra_processing import do_extra_processing, _lookup_work_type, _format_subjects, \
+    _format_creators, _translate_repository, _format_call_number
 
 
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
@@ -37,7 +38,7 @@ class Test(unittest.TestCase):
         expected_output = "https://onesearch.library.nd.edu/primo-explore/fulldisplay?docid=ndu_alephabc123&context=L&vid=NDU&lang=en_US&search_scope=malc_blended&adaptor=Local%20Search%20Engine&tab=onesearch&query=any,contains,ndu_aleph002097132&mode=basic"  # noqa: E501
         self.assertTrue(actual_output == expected_output)
 
-    def test_4_translate_repository(self):
+    def test_5_translate_repository(self):
         actual_output = _translate_repository("rare")
         expected_output = "RARE"
         self.assertTrue(actual_output == expected_output)
@@ -46,6 +47,12 @@ class Test(unittest.TestCase):
         self.assertTrue(actual_output == expected_output)
         actual_output = _translate_repository("something_else")
         expected_output = "something_else"
+        self.assertTrue(actual_output == expected_output)
+
+    def test_6_format_call_number(self):
+        call_number_list = "M 1744 .B868^^^G4 1796"
+        actual_output = _format_call_number(call_number_list)
+        expected_output = "M 1744 .B868 G4 1796"
         self.assertTrue(actual_output == expected_output)
 
 

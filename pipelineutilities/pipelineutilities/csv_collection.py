@@ -165,8 +165,9 @@ def _add_additional_paths(row, config):
     elif level == "manifest" or level == "collection":
         paths = _manifest_paths(row, config)
     else:
-        raise "invalid type passed to _addition_paths"
-
+        if level is None:
+            level = "NoneType"
+        raise ValueError("Level must be one of ('collection', 'manifest', 'file').  You passed: " + level)
     row.update(paths)
 
 

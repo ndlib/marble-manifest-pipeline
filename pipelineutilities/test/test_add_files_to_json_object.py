@@ -31,23 +31,17 @@ class Test(unittest.TestCase):
     def test_1_test_creating_json_from_xml(self):
         """ test test_creating_json_from_xml """
         with open(local_folder + '/MSNEA8011_EAD.json', 'r') as input_source:
-            nd_json = json.load(input_source)
+            standard_json = json.load(input_source)
         config = {}
         # config['rbsc-image-bucket'] = "libnd-smb-rbsc"
         config['local'] = True
-        add_file_to_json_object = AddFilesToJsonObject(config)
-        nd_json_with_files = add_file_to_json_object.add_files(nd_json)
+        file_to_json_object_class = AddFilesToJsonObject(config)
+        standard_json_with_files = add_file_to_json_object_class.add_files(standard_json)
         # with open(local_folder + '/MSNEA8011_EAD_with_files.json', 'w') as f:
-        #     json.dump(nd_json_with_files, f, indent=2)
+        #     json.dump(standard_json_with_files, f, indent=2)
         with open(local_folder + '/MSNEA8011_EAD_with_files.json', 'r') as input_source:
             expected_json = json.load(input_source)
-
-        # sort and remove extra blanks
-        debug_json(expected_json, nd_json_with_files)
-        
-        expected_json = "".join(json.dumps(expected_json, sort_keys=True).split())
-        nd_json_with_files = "".join(json.dumps(nd_json_with_files, sort_keys=True).split())
-        self.assertEqual(expected_json, nd_json_with_files)
+        self.assertTrue(expected_json == standard_json_with_files)
 
 
 def suite():

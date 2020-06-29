@@ -1,0 +1,22 @@
+{
+  "apiVersion": 1,
+  "fileCreatedDate": "2020-06-11",
+  "sourceSystem": "Curate",
+  "repository": "Curate",
+  "sequence": 1,
+  "title": "Notre Dame Commencement Programs, 1845-",
+  "collectionId": "zp38w953h0s",
+  "parentId": "root",
+  "id": "zp38w953h0s",
+  "access": "University of Notre Dame::Hesburgh Libraries::University Archives",
+  "createdDate": "2018-11-16T00:00:00Z",
+  "modifiedDate": "2018-11-16T00:00:00Z",
+  "workType": "LibraryCollection",
+  "linkToSource": "https://curate.nd.edu/show/zp38w953h0s",
+  "publisher": {
+    "publisherName": "University of Notre Dame::Hesburgh Libraries::University Archives"
+  },
+  "description": "Programs for graduations at the University of Notre Dame. The number of commencements per year varies. The content of programs also varies, but they generally provide information about graduating students, speakers, related events and ceremonies. These are also available at: http://archives.nd.edu/Commencement/",
+  "bendoItem": "zp38w953h0s",
+  "level": "manifest"
+}

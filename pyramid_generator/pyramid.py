@@ -6,7 +6,7 @@ import json
 import boto3
 from s3_helpers import upload_json
 from processor_factory import ProcessorFactory
-from csv_collection import load_csv_data
+from load_standard_json import load_standard_json
 from pipeline_config import load_pipeline_config
 
 
@@ -14,35 +14,37 @@ class ImageRunner():
     def __init__(self, config: dict) -> None:
         self.ids = config['ids']
         self.bucket = config['process-bucket']
-        self.csv_read_base = config['process-bucket-csv-basepath']
         self.img_write_base = config['process-bucket-read-basepath']
         self.img_file = config['image-data-file']
         self.gdrive_ssm = f"{config['google_keys_ssm_base']}/credentials"
-        self.csv_config = config
+        self.config = config
         self.processor = None
 
     def process_images(self) -> None:
         for id in self.ids:
             id_results = {}
-            for file in load_csv_data(id, self.csv_config).files():
+            for file in load_standard_json(id, self.config).files():
                 if not self.processor:
                     self._set_processor(file)
-
                 img_config = {
                     'collection_id': id,
                     'bucket': self.bucket,
                     'img_write_base': self.img_write_base
                 }
-                self.processor.set_data(file, img_config)
-                id_results.update(self.processor.process())
+                if self._can_process_file(file):
+                    self.processor.set_data(file, img_config)
+                    id_results.update(self.processor.process())
             s3_file = f"{self.img_write_base}/{id}/{self.img_file}"
             upload_json(self.bucket, s3_file, id_results)
+
+    def _can_process_file(self, file):
+        return not file.get("mimeType", "") == "application/xml"
 
     def _get_processor_info(self, filepath: str) -> dict:
         img_type = {'type': 's3'}
         if filepath.startswith('https://drive.google'):
             img_type = {'type': 'gdrive', 'cred': _get_credentials(self.gdrive_ssm)}
-        elif filepath.startswith('http://bendo'):
+        elif filepath.startswith('https://curate'):
             img_type = {'type': 'bendo'}
         return img_type
 

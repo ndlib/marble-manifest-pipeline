@@ -40,6 +40,15 @@
 				"fields": ["001"],
 				"format": "text"
 			},
+			{
+				"label": "uniqueIdentifier",
+				"fields": ["852"],
+				"subfields": ["h"],
+				"specialSubfields": ["i"],
+				"ind1": ["0"],
+				"extraProcessing": "format_call_number",
+				"format": "text"
+			},
 			{ "label": "creators",
 				"fields": ["100", "199"],
 				"selection": "range",
@@ -58,7 +67,7 @@
 				"format": "array",
 				"note": "added 5/15/20 sm"
 			},
-			{ "label": "dateCreated",
+			{ "label": "createdDate",
 				"fields": ["264", "260"],
 				"selection": "first",
 				"subfields": ["c"],

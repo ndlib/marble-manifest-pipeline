@@ -1,46 +1,29 @@
 {
-  "@context": [
-    "http://www.w3.org/ns/anno.jsonld",
-    "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
-    "http://iiif.io/api/presentation/3/context.json"
-  ],
+  "type": "Manifest",
   "id": "https://presentation-iiif.library.nd.edu/1999.024/manifest",
+  "label": {
+    "en": [
+      "Memento Mori: Death Comes to the Table"
+    ]
+  },
+  "thumbnail": [
+    {
+      "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/250,/0/default.jpg",
+      "type": "Image",
+      "service": [
+        {
+          "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
+          "type": "ImageService2",
+          "profile": "http://iiif.io/api/image/2/level2.json"
+        }
+      ]
+    }
+  ],
   "items": [
     {
-      "height": 688,
+      "type": "Canvas",
       "id": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas/annotation_page/1999_024-v0001.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas/annotation/1999_024-v0001.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
       "label": {
-        "en": [
-          "1999_024-v0001.jpg"
-        ]
-      },
-      "summary": {
         "en": [
           "1999_024-v0001.jpg"
         ]
@@ -48,26 +31,116 @@
       "thumbnail": [
         {
           "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/250,/0/default.jpg",
+          "type": "Image",
           "service": [
             {
               "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
             }
-          ],
-          "type": "Image"
+          ]
         }
       ],
-      "type": "Canvas",
+      "items": [
+        {
+          "id": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas/annotation_page/1999_024-v0001.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas/annotation/1999_024-v0001.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas",
+              "body": {
+                "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
       "viewingDirection": "left-to-right",
+      "summary": {
+        "en": [
+          "1999_024-v0001.jpg"
+        ]
+      },
+      "height": 688,
       "width": 843
     }
   ],
-  "label": {
-    "en": [
-      "Memento Mori: Death Comes to the Table"
-    ]
+  "viewingDirection": "left-to-right",
+  "@context": [
+    "http://www.w3.org/ns/anno.jsonld",
+    "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
+    "http://iiif.io/api/presentation/3/context.json"
+  ],
+  "provider": [
+    {
+      "id": "https://sniteartmuseum.nd.edu/about-us/contact-us/",
+      "type": "Agent",
+      "label": {
+        "en": [
+          "Snite Museum of Art"
+        ]
+      },
+      "homepage": [
+        {
+          "id": "https://sniteartmuseum.nd.edu",
+          "type": "Text",
+          "label": {
+            "en": [
+              "Snite Museum of Art"
+            ]
+          },
+          "format": "text/html"
+        }
+      ],
+      "logo": [
+        {
+          "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
+          "type": "Image",
+          "format": "image/png",
+          "height": 100,
+          "width": 120
+        }
+      ]
+    }
+  ],
+  "requiredStatement": {
+    "label": {
+      "en": [
+        "Copyright"
+      ]
+    },
+    "value": {
+      "en": [
+        "Public domain"
+      ]
+    }
   },
+  "seeAlso": [
+    {
+      "id": "https://presentation-iiif.library.nd.edu/1999.024/mets.xml",
+      "type": "Dataset",
+      "profile": "http://www.loc.gov/METS/",
+      "format": "application/xml"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/1999.024",
+      "type": "Dataset",
+      "format": "application/ld+json",
+      "profile": "https://schema.org/"
+    }
+  ],
   "metadata": [
     {
       "label": {
@@ -84,7 +157,7 @@
     {
       "label": {
         "en": [
-          "Date "
+          "Date"
         ]
       },
       "value": {
@@ -96,7 +169,7 @@
     {
       "label": {
         "en": [
-          "Classification "
+          "Classification"
         ]
       },
       "value": {
@@ -120,7 +193,7 @@
     {
       "label": {
         "en": [
-          "Accession number "
+          "Accession number"
         ]
       },
       "value": {
@@ -146,7 +219,7 @@
           "tables"
         ]
       }
-    },    
+    },
     {
       "label": {
         "en": [
@@ -183,78 +256,5 @@
         ]
       }
     }
-  ],
-  "provider": [
-    {
-      "homepage": [
-        {
-          "format": "text/html",
-          "id": "https://sniteartmuseum.nd.edu",
-          "label": {
-            "en": [
-              "Snite Museum of Art"
-            ]
-          },
-          "type": "Text"
-        }
-      ],
-      "id": "https://sniteartmuseum.nd.edu/about-us/contact-us/",
-      "label": {
-        "en": [
-          "Snite Museum of Art"
-        ]
-      },
-      "logo": [
-        {
-          "format": "image/png",
-          "height": 100,
-          "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
-          "type": "Image",
-          "width": 120
-        }
-      ],
-      "type": "Agent"
-    }
-  ],
-  "requiredStatement": {
-    "label": {
-      "en": [
-        "Copyright"
-      ]
-    },
-    "value": {
-      "en": [
-        "Public domain"
-      ]
-    }
-  },
-  "seeAlso": [
-    {
-      "format": "application/xml",
-      "id": "https://presentation-iiif.library.nd.edu/1999.024/mets.xml",
-      "profile": "http://www.loc.gov/METS/",
-      "type": "Dataset"
-    },
-    {
-      "format": "application/ld+json",
-      "id": "https://presentation-iiif.library.nd.edu/1999.024",
-      "profile": "https://schema.org/",
-      "type": "Dataset"
-    }
-  ],
-  "thumbnail": [
-    {
-      "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/250,/0/default.jpg",
-      "service": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
-          "profile": "http://iiif.io/api/image/2/level2.json",
-          "type": "ImageService2"
-        }
-      ],
-      "type": "Image"
-    }
-  ],
-  "type": "Manifest",
-  "viewingDirection": "left-to-right"
+  ]
 }
