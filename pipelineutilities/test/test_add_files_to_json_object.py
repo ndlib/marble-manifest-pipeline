@@ -35,13 +35,13 @@ class Test(unittest.TestCase):
         config = {}
         # config['rbsc-image-bucket'] = "libnd-smb-rbsc"
         config['local'] = True
-        file_to_json_object_class = AddFilesToJsonObject(config)
+        add_file_to_json_object_class = AddFilesToJsonObject(config)
         standard_json_with_files = add_file_to_json_object_class.add_files(standard_json)
         # with open(local_folder + '/MSNEA8011_EAD_with_files.json', 'w') as f:
         #     json.dump(standard_json_with_files, f, indent=2)
         with open(local_folder + '/MSNEA8011_EAD_with_files.json', 'r') as input_source:
             expected_json = json.load(input_source)
-        self.assertTrue(expected_json == standard_json_with_files)
+        self.assertEqual(expected_json, standard_json_with_files)
 
 
 def suite():
