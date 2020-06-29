@@ -67,7 +67,6 @@ class TestDirecgtoryApi(unittest.TestCase):
         response = convert_directory_to_json(directories[directory], True)
         self.assertEqual(327, len(response.get('objects', [])))
 
-
     def test_convert_directory_to_json_for_single_objects(self):
         # test for single objects
         directory = 'digital-MARBLE-images-BOO_000297305'
