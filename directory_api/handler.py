@@ -43,20 +43,6 @@ def run_id(event, context):
     return success(output)
 
 
-def run_item_id(event, context):
-    config = load_pipeline_config(event)
-
-    directories = load_from_s3_or_cache(config, False)
-
-    if not directories.get(event['directory_id'], False) or not directories[event['directory_id']]['objects'].get(event['id'], False):
-        return error('404')
-
-    output = convert_object_to_json(directories[event['directory_id']]['objects'][event['id']])
-    cache_s3_call("./cache/%s.json" % (event['id']), output)
-
-    return success(output)
-
-
 def cache_directory_to_file_name(bucket, directory):
     return bucket + "-" + directory.replace("/", "-")
 

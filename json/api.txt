@@ -1,7 +1,9 @@
-Examples of json data for the api. 
+Examples of json data for the api.
 
 /collections - get
 Lists all the collections that have been added to RedBox
+? q=search string, source= source type to filter on.
+
 
 /collections/id  - get
 Gets the metadata for the Item.

@@ -88,9 +88,6 @@ def id_from_url(url):
     for exp in test_expressions:
         test = re.findall(exp, file)
         if test:
-            url_part = url.netloc
-            if url_part == 'rarebooks.nd.edu':
-                url_part = 'rarebooks.library.nd.edu'
             return "%s/%s" % (directory, test[0])
 
     return False
@@ -164,8 +161,9 @@ def crawl_available_files(config):
     for directory in folders_to_crawl:
         objects = get_matching_s3_objects(bucket, directory)
         for obj in objects:
-            if is_tracked_file(obj.get('Key')):
-                url = bucket_to_url[bucket] + obj.get('Key')
+            key = obj.get('Key')
+            if is_tracked_file(key):
+                url = bucket_to_url[bucket] + key
                 id = id_from_url(url)
 
                 if id:
@@ -174,6 +172,7 @@ def crawl_available_files(config):
                             "FileId": id,
                             "Source": "RBSC",
                             "LastModified": False,
+                            "Directory": os.path.dirname(key),
                             "files": [],
                         }
 
@@ -293,8 +292,8 @@ def test():
     # change to the prod bucket
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     # data = list_updated_files(config, 1000000)
-    objs = list_all_directories(config)
-    for key, value in objs["collections/ead_xml/images/BPP_1001"]["objects"].items():
-        print(key)
+    objs = crawl_available_files(config)
+    for key, value in objs.items():
+        print(key, value['Directory'])
 
     return
