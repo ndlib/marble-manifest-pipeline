@@ -283,7 +283,7 @@ def is_tracked_file(file):
     return re.match(r"^.*[.]((jpe?g)|(tif)|(pdf))$", file, re.IGNORECASE)
 
 
-    #  python -c 'from search_files import *; test()'
+# python -c 'from search_files import *; test()'
 def test():
     from pipeline_config import setup_pipeline_config
     event = {"local": True}

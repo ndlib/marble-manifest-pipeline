@@ -7,7 +7,6 @@ from datetime import datetime, date
 # from api_helpers import success
 from search_files import list_all_directories
 from pipeline_config import load_pipeline_config
-from pipelineutilities.s3_helpers import read_s3_json, write_s3_json
 import sentry_sdk as sentry_sdk
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 
@@ -23,7 +22,7 @@ def run(event, context):
 
     directories = load_from_s3_or_cache(config, False)
     output = []
-    for key, value in directories.items():
+    for _key, value in directories.items():
         output.append(convert_directory_to_json(value))
 
     cache_s3_call("./cache/directories.json", output)
@@ -145,7 +144,3 @@ def test():
 
     data['id'] = 'collections-ead_xml-images-BPP_1001'
     run_id(data, {})
-
-    data['directory_id'] = 'collections-ead_xml-images-BPP_1001'
-    data['id'] = 'collections-ead_xml-images-BPP_1001-BPP_1001-001'
-    print(run_item_id(data, {}))
