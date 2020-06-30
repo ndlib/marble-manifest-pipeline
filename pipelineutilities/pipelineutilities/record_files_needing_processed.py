@@ -1,6 +1,7 @@
 # record_files_needing_processed.py
 
 import boto3
+import botocore
 from datetime import datetime, timedelta
 from pipelineutilities.s3_helpers import read_s3_json, write_s3_json
 
@@ -22,7 +23,12 @@ class FilesNeedingProcessed():
             file_name = key + ".json"  # key will be similar to "curate" or "google" or "bendo"
             original_hash = _load_json_from_s3(bucket_name, file_name)
             original_hash.update(value)
-            write_s3_json(bucket_name, file_name, original_hash)
+            try:
+                write_s3_json(bucket_name, file_name, original_hash)
+            except botocore.exceptions.ClientError:
+                success_flag = False
+            except botocore.exceptions.NoCredentialsError:
+                success_flag = False
             # print("files_needing_processed saved for: ", standard_json.get("id", ""), " in ", file_name, " in bucket ", bucket_name)
         return success_flag
 
@@ -88,6 +94,8 @@ def _load_json_from_s3(s3_bucket, s3_path):
     try:
         return read_s3_json(s3_bucket, s3_path)
     except boto3.resource('s3').meta.client.exceptions.NoSuchKey:
+        return {}
+    except botocore.exceptions.ClientError:
         return {}
     except Exception:
         return {}
