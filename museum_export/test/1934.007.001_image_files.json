@@ -1,0 +1,38 @@
+{
+  "1934_007_001-v0002.jpg": {
+    "id": "1CQMTCghx18TmfXHauFv66_uxc1vMRzYB",
+    "name": "1934_007_001-v0002.jpg",
+    "mimeType": "image/jpeg",
+    "parents": [
+      "1knNJR9BTYJP1JjTvlDosToJIQuqeCtYu"
+    ],
+    "modifiedTime": "2019-06-25T13:06:38.223Z",
+    "driveId": "0AGid-WpPHOiEUk9PVA",
+    "md5Checksum": "2163bf24f911219ff3719c6fe3eb7bd9",
+    "size": "2288618"
+  },
+  "1934_007_001-v0003.jpg": {
+    "id": "1801JSqSXsRD9CIXl-dFkJdlXV8wLrOCi",
+    "name": "1934_007_001-v0003.jpg",
+    "mimeType": "image/jpeg",
+    "parents": [
+      "1knNJR9BTYJP1JjTvlDosToJIQuqeCtYu"
+    ],
+    "modifiedTime": "2019-06-25T13:06:35.881Z",
+    "driveId": "0AGid-WpPHOiEUk9PVA",
+    "md5Checksum": "5e43336bf11c1b9ada4ef14b78fc4bf4",
+    "size": "5594182"
+  },
+  "1934_007_001-v0001.jpg": {
+    "id": "1AJqKH75dk-I0sdojTFtukO7qV_IiHtHi",
+    "name": "1934_007_001-v0001.jpg",
+    "mimeType": "image/jpeg",
+    "parents": [
+      "1knNJR9BTYJP1JjTvlDosToJIQuqeCtYu"
+    ],
+    "modifiedTime": "2019-06-25T13:06:33.817Z",
+    "driveId": "0AGid-WpPHOiEUk9PVA",
+    "md5Checksum": "652568b3978647bfe3425c813d1c7a10",
+    "size": "2246043"
+  }
+}
