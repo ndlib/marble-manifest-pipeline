@@ -25,7 +25,7 @@ class OutputCsv():
         """ Write one row to the csv string io """
         for key in json_node.keys():
             if type(json_node[key]) is dict or type(json_node[key]) is list:
-                json_node[key] = json.dumps(json_node[key])
+                json_node[key] = json.dumps(json_node[key], default=str)
 
         self.csv_writer.writerow(json_node)
 
