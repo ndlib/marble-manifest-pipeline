@@ -7,16 +7,22 @@ sys.path.append(where_i_am + "/../pipelineutilities/pipelineutilities")
 from pyramid import ImageRunner
 from pipeline_config import load_pipeline_config
 
-event = {
-    'ssm_key_base': '/all/marble-manifest-prod',
-    'config-file': '2020-06-22-13:55:36.698390.json',
-    'process-bucket': 'marble-manifest-prod-processbucket-kskqchthxshg',
-    'ids': [
-        'qz20sq9094h'
-    ],
-    'errors': []
-}
-config = load_pipeline_config(event)
-config['ids'] = ['qz20sq9094h']
-runner = ImageRunner(config)
-runner.process_images()
+try:
+    # event = json.loads("{\"config-file\": \"2020-04-28-12:43:07.205855.json\", \"process-bucket\": \"marble-manifest-prod-processbucket-kskqchthxshg\", \"errors\": [], \"local\": false}")
+    event = {
+        "config-file": "2020-05-13-18:18:07.449923.json",
+        "process-bucket": "marble-manifest-prod-processbucket-kskqchthxshg",
+        "errors": [],
+        "local": False,
+        "ecs-args": [
+            "{\"config-file\": \"2020-05-13-18:18:07.449923.json\", \"process-bucket\": \"marble-manifest-prod-processbucket-kskqchthxshg\", \"errors\": [], \"local\": false}"
+        ]
+    }
+
+    config = load_pipeline_config(event)
+    print(config['ids'])
+
+    runner = ImageRunner(config)
+    runner.process_images()
+except Exception as e:
+    print(e)
