@@ -234,7 +234,7 @@ class createJsonFromXml():
                 return_value = format_creators(parameters_json["creator"])
         return return_value
 
-    def _process_get_files_from_uri(self, json_node, field, parameters_json):
+    def _process_get_files_from_uri(self, json_node, field, parameters_json):  # noqa: C901
         """ This accepts an image uri, and finds (and appends to the csv)
             all related images. """
         if 'filename' in parameters_json:
@@ -248,6 +248,7 @@ class createJsonFromXml():
             id = id_from_url(uri)
             if id in self.hash_of_available_files:
                 if 'files' in self.hash_of_available_files[id]:
+                    sequence = 0
                     for obj in self.hash_of_available_files[id]['files']:
                         each_file_dict['id'] = file_name_from_filePath(obj['Key'])
                         each_file_dict['thumbnail'] = (each_file_dict['id'] == json_node['id'])
@@ -256,10 +257,15 @@ class createJsonFromXml():
                             each_file_dict['description'] = json_node['description']
                         each_file_dict['fileInfo'] = obj
                         each_file_dict['filePath'] = obj['Path']
-                        each_file_dict['sequence'] = obj['Order']
+                        sequence += 1
+                        each_file_dict['sequence'] = obj.get('Order', sequence)
                         each_file_dict['title'] = obj['Label']
-                        each_file_dict['modifiedDate'] = obj['LastModified']
-                        each_file_dict['modifiedDate'] = datetime.strptime(obj['LastModified'], '%Y-%m-%d %H:%M:%S').isoformat() + 'Z'  # noqa: E501
+                        if obj['LastModified']:
+                            each_file_dict['modifiedDate'] = obj['LastModified']
+                            if isinstance(each_file_dict['modifiedDate'], str):
+                                each_file_dict['modifiedDate'] = datetime.strptime(obj['LastModified'], '%Y-%m-%d %H:%M:%S').isoformat() + 'Z'
+                            elif isinstance(each_file_dict['modifiedDate'], datetime):
+                                each_file_dict['modifiedDate'] = obj['LastModified'].isoformat() + 'Z'
                         each_file_dict['md5Checksum'] = obj['ETag'].replace("'", "").replace('"', '')  # strip duplicated quotes: {'ETag': '"8b50cfed39b7d8bcb4bd652446fe8adf"'}  # noqa: E501
                         self.output_csv_class.write_csv_row(each_file_dict)
         return None

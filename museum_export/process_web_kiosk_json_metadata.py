@@ -68,12 +68,8 @@ class processWebKioskJsonMetadata():
             objects = composite_json["objects"]
             google_credentials = {}
             if self.config.get("museum-google-credentials", ""):
-                json.loads(self.config["museum-google-credentials"])
+                google_credentials = json.loads(self.config["museum-google-credentials"])
             drive_id = self.config.get("museum-google-drive-id", "")
-            # image_file_info = GetImageInfoForAllObjects(objects, google_credentials, drive_id).image_file_info
-            # print("image_file_info = ", image_file_info)
-            # if google_credentials and drive_id:
-            print("before")
             image_file_info = GetImageInfoForAllObjects(objects, google_credentials, drive_id).image_file_info
             print("Completed retrieving Google image file info after", int(time.time() - self.start_time), 'seconds.')
         return image_file_info
