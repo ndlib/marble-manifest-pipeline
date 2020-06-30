@@ -27,6 +27,8 @@ class FilesNeedingProcessed():
                 write_s3_json(bucket_name, file_name, original_hash)
             except botocore.exceptions.ClientError:
                 success_flag = False
+            except botocore.exceptions.NoCredentialsError:
+                success_flag = False
             # print("files_needing_processed saved for: ", standard_json.get("id", ""), " in ", file_name, " in bucket ", bucket_name)
         return success_flag
 
