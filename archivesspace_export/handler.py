@@ -108,7 +108,7 @@ def test(identifier=""):
         # ]
         # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1492"]  # Parsons Journals
         # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1524"]
-
+        event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/2038"]
     event = run(event, {})
 
     if not event['archivesSpaceHarvestComplete']:
