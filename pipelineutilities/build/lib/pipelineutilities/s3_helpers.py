@@ -306,6 +306,8 @@ def s3_file_exists(s3_bucket: str, s3_key: str) -> dict:
 
     except botocore.exceptions.ClientError:
         return False
+    except botocore.exceptions.NoCredentialsError:
+        return False
 
 
 def s3_client():
