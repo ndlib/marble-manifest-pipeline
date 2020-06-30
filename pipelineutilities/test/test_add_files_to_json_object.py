@@ -10,18 +10,6 @@ from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
 
 
-def debug_json(tested, result):
-    tested = json.dumps(tested, sort_keys=True, indent=2)
-    result = json.dumps(result, sort_keys=True, indent=2)
-
-    f = open("./test.json", "w")
-    f.write(tested)
-    f.close()
-
-    f = open("./result.json", "w")
-    f.write(result)
-    f.close()
-
 
 class Test(unittest.TestCase):
     """ Class for test fixtures """
