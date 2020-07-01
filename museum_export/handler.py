@@ -43,19 +43,23 @@ def run(event, context):
     else:
         composite_json = read_s3_json(config['process-bucket'], 'museum_composite_metadata.json')
         museum_image_metadata = read_s3_json(config['process-bucket'], 'museum_image_metadata.json')
+
     if composite_json:
         jsonWebKioskClass.process_composite_json_metadata(composite_json, museum_image_metadata)
         event['museumHarvestComplete'] = _done_processing(composite_json)
-        if event['museumHarvestComplete']:
-            if s3_file_exists(config['process-bucket'], 'museum_composite_metadata.json'):
-                delete_s3_key(config['process-bucket'], 'museum_composite_metadata.json')
-            if s3_file_exists(config['process-bucket'], 'museum_image_metadata.json'):
-                delete_s3_key(config['process-bucket'], 'museum_image_metadata.json')
-        else:
-            write_s3_json(config['process-bucket'], 'museum_composite_metadata.json', composite_json)
-
     else:
         print('No JSON to process')
+
+    if event["museum_execution_count"] >= event["maximum_museum_executions"]:
+        event['museumHarvestComplete'] = True
+    if event['museumHarvestComplete']:
+        if s3_file_exists(config['process-bucket'], 'museum_composite_metadata.json'):
+            delete_s3_key(config['process-bucket'], 'museum_composite_metadata.json')
+        if s3_file_exists(config['process-bucket'], 'museum_image_metadata.json'):
+            delete_s3_key(config['process-bucket'], 'museum_image_metadata.json')
+    elif composite_json:
+        write_s3_json(config['process-bucket'], 'museum_composite_metadata.json', composite_json)
+
     return event
 
 
@@ -75,6 +79,7 @@ def _suplement_event(event):
         event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     event['museumHarvestComplete'] = event.get('museumHarvestComplete', False)
     event["museum_execution_count"] = event.get("museum_execution_count", 0) + 1
+    event["maximum_museum_executions"] = event.get("maximum_museum_executions", 10)
     return
 
 
