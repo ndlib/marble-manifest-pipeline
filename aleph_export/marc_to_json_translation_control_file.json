@@ -179,7 +179,7 @@
 				"format": "text"
 			},
 			{ "label": "sequence",
-				"constant": "1",
+				"constant": 1,
 				"format": "text"
 			},
 			{ "label": "thumbnail",
