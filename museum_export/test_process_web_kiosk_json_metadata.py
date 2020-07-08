@@ -56,6 +56,7 @@ class Test(unittest.TestCase):
         url = "http://notredame.dom5182.com:8080/results.html?layout=marble&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
         actual_results = json_web_kiosk_class._get_metadata_given_url(url)
         filename = local_folder + 'test/1934.007.001_web_kiosk.json'
+        # Note:  Each time we save the template, we will need to re-save this test json file
         # with open(filename, 'w') as f:
         #     json.dump(actual_results, f, indent=2)
         with io.open(filename, 'r', encoding='utf-8') as json_file:
