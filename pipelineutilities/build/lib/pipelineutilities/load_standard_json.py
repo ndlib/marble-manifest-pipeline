@@ -154,7 +154,7 @@ class Item():
         return False
 
 
-# python -c 'from load_nd_json import *; test()'
+# python -c 'from load_standard_json import *; test()'
 def test():
     from pipeline_config import setup_pipeline_config
     event = {"local": True}
@@ -162,5 +162,5 @@ def test():
 
     event['ssm_key_base'] = "/all/marble-manifest-deployment/prod"
     config = setup_pipeline_config(event)
-    object = load_nd_json('1951.004.009', config)
+    object = load_standard_json('1951.004.009', config)
     print(list(object.children()))

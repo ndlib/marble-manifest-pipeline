@@ -38,7 +38,7 @@ class AddImageRecordsAsChildItems():
         if file_name in self.image_files:
             image_item['id'] = file_name
             image_item['level'] = 'file'
-            image_item['sequence'] = digital_asset.get("sequence", 0)
+            image_item['sequence'] = int(digital_asset.get("sequence", 0))
             image_item['title'] = file_name
             image_item['description'] = file_name
             image_item['thumbnail'] = digital_asset.get("thumbnail", False)

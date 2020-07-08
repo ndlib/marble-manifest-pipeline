@@ -81,7 +81,7 @@ standard_json_schema = {
         "modifiedDate": {"type": "string"},
         "thumbnail": {"type": "boolean"},
         "filePath": {"type": "string"},
-        "sequence": {"type": ["number", "string"]},
+        "sequence": {"type": "number"},
         "collectionInformation": {"type": "string"},
         "fileId": {"anyOf": [{"type": "string"}, {"type": "boolean"}]},
         "mimeType": {"type": "string"},

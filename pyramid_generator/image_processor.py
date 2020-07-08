@@ -26,8 +26,10 @@ class ImageProcessor(ABC):
         self.source_md5sum = None
         self.prior_results = {}
         self.image_result = {}
-        self.max_img_height = 8500.0
-        self.max_img_width = 8500.0
+        self.max_img_height = 4000.0
+        self.max_img_width = 4000.0
+        # self.max_img_height = 8500.0
+        # self.max_img_width = 8500.0
         self.copyrighted = False
 
     @abstractmethod
@@ -78,12 +80,16 @@ class ImageProcessor(ABC):
 
     def _generate_pytiff(self, file: str, tif_filename: str) -> None:
         image = self._preprocess_image(file)
+        # print("image xres, yres = ", image.xres, image.yres, image.bands, image.format, image.interpretation)
+        dpi_resolution_multiplier = 25.3999998062134
+        print("image was originally ", image.xres * dpi_resolution_multiplier, "x", image.yres * dpi_resolution_multiplier, "dpi")
         image.tiffsave(tif_filename, tile=True, pyramid=True, compression=self.COMPRESSION_TYPE,
                        tile_width=self.PYTIF_TILE_WIDTH, tile_height=self.PYTIF_TILE_HEIGHT)
         # print(f"{image.get_fields()}")  # image fields, including exif
         self._log_result('height', image.get('height'))
         self._log_result('width', image.get('width'))
         self._log_result('md5sum', self.source_md5sum)
+        # print("self.image_result = ", self.image_result)
 
     def _preprocess_image(self, file: str) -> Image:
         image = Image.new_from_file(file, access='sequential')
@@ -97,6 +103,8 @@ class ImageProcessor(ABC):
             print(f'Original image width: {image.width}')
 
             image = image.shrink(shrink_by, shrink_by)
+            print("New image height = ", image.height)
+            print("New image width = ", image.width)
         return image
 
     def set_data(self, img_data: dict, config: dict) -> None:
