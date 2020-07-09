@@ -4,7 +4,7 @@
 magenta=`tput setaf 5`
 reset=`tput sgr0`
 
-echo "\n\n ${magenta}----- directory_api LOCAL_INSTALL.SH -----${reset}"
+echo "\n\n ${magenta}----- collections_api LOCAL_INSTALL.SH -----${reset}"
 
 rm -rf ./dependencies
 
