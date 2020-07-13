@@ -44,3 +44,11 @@ popd
 pushd metadata_rules
 ./local_install.sh
 popd
+
+pushd directory_api
+./local_install.sh
+popd
+
+pushd collections_api
+./local_install.sh
+popd
