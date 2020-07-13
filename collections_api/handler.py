@@ -1,15 +1,15 @@
-"""This module used in a lambda and api gateway to deal with collections."""
+"""This module saves a listing of contents of standard json files by source.
+    These results are saved into the manifest-server-bucket.
+    These are served by calls to cloudfront here:  https://presentation-iiif.library.nd.edu/experimental/collections
+    These are used by redbox."""
 
 import _set_path  # noqa
 import os
-import json
-from datetime import datetime, date
-import boto3
-import re
-from pipeline_config import load_pipeline_config
+from pipeline_config import setup_pipeline_config
 import sentry_sdk as sentry_sdk
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
-from s3_helpers import read_s3_json
+from collections_api import CollectionsApi
+
 
 if 'SENTRY_DSN' in os.environ:
     sentry_sdk.init(
@@ -19,82 +19,10 @@ if 'SENTRY_DSN' in os.environ:
 
 
 def run(event, context):
-    config = load_pipeline_config(event)
-    collections_list = get_collections_list(config, event.get("source", ""))
-    if not len(collections_list):
-        return error('404')
-    return success(collections_list)
-
-
-def run_id(event, context):
-    config = load_pipeline_config(event)
-    item_json = get_id(config, event.get('id', ""))
-    if not item_json:
-        return error('404')
-    return success(item_json)
-
-
-def get_id(config: dict, id: str) -> dict:
-    """ Return content for an individual id."""
-    item_json = {}
-    key = os.path.join(config["process-bucket-data-basepath"], id + '.json')
-    print(config['process-bucket'])
-    print("key = ", key)
-    if id:
-        item_json = read_s3_json(config['process-bucket'], key)
-    return item_json
-
-
-def get_collections_list(config, source: str = "") -> list:
-    """ Get a listing of collections by source.  If no source is specified, return all."""
-    collections_list = []
-    folder = config["process-bucket-data-basepath"]
-    patterns = {
-        "aleph": "(^" + folder + r"/[0-9]{9}\.json$)",
-        "museum": "(^" + folder + r"/[A-Z]*[0-9]{4}.[.0-9]*[.a-z]*\.json$)",
-        "rbsc": "(^" + folder + r"/[A-Z]*[0-9]*_EAD\.json$)",
-        "curate": "(^" + folder + r"/[a-z0-9]{11}\.json$)"
-    }
-    s3 = boto3.client("s3")
-    paginator = s3.get_paginator("list_objects_v2")
-    if source:
-        regex = patterns.get(source, "^source was specified but no pattern found so do not return results")
-    else:
-        regex = ".*"  # if no source was indicated, return everything
-    for result in paginator.paginate(Bucket=config["process-bucket"], Prefix=config["process-bucket-data-basepath"]):
-        for file_info in result.get('Contents', []):
-            key = file_info.get('Key', '')
-            if re.search(regex, key):
-                collections_list.append(re.sub('^' + folder + '/', '', re.sub('.json$', '', key)))
-    collections_list.sort()
-    return collections_list
-
-
-def error(code):
-    return {
-        "statusCode": code,
-        "headers": {
-            "Access-Control-Allow-Origin": "*",
-        },
-    }
-
-
-def success(data):
-    return {
-        "statusCode": 200,
-        "body": json.dumps(data, default=json_serial),
-        "headers": {
-            "Access-Control-Allow-Origin": "*",
-        },
-    }
-
-
-def json_serial(obj):
-    """JSON serializer for objects not serializable by default json code"""
-
-    if isinstance(obj, (datetime, date)):
-        return obj.isoformat()
-    raise TypeError("Type %s not serializable" % type(obj))
+    config = setup_pipeline_config(event)
+    collections_api_class = CollectionsApi(config)
+    collections_api_class.save_collection_details()
+    return event
 
 
 # export SSM_KEY_BASE=/all/new-csv
@@ -102,9 +30,9 @@ def json_serial(obj):
 # python -c 'from handler import *; test()'
 def test():
     event = {}
-    event['local'] = True
-    event['source'] = 'curate'
+    event['local'] = False
+    if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:
+        event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
+    else:
+        event['ssm_key_base'] = '/all/new-csv'
     print(run(event, {}))
-
-    event['id'] = '1934.007.001'
-    print("id content = ", run_id(event, {}))

@@ -120,6 +120,7 @@ class ImageProcessor(ABC):
         self.source_md5sum = img_data.get('md5Checksum', None)
         # if copyrighted work scale height/width directed by aamd.org
         if self._is_copyrighted(img_data.collection().get('copyrightStatus')):
+            # These values came from here: https://aamd.org/sites/default/files/document/Guidelines%20for%20the%20Use%20of%20Copyrighted%20Materials.pdf 
             self.copyrighted = True
             self.max_img_height = 560.0
             self.max_img_width = 843.0
