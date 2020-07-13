@@ -21,7 +21,7 @@ if 'SENTRY_DSN' in os.environ:
 def run(event, context):
     config = setup_pipeline_config(event)
     collections_api_class = CollectionsApi(config)
-    collections_api_class.save_collection_details()
+    collections_api_class.save_collection_details(['aleph', 'archivesspace', 'curate', 'embark'])
     return event
 
 

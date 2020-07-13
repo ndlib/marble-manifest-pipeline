@@ -12,7 +12,9 @@ class CollectionsApi():
         self.start_time = time.time()
         self.local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
 
-    def save_collection_details(self, source_list: list = ['aleph', 'archivesspace', 'curate', 'embark']):
+    def save_collection_details(self, source_list: list):
+        if not source_list:
+            source_list = ['aleph', 'archivesspace', 'curate', 'embark']
         all_collections_details = []
         for source in source_list:
             collection_list = self._get_collection_list(source)
