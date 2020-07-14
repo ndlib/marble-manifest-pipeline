@@ -19,6 +19,9 @@ if 'SENTRY_DSN' in os.environ:
 
 
 def run(event, context):
+    event['local'] = event.get("local", False)
+    if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:
+        event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
     config = setup_pipeline_config(event)
     collections_api_class = CollectionsApi(config)
     collections_api_class.save_collection_details(['aleph', 'archivesspace', 'curate', 'embark'])
