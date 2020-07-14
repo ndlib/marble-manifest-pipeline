@@ -8,8 +8,6 @@ import io
 from dependencies.sentry_sdk import capture_exception
 from translate_curate_json_node import TranslateCurateJsonNode
 from create_standard_json import CreateStandardJson
-from convert_json_to_csv import ConvertJsonToCsv
-from pipelineutilities.s3_helpers import write_s3_file
 from pipelineutilities.save_standard_json import save_standard_json
 
 
@@ -26,6 +24,7 @@ class CurateApi():
         self.save_curate_json_locally = event.get("local", False)
         self.create_standard_json_class = CreateStandardJson(config)
         self.local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
+        self.attempting_huge_export_with_resumption_flag = False
 
     def get_curate_items(self, ids: list) -> bool:
         """ Given a list of ids, process each one that corresponds to a Curate item """
@@ -47,23 +46,23 @@ class CurateApi():
         url = self.config["curate-server-base-url"] + "/api/items/" + id
         filename = self.local_folder + "test/" + id + "_curate.json"
         file_exists_flag = os.path.exists(filename)
-        if self.save_standard_json_locally:
-            if id == "qz20sq9094h" and file_exists_flag:
-                with io.open(filename, 'r', encoding='utf-8') as json_file:
-                    curate_json = json.load(json_file)
-            else:
-                curate_json = self._get_json_given_url(url)
+        if self.attempting_huge_export_with_resumption_flag and file_exists_flag:
+            with io.open(filename, 'r', encoding='utf-8') as json_file:
+                curate_json = json.load(json_file)
+        else:
+            curate_json = self._get_json_given_url(url)
+            if self.save_standard_json_locally:
                 with open(self.local_folder + "test/" + id + "_curate.json", "w") as output_file:
                     json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
         members = []
         if "membersUrl" in curate_json:
-            if not curate_json["members"]:
+            if not curate_json.get("members", False):
                 print("getting members list")
                 members = self._get_members_list(curate_json['membersUrl'], id, 100, False)
                 curate_json["members"] = members
-                if self.save_standard_json_locally:
-                    with open(self.local_folder + "test/" + id + "_curate_with_members_list.json", "w") as output_file:
-                        json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
+                # if self.save_standard_json_locally:
+                #     with open(self.local_folder + "test/" + id + "_curate_with_members_list.json", "w") as output_file:
+                #         json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
             else:
                 members = curate_json["members"]
             filename = self.local_folder + "test/" + id + "_members_json.json"
@@ -72,7 +71,7 @@ class CurateApi():
                 with io.open(filename, 'r', encoding='utf-8') as json_file:
                     members = json.load(json_file)
             while self._more_unprocessed_members_exist(members):
-                members = self._get_members_details(members, False, id, 10)
+                members = self._get_members_details(members, False, id, 20)
                 curate_json["members"] = members
                 if self.save_curate_json_locally:
                     with open(self.local_folder + "test/" + id + "_curate.json", "w") as output_file:
@@ -88,7 +87,6 @@ class CurateApi():
                     json.dump(standard_json, output_file, indent=2, ensure_ascii=False)
             else:
                 save_standard_json(self.config, standard_json)
-                _export_json_as_csv(self.config, standard_json)
         return standard_json
 
     def _more_unprocessed_members_exist(self, members: dict) -> bool:
@@ -107,6 +105,8 @@ class CurateApi():
         i = 1
         while url and "part_of" in url:
             member_results = self._get_json_given_url(url)
+            # with open(self.local_folder + "test/member_results_get_json_given_url_parent_" + parent_id + ".json", "w") as output_file:
+            #     json.dump(member_results, output_file, indent=2, ensure_ascii=False)
             if "results" in member_results:
                 for item in member_results["results"]:
                     id = item["id"]
@@ -115,7 +115,7 @@ class CurateApi():
                         node[id] = item
                         results.append(node)
                         i += 1
-                        if testing_mode and i > 3:  # early out for testing
+                        if testing_mode:  # early out for testing
                             break
             url = self._get_next_page_url(member_results)
             if testing_mode:
@@ -131,6 +131,8 @@ class CurateApi():
                     # Intentionally skip datasets, since the API will not allow us to download those.
                     if "itemUrl" in value and value.get("type", "") not in ["Dataset"]:
                         details_json = self._get_json_given_url(value["itemUrl"])
+                        # with open(self.local_folder + "test/" + _key + "_get_members_details_get_json_given_url.json", "w") as output_file:
+                        #     json.dump(details_json, output_file, indent=2, ensure_ascii=False)
                         for details_key, details_value in details_json.items():
                             value[details_key] = details_value
                         if testing_mode:
@@ -141,7 +143,7 @@ class CurateApi():
                 member["detailsRetrieved"] = True
                 if i > limit_record_count:
                     print("i, limit = ", i, limit_record_count)
-                    if self.save_standard_json_locally:
+                    if self.save_standard_json_locally and self.attempting_huge_export_with_resumption_flag:
                         with open(self.local_folder + "test/" + id + "_members_json.json", "w") as output_file:
                             json.dump(members_json, output_file, indent=2, ensure_ascii=False)
                     break
@@ -167,11 +169,3 @@ class CurateApi():
             print('Error caught trying to process url ' + url)
             capture_exception(e)
         return json_response
-
-
-def _export_json_as_csv(config: dict, standard_json: dict):
-    """ I'm leaving this here for now until we no longer need to create a CSV from the standard_json """
-    convert_json_to_csv_class = ConvertJsonToCsv(config["csv-field-names"])
-    csv_string = convert_json_to_csv_class.convert_json_to_csv(standard_json)
-    s3_csv_file_name = os.path.join(config['process-bucket-csv-basepath'], standard_json["id"] + '.csv')
-    write_s3_file(config['process-bucket'], s3_csv_file_name, csv_string)
