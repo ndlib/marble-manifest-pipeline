@@ -1,0 +1,69 @@
+{
+  "requestUrl": "https://curate.nd.edu/api/items/pv63fx74g23",
+  "id": "pv63fx74g23",
+  "source": "http://archives.nd.edu/findaids/ead/xml/ndp.xml",
+  "relation": "http://archives.nd.edu/Commencement/1845-08-02_Commencement.pdf",
+  "creator#administrative_unit": "University of Notre Dame::Hesburgh Libraries::University Archives",
+  "subject": "University of Notre Dame",
+  "contributor#institution": "University of Notre Dame",
+  "dateSubmitted": "2018-12-10Z",
+  "type": "Program",
+  "publisher": "University of Notre Dame",
+  "rights": "All rights reserved",
+  "creator#author": "University of Notre Dame",
+  "abstract": "PNDP 1300: Program for the August 2, 1845 Graduation Ceremonies at the University of Notre Dame, Notre Dame, Indiana, United States of America",
+  "contributor": "Sorin, Edward",
+  "modified": "2020-01-29Z",
+  "contributor#repository": "University of Notre Dame Archives",
+  "issued": "1845-08-02",
+  "language": "English",
+  "bibliographicCitation": "University of Notre Dame Commencement Program, August 2, 1845, PNDP 1300, University of Notre Dame Archives, Notre Dame, Indiana",
+  "isPartOf": "Notre Dame Printed and Reference Material Dropfiles: PNDP 1300",
+  "rights#permissions": "May be protected by copyright law under Title 17 U.S. Code. Cannot be sold, given away, reproduced or published in whole or in part (including on the internet), without the prior permission of the University of Notre Dame Archives.",
+  "title": "Notre Dame Commencement Program: August 2, 1845",
+  "access": {
+    "readGroup": [
+      "public"
+    ],
+    "editPerson": [
+      "skirycki"
+    ]
+  },
+  "depositor": "batch_ingest",
+  "owner": "skirycki",
+  "representative": "https://curate.nd.edu/api/items/download/pz50gt57r3h",
+  "bendoItem": "pv63fx74g23",
+  "hasModel": "Document",
+  "isMemberOfCollection": [
+    "https://curate.nd.edu/api/items/zp38w953h0s"
+  ],
+  "containedFiles": [
+    {
+      "id": "pz50gt57r3h",
+      "fileUrl": "https://curate.nd.edu/api/items/pz50gt57r3h",
+      "downloadUrl": "https://curate.nd.edu/api/items/download/pz50gt57r3h",
+      "thumbnailUrl": "https://curate.nd.edu/downloads/pz50gt57r3h/thumbnail",
+      "characterization": "<fits xmlns=\"http://hul.harvard.edu/ois/xml/ns/fits/fits_output\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://hul.harvard.edu/ois/xml/ns/fits/fits_output http://hul.harvard.edu/ois/xml/xsd/fits/fits_output.xsd\" version=\"0.6.2\" timestamp=\"2/2/20 10:06 PM\">\n  <identification>\n    <identity format=\"Portable Document Format\" mimetype=\"application/pdf\" toolname=\"FITS\" toolversion=\"0.6.2\">\n      <tool toolname=\"Jhove\" toolversion=\"1.5\"/>\n      <tool toolname=\"file utility\" toolversion=\"5.04\"/>\n      <tool toolname=\"Exiftool\" toolversion=\"9.06\"/>\n      <tool toolname=\"Droid\" toolversion=\"3.0\"/>\n      <tool toolname=\"NLNZ Metadata Extractor\" toolversion=\"3.4GA\"/>\n      <tool toolname=\"ffident\" toolversion=\"0.2\"/>\n      <version toolname=\"file utility\" toolversion=\"5.04\">1.6</version>\n      <externalIdentifier toolname=\"Droid\" toolversion=\"3.0\" type=\"puid\">fmt/20</externalIdentifier>\n    </identity>\n  </identification>\n  <fileinfo>\n    <size toolname=\"Jhove\" toolversion=\"1.5\">87442</size>\n    <creatingApplicationName toolname=\"Exiftool\" toolversion=\"9.06\" status=\"CONFLICT\">University of Notre Dame Archives/University of Notre Dame Archives</creatingApplicationName>\n    <creatingApplicationName toolname=\"NLNZ Metadata Extractor\" toolversion=\"3.4GA\" status=\"CONFLICT\">/</creatingApplicationName>\n    <lastmodified toolname=\"Exiftool\" toolversion=\"9.06\" status=\"SINGLE_RESULT\">2020:02:02 22:06:24-05:00</lastmodified>\n    <created toolname=\"Exiftool\" toolversion=\"9.06\" status=\"SINGLE_RESULT\">2015:08:04 14:17:05-04:00</created>\n    <filepath toolname=\"OIS File Information\" toolversion=\"0.1\" status=\"SINGLE_RESULT\">/tmp/und:pz50gt57r3h-content.1.pdf20200202-76701-1hqth20.pdf</filepath>\n    \n    <md5checksum toolname=\"OIS File Information\" toolversion=\"0.1\" status=\"SINGLE_RESULT\">e5ad298d464aa992c94e07c7b1b165f1</md5checksum>\n    <fslastmodified toolname=\"OIS File Information\" toolversion=\"0.1\" status=\"SINGLE_RESULT\">1580699184000</fslastmodified>\n  </fileinfo>\n  <filestatus>\n    <well-formed toolname=\"Jhove\" toolversion=\"1.5\" status=\"SINGLE_RESULT\">false</well-formed>\n    <valid toolname=\"Jhove\" toolversion=\"1.5\" status=\"SINGLE_RESULT\">false</valid>\n    <message toolname=\"Jhove\" toolversion=\"1.5\" status=\"SINGLE_RESULT\">Invalid object number in cross-reference stream offset=87381</message>\n  </filestatus>\n  <metadata>\n    <document>\n      <title toolname=\"Exiftool\" toolversion=\"9.06\" status=\"SINGLE_RESULT\">University of Notre Dame Commencement Program</title>\n      <pageCount toolname=\"Exiftool\" toolversion=\"9.06\" status=\"SINGLE_RESULT\">1</pageCount>\n      <isTagged toolname=\"Jhove\" toolversion=\"1.5\">no</isTagged>\n      <hasOutline toolname=\"Jhove\" toolversion=\"1.5\">no</hasOutline>\n      <hasAnnotations toolname=\"Jhove\" toolversion=\"1.5\" status=\"SINGLE_RESULT\">no</hasAnnotations>\n      <isRightsManaged toolname=\"Exiftool\" toolversion=\"9.06\" status=\"SINGLE_RESULT\">no</isRightsManaged>\n      <isProtected toolname=\"Exiftool\" toolversion=\"9.06\">no</isProtected>\n      <hasForms toolname=\"NLNZ Metadata Extractor\" toolversion=\"3.4GA\" status=\"SINGLE_RESULT\">no</hasForms>\n    </document>\n  </metadata>\n</fits>",
+      "bendoItem": "pv63fx74g23",
+      "dateSubmitted": "2018-12-10Z",
+      "modified": "2020-01-29Z",
+      "title": "University of Notre Dame Commencement Program",
+      "label": "1845-08-02_Commencement.pdf",
+      "mimeType": "application/pdf",
+      "access": {
+        "readGroup": [
+          "public"
+        ],
+        "editPerson": [
+          "skirycki"
+        ]
+      },
+      "depositor": "batch_ingest",
+      "owner": "skirycki",
+      "hasModel": "GenericFile",
+      "isPartOf": [
+        "https://curate.nd.edu/api/items/pv63fx74g23"
+      ]
+    }
+  ]
+}
