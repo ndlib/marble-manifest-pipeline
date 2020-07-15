@@ -59,6 +59,13 @@
 				"format": "text"
 			},
 			{
+				"label": "digitalAccess",
+				"note": "This must run after copyrightStatus is added above.",
+				"externalProcess": "define_digital_access",
+				"optional": true,
+				"passLabels": [{"copyrightStatus": "copyrightStatus", "copyrightStatement": "copyrightStatement"}]
+			},
+			{
 				"label": "linkToSource",
 				"xpath": "./metadata/ead/eadheader/eadid",
 				"returnAttributeName": "url",
@@ -66,6 +73,11 @@
 			},
 			{
 				"label": "access",
+				"xpath": "./metadata/ead/archdesc/accessrestrict/p",
+				"format": "text"
+			},
+			{
+				"label": "physicalAccess",
 				"xpath": "./metadata/ead/archdesc/accessrestrict/p",
 				"format": "text"
 			},

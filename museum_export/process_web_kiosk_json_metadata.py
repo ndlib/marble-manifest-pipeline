@@ -8,13 +8,11 @@ import json
 from datetime import datetime, timedelta
 import time
 import os
-from convert_json_to_csv import ConvertJsonToCsv
 from dependencies.sentry_sdk import capture_exception
 import dependencies.requests
 from process_one_museum_object import ProcessOneMuseumObject
 from get_image_info_for_all_objects import GetImageInfoForAllObjects
 from pipelineutilities.save_standard_json import save_standard_json
-from pipelineutilities.s3_helpers import write_s3_file
 
 
 class processWebKioskJsonMetadata():
@@ -94,7 +92,7 @@ class processWebKioskJsonMetadata():
         if self.delete_local_copy:
             delete_file(self.folder_name, self.file_name)
         if not self.event.get("local", False):
-            print("Saved to s3: ", os.path.join(self.config['process-bucket'], self.config['process-bucket-csv-basepath']))  # noqa: #501
+            print("Saved to s3: ", os.path.join(self.config['process-bucket'], self.config['process-bucket-data-basepath']))
         return objects_processed
 
     def _get_metadata_given_url(self, url: str) -> dict:
@@ -111,9 +109,13 @@ class processWebKioskJsonMetadata():
         return json_response
 
     def _get_embark_metadata_url(self, mode: str, id_to_process: str = "") -> str:
-        """ Get url for retrieving museum metadata """
+        """ Get url for retrieving museum metadata
+            Note:  each time we update the template, we need to switch between
+            updating the marble template and the marble_hash template so the version
+            in production doesn't break.  The following line must be updated to
+            reflect which template is active. """
         base_url = self.config['museum-server-base-url'] \
-            + "/results.html?layout=marble&format=json&maximumrecords=-1&recordType=objects_1"
+            + "/results.html?layout=marble_hash&format=json&maximumrecords=-1&recordType=objects_1"
         if mode == 'full':
             url = base_url + "&query=_ID=ALL"
         elif mode == 'ids':
@@ -123,25 +125,6 @@ class processWebKioskJsonMetadata():
             recent_past_string = recent_past.strftime('%m/%d/%Y')
             url = base_url + "&query=mod_date%3E%22" + recent_past_string + "%22"
         return(url)
-
-    def _save_csv(self, object_id: str, object: dict):
-        """ save csv string as a csv file """
-        csv_file_name = object_id + '.csv'
-        convert_json_to_csv_class = ConvertJsonToCsv(self.config["csv-field-names"])
-        csv_string = convert_json_to_csv_class.convert_json_to_csv(object)
-        if self.config["local"]:
-            write_csv_locally(csv_file_name, csv_string)
-        else:
-            s3_csv_file_name = os.path.join(self.config['process-bucket-csv-basepath'], csv_file_name)
-            write_s3_file(self.config['process-bucket'], s3_csv_file_name, csv_string)
-
-
-def write_csv_locally(csv_file_name: str, csv_string: str):
-    """ save csv locally """
-    fully_qualified_file_name = os.path.join("./test", csv_file_name)
-    with open(fully_qualified_file_name, 'w') as f:
-        f.write(csv_string)
-    return
 
 
 def delete_file(folder_name: str, file_name: str):

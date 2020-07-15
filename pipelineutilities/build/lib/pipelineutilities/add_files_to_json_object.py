@@ -70,5 +70,19 @@ class AddFilesToJsonObject():
                         elif isinstance(each_file_dict['modifiedDate'], datetime):
                             each_file_dict['modifiedDate'] = obj['LastModified'].isoformat() + 'Z'
                     each_file_dict['md5Checksum'] = obj['ETag'].replace("'", "").replace('"', '')  # strip duplicated quotes: {'ETag': '"8b50cfed39b7d8bcb4bd652446fe8adf"'}  # noqa: E501
+                    if self._file_exists_in_list(file_items, each_file_dict['id']):
+                        self._remove_existing_file_from_list(file_items, each_file_dict['id'])
                     file_items.append(dict(each_file_dict))
         return file_items
+
+    def _file_exists_in_list(self, file_items: list, id: str) -> bool:
+        for item in file_items:
+            if item.get("id", "") == id:
+                return True
+        return False
+
+    def _remove_existing_file_from_list(self, file_items: list, id: str):
+        for index, item in enumerate(file_items):
+            if item.get("id", "") == id:
+                file_items.pop(index)
+                break

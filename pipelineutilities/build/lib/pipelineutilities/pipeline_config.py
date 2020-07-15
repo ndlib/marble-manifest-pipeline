@@ -1,6 +1,7 @@
 # import _set_pipelineutilites_path  # noqa
 import boto3
 from s3_helpers import read_s3_json, write_s3_json
+import os
 
 default_config = {
     # "process-bucket": "marble-manifest-prod-processbucket-13bond538rnnb",
@@ -24,42 +25,6 @@ default_config = {
     "museum_keys_ssm_base": "/all/marble/museum",
     "curate_keys_ssm_base": "/all/marble/curate/prod",
     "local-path": "please set me",
-    "csv-field-names": [
-        "id",
-        "sourceSystem",
-        "repository",
-        "collectionId",
-        "parentId",
-        "level",
-        "title",
-        "createdDate",
-        "uniqueIdentifier",
-        "dimensions",
-        "languages",
-        "subjects",
-        "copyrightStatus",
-        "copyrightStatement",
-        "linkToSource",
-        "access",
-        "format",
-        "dedication",
-        "description",
-        "modifiedDate",
-        "thumbnail",
-        "filePath",
-        "sequence",
-        "collectionInformation",
-        "fileId",
-        "mimeType",
-        "workType",
-        "medium",
-        "creators",
-        # "digitalAssets",
-        "width",
-        "height",
-        "md5Checksum",
-        "creationPlace"
-    ],
     "museum-required-fields": {
         "Title": "title",
         "Creators": "creators",
@@ -108,6 +73,8 @@ def setup_pipeline_config(event):
     if event.get('local', False):
         config = load_config_local()
     else:
+        if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:
+            event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
         if "ssm_key_base" not in event:
             raise Exception("ssm_key_base required to be in the event dictionary to setup a pipeline config")
         config = default_config.copy()

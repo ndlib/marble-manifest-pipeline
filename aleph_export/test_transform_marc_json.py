@@ -18,8 +18,7 @@ class Test(unittest.TestCase):
         self.event = {"local": True}
         self.event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
         self.config = setup_pipeline_config(self.event)
-        self.csv_field_names = self.config["csv-field-names"]
-        self.transform_marc_json_class = TransformMarcJson(self.csv_field_names)
+        self.transform_marc_json_class = TransformMarcJson()
         filename = local_folder + 'test/sample_marc.json'
         with open(filename, 'r') as input_source:
             self.marc_record_as_json = json.load(input_source)

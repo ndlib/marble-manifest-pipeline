@@ -27,6 +27,22 @@ def perform_additional_processing(json_node: dict, field: dict, schema_api_versi
     elif external_process_name == "format_creators":
         if 'creator' in parameters_json:
             return_value = format_creators(parameters_json["creator"])
+    elif external_process_name == 'define_digital_access':
+        return_value = _define_digital_access(parameters_json)
+    return return_value
+
+
+def _define_digital_access(parameters_json: dict) -> str:
+    copyrightStatus = parameters_json.get('copyrightStatus', '')
+    # copyrightStatement = parameters_json.get('copyrightStatement', '')
+    """ If the copyrightStatus contains the word "public", allow Regular access, otherwise Restricted."""
+    # return_value = "Restricted"
+    return_value = "Regular"  # Until aleph content has copyrightStatus defined, we need to default to Regular access.
+    # We will need to define appropriate logic once copyrightStatus is populated.
+    if "public" in copyrightStatus.lower():
+        return_value = "Regular"
+    elif "copyright" in copyrightStatus.lower():
+        return_value = "Restricted"
     return return_value
 
 

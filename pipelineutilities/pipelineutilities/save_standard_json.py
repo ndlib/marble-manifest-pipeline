@@ -20,6 +20,15 @@ def save_standard_json(config: dict, standard_json: dict, export_all_files_flag:
             files_needing_processed_class = FilesNeedingProcessed(config)
             if files_needing_processed_class.record_files_needing_processed(standard_json, export_all_files_flag):
                 success_flag = _save_json_to_s3(config['process-bucket'], key_name, standard_json)
+            success_flag = _save_to_manifest_bucket(config, standard_json)
+    return success_flag
+
+
+def _save_to_manifest_bucket(config: dict, standard_json: dict) -> bool:
+    """ Added to start saving standard json to process bucket under id/standard/index.json """
+    if "id" in standard_json:
+        key_name = standard_json["id"] + "/standard/index.json"
+        success_flag = _save_json_to_s3(config['manifest-server-bucket'], key_name, standard_json)
     return success_flag
 
 

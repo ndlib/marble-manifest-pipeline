@@ -1,6 +1,5 @@
 import os
 import json
-# from csv_from_json import CsvFromJson
 from do_extra_processing import do_extra_processing
 from pipelineutilities.validate_json import schema_api_version, validate_standard_json
 from get_value_from_external_process import get_value_from_external_process, get_seed_nodes_json
@@ -8,7 +7,7 @@ from get_value_from_external_process import get_value_from_external_process, get
 
 class TransformMarcJson():
     """ This performs all Marc-related processing """
-    def __init__(self, csv_field_names: list):
+    def __init__(self):
         """ Save values required for all calls """
         local_folder = os.path.dirname(os.path.realpath(__file__))
         self.json_control = read_marc_to_json_translation_control_file(local_folder + "/marc_to_json_translation_control_file.json")  # noqa: E501

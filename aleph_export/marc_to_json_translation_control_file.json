@@ -98,6 +98,14 @@
 				"subfields": ["f"],
 				"format": "text"
 			},
+			{
+				"label": "digitalAccess",
+				"note": "This must run after copyrightStatus is added above.",
+				"externalProcess": "define_digital_access",
+				"passLabels": [{"copyrightStatus": "copyrightStatus"}],
+				"optional": true,
+				"format": "text"
+			},
 			{ "label": "linkToSource",
 				"fields": ["001"],
 				"format": "text",

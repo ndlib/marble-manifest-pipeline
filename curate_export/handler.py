@@ -44,8 +44,6 @@ def run(event: dict, context: dict) -> dict:
         if event["curate_execution_count"] >= event["max_curate_executions"] and not event["curateHarvestComplete"]:
             event["curateHarvestComplete"] = True
             sentry_sdk.capture_message('Curate did not complete harvest after maximum executions threshold of ' + str(event["max_curate_executions"]))
-        if not event['local']:
-            event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-csv-basepath'])
     return event
 
 
@@ -105,7 +103,8 @@ def test(identifier=""):
             event['ids'] = ["und:zp38w953p3c"]  # Chinese Catholic-themed paintings
             event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
             # event['ids'] = ["und:zp38w953h0s", "und:zp38w953p3c"]
-            event['ids'] = []  # force to read from s3 file.
+            # event['ids'] = []  # force to read from s3 file.
+        event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
     event = run(event, {})
 
     if not event['curateHarvestComplete']:

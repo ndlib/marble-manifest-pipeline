@@ -1,3 +1,0 @@
-../pipelineutilities/
-sentry_sdk
-requests

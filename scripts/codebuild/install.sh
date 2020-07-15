@@ -21,10 +21,6 @@ pushd museum_export
 ./local_install.sh
 popd
 
-pushd harvest_eads
-./local_install.sh
-popd
-
 pushd aleph_export
 ./local_install.sh
 popd

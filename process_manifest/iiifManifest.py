@@ -106,7 +106,6 @@ class iiifManifest():
             return 'Collection'
         elif self.data.type() == 'file':
             return 'Canvas'
-
         raise Exception("invalid schema processor type: " + self.data.type())
 
     def _manifest_id(self):
