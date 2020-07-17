@@ -5,14 +5,11 @@ import json
 import io
 import os
 import time
-# import botocore
 from datetime import datetime, timedelta
 from harvest_oai_eads import HarvestOaiEads  # noqa: #502
 from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
 import sentry_sdk as sentry_sdk  # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
-from pipelineutilities.s3_helpers import write_s3_file
-from convert_json_to_csv import ConvertJsonToCsv
 from pipelineutilities.search_files import id_from_url, crawl_available_files  # noqa: #402
 from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject
@@ -29,7 +26,7 @@ def run(event: dict, context: dict):
     _supplement_event(event)
     _init_sentry()
     config = setup_pipeline_config(event)
-    if "ids" not in event:
+    if not event.get("ids", False):
         event["ids"] = read_ids_from_s3(config['process-bucket'], "source_system_export_ids.json", "ArchivesSpace")
     # config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     start_time = time.time()
@@ -48,20 +45,10 @@ def run(event: dict, context: dict):
             standard_json = fix_creators_in_json_object_class.fix_creators(standard_json)
             save_standard_json(config, standard_json)
             print("ArchivesSpace ead_id = ", standard_json.get("id", ""), " source_system_url = ", ids[0], int(time.time() - start_time), 'seconds.')
-            # in case we need to create CSVs
-            # _export_json_as_csv(config, standard_json)
         del ids[0]
     event['archivesSpaceHarvestComplete'] = (len(ids) == 0)
-    event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-csv-basepath'])
+    event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-data-basepath'])
     return event
-
-
-def _export_json_as_csv(config: dict, standard_json: dict):
-    """ I'm leaving this here for now in case we need to create a CSV from the standard_json """
-    convert_json_to_csv_class = ConvertJsonToCsv(config["csv-field-names"])
-    csv_string = convert_json_to_csv_class.convert_json_to_csv(standard_json)
-    s3_csv_file_name = os.path.join(config['process-bucket-csv-basepath'], standard_json["id"] + '.csv')
-    write_s3_file(config['process-bucket'], s3_csv_file_name, csv_string)
 
 
 def _supplement_event(event: dict) -> dict:
@@ -91,6 +78,7 @@ def _init_sentry():
 
 # setup:
 # export SSM_KEY_BASE=/all/new-csv
+# export SSM_KEY_BASE=/all/marble-manifest-deployment/prod
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
 def test(identifier=""):
@@ -108,7 +96,8 @@ def test(identifier=""):
         # ]
         # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1492"]  # Parsons Journals
         # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1524"]
-        event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/2038"]
+        # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/2038"]
+        event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1567"]
     event = run(event, {})
 
     if not event['archivesSpaceHarvestComplete']:

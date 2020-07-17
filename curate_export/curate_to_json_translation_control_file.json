@@ -51,6 +51,14 @@
 				"fields": ["creator#administrative_unit"],
 				"format": "text"
 			},
+			{ "label": "physicalAccess",
+				"fields": ["creator#administrative_unit"],
+				"format": "text"
+			},
+			{ "label": "digitalAccess",
+				"constant": "Regular",
+				"format": "text"
+			},
 			{ "label": "createdDate",
 				"fields": ["dateSubmitted"],
 				"format": "text",

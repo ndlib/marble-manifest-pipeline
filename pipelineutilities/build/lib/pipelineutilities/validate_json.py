@@ -75,6 +75,8 @@ standard_json_schema = {
         "copyrightStatement": {"type": "string"},
         "linkToSource": {"type": "string"},
         "access": {"type": "string"},
+        "physicalAccess": {"type": "string"},
+        "digitalAccess": {"enum": ["Regular", "Restricted"]},
         "format": {"type": "string"},
         "dedication": {"type": "string"},
         "description": {"type": "string"},

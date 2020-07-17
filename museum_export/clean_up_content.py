@@ -23,6 +23,7 @@ class CleanUpContent():
         object = self._add_missing_required_fields(object)
         object = self._clean_up_creation_place(object)
         object = self._clean_up_object_special_characters(object)
+        object = self._define_digital_access(object)
         if object.get("level", "manifest") != "file" and "digitalAssets" in object:
             add_image_records_as_child_items_class = AddImageRecordsAsChildItems(self.image_files)
             object = add_image_records_as_child_items_class.add_images_as_children(object)
@@ -32,6 +33,12 @@ class CleanUpContent():
         if "items" in object:
             for item in object["items"]:
                 self.clean_up_content(item)
+        return object
+
+    def _define_digital_access(self, object: dict) -> dict:
+        object["digitalAccess"] = "Restricted"
+        if "public" in object.get("copyrightStatus", "").lower():
+            object["digitalAccess"] = "Regular"
         return object
 
     def _clean_up_object_special_characters(self, object: dict) -> dict:

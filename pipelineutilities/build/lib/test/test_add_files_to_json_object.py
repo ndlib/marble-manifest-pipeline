@@ -10,19 +10,6 @@ from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
 
 
-def debug_json(tested, result):
-    tested = json.dumps(tested, sort_keys=True, indent=2)
-    result = json.dumps(result, sort_keys=True, indent=2)
-
-    f = open("./test.json", "w")
-    f.write(tested)
-    f.close()
-
-    f = open("./result.json", "w")
-    f.write(result)
-    f.close()
-
-
 class Test(unittest.TestCase):
     """ Class for test fixtures """
     def setUp(self):
@@ -42,6 +29,22 @@ class Test(unittest.TestCase):
         with open(local_folder + '/MSNEA8011_EAD_with_files.json', 'r') as input_source:
             expected_json = json.load(input_source)
         self.assertEqual(expected_json, standard_json_with_files)
+
+    def test_2_file_exists_in_list(self):
+        files_list = [{"id": "MSN-COL_8501-05.b.150.jpg"}, {"id": "MSN-COL_8501-05.a.150.jpg"}]
+        config = {}
+        config['local'] = True
+        add_file_to_json_object_class = AddFilesToJsonObject(config)
+        self.assertTrue(add_file_to_json_object_class._file_exists_in_list(files_list, "MSN-COL_8501-05.b.150.jpg"))
+        self.assertFalse(add_file_to_json_object_class._file_exists_in_list(files_list, "abc.txt"))
+
+    def test_3_remove_existing_file_from_list(self):
+        files_list = [{"id": "MSN-COL_8501-05.b.150.jpg"}, {"id": "MSN-COL_8501-05.a.150.jpg"}]
+        config = {}
+        config['local'] = True
+        add_file_to_json_object_class = AddFilesToJsonObject(config)
+        add_file_to_json_object_class._remove_existing_file_from_list(files_list, "MSN-COL_8501-05.b.150.jpg")
+        self.assertEqual(files_list, [{"id": "MSN-COL_8501-05.a.150.jpg"}])
 
 
 def suite():

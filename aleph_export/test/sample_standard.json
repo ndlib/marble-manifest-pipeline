@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "fileCreatedDate": "2020-06-02",
+  "fileCreatedDate": "2020-07-14",
   "sourceSystem": "Aleph",
   "repository": "RARE",
   "sequence": 1,
@@ -71,6 +71,7 @@
   ],
   "copyrightStatus": "",
   "copyrightStatement": "",
+  "digitalAccess": "Regular",
   "linkToSource": "https://onesearch.library.nd.edu/primo-explore/fulldisplay?docid=ndu_aleph000297305&context=L&vid=NDU&lang=en_US&search_scope=malc_blended&adaptor=Local%20Search%20Engine&tab=onesearch&query=any,contains,ndu_aleph002097132&mode=basic",
   "publisher": {
     "publisherName": "published by I. Willis",
@@ -90,7 +91,7 @@
       "sourceSystem": "Aleph",
       "repository": "RARE",
       "apiVersion": 1,
-      "fileCreatedDate": "2020-06-02",
+      "fileCreatedDate": "2020-07-14",
       "level": "file",
       "sequence": 1,
       "thumbnail": true,

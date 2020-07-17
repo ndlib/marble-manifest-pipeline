@@ -1,6 +1,7 @@
 import _set_path  # noqa
 import unittest
-from pipelineutilities.csv_collection import Item, _check_creator, _add_additional_paths, _add_image_dimensions, _turn_strings_to_json, _fix_ids  # noqa: E402
+from pipelineutilities.csv_collection import _check_creator, _add_additional_paths, _add_image_dimensions, _turn_strings_to_json, _fix_ids  # noqa: E402
+# from pipelineutilities.csv_collection import Item
 
 objects = [
     {"sourceSystem": "EmbARK", "repository": "repository", "id": "collectionId", "collectionId": "collectionId", "parentId": "root", "level": "collection"},
@@ -30,26 +31,26 @@ all_image_data = {
 
 class TestCsvCollection(unittest.TestCase):
 
-    def test_collection(self):
-        parent = Item(objects[0], objects)
-        self.assertEqual(parent.collection().object, objects[0])
-
-    def test_children(self):
-        parent = Item(objects[0], objects)
-        children = parent.children()
-
-        self.assertEqual(children[0].object, objects[1])
-
-        file_children = children[0].children()
-        self.assertEqual(file_children[0].object, objects[2])
-        self.assertEqual(file_children[1].object, objects[3])
-
-    def test_files(self):
-        parent = Item(objects[0], objects)
-        files = parent.files()
-
-        self.assertEqual(files[0].object, objects[2])
-        self.assertEqual(files[1].object, objects[3])
+    # def test_collection(self):
+    #     parent = Item(objects[0], objects)
+    #     self.assertEqual(parent.collection().object, objects[0])
+    #
+    # def test_children(self):
+    #     parent = Item(objects[0], objects)
+    #     children = parent.children()
+    #
+    #     self.assertEqual(children[0].object, objects[1])
+    #
+    #     file_children = children[0].children()
+    #     self.assertEqual(file_children[0].object, objects[2])
+    #     self.assertEqual(file_children[1].object, objects[3])
+    #
+    # def test_files(self):
+    #     parent = Item(objects[0], objects)
+    #     files = parent.files()
+    #
+    #     self.assertEqual(files[0].object, objects[2])
+    #     self.assertEqual(files[1].object, objects[3])
 
     def test_converts_json_fields(self):
         test = {'somejson': '[{"obj": "value"}]'}

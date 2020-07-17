@@ -43,7 +43,7 @@ class Test(unittest.TestCase):
         event = {"mode": "ids", "ids": ["1934.007.001"]}
         json_web_kiosk_class = processWebKioskJsonMetadata(self.config, event, self.time_to_break)
         actual_results = json_web_kiosk_class._get_embark_metadata_url("ids", "1934.007.001")
-        expected_results = "http://notredame.dom5182.com:8080/results.html?layout=marble&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
+        expected_results = "http://notredame.dom5182.com:8080/results.html?layout=marble_hash&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
         self.assertTrue(actual_results == expected_results)
 
     def test_2_get_metadata_given_url(self):

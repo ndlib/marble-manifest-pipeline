@@ -17,18 +17,7 @@ class AddImageRecordsAsChildItems():
                 child_item.update(image_item)
                 child_item.update(from_parent_item)
                 object["items"].append(child_item)
-            object = self._add_additional_missing_fields(object)
         del object["digitalAssets"]
-        return object
-
-    def _add_additional_missing_fields(self, object: dict) -> dict:
-        """ Add additional array fields so CSV will not contain an empty string for them. """
-        if "subjects" not in object:
-            object["subjects"] = []
-        if "creators" not in object:
-            object["creators"] = []
-        if "creationPlace" not in object:
-            object["creationPlace"] = {}
         return object
 
     def _create_item_record_for_image(self, digital_asset: dict) -> dict:

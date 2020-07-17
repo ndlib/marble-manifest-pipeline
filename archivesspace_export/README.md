@@ -1,7 +1,7 @@
 # Harvest EADs
 
 ## Description
-This module harvests OAI EADs from ArchivesSpace into a CSV format of our own design.  Only EAD records with corresponding DAO (digital asset object) records are harvested.
+This module harvests OAI EADs from ArchivesSpace into a json format of our own design.  Only EAD records with corresponding DAO (digital asset object) records are harvested.
 
 Various modes exist for this harvest:
 full - Export all EADs.
