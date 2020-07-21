@@ -78,10 +78,12 @@ class ImageProcessor(ABC):
 
     def _generate_pytiff(self, file: str, tif_filename: str) -> None:
         image = self._preprocess_image(file)
-        DPI_VALUE = 11.812  # pixels per millimeter; equiv. 300 DPI
+        dpi = 11.812  # pixels per millimeter; equiv. 300 DPI
+        if image.xres < dpi:
+            dpi = image.xres
         image.tiffsave(tif_filename, tile=True, pyramid=True, compression=self.COMPRESSION_TYPE,
                        tile_width=self.PYTIF_TILE_WIDTH, tile_height=self.PYTIF_TILE_HEIGHT,
-                       xres=DPI_VALUE, yres=DPI_VALUE)
+                       xres=dpi, yres=dpi)
         self._log_result('height', image.get('height'))
         self._log_result('width', image.get('width'))
         self._log_result('md5sum', self.source_md5sum)
