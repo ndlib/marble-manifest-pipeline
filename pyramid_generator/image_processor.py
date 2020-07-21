@@ -28,8 +28,6 @@ class ImageProcessor(ABC):
         self.image_result = {}
         self.max_img_height = 4000.0
         self.max_img_width = 4000.0
-        # self.max_img_height = 8500.0
-        # self.max_img_width = 8500.0
         self.copyrighted = False
 
     @abstractmethod
@@ -80,15 +78,14 @@ class ImageProcessor(ABC):
 
     def _generate_pytiff(self, file: str, tif_filename: str) -> None:
         image = self._preprocess_image(file)
-        # print("image xres, yres = ", image.xres, image.yres, image.bands, image.format, image.interpretation)
-        dpi_resolution_multiplier = 25.3999998062134
-        print("image was originally ", image.xres * dpi_resolution_multiplier, "x", image.yres * dpi_resolution_multiplier, "dpi")
+        DPI_VALUE = 11.812  # pixels per millimeter; equiv. 300 DPI
         image.tiffsave(tif_filename, tile=True, pyramid=True, compression=self.COMPRESSION_TYPE,
-                       tile_width=self.PYTIF_TILE_WIDTH, tile_height=self.PYTIF_TILE_HEIGHT)
-        # print(f"{image.get_fields()}")  # image fields, including exif
+                       tile_width=self.PYTIF_TILE_WIDTH, tile_height=self.PYTIF_TILE_HEIGHT,
+                       xres=DPI_VALUE, yres=DPI_VALUE)
         self._log_result('height', image.get('height'))
         self._log_result('width', image.get('width'))
         self._log_result('md5sum', self.source_md5sum)
+        # print(f"{image.get_fields()}")  # image fields, including exif
         # print("self.image_result = ", self.image_result)
 
     def _preprocess_image(self, file: str) -> Image:
@@ -120,7 +117,7 @@ class ImageProcessor(ABC):
         self.source_md5sum = img_data.get('md5Checksum', None)
         # if copyrighted work scale height/width directed by aamd.org
         if self._is_copyrighted(img_data.collection().get('copyrightStatus')):
-            # These values came from here: https://aamd.org/sites/default/files/document/Guidelines%20for%20the%20Use%20of%20Copyrighted%20Materials.pdf 
+            # These values came from here: https://aamd.org/sites/default/files/document/Guidelines%20for%20the%20Use%20of%20Copyrighted%20Materials.pdf
             self.copyrighted = True
             self.max_img_height = 560.0
             self.max_img_width = 843.0
