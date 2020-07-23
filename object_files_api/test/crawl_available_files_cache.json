@@ -1,0 +1,95 @@
+{
+  "/collections/ead_xml/images/BPP_1001/BPP_1001-001": {
+    "directory": "collections/ead_xml/images/BPP_1001",
+    "fileId": "/collections/ead_xml/images/BPP_1001/BPP_1001-001",
+    "files": [
+      {
+        "eTag": "\"fae679e8863fc9963e7a7e4d97290623\"",
+        "fileId": "/collections/ead_xml/images/BPP_1001/BPP_1001-001",
+        "iiifImageFilePath": "s3://marble-data-broker-publicbucket-kebe5zkimvyg/collections/ead_xml/images/BPP_1001/BPP_1001-001-F2.jpg",
+        "iiifImageUri": "https://image-iiif.libraries.nd.edu/iiif/2/collections/ead_xml/images/BPP_1001/BPP_1001-001-F2.jpg",
+        "key": "collections/ead_xml/images/BPP_1001/BPP_1001-001-F2.jpg",
+        "label": "https://rarebooks library nd edu F2",
+        "lastModified": "2020-01-28T15:01:53+00:00",
+        "path": "s3://rbsc-test-files/collections/ead_xml/images/BPP_1001/BPP_1001-001-F2.jpg",
+        "size": 2360533,
+        "source": "rbsc-test-files",
+        "sourceType": "S3",
+        "sourceUri": "https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-001-F2.jpg",
+        "storageClass": "STANDARD"
+      },
+      {
+        "eTag": "\"6c527d582c2eec793ac6694f8ef97361\"",
+        "fileId": "/collections/ead_xml/images/BPP_1001/BPP_1001-001",
+        "iiifImageFilePath": "s3://marble-data-broker-publicbucket-kebe5zkimvyg/collections/ead_xml/images/BPP_1001/BPP_1001-001.jpg",
+        "iiifImageUri": "https://image-iiif.libraries.nd.edu/iiif/2/collections/ead_xml/images/BPP_1001/BPP_1001-001.jpg",
+        "key": "collections/ead_xml/images/BPP_1001/BPP_1001-001.jpg",
+        "label": "https://rarebooks library nd edu",
+        "lastModified": "2020-01-28T15:01:52+00:00",
+        "path": "s3://rbsc-test-files/collections/ead_xml/images/BPP_1001/BPP_1001-001.jpg",
+        "size": 2165484,
+        "source": "rbsc-test-files",
+        "sourceType": "S3",
+        "sourceUri": "https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-001.jpg",
+        "storageClass": "STANDARD"
+      }
+    ],
+    "lastModified": "2020-01-28T15:01:53+00:00",
+    "source": "rbsc-test-files",
+    "sourceType": "S3"
+  },
+  "/collections/ead_xml/images/BPP_1001/BPP_1001-002": {
+    "directory": "collections/ead_xml/images/BPP_1001",
+    "fileId": "/collections/ead_xml/images/BPP_1001/BPP_1001-002",
+    "files": [
+      {
+        "eTag": "\"a09195313f7e02f03d6a62fa76671858\"",
+        "fileId": "/collections/ead_xml/images/BPP_1001/BPP_1001-002",
+        "iiifImageFilePath": "s3://marble-data-broker-publicbucket-kebe5zkimvyg/collections/ead_xml/images/BPP_1001/BPP_1001-002-F2.jpg",
+        "iiifImageUri": "https://image-iiif.libraries.nd.edu/iiif/2/collections/ead_xml/images/BPP_1001/BPP_1001-002-F2.jpg",
+        "key": "collections/ead_xml/images/BPP_1001/BPP_1001-002-F2.jpg",
+        "label": "https://rarebooks library nd edu F2",
+        "lastModified": "2020-01-28T15:01:53+00:00",
+        "path": "s3://rbsc-test-files/collections/ead_xml/images/BPP_1001/BPP_1001-002-F2.jpg",
+        "size": 2186555,
+        "source": "rbsc-test-files",
+        "sourceType": "S3",
+        "sourceUri": "https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-002-F2.jpg",
+        "storageClass": "STANDARD"
+      },
+      {
+        "eTag": "\"658532662c77488bacba72e2bc550730\"",
+        "fileId": "/collections/ead_xml/images/BPP_1001/BPP_1001-002",
+        "iiifImageFilePath": "s3://marble-data-broker-publicbucket-kebe5zkimvyg/collections/ead_xml/images/BPP_1001/BPP_1001-002-c1.jpg",
+        "iiifImageUri": "https://image-iiif.libraries.nd.edu/iiif/2/collections/ead_xml/images/BPP_1001/BPP_1001-002-c1.jpg",
+        "key": "collections/ead_xml/images/BPP_1001/BPP_1001-002-c1.jpg",
+        "label": "https://rarebooks library nd edu c1",
+        "lastModified": "2020-01-28T15:01:53+00:00",
+        "path": "s3://rbsc-test-files/collections/ead_xml/images/BPP_1001/BPP_1001-002-c1.jpg",
+        "size": 4156842,
+        "source": "rbsc-test-files",
+        "sourceType": "S3",
+        "sourceUri": "https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-002-c1.jpg",
+        "storageClass": "STANDARD"
+      },
+      {
+        "eTag": "\"658532662c77488bacba72e2bc550730\"",
+        "fileId": "/collections/ead_xml/images/BPP_1001/BPP_1001-002",
+        "iiifImageFilePath": "s3://marble-data-broker-publicbucket-kebe5zkimvyg/collections/ead_xml/images/BPP_1001/BPP_1001-002-c2.jpg",
+        "iiifImageUri": "https://image-iiif.libraries.nd.edu/iiif/2/collections/ead_xml/images/BPP_1001/BPP_1001-002-c2.jpg",
+        "key": "collections/ead_xml/images/BPP_1001/BPP_1001-002-c2.jpg",
+        "label": "https://rarebooks library nd edu c2",
+        "lastModified": "2020-01-28T15:01:53+00:00",
+        "path": "s3://rbsc-test-files/collections/ead_xml/images/BPP_1001/BPP_1001-002-c2.jpg",
+        "size": 4156842,
+        "source": "rbsc-test-files",
+        "sourceType": "S3",
+        "sourceUri": "https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-002-c2.jpg",
+        "storageClass": "STANDARD"
+      }
+    ],
+    "lastModified": "2020-01-28T15:01:53+00:00",
+    "source": "rbsc-test-files",
+    "sourceType": "S3"
+  }
+}

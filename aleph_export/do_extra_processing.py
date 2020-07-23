@@ -7,7 +7,7 @@ def do_extra_processing(value: str, extra_processing: str) -> str:
     """ If extra processing is required, make appropriate calls to perform that additional processing. """
     results = ""
     if extra_processing == "link_to_source":
-        results = "https://onesearch.library.nd.edu/primo-explore/fulldisplay?docid=ndu_aleph" + value + "&context=L&vid=NDU&lang=en_US&search_scope=malc_blended&adaptor=Local%20Search%20Engine&tab=onesearch&query=any,contains,ndu_aleph002097132&mode=basic"  # noqa: E501
+        results = "https://onesearch.library.nd.edu/permalink/f/1phik6l/ndu_aleph" + value
     elif extra_processing == "lookup_work_type":
         results = _lookup_work_type(value)
     elif extra_processing == "format_subjects":

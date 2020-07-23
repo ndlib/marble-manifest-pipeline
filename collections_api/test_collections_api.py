@@ -1,5 +1,5 @@
-# test_harvest_metadata_rules.py
-""" test harvest_metadata_rules """
+# test_collections_api.py
+""" test collections_api """
 import _set_path  # noqa
 import unittest
 from unittest.mock import patch

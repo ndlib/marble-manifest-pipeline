@@ -6,7 +6,6 @@ from s3_helpers import read_s3_json, get_matching_s3_objects, write_s3_json
 
 
 class CollectionsApi():
-    """ This performs all Marc-related processing """
     def __init__(self, config):
         self.config = config
         self.start_time = time.time()
@@ -22,11 +21,11 @@ class CollectionsApi():
                 collection_details = self._get_collection_details(collection_list)
                 if len(collection_details):
                     all_collections_details.append(collection_details)
-                    s3_key = os.path.join('collections/sourcesystem', source, 'index.json')
+                    s3_key = os.path.join('collections', source, 'index.json')
                     # print("About to write collection_details to ", self.config['manifest-server-bucket'], s3_key)
                     write_s3_json(self.config['manifest-server-bucket'], s3_key, collection_details)
         if all_collections_details:
-            s3_key = 'collections/sourcesystem/all/index.json'
+            s3_key = 'collections/all/index.json'
             write_s3_json(self.config['manifest-server-bucket'], s3_key, collection_details)
         #  These need to be saved directly into the manifest bucket so we can serve from here:
         # https://presentation-iiif.library.nd.edu/collections

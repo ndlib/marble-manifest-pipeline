@@ -10,7 +10,6 @@ from harvest_oai_eads import HarvestOaiEads  # noqa: #502
 from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
 import sentry_sdk as sentry_sdk  # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
-from pipelineutilities.search_files import id_from_url, crawl_available_files  # noqa: #402
 from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject
 from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject
@@ -90,14 +89,14 @@ def test(identifier=""):
     else:
         event = {}
         event["local"] = False
-        # event["ids"] = [
-        #     "https://archivesspace.library.nd.edu/repositories/3/resources/1631",
-        #     "https://archivesspace.library.nd.edu/repositories/3/resources/1644"
-        # ]
+        event["ids"] = [
+            # "https://archivesspace.library.nd.edu/repositories/3/resources/1631",
+            # "https://archivesspace.library.nd.edu/repositories/3/resources/1644",  # Irish Broadsides
+        ]
         # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1492"]  # Parsons Journals
         # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1524"]
         # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/2038"]
-        event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1567"]
+        # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1567"]
     event = run(event, {})
 
     if not event['archivesSpaceHarvestComplete']:

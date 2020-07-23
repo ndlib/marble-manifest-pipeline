@@ -59,13 +59,21 @@
 				"note": "added e 5/15/20 sm"
 			},
 			{ "label": "contributors",
-				"fields": ["700", "710"],
+				"fields": ["700"],
 				"selection": "range",
 				"subfields": ["a", "b", "c", "d", "e", "q"],
 				"specialSubfields": ["d"],
 				"extraProcessing": "format_creators",
 				"format": "array",
 				"note": "added 5/15/20 sm"
+			},
+			{ "label": "collections",
+				"fields": ["710"],
+				"selection": "range",
+				"subfields": ["a", "b", "c", "d", "e", "q"],
+				"specialSubfields": ["d"],
+				"format": "array",
+				"note": "added 7/20/20 sm"
 			},
 			{ "label": "createdDate",
 				"fields": ["264", "260"],
@@ -91,6 +99,11 @@
 			{ "label": "copyrightStatus",
 				"fields": ["542"],
 				"subfields": ["l"],
+				"format": "text"
+			},
+			{ "label": "copyrightUrl",
+				"fields": ["542"],
+				"subfields": ["u"],
 				"format": "text"
 			},
 			{ "label": "copyrightStatement",

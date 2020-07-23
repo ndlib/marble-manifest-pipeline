@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "fileCreatedDate": "2020-07-14",
+  "fileCreatedDate": "2020-07-23",
   "sourceSystem": "Aleph",
   "repository": "RARE",
   "sequence": 1,
@@ -44,12 +44,10 @@
       "fullName": "O'Neill, Francis, 1848-1936 donor.",
       "lifeDates": "1848-1936",
       "display": "O'Neill, Francis, 1848-1936 donor."
-    },
-    {
-      "attribution": "",
-      "fullName": "Capt. Francis O'Neill Collection of Irish Studies (University of Notre Dame. Library)",
-      "display": "Capt. Francis O'Neill Collection of Irish Studies (University of Notre Dame. Library)"
     }
+  ],
+  "collections": [
+    "Capt. Francis O'Neill Collection of Irish Studies (University of Notre Dame. Library)"
   ],
   "createdDate": "[1796?]",
   "workType": "Notated music",
@@ -70,9 +68,10 @@
     }
   ],
   "copyrightStatus": "",
+  "copyrightUrl": "",
   "copyrightStatement": "",
   "digitalAccess": "Regular",
-  "linkToSource": "https://onesearch.library.nd.edu/primo-explore/fulldisplay?docid=ndu_aleph000297305&context=L&vid=NDU&lang=en_US&search_scope=malc_blended&adaptor=Local%20Search%20Engine&tab=onesearch&query=any,contains,ndu_aleph002097132&mode=basic",
+  "linkToSource": "https://onesearch.library.nd.edu/permalink/f/1phik6l/ndu_aleph000297305",
   "publisher": {
     "publisherName": "published by I. Willis",
     "publisherLocation": "Dublin,"
@@ -91,7 +90,7 @@
       "sourceSystem": "Aleph",
       "repository": "RARE",
       "apiVersion": 1,
-      "fileCreatedDate": "2020-07-14",
+      "fileCreatedDate": "2020-07-23",
       "level": "file",
       "sequence": 1,
       "thumbnail": true,
