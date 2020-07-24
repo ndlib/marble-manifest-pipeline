@@ -14,7 +14,7 @@ class FilesApi():
         self.event['local'] = self.event.get('local', False)
         self.config = config
         self.local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
-        self.time_to_break = datetime.now() + timedelta(seconds=899))
+        self.time_to_break = datetime.now() + timedelta(seconds=899)
         if self.config.get('test', False):
             self.directory = os.path.join(os.path.dirname(__file__), 'test')
         else:
