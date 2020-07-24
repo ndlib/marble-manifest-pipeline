@@ -14,7 +14,7 @@ class FilesApi():
         self.event['local'] = self.event.get('local', False)
         self.config = config
         self.local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
-        self.time_to_break = datetime.now() + timedelta(seconds=config.get('seconds-to-allow-for-processing', 600))
+        self.time_to_break = datetime.now() + timedelta(seconds=899)
         if self.config.get('test', False):
             self.directory = os.path.join(os.path.dirname(__file__), 'test')
         else:
@@ -65,7 +65,8 @@ class FilesApi():
         cache_file = os.path.join(self.directory, 'crawl_available_files_cache.json')
         if force_use_s3 or (not self.config.get("test", False) and not self.config.get('local', False)):
             objects = crawl_available_files(self.config)
-            self._cache_s3_call(cache_file, objects)
+            if self.config.get('local', False):
+                self._cache_s3_call(cache_file, objects)
             return objects
         elif os.path.exists(cache_file):
             with io.open(cache_file, 'r', encoding='utf-8') as json_file:
