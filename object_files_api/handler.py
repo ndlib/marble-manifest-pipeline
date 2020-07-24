@@ -2,7 +2,6 @@
 
 import _set_path  # noqa
 import os
-from api_helpers import success
 from pipeline_config import setup_pipeline_config
 import sentry_sdk as sentry_sdk
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
@@ -19,7 +18,8 @@ def run(event, context):
     config = setup_pipeline_config(event)
     files_api_class = FilesApi(event, config)
     directories = files_api_class.save_files_details()
-    return success(directories)
+    event['objectFilesApiDirectoriesCount'] = len(directories)
+    return event
 
 
 # aws-vault exec libnd-wse-admin --session-ttl=1h --assume-role-ttl=1h --
