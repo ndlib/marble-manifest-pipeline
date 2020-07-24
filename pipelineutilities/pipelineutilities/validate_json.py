@@ -72,6 +72,7 @@ standard_json_schema = {
             }
         },
         "copyrightStatus": {"type": "string"},
+        "copyrightUrl": {"type": "string"},
         "copyrightStatement": {"type": "string"},
         "linkToSource": {"type": "string"},
         "access": {"type": "string"},
@@ -139,6 +140,11 @@ standard_json_schema = {
                 "required": ["fullName"],
                 "additionalProperties": False
             }
+        },
+        "collections": {
+            "description": "This is a list of names of collections to which this object belongs.",
+            "type": "array",
+            "items": {"type": "string"}
         },
         "md5Checksum": {"type": "string"},
         "creationPlace": {

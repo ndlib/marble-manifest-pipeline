@@ -20,8 +20,12 @@ class Test(unittest.TestCase):
         with open(local_folder + '/MSNEA8011_EAD.json', 'r') as input_source:
             standard_json = json.load(input_source)
         config = {}
-        # config['rbsc-image-bucket'] = "libnd-smb-rbsc"
         config['local'] = True
+        # To re-create copy of hash_of_available_files, uncomment the following lines and run in libnd
+        # config['rbsc-image-bucket'] = "libnd-smb-rbsc"
+        # config['local'] = False
+        # config['image-server-base-url'] = "image-server-base-url"
+        # config['image-server-bucket'] = "image-server-bucket"
         add_file_to_json_object_class = AddFilesToJsonObject(config)
         standard_json_with_files = add_file_to_json_object_class.add_files(standard_json)
         # with open(local_folder + '/MSNEA8011_EAD_with_files.json', 'w') as f:

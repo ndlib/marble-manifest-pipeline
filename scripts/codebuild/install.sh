@@ -41,7 +41,7 @@ pushd metadata_rules
 ./local_install.sh
 popd
 
-pushd directory_api
+pushd object_files_api
 ./local_install.sh
 popd
 
