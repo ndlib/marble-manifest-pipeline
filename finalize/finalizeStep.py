@@ -70,6 +70,12 @@ class FinalizeStep():
                 manifest.add(f"{image}.tif")
         except boto3.resource('s3').meta.client.exceptions.NoSuchKey:
             pass
+        except ValueError as ve:  # includes simplejson.decoder.JSONDecodeError
+            print(f"Failed cleanup process for - {img_data}")
+            print(f"ValueError Exception - {ve}")
+        except Exception as e:
+            print(f"Failed cleanup process for - {img_data}")
+            print(e)
 
         # delete pyramids in process bucket but not in image_data.json
         self._delete_obsolete_pyramids(src_bucket, src_path, latest.difference(manifest))
