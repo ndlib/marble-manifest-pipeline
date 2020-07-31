@@ -58,10 +58,7 @@ def run(event, context):
 def process_manifest(id, config):
     inprocess_bucket = InprocessBucket(id, config)
 
-    inprocess_bucket.write_nd_json()
-
     parent = load_standard_json(id, config)
-
     mapping = MetadataMappings(parent)
     iiif = iiifManifest(config, parent, mapping)
     manifest = iiif.manifest()
@@ -96,7 +93,7 @@ def test():
         'config-file': '2020-06-22-13:55:36.698390.json',
         'process-bucket': 'marble-manifest-prod-processbucket-kskqchthxshg',
         'ids': [
-            'qz20sq9094h'
+            'BPP1001_EAD'
         ],
         'errors': []
     }
