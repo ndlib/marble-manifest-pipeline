@@ -38,7 +38,7 @@ def load_standard_json(id, config):
     if config.get('local', False):
         tree = _load_json_from_file(id, config['local-path'])
     else:
-        tree = _load_json_from_s3(config['process-bucket'], config['process-bucket-data-basepath'], id)
+        tree = _load_json_from_s3(config['manifest-server-bucket'], 'standard', id)
 
     images = load_image_data(id, config)
     _augment_row_data(tree, images, config)
@@ -89,7 +89,7 @@ def _load_json_from_file(id, local_path):
 
 
 def _load_json_from_s3(s3_bucket, s3_path, id):
-    s3_path = os.path.join(s3_path, id + ".json")
+    s3_path = os.path.join(id, "standard/index.json")
     return read_s3_json(s3_bucket, s3_path)
 
 
