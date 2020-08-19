@@ -35,6 +35,10 @@ class FinalizeStep():
             img_data = json.loads(read_s3_file_content(src_bucket, img_data_path))
         except boto3.resource('s3').meta.client.exceptions.NoSuchKey:
             img_data = {}
+        except ValueError as ve:  # includes simplejson.decoder.JSONDecodeError
+            print(f"Failed move_pyramids for - {img_data_path}")
+            print(f"ValueError Exception - {ve}")
+            img_data = {}
 
         all_objects = get_matching_s3_objects(src_bucket, src_path)
         for obj in all_objects:
