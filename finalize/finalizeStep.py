@@ -89,6 +89,7 @@ class FinalizeStep():
 
     def _delete_obsolete_pyramids(self, bucket, path, images, **kwargs) -> set:
         deleted_images = set()
+        return deleted_images  # Added 8/19/20 to make sure we don't accidentally remove images we shouldn't - per Jon
         for image in images:
             print(f"Removing - {path}/{image} from {bucket}")
             if kwargs.get('local', False):
