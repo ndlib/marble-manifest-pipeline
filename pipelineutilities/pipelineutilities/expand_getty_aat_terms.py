@@ -1,7 +1,7 @@
 # expand_getty_aat_terms.py
 """ Expand Getty Art and Architecture Thesaurus (AAT) terms """
 from xml.etree import ElementTree
-import json  # pylint: disable=unused-import
+import json  # noqa: F401  # pylint: disable=unused-import
 import re
 import requests
 from sentry_sdk import capture_exception
@@ -35,6 +35,7 @@ def _get_api_url(human_url: str) -> str:
     """ Get API url """
     return human_url.replace('vocab.getty.edu/aat/', 'vocabsservices.getty.edu/AATService.asmx/AATGetSubject?subjectID=')
 
+
 def _get_note(xml: ElementTree) -> str:
     """ Get note text if any """
     xpath = "./Subject/Descriptive_Notes/Descriptive_Note"
@@ -47,6 +48,7 @@ def _get_note(xml: ElementTree) -> str:
                     value_found = note_node.text
                     return value_found
     return ''
+
 
 def _get_broader_terms(xml: ElementTree) -> (list, list):
     """ Get braoder terms if any """
@@ -111,6 +113,7 @@ def _get_uri_from_string(term_string: str) -> str:
     if '[' in term_string:
         return 'http://vocab.getty.edu/aat/' + term_string[term_string.index('['):].replace('[', '').replace(']', '')
     return ''
+
 
 def _get_xml_given_url(url: str) -> ElementTree:
     """ retrieve the xml from the url """

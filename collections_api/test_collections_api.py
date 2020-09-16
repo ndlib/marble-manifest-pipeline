@@ -28,7 +28,7 @@ class Test(unittest.TestCase):
     #     mock_read_s3_json.return_value = {}
     #     actual_results = self.collections_api_class._get_id('1934.007.001')
     #     mock_read_s3_json.assert_called_once_with("marble-manifest-prod-processbucket-13bond538rnnb", "json/1934.007.001.json")
-    #     self.assertEquals(actual_results, {})
+    #     self.assertEqual(actual_results, {})
 
     @patch('collections_api.CollectionsApi._get_id')
     def test_01_get_item_details(self, mock_get_id):
@@ -39,7 +39,7 @@ class Test(unittest.TestCase):
         with open(filename, 'r') as input_source:
             expected_results = json.load(input_source)
         actual_results = self.collections_api_class._get_item_details('1934.007.001')
-        self.assertEquals(actual_results, expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     @patch('collections_api.CollectionsApi._get_id')
     def test_02_get_collection_details(self, mock_get_id):
@@ -53,7 +53,7 @@ class Test(unittest.TestCase):
         #     json.dump(actual_results, f, indent=2)
         with open(filename, 'r') as input_source:
             expected_results = json.load(input_source)
-        self.assertEquals(actual_results, expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     @patch('collections_api.CollectionsApi._call_get_matching_s3_objects')
     def test_03_get_collection_list(self, mock_get_matching_s3_objects):
@@ -66,7 +66,7 @@ class Test(unittest.TestCase):
         #     json.dump(actual_results, f, indent=2)
         with open(filename, 'r') as input_source:
             expected_results = json.load(input_source)
-        self.assertEquals(actual_results, expected_results)
+        self.assertEqual(actual_results, expected_results)
 
 
 class SaveDataForTests():

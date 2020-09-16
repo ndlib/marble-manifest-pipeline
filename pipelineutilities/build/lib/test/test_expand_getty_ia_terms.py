@@ -52,14 +52,14 @@ class Test(unittest.TestCase):
             'authority': 'IA',
             'term': 'Blessed Virgin Mary',
             'uri': 'http://vocab.getty.edu/page/ia/999',
-            'description': 'Mother of Jesus, venerated since the earliest days of Christianity. Christians believe the birth of Jesus was a virgin birth, his having been conceived through the Holy Spirit.',  # pylint: disable=line-too-long
+            'description': 'Mother of Jesus, venerated since the earliest days of Christianity. Christians believe the birth of Jesus was a virgin birth, his having been conceived through the Holy Spirit.',  # noqa: E501  # pylint: disable=line-too-long
             'variants': [
                 'Mary, Blessed Virgin, Saint (Christian character)',
                 'Blessed Virgin (Christian character)',
                 'Blessed Virgin, Saint (Christian character)',
                 'Virgin Mary (Christian character)'
-                ]
-            }
+            ]
+        }
         self.assertEqual(actual_results, expected_results)
 
 

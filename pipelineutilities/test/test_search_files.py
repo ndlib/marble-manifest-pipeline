@@ -152,7 +152,7 @@ class TestSearchFiles(unittest.TestCase):
 
         for i, test in enumerate(tests):
             result = _convert_dict_to_camel_case(test)
-            self.assertEquals(result, results[i])
+            self.assertEqual(result, results[i])
 
 
 if __name__ == '__main__':

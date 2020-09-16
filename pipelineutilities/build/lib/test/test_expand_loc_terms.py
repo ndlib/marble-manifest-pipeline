@@ -13,6 +13,7 @@ local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
 with open(local_folder + 'loc_term_85012415.json', 'r', encoding='utf-8') as json_file:
     loc_term_85012315 = json.load(json_file)
 
+
 class Test(unittest.TestCase):
     """ Test expand_getty_aat_terms """
 

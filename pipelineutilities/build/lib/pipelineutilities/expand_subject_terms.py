@@ -6,10 +6,11 @@ Currently expands subject terms for these dictionaries:
   IA - Getty Iconographic Authority
   AAT - Getty Art and Architecture Thesaurus
 """
-import json  # pylint: disable=wrong-import-order, unused-import
+import json  # noqa: F401  # pylint: disable=wrong-import-order, unused-import
 from expand_loc_terms import expand_loc_terms  # pylint: disable=import-error
 from expand_getty_ia_terms import expand_ia_terms  # pylint: disable=import-error
 from expand_getty_aat_terms import expand_aat_terms  # pylint: disable=import-error
+
 
 def expand_subject_terms(standard_json: dict) -> dict:
     """ Expand terms for various authorities """
@@ -41,6 +42,7 @@ def expand_subject_terms_recursive(standard_json: dict) -> dict:
     for item in standard_json.get('items', []):
         item = expand_subject_terms_recursive(item)
     return standard_json
+
 
 def _init_json():
     seed_json = {
