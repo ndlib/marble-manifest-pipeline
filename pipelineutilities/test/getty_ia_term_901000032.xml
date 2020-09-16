@@ -1,0 +1,582 @@
+<Vocabulary
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://vocabsservices.getty.edu/Schemas/CONA/CONAGetIconography.xsd">
+	<Iconography_Records>
+		<Iconography_Record>
+			<Iconography_Id>901000032</Iconography_Id>
+			<Iconography_Type>Character/Person</Iconography_Type>
+			<Descriptive_Note>Mother of Jesus, venerated since the earliest days of Christianity. Christians believe the birth of Jesus was a virgin birth, his having been conceived through the Holy Spirit.</Descriptive_Note>
+			<Display_Date>1st century</Display_Date>
+			<Start_Date>-30</Start_Date>
+			<End_Date>50</End_Date>
+			<Names>
+				<Name>
+					<Name_Text>Blessed Virgin Mary (Christian character)</Name_Text>
+					<Preferred>Preferred</Preferred>
+					<Term_Languages>
+						<Term_Language>
+							<Language>English/70051</Language>
+							<Preferred>Preferred</Preferred>
+							<Part_of_Speech>Noun</Part_of_Speech>
+							<Term_Type>Descriptor</Term_Type>
+						</Term_Language>
+					</Term_Languages>
+					<Term_Sources>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000046973/Catholic Encyclopedia [online], republished from 1913 edition (2003-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Preferred</Preferred>
+						</Term_Source>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000047439/Encyclopedia Britannica Online (2002-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Non Preferred</Preferred>
+						</Term_Source>
+					</Term_Sources>
+				</Name>
+				<Name>
+					<Name_Text>Mary, Blessed Virgin, Saint (Christian character)</Name_Text>
+					<Preferred>Variant</Preferred>
+					<Term_Languages>
+						<Term_Language>
+							<Language>English/70051</Language>
+							<Preferred>Non Preferred</Preferred>
+							<Part_of_Speech>Noun</Part_of_Speech>
+							<Term_Type>Used For Term</Term_Type>
+						</Term_Language>
+					</Term_Languages>
+					<Term_Sources>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000052909/Library of Congress Authorities online (2002-)</Source_ID>
+							</Source>
+							<Page>n 81018544; accessed 19 August 2010</Page>
+							<Preferred>Preferred</Preferred>
+						</Term_Source>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000053633/Metropolitan Museum of Art [online] (2001-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Non Preferred</Preferred>
+						</Term_Source>
+					</Term_Sources>
+				</Name>
+				<Name>
+					<Name_Text>Blessed Virgin (Christian character)</Name_Text>
+					<Preferred>Variant</Preferred>
+					<Term_Languages>
+						<Term_Language>
+							<Language>English/70051</Language>
+							<Preferred>Non Preferred</Preferred>
+							<Part_of_Speech>Noun</Part_of_Speech>
+							<Term_Type>Used For Term</Term_Type>
+						</Term_Language>
+					</Term_Languages>
+					<Term_Sources>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000046973/Catholic Encyclopedia [online], republished from 1913 edition (2003-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Non Preferred</Preferred>
+						</Term_Source>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000053633/Metropolitan Museum of Art [online] (2001-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Non Preferred</Preferred>
+						</Term_Source>
+					</Term_Sources>
+				</Name>
+				<Name>
+					<Name_Text>Blessed Virgin, Saint (Christian character)</Name_Text>
+					<Preferred>Variant</Preferred>
+					<Term_Languages>
+						<Term_Language>
+							<Language>English/70051</Language>
+							<Preferred>Non Preferred</Preferred>
+							<Part_of_Speech>Noun</Part_of_Speech>
+							<Term_Type>Used For Term</Term_Type>
+						</Term_Language>
+					</Term_Languages>
+					<Term_Sources>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000052909/Library of Congress Authorities online (2002-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Non Preferred</Preferred>
+						</Term_Source>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000053633/Metropolitan Museum of Art [online] (2001-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Non Preferred</Preferred>
+						</Term_Source>
+					</Term_Sources>
+				</Name>
+				<Name>
+					<Name_Text>Virgin Mary (Christian character)</Name_Text>
+					<Preferred>Variant</Preferred>
+					<Term_Languages>
+						<Term_Language>
+							<Language>English/70051</Language>
+							<Preferred>Non Preferred</Preferred>
+							<Part_of_Speech>Noun</Part_of_Speech>
+							<Term_Type>Used For Term</Term_Type>
+						</Term_Language>
+					</Term_Languages>
+					<Term_Sources>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000052084/Iconclass 2100 Browser (2009-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Non Preferred</Preferred>
+						</Term_Source>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000053633/Metropolitan Museum of Art [online] (2001-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Non Preferred</Preferred>
+						</Term_Source>
+					</Term_Sources>
+				</Name>
+				<Name>
+					<Name_Text>Maria Vergine (Christian character)</Name_Text>
+					<Preferred>Variant</Preferred>
+					<Term_Languages>
+						<Term_Language>
+							<Language>Italian/70350</Language>
+							<Preferred>Non Preferred</Preferred>
+							<Part_of_Speech>Noun</Part_of_Speech>
+							<Term_Type>Used For Term</Term_Type>
+						</Term_Language>
+					</Term_Languages>
+					<Term_Sources>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000048737/ICCD database (1988-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Non Preferred</Preferred>
+						</Term_Source>
+					</Term_Sources>
+				</Name>
+				<Name>
+					<Name_Text>Hagnē Theotokos (Christian character)</Name_Text>
+					<Preferred>Variant</Preferred>
+					<Term_Languages>
+						<Term_Language>
+							<Language>Greek (transliterated)/70411</Language>
+							<Preferred>Non Preferred</Preferred>
+							<Part_of_Speech>Noun</Part_of_Speech>
+							<Term_Type>Used For Term</Term_Type>
+						</Term_Language>
+					</Term_Languages>
+					<Term_Sources>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000052909/Library of Congress Authorities online (2002-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Non Preferred</Preferred>
+						</Term_Source>
+					</Term_Sources>
+				</Name>
+				<Name>
+					<Name_Text>Mare de Déu (Christian character)</Name_Text>
+					<Preferred>Variant</Preferred>
+					<Term_Languages>
+						<Term_Language>
+							<Language>Catalan/70643</Language>
+							<Preferred>Non Preferred</Preferred>
+							<Part_of_Speech>Noun</Part_of_Speech>
+							<Term_Type>Used For Term</Term_Type>
+						</Term_Language>
+					</Term_Languages>
+					<Term_Sources>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000052909/Library of Congress Authorities online (2002-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Non Preferred</Preferred>
+						</Term_Source>
+					</Term_Sources>
+				</Name>
+				<Name>
+					<Name_Text>Birhen ng mga Dukha (Christian character)</Name_Text>
+					<Preferred>Variant</Preferred>
+					<Term_Languages>
+						<Term_Language>
+							<Language>Pilipino/74690</Language>
+							<Preferred>Non Preferred</Preferred>
+							<Part_of_Speech>Noun</Part_of_Speech>
+							<Term_Type>Used For Term</Term_Type>
+						</Term_Language>
+					</Term_Languages>
+					<Term_Sources>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000052909/Library of Congress Authorities online (2002-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Non Preferred</Preferred>
+						</Term_Source>
+					</Term_Sources>
+				</Name>
+				<Name>
+					<Name_Text>Marii︠a︡, Bozhʹi︠a︡ Materʹ (Christian character)</Name_Text>
+					<Preferred>Variant</Preferred>
+					<Term_Languages>
+						<Term_Language>
+							<Language>undetermined/70001</Language>
+							<Preferred>Non Preferred</Preferred>
+							<Part_of_Speech>Noun</Part_of_Speech>
+							<Term_Type>Used For Term</Term_Type>
+						</Term_Language>
+					</Term_Languages>
+					<Term_Sources>
+						<Term_Source>
+							<Source>
+								<Source_ID>2000052909/Library of Congress Authorities online (2002-)</Source_ID>
+							</Source>
+							<Page></Page>
+							<Preferred>Non Preferred</Preferred>
+						</Term_Source>
+					</Term_Sources>
+				</Name>
+			</Names>
+			<Subject_Sources>
+				<Subject_Source>
+					<Source>
+						<Source_ID>2000046973/Catholic Encyclopedia [online], republished from 1913 edition (2003-)</Source_ID>
+					</Source>
+					<Page></Page>
+				</Subject_Source>
+				<Subject_Source>
+					<Source>
+						<Source_ID>2000052084/Iconclass 2100 Browser (2009-)</Source_ID>
+					</Source>
+					<Page>11F the Virgin Mary</Page>
+				</Subject_Source>
+				<Subject_Source>
+					<Source>
+						<Source_ID>2000052869/Source for image</Source_ID>
+					</Source>
+					<Page>https://en.wikipedia.org/wiki/Mary_%28mother_of_Jesus%29#/media/File:Vladimirskaya.jpg</Page>
+				</Subject_Source>
+				<Subject_Source>
+					<Source>
+						<Source_ID>2000052858/Brooklyn Museum [online] (2009-)</Source_ID>
+					</Source>
+					<Page>https://www.brooklynmuseum.org/opencollection/objects/52953/Our_Lady_of_Cocharcas_-_Virgin_with_Indian_Worshipers/right_tab/posse/</Page>
+				</Subject_Source>
+				<Subject_Source>
+					<Source>
+						<Source_ID>2000052873/Hermitage [online] (2000-)</Source_ID>
+					</Source>
+					<Page>http://www.arthermitage.org/Jose-de-Ribera/Virgin-Mary-Mourning.html</Page>
+				</Subject_Source>
+				<Subject_Source>
+					<Source>
+						<Source_ID>2000052668/J. Paul Getty Museum, collections online (2000-)</Source_ID>
+					</Source>
+					<Page>http://www.getty.edu/art/collection/objects/860/bernardo-daddi-the-virgin-mary-with-saints-thomas-aquinas-and-paul-italian-about-1335/</Page>
+				</Subject_Source>
+				<Subject_Source>
+					<Source>
+						<Source_ID>2000053633/Metropolitan Museum of Art [online] (2001-)</Source_ID>
+					</Source>
+					<Page>http://www.metmuseum.org/collection/the-collection-online/search/437824</Page>
+				</Subject_Source>
+			</Subject_Sources>
+			<Associative_Relationships>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901000083</Related_Iconography_ID>
+					<Pref_Name>Adoration of the Magi</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901000026</Related_Iconography_ID>
+					<Pref_Name>Life of the Virgin Mary</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901000462</Related_Iconography_ID>
+					<Pref_Name>Descent from the Cross</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901001236</Related_Iconography_ID>
+					<Pref_Name>Saint Luke Painting the Virgin Mary</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901001264</Related_Iconography_ID>
+					<Pref_Name>Saint Thomas Receiving the Virgin Mary's Girdle</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901001650</Related_Iconography_ID>
+					<Pref_Name>Madonna and Child Enthroned</Pref_Name>
+					<Record_Type>Allegory/Symbolism/Theme</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901001652</Related_Iconography_ID>
+					<Pref_Name>Presentation of Mary in the Temple</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901000780</Related_Iconography_ID>
+					<Pref_Name>Coronation of the Virgin Mary</Pref_Name>
+					<Record_Type>Character/Person</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901000779</Related_Iconography_ID>
+					<Pref_Name>Our Lady of Sorrows</Pref_Name>
+					<Record_Type>Allegory/Symbolism/Theme</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901001052</Related_Iconography_ID>
+					<Pref_Name>Annunciation to the Virgin Mary</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901001007</Related_Iconography_ID>
+					<Pref_Name>Assumption of the Virgin Mary</Pref_Name>
+					<Record_Type>Religion/Mythology/Legend</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901000429</Related_Iconography_ID>
+					<Pref_Name>Immaculate Conception</Pref_Name>
+					<Record_Type>Allegory/Symbolism/Theme</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901001160</Related_Iconography_ID>
+					<Pref_Name>Virgin Birth</Pref_Name>
+					<Record_Type>Allegory/Symbolism/Theme</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901000027</Related_Iconography_ID>
+					<Pref_Name>Marriage of the Virgin Mary</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901000359</Related_Iconography_ID>
+					<Pref_Name>Visitation of the Virgin Mary</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901000052</Related_Iconography_ID>
+					<Pref_Name>Madonna and Child</Pref_Name>
+					<Record_Type>Allegory/Symbolism/Theme</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901000450</Related_Iconography_ID>
+					<Pref_Name>Madonna of Humility</Pref_Name>
+					<Record_Type>Allegory/Symbolism/Theme</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901000222</Related_Iconography_ID>
+					<Pref_Name>Madonna of the Rosary</Pref_Name>
+					<Record_Type>Allegory/Symbolism/Theme</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901000799</Related_Iconography_ID>
+					<Pref_Name>Virgo Lactans</Pref_Name>
+					<Record_Type>Allegory/Symbolism/Theme</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901001175</Related_Iconography_ID>
+					<Pref_Name>Holy Family</Pref_Name>
+					<Record_Type>Allegory/Symbolism/Theme</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901001156</Related_Iconography_ID>
+					<Pref_Name>Presentation in the Temple</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901001044</Related_Iconography_ID>
+					<Pref_Name>Pietà</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901001201</Related_Iconography_ID>
+					<Pref_Name>Wedding at Cana</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901002072</Related_Iconography_ID>
+					<Pref_Name>Our Lady of Aparecida</Pref_Name>
+					<Record_Type>Allegory/Symbolism/Theme</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is actor for</Relationship_Type>
+					<Relationship_Type_Code>5501</Relationship_Type_Code>
+					<Related_Iconography_ID>901001973</Related_Iconography_ID>
+					<Pref_Name>Hodegetria</Pref_Name>
+					<Record_Type>Allegory/Symbolism/Theme</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>relative of</Relationship_Type>
+					<Relationship_Type_Code>5510</Relationship_Type_Code>
+					<Related_Iconography_ID>901001060</Related_Iconography_ID>
+					<Pref_Name>Elizabeth, Mother of John the Baptist, Saint</Pref_Name>
+					<Record_Type>Character/Person</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>consort/spouse of</Relationship_Type>
+					<Relationship_Type_Code>5520</Relationship_Type_Code>
+					<Related_Iconography_ID>901000953</Related_Iconography_ID>
+					<Pref_Name>Joseph, Saint</Pref_Name>
+					<Record_Type>Character/Person</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>child of</Relationship_Type>
+					<Relationship_Type_Code>5530</Relationship_Type_Code>
+					<Related_Iconography_ID>901001010</Related_Iconography_ID>
+					<Pref_Name>Anne, Saint</Pref_Name>
+					<Record_Type>Character/Person</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>child of</Relationship_Type>
+					<Relationship_Type_Code>5530</Relationship_Type_Code>
+					<Related_Iconography_ID>901000821</Related_Iconography_ID>
+					<Pref_Name>Joachim, Saint</Pref_Name>
+					<Record_Type>Character/Person</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>parent of</Relationship_Type>
+					<Relationship_Type_Code>5531</Relationship_Type_Code>
+					<Related_Iconography_ID>901000087</Related_Iconography_ID>
+					<Pref_Name>Jesus Christ</Pref_Name>
+					<Record_Type>Character/Person</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>source is</Relationship_Type>
+					<Relationship_Type_Code>5835</Relationship_Type_Code>
+					<Related_Iconography_ID>901000254</Related_Iconography_ID>
+					<Pref_Name>Bible, New Testament</Pref_Name>
+					<Record_Type>Literature</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is identified as</Relationship_Type>
+					<Relationship_Type_Code>5117</Relationship_Type_Code>
+					<Related_Iconography_ID>901000946</Related_Iconography_ID>
+					<Pref_Name>Woman of the Apocalypse</Pref_Name>
+					<Record_Type>Character/Person</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is identified as</Relationship_Type>
+					<Relationship_Type_Code>5117</Relationship_Type_Code>
+					<Related_Iconography_ID>901001456</Related_Iconography_ID>
+					<Pref_Name>Queen of Martyrs</Pref_Name>
+					<Record_Type>Character/Person</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is identified as</Relationship_Type>
+					<Relationship_Type_Code>5117</Relationship_Type_Code>
+					<Related_Iconography_ID>901000080</Related_Iconography_ID>
+					<Pref_Name>Queen of Heaven</Pref_Name>
+					<Record_Type>Allegory/Symbolism/Theme</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is protagonist for</Relationship_Type>
+					<Relationship_Type_Code>5503</Relationship_Type_Code>
+					<Related_Iconography_ID>901000556</Related_Iconography_ID>
+					<Pref_Name>Dormition of the Virgin Mary</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is protagonist for</Relationship_Type>
+					<Relationship_Type_Code>5503</Relationship_Type_Code>
+					<Related_Iconography_ID>901001651</Related_Iconography_ID>
+					<Pref_Name>Virgin Maestà</Pref_Name>
+					<Record_Type>Allegory/Symbolism/Theme</Record_Type>
+				</Associative_Relationship>
+				<Associative_Relationship>
+					<Relationship_Type>is protagonist for</Relationship_Type>
+					<Relationship_Type_Code>5503</Relationship_Type_Code>
+					<Related_Iconography_ID>901002030</Related_Iconography_ID>
+					<Pref_Name>Miracle of the Flowering Rod</Pref_Name>
+					<Record_Type>Event/Narrative</Record_Type>
+				</Associative_Relationship>
+			</Associative_Relationships>
+			<Vocabulary_Relationships>
+				<Vocabulary_Relationship>
+					<Aat_Number>300150555</Aat_Number>
+					<Relationship_Type>role/characteristic is</Relationship_Type>
+					<Term_Label>saint</Term_Label>
+				</Vocabulary_Relationship>
+				<Vocabulary_Relationship>
+					<Aat_Number>300404311</Aat_Number>
+					<Relationship_Type>affiliated/associated with</Relationship_Type>
+					<Term_Label>virgin birth (doctrinal concept)</Term_Label>
+				</Vocabulary_Relationship>
+				<Vocabulary_Relationship>
+					<Aat_Number>300073711</Aat_Number>
+					<Relationship_Type>culture/religion is</Relationship_Type>
+					<Term_Label>Christianity</Term_Label>
+				</Vocabulary_Relationship>
+			</Vocabulary_Relationships>
+		</Iconography_Record>
+	</Iconography_Records>
+</Vocabulary>

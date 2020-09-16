@@ -1,25 +1,35 @@
+"""
+Collections_api
+
+Find collection details associated with each source system and save results
+to the manifest bucket under the /collections folder, with each json file
+named for a source system.  Also, add an "all.json" describing all collections.
+"""
+
 import time
 import os
 import re
-import json  # noqa: F401
-from s3_helpers import read_s3_json, get_matching_s3_objects, write_s3_json
+import json  # noqa: F401  # pylint: disable=unused-import
+from s3_helpers import read_s3_json, get_matching_s3_objects, write_s3_json  # pylint: disable=import-error
 
 
 class CollectionsApi():
+    """ Class to create Collections json output """
     def __init__(self, config):
         self.config = config
         self.start_time = time.time()
         self.local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
 
     def save_collection_details(self, source_list: list):
+        """ collect and save collection details for source in source_list """
         if not source_list:
             source_list = ['aleph', 'archivesspace', 'curate', 'embark']
         all_collections_details = []
         for source in source_list:
             collection_list = self._get_collection_list(source)
-            if len(collection_list):
+            if len(collection_list) > 0:
                 collection_details = self._get_collection_details(collection_list)
-                if len(collection_details):
+                if len(collection_details) > 0:
                     all_collections_details.append(collection_details)
                     s3_key = os.path.join('collections', source, 'index.json')
                     # print("About to write collection_details to ", self.config['manifest-server-bucket'], s3_key)
@@ -29,7 +39,6 @@ class CollectionsApi():
             write_s3_json(self.config['manifest-server-bucket'], s3_key, collection_details)
         #  These need to be saved directly into the manifest bucket so we can serve from here:
         # https://presentation-iiif.library.nd.edu/collections
-        return
 
     def _get_collection_list(self, source: str = "") -> list:
         """ Get a listing of collections by source.  If no source is specified, return all."""
@@ -66,26 +75,26 @@ class CollectionsApi():
 
     def _get_collection_details(self, collection_list: list) -> dict:
         collection_details = []
-        for id in collection_list:
-            collection_details.append(self._get_item_details(id))
+        for collection_id in collection_list:
+            collection_details.append(self._get_item_details(collection_id))
         return collection_details
 
-    def _get_item_details(self, id: str) -> dict:
+    def _get_item_details(self, collection_id: str) -> dict:
         details = {}
-        item_json = self._get_id(id)
-        base_url = "https://presentation-iiif.library.nd.edu/collections"
+        item_json = self._get_id(collection_id)
+        base_url = os.path.join(self.config['manifest-server-base-url'], 'collections')
         if item_json:
             details['id'] = item_json.get('id', '')
-            details['url'] = os.path.join(base_url, id)
+            details['url'] = os.path.join(base_url, collection_id)
             details['title'] = item_json.get('title', '')
             if item_json.get('linkToSource', ''):
                 details['sourceSystemUri'] = item_json['linkToSource']
         return details
 
-    def _get_id(self, id: str) -> dict:
+    def _get_id(self, collection_id: str) -> dict:
         """ Return content for an individual id."""
         item_json = {}
-        key = os.path.join(self.config["process-bucket-data-basepath"], id + '.json')
-        if id:
+        key = os.path.join(self.config["process-bucket-data-basepath"], collection_id + '.json')
+        if collection_id:
             item_json = read_s3_json(self.config['process-bucket'], key)
         return item_json

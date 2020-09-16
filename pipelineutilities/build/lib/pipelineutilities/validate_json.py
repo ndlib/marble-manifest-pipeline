@@ -30,6 +30,66 @@ def validate_standard_json(json_to_test: dict) -> bool:
     return valid_json_flag
 
 
+subject_properties = {
+    "authority": {"type": "string"},
+    "term": {"type": "string"},
+    "uri": {"type": "string"},
+    "description": {"type": "string"},
+    "parentTerms": {
+        "type": "array",
+        "items": {"type": "string"}
+    },
+    "variants": {
+        "type": "array",
+        "items": {"type": "string"}
+    },
+    "broaderTerms": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "authority": {"type": "string"},
+                "term": {"type": "string"},
+                "uri": {"type": "string"},
+                "parentTerm": {"type": "string"}
+            }
+        }
+    }
+}
+
+subject_definition = {
+    "type": "object",
+    "properties": subject_properties,
+    "required": ["term"],
+    "additionalProperties": False
+}
+
+subject_json_schema = {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Schema for validating a single subject",
+    "id": "subject.schema.json",
+    "type": "object",
+    "properties": subject_properties,
+    "required": ["term"],
+    "additionalProperties": False
+}
+
+subjects_definition = {
+    "type": "array",
+    "items": subject_definition,
+}
+
+subjects_json_schema = {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Schema for validating subjects",
+    "title": "Tester for subjects schema",
+    "id": "subjects.schema.json",
+    "type": "object",
+    "properties": {
+        "subjects": subjects_definition
+    }
+}
+
 standard_json_schema = {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "description": "Schema for validating ND.json",
@@ -44,6 +104,14 @@ standard_json_schema = {
         "repository": {"type": "string"},
         "collectionId": {"type": "string"},
         "parentId": {"type": "string"},
+        "relatedIds": {
+            "description": "This facilitates defining non-parent-child relationships.",
+            "type": "array",
+            "items": {
+                "id": {"type": "string"},
+                "sequence": {"type": "string"}
+            }
+        },
         "level": {"type": "string"},
         "title": {"type": "string"},
         "createdDate": {
@@ -57,20 +125,7 @@ standard_json_schema = {
             "type": "array",
             "items": {"type": "string"}
         },
-        "subjects": {
-            "type": "array",
-            "items": {
-                "description": "Ideally, subjects contain URIs, unfortunately, many do not.",
-                "type": "object",
-                "properties": {
-                    "authority": {"type": "string"},
-                    "term": {"type": "string"},
-                    "uri": {"type": "string"}
-                },
-                "required": ["term"],
-                "additionalProperties": False
-            }
-        },
+        "subjects": subjects_definition,
         "copyrightStatus": {"type": "string"},
         "copyrightUrl": {"type": "string"},
         "copyrightStatement": {"type": "string"},
@@ -177,17 +232,26 @@ standard_json_schema = {
     },
     "required": ["id", "parentId", "collectionId", "apiVersion", "fileCreatedDate"],
     "additionalProperties": False
-
 }
 
 
 def get_standard_json_schema():
     """ Return our nd.json schema """
-    return(standard_json_schema)
+    return standard_json_schema
+
+
+def get_subjects_json_schema():
+    """ Return subjects (plural) schema """
+    return subjects_json_schema
+
+
+def get_subject_json_schema():
+    """ Return subject (singular) schema """
+    return subject_json_schema
 
 
 # python -c 'from validate_json import *; test()'
-def test(identifier=""):
+def test():
     """ test various known cases for schema validation success or failure """
     schema_to_use = get_standard_json_schema()
     optional_test_mode_parameter = False
@@ -214,4 +278,4 @@ def test(identifier=""):
         validation_results = validate_json(json_to_test, schema_to_use, optional_test_mode_parameter)
         if validation_results != result[index]:
             print("Expected ", result[index], " when validating ", json_to_test)
-        assert(result[index] == validation_results)
+        assert result[index] == validation_results

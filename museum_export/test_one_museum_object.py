@@ -39,7 +39,7 @@ class Test(unittest.TestCase):
         with io.open(filename, 'r', encoding='utf-8') as json_file:
             expected_results = json.load(json_file)
         actual_results = self.fix_file_created_date(actual_results, expected_results["fileCreatedDate"])
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def fix_file_created_date(self, standard_json: dict, file_created_date: str) -> dict:
         if "fileCreatedDate" in standard_json:
