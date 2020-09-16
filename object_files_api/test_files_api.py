@@ -28,7 +28,7 @@ class Test(unittest.TestCase):
         input = {"id": "abc"}
         expected_results = {"id": "abc", "uri": "https://presentation-iiif.library.nd.edu/objectFiles/abc"}
         actual_results = self.files_api_class._convert_object_to_json(input)
-        self.assertEquals(actual_results, expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_02_convert_object_to_json(self):
         directories = self.files_api_class._crawl_available_files_from_s3_or_cache()
@@ -43,13 +43,13 @@ class Test(unittest.TestCase):
         input['LastModified'] = datetime(2020, 3, 2, 19, 35, 2, tzinfo=tzutc())
         actual_results = self.files_api_class._fix_json_serial_problems(input)
         expected_results = {'ETag': '"3b16c210f529e33c3acffce66bc2268d"', 'LastModified': '2020-03-02T19:35:02+00:00'}
-        self.assertEquals(actual_results, expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_04_crawl_available_files_from_s3_or_cache(self):
         actual_results = self.files_api_class._crawl_available_files_from_s3_or_cache(False)
         with io.open(os.path.join(os.path.dirname(__file__), 'test/crawl_available_files_cache.json'), 'r', encoding='utf-8') as json_file:
             expected_results = json.load(json_file)
-        self.assertEquals(actual_results, expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_05_convert_directory_to_json(self):
         all_directories = self.files_api_class._crawl_available_files_from_s3_or_cache(False)
@@ -61,7 +61,7 @@ class Test(unittest.TestCase):
             with io.open(filename, 'r', encoding='utf-8') as json_file:
                 expected_results = json.load(json_file)
             break
-        self.assertEquals(actual_results, expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_06_convert_directory_to_json(self):
         directories = self.files_api_class._crawl_available_files_from_s3_or_cache()
@@ -80,7 +80,7 @@ class Test(unittest.TestCase):
         for _key, value in all_directories.items():
             actual_results = self.files_api_class._save_file_objects_per_collection(value, {})
             expected_results = len(value['files'])
-            self.assertEquals(actual_results, expected_results)
+            self.assertEqual(actual_results, expected_results)
 
 
 def suite():

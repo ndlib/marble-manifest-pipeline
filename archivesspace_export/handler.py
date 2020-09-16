@@ -1,23 +1,24 @@
 # handler.py
-""" Module to launch application """
-import _set_path  # noqa
-import json
-import io
-import os
-import time
-from datetime import datetime, timedelta
+""" Module to launch ArchivesSpace Export application """
+import _set_path  # noqa  # pylint: disable=import-error, unused-import
+import io  # pylint: disable=wrong-import-order
+import json  # pylint: disable=wrong-import-order
+import os  # pylint: disable=wrong-import-order
+import time  # pylint: disable=wrong-import-order
+from datetime import datetime, timedelta  # pylint: disable=wrong-import-order
+import sentry_sdk  # noqa: E402 # pylint: disable=wrong-import-order
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402 # pylint: disable=wrong-import-order
 from harvest_oai_eads import HarvestOaiEads  # noqa: #502
-from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
-import sentry_sdk as sentry_sdk  # noqa: E402
-from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
-from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
-from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject
-from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject
-from pipelineutilities.s3_helpers import read_s3_json
-from pipelineutilities.save_standard_json import save_standard_json
+from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.expand_subject_terms import expand_subject_terms_recursive  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.s3_helpers import read_s3_json  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.save_standard_json import save_standard_json  # pylint: disable=import-error, no-name-in-module
 
 
-def run(event: dict, context: dict):
+def run(event: dict, _context: dict):
     """ Run the process to retrieve and process ArchivesSpace metadata.
 
     Information on the API can be found here:
@@ -39,11 +40,12 @@ def run(event: dict, context: dict):
     while len(ids) > 0 and datetime.now() < time_to_break:
         standard_json = harvest_oai_eads_class.get_standard_json_from_archives_space_url(ids[0])
         if standard_json:
+            print("ArchivesSpace ead_id = ", standard_json.get("id", ""), " source_system_url = ", ids[0], int(time.time() - start_time), 'seconds.')
             standard_json = add_files_to_json_object_class.add_files(standard_json)
             standard_json = add_paths_to_json_object_class.add_paths(standard_json)
             standard_json = fix_creators_in_json_object_class.fix_creators(standard_json)
+            standard_json = expand_subject_terms_recursive(standard_json)
             save_standard_json(config, standard_json)
-            print("ArchivesSpace ead_id = ", standard_json.get("id", ""), " source_system_url = ", ids[0], int(time.time() - start_time), 'seconds.')
         del ids[0]
     event['archivesSpaceHarvestComplete'] = (len(ids) == 0)
     event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-data-basepath'])
@@ -59,12 +61,13 @@ def _supplement_event(event: dict) -> dict:
 
 
 def read_ids_from_s3(process_bucket: str, s3_path: str, section: str) -> list:
+    """ Read ids from control file in an s3 bucket """
     ids = []
     try:
         json_hash = read_s3_json(process_bucket, s3_path)
         if section in json_hash:
             ids = json_hash[section]
-    except Exception as e:
+    except Exception as e:  # pylint: disable=broad-except
         sentry_sdk.capture_exception(e)
         print("Control file does not exit:", process_bucket, s3_path)
     return ids
@@ -80,7 +83,7 @@ def _init_sentry():
 # export SSM_KEY_BASE=/all/marble-manifest-deployment/prod
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
-def test(identifier=""):
+def test():
     """ test exection """
     filename = 'event.json'
     if os.path.exists(filename):
@@ -101,8 +104,8 @@ def test(identifier=""):
     event = run(event, {})
 
     if not event['archivesSpaceHarvestComplete']:
-        with open('event.json', 'w') as f:
-            json.dump(event, f, indent=2)
+        with open('event.json', 'w') as json_file:
+            json.dump(event, json_file, indent=2)
     else:
         try:
             os.remove('event.json')

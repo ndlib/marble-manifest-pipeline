@@ -8,7 +8,7 @@ import json
 import os
 import io
 from datetime import datetime, timedelta
-from process_web_kiosk_json_metadata import processWebKioskJsonMetadata
+from process_web_kiosk_json_metadata import ProcessWebKioskJsonMetadata
 from dependencies.pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
 
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
@@ -41,7 +41,7 @@ class Test(unittest.TestCase):
     def test_1_get_embark_metadata_url(self):
         """ test_2 _get_embark_metadata_url """
         event = {"mode": "ids", "ids": ["1934.007.001"]}
-        json_web_kiosk_class = processWebKioskJsonMetadata(self.config, event, self.time_to_break)
+        json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
         actual_results = json_web_kiosk_class._get_embark_metadata_url("ids", "1934.007.001")
         expected_results = "http://notredame.dom5182.com:8080/results.html?layout=marble_hash&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
         self.assertTrue(actual_results == expected_results)
@@ -52,16 +52,17 @@ class Test(unittest.TestCase):
             Note:  each time we update the template on the Web Kiosk server, we must re-save the results here.
         """
         event = {"mode": "ids", "ids": ["1934.007.001"]}
-        json_web_kiosk_class = processWebKioskJsonMetadata(self.config, event, self.time_to_break)
-        url = "http://notredame.dom5182.com:8080/results.html?layout=marble&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
+        json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
+        url = "http://notredame.dom5182.com:8080/results.html?layout=marble_hash&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
         actual_results = json_web_kiosk_class._get_metadata_given_url(url)
+        actual_results["objects"]["1934.007.001"]["modifiedDate"] = "9/16/2020 09:10:03"  # Set modified date to a fixed date to make comparisons easier later
         filename = local_folder + 'test/1934.007.001_web_kiosk.json'
         # Note:  Each time we save the template, we will need to re-save this test json file
         # with open(filename, 'w') as f:
         #     json.dump(actual_results, f, indent=2)
         with io.open(filename, 'r', encoding='utf-8') as json_file:
             expected_results = json.load(json_file)
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_3_process_composite_json_metadata(self):
         event = {"mode": "ids", "ids": ["1934.007.001"], "local": True}
@@ -70,17 +71,17 @@ class Test(unittest.TestCase):
         with io.open(local_folder + 'test/1934.007.001_image_files.json', 'r', encoding='utf-8') as json_file:
             image_file_info = json.load(json_file)
         running_unit_tests = True
-        json_web_kiosk_class = processWebKioskJsonMetadata(self.config, event, self.time_to_break)
+        json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
         count_objects_processed = json_web_kiosk_class.process_composite_json_metadata(composite_json, image_file_info, running_unit_tests)
         self.assertTrue(count_objects_processed == 1)
 
-    @patch('process_web_kiosk_json_metadata.processWebKioskJsonMetadata._get_metadata_given_url')
+    @patch('process_web_kiosk_json_metadata.ProcessWebKioskJsonMetadata._get_metadata_given_url')
     def test_4_get_composite_json_for_all_named_ids(self, mock_get_metadata_given_url):
         event = {"mode": "ids", "ids": ["1934.007.001"], "local": True}
         with io.open(local_folder + 'test/1934.007.001_web_kiosk.json', 'r', encoding='utf-8') as json_file:
             composite_json = json.load(json_file)
         mock_get_metadata_given_url.return_value = composite_json
-        json_web_kiosk_class = processWebKioskJsonMetadata(self.config, event, self.time_to_break)
+        json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
         actual_results = json_web_kiosk_class._get_composite_json_for_all_named_ids("ids")
         self.assertTrue(actual_results == composite_json)
 
@@ -91,7 +92,7 @@ class Test(unittest.TestCase):
         event = {"mode": "ids", "ids": ["1934.007.001"], "local": True}
         with io.open(local_folder + 'test/1934.007.001_web_kiosk.json', 'r', encoding='utf-8') as json_file:
             composite_json = json.load(json_file)
-        json_web_kiosk_class = processWebKioskJsonMetadata(self.config, event, self.time_to_break)
+        json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
         actual_results = json_web_kiosk_class.find_images_for_composite_json_metadata(composite_json)
         self.assertTrue(actual_results == {"abc": 123})
 

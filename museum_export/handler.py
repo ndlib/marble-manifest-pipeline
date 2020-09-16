@@ -1,25 +1,26 @@
-# handler.py
-""" Module to launch application """
+"""
+Module to launch Museum Export application to harvest Web Kiosk data and transform into standard json
+"""
 
-import _set_path  # noqa
-import os
-from pathlib import Path
-from datetime import datetime, timedelta
-import sentry_sdk
-import io
-import json
-from process_web_kiosk_json_metadata import processWebKioskJsonMetadata
-from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm
-from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+import _set_path  # noqa  # pylint: disable=import-error, unused-import
+import os  # pylint: disable=wrong-import-order
+from datetime import datetime, timedelta  # pylint: disable=wrong-import-order
+import io  # pylint: disable=wrong-import-order
+import json  # pylint: disable=wrong-import-order
+from pathlib import Path  # pylint: disable=wrong-import-order
+import sentry_sdk  # pylint: disable=wrong-import-order
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # pylint: disable=wrong-import-order
+from process_web_kiosk_json_metadata import ProcessWebKioskJsonMetadata
+from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm  # pylint: disable=import-error, no-name-in-module
 from clean_up_composite_json import CleanUpCompositeJson
-from s3_helpers import write_s3_json, read_s3_json, s3_file_exists, delete_s3_key
+from s3_helpers import write_s3_json, read_s3_json, s3_file_exists, delete_s3_key  # pylint: disable=import-error, no-name-in-module
 
 
 if 'SENTRY_DSN' in os.environ:
     sentry_sdk.init(dsn=os.environ['SENTRY_DSN'], integrations=[AwsLambdaIntegration()])
 
 
-def run(event, context):
+def run(event, _context):
     """ run the process to retrieve and process web kiosk metadata """
     _suplement_event(event)
     config = setup_pipeline_config(event)
@@ -33,10 +34,10 @@ def run(event, context):
     mode = event.get("mode", "full")
     if mode not in ["full", "incremental", "ids"]:
         mode = "full"
-    jsonWebKioskClass = processWebKioskJsonMetadata(config, event, time_to_break)
+    json_web_kiosk_class = ProcessWebKioskJsonMetadata(config, event, time_to_break)
     if event["museum_execution_count"] == 1:
-        composite_json = jsonWebKioskClass.get_composite_json_metadata(mode)
-        museum_image_metadata = jsonWebKioskClass.find_images_for_composite_json_metadata(composite_json)
+        composite_json = json_web_kiosk_class.get_composite_json_metadata(mode)
+        museum_image_metadata = json_web_kiosk_class.find_images_for_composite_json_metadata(composite_json)
         composite_json = CleanUpCompositeJson(composite_json).cleaned_up_content
         write_s3_json(config['process-bucket'], 'museum_composite_metadata.json', composite_json)
         write_s3_json(config['process-bucket'], 'museum_image_metadata.json', museum_image_metadata)
@@ -45,7 +46,7 @@ def run(event, context):
         museum_image_metadata = read_s3_json(config['process-bucket'], 'museum_image_metadata.json')
 
     if composite_json:
-        jsonWebKioskClass.process_composite_json_metadata(composite_json, museum_image_metadata)
+        json_web_kiosk_class.process_composite_json_metadata(composite_json, museum_image_metadata)
         event['museumHarvestComplete'] = _done_processing(composite_json)
     else:
         print('No JSON to process')
@@ -79,7 +80,7 @@ def _suplement_event(event):
         event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     event['museumHarvestComplete'] = event.get('museumHarvestComplete', False)
     event["museum_execution_count"] = event.get("museum_execution_count", 0) + 1
-    event["maximum_museum_executions"] = event.get("maximum_museum_executions", 10)
+    event["maximum_museum_executions"] = event.get("maximum_museum_executions", 15)
     return
 
 
@@ -110,8 +111,8 @@ def test():
     event = run(event, {})
 
     if not event['museumHarvestComplete']:
-        with open('event.json', 'w') as f:
-            json.dump(event, f, indent=2)
+        with open('event.json', 'w') as output_file:
+            json.dump(event, output_file, indent=2)
     else:
         try:
             os.remove('event.json')

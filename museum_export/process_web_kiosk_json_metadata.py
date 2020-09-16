@@ -1,21 +1,24 @@
-# process_web_kiosk_json_metadata.py
-""" This routine reads a potentially huge single JSON metadata output file from Web Kiosk.
+"""
+Process Web Kiosk Json Metadata
+This routine reads a potentially huge single JSON metadata output file from Web Kiosk.
     Individual json files are created, one per object.
     These individual json files are saved locally by object name.
-    They are then uploaded to a Google Team Drive, and deleted locally. """
+    They are then uploaded to a Google Team Drive, and deleted locally.
+"""
 
 import json
 from datetime import datetime, timedelta
-import time
 import os
-from dependencies.sentry_sdk import capture_exception
-import dependencies.requests
+import time
+import dependencies.requests  # pylint: disable=import-error
+from dependencies.sentry_sdk import capture_exception  # pylint: disable=import-error
 from process_one_museum_object import ProcessOneMuseumObject
 from get_image_info_for_all_objects import GetImageInfoForAllObjects
-from pipelineutilities.save_standard_json import save_standard_json
+from pipelineutilities.expand_subject_terms import expand_subject_terms_recursive  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.save_standard_json import save_standard_json  # pylint: disable=import-error, no-name-in-module
 
 
-class processWebKioskJsonMetadata():
+class ProcessWebKioskJsonMetadata():
     """ This class reads a potentially huge single JSON metadata output file from Web Kiosk.
         Individual json files are created, one per object.
         These individual json files are saved locally by object name.
@@ -39,8 +42,8 @@ class processWebKioskJsonMetadata():
             composite_json = self._get_metadata_given_url(url)
         if self.save_local_copy and composite_json:
             fully_qualified_file_name = os.path.join(self.folder_name, self.file_name)
-            with open(fully_qualified_file_name, 'w') as f:
-                json.dump(composite_json, f)
+            with open(fully_qualified_file_name, 'w') as output_file:
+                json.dump(composite_json, output_file)
             print("Completed retrieving composite metadata from WebKiosk after", int(time.time() - self.start_time), 'seconds.')
         return composite_json
 
@@ -61,6 +64,7 @@ class processWebKioskJsonMetadata():
         return composite_json
 
     def find_images_for_composite_json_metadata(self, composite_json: dict) -> dict:
+        """ Find images for all objects """
         image_file_info = {}
         if 'objects' in composite_json:
             objects = composite_json["objects"]
@@ -82,6 +86,7 @@ class processWebKioskJsonMetadata():
             for _object_key, object_value in objects.items():
                 if 'uniqueIdentifier' in object_value and not object_value.get("recordProcessedFlag", False):
                     standard_json = process_one_museum_object_class.process_object(object_value)
+                    standard_json = expand_subject_terms_recursive(standard_json)
                     save_standard_json(self.config, standard_json, export_all_files_flag)
                     object_value["recordProcessedFlag"] = True
                     objects_processed += 1
@@ -103,7 +108,7 @@ class processWebKioskJsonMetadata():
         except ConnectionRefusedError as e:
             print('Connection refused in process_web_kiosk_json_metadata/_get_metadata_given_url on url ', url)
             capture_exception(e)
-        except Exception as e:  # noqa E722 - intentionally ignore warning about bare except
+        except Exception as e:  # noqa E722 - intentionally ignore warning about bare except   # pylint: disable=broad-except
             print('Error caught in process_web_kiosk_json_metadata/_get_metadata_given_url trying to process url ' + url)
             capture_exception(e)
         return json_response
@@ -124,7 +129,7 @@ class processWebKioskJsonMetadata():
             recent_past = datetime.utcnow() - timedelta(hours=self.config["hours-threshold-for-incremental-harvest"])
             recent_past_string = recent_past.strftime('%m/%d/%Y')
             url = base_url + "&query=mod_date%3E%22" + recent_past_string + "%22"
-        return(url)
+        return url
 
 
 def delete_file(folder_name: str, file_name: str):

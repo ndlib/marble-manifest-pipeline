@@ -1,0 +1,1858 @@
+[
+  {
+    "@id": "http://id.loc.gov/resources/works/1444948",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Macaulay, Tom, 1947- How to hit .400 : the physical and mental fundamentals of hitting a baseball"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1916226",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Carew, Rod, 1945- Rod Carew's art and science of hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/15715252",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Foster, John Buckingham, 1863- How to bat,"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/11919402",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Lau, Charley. Charley Lau's laws on hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/3616198",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Seaver, Tom, 1944- How I would pitch to Babe Ruth; Seaver vs. the sluggers"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1826146",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Appel, Martin. Batting secrets of the major leaguers"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/2689036",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Deegan, Paul J., 1937- Bunting and baserunning"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/16992789",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Carew, Rod, 1945- Rod Carew's hit to win : batting tips and techniques from a baseball hall of famer"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1441392",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Rose, Pete, 1941- Pete Rose on hitting : how to hit better than anybody"
+      }
+    ]
+  },
+  {
+    "@id": "_:b17iddOtlocdOtgovauthoritiessubjectssh85012415",
+    "@type": [
+      "http://www.loc.gov/mads/rdf/v1#TopicElement"
+    ],
+    "http://www.loc.gov/mads/rdf/v1#elementValue": [
+      {
+        "@language": "en",
+        "@value": "Hitting (Baseball)"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/2423556",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Minks, Benton. 100 greatest hitters"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/2644525",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Shapiro, Milton J. Champions of the bat: baseball's greatest sluggers,"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/2030071",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Baker, Dusty, 1949- You can teach hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1982981",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Honig, Donald. power hitters"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/3825601",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Cluck, Bob. winning edge, hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.worldcat.org/fast/828881",
+    "@type": [
+      "http://www.loc.gov/mads/rdf/v1#Authority",
+      "http://www.w3.org/2004/02/skos/core#Concept"
+    ],
+    "http://www.loc.gov/mads/rdf/v1#authoritativeLabel": [
+      {
+        "@value": "Batting (Baseball)"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@value": "Batting (Baseball)"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/654640",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Cluck, Bob. How to hit, how to pitch : a complete self-coaching system for winning baseball"
+      }
+    ]
+  },
+  {
+    "@id": "_:b52iddOtlocdOtgovauthoritiessubjectssh85012415",
+    "@type": [
+      "http://www.loc.gov/mads/rdf/v1#TopicElement"
+    ],
+    "http://www.loc.gov/mads/rdf/v1#elementValue": [
+      {
+        "@language": "en",
+        "@value": "Baseball"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/18824491",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Woodling, Gene. Gene Woodling's secrets of batting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/4424965",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "DeRenne, Coop. High-tech hitting : science vs. tradition"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/4820466",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Pecci, Stephen. Building a better hitter"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.worldcat.org/fast/828884",
+    "@type": [
+      "http://www.loc.gov/mads/rdf/v1#Authority",
+      "http://www.w3.org/2004/02/skos/core#Concept"
+    ],
+    "http://www.loc.gov/mads/rdf/v1#authoritativeLabel": [
+      {
+        "@value": "Batting (Baseball)--Psychological aspects"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@value": "Batting (Baseball)--Psychological aspects"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/authorities/subjects/sh00007733",
+    "@type": [
+      "http://www.loc.gov/mads/rdf/v1#Topic",
+      "http://www.loc.gov/mads/rdf/v1#Authority",
+      "http://www.w3.org/2004/02/skos/core#Concept"
+    ],
+    "http://www.loc.gov/mads/rdf/v1#authoritativeLabel": [
+      {
+        "@language": "en",
+        "@value": "Baseball"
+      }
+    ],
+    "http://www.loc.gov/mads/rdf/v1#elementList": [
+      {
+        "@list": [
+          {
+            "@id": "_:b52iddOtlocdOtgovauthoritiessubjectssh85012415"
+          }
+        ]
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Baseball"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/2721562",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Ryan, Nolan, 1947- Pitching & hitting"
+      }
+    ]
+  },
+  {
+    "@id": "_:b469iddOtlocdOtgovauthoritiessubjectssh85012415",
+    "@type": [
+      "http://id.loc.gov/ontologies/RecordInfo#RecordInfo"
+    ],
+    "http://id.loc.gov/ontologies/RecordInfo#recordChangeDate": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2010-09-21T09:27:57"
+      }
+    ],
+    "http://id.loc.gov/ontologies/RecordInfo#recordStatus": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#string",
+        "@value": "revised"
+      }
+    ],
+    "http://id.loc.gov/ontologies/RecordInfo#recordContentSource": [
+      {
+        "@id": "http://id.loc.gov/vocabulary/organizations/dlc"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/316274",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Haskins, James, 1941-2005. Babe Ruth and Hank Aaron; the home run kings"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/20880606",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "baseball stars of yesteryear--compilation]"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/10077046",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Matteson, Jesse F., How to bat"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/2196826",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Reeves, Fred. physical aspects of correct baseball hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/13055633",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Springer, Steve, 1961- Quality at bats, the mental side"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/14867343",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Keating, Peter, 1967- Dingers!"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/5893125",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Matteson, Jesse F., How to bat,"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/13548453",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Stewart, Wayne, 1951- Hitting secrets of the pros : big league sluggers reveal the tricks of their trade"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/4097437",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Rainbolt, Richard. Baseball's home-run hitters"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/14053596",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "New York Times Company. Sultans of swat : the four great sluggers of the New York Yankees"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/13014463",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Epstein, Mike. Mike Epstein on hitting"
+      }
+    ]
+  },
+  {
+    "@id": "_:b462iddOtlocdOtgovauthoritiessubjectssh85012415",
+    "@type": [
+      "http://id.loc.gov/ontologies/RecordInfo#RecordInfo"
+    ],
+    "http://id.loc.gov/ontologies/RecordInfo#recordChangeDate": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "1986-02-11T00:00:00"
+      }
+    ],
+    "http://id.loc.gov/ontologies/RecordInfo#recordStatus": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#string",
+        "@value": "new"
+      }
+    ],
+    "http://id.loc.gov/ontologies/RecordInfo#recordContentSource": [
+      {
+        "@id": "http://id.loc.gov/vocabulary/organizations/dlc"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1240827",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Aaron, Hank, 1934- How to hit and run the bases"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/6970003",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Brown, Clifford W. Batting as major leaguers do it,"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/13032733",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Garretson, Ed. Youth baseball hitting fundamentals : a coach's guide"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/13882605",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Baker, Dirk, 1969- Teaching hitting : a guide for coaches"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/3633886",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Deegan, Paul J., 1937- Hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1072283",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Delmonico, Rod, 1958- Hit and run baseball"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1916807",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Hines, Ben, 1935- swing's the thing"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/4261601",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Lau, Charley. winning hitter : how to play championship baseball"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1580245",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Pioneer Press Co. (Saint Paul, Minn.) Dave Winfield, 3,000 and counting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/18502503",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Hagedorn, Bill, 1948- on-base specialist : a new model for baseball offense"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/17821365",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Graves, Will. best MLB hitters of all time"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/4418009",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Schmidt, Mike, 1949- Mike Schmidt study : building a hitting foundation"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.worldcat.org/fast/828886",
+    "@type": [
+      "http://www.loc.gov/mads/rdf/v1#Authority",
+      "http://www.w3.org/2004/02/skos/core#Concept"
+    ],
+    "http://www.loc.gov/mads/rdf/v1#authoritativeLabel": [
+      {
+        "@value": "Batting (Baseball)--Study and teaching"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@value": "Batting (Baseball)--Study and teaching"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/4279453",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Williams, Ted, 1918-2002. science of hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/5908989",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Matteson, Jesse F., How to bat,"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/4232476",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Getz, Mike. Baseball's 3000-hit men : a book of stats, facts, and trivia"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1251951",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Sullivan, George, 1927- Baseball's art of hitting. Illustrated with photos. and diagrams"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/4599727",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Sullivan, George, 1927- Home run!"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/12712733",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Lane, Ferdinand C. (Ferdinand Cole), 1885-1984. Batting"
+      }
+    ]
+  },
+  {
+    "@id": "_:b8iddOtlocdOtgovauthoritiessubjectssh85012415",
+    "@type": [
+      "http://www.loc.gov/mads/rdf/v1#TopicElement"
+    ],
+    "http://www.loc.gov/mads/rdf/v1#elementValue": [
+      {
+        "@language": "en",
+        "@value": "Batting (Baseball)"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/5863363",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Chadwick, Henry, 1824-1908. art of base ball batting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/13002225",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Robson, Tom, 1946- hitting edge"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.worldcat.org/fast/828883",
+    "@type": [
+      "http://www.loc.gov/mads/rdf/v1#Authority",
+      "http://www.w3.org/2004/02/skos/core#Concept"
+    ],
+    "http://www.loc.gov/mads/rdf/v1#authoritativeLabel": [
+      {
+        "@value": "Batting (Baseball)--Physiological aspects"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@value": "Batting (Baseball)--Physiological aspects"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/2987510",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Dixon, Jim. Exceptional player"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/11871135",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Myers, Doug, 1964- Louisville slugger presents batting around : a comprehensive collection of hitting achievements, anecdotes, and analyses"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/21222681",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Welch, Erik, Essential topics in baseball : from performance analysis to injury prevention"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/5938305",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Foster, John Buckingham, 1863- How to bat,"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/397397",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Williams, Ted, 1918-2002. science of hitting,"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/authorities/subjects/sh85012415",
+    "@type": [
+      "http://www.loc.gov/mads/rdf/v1#Topic",
+      "http://www.loc.gov/mads/rdf/v1#Authority",
+      "http://www.w3.org/2004/02/skos/core#Concept"
+    ],
+    "http://www.loc.gov/mads/rdf/v1#authoritativeLabel": [
+      {
+        "@language": "en",
+        "@value": "Batting (Baseball)"
+      }
+    ],
+    "http://www.loc.gov/mads/rdf/v1#elementList": [
+      {
+        "@list": [
+          {
+            "@id": "_:b8iddOtlocdOtgovauthoritiessubjectssh85012415"
+          }
+        ]
+      }
+    ],
+    "http://www.loc.gov/mads/rdf/v1#hasVariant": [
+      {
+        "@id": "_:b11iddOtlocdOtgovauthoritiessubjectssh85012415"
+      }
+    ],
+    "http://www.loc.gov/mads/rdf/v1#classification": [
+      {
+        "@value": "GV869"
+      }
+    ],
+    "http://www.loc.gov/mads/rdf/v1#hasNarrowerExternalAuthority": [
+      {
+        "@id": "http://id.worldcat.org/fast/828886"
+      },
+      {
+        "@id": "http://id.worldcat.org/fast/828884"
+      },
+      {
+        "@id": "http://id.worldcat.org/fast/828882"
+      },
+      {
+        "@id": "http://id.worldcat.org/fast/828885"
+      },
+      {
+        "@id": "http://id.worldcat.org/fast/828883"
+      }
+    ],
+    "http://www.loc.gov/mads/rdf/v1#hasCloseExternalAuthority": [
+      {
+        "@id": "http://id.worldcat.org/fast/828881"
+      }
+    ],
+    "http://www.loc.gov/mads/rdf/v1#hasBroaderAuthority": [
+      {
+        "@id": "http://id.loc.gov/authorities/subjects/sh00007733"
+      }
+    ],
+    "http://www.loc.gov/mads/rdf/v1#isMemberOfMADSCollection": [
+      {
+        "@id": "http://id.loc.gov/authorities/subjects/collection_LCSHAuthorizedHeadings"
+      },
+      {
+        "@id": "http://id.loc.gov/authorities/subjects/collection_LCSH_General"
+      }
+    ],
+    "http://id.loc.gov/ontologies/bflc/subjectOf": [
+      {
+        "@id": "http://id.loc.gov/resources/works/1240827"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/11622547"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1826146"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/13882605"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/2030071"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/20880606"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/4645539"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/3622897"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/2453737"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/3180137"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/6970003"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/11874770"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1916226"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/16992789"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/2389235"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/5863363"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/654640"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/3825601"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/2455057"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1999747"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/2689036"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/3633886"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1072283"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/4424965"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/2987510"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/17257864"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/13014463"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/3416674"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/3559373"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/11917802"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/15715252"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/5938305"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/13032733"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/3352616"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/4232476"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/12166266"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/17821365"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1197251"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/18502503"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/316274"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1916807"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/3385424"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1982981"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/3369720"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/2206350"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/14867343"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1169290"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/10285382"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/12712733"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1444507"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/393754"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/11919402"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/4261601"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/4491127"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1180384"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/17303046"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1444948"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/14090473"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/10077046"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/5893125"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/5908989"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/14647978"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/12412261"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/2423556"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/4473145"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/11871135"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1423049"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/14053596"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/14271911"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/13826703"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/13802754"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/4820466"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/15181787"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1580245"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/4097437"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/2196826"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/13002225"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1441392"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/2721562"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/4418009"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1581970"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/3616198"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/2644525"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/13055633"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/12576221"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/13548453"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1251951"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/4599727"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1498991"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/2352614"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/1452124"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/6572618"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/21222681"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/21223068"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/3882098"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/4279453"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/4680014"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/397397"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/18824491"
+      },
+      {
+        "@id": "http://id.loc.gov/resources/works/3616951"
+      }
+    ],
+    "http://www.loc.gov/mads/rdf/v1#isMemberOfMADSScheme": [
+      {
+        "@id": "http://id.loc.gov/authorities/subjects"
+      }
+    ],
+    "http://id.loc.gov/vocabulary/identifiers/lccn": [
+      {
+        "@value": "sh 85012415"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#sameAs": [
+      {
+        "@id": "info:lc/authorities/sh85012415"
+      },
+      {
+        "@id": "http://id.loc.gov/authorities/sh85012415#concept"
+      }
+    ],
+    "http://www.loc.gov/mads/rdf/v1#adminMetadata": [
+      {
+        "@id": "_:b462iddOtlocdOtgovauthoritiessubjectssh85012415"
+      },
+      {
+        "@id": "_:b469iddOtlocdOtgovauthoritiessubjectssh85012415"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Batting (Baseball)"
+      }
+    ],
+    "http://www.w3.org/2008/05/skos-xl#altLabel": [
+      {
+        "@id": "_:b479iddOtlocdOtgovauthoritiessubjectssh85012415"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#broader": [
+      {
+        "@id": "http://id.loc.gov/authorities/subjects/sh00007733"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#closeMatch": [
+      {
+        "@id": "http://id.worldcat.org/fast/828881"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#narrowMatch": [
+      {
+        "@id": "http://id.worldcat.org/fast/828886"
+      },
+      {
+        "@id": "http://id.worldcat.org/fast/828884"
+      },
+      {
+        "@id": "http://id.worldcat.org/fast/828882"
+      },
+      {
+        "@id": "http://id.worldcat.org/fast/828885"
+      },
+      {
+        "@id": "http://id.worldcat.org/fast/828883"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#inScheme": [
+      {
+        "@id": "http://id.loc.gov/authorities/subjects"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "en",
+        "@value": "Hitting (Baseball)"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#changeNote": [
+      {
+        "@id": "_:b522iddOtlocdOtgovauthoritiessubjectssh85012415"
+      },
+      {
+        "@id": "_:b530iddOtlocdOtgovauthoritiessubjectssh85012415"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/2389235",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Carlyle, Bruce. Swing the bat! : a guide to aggressive line drive hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1169290",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Kidd, Jeff. total hitter : a comprehensive guide to the batsman's art"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/14647978",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Mattingly, Don, 1961- Don Mattingly's hitting is simple : the ABC's of batting .300"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/13802754",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Oster, Don. Guide for young batters & baserunners"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1452124",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "United Press International. 4192! : a celebration of Pete Rose, baseball's record-breaking hitter"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/13826703",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Ortiz, Luis, 1970- natural hitter's handbook"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1999747",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Curran, William, 1921- Big sticks : the phenomenal decade of Ruth, Gehrig, Cobb, and Hornsby"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/12576221",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Stewart, Mark, 1960 July 7- Latino baseball's hottest hitters = Los mejores bateadores del béisbol latino"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/15181787",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Perconte, Jack. 60,000 hitting lessons : hit it, fix it, coach it; a hands on baseball guide for parents, coaches & players"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/11622547",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "American Motion Picture Corporation. Baseball slow motion pictures--how Babe Ruth knocks a home run"
+      }
+    ]
+  },
+  {
+    "@id": "_:b11iddOtlocdOtgovauthoritiessubjectssh85012415",
+    "@type": [
+      "http://www.loc.gov/mads/rdf/v1#Topic",
+      "http://www.loc.gov/mads/rdf/v1#Variant"
+    ],
+    "http://www.loc.gov/mads/rdf/v1#variantLabel": [
+      {
+        "@language": "en",
+        "@value": "Hitting (Baseball)"
+      }
+    ],
+    "http://www.loc.gov/mads/rdf/v1#elementList": [
+      {
+        "@list": [
+          {
+            "@id": "_:b17iddOtlocdOtgovauthoritiessubjectssh85012415"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/14090473",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Maloof, Jack. Hit like a big leaguer : batting tips, techniques, and strategies for coaches and players"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/4491127",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Leonard, Bernardo. superstar hitter's bible : winning tips, techniques, and strategies from baseball's top players"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/3352616",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Garvey, Steve, 1948- Steve Garvey's hitting system"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/4473145",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Monteleone, John J. Louisville Slugger ultimate book of hitting"
+      }
+    ]
+  },
+  {
+    "@id": "_:b479iddOtlocdOtgovauthoritiessubjectssh85012415",
+    "@type": [
+      "http://www.w3.org/2008/05/skos-xl#Label"
+    ],
+    "http://www.w3.org/2008/05/skos-xl#literalForm": [
+      {
+        "@language": "en",
+        "@value": "Hitting (Baseball)"
+      }
+    ]
+  },
+  {
+    "@id": "_:b522iddOtlocdOtgovauthoritiessubjectssh85012415",
+    "@type": [
+      "http://purl.org/vocab/changeset/schema#ChangeSet"
+    ],
+    "http://purl.org/vocab/changeset/schema#subjectOfChange": [
+      {
+        "@id": "http://id.loc.gov/authorities/subjects/sh85012415"
+      }
+    ],
+    "http://purl.org/vocab/changeset/schema#creatorName": [
+      {
+        "@id": "http://id.loc.gov/vocabulary/organizations/dlc"
+      }
+    ],
+    "http://purl.org/vocab/changeset/schema#createdDate": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "1986-02-11T00:00:00"
+      }
+    ],
+    "http://purl.org/vocab/changeset/schema#changeReason": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#string",
+        "@value": "new"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/17257864",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Enders, Eric. Baseball's greatest hitters: : batting champs, five-tool phenoms and the most fearsome mashers in Major League history"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/4645539",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Batting secrets of the major leaguers"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/2455057",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Curran, William, 1921- Big sticks : the batting revolution of the twenties"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/3385424",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Holway, John. sluggers"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/3416674",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Feldman, Jay. Hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/2206350",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Jackson, Reggie. Inside hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/11917802",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Fitzgerald, Ron. Baseball. Becoming a great hitter"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/6572618",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Walker, Harry, 1918-- How to bat"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/3882098",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "White, John W. Batting basics : science of the perfect swing"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/10285382",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Kuenn, Harvey. Big league batting secrets"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/393754",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Lau, Charley. art of hitting .300"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/3559373",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Ferroli, Steve. Hit your potential : mastering the Ted Williams approach"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/11874770",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Brundage, Buz. Be a better hitter : baseball basics"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/3369720",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Hriniak, Walt. hitting clinic : the Walt Hriniak way"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1498991",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Swenson, Bob. Modern mechanics of hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/17303046",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Long, Kevin (Baseball coach) Cage rat : lessons from a life in baseball by the Yankees hitting coach"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/3622897",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Bench, Johnny, 1947- Catching and power hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.worldcat.org/fast/828885",
+    "@type": [
+      "http://www.loc.gov/mads/rdf/v1#Authority",
+      "http://www.w3.org/2004/02/skos/core#Concept"
+    ],
+    "http://www.loc.gov/mads/rdf/v1#authoritativeLabel": [
+      {
+        "@value": "Batting (Baseball)--Statistical methods"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@value": "Batting (Baseball)--Statistical methods"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.worldcat.org/fast/828882",
+    "@type": [
+      "http://www.loc.gov/mads/rdf/v1#Authority",
+      "http://www.w3.org/2004/02/skos/core#Concept"
+    ],
+    "http://www.loc.gov/mads/rdf/v1#authoritativeLabel": [
+      {
+        "@value": "Batting (Baseball)--Audio-visual aids"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@value": "Batting (Baseball)--Audio-visual aids"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/2453737",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Boggs, Wade. techniques of modern hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/3180137",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Braun, Thomas, 1944- Meet the hitters"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/12412261",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "May, Shawn T. Hitting made easy"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/4680014",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Williams, Ted, 1918-2002. science of hitting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1423049",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Nelson, Don. Baseball's home run hitters : the sultans of swat"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/14271911",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Ortiz, Luis, 1970- natural hitter's drill handbook"
+      }
+    ]
+  },
+  {
+    "@id": "_:b530iddOtlocdOtgovauthoritiessubjectssh85012415",
+    "@type": [
+      "http://purl.org/vocab/changeset/schema#ChangeSet"
+    ],
+    "http://purl.org/vocab/changeset/schema#subjectOfChange": [
+      {
+        "@id": "http://id.loc.gov/authorities/subjects/sh85012415"
+      }
+    ],
+    "http://purl.org/vocab/changeset/schema#creatorName": [
+      {
+        "@id": "http://id.loc.gov/vocabulary/organizations/dlc"
+      }
+    ],
+    "http://purl.org/vocab/changeset/schema#createdDate": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2010-09-21T09:27:57"
+      }
+    ],
+    "http://purl.org/vocab/changeset/schema#changeReason": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#string",
+        "@value": "revised"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1581970",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Schmidt, Mike, 1949- Mike Schmidt study : hitting theory, skills, and technique"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1444507",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Lau, Charley. art of hitting .300"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/2352614",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Thom, John. Champion batsmen of the 20th century"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/21223068",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Welch, Erik, Essential topics in baseball : from performance analysis to injury prevention"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1180384",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Lloyd, Bryant, 1942- Baseball--batting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/12166266",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Gola, Mark. Louisville Slugger complete book of hitting faults and fixes : how to correct the 50 most common mistakes at the plate"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/3616951",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Yastrzemski, Carl. Batting"
+      }
+    ]
+  },
+  {
+    "@id": "http://id.loc.gov/resources/works/1197251",
+    "@type": [
+      "http://id.loc.gov/ontologies/bibframe/Work"
+    ],
+    "http://id.loc.gov/ontologies/bflc/aap": [
+      {
+        "@value": "Gwynn, Tony. art of hitting"
+      }
+    ]
+  }
+]

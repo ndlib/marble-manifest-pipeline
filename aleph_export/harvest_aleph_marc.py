@@ -1,15 +1,22 @@
+"""
+Harvest Aleph Marc
+This retrieves from a url a marc file consisting of marc records to process.
+This translates each of these marc records into a standard json file
+and saves it to the manifest bucket.
+"""
+
 import time
 import json
 import os
-from transform_marc_json import TransformMarcJson
-from pymarc import MARCReader
-from sentry_sdk import capture_exception
 import requests
-from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
-from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject
-from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject
-from pipelineutilities.save_standard_json import save_standard_json
-
+from sentry_sdk import capture_exception
+from transform_marc_json import TransformMarcJson
+from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.expand_subject_terms import expand_subject_terms_recursive  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.save_standard_json import save_standard_json  # pylint: disable=import-error, no-name-in-module
+from pymarc import MARCReader  # pylint: disable=import-error
 
 class HarvestAlephMarc():
     """ This performs all Marc-related processing """
@@ -27,18 +34,19 @@ class HarvestAlephMarc():
         marc_records_stream = b""  # MARCReader requires a byte string
         url = self.marc_records_url
         try:
-            r = requests.get(url, stream=True)
-            if r.status_code == 200:
-                marc_records_stream = r.raw
+            results = requests.get(url, stream=True)
+            if results.status_code == 200:
+                marc_records_stream = results.raw
         except ConnectionRefusedError:
             capture_exception('Connection refused on url ' + url)
         except ConnectionError:
             capture_exception('ConnectionError when trying to call url ' + url)
-        except:  # noqa E722 - intentionally ignore warning about bare except
+        except:  # noqa E722 - intentionally ignore warning about bare exceptfrom pymarc import MARCReader  # pylint: disable=bare-except
             capture_exception('Error caught trying to process url ' + url)
         return marc_records_stream
 
     def process_marc_records_from_stream(self, test_mode_flag: bool = False) -> int:
+        """ Process each marc record read from the stream """
         processed_records_count = 0
         try:
             marc_reader = MARCReader(self.marc_records_stream)
@@ -55,13 +63,14 @@ class HarvestAlephMarc():
             marc_record_as_json = json.loads(marc_record.as_json())
             json_record = transform_marc_json_class.build_json_from_marc_json(marc_record_as_json)
             if json_record:
+                print("Aleph identifier ", json_record.get("id", ""), " - ", int(time.time() - self.start_time), " seconds.")
                 json_record = add_files_to_json_object_class.add_files(json_record)
                 json_record = add_paths_to_json_object_class.add_paths(json_record)
                 json_record = fix_creators_in_json_object_class.fix_creators(json_record)
+                json_record = expand_subject_terms_recursive(json_record)
                 self._save_json_record(json_record)
                 processed_records_count += 1
-                print("Aleph identifier ", json_record.get("id", ""), " - ", int(time.time() - self.start_time), " seconds.")
-            if False:  # change to True to output test files locally.
+            if False:  # change to True to output test files locally.from pymarc import MARCReader  # pylint: disable=using-constant-test
                 filename = self._save_local_marc_json_for_testing(marc_record_as_json)
                 self._save_local_standard_json_for_testing(filename, json_record)
             if test_mode_flag:
