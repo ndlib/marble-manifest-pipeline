@@ -157,11 +157,12 @@ def _strip_namespaces(xml_string: str) -> str:
 def _get_xml_tree_given_xml_string(xml_string: str, id_url: str) -> ElementTree:
     """ translate the xml string into an ElementTree object for further use """
     xml_tree = ElementTree.fromstring("<empty/>")
-    try:
-        xml_tree = ElementTree.fromstring(xml_string)
-    except ElementTree.ParseError as e:
-        print("Error converting to xml results of this url: " + id_url)
-        capture_exception(e)
+    if xml_string:
+        try:
+            xml_tree = ElementTree.fromstring(xml_string)
+        except ElementTree.ParseError as e:
+            print("Error converting to xml results of this url: " + id_url)
+            capture_exception(e)
     return xml_tree
 
 

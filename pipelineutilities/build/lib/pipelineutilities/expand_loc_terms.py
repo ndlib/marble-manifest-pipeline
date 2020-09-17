@@ -21,10 +21,11 @@ def expand_loc_terms(subject: dict, depth: int = 1) -> dict:
             if variant_links:
                 subject['variants'] = _get_loc_variants(loc_json, variant_links)
             for each_broader_authority in loc_item_node.get("http://www.loc.gov/mads/rdf/v1#hasBroaderAuthority", []):
-                this_new_subject = {"uri": each_broader_authority['@id']}
-                if depth < 2:
+                broader_uri = each_broader_authority.get('@id', '')
+                if depth < 2 and not broader_uri.startswith('_:'):  # Note: "urls" starting with "_:" define authority organizations, not terms
                     if 'broaderTerms' not in subject:
                         subject['broaderTerms'] = []
+                    this_new_subject = {"uri": broader_uri}
                     subject['broaderTerms'].append(expand_loc_terms(this_new_subject, depth + 1))
             if not validate_json(subject, get_subject_json_schema(), True):
                 subject = None
