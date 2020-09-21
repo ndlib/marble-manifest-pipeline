@@ -82,10 +82,10 @@ class CollectionsApi():
     def _get_item_details(self, collection_id: str) -> dict:
         details = {}
         item_json = self._get_id(collection_id)
-        base_url = os.path.join(self.config['manifest-server-base-url'], 'collections')
+        base_url = self.config['manifest-server-base-url']
         if item_json:
             details['id'] = item_json.get('id', '')
-            details['url'] = os.path.join(base_url, collection_id)
+            details['url'] = os.path.join(base_url, collection_id, 'standard/index.json')
             details['title'] = item_json.get('title', '')
             if item_json.get('linkToSource', ''):
                 details['sourceSystemUri'] = item_json['linkToSource']
