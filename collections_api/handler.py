@@ -3,11 +3,11 @@
     These are served by calls to cloudfront here:  https://presentation-iiif.library.nd.edu/experimental/collections
     These are used by redbox."""
 
-import _set_path  # noqa  # pylint: disable=unused-import
-import os  # pylint: disable=wrong-import-order
-import sentry_sdk  # pylint: disable=wrong-import-order
-from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # pylint: disable=wrong-import-order
-from pipeline_config import setup_pipeline_config  # pylint: disable=import-error
+import _set_path  # noqa
+import os
+import sentry_sdk
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+from pipeline_config import setup_pipeline_config
 from collections_api import CollectionsApi
 
 
