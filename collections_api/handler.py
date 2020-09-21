@@ -5,9 +5,9 @@
 
 import _set_path  # noqa
 import os
-from pipeline_config import setup_pipeline_config
-import sentry_sdk as sentry_sdk
+import sentry_sdk
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+from pipeline_config import setup_pipeline_config
 from collections_api import CollectionsApi
 
 
@@ -18,11 +18,13 @@ if 'SENTRY_DSN' in os.environ:
     )
 
 
-def run(event, context):
+def run(event, _context):
+    """ Main run routine for module """
     event['local'] = event.get("local", False)
     if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
     config = setup_pipeline_config(event)
+    print("config = ", config)
     collections_api_class = CollectionsApi(config)
     collections_api_class.save_collection_details(['aleph', 'archivesspace', 'curate', 'embark'])
     return event
@@ -32,6 +34,7 @@ def run(event, context):
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
 def test():
+    """ test """
     event = {}
     event['local'] = False
     if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:

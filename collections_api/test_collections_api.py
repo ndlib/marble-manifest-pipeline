@@ -32,38 +32,43 @@ class Test(unittest.TestCase):
 
     @patch('collections_api.CollectionsApi._get_id')
     def test_01_get_item_details(self, mock_get_id):
+        """ test_01_get_item_details """
         filename = os.path.join(local_folder, 'test/1934.007.001_get_id.json')
         with open(filename, 'r') as input_source:
             mock_get_id.return_value = json.load(input_source)
         filename = os.path.join(local_folder, 'test/1934.007.001_get_item_details.json')
+        actual_results = self.collections_api_class._get_item_details('1934.007.001')
+        # with open(filename, 'w') as f:
+        #     json.dump(actual_results, f, indent=2)
         with open(filename, 'r') as input_source:
             expected_results = json.load(input_source)
-        actual_results = self.collections_api_class._get_item_details('1934.007.001')
         self.assertEqual(actual_results, expected_results)
 
     @patch('collections_api.CollectionsApi._get_id')
     def test_02_get_collection_details(self, mock_get_id):
+        """ test_02_get_collection_details """
         filename = os.path.join(local_folder, 'test/1934.007.001_get_id.json')
         with open(filename, 'r') as input_source:
             mock_get_id.return_value = json.load(input_source)
         collection_list = ["1934.007.001"]
         actual_results = self.collections_api_class._get_collection_details(collection_list)
         filename = os.path.join(local_folder, 'test/1934.007.001_collection_details.json')
-        # with open(filename, 'w') as f:
-        #     json.dump(actual_results, f, indent=2)
+        # with open(filename, 'w') as file:
+        #     json.dump(actual_results, file, indent=2)
         with open(filename, 'r') as input_source:
             expected_results = json.load(input_source)
         self.assertEqual(actual_results, expected_results)
 
     @patch('collections_api.CollectionsApi._call_get_matching_s3_objects')
     def test_03_get_collection_list(self, mock_get_matching_s3_objects):
+        """ test_03_get_collection_list """
         filename = os.path.join(local_folder, 'test/matching_s3_objects.json')
         with open(filename, 'r') as input_source:
             mock_get_matching_s3_objects.return_value = json.load(input_source)
         actual_results = self.collections_api_class._get_collection_list('embark')
         filename = os.path.join(local_folder, 'test/embark_collections_list.json')
-        # with open(filename, 'w') as f:
-        #     json.dump(actual_results, f, indent=2)
+        # with open(filename, 'w') as file:
+        #     json.dump(actual_results, file, indent=2)
         with open(filename, 'r') as input_source:
             expected_results = json.load(input_source)
         self.assertEqual(actual_results, expected_results)
@@ -78,28 +83,32 @@ class SaveDataForTests():
         self.collections_api_class = CollectionsApi(self.config)
 
     def save_data(self):
-        id = "1934.007.001"
-        self.save_get_id(id)
-        self.save_get_item_details(id)
+        """ save_data """
+        item_id = "1934.007.001"
+        self.save_get_id(item_id)
+        self.save_get_item_details(item_id)
         self.save_get_collection_list("embark")
 
-    def save_get_id(self, id):
-        item_json = self.collections_api_class._get_id(id)
-        with open(os.path.join(local_folder, 'test/' + id + '_get_id.json'), 'w') as f:
-            json.dump(item_json, f, indent=2)
+    def save_get_id(self, item_id):
+        """ save_get_id """
+        item_json = self.collections_api_class._get_id(item_id)
+        with open(os.path.join(local_folder, 'test/' + item_id + '_get_id.json'), 'w') as file:
+            json.dump(item_json, file, indent=2)
 
-    def save_get_item_details(self, id):
-        item_details_json = self.collections_api_class._get_item_details(id)
-        with open(os.path.join(local_folder, 'test/' + id + '_get_item_details.json'), 'w') as f:
-            json.dump(item_details_json, f, indent=2)
+    def save_get_item_details(self, item_id):
+        """ save_get_item_details """
+        item_details_json = self.collections_api_class._get_item_details(item_id)
+        with open(os.path.join(local_folder, 'test/' + item_id + '_get_item_details.json'), 'w') as file:
+            json.dump(item_details_json, file, indent=2)
 
     def save_get_collection_list(self, source):
+        """ save_get_collection_list """
         collection_list = self.collections_api_class._get_collection_list(source)
-        with open(os.path.join(local_folder, 'test/' + source + '_collections_list.json'), 'w') as f:
-            json.dump(collection_list, f, indent=2)
+        with open(os.path.join(local_folder, 'test/' + source + '_collections_list.json'), 'w') as file:
+            json.dump(collection_list, file, indent=2)
         collection_details = self.collections_api_class._get_collection_details(collection_list)
-        with open(os.path.join(local_folder, 'test/' + source + '_collection_details.json'), 'w') as f:
-            json.dump(collection_details, f, indent=2)
+        with open(os.path.join(local_folder, 'test/' + source + '_collection_details.json'), 'w') as file:
+            json.dump(collection_details, file, indent=2)
 
 
 def save_data_for_tests():

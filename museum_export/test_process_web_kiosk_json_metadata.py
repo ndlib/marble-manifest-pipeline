@@ -46,23 +46,24 @@ class Test(unittest.TestCase):
         expected_results = "http://notredame.dom5182.com:8080/results.html?layout=marble_hash&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
         self.assertTrue(actual_results == expected_results)
 
-    def test_2_get_metadata_given_url(self):
-        """ test_1 _get_metadata_given_url
-            This really calls the url without mocking.
-            Note:  each time we update the template on the Web Kiosk server, we must re-save the results here.
-        """
-        event = {"mode": "ids", "ids": ["1934.007.001"]}
-        json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
-        url = "http://notredame.dom5182.com:8080/results.html?layout=marble_hash&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
-        actual_results = json_web_kiosk_class._get_metadata_given_url(url)
-        actual_results["objects"]["1934.007.001"]["modifiedDate"] = "9/16/2020 09:10:03"  # Set modified date to a fixed date to make comparisons easier later
-        filename = local_folder + 'test/1934.007.001_web_kiosk.json'
-        # Note:  Each time we save the template, we will need to re-save this test json file
-        # with open(filename, 'w') as f:
-        #     json.dump(actual_results, f, indent=2)
-        with io.open(filename, 'r', encoding='utf-8') as json_file:
-            expected_results = json.load(json_file)
-        self.assertEqual(actual_results, expected_results)
+    # Eliminated this test to eliminate really calling the url without mocking
+    # def test_2_get_metadata_given_url(self):
+    #     """ test_1 _get_metadata_given_url
+    #         This really calls the url without mocking.
+    #         Note:  each time we update the template on the Web Kiosk server, we must re-save the results here.
+    #     """
+    #     event = {"mode": "ids", "ids": ["1934.007.001"]}
+    #     json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
+    #     url = "http://notredame.dom5182.com:8080/results.html?layout=marble_hash&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
+    #     actual_results = json_web_kiosk_class._get_metadata_given_url(url)
+    #     actual_results["objects"]["1934.007.001"]["modifiedDate"] = "9/16/2020 09:10:03"  # Set modified date to a fixed date to make comparisons easier later
+    #     filename = local_folder + 'test/1934.007.001_web_kiosk.json'
+    #     # Note:  Each time we save the template, we will need to re-save this test json file
+    #     # with open(filename, 'w') as f:
+    #     #     json.dump(actual_results, f, indent=2)
+    #     with io.open(filename, 'r', encoding='utf-8') as json_file:
+    #         expected_results = json.load(json_file)
+    #     self.assertEqual(actual_results, expected_results)
 
     def test_3_process_composite_json_metadata(self):
         event = {"mode": "ids", "ids": ["1934.007.001"], "local": True}
