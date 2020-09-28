@@ -72,6 +72,7 @@
 				"selection": "range",
 				"subfields": ["a", "b", "c", "d", "e", "q"],
 				"specialSubfields": ["d"],
+				"extraProcessing": "format_collections",
 				"format": "array",
 				"note": ["added 710 7/20/20 sm", "changed 710 to 791 8/26020 sm"]
 			},

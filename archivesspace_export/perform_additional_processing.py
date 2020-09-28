@@ -1,6 +1,7 @@
 import os
 from additional_functions import get_seed_nodes_json
 from datetime import date
+import re
 
 
 def perform_additional_processing(json_node: dict, field: dict, schema_api_version: int) -> dict:  # noqa: C901
@@ -29,6 +30,9 @@ def perform_additional_processing(json_node: dict, field: dict, schema_api_versi
             return_value = format_creators(parameters_json["creator"])
     elif external_process_name == 'define_digital_access':
         return_value = _define_digital_access(parameters_json)
+    elif external_process_name == 'format_related_ids':
+        if 'related_ids' in parameters_json:
+            return_value = _format_related_ids(parameters_json["related_ids"])
     return return_value
 
 
@@ -78,4 +82,16 @@ def format_creators(value_found: str) -> dict:
     node["fullName"] = value_found
     node["display"] = value_found
     results.append(node)
+    return results
+
+
+def _format_related_ids(value_found: list) -> list:
+    """ Return formatted related ids.
+    They come in the form: "https://onesearch.library.nd.edu/primo-explore/search?query=any,contains,ndu_aleph001586302&tab=nd_campus&search_scope=nd_campus&vid=NDU" """
+    results = []
+    regex = r'ndu_aleph[0-9]*'
+    for value in value_found:
+        found_list = re.findall(regex, value)
+        if len(found_list) > 0:
+            results.append(found_list[0])
     return results

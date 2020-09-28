@@ -40,6 +40,7 @@ def _supplement_event(event):
 
 # setup:
 # export SSM_KEY_BASE=/all/new-csv
+# export SSM_KEY_BASE=/all/stacks/marbleb-prod-manifest
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
 

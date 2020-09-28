@@ -1,9 +1,9 @@
 """ test_expand_getty_ia_terms """
-import _set_path  # noqa  # pylint: disable=import-error, unused-import
-import os  # pylint: disable=wrong-import-order
+import _set_path  # noqa
+import os
 from pipelineutilities.expand_getty_ia_terms import _get_id_given_url, _get_broader_terms_given_id, expand_ia_terms
-import unittest  # pylint: disable=wrong-import-order
-from unittest.mock import patch  # pylint: disable=wrong-import-order
+import unittest
+from unittest.mock import patch
 
 
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
@@ -52,7 +52,7 @@ class Test(unittest.TestCase):
             'authority': 'IA',
             'term': 'Blessed Virgin Mary',
             'uri': 'http://vocab.getty.edu/page/ia/999',
-            'description': 'Mother of Jesus, venerated since the earliest days of Christianity. Christians believe the birth of Jesus was a virgin birth, his having been conceived through the Holy Spirit.',  # noqa: E501  # pylint: disable=line-too-long
+            'description': 'Mother of Jesus, venerated since the earliest days of Christianity. Christians believe the birth of Jesus was a virgin birth, his having been conceived through the Holy Spirit.',  # noqa: E501
             'variants': [
                 'Mary, Blessed Virgin, Saint (Christian character)',
                 'Blessed Virgin (Christian character)',

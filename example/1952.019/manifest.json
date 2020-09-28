@@ -1,913 +1,1179 @@
 {
-  "@context": [
-    "http://www.w3.org/ns/anno.jsonld",
-    "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
-    "http://iiif.io/api/presentation/3/context.json"
-  ],
-  "id": "https://presentation-iiif.library.nd.edu/1952.019/manifest",
-  "items": [
-    {
-      "height": 560,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0002/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0002/canvas/annotation_page/1952_019-v0002.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0002/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0002",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0002/canvas/annotation/1952_019-v0002.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0002/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0002.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0002.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0002/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0002",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 431
-    },
-    {
-      "height": 560,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0001/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0001/canvas/annotation_page/1952_019-v0001.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0001/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0001",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0001/canvas/annotation/1952_019-v0001.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0001/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0001.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0001.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0001/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0001",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 347
-    },
-    {
-      "height": 560,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0003/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0003/canvas/annotation_page/1952_019-v0003.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0003/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0003",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0003/canvas/annotation/1952_019-v0003.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0003/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0003.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0003.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0003/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0003",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 431
-    },
-    {
-      "height": 560,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0004/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0004/canvas/annotation_page/1952_019-v0004.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0004/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0004",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0004/canvas/annotation/1952_019-v0004.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0004/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0004.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0004.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0004/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0004",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 431
-    },
-    {
-      "height": 560,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0005/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0005/canvas/annotation_page/1952_019-v0005.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0005/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0005",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0005/canvas/annotation/1952_019-v0005.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0005/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0005.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0005.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0005/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0005",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 431
-    },
-    {
-      "height": 560,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0006/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0006/canvas/annotation_page/1952_019-v0006.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0006/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0006",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0006/canvas/annotation/1952_019-v0006.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0006/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0006.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0006.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0006/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0006",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 431
-    },
-    {
-      "height": 560,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0007/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0007/canvas/annotation_page/1952_019-v0007.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0007/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0007",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0007/canvas/annotation/1952_019-v0007.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0007/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0007.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0007.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0007/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0007",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 431
-    },
-    {
-      "height": 560,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0008/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0008/canvas/annotation_page/1952_019-v0008.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0008/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0008",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0008/canvas/annotation/1952_019-v0008.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0008/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0008.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0008.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0008/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0008",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 414
-    },
-    {
-      "height": 562,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0009/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0009/canvas/annotation_page/1952_019-v0009.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0009/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0009",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0009/canvas/annotation/1952_019-v0009.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0009/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0009.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0009.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0009/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0009",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 843
-    },
-    {
-      "height": 562,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0010/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0010/canvas/annotation_page/1952_019-v0010.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0010/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0010",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0010/canvas/annotation/1952_019-v0010.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0010/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0010.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0010.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0010/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0010",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 843
-    },
-    {
-      "height": 562,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0011/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0011/canvas/annotation_page/1952_019-v0011.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0011/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0011",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0011/canvas/annotation/1952_019-v0011.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0011/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0011.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0011.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0011/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0011",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 843
-    },
-    {
-      "height": 562,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0012/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0012/canvas/annotation_page/1952_019-v0012.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0012/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0012",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0012/canvas/annotation/1952_019-v0012.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0012/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0012.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0012.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0012/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0012",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 843
-    },
-    {
-      "height": 542,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0013/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0013/canvas/annotation_page/1952_019-v0013.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0013/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0013",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0013/canvas/annotation/1952_019-v0013.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0013/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0013.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0013.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0013/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0013",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 843
-    },
-    {
-      "height": 562,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0014/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0014/canvas/annotation_page/1952_019-v0014.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0014/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0014",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0014/canvas/annotation/1952_019-v0014.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0014/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0014.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0014.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0014/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0014",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 843
-    },
-    {
-      "height": 562,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0015/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0015/canvas/annotation_page/1952_019-v0015.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0015/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0015",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0015/canvas/annotation/1952_019-v0015.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0015/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0015.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0015.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0015/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0015",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 843
-    },
-    {
-      "height": 560,
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0016/canvas",
-      "items": [
-        {
-          "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0016/canvas/annotation_page/1952_019-v0016.jpg",
-          "items": [
-            {
-              "body": {
-                "format": "image/jpeg",
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0016/full/full/0/default.jpg",
-                "service": [
-                  {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0016",
-                    "profile": "http://iiif.io/api/image/2/level2.json",
-                    "type": "ImageService2"
-                  }
-                ],
-                "type": "Image"
-              },
-              "id": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0016/canvas/annotation/1952_019-v0016.jpg",
-              "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1952.019/1952_019-v0016/canvas",
-              "type": "Annotation"
-            }
-          ],
-          "type": "AnnotationPage"
-        }
-      ],
-      "label": {
-        "en": [
-          "1952_019-v0016.jpg"
-        ]
-      },
-      "summary": {
-        "en": [
-          "1952_019-v0016.jpg"
-        ]
-      },
-      "thumbnail": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0016/full/250,/0/default.jpg",
-          "service": [
-            {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0016",
-              "profile": "http://iiif.io/api/image/2/level2.json",
-              "type": "ImageService2"
-            }
-          ],
-          "type": "Image"
-        }
-      ],
-      "type": "Canvas",
-      "viewingDirection": "left-to-right",
-      "width": 373
-    }
-  ],
+  "type": "Manifest",
+  "id": "https://presentation-iiif.libraries.nd.edu/1952.019/manifest",
   "label": {
     "en": [
       "Diana"
     ]
   },
+  "thumbnail": [
+    {
+      "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0001/full/250,/0/default.jpg",
+      "type": "Image",
+      "service": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0001",
+          "type": "ImageService2",
+          "profile": "http://iiif.io/api/image/2/level2.json"
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0001/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0001.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0001/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0001",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0001/canvas/annotation_page/1952_019-v0001.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0001/canvas/annotation/1952_019-v0001.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0001/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0001/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0001",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0001.jpg"
+        ]
+      },
+      "height": 560,
+      "width": 347
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0002/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0002.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0002/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0002",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0002/canvas/annotation_page/1952_019-v0002.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0002/canvas/annotation/1952_019-v0002.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0002/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0002/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0002",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0002.jpg"
+        ]
+      },
+      "height": 560,
+      "width": 431
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0003/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0003.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0003/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0003",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0003/canvas/annotation_page/1952_019-v0003.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0003/canvas/annotation/1952_019-v0003.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0003/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0003/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0003",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0003.jpg"
+        ]
+      },
+      "height": 560,
+      "width": 431
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0004/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0004.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0004/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0004",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0004/canvas/annotation_page/1952_019-v0004.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0004/canvas/annotation/1952_019-v0004.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0004/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0004/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0004",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0004.jpg"
+        ]
+      },
+      "height": 560,
+      "width": 431
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0005/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0005.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0005/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0005",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0005/canvas/annotation_page/1952_019-v0005.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0005/canvas/annotation/1952_019-v0005.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0005/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0005/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0005",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0005.jpg"
+        ]
+      },
+      "height": 560,
+      "width": 431
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0006/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0006.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0006/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0006",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0006/canvas/annotation_page/1952_019-v0006.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0006/canvas/annotation/1952_019-v0006.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0006/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0006/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0006",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0006.jpg"
+        ]
+      },
+      "height": 560,
+      "width": 431
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0007/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0007.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0007/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0007",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0007/canvas/annotation_page/1952_019-v0007.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0007/canvas/annotation/1952_019-v0007.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0007/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0007/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0007",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0007.jpg"
+        ]
+      },
+      "height": 560,
+      "width": 431
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0008/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0008.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0008/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0008",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0008/canvas/annotation_page/1952_019-v0008.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0008/canvas/annotation/1952_019-v0008.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0008/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0008/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0008",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0008.jpg"
+        ]
+      },
+      "height": 560,
+      "width": 414
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0009/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0009.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0009/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0009",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0009/canvas/annotation_page/1952_019-v0009.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0009/canvas/annotation/1952_019-v0009.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0009/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0009/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0009",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0009.jpg"
+        ]
+      },
+      "height": 562,
+      "width": 843
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0010/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0010.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0010/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0010",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0010/canvas/annotation_page/1952_019-v0010.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0010/canvas/annotation/1952_019-v0010.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0010/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0010/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0010",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0010.jpg"
+        ]
+      },
+      "height": 562,
+      "width": 843
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0011/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0011.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0011/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0011",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0011/canvas/annotation_page/1952_019-v0011.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0011/canvas/annotation/1952_019-v0011.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0011/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0011/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0011",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0011.jpg"
+        ]
+      },
+      "height": 562,
+      "width": 843
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0012/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0012.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0012/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0012",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0012/canvas/annotation_page/1952_019-v0012.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0012/canvas/annotation/1952_019-v0012.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0012/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0012/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0012",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0012.jpg"
+        ]
+      },
+      "height": 562,
+      "width": 843
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0013/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0013.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0013/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0013",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0013/canvas/annotation_page/1952_019-v0013.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0013/canvas/annotation/1952_019-v0013.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0013/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0013/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0013",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0013.jpg"
+        ]
+      },
+      "height": 542,
+      "width": 843
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0014/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0014.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0014/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0014",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0014/canvas/annotation_page/1952_019-v0014.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0014/canvas/annotation/1952_019-v0014.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0014/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0014/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0014",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0014.jpg"
+        ]
+      },
+      "height": 562,
+      "width": 843
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0015/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0015.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0015/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0015",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0015/canvas/annotation_page/1952_019-v0015.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0015/canvas/annotation/1952_019-v0015.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0015/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0015/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0015",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0015.jpg"
+        ]
+      },
+      "height": 562,
+      "width": 843
+    },
+    {
+      "type": "Canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0016/canvas",
+      "label": {
+        "en": [
+          "1952_019-v0016.jpg"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0016/full/250,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0016",
+              "type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0016/canvas/annotation_page/1952_019-v0016.jpg",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0016/canvas/annotation/1952_019-v0016.jpg",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "https://presentation-iiif.libraries.nd.edu/1952.019/1952_019-v0016/canvas",
+              "body": {
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0016/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "service": [
+                  {
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1952.019%2F1952_019-v0016",
+                    "type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Copyright"
+          ]
+        }
+      },
+      "summary": {
+        "en": [
+          "1952_019-v0016.jpg"
+        ]
+      },
+      "height": 560,
+      "width": 373
+    }
+  ],
+  "viewingDirection": "left-to-right",
+  "@context": [
+    "http://www.w3.org/ns/anno.jsonld",
+    "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
+    "http://iiif.io/api/presentation/3/context.json"
+  ],
+  "provider": [
+    {
+      "id": "https://sniteartmuseum.nd.edu/about-us/contact-us/",
+      "type": "Agent",
+      "label": {
+        "en": [
+          "Snite Museum of Art"
+        ]
+      },
+      "homepage": [
+        {
+          "id": "https://sniteartmuseum.nd.edu",
+          "type": "Text",
+          "label": {
+            "en": [
+              "Snite Museum of Art"
+            ]
+          },
+          "format": "text/html"
+        }
+      ],
+      "logo": [
+        {
+          "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
+          "type": "Image",
+          "format": "image/png",
+          "height": 100,
+          "width": 120
+        }
+      ]
+    }
+  ],
+  "requiredStatement": {
+    "label": {
+      "en": [
+        "Copyright"
+      ]
+    },
+    "value": {
+      "en": [
+        "Copyright"
+      ]
+    }
+  },
+  "rights": "© Paul Manship / 2020",
+  "seeAlso": [
+    {
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019/mets.xml",
+      "type": "Dataset",
+      "profile": "http://www.loc.gov/METS/",
+      "format": "application/xml"
+    },
+    {
+      "id": "https://presentation-iiif.libraries.nd.edu/1952.019",
+      "type": "Dataset",
+      "format": "application/ld+json",
+      "profile": "https://schema.org/"
+    }
+  ],
   "metadata": [
     {
       "label": {
@@ -924,7 +1190,7 @@
     {
       "label": {
         "en": [
-          "Date "
+          "Date"
         ]
       },
       "value": {
@@ -936,7 +1202,7 @@
     {
       "label": {
         "en": [
-          "Classification "
+          "Classification"
         ]
       },
       "value": {
@@ -960,7 +1226,7 @@
     {
       "label": {
         "en": [
-          "Accession number "
+          "Accession number"
         ]
       },
       "value": {
@@ -1010,7 +1276,7 @@
       },
       "value": {
         "en": [
-          "40 x 27 x 9 in. (101.6 x 68.58 x 22.86 cm)"
+          "40 x 26 3/8 x 10 1/2 in. (101.6 x 66.99 x 26.67 cm)"
         ]
       }
     },
@@ -1026,79 +1292,5 @@
         ]
       }
     }
-  ],
-  "provider": [
-    {
-      "homepage": [
-        {
-          "format": "text/html",
-          "id": "https://sniteartmuseum.nd.edu",
-          "label": {
-            "en": [
-              "Snite Museum of Art"
-            ]
-          },
-          "type": "Text"
-        }
-      ],
-      "id": "https://sniteartmuseum.nd.edu/about-us/contact-us/",
-      "label": {
-        "en": [
-          "Snite Museum of Art"
-        ]
-      },
-      "logo": [
-        {
-          "format": "image/png",
-          "height": 100,
-          "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
-          "type": "Image",
-          "width": 120
-        }
-      ],
-      "type": "Agent"
-    }
-  ],
-  "requiredStatement": {
-    "label": {
-      "en": [
-        "Copyright"
-      ]
-    },
-    "value": {
-      "en": [
-        "Copyright"
-      ]
-    }
-  },
-  "rights": "\u00a9 Paul Manship / 2020",
-  "seeAlso": [
-    {
-      "format": "application/xml",
-      "id": "https://presentation-iiif.library.nd.edu/1952.019/mets.xml",
-      "profile": "http://www.loc.gov/METS/",
-      "type": "Dataset"
-    },
-    {
-      "format": "application/ld+json",
-      "id": "https://presentation-iiif.library.nd.edu/1952.019",
-      "profile": "https://schema.org/",
-      "type": "Dataset"
-    }
-  ],
-  "thumbnail": [
-    {
-      "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0002/full/250,/0/default.jpg",
-      "service": [
-        {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1952.019%2F1952_019-v0002",
-          "profile": "http://iiif.io/api/image/2/level2.json",
-          "type": "ImageService2"
-        }
-      ],
-      "type": "Image"
-    }
-  ],
-  "type": "Manifest",
-  "viewingDirection": "left-to-right"
+  ]
 }

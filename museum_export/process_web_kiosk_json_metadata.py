@@ -10,12 +10,13 @@ import json
 from datetime import datetime, timedelta
 import os
 import time
-import dependencies.requests  # pylint: disable=import-error
-from dependencies.sentry_sdk import capture_exception  # pylint: disable=import-error
+import dependencies.requests
+from dependencies.sentry_sdk import capture_exception
 from process_one_museum_object import ProcessOneMuseumObject
 from get_image_info_for_all_objects import GetImageInfoForAllObjects
-from pipelineutilities.expand_subject_terms import expand_subject_terms_recursive  # pylint: disable=import-error, no-name-in-module
-from pipelineutilities.save_standard_json import save_standard_json  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.save_standard_json import save_standard_json
+# from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
+from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 
 
 class ProcessWebKioskJsonMetadata():
@@ -54,6 +55,7 @@ class ProcessWebKioskJsonMetadata():
         if mode == 'ids':
             while "ids" in self.event and len(self.event["ids"]) > 0:
                 id_to_process = self.event["ids"].pop(0)
+                # print("id_to_process = ", id_to_process)
                 url = self._get_embark_metadata_url(mode, id_to_process)
                 this_composite_json = self._get_metadata_given_url(url)
                 if "objects" in this_composite_json:
@@ -83,10 +85,13 @@ class ProcessWebKioskJsonMetadata():
             objects = composite_json["objects"]
             export_all_files_flag = self.event.get('export_all_files_flag', False)
             process_one_museum_object_class = ProcessOneMuseumObject(self.config, image_file_info, self.start_time)
+            standard_json_helpers_class = StandardJsonHelpers(self.config)
+            # save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
             for _object_key, object_value in objects.items():
                 if 'uniqueIdentifier' in object_value and not object_value.get("recordProcessedFlag", False):
                     standard_json = process_one_museum_object_class.process_object(object_value)
-                    standard_json = expand_subject_terms_recursive(standard_json)
+                    standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
+                    # save_standard_json_to_dynamo_class.save_standard_json(standard_json)
                     save_standard_json(self.config, standard_json, export_all_files_flag)
                     object_value["recordProcessedFlag"] = True
                     objects_processed += 1
@@ -108,7 +113,7 @@ class ProcessWebKioskJsonMetadata():
         except ConnectionRefusedError as e:
             print('Connection refused in process_web_kiosk_json_metadata/_get_metadata_given_url on url ', url)
             capture_exception(e)
-        except Exception as e:  # noqa E722 - intentionally ignore warning about bare except   # pylint: disable=broad-except
+        except Exception as e:  # noqa E722 - intentionally ignore warning about bare except
             print('Error caught in process_web_kiosk_json_metadata/_get_metadata_given_url trying to process url ' + url)
             capture_exception(e)
         return json_response
@@ -120,7 +125,7 @@ class ProcessWebKioskJsonMetadata():
             in production doesn't break.  The following line must be updated to
             reflect which template is active. """
         base_url = self.config['museum-server-base-url'] \
-            + "/results.html?layout=marble_hash&format=json&maximumrecords=-1&recordType=objects_1"
+            + "/results.html?layout=marble&format=json&maximumrecords=-1&recordType=objects_1"
         if mode == 'full':
             url = base_url + "&query=_ID=ALL"
         elif mode == 'ids':

@@ -1,11 +1,11 @@
 """ test_expand_getty_ia_terms """
-import _set_path  # noqa  # pylint: disable=import-error, unused-import
-import json  # pylint: disable=wrong-import-order
-import os  # pylint: disable=wrong-import-order
+import _set_path  # noqa
+import json
+import os
 from pipelineutilities.expand_loc_terms import _get_api_url, _get_str_value, _get_loc_item_node, _get_loc_variants, \
     expand_loc_terms
-import unittest  # pylint: disable=wrong-import-order
-from unittest.mock import patch  # pylint: disable=wrong-import-order
+import unittest
+from unittest.mock import patch
 
 
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"

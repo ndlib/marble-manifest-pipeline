@@ -32,6 +32,7 @@ def validate_standard_json(json_to_test: dict) -> bool:
 
 subject_properties = {
     "authority": {"type": "string"},
+    "display": {"type": "string"},
     "term": {"type": "string"},
     "uri": {"type": "string"},
     "description": {"type": "string"},
@@ -49,6 +50,7 @@ subject_properties = {
             "type": "object",
             "properties": {
                 "authority": {"type": "string"},
+                "display": {"type": "string"},
                 "term": {"type": "string"},
                 "uri": {"type": "string"},
                 "parentTerm": {"type": "string"}
@@ -123,7 +125,20 @@ standard_json_schema = {
         "languages": {
             "description": "Ultimately, we want languages, like ['english'] or ['english', 'french'].",
             "type": "array",
-            "items": {"type": "string"}
+            "items": {
+                "anyOf": [
+                    {"type": "string"},
+                    {
+                        "type": "object",
+                        "Properties": {
+                            "display": {"type": "string"},
+                            "alpha2": {"type": "string"},
+                            "alpha3": {"type": "string"}
+                        }
+
+                    }
+                ]
+            }
         },
         "subjects": subjects_definition,
         "copyrightStatus": {"type": "string"},
@@ -153,6 +168,19 @@ standard_json_schema = {
             },
             "required": ["publisherName"],
             "additionalProperties": False
+        },
+        "publishers": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "display": {"type": "string"},
+                    "publisherName": {"type": "string"},
+                    "publisherLocation": {"type": "string"}
+                },
+                "required": ["display"],
+                "additionalProperties": False
+            }
         },
         "contributors": {
             "type": "array",
@@ -199,7 +227,16 @@ standard_json_schema = {
         "collections": {
             "description": "This is a list of names of collections to which this object belongs.",
             "type": "array",
-            "items": {"type": "string"}
+            # "items": {"type": "string"}
+            "items": {
+                "anyOf": [
+                    {"type": "string"},
+                    {
+                        "type": "object",
+                        "properties": {"display": {"type": "string"}}
+                    }
+                ]
+            },
         },
         "md5Checksum": {"type": "string"},
         "creationPlace": {
@@ -230,7 +267,7 @@ standard_json_schema = {
             "default": []
         }
     },
-    "required": ["id", "parentId", "collectionId", "apiVersion", "fileCreatedDate"],
+    "required": ["id", "parentId", "collectionId", "apiVersion"],
     "additionalProperties": False
 }
 

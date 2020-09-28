@@ -12,8 +12,9 @@ import dependencies.requests
 from dependencies.sentry_sdk import capture_exception
 from translate_curate_json_node import TranslateCurateJsonNode
 from create_standard_json import CreateStandardJson
-from pipelineutilities.expand_subject_terms import expand_subject_terms_recursive  # pylint: disable=import-error, no-name-in-module
-from pipelineutilities.save_standard_json import save_standard_json  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.standard_json_helpers import StandardJsonHelpers
+# from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
+from pipelineutilities.save_standard_json import save_standard_json
 
 
 class CurateApi():
@@ -60,7 +61,8 @@ class CurateApi():
                         json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
 
         standard_json = self.translate_curate_json_node_class.build_json_from_curate_json(curate_json, "root", {})
-        standard_json = expand_subject_terms_recursive(standard_json)
+        standard_json_helpers_class = StandardJsonHelpers(self.config)
+        standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
         if self.save_standard_json_locally:
             with open(self.local_folder + "test/" + item_id + "_preliminary_standard.json", "w") as output_file:
                 json.dump(standard_json, output_file, indent=2, ensure_ascii=False)
@@ -71,6 +73,8 @@ class CurateApi():
                     json.dump(standard_json, output_file, indent=2, ensure_ascii=False)
             else:
                 save_standard_json(self.config, standard_json)
+                # save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
+                # save_standard_json_to_dynamo_class.save_standard_json(standard_json)
         return standard_json
 
     def _get_curate_json(self, item_id: str) -> dict:
@@ -183,7 +187,7 @@ class CurateApi():
         except ConnectionRefusedError as e:
             print('Connection refused on url ' + url)
             capture_exception(e)
-        except Exception as e:  # noqa E722 - intentionally ignore warning about bare except  # pylint: disable=broad-except
+        except Exception as e:  # noqa E722 - intentionally ignore warning about bare except
             print('Error caught trying to process url ' + url)
             capture_exception(e)
         return json_response

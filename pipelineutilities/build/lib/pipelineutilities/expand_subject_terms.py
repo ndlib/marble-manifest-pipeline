@@ -5,33 +5,40 @@ Currently expands subject terms for these dictionaries:
   LCSH - Library of Congress Subject Headings
   IA - Getty Iconographic Authority
   AAT - Getty Art and Architecture Thesaurus
+Note:  we are currently intentionally not expanding FAST terms, since those don't seem to add value
+
 """
-import json  # noqa: F401  # pylint: disable=wrong-import-order, unused-import
-from expand_loc_terms import expand_loc_terms  # pylint: disable=import-error
-from expand_getty_ia_terms import expand_ia_terms  # pylint: disable=import-error
-from expand_getty_aat_terms import expand_aat_terms  # pylint: disable=import-error
+import json  # noqa: F401
+from expand_loc_terms import expand_loc_terms
+from expand_getty_ia_terms import expand_ia_terms
+from expand_getty_aat_terms import expand_aat_terms
 
 
-def expand_subject_terms(standard_json: dict) -> dict:
+def expand_subject_terms(standard_json: dict) -> dict:  # noqa: C901
     """ Expand terms for various authorities """
     if 'subjects' in standard_json:
         for subject in standard_json.get('subjects', []):
             authority = subject.get('authority', 'x')
-            #  Note:  The api url here:  http://id.worldcat.org/fast/1000579/rdf.xml for "uri": "http://id.worldcat.org/fast/01000579" does not seem helpful
-            if authority != authority.upper():
-                authority = authority.upper()
-                if authority != 'X':
-                    subject['authority'] = authority
+            authority = authority.upper()
+            if authority != 'X':
+                subject['authority'] = authority
             if authority in ('LCSH', 'LOC') or '/id.loc.gov/' in subject.get('uri', ''):
                 expand_loc_terms(subject)
             elif authority in ('IA') or '/vocab.getty.edu/page/ia/' in subject.get('uri', ''):
                 expand_ia_terms(subject)
             elif authority in ('AAT') or '/vocab.getty.edu/aat/' in subject.get('uri', ''):
                 expand_aat_terms(subject)
-            elif authority not in ('LCSH', 'LOC', 'IA', 'AAT', 'X'):
+            elif authority in ('FAST') or '/id.worldcat.org/fast/' in subject.get('uri', ''):
+                #  Note:  The api url here:  http://id.worldcat.org/fast/1000579/rdf.xml for "uri": "http://id.worldcat.org/fast/01000579" does not seem helpful
+                pass  # intentionally skip harvesting fast, since content there doesn't seem to add value
+            elif authority not in ('X') and subject.get('uri', ''):
                 print("unknown authority in ", subject)
             elif subject.get('uri', ''):
                 print('unable to expand subject uri in ', subject)
+
+            if subject.get('term', ''):
+                subject['display'] = subject['term']
+            subject = _add_display_to_broader_terms(subject)
     return standard_json
 
 
@@ -42,6 +49,13 @@ def expand_subject_terms_recursive(standard_json: dict) -> dict:
     for item in standard_json.get('items', []):
         item = expand_subject_terms_recursive(item)
     return standard_json
+
+
+def _add_display_to_broader_terms(subject: dict) -> dict:
+    for broader_term in subject.get('broaderTerms', []):
+        if broader_term.get('term', ''):
+            broader_term['display'] = broader_term['term']
+    return subject
 
 
 def _init_json():

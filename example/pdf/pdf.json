@@ -9,36 +9,43 @@
   "repository": "museum",
   "subjects": [
     {
+      "display": "allegory",
       "authority": "AAT",
       "term": "allegory",
       "uri": "http://vocab.getty.edu/aat/300055866"
     },
     {
+      "display": "Baroque",
       "authority": "AAT",
       "term": "Baroque",
       "uri": "http://vocab.getty.edu/aat/300021147"
     },
     {
+      "display": "food",
       "authority": "AAT",
       "term": "food",
       "uri": "http://vocab.getty.edu/aat/300254496"
     },
     {
+      "display": "glassware",
       "authority": "AAT",
       "term": "glassware",
       "uri": "http://vocab.getty.edu/aat/300010898"
     },
     {
+      "display": "grape",
       "authority": "AAT",
       "term": "grape",
       "uri": "http://vocab.getty.edu/aat/300379338"
     },
     {
+      "display": "skeletons",
       "authority": "AAT",
       "term": "skeletons",
       "uri": "http://vocab.getty.edu/aat/300191778"
     },
     {
+      "display": "tables",
       "authority": "AAT",
       "term": "tables",
       "uri": "http://vocab.getty.edu/aat/300039548"

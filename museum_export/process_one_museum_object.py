@@ -7,8 +7,6 @@ import os
 from clean_up_content import CleanUpContent
 from dependencies.pipelineutilities.validate_json import validate_json, get_standard_json_schema, schema_api_version
 from sentry_sdk import capture_message, push_scope
-from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject
-from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject
 
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
 
@@ -20,8 +18,6 @@ class ProcessOneMuseumObject():
         self.start_time = start_time
         self.save_despite_missing_fields = True
         self.api_version = schema_api_version()
-        self.add_paths_to_json_object_class = AddPathsToJsonObject(config)
-        self.fix_creators_in_json_object_class = FixCreatorsInJsonObject(config)
 
     def process_object(self, museum_object: dict) -> dict:
         """ For each object, check for missing fields.  If there are none,
@@ -38,9 +34,6 @@ class ProcessOneMuseumObject():
             if not validate_standard_json(standard_json):
                 print("Validation Error validating cleaned up content standard_json", object_id)
                 standard_json = {}
-            else:
-                standard_json = self.add_paths_to_json_object_class.add_paths(standard_json)
-                standard_json = self.fix_creators_in_json_object_class.fix_creators(standard_json)
         return standard_json
 
     def _test_for_missing_fields(self, object_id: dict, json_object: dict, required_fields: dict) -> str:
