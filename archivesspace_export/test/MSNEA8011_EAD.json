@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "fileCreatedDate": "2020-07-14",
+  "fileCreatedDate": "2020-09-28",
   "sourceSystem": "ArchivesSpace",
   "sequence": 0,
   "collectionInformation": "Theophilus Parsons Journal",
@@ -23,7 +23,27 @@
   "subjects": [
     {
       "authority": "lcsh",
+      "term": "New England -- Intellectual life -- 19th century -- Sources",
+      "uri": ""
+    },
+    {
+      "authority": "lcsh",
+      "term": "United States. Intellectual life. 1783-1865. Sources.",
+      "uri": ""
+    },
+    {
+      "authority": "lcsh",
       "term": "Elite (Social sciences) -- Boston (Mass.) -- History -- 19th century",
+      "uri": ""
+    },
+    {
+      "authority": "lcsh",
+      "term": "Boston (Mass.) -- Social life and customs",
+      "uri": ""
+    },
+    {
+      "authority": "aat",
+      "term": "Journals (accounts)",
       "uri": ""
     }
   ],
@@ -47,7 +67,7 @@
       "sourceSystem": "ArchivesSpace",
       "repository": "RARE",
       "apiVersion": 1,
-      "fileCreatedDate": "2020-07-14",
+      "fileCreatedDate": "2020-09-28",
       "id": "aspace_8f5be6708c2e98e57a60eddf20e36679",
       "title": "Theophilus Parsons, Journal, vol. 1",
       "createdDate": "January 1819-December 1820",
@@ -58,7 +78,7 @@
           "sourceSystem": "ArchivesSpace",
           "repository": "RARE",
           "apiVersion": 1,
-          "fileCreatedDate": "2020-07-14",
+          "fileCreatedDate": "2020-09-28",
           "level": "file",
           "thumbnail": true,
           "description": "Theophilus Parsons, Journal, vol. 1",
@@ -75,7 +95,7 @@
       "sourceSystem": "ArchivesSpace",
       "repository": "RARE",
       "apiVersion": 1,
-      "fileCreatedDate": "2020-07-14",
+      "fileCreatedDate": "2020-09-28",
       "id": "aspace_5cc53e5bc083823390135923b389d00c",
       "title": "Theophilus Parsons, Journal, vol. 2",
       "createdDate": "January 1821-March 1823",
@@ -86,7 +106,7 @@
           "sourceSystem": "ArchivesSpace",
           "repository": "RARE",
           "apiVersion": 1,
-          "fileCreatedDate": "2020-07-14",
+          "fileCreatedDate": "2020-09-28",
           "level": "file",
           "thumbnail": true,
           "description": "Theophilius Parsons, Journal, vol. 2",

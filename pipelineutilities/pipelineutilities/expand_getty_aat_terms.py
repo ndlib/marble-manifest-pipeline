@@ -1,7 +1,7 @@
 # expand_getty_aat_terms.py
 """ Expand Getty Art and Architecture Thesaurus (AAT) terms """
 from xml.etree import ElementTree
-import json  # noqa: F401  # pylint: disable=unused-import
+import json  # noqa: F401
 import re
 import requests
 from sentry_sdk import capture_exception

@@ -1,7 +1,7 @@
 # expand_getty_ia_terms.py
 """ Expand Getty Iconographic Authority (IA) terms (which are a sub-set of CONA terms) """
 from xml.etree import ElementTree
-import json  # noqa: F401  # pylint: disable=unused-import
+import json  # noqa: F401
 import requests
 from sentry_sdk import capture_exception
 from validate_json import validate_json, get_subject_json_schema

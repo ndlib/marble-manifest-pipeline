@@ -4,7 +4,6 @@ import json
 from test.test_utils import load_data_for_test
 from test.test_utils import debug_json
 from pathlib import Path
-# from csv_collection import load_csv_data
 from load_standard_json import load_standard_json
 from pipeline_config import setup_pipeline_config
 from iiifManifest import iiifManifest
@@ -30,24 +29,6 @@ class TestCreateManifest(unittest.TestCase):
         ]
         pass
 
-    # def test_buildJson(self):
-    #     for id in self.ids:
-    #         print("Testing id, {}".format(id))
-    #         parent = load_csv_data(id, config)
-    #         print(id, "parent.data.type = ", parent.type())
-    #         mapping = MetadataMappings(parent)
-    #         iiif = iiifManifest(config, parent, mapping)
-    #         manifest = iiif.manifest()
-    #         # current_path = str(Path(__file__).parent.absolute())
-    #         # with open(current_path + '/../example/{}/manifest.json'.format(id), "w") as output_file:
-    #         #     json.dump(manifest, output_file, indent=2, ensure_ascii=False)
-    #         data = load_data_for_test(id)
-    #         # print("data = ", data)
-    #         debug_json(data['manifest_json'], manifest)
-    #         manifest_json = "".join(json.dumps(data['manifest_json'], sort_keys=True).split())
-    #         result_json = "".join(json.dumps(manifest, sort_keys=True).split())
-    #         self.assertEqual(result_json, manifest_json, msg="%s did not match see test/debug for output" % (id))
-
     def test_build_nd_json(self):
         for id in ["1999.024", "1952.019", "MSNCOL8501_EAD", "pdf"]:
             # print("Testing id, {}".format(id))
@@ -55,6 +36,7 @@ class TestCreateManifest(unittest.TestCase):
             mapping = MetadataMappings(parent)
             iiif = iiifManifest(config, parent, mapping)
             manifest = iiif.manifest()
+            # print("id=", id)
             # current_path = str(Path(__file__).parent.absolute())
             # with open(current_path + '/../example/{}/manifest.json'.format(id), "w") as output_file:
             #     json.dump(manifest, output_file, indent=2, ensure_ascii=False)

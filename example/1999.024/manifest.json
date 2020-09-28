@@ -1,6 +1,6 @@
 {
   "type": "Manifest",
-  "id": "https://presentation-iiif.library.nd.edu/1999.024/manifest",
+  "id": "https://presentation-iiif.libraries.nd.edu/1999.024/manifest",
   "label": {
     "en": [
       "Memento Mori: Death Comes to the Table"
@@ -8,11 +8,11 @@
   },
   "thumbnail": [
     {
-      "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/250,/0/default.jpg",
+      "id": "https://image-iiif.libraries.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/250,/0/default.jpg",
       "type": "Image",
       "service": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
           "type": "ImageService2",
           "profile": "http://iiif.io/api/image/2/level2.json"
         }
@@ -22,7 +22,7 @@
   "items": [
     {
       "type": "Canvas",
-      "id": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas",
+      "id": "https://presentation-iiif.libraries.nd.edu/1999.024/1999_024-v0001/canvas",
       "label": {
         "en": [
           "1999_024-v0001.jpg"
@@ -30,11 +30,11 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -43,21 +43,21 @@
       ],
       "items": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas/annotation_page/1999_024-v0001.jpg",
+          "id": "https://presentation-iiif.libraries.nd.edu/1999.024/1999_024-v0001/canvas/annotation_page/1999_024-v0001.jpg",
           "type": "AnnotationPage",
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas/annotation/1999_024-v0001.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/1999.024/1999_024-v0001/canvas/annotation/1999_024-v0001.jpg",
               "type": "Annotation",
               "motivation": "painting",
-              "target": "https://presentation-iiif.library.nd.edu/1999.024/1999_024-v0001/canvas",
+              "target": "https://presentation-iiif.libraries.nd.edu/1999.024/1999_024-v0001/canvas",
               "body": {
-                "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/full/0/default.jpg",
+                "id": "https://image-iiif.libraries.nd.edu/iiif/2/1999.024%2F1999_024-v0001/full/full/0/default.jpg",
                 "type": "Image",
                 "format": "image/jpeg",
                 "service": [
                   {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/1999.024%2F1999_024-v0001",
                     "type": "ImageService2",
                     "profile": "http://iiif.io/api/image/2/level2.json"
                   }
@@ -68,6 +68,18 @@
         }
       ],
       "viewingDirection": "left-to-right",
+      "requiredStatement": {
+        "label": {
+          "en": [
+            "Copyright"
+          ]
+        },
+        "value": {
+          "en": [
+            "Public domain"
+          ]
+        }
+      },
       "summary": {
         "en": [
           "1999_024-v0001.jpg"
@@ -129,13 +141,13 @@
   },
   "seeAlso": [
     {
-      "id": "https://presentation-iiif.library.nd.edu/1999.024/mets.xml",
+      "id": "https://presentation-iiif.libraries.nd.edu/1999.024/mets.xml",
       "type": "Dataset",
       "profile": "http://www.loc.gov/METS/",
       "format": "application/xml"
     },
     {
-      "id": "https://presentation-iiif.library.nd.edu/1999.024",
+      "id": "https://presentation-iiif.libraries.nd.edu/1999.024",
       "type": "Dataset",
       "format": "application/ld+json",
       "profile": "https://schema.org/"
@@ -150,7 +162,7 @@
       },
       "value": {
         "en": [
-          "Giovanni Martinelli (Italian, 1600 - 1659)"
+          "Giovanni Martinelli (Italian, 1600 or 1604 - 1659)"
         ]
       }
     },
@@ -240,7 +252,7 @@
       },
       "value": {
         "en": [
-          "48 x 57 1/4 x 4 3/8 in. (121.92 x 145.42 x 11.11 cm)"
+          "40 x 49 in. (101.6 x 124.46 cm)"
         ]
       }
     },

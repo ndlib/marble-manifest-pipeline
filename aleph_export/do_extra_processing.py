@@ -18,6 +18,8 @@ def do_extra_processing(value: str, extra_processing: str) -> str:
         results = _translate_repository(value)
     elif extra_processing == "format_call_number":
         results = _format_call_number(value)
+    elif extra_processing == "format_collections":
+        results = _format_collections(value)
     return results
 
 
@@ -96,3 +98,12 @@ def _translate_repository(value: str) -> str:
     if value.upper() in repository_mapping_json:
         value = repository_mapping_json[value.upper()]
     return value
+
+
+def _format_collections(value: list) -> dict:
+    """ Add display to collections.  """
+    results = []
+    for each_value in value:
+        node = {"display": each_value}
+        results.append(node)
+    return results

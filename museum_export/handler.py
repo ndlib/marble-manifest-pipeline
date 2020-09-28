@@ -2,18 +2,18 @@
 Module to launch Museum Export application to harvest Web Kiosk data and transform into standard json
 """
 
-import _set_path  # noqa  # pylint: disable=import-error, unused-import
-import os  # pylint: disable=wrong-import-order
-from datetime import datetime, timedelta  # pylint: disable=wrong-import-order
-import io  # pylint: disable=wrong-import-order
-import json  # pylint: disable=wrong-import-order
-from pathlib import Path  # pylint: disable=wrong-import-order
-import sentry_sdk  # pylint: disable=wrong-import-order
-from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # pylint: disable=wrong-import-order
+import _set_path  # noqa
+import os
+from datetime import datetime, timedelta
+import io
+import json
+from pathlib import Path
+import sentry_sdk
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 from process_web_kiosk_json_metadata import ProcessWebKioskJsonMetadata
-from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm  # pylint: disable=import-error, no-name-in-module
+from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm
 from clean_up_composite_json import CleanUpCompositeJson
-from s3_helpers import write_s3_json, read_s3_json, s3_file_exists, delete_s3_key  # pylint: disable=import-error, no-name-in-module
+from s3_helpers import write_s3_json, read_s3_json, s3_file_exists, delete_s3_key
 
 
 if 'SENTRY_DSN' in os.environ:
@@ -42,6 +42,7 @@ def run(event, _context):
         write_s3_json(config['process-bucket'], 'museum_composite_metadata.json', composite_json)
         write_s3_json(config['process-bucket'], 'museum_image_metadata.json', museum_image_metadata)
     else:
+        print("config = ", config)
         composite_json = read_s3_json(config['process-bucket'], 'museum_composite_metadata.json')
         museum_image_metadata = read_s3_json(config['process-bucket'], 'museum_image_metadata.json')
 
@@ -101,6 +102,7 @@ def test():
         event["mode"] = "full"
         # event['seconds-to-allow-for-processing'] = 60
         # event["mode"] = "ids"
+        # event['ids'] = ['1999.024', '1952.019', '2018.009, 218.049.004']
         # event['ids'] = ['1994.042', '1994.042.a', '1994.042.b']  # , '1990.005.001']
         # event["ids"] = ["1990.005.001", "1990.005.001.a", "1990.005.001.b"]  # parent / child objects
         # event["export_all_files_flag"] = True

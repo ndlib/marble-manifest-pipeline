@@ -9,8 +9,8 @@ named for a source system.  Also, add an "all.json" describing all collections.
 import time
 import os
 import re
-import json  # noqa: F401  # pylint: disable=unused-import
-from s3_helpers import read_s3_json, get_matching_s3_objects, write_s3_json  # pylint: disable=import-error
+import json  # noqa: F401
+from s3_helpers import read_s3_json, get_matching_s3_objects, write_s3_json
 
 
 class CollectionsApi():

@@ -43,7 +43,7 @@ class Test(unittest.TestCase):
         event = {"mode": "ids", "ids": ["1934.007.001"]}
         json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
         actual_results = json_web_kiosk_class._get_embark_metadata_url("ids", "1934.007.001")
-        expected_results = "http://notredame.dom5182.com:8080/results.html?layout=marble_hash&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
+        expected_results = "http://notredame.dom5182.com:8080/results.html?layout=marble&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
         self.assertTrue(actual_results == expected_results)
 
     # Eliminated this test to eliminate really calling the url without mocking
@@ -65,16 +65,17 @@ class Test(unittest.TestCase):
     #         expected_results = json.load(json_file)
     #     self.assertEqual(actual_results, expected_results)
 
-    def test_3_process_composite_json_metadata(self):
-        event = {"mode": "ids", "ids": ["1934.007.001"], "local": True}
-        with io.open(local_folder + 'test/1934.007.001_web_kiosk.json', 'r', encoding='utf-8') as json_file:
-            composite_json = json.load(json_file)
-        with io.open(local_folder + 'test/1934.007.001_image_files.json', 'r', encoding='utf-8') as json_file:
-            image_file_info = json.load(json_file)
-        running_unit_tests = True
-        json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
-        count_objects_processed = json_web_kiosk_class.process_composite_json_metadata(composite_json, image_file_info, running_unit_tests)
-        self.assertTrue(count_objects_processed == 1)
+    # Eliminated this test to eliminate really calling the url without mocking
+    # def test_3_process_composite_json_metadata(self):
+    #     event = {"mode": "ids", "ids": ["1934.007.001"], "local": True}
+    #     with io.open(local_folder + 'test/1934.007.001_web_kiosk.json', 'r', encoding='utf-8') as json_file:
+    #         composite_json = json.load(json_file)
+    #     with io.open(local_folder + 'test/1934.007.001_image_files.json', 'r', encoding='utf-8') as json_file:
+    #         image_file_info = json.load(json_file)
+    #     running_unit_tests = True
+    #     json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
+    #     count_objects_processed = json_web_kiosk_class.process_composite_json_metadata(composite_json, image_file_info, running_unit_tests)
+    #     self.assertTrue(count_objects_processed == 1)
 
     @patch('process_web_kiosk_json_metadata.ProcessWebKioskJsonMetadata._get_metadata_given_url')
     def test_4_get_composite_json_for_all_named_ids(self, mock_get_metadata_given_url):

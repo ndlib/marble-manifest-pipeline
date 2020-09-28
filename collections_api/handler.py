@@ -1,6 +1,6 @@
 """This module saves a listing of contents of standard json files by source.
     These results are saved into the manifest-server-bucket.
-    These are served by calls to cloudfront here:  https://presentation-iiif.library.nd.edu/experimental/collections
+    These are served by calls to cloudfront here:  https://presentation-iiif.library.nd.edu/collections/all
     These are used by redbox."""
 
 import _set_path  # noqa

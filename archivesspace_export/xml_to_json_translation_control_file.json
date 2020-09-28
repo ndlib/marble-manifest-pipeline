@@ -47,7 +47,7 @@
 			{
 				"label": "subjects",
 				"otherNodes": "subjects",
-				"xpath": "./metadata/ead/archdesc/controlaccess/subject"
+				"xpath": "./metadata/ead/archdesc/controlaccess/*"
 			},
 			{ "label": "copyrightStatus",
 				"constant": "",
@@ -148,6 +148,21 @@
 				"format": "text"
 			},
 			{
+				"label": "related_ids",
+				"xpath": "./relatedmaterial/p/extref",
+				"returnAttributeName": "href",
+				"optional": true,
+				"format": "array"
+			},
+			{
+				"label": "relatedIds",
+				"note": "This must run after related_ids above.",
+				"optional": true,
+				"format": "array",
+				"externalProcess": "format_related_ids",
+				"passLabels": [{"related_ids": "related_ids"}]
+		},
+			{
 				"label": "child",
 				"otherNodes": "childDetails",
 				"xpath": "./did",
@@ -157,7 +172,7 @@
 					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}]
 			},
 			{
-				"removeNodes": ["passedParentId"]
+				"removeNodes": ["passedParentId", "related_ids"]
 			},
 			{
 				"label": "items",

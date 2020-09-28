@@ -1,10 +1,10 @@
 """ test_expand_getty_aat_terms """
-import _set_path  # noqa  # pylint: disable=import-error, unused-import
-import os  # pylint: disable=wrong-import-order
+import _set_path  # noqa
+import os
 from pipelineutilities.expand_getty_aat_terms import expand_aat_terms, _parse_parent_string_into_broader_terms, \
     _get_term_from_string, _get_uri_from_string, _get_api_url
-import unittest  # pylint: disable=wrong-import-order
-from unittest.mock import patch  # pylint: disable=wrong-import-order
+import unittest
+from unittest.mock import patch
 
 
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
@@ -48,7 +48,7 @@ class Test(unittest.TestCase):
         expected_results = [
             {'authority': 'AAT', 'term': 'headdresses', 'uri': 'http://vocab.getty.edu/aat/300046023', 'parentTerm': 'headgear'},
             {'authority': 'AAT', 'term': 'headgear', 'uri': 'http://vocab.getty.edu/aat/300209285', 'parentTerm': 'accessories by location on the head'},
-            {'authority': 'AAT', 'term': 'accessories by location on the head', 'uri': 'http://vocab.getty.edu/aat/300211601', 'parentTerm': 'worn costume accessories'},  # pylint: disable=line-too-long
+            {'authority': 'AAT', 'term': 'accessories by location on the head', 'uri': 'http://vocab.getty.edu/aat/300211601', 'parentTerm': 'worn costume accessories'},
             {'authority': 'AAT', 'term': 'worn costume accessories', 'uri': 'http://vocab.getty.edu/aat/300209274', 'parentTerm': 'costume accessories'},
             {'authority': 'AAT', 'term': 'costume accessories', 'uri': 'http://vocab.getty.edu/aat/300209273', 'parentTerm': 'costume (mode of fashion)'},
             {'authority': 'AAT', 'term': 'costume (mode of fashion)', 'uri': 'http://vocab.getty.edu/aat/300178802'}
@@ -69,11 +69,11 @@ class Test(unittest.TestCase):
         actual_results = expand_aat_terms(sample_subject)
         expected_results = {
             'authority': 'AAT', 'term': 'crowns', 'uri': 'http://vocab.getty.edu/aat/999',
-            'description': 'Ornamental fillets, wreaths, or similar encircling ornaments for the head worn to signify rank, for personal adornment, or as a mark of honor or achievement; also, coronal wreaths of leaves or flowers.',  # pylint: disable=line-too-long  # noqa: E501
+            'description': 'Ornamental fillets, wreaths, or similar encircling ornaments for the head worn to signify rank, for personal adornment, or as a mark of honor or achievement; also, coronal wreaths of leaves or flowers.',  # noqa: E501
             'broaderTerms': [
                 {'authority': 'AAT', 'term': 'headdresses', 'uri': 'http://vocab.getty.edu/aat/300046023', 'parentTerm': 'headgear'},
                 {'authority': 'AAT', 'term': 'headgear', 'uri': 'http://vocab.getty.edu/aat/300209285', 'parentTerm': 'accessories by location on the head'},
-                {'authority': 'AAT', 'term': 'accessories by location on the head', 'uri': 'http://vocab.getty.edu/aat/300211601', 'parentTerm': 'worn costume accessories'},  # pylint: disable=line-too-long
+                {'authority': 'AAT', 'term': 'accessories by location on the head', 'uri': 'http://vocab.getty.edu/aat/300211601', 'parentTerm': 'worn costume accessories'},
                 {'authority': 'AAT', 'term': 'worn costume accessories', 'uri': 'http://vocab.getty.edu/aat/300209274', 'parentTerm': 'costume accessories'},
                 {'authority': 'AAT', 'term': 'costume accessories', 'uri': 'http://vocab.getty.edu/aat/300209273', 'parentTerm': 'costume (mode of fashion)'},
                 {'authority': 'AAT', 'term': 'costume (mode of fashion)', 'uri': 'http://vocab.getty.edu/aat/300178802'},
