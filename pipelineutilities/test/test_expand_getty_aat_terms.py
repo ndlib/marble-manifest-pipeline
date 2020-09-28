@@ -69,7 +69,7 @@ class Test(unittest.TestCase):
         actual_results = expand_aat_terms(sample_subject)
         expected_results = {
             'authority': 'AAT', 'term': 'crowns', 'uri': 'http://vocab.getty.edu/aat/999',
-            'description': 'Ornamental fillets, wreaths, or similar encircling ornaments for the head worn to signify rank, for personal adornment, or as a mark of honor or achievement; also, coronal wreaths of leaves or flowers.',
+            'description': 'Ornamental fillets, wreaths, or similar encircling ornaments for the head worn to signify rank, for personal adornment, or as a mark of honor or achievement; also, coronal wreaths of leaves or flowers.',  # noqa: E501
             'broaderTerms': [
                 {'authority': 'AAT', 'term': 'headdresses', 'uri': 'http://vocab.getty.edu/aat/300046023', 'parentTerm': 'headgear'},
                 {'authority': 'AAT', 'term': 'headgear', 'uri': 'http://vocab.getty.edu/aat/300209285', 'parentTerm': 'accessories by location on the head'},
