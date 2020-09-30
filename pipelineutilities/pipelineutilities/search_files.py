@@ -202,6 +202,20 @@ def list_updated_files(config: dict, minutes_to_test: int):
                     yield file
 
 
+def list_all_files(config: dict):
+    bucket = config['rbsc-image-bucket']
+    print("crawling image files in this bucket: ", bucket)
+    for directory in folders_to_crawl:
+        objects = get_matching_s3_objects(bucket, directory)
+        for obj in objects:
+            if is_tracked_file(obj.get('Key')):
+                url = bucket_to_url[bucket] + obj.get('Key')
+                id = key_to_id(obj.get('Key'))
+                augement_file_record(obj, id, url, config)
+
+                yield obj
+
+
 def list_all_directories(config: dict):
     order_field = {}
     bucket = config['rbsc-image-bucket']
@@ -283,6 +297,18 @@ def is_tracked_file(file):
     return re.match(r"^.*[.]((jpe?g)|(tif)|(pdf))$", file, re.IGNORECASE)
 
 
+def json_serial(obj):
+    """JSON serializer for objects not serializable by default json code"""
+
+    if isinstance(obj, (datetime, date)):
+        return obj.isoformat()
+    raise TypeError("Type %s not serializable" % type(obj))
+
+
+import json
+from datetime import datetime, date
+
+
 # python -c 'from search_files import *; test()'
 def test():
     from pipeline_config import setup_pipeline_config
@@ -292,8 +318,13 @@ def test():
     # change to the prod bucket
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     # data = list_updated_files(config, 1000000)
-    objs = crawl_available_files(config)
-    for key, value in objs.items():
-        print(key, value['Directory'])
+    objs = list_all_files(config)
+    data = list(objs)
+    for id, value in enumerate(data):
+        value['Size'] = str(value['Size'])
+        data[id] = value
+
+    with open("output.json", 'w') as outfile:
+        print(json.dump(data, outfile, default=json_serial, sort_keys=True))
 
     return
