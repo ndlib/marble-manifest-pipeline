@@ -94,7 +94,7 @@ def id_from_url(url):
     for exp in test_expressions:
         test = re.findall(exp, file)
         if test:
-            return "%s/%s" % (directory, test[0])
+            return test[0]
 
     return False
 
@@ -205,7 +205,6 @@ def crawl_available_files(config):
                     augement_file_record(obj, id, url, config)
 
                     order_field[id]['files'].append(obj)
-
     return order_field
 
 
@@ -346,13 +345,12 @@ def test():
     # change to the prod bucket
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     # data = list_updated_files(config, 1000000)
-    objs = list_all_files(config)
-    data = list(objs)
-    for id, value in enumerate(data):
-        value['Size'] = str(value['Size'])
-        data[id] = value
+    data = crawl_available_files(config)
+    for id, value in data.items():
+        print(id)
+        print(value)
 
-    with open("output.json", 'w') as outfile:
-        print(json.dump(data, outfile, default=json_serial, sort_keys=True))
+#    with open("output.json", 'w') as outfile:
+#        print(json.dump(data, outfile, default=json_serial, sort_keys=True))
 
     return

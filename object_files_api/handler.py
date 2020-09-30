@@ -30,4 +30,7 @@ def test():
     event['ssm_key_base'] = '/all/new-csv'
     # event['ssm_key_base'] = '/all/marble-manifest-prod'
     # event['rbsc-image-bucket'] = 'libnd-smb-rbsc'
+    event['image-server-base-url'] = 'http://images.com'
+    event['image-server-bucket'] = 's3://images'
+    event['manifest-server-bucket'] = 'steve-manifest-manifestbucket46c412a5-19kyrt97zbq12'
     run(event, {})
