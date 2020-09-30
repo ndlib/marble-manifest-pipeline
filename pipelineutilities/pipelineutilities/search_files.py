@@ -1,9 +1,8 @@
 import boto3
 import re
 import os
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, date, timedelta, timezone
 from urllib.parse import urlparse
-
 # saved live path
 # "libnd-smb-rbsc": ["digital/bookreader", "collections/ead_xml/images"]
 
@@ -332,10 +331,6 @@ def json_serial(obj):
     raise TypeError("Type %s not serializable" % type(obj))
 
 
-import json
-from datetime import datetime, date
-
-
 # python -c 'from search_files import *; test()'
 def test():
     from pipeline_config import setup_pipeline_config
@@ -349,8 +344,5 @@ def test():
     for id, value in data.items():
         print(id)
         print(value)
-
-#    with open("output.json", 'w') as outfile:
-#        print(json.dump(data, outfile, default=json_serial, sort_keys=True))
 
     return
