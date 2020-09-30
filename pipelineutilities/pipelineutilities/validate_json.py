@@ -30,6 +30,68 @@ def validate_standard_json(json_to_test: dict) -> bool:
     return valid_json_flag
 
 
+subject_properties = {
+    "authority": {"type": "string"},
+    "display": {"type": "string"},
+    "term": {"type": "string"},
+    "uri": {"type": "string"},
+    "description": {"type": "string"},
+    "parentTerms": {
+        "type": "array",
+        "items": {"type": "string"}
+    },
+    "variants": {
+        "type": "array",
+        "items": {"type": "string"}
+    },
+    "broaderTerms": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "authority": {"type": "string"},
+                "display": {"type": "string"},
+                "term": {"type": "string"},
+                "uri": {"type": "string"},
+                "parentTerm": {"type": "string"}
+            }
+        }
+    }
+}
+
+subject_definition = {
+    "type": "object",
+    "properties": subject_properties,
+    "required": ["term"],
+    "additionalProperties": False
+}
+
+subject_json_schema = {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Schema for validating a single subject",
+    "id": "subject.schema.json",
+    "type": "object",
+    "properties": subject_properties,
+    "required": ["term"],
+    "additionalProperties": False
+}
+
+subjects_definition = {
+    "type": "array",
+    "items": subject_definition,
+}
+
+subjects_json_schema = {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Schema for validating subjects",
+    "title": "Tester for subjects schema",
+    "id": "subjects.schema.json",
+    "type": "object",
+    "properties": {
+        "subjects": subjects_definition
+    }
+}
+
 standard_json_schema = {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "description": "Schema for validating ND.json",
@@ -44,6 +106,14 @@ standard_json_schema = {
         "repository": {"type": "string"},
         "collectionId": {"type": "string"},
         "parentId": {"type": "string"},
+        "relatedIds": {
+            "description": "This facilitates defining non-parent-child relationships.",
+            "type": "array",
+            "items": {
+                "id": {"type": "string"},
+                "sequence": {"type": "string"}
+            }
+        },
         "level": {"type": "string"},
         "title": {"type": "string"},
         "createdDate": {
@@ -55,33 +125,36 @@ standard_json_schema = {
         "languages": {
             "description": "Ultimately, we want languages, like ['english'] or ['english', 'french'].",
             "type": "array",
-            "items": {"type": "string"}
-        },
-        "subjects": {
-            "type": "array",
             "items": {
-                "description": "Ideally, subjects contain URIs, unfortunately, many do not.",
-                "type": "object",
-                "properties": {
-                    "authority": {"type": "string"},
-                    "term": {"type": "string"},
-                    "uri": {"type": "string"}
-                },
-                "required": ["term"],
-                "additionalProperties": False
+                "anyOf": [
+                    {"type": "string"},
+                    {
+                        "type": "object",
+                        "Properties": {
+                            "display": {"type": "string"},
+                            "alpha2": {"type": "string"},
+                            "alpha3": {"type": "string"}
+                        }
+
+                    }
+                ]
             }
         },
+        "subjects": subjects_definition,
         "copyrightStatus": {"type": "string"},
+        "copyrightUrl": {"type": "string"},
         "copyrightStatement": {"type": "string"},
         "linkToSource": {"type": "string"},
         "access": {"type": "string"},
+        "physicalAccess": {"type": "string"},
+        "digitalAccess": {"enum": ["Regular", "Restricted"]},
         "format": {"type": "string"},
         "dedication": {"type": "string"},
         "description": {"type": "string"},
         "modifiedDate": {"type": "string"},
         "thumbnail": {"type": "boolean"},
         "filePath": {"type": "string"},
-        "sequence": {"type": ["number", "string"]},
+        "sequence": {"type": "number"},
         "collectionInformation": {"type": "string"},
         "fileId": {"anyOf": [{"type": "string"}, {"type": "boolean"}]},
         "mimeType": {"type": "string"},
@@ -94,6 +167,16 @@ standard_json_schema = {
                 "publisherLocation": {"type": "string"}
             },
             "required": ["publisherName"],
+            "additionalProperties": False
+        },
+        "publishers": {
+            "type": "object",
+            "properties": {
+                "display": {"type": "string"},
+                "publisherName": {"type": "string"},
+                "publisherLocation": {"type": "string"}
+            },
+            "required": ["display"],
             "additionalProperties": False
         },
         "contributors": {
@@ -138,6 +221,20 @@ standard_json_schema = {
                 "additionalProperties": False
             }
         },
+        "collections": {
+            "description": "This is a list of names of collections to which this object belongs.",
+            "type": "array",
+            # "items": {"type": "string"}
+            "items": {
+                "anyOf": [
+                    {"type": "string"},
+                    {
+                        "type": "object",
+                        "properties": {"display": {"type": "string"}}
+                    }
+                ]
+            },
+        },
         "md5Checksum": {"type": "string"},
         "creationPlace": {
             "type": "object",
@@ -169,17 +266,26 @@ standard_json_schema = {
     },
     "required": ["id", "parentId", "collectionId", "apiVersion", "fileCreatedDate"],
     "additionalProperties": False
-
 }
 
 
 def get_standard_json_schema():
     """ Return our nd.json schema """
-    return(standard_json_schema)
+    return standard_json_schema
+
+
+def get_subjects_json_schema():
+    """ Return subjects (plural) schema """
+    return subjects_json_schema
+
+
+def get_subject_json_schema():
+    """ Return subject (singular) schema """
+    return subject_json_schema
 
 
 # python -c 'from validate_json import *; test()'
-def test(identifier=""):
+def test():
     """ test various known cases for schema validation success or failure """
     schema_to_use = get_standard_json_schema()
     optional_test_mode_parameter = False
@@ -206,4 +312,4 @@ def test(identifier=""):
         validation_results = validate_json(json_to_test, schema_to_use, optional_test_mode_parameter)
         if validation_results != result[index]:
             print("Expected ", result[index], " when validating ", json_to_test)
-        assert(result[index] == validation_results)
+        assert result[index] == validation_results

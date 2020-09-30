@@ -22,6 +22,12 @@ skip_files = [
     r"^.*[.]072[.]jpg$",
     r"^.*[.]100[.]jpg$",
     r"^[.]_.*$",
+    r"^_.*$",
+]
+
+# patterns we skip if the folder matches these
+skip_folders = [
+    r"^.*resource.frk.*$",
 ]
 
 # patterns that corrispond to urls we can parse
@@ -74,7 +80,7 @@ def id_from_url(url):
     url = urlparse(url)
     file = os.path.basename(url.path)
 
-    if file_should_be_skipped(file):
+    if file_should_be_skipped(url.path):
         return False
 
     directory = os.path.dirname(url.path)
@@ -135,11 +141,15 @@ def url_can_be_harvested(url):
     return False
 
 
-def file_should_be_skipped(file):
+def file_should_be_skipped(file_path):
+    file_name = os.path.basename(file_path)
+    folder_name = os.path.dirname(file_path)
     for exp in skip_files:
-        if re.match(exp, file):
+        if re.match(exp, file_name):
             return True
-
+    for exp in skip_folders:
+        if re.match(exp, folder_name):
+            return True
     return False
 
 
@@ -152,6 +162,17 @@ def make_label(url, id):
     label = label.replace(".", " ")
     label = re.sub(' +', ' ', label)
     return label.strip()
+
+
+def _convert_dict_to_camel_case(obj: dict) -> dict:
+    keys_to_remove = []
+    for k, v in dict(obj).items():
+        if re.match("^[A-Z]{1}.*", k):
+            obj[k[0].lower() + k[1:]] = v
+            keys_to_remove.append(k)
+    for k in keys_to_remove:
+        del obj[k]
+    return obj
 
 
 def crawl_available_files(config):
@@ -167,17 +188,19 @@ def crawl_available_files(config):
                 id = id_from_url(url)
 
                 if id:
+                    obj = _convert_dict_to_camel_case(obj)
                     if not order_field.get(id, False):
                         order_field[id] = {
-                            "FileId": id,
-                            "Source": "RBSC",
-                            "LastModified": False,
-                            "Directory": os.path.dirname(key),
+                            "fileId": id,
+                            "sourceType": "S3",
+                            "source": bucket,
+                            "lastModified": False,
+                            "directory": os.path.dirname(key),
                             "files": [],
                         }
 
-                    if not order_field[id]["LastModified"] or obj['LastModified'] > order_field[id]["LastModified"]:
-                        order_field[id]["LastModified"] = obj['LastModified']
+                    if not order_field[id]["lastModified"] or obj['lastModified'] > order_field[id]["lastModified"]:
+                        order_field[id]["lastModified"] = obj['lastModified']
 
                     augement_file_record(obj, id, url, config)
 
@@ -197,7 +220,9 @@ def list_updated_files(config: dict, minutes_to_test: int):
                 url = bucket_to_url[bucket] + file.get('Key')
                 id = id_from_url(url)
 
-                if id and file['LastModified'] >= time_threshold_for_processing:
+                file = _convert_dict_to_camel_case(file)
+
+                if id and file['lastModified'] >= time_threshold_for_processing:
                     augement_file_record(file, id, url, config)
                     yield file
 
@@ -275,13 +300,14 @@ def is_directory(file):
 def augement_file_record(obj, id, url, config):
     bucket = config['rbsc-image-bucket']
 
-    obj['FileId'] = id
-    obj['Label'] = make_label(url, id)
-    obj['Source'] = 'RBSC'
-    obj['Path'] = "s3://" + os.path.join(bucket, obj['Key'])
-    obj['SourceUri'] = url
-    obj["iiifImageUri"] = os.path.join(config['image-server-base-url'], obj.get('Key'))
-    obj["iiifImageFilePath"] = "s3://" + os.path.join(config['image-server-bucket'], obj.get('Key'))
+    obj['fileId'] = id
+    obj['label'] = make_label(url, id)
+    obj['sourceType'] = 'S3'
+    obj['source'] = bucket
+    obj['path'] = "s3://" + os.path.join(bucket, obj['key'])
+    obj['sourceUri'] = url
+    obj["iiifImageUri"] = os.path.join(config['image-server-base-url'], obj.get('key'))
+    obj["iiifImageFilePath"] = "s3://" + os.path.join(config['image-server-bucket'], obj.get('key'))
 
 
 def determine_time_threshold_for_processing(time_in_min):
@@ -294,6 +320,8 @@ def determine_time_threshold_for_processing(time_in_min):
 
 
 def is_tracked_file(file):
+    if file_should_be_skipped(file):
+        return False
     return re.match(r"^.*[.]((jpe?g)|(tif)|(pdf))$", file, re.IGNORECASE)
 
 

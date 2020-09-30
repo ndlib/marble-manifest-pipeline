@@ -1,8 +1,8 @@
-import csv
+# import csv
 import json
 import os
 import boto3
-from io import StringIO
+# from io import StringIO
 
 
 def load_image_data(id, config):
@@ -35,95 +35,95 @@ def load_image_from_s3(s3Bucket, s3Path, id, config):
         return {}
 
 
-def load_csv_data(id, config):
-    if config.get('local', False):
-        objects = load_id_from_file(id, config)
-    else:
-        objects = load_id_from_s3(config['process-bucket'], config['process-bucket-csv-basepath'], id)
+# def load_csv_data(id, config):
+#     if config.get('local', False):
+#         objects = load_id_from_file(id, config)
+#     else:
+#         objects = load_id_from_s3(config['process-bucket'], config['process-bucket-csv-basepath'], id)
+#
+#     all_image_data = load_image_data(id, config)
+#
+#     for object in objects:
+#         _augment_row_data(object, all_image_data, config)
+#
+#     return Item(objects[0], objects).collection()
+#
+#
+# def load_id_from_s3(s3Bucket, s3Path, id):
+#     s3Path = s3Path + "/" + id + ".csv"
+#
+#     content_object = boto3.resource('s3').Object(s3Bucket, s3Path)
+#     source = content_object.get()['Body'].read().decode('utf-8')
+#     f = StringIO(source)
+#
+#     return list(csv.DictReader(f, delimiter=','))
+#
+#
+# def load_id_from_file(id, config):
+#     filepath = config['local-path'] + "/" + id + "/" + id + ".csv"
+#
+#     with open(filepath, 'r') as input_source:
+#         source = input_source.read()
+#     input_source.close()
+#     f = StringIO(source)
+#
+#     return list(csv.DictReader(f, delimiter=','))
 
-    all_image_data = load_image_data(id, config)
-
-    for object in objects:
-        _augment_row_data(object, all_image_data, config)
-
-    return Item(objects[0], objects).collection()
-
-
-def load_id_from_s3(s3Bucket, s3Path, id):
-    s3Path = s3Path + "/" + id + ".csv"
-
-    content_object = boto3.resource('s3').Object(s3Bucket, s3Path)
-    source = content_object.get()['Body'].read().decode('utf-8')
-    f = StringIO(source)
-
-    return list(csv.DictReader(f, delimiter=','))
-
-
-def load_id_from_file(id, config):
-    filepath = config['local-path'] + "/" + id + "/" + id + ".csv"
-
-    with open(filepath, 'r') as input_source:
-        source = input_source.read()
-    input_source.close()
-    f = StringIO(source)
-
-    return list(csv.DictReader(f, delimiter=','))
-
-
-class Item():
-
-    def __init__(self, object, all_objects):
-        self.object = object
-        self.all_objects = all_objects
-
-    def repository(self):
-        return self.get('sourceSystem', 'aleph')
-
-    def type(self):
-        return self.get('level')
-
-    def collection(self):
-        return self._find_row(self.object.get('collectionId'))
-
-    def parent(self):
-        parent = self._find_row(self.object.get('parentId'))
-        if not parent:
-            parent = self
-
-        return parent
-
-    def root(self):
-        return self.get("parentId", False) == "root"
-
-    def get(self, key, default=False):
-        return self.object.get(key, default)
-
-    def children(self):
-        children = []
-        test_id = "".join(self.get('id').lower().split(" "))
-        for row in self.all_objects:
-            if "".join(row['parentId'].lower().split(" ")) == test_id:
-                children.append(Item(row, self.all_objects))
-
-        return children
-
-    def files(self):
-        ret = []
-
-        for child in self.children():
-            if child.type() == 'file':
-                ret.append(child)
-            else:
-                ret = ret + child.files()
-
-        return ret
-
-    def _find_row(self, id):
-        for this_row in self.all_objects:
-            if this_row.get('id', False) == id:
-                return Item(this_row, self.all_objects)
-
-        return False
+#
+# class Item():
+#
+#     def __init__(self, object, all_objects):
+#         self.object = object
+#         self.all_objects = all_objects
+#
+#     def repository(self):
+#         return self.get('sourceSystem', 'aleph')
+#
+#     def type(self):
+#         return self.get('level')
+#
+#     def collection(self):
+#         return self._find_row(self.object.get('collectionId'))
+#
+#     def parent(self):
+#         parent = self._find_row(self.object.get('parentId'))
+#         if not parent:
+#             parent = self
+#
+#         return parent
+#
+#     def root(self):
+#         return self.get("parentId", False) == "root"
+#
+#     def get(self, key, default=False):
+#         return self.object.get(key, default)
+#
+#     def children(self):
+#         children = []
+#         test_id = "".join(self.get('id').lower().split(" "))
+#         for row in self.all_objects:
+#             if "".join(row['parentId'].lower().split(" ")) == test_id:
+#                 children.append(Item(row, self.all_objects))
+#
+#         return children
+#
+#     def files(self):
+#         ret = []
+#
+#         for child in self.children():
+#             if child.type() == 'file':
+#                 ret.append(child)
+#             else:
+#                 ret = ret + child.files()
+#
+#         return ret
+#
+#     def _find_row(self, id):
+#         for this_row in self.all_objects:
+#             if this_row.get('id', False) == id:
+#                 return Item(this_row, self.all_objects)
+#
+#         return False
 
 
 def _augment_row_data(row, all_image_data, config):
@@ -239,16 +239,16 @@ def test():
 
     # s3 libnd
     config['local'] = False
-    for id in ['1954.030']:
-        parent = load_csv_data(id, config)
-        print(parent.object['creators'][0])
-    return
-    # local
-    config['local'] = True
-    for id in ['parsons', '1976.057']:
-        parent = load_csv_data(id, config)
-        print(parent.get('title'))
-        print(parent.get('height'))
-
-        for file in parent.files():
-            print(file.get("height"))
+    # for id in ['1954.030']:
+    #     parent = load_csv_data(id, config)
+    #     print(parent.object['creators'][0])
+    # return
+    # # local
+    # config['local'] = True
+    # for id in ['parsons', '1976.057']:
+    #     parent = load_csv_data(id, config)
+    #     print(parent.get('title'))
+    #     print(parent.get('height'))
+    #
+    #     for file in parent.files():
+    #         print(file.get("height"))

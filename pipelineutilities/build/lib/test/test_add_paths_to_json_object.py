@@ -31,7 +31,7 @@ class Test(unittest.TestCase):
         #     json.dump(standard_json_with_files, f, indent=2)
         with open(local_folder + './MSNEA8011_EAD_with_files_and_paths.json', 'r') as input_source:
             expected_json = json.load(input_source)
-        self.assertTrue(expected_json == standard_json_with_files)
+        self.assertEqual(expected_json, standard_json_with_files)
 
 
 def suite():

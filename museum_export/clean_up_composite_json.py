@@ -26,7 +26,7 @@ class CleanUpCompositeJson():
             if "items" not in parent:
                 parent["items"] = []
             if child_id in objects:
-                objects[child_id]["sequence"] = sequence
+                objects[child_id]["sequence"] = int(sequence)
                 parent["items"].append(objects[child_id])
                 CleanUpCompositeJson._remove_child_node_from_objects(objects, family["childId"])
                 CleanUpCompositeJson._remove_child_node_from_parent_children_array(objects, parent_id, child_id)

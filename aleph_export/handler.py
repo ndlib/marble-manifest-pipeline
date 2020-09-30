@@ -14,7 +14,7 @@ if 'SENTRY_DSN' in os.environ:
     sentry_sdk.init(dsn=os.environ['SENTRY_DSN'], integrations=[AwsLambdaIntegration()])
 
 
-def run(event, context):
+def run(event, _context):
     """ Run the process to retrieve and process Aleph metadata. """
     _supplement_event(event)
     config = setup_pipeline_config(event)
@@ -40,12 +40,13 @@ def _supplement_event(event):
 
 # setup:
 # export SSM_KEY_BASE=/all/new-csv
+# export SSM_KEY_BASE=/all/stacks/marbleb-prod-manifest
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
 
 # testing:
 # python 'run_all_tests.py'
-def test(identifier=""):
+def test():
     """ test exection """
     event = {}
     event['local'] = False

@@ -29,14 +29,15 @@ class iiifManifest():
             # print("key = ", key, self.data.get(key))
             if key.lower() != 'n/a':
                 # print("key = ", key, " value = ", self.data.get(key, 'no value'))
-                if key == 'creators':
+                if key in ('creators', 'contributors', 'publishers', 'languages', 'subjects', 'collections'):
                     value = self.data.get(key)
                     if value:
+                        # print("key, value = ", key, value)
                         value = list(map(lambda row: row.get('display', ''), value))
-                elif key == 'subjects':
-                    value = self.data.get(key, [])
-                    if value and len(value) != 0:
-                        value = list(map(lambda row: row.get('term', ''), value))
+                # elif key == 'subjects':
+                #     value = self.data.get(key, [])
+                #     if value and len(value) != 0:
+                #         value = list(map(lambda row: row.get('term', ''), value))
                 else:
                     value = self.data.get(key, False)
 
@@ -106,7 +107,6 @@ class iiifManifest():
             return 'Collection'
         elif self.data.type() == 'file':
             return 'Canvas'
-
         raise Exception("invalid schema processor type: " + self.data.type())
 
     def _manifest_id(self):

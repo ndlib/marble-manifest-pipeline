@@ -1,0 +1,42 @@
+<Vocabulary
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://vocabsservices.getty.edu/Schemas/CONA/CONAGetParentHierarchyIcon.xsd">
+	<Iconography Iconography_ID="901000032">
+		<Parent_Hierarchies>
+			<Preferred_Parent>
+				<Total_Levels>4</Total_Levels>
+				<Parent_Record>
+					<Parent_Level>4</Parent_Level>
+					<Parent_Subject_ID>901000002</Parent_Subject_ID>
+					<Pref_Term>Legend, Religion, Mythology</Pref_Term>
+					<Record_Type>Facet</Record_Type>
+					<Hier_Rel_Type>Whole/Part-BTP</Hier_Rel_Type>
+					<Display_Date></Display_Date>
+				</Parent_Record>
+				<Parent_Record>
+					<Parent_Level>3</Parent_Level>
+					<Parent_Subject_ID>901000024</Parent_Subject_ID>
+					<Pref_Term>Christian iconography</Pref_Term>
+					<Record_Type>Guide Term</Record_Type>
+					<Hier_Rel_Type>Whole/Part-BTP</Hier_Rel_Type>
+					<Display_Date></Display_Date>
+				</Parent_Record>
+				<Parent_Record>
+					<Parent_Level>2</Parent_Level>
+					<Parent_Subject_ID>901000047</Parent_Subject_ID>
+					<Pref_Term>Christian characters</Pref_Term>
+					<Record_Type>Guide Term</Record_Type>
+					<Hier_Rel_Type>Whole/Part-BTP</Hier_Rel_Type>
+					<Display_Date></Display_Date>
+				</Parent_Record>
+				<Parent_Record>
+					<Parent_Level>1</Parent_Level>
+					<Parent_Subject_ID>901000032</Parent_Subject_ID>
+					<Pref_Term>Blessed Virgin Mary (Christian character)</Pref_Term>
+					<Record_Type>Character/Person</Record_Type>
+					<Hier_Rel_Type>Instance-BTI</Hier_Rel_Type>
+					<Display_Date></Display_Date>
+				</Parent_Record>
+			</Preferred_Parent>
+		</Parent_Hierarchies>
+	</Iconography>
+</Vocabulary>

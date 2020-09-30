@@ -59,13 +59,22 @@
 				"note": "added e 5/15/20 sm"
 			},
 			{ "label": "contributors",
-				"fields": ["700", "710"],
+				"fields": ["700"],
 				"selection": "range",
 				"subfields": ["a", "b", "c", "d", "e", "q"],
 				"specialSubfields": ["d"],
 				"extraProcessing": "format_creators",
 				"format": "array",
 				"note": "added 5/15/20 sm"
+			},
+			{ "label": "collections",
+				"fields": ["791"],
+				"selection": "range",
+				"subfields": ["a", "b", "c", "d", "e", "q"],
+				"specialSubfields": ["d"],
+				"extraProcessing": "format_collections",
+				"format": "array",
+				"note": ["added 710 7/20/20 sm", "changed 710 to 791 8/26020 sm"]
 			},
 			{ "label": "createdDate",
 				"fields": ["264", "260"],
@@ -84,18 +93,33 @@
 				"selection": "range",
 				"skipFields": ["655", "690"],
 				"subfields": ["a", "b", "c", "d", "e", "f", "g", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+				"subfieldSeparator": " -- ",
 				"specialSubfields": ["0"],
 				"extraProcessing": "format_subjects",
-				"format": "array"
+				"format": "array",
+				"note": "these subfields are defined here: https://www.loc.gov/marc/bibliographic/bd650.html and https://www.loc.gov/marc/bibliographic/bd6xx.html"
 			},
 			{ "label": "copyrightStatus",
 				"fields": ["542"],
 				"subfields": ["l"],
 				"format": "text"
 			},
+			{ "label": "copyrightUrl",
+				"fields": ["542"],
+				"subfields": ["u"],
+				"format": "text"
+			},
 			{ "label": "copyrightStatement",
 				"fields": ["542"],
 				"subfields": ["f"],
+				"format": "text"
+			},
+			{
+				"label": "digitalAccess",
+				"note": "This must run after copyrightStatus is added above.",
+				"externalProcess": "define_digital_access",
+				"passLabels": [{"copyrightStatus": "copyrightStatus"}],
+				"optional": true,
 				"format": "text"
 			},
 			{ "label": "linkToSource",
@@ -179,7 +203,7 @@
 				"format": "text"
 			},
 			{ "label": "sequence",
-				"constant": "1",
+				"constant": 1,
 				"format": "text"
 			},
 			{ "label": "thumbnail",

@@ -1,16 +1,91 @@
 {
-  "@context": [
-    "http://www.w3.org/ns/anno.jsonld",
-    "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
-    "http://iiif.io/api/presentation/3/context.json"
-  ],
+  "type": "Manifest",
   "id": "https://presentation-iiif.library.nd.edu/pdf/manifest",
-  "items": [],
   "label": {
     "en": [
       "Memento Mori: Death Comes to the Table"
     ]
   },
+  "thumbnail": [
+    {}
+  ],
+  "items": [],
+  "viewingDirection": "left-to-right",
+  "@context": [
+    "http://www.w3.org/ns/anno.jsonld",
+    "https://presentation-iiif.library.nd.edu/extensions/partiallyDigitized",
+    "http://iiif.io/api/presentation/3/context.json"
+  ],
+  "provider": [
+    {
+      "id": "https://sniteartmuseum.nd.edu/about-us/contact-us/",
+      "type": "Agent",
+      "label": {
+        "en": [
+          "Snite Museum of Art"
+        ]
+      },
+      "homepage": [
+        {
+          "id": "https://sniteartmuseum.nd.edu",
+          "type": "Text",
+          "label": {
+            "en": [
+              "Snite Museum of Art"
+            ]
+          },
+          "format": "text/html"
+        }
+      ],
+      "logo": [
+        {
+          "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
+          "type": "Image",
+          "format": "image/png",
+          "height": 100,
+          "width": 120
+        }
+      ]
+    }
+  ],
+  "requiredStatement": {
+    "label": {
+      "en": [
+        "Copyright"
+      ]
+    },
+    "value": {
+      "en": [
+        "Public domain"
+      ]
+    }
+  },
+  "seeAlso": [
+    {
+      "id": "https://presentation-iiif.library.nd.edu/pdf/mets.xml",
+      "type": "Dataset",
+      "profile": "http://www.loc.gov/METS/",
+      "format": "application/xml"
+    },
+    {
+      "id": "https://presentation-iiif.library.nd.edu/pdf",
+      "type": "Dataset",
+      "format": "application/ld+json",
+      "profile": "https://schema.org/"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://rbsc.library.nd.edu/pdfs/pdf.pdf",
+      "type": "Text",
+      "label": {
+        "en": [
+          "PDF Rendering"
+        ]
+      },
+      "format": "application/pdf"
+    }
+  ],
   "metadata": [
     {
       "label": {
@@ -27,7 +102,7 @@
     {
       "label": {
         "en": [
-          "Date "
+          "Date"
         ]
       },
       "value": {
@@ -39,7 +114,7 @@
     {
       "label": {
         "en": [
-          "Classification "
+          "Classification"
         ]
       },
       "value": {
@@ -63,7 +138,7 @@
     {
       "label": {
         "en": [
-          "Accession number "
+          "Accession number"
         ]
       },
       "value": {
@@ -126,80 +201,5 @@
         ]
       }
     }
-  ],
-  "provider": [
-    {
-      "homepage": [
-        {
-          "format": "text/html",
-          "id": "https://sniteartmuseum.nd.edu",
-          "label": {
-            "en": [
-              "Snite Museum of Art"
-            ]
-          },
-          "type": "Text"
-        }
-      ],
-      "id": "https://sniteartmuseum.nd.edu/about-us/contact-us/",
-      "label": {
-        "en": [
-          "Snite Museum of Art"
-        ]
-      },
-      "logo": [
-        {
-          "format": "image/png",
-          "height": 100,
-          "id": "https://sniteartmuseum.nd.edu/stylesheets/images/snite_logo@2x.png",
-          "type": "Image",
-          "width": 120
-        }
-      ],
-      "type": "Agent"
-    }
-  ],
-  "rendering": [
-    {
-      "format": "application/pdf",
-      "id": "https://rbsc.library.nd.edu/pdfs/pdf.pdf",
-      "label": {
-        "en": [
-          "PDF Rendering"
-        ]
-      },
-      "type": "Text"
-    }
-  ],
-  "requiredStatement": {
-    "label": {
-      "en": [
-        "Copyright"
-      ]
-    },
-    "value": {
-      "en": [
-        "Public domain"
-      ]
-    }
-  },
-  "seeAlso": [
-    {
-      "format": "application/xml",
-      "id": "https://presentation-iiif.library.nd.edu/pdf/mets.xml",
-      "profile": "http://www.loc.gov/METS/",
-      "type": "Dataset"
-    },
-    {
-      "format": "application/ld+json",
-      "id": "https://presentation-iiif.library.nd.edu/pdf",
-      "profile": "https://schema.org/",
-      "type": "Dataset"
-    }
-  ],
-  "thumbnail": [
-    {}
-  ],
-  "type": "Manifest",
-  "viewingDirection": "left-to-right"
+  ]
 }

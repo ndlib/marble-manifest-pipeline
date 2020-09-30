@@ -1,15 +1,19 @@
-# curate_api.py
+"""
+Curate_API
+Calls the Curate API, massages results to create standard json output, which is then saved.
+"""
+
 import time
 import json
 from datetime import datetime
-import dependencies.requests
 import os
 import io
+import dependencies.requests
 from dependencies.sentry_sdk import capture_exception
 from translate_curate_json_node import TranslateCurateJsonNode
 from create_standard_json import CreateStandardJson
-from convert_json_to_csv import ConvertJsonToCsv
-from pipelineutilities.s3_helpers import write_s3_file
+from pipelineutilities.standard_json_helpers import StandardJsonHelpers
+# from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.save_standard_json import save_standard_json
 
 
@@ -26,70 +30,86 @@ class CurateApi():
         self.save_curate_json_locally = event.get("local", False)
         self.create_standard_json_class = CreateStandardJson(config)
         self.local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
+        self.attempting_huge_export_with_resumption_flag = False
 
     def get_curate_items(self, ids: list) -> bool:
         """ Given a list of ids, process each one that corresponds to a Curate item """
         aborted_processing = False
-        for id in list(ids):  # iterate over a copy of the list, so we can remove items from the original list
-            if "und:" in id:
-                curate_id = id.replace("und:", "")  # strip namespace
+        for item_id in list(ids):  # iterate over a copy of the list, so we can remove items from the original list
+            if "und:" in item_id:
+                curate_id = item_id.replace("und:", "")  # strip namespace
                 self.get_curate_item(curate_id)
-                ids.remove(id)
+                ids.remove(item_id)
             if datetime.now() > self.time_to_break and len(ids) > 0:
                 aborted_processing = True
                 break
-        return not(aborted_processing)
+        return not aborted_processing
 
-    def get_curate_item(self, id: str) -> dict:  # noqa: C901  - Added code to accommodate export architectural lantern slides looping and restarting
-        """ Get json metadata for a curate item given an item id
+    def get_curate_item(self, item_id: str) -> dict:
+        """ Get json metadata for a curate item given an item_id
             Note: query is of the form: curate-server-base-url + "/api/items/<pid>" """
         standard_json = {}
-        url = self.config["curate-server-base-url"] + "/api/items/" + id
-        filename = self.local_folder + "test/" + id + "_curate.json"
-        file_exists_flag = os.path.exists(filename)
-        if self.save_standard_json_locally:
-            if id == "qz20sq9094h" and file_exists_flag:
-                with io.open(filename, 'r', encoding='utf-8') as json_file:
-                    curate_json = json.load(json_file)
-            else:
-                curate_json = self._get_json_given_url(url)
-                with open(self.local_folder + "test/" + id + "_curate.json", "w") as output_file:
-                    json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
+        curate_json = self._get_curate_json(item_id)
         members = []
         if "membersUrl" in curate_json:
-            if not curate_json["members"]:
-                print("getting members list")
-                members = self._get_members_list(curate_json['membersUrl'], id, 100, False)
-                curate_json["members"] = members
-                if self.save_standard_json_locally:
-                    with open(self.local_folder + "test/" + id + "_curate_with_members_list.json", "w") as output_file:
-                        json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
-            else:
-                members = curate_json["members"]
-            filename = self.local_folder + "test/" + id + "_members_json.json"
-            file_exists_flag = os.path.exists(filename)
-            if file_exists_flag:
-                with io.open(filename, 'r', encoding='utf-8') as json_file:
-                    members = json.load(json_file)
+            members = self._get_members_json(curate_json, item_id)
             while self._more_unprocessed_members_exist(members):
-                members = self._get_members_details(members, False, id, 10)
+                members = self._get_members_details(members, False, item_id, 20)
                 curate_json["members"] = members
-                if self.save_curate_json_locally:
-                    with open(self.local_folder + "test/" + id + "_curate.json", "w") as output_file:
+                if self.save_curate_json_locally or self.attempting_huge_export_with_resumption_flag:
+                    with open(self.local_folder + "test/" + item_id + "_curate.json", "w") as output_file:
                         json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
+
         standard_json = self.translate_curate_json_node_class.build_json_from_curate_json(curate_json, "root", {})
+        standard_json_helpers_class = StandardJsonHelpers(self.config)
+        standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
         if self.save_standard_json_locally:
-            with open(self.local_folder + "test/" + id + "_preliminary_standard.json", "w") as output_file:
+            with open(self.local_folder + "test/" + item_id + "_preliminary_standard.json", "w") as output_file:
                 json.dump(standard_json, output_file, indent=2, ensure_ascii=False)
         standard_json = self.create_standard_json_class.build_standard_json_tree(standard_json, members)
         if standard_json:
             if self.save_standard_json_locally:
-                with open(self.local_folder + "test/" + id + "_standard.json", "w") as output_file:
+                with open(self.local_folder + "test/" + item_id + "_standard.json", "w") as output_file:
                     json.dump(standard_json, output_file, indent=2, ensure_ascii=False)
             else:
                 save_standard_json(self.config, standard_json)
-                _export_json_as_csv(self.config, standard_json)
+                # save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
+                # save_standard_json_to_dynamo_class.save_standard_json(standard_json)
         return standard_json
+
+    def _get_curate_json(self, item_id: str) -> dict:
+        """ If self.attempting_huge_export_with_resumption_flag, read file locally
+            (if it exists), otherwise, get json using url to Curate API """
+        curate_json = {}
+        url = self.config["curate-server-base-url"] + "/api/items/" + item_id
+        filename = self.local_folder + "test/" + item_id + "_curate.json"
+        if self.attempting_huge_export_with_resumption_flag and os.path.exists(filename):
+            with io.open(filename, 'r', encoding='utf-8') as json_file:
+                curate_json = json.load(json_file)
+        else:
+            curate_json = self._get_json_given_url(url)
+            if self.save_standard_json_locally or self.attempting_huge_export_with_resumption_flag:
+                with open(self.local_folder + "test/" + item_id + "_curate.json", "w") as output_file:
+                    json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
+        return curate_json
+
+    def _get_members_json(self, curate_json: dict, item_id: str) -> dict:
+        """ If self.attempting_huge_export_with_resumption_flag, read file locally
+            (if it exists), otherwise, get json using url to Curate API """
+        if not curate_json.get("members", False):
+            print("getting members list")
+            members = self._get_members_list(curate_json['membersUrl'], item_id, 100, False)
+            curate_json["members"] = members
+            if self.attempting_huge_export_with_resumption_flag:
+                with open(self.local_folder + "test/" + item_id + "_curate.json", "w") as output_file:
+                    json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
+        else:
+            members = curate_json["members"]
+        filename = self.local_folder + "test/" + item_id + "_members_json.json"
+        if os.path.exists(filename):
+            with io.open(filename, 'r', encoding='utf-8') as json_file:
+                members = json.load(json_file)
+        return members
 
     def _more_unprocessed_members_exist(self, members: dict) -> bool:
         for member in members:
@@ -107,30 +127,34 @@ class CurateApi():
         i = 1
         while url and "part_of" in url:
             member_results = self._get_json_given_url(url)
+            # with open(self.local_folder + "test/member_results_get_json_given_url_parent_" + parent_id + ".json", "w") as output_file:
+            #     json.dump(member_results, output_file, indent=2, ensure_ascii=False)
             if "results" in member_results:
                 for item in member_results["results"]:
-                    id = item["id"]
-                    if id != parent_id:
+                    item_id = item["id"]
+                    if item_id != parent_id:
                         node = {}
-                        node[id] = item
+                        node[item_id] = item
                         results.append(node)
                         i += 1
-                        if testing_mode and i > 3:  # early out for testing
+                        if testing_mode:  # early out for testing
                             break
             url = self._get_next_page_url(member_results)
             if testing_mode:
                 break
         return results
 
-    def _get_members_details(self, members_json: dict, testing_mode: bool = False, id: str = "", limit_record_count: int = 99999) -> dict:
+    def _get_members_details(self, members_json: dict, testing_mode: bool = False, item_id: str = "", limit_record_count: int = 99999) -> dict:
         """ For each member, do an API call to get all metadata details we know about. """
         i = 0
         for member in members_json:
             if not member.get("detailsRetrieved", False):
                 for _key, value in member.items():
                     # Intentionally skip datasets, since the API will not allow us to download those.
-                    if "itemUrl" in value and value.get("type", "") not in ["Dataset"]:
+                    if "itemUrl" in value and value.get("type", "") not in ["Audio", "Dataset"]:
                         details_json = self._get_json_given_url(value["itemUrl"])
+                        # with open(self.local_folder + "test/" + _key + "_get_members_details_get_json_given_url.json", "w") as output_file:
+                        #     json.dump(details_json, output_file, indent=2, ensure_ascii=False)
                         for details_key, details_value in details_json.items():
                             value[details_key] = details_value
                         if testing_mode:
@@ -140,9 +164,9 @@ class CurateApi():
                 i += 1
                 member["detailsRetrieved"] = True
                 if i > limit_record_count:
-                    print("i, limit = ", i, limit_record_count)
-                    if self.save_standard_json_locally:
-                        with open(self.local_folder + "test/" + id + "_members_json.json", "w") as output_file:
+                    # print("i, limit = ", i, limit_record_count)
+                    if self.save_standard_json_locally and self.attempting_huge_export_with_resumption_flag:
+                        with open(self.local_folder + "test/" + item_id + "_members_json.json", "w") as output_file:
                             json.dump(members_json, output_file, indent=2, ensure_ascii=False)
                     break
         return members_json
@@ -167,11 +191,3 @@ class CurateApi():
             print('Error caught trying to process url ' + url)
             capture_exception(e)
         return json_response
-
-
-def _export_json_as_csv(config: dict, standard_json: dict):
-    """ I'm leaving this here for now until we no longer need to create a CSV from the standard_json """
-    convert_json_to_csv_class = ConvertJsonToCsv(config["csv-field-names"])
-    csv_string = convert_json_to_csv_class.convert_json_to_csv(standard_json)
-    s3_csv_file_name = os.path.join(config['process-bucket-csv-basepath'], standard_json["id"] + '.csv')
-    write_s3_file(config['process-bucket'], s3_csv_file_name, csv_string)

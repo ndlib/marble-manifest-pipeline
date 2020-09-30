@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "fileCreatedDate": "2020-06-02",
+  "fileCreatedDate": "2020-08-26",
   "sourceSystem": "Aleph",
   "repository": "RARE",
   "sequence": 1,
@@ -44,34 +44,32 @@
       "fullName": "O'Neill, Francis, 1848-1936 donor.",
       "lifeDates": "1848-1936",
       "display": "O'Neill, Francis, 1848-1936 donor."
-    },
-    {
-      "attribution": "",
-      "fullName": "Capt. Francis O'Neill Collection of Irish Studies (University of Notre Dame. Library)",
-      "display": "Capt. Francis O'Neill Collection of Irish Studies (University of Notre Dame. Library)"
     }
   ],
+  "collections": [],
   "createdDate": "[1796?]",
   "workType": "Notated music",
   "subjects": [
     {
-      "term": "Folk songs Ireland Instrumental settings."
+      "term": "Folk songs -- Ireland -- Instrumental settings."
     },
     {
-      "term": "Songs, Irish Ireland Instrumental settings."
+      "term": "Songs, Irish -- Ireland -- Instrumental settings."
     },
     {
       "term": "Piano music, Arranged.",
       "uri": "http://id.loc.gov/authorities/subjects/sh85101791"
     },
     {
-      "term": "Folk music Ireland.",
+      "term": "Folk music -- Ireland.",
       "uri": "http://id.loc.gov/authorities/subjects/sh98002834"
     }
   ],
   "copyrightStatus": "",
+  "copyrightUrl": "",
   "copyrightStatement": "",
-  "linkToSource": "https://onesearch.library.nd.edu/primo-explore/fulldisplay?docid=ndu_aleph000297305&context=L&vid=NDU&lang=en_US&search_scope=malc_blended&adaptor=Local%20Search%20Engine&tab=onesearch&query=any,contains,ndu_aleph002097132&mode=basic",
+  "digitalAccess": "Regular",
+  "linkToSource": "https://onesearch.library.nd.edu/permalink/f/1phik6l/ndu_aleph000297305",
   "publisher": {
     "publisherName": "published by I. Willis",
     "publisherLocation": "Dublin,"
@@ -90,9 +88,9 @@
       "sourceSystem": "Aleph",
       "repository": "RARE",
       "apiVersion": 1,
-      "fileCreatedDate": "2020-06-02",
+      "fileCreatedDate": "2020-08-26",
       "level": "file",
-      "sequence": "1",
+      "sequence": 1,
       "thumbnail": true,
       "filePath": "",
       "id": "",

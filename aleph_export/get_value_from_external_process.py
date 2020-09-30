@@ -14,12 +14,24 @@ def get_value_from_external_process(json_node: dict, field: dict, schema_api_ver
     if external_process_name == 'file_created_date':
         return_value = str(date.today())
     elif external_process_name == 'define_level':
-        return_value = 'manifest'
-        if 'items' in parameters_json:
-            return_value = define_manifest_level(parameters_json['items'])
+        return_value = define_manifest_level(parameters_json.get('items', []))
     elif external_process_name == 'file_name_from_filePath':
         if 'filename' in parameters_json:
             return_value = os.path.basename(parameters_json['filename'])
+    elif external_process_name == 'define_digital_access':
+        return_value = _define_digital_access(parameters_json.get("copyrightStatus", ""))
+    return return_value
+
+
+def _define_digital_access(copyrightStatus: str) -> str:
+    """ If the copyrightStatus contains the word "public", allow Regular access, otherwise Restricted."""
+    # return_value = "Restricted"
+    return_value = "Regular"  # Until aleph content has copyrightStatus defined, we need to default to Regular access.
+    # We will need to define appropriate logic once copyrightStatus is populated.
+    if "public" in copyrightStatus.lower():
+        return_value = "Regular"
+    elif "copyright" in copyrightStatus.lower():
+        return_value = "Restricted"
     return return_value
 
 

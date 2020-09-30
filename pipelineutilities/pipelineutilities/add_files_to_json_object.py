@@ -45,6 +45,7 @@ class AddFilesToJsonObject():
             parent_id = file_items[index]["parentId"]
             if 'files' in self.hash_of_available_files[id_to_find]:
                 file_items.pop(index)
+                sequence = 0
                 for obj in self.hash_of_available_files[id_to_find]['files']:
                     each_file_dict['collectionId'] = collection_id
                     each_file_dict['sourceSystem'] = source_system
@@ -53,16 +54,36 @@ class AddFilesToJsonObject():
                     each_file_dict['fileCreatedDate'] = file_created_date
                     each_file_dict['level'] = 'file'
                     each_file_dict['parentId'] = parent_id
-                    each_file_dict['id'] = os.path.basename(obj['Key'])
+                    each_file_dict['id'] = os.path.basename(obj['key'])
                     each_file_dict['thumbnail'] = (each_file_dict['id'] == item_id)
                     each_file_dict['description'] = ""
                     if each_file_dict['id'] == item_id:
                         each_file_dict['description'] = item_description
-                    each_file_dict['filePath'] = obj['Path']
-                    each_file_dict['sequence'] = obj['Order']
-                    each_file_dict['title'] = obj['Label']
-                    each_file_dict['modifiedDate'] = obj['LastModified']
-                    each_file_dict['modifiedDate'] = datetime.strptime(obj['LastModified'], '%Y-%m-%d %H:%M:%S').isoformat() + 'Z'  # noqa: E501
-                    each_file_dict['md5Checksum'] = obj['ETag'].replace("'", "").replace('"', '')  # strip duplicated quotes: {'ETag': '"8b50cfed39b7d8bcb4bd652446fe8adf"'}  # noqa: E501
+                    each_file_dict['filePath'] = obj['path']
+                    sequence += 1
+                    each_file_dict['sequence'] = obj.get('order', sequence)
+                    each_file_dict['title'] = obj['label']
+                    if obj['lastModified']:
+                        each_file_dict['modifiedDate'] = obj['lastModified']
+                        if isinstance(each_file_dict['modifiedDate'], str):
+                            obj['lastModified'] = obj['lastModified'].replace("+00:00", "")
+                            each_file_dict['modifiedDate'] = datetime.strptime(obj['lastModified'], '%Y-%m-%d %H:%M:%S').isoformat() + '+00:00Z'
+                        elif isinstance(each_file_dict['modifiedDate'], datetime):
+                            each_file_dict['modifiedDate'] = obj['lastModified'].isoformat() + 'Z'
+                    each_file_dict['md5Checksum'] = obj['eTag'].replace("'", "").replace('"', '')  # strip duplicated quotes: {'ETag': '"8b50cfed39b7d8bcb4bd652446fe8adf"'}  # noqa: E501
+                    if self._file_exists_in_list(file_items, each_file_dict['id']):
+                        self._remove_existing_file_from_list(file_items, each_file_dict['id'])
                     file_items.append(dict(each_file_dict))
         return file_items
+
+    def _file_exists_in_list(self, file_items: list, id: str) -> bool:
+        for item in file_items:
+            if item.get("id", "") == id:
+                return True
+        return False
+
+    def _remove_existing_file_from_list(self, file_items: list, id: str):
+        for index, item in enumerate(file_items):
+            if item.get("id", "") == id:
+                file_items.pop(index)
+                break

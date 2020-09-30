@@ -1,7 +1,7 @@
 {
   "properties": {
     "children": {
-      "description": "Not currently in CSV, but present in source systems.  This facilitates defining hierarchy from Museum content.",
+      "description": "This facilitates defining parent-child relationships from Museum content.",
       "anyOf": [
         {
           "type": "string"
@@ -20,11 +20,11 @@
       ]
     },
     "classification": {
-      "description": "Not currently in CSV, but potentially useful - from Museum content",
+      "description": "used to overwrite workType if classification is 'Decorative Arts, Craft, and Design'",
       "type": "string"
     },
     "digitalAssets": {
-      "description": "Not in CSV, but present in EAD_Harvest.  TODO - remove once Harvest_EAD is updated.",
+      "description": "Used to define files names (to be found on Google Drive), and sequence.",
       "anyOf": [
         {
           "type": "array",

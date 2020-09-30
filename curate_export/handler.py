@@ -5,14 +5,13 @@ import _set_path  # noqa
 import os
 import io
 import json
-# import botocore
 from datetime import datetime, timedelta
 from pathlib import Path
 from curate_api import CurateApi
-from read_batch_ingest_combined_csv import read_batch_ingest_combined_csv  # noqa: #402
-from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm  # noqa: E402
+# from read_batch_ingest_combined_csv import read_batch_ingest_combined_csv
+from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm
 import sentry_sdk   # noqa: E402
-from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 from pipelineutilities.s3_helpers import read_s3_json
 
 
@@ -35,17 +34,16 @@ def run(event: dict, context: dict) -> dict:
         #         json_curate_item = read_batch_ingest_combined_csv(filename)
         #         with open(filename + '.json', 'w') as f:
         #             json.dump(json_curate_item, f, indent=2)
-        if "ids" not in event:
+        if not event.get("ids", False):
             event["ids"] = read_ids_from_s3(config['process-bucket'], "source_system_export_ids.json", "Curate")
         # print("event after ids added = ", event)
         if "ids" in event:
+            print("ids to process: ", event["ids"])
             curate_api_class = CurateApi(config, event, time_to_break)
             event["curateHarvestComplete"] = curate_api_class.get_curate_items(event["ids"])
         if event["curate_execution_count"] >= event["max_curate_executions"] and not event["curateHarvestComplete"]:
             event["curateHarvestComplete"] = True
             sentry_sdk.capture_message('Curate did not complete harvest after maximum executions threshold of ' + str(event["max_curate_executions"]))
-        if not event['local']:
-            event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-csv-basepath'])
     return event
 
 
@@ -91,7 +89,7 @@ def test(identifier=""):
             event = json.load(json_file)
     else:
         event = {}
-        event['local'] = True
+        event['local'] = False
         if event['local']:
             # event['seconds-to-allow-for-processing'] = 30
             # und:zp38w953h0s = Commencement Programs
@@ -99,11 +97,14 @@ def test(identifier=""):
             # und:qz20sq9094h = Architectural Lantern Slides (huge)
             # ks65h992w12 = Epistemological Letters
             # 1z40ks6792x = Varieties of Democracy - has sub-collections
+            # n296ww75n6f = Gregorian Archive
             # event['ids'] = ["und:1z40ks6792x"]
-            event['ids'] = ["und:zp38w953h0s"]
+            event['ids'] = ["und:zp38w953h0s"]  # Commencement Programs
+            event['ids'] = ["und:zp38w953p3c"]  # Chinese Catholic-themed paintings
+            event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
             # event['ids'] = ["und:zp38w953h0s", "und:zp38w953p3c"]
-            event['ids'] = ["und:qz20sq9094h"]  # export Architectural Lantern Slides
-
+            # event['ids'] = []  # force to read from s3 file.
+        event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
     event = run(event, {})
 
     if not event['curateHarvestComplete']:

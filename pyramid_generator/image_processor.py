@@ -26,8 +26,8 @@ class ImageProcessor(ABC):
         self.source_md5sum = None
         self.prior_results = {}
         self.image_result = {}
-        self.max_img_height = 8500.0
-        self.max_img_width = 8500.0
+        self.max_img_height = 4000.0
+        self.max_img_width = 4000.0
         self.copyrighted = False
 
     @abstractmethod
@@ -78,12 +78,17 @@ class ImageProcessor(ABC):
 
     def _generate_pytiff(self, file: str, tif_filename: str) -> None:
         image = self._preprocess_image(file)
+        dpi = 11.812  # pixels per millimeter; equiv. 300 DPI
+        if image.xres < dpi:
+            dpi = image.xres
         image.tiffsave(tif_filename, tile=True, pyramid=True, compression=self.COMPRESSION_TYPE,
-                       tile_width=self.PYTIF_TILE_WIDTH, tile_height=self.PYTIF_TILE_HEIGHT)
-        # print(f"{image.get_fields()}")  # image fields, including exif
+                       tile_width=self.PYTIF_TILE_WIDTH, tile_height=self.PYTIF_TILE_HEIGHT,
+                       xres=dpi, yres=dpi)
         self._log_result('height', image.get('height'))
         self._log_result('width', image.get('width'))
         self._log_result('md5sum', self.source_md5sum)
+        # print(f"{image.get_fields()}")  # image fields, including exif
+        # print("self.image_result = ", self.image_result)
 
     def _preprocess_image(self, file: str) -> Image:
         image = Image.new_from_file(file, access='sequential')
@@ -97,6 +102,8 @@ class ImageProcessor(ABC):
             print(f'Original image width: {image.width}')
 
             image = image.shrink(shrink_by, shrink_by)
+            print("New image height = ", image.height)
+            print("New image width = ", image.width)
         return image
 
     def set_data(self, img_data: dict, config: dict) -> None:
@@ -112,6 +119,7 @@ class ImageProcessor(ABC):
         self.source_md5sum = img_data.get('md5Checksum', None)
         # if copyrighted work scale height/width directed by aamd.org
         if self._is_copyrighted(img_data.collection().get('copyrightStatus')):
+            # These values came from here: https://aamd.org/sites/default/files/document/Guidelines%20for%20the%20Use%20of%20Copyrighted%20Materials.pdf
             self.copyrighted = True
             self.max_img_height = 560.0
             self.max_img_width = 843.0

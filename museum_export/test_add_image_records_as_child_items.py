@@ -67,14 +67,6 @@ class Test(unittest.TestCase):
         }
         self.assertTrue(image_item == expected_object)
 
-    def test_3__add_additional_missing_fields(self):
-        """ Test _add_additional_missing_fields """
-        object = {"id": "abc"}
-        process_one_museum_object_class = AddImageRecordsAsChildItems(self.image_info)
-        new_object = process_one_museum_object_class._add_additional_missing_fields(object)
-        expected_object = {'id': 'abc', 'subjects': [], 'creators': [], 'creationPlace': {}}
-        self.assertTrue(new_object == expected_object)
-
     def test_4_add_images_as_children(self):
         """ Test _add_images_as_children """
         object = {
@@ -137,10 +129,7 @@ class Test(unittest.TestCase):
                     "sourceSystem": "EmbARK",
                     "repository": "museum"
                 }
-            ],
-            "subjects": [],
-            "creators": [],
-            "creationPlace": {}
+            ]
         }
         self.assertTrue(new_object == expected_object)
 

@@ -35,7 +35,7 @@ class Test(unittest.TestCase):
 
     def test_4_link_to_source(self):
         actual_output = do_extra_processing("abc123", "link_to_source")
-        expected_output = "https://onesearch.library.nd.edu/primo-explore/fulldisplay?docid=ndu_alephabc123&context=L&vid=NDU&lang=en_US&search_scope=malc_blended&adaptor=Local%20Search%20Engine&tab=onesearch&query=any,contains,ndu_aleph002097132&mode=basic"  # noqa: E501
+        expected_output = "https://onesearch.library.nd.edu/permalink/f/1phik6l/ndu_alephabc123"
         self.assertTrue(actual_output == expected_output)
 
     def test_5_translate_repository(self):

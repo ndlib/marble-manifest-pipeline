@@ -15,14 +15,6 @@ test_config = {
 
 class TestFinalize(unittest.TestCase):
 
-    def test_image_cleanup(self):
-        step = FinalizeStep(test_id, test_config)
-        bucket = test_config["process-bucket"]
-        path = test_config["process-bucket-read-basepath"]
-        images = set(["img1.tif", "img2.tif", "img3.tif", "img4.tif"])
-        deleted_images = step._delete_obsolete_pyramids(bucket, path, images, local='y')
-        self.assertEqual(images, deleted_images)
-
     def test_setup_config_for_restarting_step(self):
         test = {"seconds-to-allow-for-processing": 100}
         setup_config_for_restarting_step(test)

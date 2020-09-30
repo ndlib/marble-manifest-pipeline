@@ -38,7 +38,7 @@ def load_standard_json(id, config):
     if config.get('local', False):
         tree = _load_json_from_file(id, config['local-path'])
     else:
-        tree = _load_json_from_s3(config['process-bucket'], config['process-bucket-data-basepath'], id)
+        tree = _load_json_from_s3(config['manifest-server-bucket'], id)
 
     images = load_image_data(id, config)
     _augment_row_data(tree, images, config)
@@ -88,8 +88,8 @@ def _load_json_from_file(id, local_path):
     return json.loads(source)
 
 
-def _load_json_from_s3(s3_bucket, s3_path, id):
-    s3_path = os.path.join(s3_path, id + ".json")
+def _load_json_from_s3(s3_bucket, id):
+    s3_path = os.path.join(id, "standard/index.json")
     return read_s3_json(s3_bucket, s3_path)
 
 
@@ -154,7 +154,7 @@ class Item():
         return False
 
 
-# python -c 'from load_nd_json import *; test()'
+# python -c 'from load_standard_json import *; test()'
 def test():
     from pipeline_config import setup_pipeline_config
     event = {"local": True}
@@ -162,5 +162,5 @@ def test():
 
     event['ssm_key_base'] = "/all/marble-manifest-deployment/prod"
     config = setup_pipeline_config(event)
-    object = load_nd_json('1951.004.009', config)
+    object = load_standard_json('1951.004.009', config)
     print(list(object.children()))

@@ -1,9 +1,6 @@
 #!/bin/bash
 echo "[Install phase] `date` in `pwd`"
 
-# copy the cloudformation into the project
-cp $BLUEPRINTS_DIR/deploy/cloudformation/manifest-pipeline.yml ./
-
 # install dependencies for specific lambdas
 pushd process_manifest
 ./local_install.sh
@@ -18,10 +15,6 @@ pushd finalize
 popd
 
 pushd museum_export
-./local_install.sh
-popd
-
-pushd harvest_eads
 ./local_install.sh
 popd
 
@@ -42,5 +35,13 @@ pushd bendo_export
 popd
 
 pushd metadata_rules
+./local_install.sh
+popd
+
+pushd object_files_api
+./local_install.sh
+popd
+
+pushd collections_api
 ./local_install.sh
 popd

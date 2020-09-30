@@ -1,0 +1,28 @@
+{
+  "query": {
+    "queryUrl": "https://curate.nd.edu/api/items?part_of=zp38w953h0s&rows=1",
+    "queryParameters": {
+      "part_of": "zp38w953h0s",
+      "rows": "1"
+    }
+  },
+  "results": [
+    {
+      "id": "pv63fx74g23",
+      "title": "Notre Dame Commencement Program: August 2, 1845",
+      "type": "Program",
+      "itemUrl": "https://curate.nd.edu/api/items/pv63fx74g23",
+      "partOf": [
+        "und:zp38w953h0s/und:pv63fx74g23"
+      ]
+    }
+  ],
+  "pagination": {
+    "itemsPerPage": 1,
+    "totalResults": 198,
+    "currentPage": 1,
+    "firstPage": "https://curate.nd.edu/api/items?part_of=zp38w953h0s&rows=1",
+    "lastPage": "https://curate.nd.edu/api/items?page=198&part_of=zp38w953h0s&rows=1",
+    "nextPage": "https://curate.nd.edu/api/items?page=2&part_of=zp38w953h0s&rows=1"
+  }
+}

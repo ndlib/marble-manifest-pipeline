@@ -1,5 +1,5 @@
 {
-  "templateModifiedDate": "2020-06-17",
+  "templateModifiedDate": "2020-07-14",
   "changeLog": [
     {
       "changeDate": "2020-06-17",
@@ -7,6 +7,24 @@
         "changed dateCreated to createdDate",
         "changed wording for access:",
         "added $firstDigitalAsset to fix comma problem"
+      ]
+    },
+    {
+      "changeDate": "2020-07-08",
+      "change": [
+        "changed children.sequence from string to integer"
+      ]
+    },
+    {
+      "changeDate": "2020-07-14",
+      "change": [
+        "added physicalAccess as duplicate of access (to prepare for removal of access node)"
+      ]
+    },
+    {
+      "changeDate": "2020-08-27",
+      "change": [
+        "changed where $childrenExist is set to ignore non-web-enabled children."
       ]
     }
   ],
@@ -61,12 +79,13 @@
       "copyrightStatus": "Public domain",
       "copyrightStatement": "",
       "access": "Galleries: Ancient, Medieval, and Renaissance Art Gallery",
+      "physicalAccess": "Galleries: Ancient, Medieval, and Renaissance Art Gallery",
       "format": "",
       "dimensions": "43 x 34 x 12 in. (109.22 x 86.36 x 30.48 cm)",
       "dedication": "Gift of Mrs. F. H. Wickett",
       "description": "",
       "creationPlace": {
-        "continent": "",
+        "continent": "Europe",
         "country": "",
         "state": "",
         "county": "",
@@ -81,7 +100,7 @@
         {
           "attribution": "",
           "role": "Primary",
-          "fullName": "Unidentified German artist",
+          "fullName": "Unknown German artist",
           "nationality": "",
           "lifeDates": "",
           "startDate": "",
@@ -90,7 +109,7 @@
           "alive": true
         }
       ],
-      "modifiedDate": "12/17/2019 10:36:55",
+      "modifiedDate": "9/16/2020 09:10:03",
       "digitalAssets": [
         {
           "sequence": 1,

@@ -1,6 +1,6 @@
 {
   "type": "Collection",
-  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/manifest",
+  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/manifest",
   "label": {
     "en": [
       "Parsons-Williams Family Correspondence"
@@ -8,11 +8,11 @@
   },
   "thumbnail": [
     {
-      "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150/full/250,/0/default.jpg",
+      "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150/full/250,/0/default.jpg",
       "type": "Image",
       "service": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150",
           "type": "ImageService2",
           "profile": "http://iiif.io/api/image/2/level2.json"
         }
@@ -22,7 +22,7 @@
   "items": [
     {
       "type": "Manifest",
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_cbaf46313e6793df7d3161f155e86ff2/manifest",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_cbaf46313e6793df7d3161f155e86ff2/manifest",
       "label": {
         "en": [
           "Letter. Abigail Williams, Waltham, Massachusetts, to Sarah Williams, Deerfield, Massachusetts"
@@ -30,11 +30,11 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -44,7 +44,7 @@
       "items": [
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-01.a.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-01.a.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 01 a 150"
@@ -52,11 +52,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -65,21 +65,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-01.a.150/canvas/annotation_page/MSN-COL_8501-01.a.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-01.a.150/canvas/annotation_page/MSN-COL_8501-01.a.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-01.a.150/canvas/annotation/MSN-COL_8501-01.a.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-01.a.150/canvas/annotation/MSN-COL_8501-01.a.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-01.a.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-01.a.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-01.a.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -139,13 +139,13 @@
       },
       "seeAlso": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_cbaf46313e6793df7d3161f155e86ff2/mets.xml",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_cbaf46313e6793df7d3161f155e86ff2/mets.xml",
           "type": "Dataset",
           "profile": "http://www.loc.gov/METS/",
           "format": "application/xml"
         },
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_cbaf46313e6793df7d3161f155e86ff2",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_cbaf46313e6793df7d3161f155e86ff2",
           "type": "Dataset",
           "format": "application/ld+json",
           "profile": "https://schema.org/"
@@ -160,7 +160,7 @@
           },
           "value": {
             "en": [
-              ""
+              "unknown"
             ]
           }
         },
@@ -192,7 +192,7 @@
     },
     {
       "type": "Manifest",
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_f26866710ced1b93877c99c494c8d15b/manifest",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_f26866710ced1b93877c99c494c8d15b/manifest",
       "label": {
         "en": [
           "Letter. Hannah Dickinson, Dearfield [Deerfield], Massachusetts, to Sarah Williams, Waltham, Massachusetts"
@@ -200,11 +200,11 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -214,7 +214,7 @@
       "items": [
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-02.a.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-02.a.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 02 a 150"
@@ -222,11 +222,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -235,21 +235,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-02.a.150/canvas/annotation_page/MSN-COL_8501-02.a.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-02.a.150/canvas/annotation_page/MSN-COL_8501-02.a.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-02.a.150/canvas/annotation/MSN-COL_8501-02.a.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-02.a.150/canvas/annotation/MSN-COL_8501-02.a.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-02.a.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-02.a.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-02.a.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -309,13 +309,13 @@
       },
       "seeAlso": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_f26866710ced1b93877c99c494c8d15b/mets.xml",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_f26866710ced1b93877c99c494c8d15b/mets.xml",
           "type": "Dataset",
           "profile": "http://www.loc.gov/METS/",
           "format": "application/xml"
         },
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_f26866710ced1b93877c99c494c8d15b",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_f26866710ced1b93877c99c494c8d15b",
           "type": "Dataset",
           "format": "application/ld+json",
           "profile": "https://schema.org/"
@@ -330,7 +330,7 @@
           },
           "value": {
             "en": [
-              ""
+              "unknown"
             ]
           }
         },
@@ -362,7 +362,7 @@
     },
     {
       "type": "Manifest",
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_88ae0040643d981a2e6c77e8267df16c/manifest",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_88ae0040643d981a2e6c77e8267df16c/manifest",
       "label": {
         "en": [
           "Letter. Lydia Williams, Dearfield [Deerfield], Massachusetts, to \"Sally Williams\" [Sarah Williams], Waltham, Massachusetts"
@@ -370,11 +370,11 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -384,7 +384,7 @@
       "items": [
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-03.a.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-03.a.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 03 a 150"
@@ -392,11 +392,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -405,21 +405,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-03.a.150/canvas/annotation_page/MSN-COL_8501-03.a.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-03.a.150/canvas/annotation_page/MSN-COL_8501-03.a.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-03.a.150/canvas/annotation/MSN-COL_8501-03.a.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-03.a.150/canvas/annotation/MSN-COL_8501-03.a.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-03.a.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-03.a.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-03.a.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -432,7 +432,7 @@
           "viewingDirection": "left-to-right",
           "summary": {
             "en": [
-              "Page 1 and Address Leaf. Lydia Williams to \"Sally Williams\" [Sarah Williams]"
+              "Page 1 and Address Leaf. Lydia Williams to \"Sally Williams\" Sarah Williams"
             ]
           },
           "height": 1162,
@@ -479,13 +479,13 @@
       },
       "seeAlso": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_88ae0040643d981a2e6c77e8267df16c/mets.xml",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_88ae0040643d981a2e6c77e8267df16c/mets.xml",
           "type": "Dataset",
           "profile": "http://www.loc.gov/METS/",
           "format": "application/xml"
         },
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_88ae0040643d981a2e6c77e8267df16c",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_88ae0040643d981a2e6c77e8267df16c",
           "type": "Dataset",
           "format": "application/ld+json",
           "profile": "https://schema.org/"
@@ -500,7 +500,7 @@
           },
           "value": {
             "en": [
-              ""
+              "unknown"
             ]
           }
         },
@@ -532,19 +532,19 @@
     },
     {
       "type": "Manifest",
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_424b93c46ef6d59496826365264d64f3/manifest",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_424b93c46ef6d59496826365264d64f3/manifest",
       "label": {
         "en": [
-          "Letter. Joseph Parsons [Jr.], Brookfield, Massachusetts, to \"Honored Sir\" [Joseph Parsons], n. p."
+          "Letter. Joseph Parsons [Jr.], Brookfield, Massachusetts, to \"Honored Sir\" [Joseph Parsons], n. p"
         ]
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -554,7 +554,7 @@
       "items": [
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-04.a.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-04.a.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 04 a 150"
@@ -562,11 +562,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -575,21 +575,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-04.a.150/canvas/annotation_page/MSN-COL_8501-04.a.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-04.a.150/canvas/annotation_page/MSN-COL_8501-04.a.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-04.a.150/canvas/annotation/MSN-COL_8501-04.a.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-04.a.150/canvas/annotation/MSN-COL_8501-04.a.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-04.a.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-04.a.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-04.a.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -602,7 +602,7 @@
           "viewingDirection": "left-to-right",
           "summary": {
             "en": [
-              "Page 1. Joseph Parsons [Jr.] to \"Honored Sir\" [Joseph Parsons]"
+              "Page 1. Joseph Parsons Jr. to \"Honored Sir\" Joseph Parsons"
             ]
           },
           "height": 1215,
@@ -649,13 +649,13 @@
       },
       "seeAlso": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_424b93c46ef6d59496826365264d64f3/mets.xml",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_424b93c46ef6d59496826365264d64f3/mets.xml",
           "type": "Dataset",
           "profile": "http://www.loc.gov/METS/",
           "format": "application/xml"
         },
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_424b93c46ef6d59496826365264d64f3",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_424b93c46ef6d59496826365264d64f3",
           "type": "Dataset",
           "format": "application/ld+json",
           "profile": "https://schema.org/"
@@ -670,7 +670,7 @@
           },
           "value": {
             "en": [
-              ""
+              "unknown"
             ]
           }
         },
@@ -702,7 +702,7 @@
     },
     {
       "type": "Manifest",
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_06ff7ea76e79cc7b46637f36cb132d6b/manifest",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_06ff7ea76e79cc7b46637f36cb132d6b/manifest",
       "label": {
         "en": [
           "Letter. Joseph Parsons [Jr.], Brookfield, Massachusetts, to Joseph Parsons, Bradford, Massachusetts"
@@ -710,11 +710,11 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -724,7 +724,7 @@
       "items": [
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.a.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.a.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 05 a 150"
@@ -732,11 +732,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -745,21 +745,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.a.150/canvas/annotation_page/MSN-COL_8501-05.a.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.a.150/canvas/annotation_page/MSN-COL_8501-05.a.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.a.150/canvas/annotation/MSN-COL_8501-05.a.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.a.150/canvas/annotation/MSN-COL_8501-05.a.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.a.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.a.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.a.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -772,7 +772,7 @@
           "viewingDirection": "left-to-right",
           "summary": {
             "en": [
-              "Page 1 and Address Leaf. Joseph Parsons [Jr.] to Joseph Parsons"
+              "Page 1 and Address Leaf. Joseph Parsons Jr. to Joseph Parsons"
             ]
           },
           "height": 1213,
@@ -780,7 +780,7 @@
         },
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.b.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.b.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 05 b 150"
@@ -788,11 +788,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.b.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.b.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.b.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.b.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -801,21 +801,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.b.150/canvas/annotation_page/MSN-COL_8501-05.b.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.b.150/canvas/annotation_page/MSN-COL_8501-05.b.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.b.150/canvas/annotation/MSN-COL_8501-05.b.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.b.150/canvas/annotation/MSN-COL_8501-05.b.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.b.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-05.b.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.b.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.b.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.b.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-05.b.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -870,13 +870,13 @@
       },
       "seeAlso": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_06ff7ea76e79cc7b46637f36cb132d6b/mets.xml",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_06ff7ea76e79cc7b46637f36cb132d6b/mets.xml",
           "type": "Dataset",
           "profile": "http://www.loc.gov/METS/",
           "format": "application/xml"
         },
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_06ff7ea76e79cc7b46637f36cb132d6b",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_06ff7ea76e79cc7b46637f36cb132d6b",
           "type": "Dataset",
           "format": "application/ld+json",
           "profile": "https://schema.org/"
@@ -891,7 +891,7 @@
           },
           "value": {
             "en": [
-              ""
+              "unknown"
             ]
           }
         },
@@ -923,7 +923,7 @@
     },
     {
       "type": "Manifest",
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_bdb4d109f8b70107210dc38675d78192/manifest",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_bdb4d109f8b70107210dc38675d78192/manifest",
       "label": {
         "en": [
           "Letter. Joseph Parsons [Jr.], Brookfield, Massachusetts, to \"Sally Williams\" [Sarah Williams], Waltham, Massachusetts"
@@ -931,11 +931,11 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -945,7 +945,7 @@
       "items": [
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-06.a.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-06.a.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 06 a 150"
@@ -953,11 +953,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -966,21 +966,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-06.a.150/canvas/annotation_page/MSN-COL_8501-06.a.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-06.a.150/canvas/annotation_page/MSN-COL_8501-06.a.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-06.a.150/canvas/annotation/MSN-COL_8501-06.a.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-06.a.150/canvas/annotation/MSN-COL_8501-06.a.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-06.a.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-06.a.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-06.a.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -993,7 +993,7 @@
           "viewingDirection": "left-to-right",
           "summary": {
             "en": [
-              "Page 1 and Address Leaf. Joseph Parsons [Jr.] to 'Sally Williams' [Sarah Williams]"
+              "Page 1 and Address Leaf. Joseph Parsons Jr. to 'Sally Williams' Sarah Williams"
             ]
           },
           "height": 1207,
@@ -1040,13 +1040,13 @@
       },
       "seeAlso": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_bdb4d109f8b70107210dc38675d78192/mets.xml",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_bdb4d109f8b70107210dc38675d78192/mets.xml",
           "type": "Dataset",
           "profile": "http://www.loc.gov/METS/",
           "format": "application/xml"
         },
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_bdb4d109f8b70107210dc38675d78192",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_bdb4d109f8b70107210dc38675d78192",
           "type": "Dataset",
           "format": "application/ld+json",
           "profile": "https://schema.org/"
@@ -1061,7 +1061,7 @@
           },
           "value": {
             "en": [
-              ""
+              "unknown"
             ]
           }
         },
@@ -1093,7 +1093,7 @@
     },
     {
       "type": "Manifest",
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_2c2b4f5d7d7dd938ab1327151c2938a3/manifest",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_2c2b4f5d7d7dd938ab1327151c2938a3/manifest",
       "label": {
         "en": [
           "Letter. Amos Throg, Brookfield, Massachusetts, to Jacob Cushing, Waltham, Massachusetts"
@@ -1101,11 +1101,11 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -1115,7 +1115,7 @@
       "items": [
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.a.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.a.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 07 a 150"
@@ -1123,11 +1123,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -1136,21 +1136,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.a.150/canvas/annotation_page/MSN-COL_8501-07.a.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.a.150/canvas/annotation_page/MSN-COL_8501-07.a.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.a.150/canvas/annotation/MSN-COL_8501-07.a.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.a.150/canvas/annotation/MSN-COL_8501-07.a.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.a.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.a.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.a.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -1171,7 +1171,7 @@
         },
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.b.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.b.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 07 b 150"
@@ -1179,11 +1179,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.b.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.b.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.b.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.b.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -1192,21 +1192,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.b.150/canvas/annotation_page/MSN-COL_8501-07.b.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.b.150/canvas/annotation_page/MSN-COL_8501-07.b.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.b.150/canvas/annotation/MSN-COL_8501-07.b.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.b.150/canvas/annotation/MSN-COL_8501-07.b.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.b.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-07.b.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.b.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.b.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.b.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-07.b.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -1261,13 +1261,13 @@
       },
       "seeAlso": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_2c2b4f5d7d7dd938ab1327151c2938a3/mets.xml",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_2c2b4f5d7d7dd938ab1327151c2938a3/mets.xml",
           "type": "Dataset",
           "profile": "http://www.loc.gov/METS/",
           "format": "application/xml"
         },
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_2c2b4f5d7d7dd938ab1327151c2938a3",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_2c2b4f5d7d7dd938ab1327151c2938a3",
           "type": "Dataset",
           "format": "application/ld+json",
           "profile": "https://schema.org/"
@@ -1282,7 +1282,7 @@
           },
           "value": {
             "en": [
-              ""
+              "unknown"
             ]
           }
         },
@@ -1314,7 +1314,7 @@
     },
     {
       "type": "Manifest",
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_d1c96d18d5eac8fb587bae9f01cce23d/manifest",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_d1c96d18d5eac8fb587bae9f01cce23d/manifest",
       "label": {
         "en": [
           "Letter. Jacob Cushing, Waltham, Massachusetts, to \"The Revd Mr. Parsons\" [Joseph Parsons, Jr.], Brookfield, Massachusetts"
@@ -1322,11 +1322,11 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -1336,7 +1336,7 @@
       "items": [
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.a.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.a.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 08 a 150"
@@ -1344,11 +1344,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -1357,21 +1357,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.a.150/canvas/annotation_page/MSN-COL_8501-08.a.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.a.150/canvas/annotation_page/MSN-COL_8501-08.a.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.a.150/canvas/annotation/MSN-COL_8501-08.a.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.a.150/canvas/annotation/MSN-COL_8501-08.a.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.a.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.a.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.a.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -1384,7 +1384,7 @@
           "viewingDirection": "left-to-right",
           "summary": {
             "en": [
-              "Page 1. Jacob Cushing to \"The Revd Mr. Parsons\" [Joseph Parsons, Jr.]"
+              "Page 1. Jacob Cushing to \"The Revd Mr. Parsons\" Joseph Parsons, Jr."
             ]
           },
           "height": 1192,
@@ -1392,7 +1392,7 @@
         },
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.b.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.b.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 08 b 150"
@@ -1400,11 +1400,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.b.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.b.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.b.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.b.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -1413,21 +1413,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.b.150/canvas/annotation_page/MSN-COL_8501-08.b.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.b.150/canvas/annotation_page/MSN-COL_8501-08.b.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.b.150/canvas/annotation/MSN-COL_8501-08.b.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.b.150/canvas/annotation/MSN-COL_8501-08.b.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.b.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-08.b.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.b.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.b.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.b.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-08.b.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -1482,13 +1482,13 @@
       },
       "seeAlso": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_d1c96d18d5eac8fb587bae9f01cce23d/mets.xml",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_d1c96d18d5eac8fb587bae9f01cce23d/mets.xml",
           "type": "Dataset",
           "profile": "http://www.loc.gov/METS/",
           "format": "application/xml"
         },
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_d1c96d18d5eac8fb587bae9f01cce23d",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_d1c96d18d5eac8fb587bae9f01cce23d",
           "type": "Dataset",
           "format": "application/ld+json",
           "profile": "https://schema.org/"
@@ -1503,7 +1503,7 @@
           },
           "value": {
             "en": [
-              ""
+              "unknown"
             ]
           }
         },
@@ -1535,7 +1535,7 @@
     },
     {
       "type": "Manifest",
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_e0bcba7e1715709236a859bf43ccc143/manifest",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_e0bcba7e1715709236a859bf43ccc143/manifest",
       "label": {
         "en": [
           "Letter. Joseph Parsons [Jr.], Brookfield, Massachusetts, to Joseph Parsons, Bradford, Massachusetts"
@@ -1543,11 +1543,11 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -1557,7 +1557,7 @@
       "items": [
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-09.a.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-09.a.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 09 a 150"
@@ -1565,11 +1565,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -1578,21 +1578,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-09.a.150/canvas/annotation_page/MSN-COL_8501-09.a.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-09.a.150/canvas/annotation_page/MSN-COL_8501-09.a.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-09.a.150/canvas/annotation/MSN-COL_8501-09.a.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-09.a.150/canvas/annotation/MSN-COL_8501-09.a.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-09.a.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-09.a.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-09.a.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -1605,7 +1605,7 @@
           "viewingDirection": "left-to-right",
           "summary": {
             "en": [
-              "Pge 1 and Address Leaf. Joseph Parsons [Jr.] to Joseph Parsons"
+              "Pge 1 and Address Leaf. Joseph Parsons Jr. to Joseph Parsons"
             ]
           },
           "height": 1207,
@@ -1652,13 +1652,13 @@
       },
       "seeAlso": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_e0bcba7e1715709236a859bf43ccc143/mets.xml",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_e0bcba7e1715709236a859bf43ccc143/mets.xml",
           "type": "Dataset",
           "profile": "http://www.loc.gov/METS/",
           "format": "application/xml"
         },
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_e0bcba7e1715709236a859bf43ccc143",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_e0bcba7e1715709236a859bf43ccc143",
           "type": "Dataset",
           "format": "application/ld+json",
           "profile": "https://schema.org/"
@@ -1673,7 +1673,7 @@
           },
           "value": {
             "en": [
-              ""
+              "unknown"
             ]
           }
         },
@@ -1705,19 +1705,19 @@
     },
     {
       "type": "Manifest",
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_246f53532b96ed9c3718375177300b50/manifest",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_246f53532b96ed9c3718375177300b50/manifest",
       "label": {
         "en": [
-          "Letter. Sally Rogers, Boston, to \"My Dear Sally\" [Sarah Williams], n. p."
+          "Letter. Sally Rogers, Boston, to \"My Dear Sally\" [Sarah Williams], n. p"
         ]
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -1727,7 +1727,7 @@
       "items": [
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.a.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.a.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 10 a 150"
@@ -1735,11 +1735,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -1748,21 +1748,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.a.150/canvas/annotation_page/MSN-COL_8501-10.a.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.a.150/canvas/annotation_page/MSN-COL_8501-10.a.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.a.150/canvas/annotation/MSN-COL_8501-10.a.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.a.150/canvas/annotation/MSN-COL_8501-10.a.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.a.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.a.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.a.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -1775,7 +1775,7 @@
           "viewingDirection": "left-to-right",
           "summary": {
             "en": [
-              "Page 1. Sally Rogers to \"My Dear Sally\" [Sarah Williams], n. p."
+              "Page 1. Sally Rogers to \"My Dear Sally\" Sarah Williams, n. p."
             ]
           },
           "height": 1377,
@@ -1783,7 +1783,7 @@
         },
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.b.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.b.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 10 b 150"
@@ -1791,11 +1791,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.b.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.b.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.b.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.b.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -1804,21 +1804,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.b.150/canvas/annotation_page/MSN-COL_8501-10.b.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.b.150/canvas/annotation_page/MSN-COL_8501-10.b.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.b.150/canvas/annotation/MSN-COL_8501-10.b.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.b.150/canvas/annotation/MSN-COL_8501-10.b.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.b.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-10.b.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.b.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.b.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.b.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-10.b.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -1873,13 +1873,13 @@
       },
       "seeAlso": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_246f53532b96ed9c3718375177300b50/mets.xml",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_246f53532b96ed9c3718375177300b50/mets.xml",
           "type": "Dataset",
           "profile": "http://www.loc.gov/METS/",
           "format": "application/xml"
         },
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_246f53532b96ed9c3718375177300b50",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_246f53532b96ed9c3718375177300b50",
           "type": "Dataset",
           "format": "application/ld+json",
           "profile": "https://schema.org/"
@@ -1894,7 +1894,7 @@
           },
           "value": {
             "en": [
-              ""
+              "unknown"
             ]
           }
         },
@@ -1926,7 +1926,7 @@
     },
     {
       "type": "Manifest",
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_ebbac27693f6e513034a52c0cc8a1acd/manifest",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_ebbac27693f6e513034a52c0cc8a1acd/manifest",
       "label": {
         "en": [
           "Letter. Anne Williams, n. p., to Sarah Williams, Hartford, Connecticut"
@@ -1934,11 +1934,11 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -1948,7 +1948,7 @@
       "items": [
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.a.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.a.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 11 a 150"
@@ -1956,11 +1956,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -1969,21 +1969,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.a.150/canvas/annotation_page/MSN-COL_8501-11.a.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.a.150/canvas/annotation_page/MSN-COL_8501-11.a.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.a.150/canvas/annotation/MSN-COL_8501-11.a.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.a.150/canvas/annotation/MSN-COL_8501-11.a.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.a.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.a.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.a.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -2004,7 +2004,7 @@
         },
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.b.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.b.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 11 b 150"
@@ -2012,11 +2012,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.b.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.b.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.b.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.b.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -2025,21 +2025,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.b.150/canvas/annotation_page/MSN-COL_8501-11.b.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.b.150/canvas/annotation_page/MSN-COL_8501-11.b.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.b.150/canvas/annotation/MSN-COL_8501-11.b.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.b.150/canvas/annotation/MSN-COL_8501-11.b.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.b.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-11.b.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.b.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.b.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.b.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-11.b.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -2094,13 +2094,13 @@
       },
       "seeAlso": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_ebbac27693f6e513034a52c0cc8a1acd/mets.xml",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_ebbac27693f6e513034a52c0cc8a1acd/mets.xml",
           "type": "Dataset",
           "profile": "http://www.loc.gov/METS/",
           "format": "application/xml"
         },
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_ebbac27693f6e513034a52c0cc8a1acd",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_ebbac27693f6e513034a52c0cc8a1acd",
           "type": "Dataset",
           "format": "application/ld+json",
           "profile": "https://schema.org/"
@@ -2115,7 +2115,7 @@
           },
           "value": {
             "en": [
-              ""
+              "unknown"
             ]
           }
         },
@@ -2147,7 +2147,7 @@
     },
     {
       "type": "Manifest",
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_5f8776f4d72f794e64ef9023530bc4a6/manifest",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_5f8776f4d72f794e64ef9023530bc4a6/manifest",
       "label": {
         "en": [
           "Town Meeting Minutes. Brookfield, Massachusetts"
@@ -2155,11 +2155,11 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -2169,7 +2169,7 @@
       "items": [
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.a.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.a.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 12 a 150"
@@ -2177,11 +2177,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -2190,21 +2190,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.a.150/canvas/annotation_page/MSN-COL_8501-12.a.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.a.150/canvas/annotation_page/MSN-COL_8501-12.a.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.a.150/canvas/annotation/MSN-COL_8501-12.a.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.a.150/canvas/annotation/MSN-COL_8501-12.a.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.a.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.a.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.a.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -2225,7 +2225,7 @@
         },
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.b.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.b.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 12 b 150"
@@ -2233,11 +2233,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.b.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.b.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.b.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.b.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -2246,21 +2246,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.b.150/canvas/annotation_page/MSN-COL_8501-12.b.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.b.150/canvas/annotation_page/MSN-COL_8501-12.b.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.b.150/canvas/annotation/MSN-COL_8501-12.b.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.b.150/canvas/annotation/MSN-COL_8501-12.b.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.b.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-12.b.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.b.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.b.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.b.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-12.b.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -2315,13 +2315,13 @@
       },
       "seeAlso": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_5f8776f4d72f794e64ef9023530bc4a6/mets.xml",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_5f8776f4d72f794e64ef9023530bc4a6/mets.xml",
           "type": "Dataset",
           "profile": "http://www.loc.gov/METS/",
           "format": "application/xml"
         },
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_5f8776f4d72f794e64ef9023530bc4a6",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_5f8776f4d72f794e64ef9023530bc4a6",
           "type": "Dataset",
           "format": "application/ld+json",
           "profile": "https://schema.org/"
@@ -2336,7 +2336,7 @@
           },
           "value": {
             "en": [
-              ""
+              "unknown"
             ]
           }
         },
@@ -2368,7 +2368,7 @@
     },
     {
       "type": "Manifest",
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_85abb2ffdbe27f547131e9a898dd911d/manifest",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_85abb2ffdbe27f547131e9a898dd911d/manifest",
       "label": {
         "en": [
           "Receipt. Joseph Parsons, Bradford, Massachusetts"
@@ -2376,11 +2376,11 @@
       },
       "thumbnail": [
         {
-          "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150/full/250,/0/default.jpg",
+          "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150/full/250,/0/default.jpg",
           "type": "Image",
           "service": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150",
               "type": "ImageService2",
               "profile": "http://iiif.io/api/image/2/level2.json"
             }
@@ -2390,7 +2390,7 @@
       "items": [
         {
           "type": "Canvas",
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-13.a.150/canvas",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-13.a.150/canvas",
           "label": {
             "en": [
               "https://rarebooks library nd edu/collections/ead xml/images/MSN COL 8501/MSN COL 8501 13 a 150"
@@ -2398,11 +2398,11 @@
           },
           "thumbnail": [
             {
-              "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150/full/250,/0/default.jpg",
+              "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150/full/250,/0/default.jpg",
               "type": "Image",
               "service": [
                 {
-                  "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150",
+                  "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150",
                   "type": "ImageService2",
                   "profile": "http://iiif.io/api/image/2/level2.json"
                 }
@@ -2411,21 +2411,21 @@
           ],
           "items": [
             {
-              "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-13.a.150/canvas/annotation_page/MSN-COL_8501-13.a.150.jpg",
+              "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-13.a.150/canvas/annotation_page/MSN-COL_8501-13.a.150.jpg",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-13.a.150/canvas/annotation/MSN-COL_8501-13.a.150.jpg",
+                  "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-13.a.150/canvas/annotation/MSN-COL_8501-13.a.150.jpg",
                   "type": "Annotation",
                   "motivation": "painting",
-                  "target": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-13.a.150/canvas",
+                  "target": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/MSN-COL_8501-13.a.150/canvas",
                   "body": {
-                    "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150/full/full/0/default.jpg",
+                    "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150/full/full/0/default.jpg",
                     "type": "Image",
                     "format": "image/jpeg",
                     "service": [
                       {
-                        "id": "https://image-iiif.library.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150",
+                        "id": "https://image-iiif.libraries.nd.edu/iiif/2/MSNCOL8501_EAD%2FMSN-COL_8501-13.a.150",
                         "type": "ImageService2",
                         "profile": "http://iiif.io/api/image/2/level2.json"
                       }
@@ -2485,13 +2485,13 @@
       },
       "seeAlso": [
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_85abb2ffdbe27f547131e9a898dd911d/mets.xml",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_85abb2ffdbe27f547131e9a898dd911d/mets.xml",
           "type": "Dataset",
           "profile": "http://www.loc.gov/METS/",
           "format": "application/xml"
         },
         {
-          "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/aspace_85abb2ffdbe27f547131e9a898dd911d",
+          "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/aspace_85abb2ffdbe27f547131e9a898dd911d",
           "type": "Dataset",
           "format": "application/ld+json",
           "profile": "https://schema.org/"
@@ -2506,7 +2506,7 @@
           },
           "value": {
             "en": [
-              ""
+              "unknown"
             ]
           }
         },
@@ -2582,13 +2582,13 @@
   },
   "seeAlso": [
     {
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD/mets.xml",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD/mets.xml",
       "type": "Dataset",
       "profile": "http://www.loc.gov/METS/",
       "format": "application/xml"
     },
     {
-      "id": "https://presentation-iiif.library.nd.edu/MSNCOL8501_EAD",
+      "id": "https://presentation-iiif.libraries.nd.edu/MSNCOL8501_EAD",
       "type": "Dataset",
       "format": "application/ld+json",
       "profile": "https://schema.org/"

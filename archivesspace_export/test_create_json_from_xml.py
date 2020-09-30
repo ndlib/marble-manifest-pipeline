@@ -59,7 +59,7 @@ class Test(unittest.TestCase):
         with open(local_folder + 'test/MSNEA8011_EAD.json', 'r') as input_source:
             expected_json = json.load(input_source)
         standard_json = self.fix_file_created_date(standard_json, expected_json["fileCreatedDate"])
-        self.assertTrue(expected_json == standard_json)
+        self.assertEqual(expected_json, standard_json)
 
     def test_2_test_extracting_id(self):
         xml_record = ET.fromstring(self.xml)
@@ -68,7 +68,7 @@ class Test(unittest.TestCase):
         for index, xml_item in enumerate(xml_record.findall('./c01')):
             field = {'label': 'id', 'xpath': '.', 'optional': True, 'returnAttributeName': 'id', 'format': 'text'}
             actual_results = create_json_from_xml_class._get_node(xml_item, field, {})
-            self.assertTrue(expected_results[index] == actual_results)
+            self.assertEqual(expected_results[index], actual_results)
 
     def test_3_test_extracting_items(self):
         xml_record = ET.fromstring(self.xml)
@@ -76,7 +76,7 @@ class Test(unittest.TestCase):
         for _index, xml_item in enumerate(xml_record.findall('./c01')):
             actual_results = create_json_from_xml_class.extract_fields(xml_item, "items", {})
             expected_results = {'id': 'aspace_8f5be6708c2e98e57a60eddf20e36679', 'title': 'Theophilus Parsons, Journal, vol. 1', 'createdDate': 'January 1819-December 1820', 'uniqueIdentifier': 'MSN/EA 8011-1-B', 'items': [{'level': 'file', 'thumbnail': True, 'description': 'Theophilus Parsons, Journal, vol. 1', 'filePath': 'https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg', 'parentId': 'aspace_8f5be6708c2e98e57a60eddf20e36679', 'id': 'MSN-EA_8011-01-B-000a.jpg'}], 'level': 'manifest'}  # noqa: E501
-            self.assertTrue(expected_results == actual_results)
+            self.assertEqual(expected_results, actual_results)
             break
 
     def fix_file_created_date(self, standard_json: dict, file_created_date: str) -> dict:

@@ -18,7 +18,6 @@ class Test(unittest.TestCase):
         self.event = {"local": True}
         self.event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
         self.config = setup_pipeline_config(self.event)
-        self.csv_field_names = self.config["csv-field-names"]
         self.translate_curate_json_node_class = TranslateCurateJsonNode(self.config)
 
     def test_01_get_value_from_curate_field(self):

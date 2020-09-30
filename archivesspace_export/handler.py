@@ -1,27 +1,23 @@
 # handler.py
-""" Module to launch application """
+""" Module to launch ArchivesSpace Export application """
 import _set_path  # noqa
-import json
 import io
+import json
 import os
 import time
-# import botocore
 from datetime import datetime, timedelta
+import sentry_sdk
+from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
 from harvest_oai_eads import HarvestOaiEads  # noqa: #502
 from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
-import sentry_sdk as sentry_sdk  # noqa: E402
-from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
-from pipelineutilities.s3_helpers import write_s3_file
-from convert_json_to_csv import ConvertJsonToCsv
-from pipelineutilities.search_files import id_from_url, crawl_available_files  # noqa: #402
 from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
-from pipelineutilities.add_paths_to_json_object import AddPathsToJsonObject
-from pipelineutilities.fix_creators_in_json_object import FixCreatorsInJsonObject
+from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.s3_helpers import read_s3_json
 from pipelineutilities.save_standard_json import save_standard_json
+# from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 
 
-def run(event: dict, context: dict):
+def run(event: dict, _context: dict):
     """ Run the process to retrieve and process ArchivesSpace metadata.
 
     Information on the API can be found here:
@@ -29,7 +25,7 @@ def run(event: dict, context: dict):
     _supplement_event(event)
     _init_sentry()
     config = setup_pipeline_config(event)
-    if "ids" not in event:
+    if not event.get("ids", False):
         event["ids"] = read_ids_from_s3(config['process-bucket'], "source_system_export_ids.json", "ArchivesSpace")
     # config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     start_time = time.time()
@@ -37,31 +33,21 @@ def run(event: dict, context: dict):
     print("Will break after ", time_to_break)
     harvest_oai_eads_class = HarvestOaiEads(config)
     add_files_to_json_object_class = AddFilesToJsonObject(config)
-    add_paths_to_json_object_class = AddPathsToJsonObject(config)
-    fix_creators_in_json_object_class = FixCreatorsInJsonObject(config)
+    standard_json_helpers_class = StandardJsonHelpers(config)
+    # save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(config)
     ids = event.get("ids", [])
     while len(ids) > 0 and datetime.now() < time_to_break:
         standard_json = harvest_oai_eads_class.get_standard_json_from_archives_space_url(ids[0])
         if standard_json:
-            standard_json = add_files_to_json_object_class.add_files(standard_json)
-            standard_json = add_paths_to_json_object_class.add_paths(standard_json)
-            standard_json = fix_creators_in_json_object_class.fix_creators(standard_json)
-            save_standard_json(config, standard_json)
             print("ArchivesSpace ead_id = ", standard_json.get("id", ""), " source_system_url = ", ids[0], int(time.time() - start_time), 'seconds.')
-            # in case we need to create CSVs
-            # _export_json_as_csv(config, standard_json)
+            standard_json = add_files_to_json_object_class.add_files(standard_json)
+            standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
+            save_standard_json(config, standard_json)
+            # save_standard_json_to_dynamo_class.save_standard_json(standard_json)
         del ids[0]
     event['archivesSpaceHarvestComplete'] = (len(ids) == 0)
-    event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-csv-basepath'])
+    event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-data-basepath'])
     return event
-
-
-def _export_json_as_csv(config: dict, standard_json: dict):
-    """ I'm leaving this here for now in case we need to create a CSV from the standard_json """
-    convert_json_to_csv_class = ConvertJsonToCsv(config["csv-field-names"])
-    csv_string = convert_json_to_csv_class.convert_json_to_csv(standard_json)
-    s3_csv_file_name = os.path.join(config['process-bucket-csv-basepath'], standard_json["id"] + '.csv')
-    write_s3_file(config['process-bucket'], s3_csv_file_name, csv_string)
 
 
 def _supplement_event(event: dict) -> dict:
@@ -73,6 +59,7 @@ def _supplement_event(event: dict) -> dict:
 
 
 def read_ids_from_s3(process_bucket: str, s3_path: str, section: str) -> list:
+    """ Read ids from control file in an s3 bucket """
     ids = []
     try:
         json_hash = read_s3_json(process_bucket, s3_path)
@@ -91,9 +78,10 @@ def _init_sentry():
 
 # setup:
 # export SSM_KEY_BASE=/all/new-csv
+# export SSM_KEY_BASE=/all/marble-manifest-deployment/prod
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
-def test(identifier=""):
+def test():
     """ test exection """
     filename = 'event.json'
     if os.path.exists(filename):
@@ -102,18 +90,21 @@ def test(identifier=""):
     else:
         event = {}
         event["local"] = False
-        # event["ids"] = [
-        #     "https://archivesspace.library.nd.edu/repositories/3/resources/1631",
-        #     "https://archivesspace.library.nd.edu/repositories/3/resources/1644"
-        # ]
+        event["ids"] = [
+            # "https://archivesspace.library.nd.edu/repositories/2/resources/1652",  # Collegiate Jazz Festival
+            # "https://archivesspace.library.nd.edu/repositories/3/resources/1447",
+            # "https://archivesspace.library.nd.edu/repositories/3/resources/1567",
+            # "https://archivesspace.library.nd.edu/repositories/3/resources/1644",  # Irish Broadsides
+        ]
         # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1492"]  # Parsons Journals
         # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1524"]
-
+        # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/2038"]
+        # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1567"]
     event = run(event, {})
 
     if not event['archivesSpaceHarvestComplete']:
-        with open('event.json', 'w') as f:
-            json.dump(event, f, indent=2)
+        with open('event.json', 'w') as json_file:
+            json.dump(event, json_file, indent=2)
     else:
         try:
             os.remove('event.json')

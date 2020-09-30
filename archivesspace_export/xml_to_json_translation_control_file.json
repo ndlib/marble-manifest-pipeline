@@ -47,7 +47,7 @@
 			{
 				"label": "subjects",
 				"otherNodes": "subjects",
-				"xpath": "./metadata/ead/archdesc/controlaccess/subject"
+				"xpath": "./metadata/ead/archdesc/controlaccess/*"
 			},
 			{ "label": "copyrightStatus",
 				"constant": "",
@@ -59,6 +59,13 @@
 				"format": "text"
 			},
 			{
+				"label": "digitalAccess",
+				"note": "This must run after copyrightStatus is added above.",
+				"externalProcess": "define_digital_access",
+				"optional": true,
+				"passLabels": [{"copyrightStatus": "copyrightStatus", "copyrightStatement": "copyrightStatement"}]
+			},
+			{
 				"label": "linkToSource",
 				"xpath": "./metadata/ead/eadheader/eadid",
 				"returnAttributeName": "url",
@@ -66,6 +73,11 @@
 			},
 			{
 				"label": "access",
+				"xpath": "./metadata/ead/archdesc/accessrestrict/p",
+				"format": "text"
+			},
+			{
+				"label": "physicalAccess",
 				"xpath": "./metadata/ead/archdesc/accessrestrict/p",
 				"format": "text"
 			},
@@ -136,6 +148,21 @@
 				"format": "text"
 			},
 			{
+				"label": "related_ids",
+				"xpath": "./relatedmaterial/p/extref",
+				"returnAttributeName": "href",
+				"optional": true,
+				"format": "array"
+			},
+			{
+				"label": "relatedIds",
+				"note": "This must run after related_ids above.",
+				"optional": true,
+				"format": "array",
+				"externalProcess": "format_related_ids",
+				"passLabels": [{"related_ids": "related_ids"}]
+		},
+			{
 				"label": "child",
 				"otherNodes": "childDetails",
 				"xpath": "./did",
@@ -145,7 +172,7 @@
 					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}]
 			},
 			{
-				"removeNodes": ["passedParentId"]
+				"removeNodes": ["passedParentId", "related_ids"]
 			},
 			{
 				"label": "items",
@@ -265,6 +292,18 @@
 				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "passedParentId"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
 					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}, {"passedParentId": "id"}],
 				"checkForInconsistencies": ["fileId"]
+			},
+			{
+				"label": "items",
+				"otherNodes": "dao",
+				"xpath": "./dao",
+				"optional": true,
+				"collapseTree": false,
+				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "passedParentId"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
+					{"apiVersion": "apiVersion"},	{"fileCreatedDate": "fileCreatedDate"},	{"passedParentId": "id"}],
+				"checkForInconsistencies": [
+					"fileId"
+				]
 			}
 		]
 	},
@@ -305,6 +344,58 @@
 				"label": "id",
 				"externalProcess": "file_name_from_filePath",
 				"passLabels": [{"filename": "filePath"}]
+			}
+		]
+	},
+	"dao": {
+		"FieldsToExtract": [
+			{
+				"label": "level",
+				"constant": "file",
+				"format": "text"
+			},
+			{
+				"label": "thumbnail",
+				"constant": true,
+				"format": "text"
+			},
+			{
+				"label": "description",
+				"xpath": "./daodesc/p",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "filePath",
+				"xpath": ".",
+				"optional": true,
+				"returnAttributeName": "href",
+				"removeDuplicates": true,
+				"excludePattern": [
+					".shtml"
+				],
+				"format": "text"
+			},
+			{
+				"label": "parentId",
+				"fromLabels": [
+					"passedParentId"
+				],
+				"format": "text"
+			},
+			{
+				"removeNodes": [
+					"passedParentId"
+				]
+			},
+			{
+				"label": "id",
+				"externalProcess": "file_name_from_filePath",
+				"passLabels": [
+					{
+						"filename": "filePath"
+					}
+				]
 			}
 		]
 	},

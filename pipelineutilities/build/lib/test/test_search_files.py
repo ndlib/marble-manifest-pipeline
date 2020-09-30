@@ -1,6 +1,6 @@
 import _set_path  # noqa
 import unittest
-from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_tracked_file, is_directory   # noqa: E402
+from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_tracked_file, is_directory, _convert_dict_to_camel_case
 
 
 example_ids = {
@@ -59,6 +59,8 @@ skipped_files = [
     '._filename.jpg',
     'filename.100.jpg',
     'filename.072.jpg',
+    'some/folder/with_resource.frk/file.jpg',
+    '_file_to_skip.jpg'
 ]
 
 valid_files = [
@@ -66,7 +68,8 @@ valid_files = [
     'filename.150.jpeg',
     'filename.tif',
     'filename.150.tif',
-    'somepdf.something.pdf'
+    'somepdf.something.pdf',
+    'filename/ending/with_resource.frk'
 ]
 
 
@@ -98,11 +101,17 @@ class TestSearchFiles(unittest.TestCase):
             'filename.jpeg',
             'filename.jpEg',
             'filename.JPG',
-            'BOO_000297305_000001.tif'
+            'BOO_000297305_000001.tif',
+            'file/is/still/ok.jpg'
         ]
 
         for test in tests:
             self.assertTrue(is_tracked_file(test))
+
+    def test_is_tracked_file(self):
+        failed_tests = ['file/is/resource.frk/not_ok.jpg']
+        for test in failed_tests:
+            self.assertFalse(is_tracked_file(test))
 
     def test_is_directory(self):
         true_tests = [
@@ -130,6 +139,20 @@ class TestSearchFiles(unittest.TestCase):
 
         for test in false_tests:
             self.assertFalse(is_directory(test), msg="Should Fail Test: %s" % test)
+
+    def test_convert_dict_to_camel_case(self):
+        tests = [
+            {"This": "is", "a": " test"},
+            {"ThisIs": "another", "SimpleTime": " test"},
+        ]
+        results = [
+            {"this": "is", "a": " test"},
+            {"thisIs": "another", "simpleTime": " test"},
+        ]
+
+        for i, test in enumerate(tests):
+            result = _convert_dict_to_camel_case(test)
+            self.assertEqual(result, results[i])
 
 
 if __name__ == '__main__':

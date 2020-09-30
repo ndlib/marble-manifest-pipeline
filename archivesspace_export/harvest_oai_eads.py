@@ -16,7 +16,6 @@ class HarvestOaiEads():
     def get_standard_json_from_archives_space_url(self, id_url: str) -> dict:
         """ Retrieve one EAD xml record given the ArchivesSpace identifier """
         oai_url = self._get_oai_url_given_id_url(id_url)
-        print("oai_url = ", oai_url)
         standard_json = {}
         xml_string = self._get_xml_string_given_oai_url(oai_url)
         if xml_string:
