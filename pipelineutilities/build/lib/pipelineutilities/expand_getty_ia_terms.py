@@ -132,12 +132,15 @@ def _get_xml_given_url(url: str) -> ElementTree:
 
 def _get_xml_string_given_url(url) -> str:
     """ return xml string given url """
+    xml_string = ""
     try:
         xml_string = requests.get(url, timeout=60).text
     except ConnectionError as e:
         capture_exception(e)
-        xml_string = ""
         print("ConnectionError calling " + url)
+    except TimeoutError as e:
+        capture_exception(e)
+        print("TimeoutError calling " + url)
     return xml_string
 
 

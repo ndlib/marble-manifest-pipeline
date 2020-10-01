@@ -12,7 +12,7 @@ class SaveStandardJsonToDynamo():
     def __init__(self, config: dict):
         self.config = config
         self.dynamodb = boto3.resource('dynamodb')
-        self.standard_json_table = self.dynamodb.Table("sm_standard_json")  # need table name defined in ssm and stored in config
+        self.standard_json_table = self.dynamodb.Table(self.config['standard-json-tablename'])
 
     def save_standard_json(self, standard_json: dict, export_all_files_flag: bool = False) -> bool:
         """ First, validate the standard_json.  If this is the first time this standard_json is being saved,
@@ -41,5 +41,4 @@ class SaveStandardJsonToDynamo():
                     self._save_json_to_dynamo(item)
         new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
         self.standard_json_table.put_item(Item=new_dict)
-        print(new_dict['id'], " supposedly saved to dynamo")
         return success_flag

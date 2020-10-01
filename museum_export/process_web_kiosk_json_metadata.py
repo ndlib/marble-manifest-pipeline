@@ -15,7 +15,7 @@ from dependencies.sentry_sdk import capture_exception
 from process_one_museum_object import ProcessOneMuseumObject
 from get_image_info_for_all_objects import GetImageInfoForAllObjects
 from pipelineutilities.save_standard_json import save_standard_json
-# from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
+from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 
 
@@ -86,12 +86,12 @@ class ProcessWebKioskJsonMetadata():
             export_all_files_flag = self.event.get('export_all_files_flag', False)
             process_one_museum_object_class = ProcessOneMuseumObject(self.config, image_file_info, self.start_time)
             standard_json_helpers_class = StandardJsonHelpers(self.config)
-            # save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
+            save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
             for _object_key, object_value in objects.items():
                 if 'uniqueIdentifier' in object_value and not object_value.get("recordProcessedFlag", False):
                     standard_json = process_one_museum_object_class.process_object(object_value)
                     standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
-                    # save_standard_json_to_dynamo_class.save_standard_json(standard_json)
+                    save_standard_json_to_dynamo_class.save_standard_json(standard_json)
                     save_standard_json(self.config, standard_json, export_all_files_flag)
                     object_value["recordProcessedFlag"] = True
                     objects_processed += 1
