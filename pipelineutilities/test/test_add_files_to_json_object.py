@@ -9,20 +9,6 @@ from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
 
-
-def debug_json(tested, result):
-    tested = json.dumps(tested, sort_keys=True, indent=2)
-    result = json.dumps(result, sort_keys=True, indent=2)
-
-    f = open("./test/debug/test.json", "w")
-    f.write(tested)
-    f.close()
-
-    f = open("./test/debug/result.json", "w")
-    f.write(result)
-    f.close()
-
-
 class Test(unittest.TestCase):
     """ Class for test fixtures """
     def setUp(self):
@@ -45,7 +31,6 @@ class Test(unittest.TestCase):
         #     json.dump(standard_json_with_files, f, indent=2)
         with open(local_folder + '/MSNEA8011_EAD_with_files.json', 'r') as input_source:
             expected_json = json.load(input_source)
-        debug_json(expected_json, standard_json_with_files)
 
         self.assertEqual(expected_json, standard_json_with_files)
 
