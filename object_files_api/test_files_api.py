@@ -37,10 +37,10 @@ class Test(unittest.TestCase):
             filename = os.path.join(os.path.dirname(__file__), 'test', key.replace('/', '-')[1:] + '.json')
             # with open(filename, 'w') as f:
             #     json.dump(actual_results, f, indent=2)
-            print(filename)
             with io.open(filename, 'r', encoding='utf-8') as json_file:
                 expected_results = json.load(json_file)
             break
+
         self.assertEqual(actual_results, expected_results)
 
     def test_06_convert_directory_to_json(self):

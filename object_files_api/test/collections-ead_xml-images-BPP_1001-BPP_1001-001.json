@@ -1,10 +1,10 @@
 {
-  "id": "collections-ead_xml-images-BPP_1001-BPP_1001-001",
+  "id": "/collections/ead_xml/images/BPP_1001/BPP_1001-001",
   "label": "BPP_1001 001",
   "lastModified": "2020-01-28T15:01:53+00:00",
-  "path": "S3://rbsc-test-files/collections/ead_xml/images/BPP_1001",
+  "path": "S3://rbsc-test-filescollections/ead_xml/images",
   "source": "rbsc-test-files",
   "sourceType": "S3",
-  "uri": "https://presentation-iiif.library.nd.edu/objectFiles/collections-ead_xml-images-BPP_1001-BPP_1001-001",
+  "uri": "/collections/ead_xml/images/BPP_1001/BPP_1001-001",
   "numberOfFiles": 2
 }
