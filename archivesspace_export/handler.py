@@ -14,7 +14,7 @@ from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.s3_helpers import read_s3_json
 from pipelineutilities.save_standard_json import save_standard_json
-# from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
+from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 
 
 def run(event: dict, _context: dict):
@@ -34,7 +34,7 @@ def run(event: dict, _context: dict):
     harvest_oai_eads_class = HarvestOaiEads(config)
     add_files_to_json_object_class = AddFilesToJsonObject(config)
     standard_json_helpers_class = StandardJsonHelpers(config)
-    # save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(config)
+    save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(config)
     ids = event.get("ids", [])
     while len(ids) > 0 and datetime.now() < time_to_break:
         standard_json = harvest_oai_eads_class.get_standard_json_from_archives_space_url(ids[0])
@@ -43,7 +43,7 @@ def run(event: dict, _context: dict):
             standard_json = add_files_to_json_object_class.add_files(standard_json)
             standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
             save_standard_json(config, standard_json)
-            # save_standard_json_to_dynamo_class.save_standard_json(standard_json)
+            save_standard_json_to_dynamo_class.save_standard_json(standard_json)
         del ids[0]
     event['archivesSpaceHarvestComplete'] = (len(ids) == 0)
     event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-data-basepath'])
@@ -77,8 +77,7 @@ def _init_sentry():
 
 
 # setup:
-# export SSM_KEY_BASE=/all/new-csv
-# export SSM_KEY_BASE=/all/marble-manifest-deployment/prod
+# SSM_KEY_BASE=/all/stacks/steve-manifest
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
 def test():

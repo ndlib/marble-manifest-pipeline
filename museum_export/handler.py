@@ -42,7 +42,6 @@ def run(event, _context):
         write_s3_json(config['process-bucket'], 'museum_composite_metadata.json', composite_json)
         write_s3_json(config['process-bucket'], 'museum_image_metadata.json', museum_image_metadata)
     else:
-        print("config = ", config)
         composite_json = read_s3_json(config['process-bucket'], 'museum_composite_metadata.json')
         museum_image_metadata = read_s3_json(config['process-bucket'], 'museum_image_metadata.json')
 

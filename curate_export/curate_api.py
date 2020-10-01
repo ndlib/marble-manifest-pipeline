@@ -13,7 +13,7 @@ from dependencies.sentry_sdk import capture_exception
 from translate_curate_json_node import TranslateCurateJsonNode
 from create_standard_json import CreateStandardJson
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
-# from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
+from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.save_standard_json import save_standard_json
 
 
@@ -73,8 +73,8 @@ class CurateApi():
                     json.dump(standard_json, output_file, indent=2, ensure_ascii=False)
             else:
                 save_standard_json(self.config, standard_json)
-                # save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
-                # save_standard_json_to_dynamo_class.save_standard_json(standard_json)
+                save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
+                save_standard_json_to_dynamo_class.save_standard_json(standard_json)
         return standard_json
 
     def _get_curate_json(self, item_id: str) -> dict:
