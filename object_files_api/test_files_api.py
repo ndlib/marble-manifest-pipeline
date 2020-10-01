@@ -24,27 +24,6 @@ class Test(unittest.TestCase):
         self.config['test'] = True
         self.files_api_class = FilesApi(self.event, self.config)
 
-    def test_01_convert_object_to_json(self):
-        input = {"id": "abc"}
-        expected_results = {"id": "abc", "uri": "https://presentation-iiif.library.nd.edu/objectFiles/abc"}
-        actual_results = self.files_api_class._convert_object_to_json(input)
-        self.assertEqual(actual_results, expected_results)
-
-    def test_02_convert_object_to_json(self):
-        directories = self.files_api_class._crawl_available_files_from_s3_or_cache()
-        directory = '/collections/ead_xml/images/BPP_1001/BPP_1001-001'
-
-        actual_results = self.files_api_class._convert_object_to_json(directories[directory]['files'][0])
-        expected_results = {'eTag': '"fae679e8863fc9963e7a7e4d97290623"', 'fileId': '/collections/ead_xml/images/BPP_1001/BPP_1001-001', 'iiifImageFilePath': 's3://marble-data-broker-publicbucket-kebe5zkimvyg/collections/ead_xml/images/BPP_1001/BPP_1001-001-F2.jpg', 'iiifImageUri': 'https://image-iiif.libraries.nd.edu/iiif/2/collections/ead_xml/images/BPP_1001/BPP_1001-001-F2.jpg', 'key': 'collections/ead_xml/images/BPP_1001/BPP_1001-001-F2.jpg', 'label': 'https://rarebooks library nd edu F2', 'lastModified': '2020-01-28T15:01:53+00:00', 'path': 's3://rbsc-test-files/collections/ead_xml/images/BPP_1001/BPP_1001-001-F2.jpg', 'size': 2360533, 'source': 'rbsc-test-files', 'sourceType': 'S3', 'sourceUri': 'https://rarebooks.library.nd.edu/collections/ead_xml/images/BPP_1001/BPP_1001-001-F2.jpg', 'storageClass': 'STANDARD'}  # noqa: #501
-        self.assertEqual(actual_results, expected_results)
-
-    def test_03_fix_json_serial_problems(self):
-        input = {'ETag': '"3b16c210f529e33c3acffce66bc2268d"'}
-        input['LastModified'] = datetime(2020, 3, 2, 19, 35, 2, tzinfo=tzutc())
-        actual_results = self.files_api_class._fix_json_serial_problems(input)
-        expected_results = {'ETag': '"3b16c210f529e33c3acffce66bc2268d"', 'LastModified': '2020-03-02T19:35:02+00:00'}
-        self.assertEqual(actual_results, expected_results)
-
     def test_04_crawl_available_files_from_s3_or_cache(self):
         actual_results = self.files_api_class._crawl_available_files_from_s3_or_cache(False)
         with io.open(os.path.join(os.path.dirname(__file__), 'test/crawl_available_files_cache.json'), 'r', encoding='utf-8') as json_file:
@@ -58,6 +37,7 @@ class Test(unittest.TestCase):
             filename = os.path.join(os.path.dirname(__file__), 'test', key.replace('/', '-')[1:] + '.json')
             # with open(filename, 'w') as f:
             #     json.dump(actual_results, f, indent=2)
+            print(filename)
             with io.open(filename, 'r', encoding='utf-8') as json_file:
                 expected_results = json.load(json_file)
             break
