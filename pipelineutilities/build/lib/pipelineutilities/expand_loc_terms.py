@@ -76,6 +76,9 @@ def _get_json_given_url(url: str) -> dict:
     except ConnectionRefusedError as e:
         print('Connection refused on url ', url)
         capture_exception(e)
+    except TimeoutError as e:
+        capture_exception(e)
+        print("TimeoutError calling " + url)
     except Exception as e:  # noqa E722 - intentionally ignore warning about bare except
         print('Error caught in expand_loc_terms._get_json_given_url trying to process url ' + url)
         capture_exception(e)

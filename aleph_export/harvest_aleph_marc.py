@@ -14,7 +14,7 @@ from transform_marc_json import TransformMarcJson
 from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.save_standard_json import save_standard_json
-# from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
+from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pymarc import MARCReader
 
 
@@ -94,8 +94,8 @@ class HarvestAlephMarc():
             json_file_name = json_record['id'] + '.json'
             if not self.event['local']:
                 save_standard_json(self.config, json_record)
-                # save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
-                # save_standard_json_to_dynamo_class.save_standard_json(json_record)
+                save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
+                save_standard_json_to_dynamo_class.save_standard_json(json_record)
             else:
                 self._save_json_locally(json_file_name, json_record)
 

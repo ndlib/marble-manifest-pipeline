@@ -1,9 +1,0 @@
-{
-  "local": false,
-  "mode": "full",
-  "ssm_key_base": "/all/stacks/marbleb-prod-manifest",
-  "local-path": "/Users/smattiso/git/marble-manifest-pipeline/museum_export/../example/",
-  "museumHarvestComplete": false,
-  "museum_execution_count": 3,
-  "maximum_museum_executions": 15
-}
