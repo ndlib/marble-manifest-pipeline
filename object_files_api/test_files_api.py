@@ -41,7 +41,7 @@ class Test(unittest.TestCase):
                 expected_results = json.load(json_file)
             break
 
-        self.assertEqual(actual_results, expected_results)
+            self.assertEqual(actual_results, expected_results)
 
     def test_06_convert_directory_to_json(self):
         directories = self.files_api_class._crawl_available_files_from_s3_or_cache()

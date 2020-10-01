@@ -77,7 +77,7 @@ class FilesApi():
         data['id'] = file.get('fileId')
         data['label'] = os.path.basename(file.get('fileId')).replace("-", " ")
         data['lastModified'] = file.get('lastModified')
-        data['path'] = file['sourceType'] + '://' + file['source'] + os.path.dirname(file.get('directory'))
+        data['path'] = file['sourceType'] + '://' + os.path.join(file['source'], os.path.dirname(file.get('directory')))
         data['source'] = file.get('source')
         data['sourceType'] = file.get('sourceType')
         data['uri'] = os.path.join('https://presentation-iiif.library.nd.edu/objectFiles/', data['id'])
