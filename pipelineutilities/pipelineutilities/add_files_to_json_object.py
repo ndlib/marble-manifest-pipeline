@@ -34,7 +34,10 @@ class AddFilesToJsonObject():
             all related images. """
         each_file_dict = {}
         id_to_find = id_from_url(file_path)
+        print("check")
+        print(id_to_find)
         if id_to_find in self.hash_of_available_files:
+            print("found")
             item_id = file_items[index]['id']
             item_description = file_items[index]['description']
             collection_id = file_items[index]["collectionId"]
