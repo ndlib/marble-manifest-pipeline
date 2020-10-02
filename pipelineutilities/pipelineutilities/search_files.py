@@ -1,9 +1,8 @@
 import boto3
 import re
 import os
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, date, timedelta, timezone
 from urllib.parse import urlparse
-
 # saved live path
 # "libnd-smb-rbsc": ["digital/bookreader", "collections/ead_xml/images"]
 
@@ -94,7 +93,7 @@ def id_from_url(url):
     for exp in test_expressions:
         test = re.findall(exp, file)
         if test:
-            return "%s/%s" % (directory, test[0])
+            return test[0]
 
     return False
 
@@ -205,7 +204,6 @@ def crawl_available_files(config):
                     augement_file_record(obj, id, url, config)
 
                     order_field[id]['files'].append(obj)
-
     return order_field
 
 
@@ -225,6 +223,68 @@ def list_updated_files(config: dict, minutes_to_test: int):
                 if id and file['lastModified'] >= time_threshold_for_processing:
                     augement_file_record(file, id, url, config)
                     yield file
+
+
+def list_all_files(config: dict):
+    bucket = config['rbsc-image-bucket']
+    print("crawling image files in this bucket: ", bucket)
+    for directory in folders_to_crawl:
+        objects = get_matching_s3_objects(bucket, directory)
+        for obj in objects:
+            if is_tracked_file(obj.get('Key')):
+                url = bucket_to_url[bucket] + obj.get('Key')
+                id = key_to_id(obj.get('Key'))
+                augement_file_record(obj, id, url, config)
+
+                yield obj
+
+
+def list_all_directories(config: dict):
+    order_field = {}
+    bucket = config['rbsc-image-bucket']
+    print("crawling image files in this bucket: ", bucket)
+    for directory in folders_to_crawl:
+        objects = get_matching_s3_objects(bucket, directory)
+        for obj in objects:
+            if is_tracked_file(obj.get('Key')):
+                key = obj.get('Key')
+                url = bucket_to_url[bucket] + key
+                if is_directory(key):
+                    directory = key
+                else:
+                    directory = os.path.dirname(key)
+                directory_id = key_to_id(directory)
+
+                id = id_from_url(url)
+
+                if id:
+                    id = key_to_id(id)
+                    if not order_field.get(directory_id, False):
+                        order_field[directory_id] = {
+                            "id": directory_id,
+                            "path": directory,
+                            "objects": {},
+                        }
+
+                    if not order_field[directory_id]['objects'].get(id, False):
+                        order_field[directory_id]['objects'][id] = {
+                            "id": id,
+                            "path": directory,
+                            "label": id.replace(directory_id, "").ltrim("-").replace("-", " "),
+                            "directory_id": directory,
+                            "Source": "RBSC",
+                            "LastModified": False,
+                            "files": [],
+                        }
+
+                    if not order_field[directory_id]['objects'][id]["LastModified"] or obj['LastModified'] > order_field[directory_id]['objects'][id]["LastModified"]:
+                        order_field[directory_id]['objects'][id]["LastModified"] = obj['LastModified']
+
+                    augement_file_record(obj, id, url, config)
+
+                    order_field[directory_id]['objects'][id]['files'].append(obj)
+
+    return order_field
 
 
 def key_to_id(key):
@@ -263,6 +323,14 @@ def is_tracked_file(file):
     return re.match(r"^.*[.]((jpe?g)|(tif)|(pdf))$", file, re.IGNORECASE)
 
 
+def json_serial(obj):
+    """JSON serializer for objects not serializable by default json code"""
+
+    if isinstance(obj, (datetime, date)):
+        return obj.isoformat()
+    raise TypeError("Type %s not serializable" % type(obj))
+
+
 # python -c 'from search_files import *; test()'
 def test():
     from pipeline_config import setup_pipeline_config
@@ -272,8 +340,9 @@ def test():
     # change to the prod bucket
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     # data = list_updated_files(config, 1000000)
-    objs = crawl_available_files(config)
-    for key, value in objs.items():
-        print(key, value['Directory'])
+    data = crawl_available_files(config)
+    for id, value in data.items():
+        print(id)
+        print(value)
 
     return

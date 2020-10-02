@@ -1,6 +1,6 @@
 import os
 import io
-from datetime import datetime, date, timedelta
+from datetime import datetime, timedelta
 import json
 import time
 from s3_helpers import write_s3_json
@@ -22,7 +22,7 @@ class FilesApi():
         self.start_time = time.time()
 
     def save_files_details(self):
-        all_files_listing = self._crawl_available_files_from_s3_or_cache(False)
+        all_files_listing = self._crawl_available_files_from_s3_or_cache(True)
         file_objects = []
         if not self.event['local']:
             print("saving objectFiles to ", self.config['manifest-server-bucket'] + '/objectFiles')
@@ -44,12 +44,10 @@ class FilesApi():
             my_json = dict(summary_json)
             my_json['files'] = []
             for file in collection_json['files']:
-                if isinstance(file['lastModified'], (date, datetime)):
-                    file['lastModified'] = file['lastModified'].isoformat()
                 my_json['files'].append(file)
                 count += 1
             if not self.event['local']:
-                s3_key = os.path.join('objectFiles/', os.path.basename(summary_json['uri']), 'index.json')
+                s3_key = os.path.join('objectFiles/', os.path.basename(summary_json['id']), 'index.json')
                 print("saving ", os.path.basename(summary_json['uri']), int(time.time() - self.start_time), 'seconds.')
                 write_s3_json(self.config['manifest-server-bucket'], s3_key, my_json)
             if self.event.get('test', False):
@@ -76,12 +74,10 @@ class FilesApi():
 
     def _convert_directory_to_json(self, file: dict) -> dict:
         data = {}
-        data['id'] = file.get('fileId').replace('/', '-')[1:]
+        data['id'] = file.get('fileId')
         data['label'] = os.path.basename(file.get('fileId')).replace("-", " ")
         data['lastModified'] = file.get('lastModified')
-        if isinstance(data['lastModified'], (date, datetime)):
-            data['lastModified'] = data['lastModified'].isoformat()
-        data['path'] = file['sourceType'] + '://' + file['source'] + os.path.dirname(file.get('fileId'))
+        data['path'] = file['sourceType'] + '://' + os.path.join(file['source'], os.path.dirname(file.get('directory')))
         data['source'] = file.get('source')
         data['sourceType'] = file.get('sourceType')
         data['uri'] = os.path.join('https://presentation-iiif.library.nd.edu/objectFiles/', data['id'])
@@ -94,24 +90,3 @@ class FilesApi():
         data['numberOfFiles'] = count
 
         return data
-
-    def _convert_object_to_json(self, object: dict) -> dict:
-        if isinstance(object, str):
-            return object
-        # object = {k[0].lower() + k[1:]: v for k, v in object.items()}
-        object = self._fix_json_serial_problems(object)
-        if 'id' in object and 'uri' not in object:
-            object['uri'] = 'https://presentation-iiif.library.nd.edu/objectFiles/' + object['id']
-
-        if 'files' in object:
-            for key, file in enumerate(object['files']):
-                # file = {k[0].lower() + k[1:]: v for k, v in file.items()}
-                file = self._fix_json_serial_problems(file)
-                object['files'][key] = file
-        return object
-
-    def _fix_json_serial_problems(self, object: dict) -> dict:
-        for k, v in object.items():
-            if isinstance(v, (datetime, date)):
-                object[k] = v.isoformat()
-        return object
