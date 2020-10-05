@@ -82,7 +82,7 @@ def id_from_url(url):
     if file_should_be_skipped(url.path):
         return False
 
-    directory = os.path.dirname(url.path)
+    # directory = os.path.dirname(url.path)
 
     test_expressions = []
     for key in regexps:
