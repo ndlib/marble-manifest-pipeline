@@ -25,20 +25,24 @@ default_config = {
     "museum_keys_ssm_base": "/all/marble/museum",
     "curate_keys_ssm_base": "/all/marble/curate/prod",
     "local-path": "please set me",
-    "museum-required-fields": {
-        "Title": "title",
-        "Creators": "creators",
-        "Created date": "createdDate",
-        "Work Type": "workType",
-        "Medium": "medium",
-        "Unique identifier": "uniqueIdentifier",
-        "Repository": "repository",
-        "Subject": "subjects",
-        "Copyright Status": "copyrightStatus",
-        "Access": "access",
-        "Dimensions": "dimensions",
-        "Dedication": "dedication",
-        "Thumbnail": "digitalAssets"
+    "required-fields-by-source-system": {
+        "EmbARK": {
+            "notify": ["hbertold@nd.edu"],
+            "required-fields": {
+                "Title": "title",
+                "Creators": "creators",
+                "Created date": "createdDate",
+                "Work Type": "workType",
+                "Medium": "medium",
+                "Unique identifier": "uniqueIdentifier",
+                "Repository": "repository",
+                "Subject": "subjects",
+                "Copyright Status": "copyrightStatus",
+                "Access": "access",
+                "Dimensions": "dimensions",
+                "Dedication": "dedication"
+            }
+        }
     },
     "seconds-to-allow-for-processing": 600,
     "hours-threshold-for-incremental-harvest": 72,

@@ -9,6 +9,7 @@ from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
 
+
 class Test(unittest.TestCase):
     """ Class for test fixtures """
     def setUp(self):

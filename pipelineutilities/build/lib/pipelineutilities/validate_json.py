@@ -114,7 +114,7 @@ standard_json_schema = {
                 "sequence": {"type": "string"}
             }
         },
-        "level": {"type": "string"},
+        "level": {"enum": ["collection", "manifest", "file"]},
         "title": {"type": "string"},
         "createdDate": {
             "description": "We want dates, like 'c. 1900' or '2020-04-22'.",
@@ -180,7 +180,7 @@ standard_json_schema = {
                 },
                 "required": ["display"],
                 "additionalProperties": False
-            }
+            },
         },
         "contributors": {
             "type": "array",
@@ -260,14 +260,17 @@ standard_json_schema = {
         "metsFilePath": {"type": "string"},
         "schemaUri": {"type": "string"},
         "schemaPath": {"type": "string"},
-        "bendoItem": {"type": "string"},  # added 6/10/2020 to support Curate, and subsequent bendo processing
+        "bendoItem": {"type": "string"},
+        "objectFileGroupId": {"type": "string"},
+        "width": {"type": "integer"},
+        "height": {"type": "integer"},
         "items": {
             "type": "array",
             "items": {"$ref": "#"},
             "default": []
         }
     },
-    "required": ["id", "parentId", "collectionId", "apiVersion"],
+    "required": ["id", "parentId", "collectionId", "apiVersion", "fileCreatedDate"],
     "additionalProperties": False
 }
 

@@ -47,6 +47,7 @@ class AddFilesToJsonObject():
                 file_items.pop(index)
                 sequence = 0
                 for obj in self.hash_of_available_files[id_to_find]['files']:
+                    each_file_dict['objectFileGroupId'] = id_to_find
                     each_file_dict['collectionId'] = collection_id
                     each_file_dict['sourceSystem'] = source_system
                     each_file_dict['repository'] = repository

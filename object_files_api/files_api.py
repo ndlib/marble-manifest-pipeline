@@ -80,8 +80,7 @@ class FilesApi():
         data['path'] = file['sourceType'] + '://' + os.path.join(file['source'], os.path.dirname(file.get('directory')))
         data['source'] = file.get('source')
         data['sourceType'] = file.get('sourceType')
-        data['uri'] = os.path.join('https://presentation-iiif.library.nd.edu/objectFiles/', data['id'])
-
+        data['uri'] = os.path.join(self.config['manifest-server-base-url'], 'objectFiles', data['id'])
         count = 0
 
         if 'files' in file:

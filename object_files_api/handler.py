@@ -22,15 +22,18 @@ def run(event, context):
     return event
 
 
+# export SSM_KEY_BASE=/all/stacks/steve-manifest
+# aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
+
 # aws-vault exec libnd-wse-admin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
 def test():
     event = {}
     event['local'] = False
-    event['ssm_key_base'] = '/all/new-csv'
+    event['ssm_key_base'] = '/all/stacks/steve-manifest'
     # event['ssm_key_base'] = '/all/marble-manifest-prod'
     # event['rbsc-image-bucket'] = 'libnd-smb-rbsc'
-    event['image-server-base-url'] = 'http://images.com'
-    event['image-server-bucket'] = 's3://images'
-    event['manifest-server-bucket'] = 'steve-manifest-manifestbucket46c412a5-19kyrt97zbq12'
+    # event['image-server-base-url'] = 'http://images.com'
+    # event['image-server-bucket'] = 's3://images'
+    # event['manifest-server-bucket'] = 'steve-manifest-manifestbucket46c412a5-19kyrt97zbq12'
     run(event, {})

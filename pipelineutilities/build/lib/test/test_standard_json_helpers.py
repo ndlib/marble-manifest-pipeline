@@ -3,7 +3,7 @@ import _set_path  # noqa: F401
 import json
 import os
 from pipelineutilities.standard_json_helpers import _remove_brackets, _remove_trailing_punctuation, _clean_up_standard_json_strings, \
-    _load_language_codes, _add_language_display, _clean_up_standard_json_recursive, _add_publishers_node
+    _load_language_codes, _add_language_display, _clean_up_standard_json_recursive, _add_publishers_node, _add_objectFileGroupId
 import unittest
 
 
@@ -66,7 +66,7 @@ class Test(unittest.TestCase):
         actual_results = _clean_up_standard_json_strings(standard_json)
         expected_results = {
             "description": "something really dumb",
-            "title": "test0",
+            "title": "test0,",
             "subjects": [{"display": "test1"}, {"display": "test2"}],
             "contributors": [{"display": "test3"}],
             "languages": [{'display': 'English', 'alpha2': 'en', 'alpha3': 'eng'}]
@@ -93,7 +93,7 @@ class Test(unittest.TestCase):
         """ test_06_clean_up_standard_json_recursive"""
         standard_json = {
             "description": "something [really] dumb",
-            "title": "test0,",
+            "title": "test0/",
             "subjects": [{"display": "test1/"}, {"display": "test2."}],
             "contributors": [{"display": "test3:"}],
             "items": [
@@ -132,6 +132,50 @@ class Test(unittest.TestCase):
                 "publisherLocation": "Dublin,"
             }
         ]
+        self.assertEqual(actual_results, expected_results)
+
+    def test_08_add_objectFileGroupId(self):
+        """ test_08_add_objectFileGroupId """
+        with open(local_folder + '1976.046.json', 'r', encoding='utf-8') as json_file:
+            standard_json = json.load(json_file)
+        standard_json = {
+            'id': 'abc',
+            'level': 'manifest',
+            'items': [
+                {'level': 'file', 'filePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'},
+                {'level': 'file', 'filePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}]
+        }
+        actual_results = _add_objectFileGroupId(standard_json)
+        expected_results = {
+            'id': 'abc',
+            'level': 'manifest',
+            'objectFileGroupId': 'BOO_000297305',
+            'items': [
+                {'level': 'file', 'filePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'},
+                {'level': 'file', 'filePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}
+            ]
+        }
+        self.assertEqual(actual_results, expected_results)
+
+    def test_09_add_objectFileGroupId_museum(self):
+        """ test_09_add_objectFileGroupId """
+        with open(local_folder + '1976.046.json', 'r', encoding='utf-8') as json_file:
+            standard_json = json.load(json_file)
+        standard_json = {
+            'id': '1234.567',
+            'level': 'manifest',
+            'items': [
+                {'level': 'file', 'filePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}]
+        }
+        actual_results = _add_objectFileGroupId(standard_json)
+        expected_results = {
+            'id': '1234.567',
+            'level': 'manifest',
+            'objectFileGroupId': '1234.567',
+            'items': [
+                {'level': 'file', 'filePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}
+            ]
+        }
         self.assertEqual(actual_results, expected_results)
 
 

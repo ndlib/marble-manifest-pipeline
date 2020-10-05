@@ -6,6 +6,9 @@ from add_paths_to_json_object import AddPathsToJsonObject
 from expand_subject_terms import expand_subject_terms_recursive
 from fix_creators_in_json_object import FixCreatorsInJsonObject
 from load_language_codes import load_language_codes
+from report_missing_fields import ReportMissingFields
+from get_size_of_images import get_size_of_images
+from search_files import id_from_url
 
 
 class StandardJsonHelpers():
@@ -17,12 +20,17 @@ class StandardJsonHelpers():
         """ Enhance various standard json nodes """
         add_paths_to_json_object_class = AddPathsToJsonObject(self.config)
         fix_creators_in_json_object_class = FixCreatorsInJsonObject(self.config)
+        report_missing_fields_class = ReportMissingFields(self.config)
         standard_json = add_paths_to_json_object_class.add_paths(standard_json)
         standard_json = fix_creators_in_json_object_class.fix_creators(standard_json)
         standard_json = expand_subject_terms_recursive(standard_json)
         standard_json = _clean_up_standard_json_recursive(standard_json)
+        standard_json = get_size_of_images(standard_json)
+        standard_json = _add_objectFileGroupId(standard_json)
         if not validate_standard_json(standard_json):
             standard_json = {}
+        else:
+            report_missing_fields_class.process_missing_fields(standard_json, True)
         return standard_json
 
 
@@ -49,13 +57,19 @@ def _clean_up_standard_json_strings(standard_json: dict) -> dict:
             if individual_node.get('display', ''):
                 individual_node['display'] = _remove_trailing_punctuation(individual_node['display'])
     if 'title' in standard_json:
-        standard_json['title'] = _remove_trailing_punctuation(standard_json['title'])
+        standard_json['title'] = _remove_trailing_slash(standard_json['title'])
     return standard_json
 
 
 def _remove_brackets(string_value: str) -> dict:
     """ Strip [] from description """
     regex = r'\[|\]'
+    return re.sub(regex, '', string_value).strip()
+
+
+def _remove_trailing_slash(string_value: str) -> str:
+    """ Strip trailing slash (/) at end of string"""
+    regex = r'[/]$'
     return re.sub(regex, '', string_value).strip()
 
 
@@ -102,7 +116,25 @@ def _add_publishers_node(publisher_node: dict) -> dict:
 def _load_language_codes() -> list:
     """ This list of language codes originated here:
     https://pkgstore.datahub.io/core/language-codes/language-codes-3b2_json/data/3d37ea0e5aa45a469879af23cb9b83be/language-codes-3b2_json.json """
-    # local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
-    # with open(local_folder + 'language_codes.json', 'r') as input_source:
-    #     return json.load(input_source)
     return load_language_codes()
+
+
+def _add_objectFileGroupId(standard_json: dict) -> dict:
+    level = standard_json.get('level', 'manifest')
+    if level == 'manifest':
+        print('in manifest')
+        # manifests can only have files nested directly under them
+        for item in standard_json.get('items', ''):
+            if item.get('level', '') == 'file':
+                object_file_group_id = item.get('objectFileGroupId', '')
+                if not object_file_group_id:
+                    object_file_group_id = id_from_url(item.get('filePath', ''))
+                if not object_file_group_id:
+                    object_file_group_id = standard_json.get('id', '')
+                standard_json['objectFileGroupId'] = object_file_group_id
+                break
+    elif level == 'collection':
+        # collections can only have manifests nested directly under them
+        for item in standard_json.get('items', ''):
+            item = _add_objectFileGroupId(item)
+    return standard_json

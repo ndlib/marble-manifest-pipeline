@@ -1,0 +1,474 @@
+{
+  "sourceSystem": "EmbARK",
+  "title": "Royal Staff with a Leopard Figure",
+  "createdDate": "mid-20th century",
+  "workType": "Ceremonial objects and regalia",
+  "medium": "wood, paint, metal, hammered coins",
+  "uniqueIdentifier": "1976.046",
+  "sequence": 0,
+  "repository": "museum",
+  "subjects": [
+    {
+      "authority": "AAT",
+      "term": "Benin",
+      "uri": "http://vocab.getty.edu/aat/300015777",
+      "description": "Style and culture of the people of southern Nigeria noted for their production of fine bronzes and carved ivories, particularly of the inhabitants who predated the modern nation of Bénin. For the style and culture of the modern nation, use \"Beninese.\"",
+      "broaderTerms": [
+        {
+          "authority": "AAT",
+          "term": "ancient Nigerian styles and periods",
+          "uri": "http://vocab.getty.edu/aat/300262994",
+          "parentTerm": "Ancient West African",
+          "display": "ancient Nigerian styles and periods"
+        },
+        {
+          "authority": "AAT",
+          "term": "Ancient West African",
+          "uri": "http://vocab.getty.edu/aat/300015759",
+          "parentTerm": "Ancient African",
+          "display": "Ancient West African"
+        },
+        {
+          "authority": "AAT",
+          "term": "Ancient African",
+          "uri": "http://vocab.getty.edu/aat/300015690",
+          "parentTerm": "African (general",
+          "display": "Ancient African"
+        },
+        {
+          "authority": "AAT",
+          "term": "African (general",
+          "parentTerm": "continental cultures)",
+          "display": "African (general"
+        },
+        {
+          "authority": "AAT",
+          "term": "continental cultures)",
+          "uri": "http://vocab.getty.edu/aat/300015647",
+          "parentTerm": "styles",
+          "display": "continental cultures)"
+        },
+        {
+          "authority": "AAT",
+          "term": "styles",
+          "parentTerm": "periods",
+          "display": "styles"
+        },
+        {
+          "authority": "AAT",
+          "term": "periods",
+          "parentTerm": "and cultures by region",
+          "display": "periods"
+        },
+        {
+          "authority": "AAT",
+          "term": "and cultures by region",
+          "uri": "http://vocab.getty.edu/aat/300111079",
+          "display": "and cultures by region"
+        }
+      ],
+      "parentTerms": [
+        "ancient Nigerian styles and periods"
+      ],
+      "display": "Benin"
+    },
+    {
+      "authority": "AAT",
+      "term": "Fon",
+      "uri": "http://vocab.getty.edu/aat/300016019",
+      "broaderTerms": [
+        {
+          "authority": "AAT",
+          "term": "Ewe cultures",
+          "uri": "http://vocab.getty.edu/aat/300016014",
+          "parentTerm": "Guinea Coast styles",
+          "display": "Ewe cultures"
+        },
+        {
+          "authority": "AAT",
+          "term": "Guinea Coast styles",
+          "uri": "http://vocab.getty.edu/aat/300015910",
+          "parentTerm": "West African (general)",
+          "display": "Guinea Coast styles"
+        },
+        {
+          "authority": "AAT",
+          "term": "West African (general)",
+          "uri": "http://vocab.getty.edu/aat/300015845",
+          "parentTerm": "African by cultural or regional designation",
+          "display": "West African (general)"
+        },
+        {
+          "authority": "AAT",
+          "term": "African by cultural or regional designation",
+          "uri": "http://vocab.getty.edu/aat/300121001",
+          "parentTerm": "African (general",
+          "display": "African by cultural or regional designation"
+        },
+        {
+          "authority": "AAT",
+          "term": "African (general",
+          "parentTerm": "continental cultures)",
+          "display": "African (general"
+        },
+        {
+          "authority": "AAT",
+          "term": "continental cultures)",
+          "uri": "http://vocab.getty.edu/aat/300015647",
+          "parentTerm": "styles",
+          "display": "continental cultures)"
+        },
+        {
+          "authority": "AAT",
+          "term": "styles",
+          "parentTerm": "periods",
+          "display": "styles"
+        },
+        {
+          "authority": "AAT",
+          "term": "periods",
+          "parentTerm": "and cultures by region",
+          "display": "periods"
+        },
+        {
+          "authority": "AAT",
+          "term": "and cultures by region",
+          "uri": "http://vocab.getty.edu/aat/300111079",
+          "display": "and cultures by region"
+        }
+      ],
+      "parentTerms": [
+        "Ewe cultures"
+      ],
+      "display": "Fon"
+    },
+    {
+      "authority": "AAT",
+      "term": "Leopardus",
+      "uri": "http://vocab.getty.edu/aat/300310364",
+      "description": "Genus of three primarily Central and South American species, including the little spotted cat, margay, and ocelot.",
+      "broaderTerms": [
+        {
+          "authority": "AAT",
+          "term": "Felidae (family)",
+          "uri": "http://vocab.getty.edu/aat/300265716",
+          "parentTerm": "Carnivora (order)",
+          "display": "Felidae (family)"
+        },
+        {
+          "authority": "AAT",
+          "term": "Carnivora (order)",
+          "uri": "http://vocab.getty.edu/aat/300310328",
+          "parentTerm": "Mammalia (class)",
+          "display": "Carnivora (order)"
+        },
+        {
+          "authority": "AAT",
+          "term": "Mammalia (class)",
+          "uri": "http://vocab.getty.edu/aat/300265707",
+          "parentTerm": "Vertebrata (subphylum)",
+          "display": "Mammalia (class)"
+        },
+        {
+          "authority": "AAT",
+          "term": "Vertebrata (subphylum)",
+          "uri": "http://vocab.getty.edu/aat/300265720",
+          "parentTerm": "Chordata (phylum)",
+          "display": "Vertebrata (subphylum)"
+        },
+        {
+          "authority": "AAT",
+          "term": "Chordata (phylum)",
+          "uri": "http://vocab.getty.edu/aat/300266513",
+          "parentTerm": "Animalia (kingdom)",
+          "display": "Chordata (phylum)"
+        },
+        {
+          "authority": "AAT",
+          "term": "Animalia (kingdom)",
+          "uri": "http://vocab.getty.edu/aat/300249395",
+          "parentTerm": "Eukaryota (domain)",
+          "display": "Animalia (kingdom)"
+        },
+        {
+          "authority": "AAT",
+          "term": "Eukaryota (domain)",
+          "uri": "http://vocab.getty.edu/aat/300265677",
+          "parentTerm": "living organisms (entities)",
+          "display": "Eukaryota (domain)"
+        },
+        {
+          "authority": "AAT",
+          "term": "living organisms (entities)",
+          "uri": "http://vocab.getty.edu/aat/300390503",
+          "display": "living organisms (entities)"
+        }
+      ],
+      "parentTerms": [
+        "Felidae (family)"
+      ],
+      "display": "Leopardus"
+    },
+    {
+      "authority": "AAT",
+      "term": "récades",
+      "uri": "http://vocab.getty.edu/aat/300253066",
+      "description": "Ceremonial weapons of the Fon people of Dahomey, generally in the shape of an axe or crooked club with a sculpted wooden handle, and, in those of axe shape, an elaborately carved metal or wooden head. They serve as symbols of power, either of the gods of Dahomey or of its king, and are used in various secular and religious ceremonial contexts.",
+      "broaderTerms": [
+        {
+          "authority": "AAT",
+          "term": "ceremonial weapons",
+          "uri": "http://vocab.getty.edu/aat/300263273",
+          "parentTerm": "weapons",
+          "display": "ceremonial weapons"
+        },
+        {
+          "authority": "AAT",
+          "term": "weapons",
+          "uri": "http://vocab.getty.edu/aat/300036926",
+          "display": "weapons"
+        },
+        {
+          "authority": "AAT",
+          "term": "batons (symbols or weapons)",
+          "uri": "http://vocab.getty.edu/aat/300212148",
+          "parentTerm": "symbols of office",
+          "display": "batons (symbols or weapons)"
+        },
+        {
+          "authority": "AAT",
+          "term": "symbols of office",
+          "uri": "http://vocab.getty.edu/aat/300212147",
+          "parentTerm": "identifying artifacts",
+          "display": "symbols of office"
+        },
+        {
+          "authority": "AAT",
+          "term": "identifying artifacts",
+          "uri": "http://vocab.getty.edu/aat/300200896",
+          "parentTerm": "information artifacts by function",
+          "display": "identifying artifacts"
+        },
+        {
+          "authority": "AAT",
+          "term": "information artifacts by function",
+          "uri": "http://vocab.getty.edu/aat/300137961",
+          "parentTerm": "information artifacts",
+          "display": "information artifacts by function"
+        },
+        {
+          "authority": "AAT",
+          "term": "information artifacts",
+          "uri": "http://vocab.getty.edu/aat/300230425",
+          "parentTerm": "information forms (objects)",
+          "display": "information artifacts"
+        },
+        {
+          "authority": "AAT",
+          "term": "information forms (objects)",
+          "uri": "http://vocab.getty.edu/aat/300220751",
+          "display": "information forms (objects)"
+        }
+      ],
+      "parentTerms": [
+        "ceremonial weapons",
+        "batons (symbols or weapons)"
+      ],
+      "display": "récades"
+    }
+  ],
+  "copyrightStatus": "Public domain",
+  "copyrightStatement": "",
+  "access": "Galleries: Milly &amp; Fritz Kaeser Mestrovic Studio Gallery",
+  "physicalAccess": "Galleries: Milly &amp; Fritz Kaeser Mestrovic Studio Gallery",
+  "format": "",
+  "dimensions": "25 in. (63.5 cm)",
+  "dedication": "Gift of Mr. Ernst Anspach",
+  "description": "The beautifully fashioned royal staff at the Snite Museum appears to date to the mid-nineteenth century, around the early years of the reign of King Glele (1858-89), if not earlier to the era of King Ghezo (1818-58), and matches in color and style several bas relief illustrations on the murals of the Royal Palace at the state capital of Abomey. Painted primarily in blue and yellow, the staff features overlaid metal and coins hammered into the wood for decoration. A three-dimensional leopard, meanwhile, has been expertly carved at the top of the crook. One of the king's titles was leopard, reflecting Dahomey legends claiming that kings were descendants of leopards. This animal became a central royal symbol of the king's political, economic, and miliatry might. \n\nfrom Morton, Dimensions of Power (South Bend, 2018)",
+  "creationPlace": {
+    "continent": "Africa",
+    "country": "Benin",
+    "state": "",
+    "county": "",
+    "city": "",
+    "historic": ""
+  },
+  "id": "1976.046",
+  "collectionId": "1976.046",
+  "parentId": "root",
+  "relatedIds": [],
+  "creators": [
+    {
+      "attribution": "",
+      "role": "Primary",
+      "fullName": "Unidentified Fon artist",
+      "nationality": "",
+      "lifeDates": "",
+      "startDate": "",
+      "endDate": "",
+      "human": true,
+      "alive": true,
+      "display": "Unidentified Fon artist"
+    }
+  ],
+  "modifiedDate": "2020-07-16T10:48:06Z",
+  "level": "manifest",
+  "apiVersion": 1,
+  "fileCreatedDate": "2020-10-02",
+  "digitalAccess": "Regular",
+  "items": [
+    {
+      "id": "1976_046-v0002.jpg",
+      "level": "file",
+      "sequence": 1,
+      "title": "1976_046-v0002.jpg",
+      "description": "1976_046-v0002.jpg",
+      "thumbnail": true,
+      "md5Checksum": "7ec537d934fcccc522c9f7849236c837",
+      "filePath": "https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view",
+      "fileId": "17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ",
+      "modifiedDate": "2019-06-26T15:08:58.580Z",
+      "mimeType": "image/jpeg",
+      "collectionId": "1976.046",
+      "parentId": "1976.046",
+      "sourceSystem": "EmbARK",
+      "repository": "museum",
+      "copyrightStatus": "Public domain",
+      "apiVersion": 1,
+      "fileCreatedDate": "2020-10-02",
+      "digitalAccess": "Regular",
+      "iiifImageUri": "https://image-iiif.library.nd.edu/iiif/2/1976.046%2F1976_046-v0002",
+      "iiifImageFilePath": "s3://marbleb-prod-foundation-publicbucketa6745c15-cn2zeuo35i11/1976.046/1976_046-v0002",
+      "iiifUri": "https://presentation-iiif.library.nd.edu/1976.046/1976_046-v0002/canvas",
+      "iiifFilePath": "s3://marbleb-prod-manifest-manifestbucket46c412a5-1x1wwqnq4tiy1/1976.046/1976_046-v0002/canvas/index.json",
+      "metsUri": "",
+      "metsFilePath": "",
+      "schemaUri": "",
+      "schemaPath": ""
+    },
+    {
+      "id": "1976_046-v0001.jpg",
+      "level": "file",
+      "sequence": 2,
+      "title": "1976_046-v0001.jpg",
+      "description": "1976_046-v0001.jpg",
+      "thumbnail": false,
+      "md5Checksum": "1cb8cc612c43df37ce80f8ad29e83e29",
+      "filePath": "https://drive.google.com/a/nd.edu/file/d/1KmPK2CFDYeSqQD8odW2UYV-8bSzggD3G/view",
+      "fileId": "1KmPK2CFDYeSqQD8odW2UYV-8bSzggD3G",
+      "modifiedDate": "2019-06-26T15:01:58.937Z",
+      "mimeType": "image/jpeg",
+      "collectionId": "1976.046",
+      "parentId": "1976.046",
+      "sourceSystem": "EmbARK",
+      "repository": "museum",
+      "copyrightStatus": "Public domain",
+      "apiVersion": 1,
+      "fileCreatedDate": "2020-10-02",
+      "digitalAccess": "Regular",
+      "iiifImageUri": "https://image-iiif.library.nd.edu/iiif/2/1976.046%2F1976_046-v0001",
+      "iiifImageFilePath": "s3://marbleb-prod-foundation-publicbucketa6745c15-cn2zeuo35i11/1976.046/1976_046-v0001",
+      "iiifUri": "https://presentation-iiif.library.nd.edu/1976.046/1976_046-v0001/canvas",
+      "iiifFilePath": "s3://marbleb-prod-manifest-manifestbucket46c412a5-1x1wwqnq4tiy1/1976.046/1976_046-v0001/canvas/index.json",
+      "metsUri": "",
+      "metsFilePath": "",
+      "schemaUri": "",
+      "schemaPath": ""
+    },
+    {
+      "id": "1976_046-v0003.jpg",
+      "level": "file",
+      "sequence": 3,
+      "title": "1976_046-v0003.jpg",
+      "description": "1976_046-v0003.jpg",
+      "thumbnail": false,
+      "md5Checksum": "827d6a3a7a44e22d87adb0a8c794c323",
+      "filePath": "https://drive.google.com/a/nd.edu/file/d/1DlyeZmBW1MXYqV7-_pUW8JOt6qmGaBuF/view",
+      "fileId": "1DlyeZmBW1MXYqV7-_pUW8JOt6qmGaBuF",
+      "modifiedDate": "2019-06-26T15:09:00.879Z",
+      "mimeType": "image/jpeg",
+      "collectionId": "1976.046",
+      "parentId": "1976.046",
+      "sourceSystem": "EmbARK",
+      "repository": "museum",
+      "copyrightStatus": "Public domain",
+      "apiVersion": 1,
+      "fileCreatedDate": "2020-10-02",
+      "digitalAccess": "Regular",
+      "iiifImageUri": "https://image-iiif.library.nd.edu/iiif/2/1976.046%2F1976_046-v0003",
+      "iiifImageFilePath": "s3://marbleb-prod-foundation-publicbucketa6745c15-cn2zeuo35i11/1976.046/1976_046-v0003",
+      "iiifUri": "https://presentation-iiif.library.nd.edu/1976.046/1976_046-v0003/canvas",
+      "iiifFilePath": "s3://marbleb-prod-manifest-manifestbucket46c412a5-1x1wwqnq4tiy1/1976.046/1976_046-v0003/canvas/index.json",
+      "metsUri": "",
+      "metsFilePath": "",
+      "schemaUri": "",
+      "schemaPath": ""
+    },
+    {
+      "id": "1976_046-v0004.jpg",
+      "level": "file",
+      "sequence": 4,
+      "title": "1976_046-v0004.jpg",
+      "description": "1976_046-v0004.jpg",
+      "thumbnail": false,
+      "md5Checksum": "793bd8f1456a92f5d5b2b2787cc54e32",
+      "filePath": "https://drive.google.com/a/nd.edu/file/d/14X5xyrECxc1YqYbeMLDrssE0b9EteXVb/view",
+      "fileId": "14X5xyrECxc1YqYbeMLDrssE0b9EteXVb",
+      "modifiedDate": "2019-06-26T15:09:03.163Z",
+      "mimeType": "image/jpeg",
+      "collectionId": "1976.046",
+      "parentId": "1976.046",
+      "sourceSystem": "EmbARK",
+      "repository": "museum",
+      "copyrightStatus": "Public domain",
+      "apiVersion": 1,
+      "fileCreatedDate": "2020-10-02",
+      "digitalAccess": "Regular",
+      "iiifImageUri": "https://image-iiif.library.nd.edu/iiif/2/1976.046%2F1976_046-v0004",
+      "iiifImageFilePath": "s3://marbleb-prod-foundation-publicbucketa6745c15-cn2zeuo35i11/1976.046/1976_046-v0004",
+      "iiifUri": "https://presentation-iiif.library.nd.edu/1976.046/1976_046-v0004/canvas",
+      "iiifFilePath": "s3://marbleb-prod-manifest-manifestbucket46c412a5-1x1wwqnq4tiy1/1976.046/1976_046-v0004/canvas/index.json",
+      "metsUri": "",
+      "metsFilePath": "",
+      "schemaUri": "",
+      "schemaPath": ""
+    },
+    {
+      "id": "1976_046-v0005.jpg",
+      "level": "file",
+      "sequence": 5,
+      "title": "1976_046-v0005.jpg",
+      "description": "1976_046-v0005.jpg",
+      "thumbnail": false,
+      "md5Checksum": "dccbe7fe1a24eb49b54de437a6050372",
+      "filePath": "https://drive.google.com/a/nd.edu/file/d/1lXCEmWb2GQMwAK3PK7E0qZjyNSYsvl55/view",
+      "fileId": "1lXCEmWb2GQMwAK3PK7E0qZjyNSYsvl55",
+      "modifiedDate": "2019-06-26T15:09:05.670Z",
+      "mimeType": "image/jpeg",
+      "collectionId": "1976.046",
+      "parentId": "1976.046",
+      "sourceSystem": "EmbARK",
+      "repository": "museum",
+      "copyrightStatus": "Public domain",
+      "apiVersion": 1,
+      "fileCreatedDate": "2020-10-02",
+      "digitalAccess": "Regular",
+      "iiifImageUri": "https://image-iiif.library.nd.edu/iiif/2/1976.046%2F1976_046-v0005",
+      "iiifImageFilePath": "s3://marbleb-prod-foundation-publicbucketa6745c15-cn2zeuo35i11/1976.046/1976_046-v0005",
+      "iiifUri": "https://presentation-iiif.library.nd.edu/1976.046/1976_046-v0005/canvas",
+      "iiifFilePath": "s3://marbleb-prod-manifest-manifestbucket46c412a5-1x1wwqnq4tiy1/1976.046/1976_046-v0005/canvas/index.json",
+      "metsUri": "",
+      "metsFilePath": "",
+      "schemaUri": "",
+      "schemaPath": ""
+    }
+  ],
+  "iiifImageUri": "",
+  "iiifImageFilePath": "",
+  "iiifUri": "https://presentation-iiif.library.nd.edu/1976.046/manifest",
+  "iiifFilePath": "s3://marbleb-prod-manifest-manifestbucket46c412a5-1x1wwqnq4tiy1/1976.046/manifest",
+  "metsUri": "https://presentation-iiif.library.nd.edu/1976.046/mets.xml",
+  "metsFilePath": "s3://marbleb-prod-manifest-manifestbucket46c412a5-1x1wwqnq4tiy1/1976.046/mets.xml",
+  "schemaUri": "https://presentation-iiif.library.nd.edu/1976.046",
+  "schemaPath": "s3://marbleb-prod-manifest-manifestbucket46c412a5-1x1wwqnq4tiy1/1976.046/index.json"
+}

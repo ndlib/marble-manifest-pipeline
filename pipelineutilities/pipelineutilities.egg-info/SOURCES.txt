@@ -50,11 +50,13 @@ pipelineutilities/expand_getty_ia_terms.py
 pipelineutilities/expand_loc_terms.py
 pipelineutilities/expand_subject_terms.py
 pipelineutilities/fix_creators_in_json_object.py
+pipelineutilities/get_size_of_images.py
 pipelineutilities/google_utilities.py
 pipelineutilities/load_language_codes.py
 pipelineutilities/load_standard_json.py
 pipelineutilities/pipeline_config.py
 pipelineutilities/record_files_needing_processed.py
+pipelineutilities/report_missing_fields.py
 pipelineutilities/s3_helpers.py
 pipelineutilities/s3_sync.py
 pipelineutilities/save_standard_json.py
@@ -79,8 +81,10 @@ test/test_expand_getty_ia_terms.py
 test/test_expand_loc_terms.py
 test/test_expand_subject_terms.py
 test/test_fix_creators_in_json_object.py
+test/test_get_size_of_images.py
 test/test_pipeline_config.py
 test/test_record_files_needing_processed.py
+test/test_report_missing_fields.py
 test/test_s3_helpers.py
 test/test_s3_sync.py
 test/test_search_files.py
