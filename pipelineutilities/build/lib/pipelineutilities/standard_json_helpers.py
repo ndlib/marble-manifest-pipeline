@@ -122,7 +122,6 @@ def _load_language_codes() -> list:
 def _add_objectFileGroupId(standard_json: dict) -> dict:
     level = standard_json.get('level', 'manifest')
     if level == 'manifest':
-        print('in manifest')
         # manifests can only have files nested directly under them
         for item in standard_json.get('items', ''):
             if item.get('level', '') == 'file':

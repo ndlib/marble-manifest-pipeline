@@ -83,12 +83,14 @@ def _get_each_broader_term(xml: ElementTree, xpath: str) -> list:
 
 def _parse_parent_string_into_broader_terms(parent_string: str) -> list:
     """ Given the string of the parent hierarchy, return list of broader terms """
+    break_on_terms = ["styles, periods, and cultures by region"]
     broader_terms = []
-    parent_list = parent_string.split(",")
+    parent_list = parent_string.split("],")
     for i, list_item in enumerate(parent_list):
+        list_item += ']'  # add back in bracket we removed as part of the split        term = _get_term_from_string(list_item)
         term = _get_term_from_string(list_item)
         uri = _get_uri_from_string(list_item)
-        if 'hierarchy name' in term:
+        if 'hierarchy name' in term or term in break_on_terms:
             break
         broader_term = {}
         broader_term['authority'] = 'AAT'
@@ -96,8 +98,8 @@ def _parse_parent_string_into_broader_terms(parent_string: str) -> list:
         if uri:
             broader_term['uri'] = uri
         if i < len(parent_list) - 1:
-            parent_term = _get_term_from_string(parent_list[i + 1])
-            if 'hierarchy name' not in parent_term:
+            parent_term = _get_term_from_string(parent_list[i + 1] + ']')
+            if 'hierarchy name' not in parent_term and parent_term not in break_on_terms:
                 broader_term['parentTerm'] = parent_term
         broader_terms.append(broader_term)
     return broader_terms
@@ -168,8 +170,8 @@ def test():
     """ test exection """
     seed_json = {
         "authority": "AAT",
-        "term": "crowns",
-        "uri": "http://vocab.getty.edu/aat/300046020",
+        "term": "Benin",
+        "uri": "http://vocab.getty.edu/aat/300015777",
     }
     resulting_json = expand_aat_terms(seed_json)
     print("Final output = ", resulting_json)

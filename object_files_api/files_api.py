@@ -1,6 +1,8 @@
+""" Files API """
+import boto3
 import os
 import io
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 import json
 import time
 from s3_helpers import write_s3_json
@@ -20,6 +22,9 @@ class FilesApi():
         else:
             self.directory = os.path.join(os.path.dirname(__file__), 'cache')
         self.start_time = time.time()
+        if not self.event['local']:
+            self.dynamodb = boto3.resource('dynamodb')
+            self.files_table = self.dynamodb.Table(self.config['files-tablename'])
 
     def save_files_details(self):
         all_files_listing = self._crawl_available_files_from_s3_or_cache(True)
@@ -50,6 +55,7 @@ class FilesApi():
                 s3_key = os.path.join('objectFiles/', os.path.basename(summary_json['id']), 'index.json')
                 print("saving ", os.path.basename(summary_json['uri']), int(time.time() - self.start_time), 'seconds.')
                 write_s3_json(self.config['manifest-server-bucket'], s3_key, my_json)
+                self._save_json_to_dynamo(my_json)
             if self.event.get('test', False):
                 filename = os.path.basename(summary_json['uri']) + '.json'
                 self._cache_s3_call(os.path.join(self.directory, filename), my_json)
@@ -89,3 +95,30 @@ class FilesApi():
         data['numberOfFiles'] = count
 
         return data
+
+    def _save_json_to_dynamo(self, files_json: dict) -> bool:
+        """ Save each item to dynamo """
+        success_flag = True
+        files_json = _serialize_json(files_json)
+        if 'expireTime' not in files_json:
+            files_json['expireTime'] = _get_expire_time(3)
+        self.files_table.put_item(Item=files_json)
+        return success_flag
+
+
+def _serialize_json(json_node: dict) -> dict:
+    if isinstance(json_node, dict):
+        for k, v in json_node.items():
+            if isinstance(v, (datetime, date)):
+                json_node[k] = v.isoformat()
+            elif isinstance(v, list):
+                json_node[k] = _serialize_json(v)
+    elif isinstance(json_node, list):
+        for node in json_node:
+            node = _serialize_json(node)
+    return json_node
+
+
+def _get_expire_time(days_in_future: int = 3) -> int:
+    """ Return Unix timestamp of now plus days_in_future """
+    return int(datetime.timestamp(datetime.now() + timedelta(days=days_in_future)))
