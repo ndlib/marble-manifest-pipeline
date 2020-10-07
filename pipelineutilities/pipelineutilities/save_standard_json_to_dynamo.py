@@ -3,6 +3,7 @@ Save standard.json to Dynamo
 """
 
 import boto3
+from datetime import datetime, timedelta
 # from record_files_needing_processed import FilesNeedingProcessed
 from validate_json import validate_standard_json
 
@@ -29,16 +30,23 @@ class SaveStandardJsonToDynamo():
                 # files_needing_processed_class = FilesNeedingProcessed(self.config)
                 # if files_needing_processed_class.record_files_needing_processed(standard_json, export_all_files_flag):
                 #     success_flag = _save_json_to_s3(config['process-bucket'], key_name, standard_json)
-                success_flag = self._save_json_to_dynamo(standard_json)
+                success_flag = self._save_json_to_dynamo(standard_json, _get_expire_time(3))
         return success_flag
 
-    def _save_json_to_dynamo(self, standard_json):
+    def _save_json_to_dynamo(self, standard_json: dict, expire_time: int) -> bool:
         """ Save each item recursively to dynamo then save root """
         success_flag = True
         if "items" in standard_json:
             for item in standard_json['items']:
                 if item.get("level") != "file":
-                    self._save_json_to_dynamo(item)
+                    self._save_json_to_dynamo(item, expire_time)
         new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
+        if 'expireTime' not in new_dict:
+            new_dict['expireTime'] = expire_time
         self.standard_json_table.put_item(Item=new_dict)
         return success_flag
+
+
+def _get_expire_time(days_in_future: int = 3) -> int:
+    """ Return Unix timestamp of now plus days_in_future """
+    return int(datetime.timestamp(datetime.now() + timedelta(days=days_in_future)))

@@ -55,6 +55,17 @@ class Test(unittest.TestCase):
         ]
         self.assertEqual(actual_results, expected_results)
 
+    def test_05_5_parse_parent_string_into_broader_terms(self):
+        """ test_05_5_parse_parent_string_into_broader_terms"""
+        parent_string = "North American [300134121], American regions [300107946], Americas, The [300016617], styles, periods, and cultures by region [300111079], Styles and Periods (hierarchy name) [300015646], Styles and Periods Facet [300264088]"  # noqa: E501
+        actual_results = _parse_parent_string_into_broader_terms(parent_string)
+        expected_results = [
+            {"authority": "AAT", "term": "North American", "uri": "http://vocab.getty.edu/aat/300134121", "parentTerm": "American regions"},
+            {"authority": "AAT", "term": "American regions", "uri": "http://vocab.getty.edu/aat/300107946", "parentTerm": "Americas, The"},
+            {"authority": "AAT", "term": "Americas, The", "uri": "http://vocab.getty.edu/aat/300016617"}
+        ]
+        self.assertEqual(actual_results, expected_results)
+
     @patch('pipelineutilities.expand_getty_aat_terms._get_xml_string_given_url')
     def test_06_get_xml_string_given_url(self, mock_get_xml_string_given_url):
         """ text_06 basically test the whole process given a mocked xml """
