@@ -99,6 +99,7 @@ standard_json_schema = {
     "id": "nd.schema.json",
     "type": "object",
     "properties": {
+        "expireTime": {"type": "integer"},
         "apiVersion": {"type": "integer"},
         "fileCreatedDate": {"type": "string"},
         "id": {"type": "string"},
