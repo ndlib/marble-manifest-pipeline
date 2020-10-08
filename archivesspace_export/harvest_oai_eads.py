@@ -40,6 +40,10 @@ class HarvestOaiEads():
             capture_exception(e)
             xml_string = ""
             print("ConnectionError calling " + oai_url)
+        except Exception as e:
+            capture_exception(e)
+            xml_string = ""
+            print("Error calling " + oai_url)
         return xml_string
 
     def _strip_namespaces(self, xml_string: str) -> str:

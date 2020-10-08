@@ -9,6 +9,7 @@ from s3_helpers import write_s3_json
 from api_helpers import json_serial
 from search_files import crawl_available_files
 from sentry_sdk import capture_exception
+from botocore.exceptions import ClientError
 
 
 class FilesApi():
@@ -23,9 +24,6 @@ class FilesApi():
         else:
             self.directory = os.path.join(os.path.dirname(__file__), 'cache')
         self.start_time = time.time()
-        if not self.event['local']:
-            self.dynamodb = boto3.resource('dynamodb')
-            self.files_table = self.dynamodb.Table(self.config['files-tablename'])
 
     def save_files_details(self):
         all_files_listing = self._crawl_available_files_from_s3_or_cache(True)
@@ -104,11 +102,12 @@ class FilesApi():
         if 'expireTime' not in files_json:
             files_json['expireTime'] = _get_expire_time(3)
         try:
-            self.files_table.put_item(Item=files_json)
-        except Exception as e:
-            capture_exception(e)
-            print(str(e) + " Error saving ", files_json)
+            files_table = boto3.resource('dynamodb').Table(self.config['files-tablename'])
+            files_table.put_item(Item=files_json)
+        except ClientError as ce:
             success_flag = False
+            capture_exception(ce)
+            print(f"Error saving to {self.config['files-tablename']} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
         return success_flag
 
 
