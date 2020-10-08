@@ -141,6 +141,9 @@ def _get_xml_string_given_url(url) -> str:
     except TimeoutError as e:
         capture_exception(e)
         print("TimeoutError calling " + url)
+    except Exception as e:
+        capture_exception(e)
+        print(str(e) + " Error calling " + url)
     return xml_string
 
 

@@ -8,6 +8,7 @@ import time
 from s3_helpers import write_s3_json
 from api_helpers import json_serial
 from search_files import crawl_available_files
+from sentry_sdk import capture_exception
 
 
 class FilesApi():
@@ -102,7 +103,12 @@ class FilesApi():
         files_json = _serialize_json(files_json)
         if 'expireTime' not in files_json:
             files_json['expireTime'] = _get_expire_time(3)
-        self.files_table.put_item(Item=files_json)
+        try:
+            self.files_table.put_item(Item=files_json)
+        except Exception as e:
+            capture_exception(e)
+            print(str(e) + " Error saving ", files_json)
+            success_flag = False
         return success_flag
 
 

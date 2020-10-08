@@ -6,6 +6,7 @@ import boto3
 from datetime import datetime, timedelta
 # from record_files_needing_processed import FilesNeedingProcessed
 from validate_json import validate_standard_json
+from sentry_sdk import capture_exception
 
 
 class SaveStandardJsonToDynamo():
@@ -43,7 +44,12 @@ class SaveStandardJsonToDynamo():
         new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
         if 'expireTime' not in new_dict:
             new_dict['expireTime'] = expire_time
-        self.standard_json_table.put_item(Item=new_dict)
+        try:
+            self.standard_json_table.put_item(Item=new_dict)
+        except Exception as e:
+            capture_exception(e)
+            print(str(e) + " Error saving ", new_dict)
+            success_flag = False
         return success_flag
 
 
