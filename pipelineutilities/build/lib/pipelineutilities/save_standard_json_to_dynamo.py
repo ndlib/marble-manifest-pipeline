@@ -6,14 +6,14 @@ import boto3
 from datetime import datetime, timedelta
 # from record_files_needing_processed import FilesNeedingProcessed
 from validate_json import validate_standard_json
+from sentry_sdk import capture_exception
+from botocore.exceptions import ClientError
 
 
 class SaveStandardJsonToDynamo():
     """ Save Standard Json to Dynamo """
     def __init__(self, config: dict):
         self.config = config
-        self.dynamodb = boto3.resource('dynamodb')
-        self.standard_json_table = self.dynamodb.Table(self.config['standard-json-tablename'])
 
     def save_standard_json(self, standard_json: dict, export_all_files_flag: bool = False) -> bool:
         """ First, validate the standard_json.  If this is the first time this standard_json is being saved,
@@ -43,7 +43,13 @@ class SaveStandardJsonToDynamo():
         new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
         if 'expireTime' not in new_dict:
             new_dict['expireTime'] = expire_time
-        self.standard_json_table.put_item(Item=new_dict)
+        try:
+            standard_json_table = boto3.resource('dynamodb').Table(self.config['standard-json-tablename'])
+            standard_json_table.put_item(Item=new_dict)
+        except ClientError as ce:
+            success_flag = False
+            capture_exception(ce)
+            print(f"Error saving to {self.config['standard-json-tablename']} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
         return success_flag
 
 
