@@ -46,7 +46,8 @@ default_config = {
     },
     "seconds-to-allow-for-processing": 600,
     "hours-threshold-for-incremental-harvest": 72,
-    "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai"
+    "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai",
+    "pipeline-control-folder": "pipeline_control"
 }
 
 local_ssm = {

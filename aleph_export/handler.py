@@ -22,6 +22,7 @@ def run(event, _context):
         marc_records_url = "https://alephprod.library.nd.edu/aleph_tmp/marble.mrc"
         harvest_marc_class = HarvestAlephMarc(config, event, marc_records_url)
         harvest_marc_class.process_marc_records_from_stream()
+    event['alephHarvestComplete'] = True
     return event
 
 

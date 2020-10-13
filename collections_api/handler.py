@@ -27,6 +27,7 @@ def run(event, _context):
     print("config = ", config)
     collections_api_class = CollectionsApi(config)
     collections_api_class.save_collection_details(['aleph', 'archivesspace', 'curate', 'embark'])
+    event['collectionsApiComplete'] = True
     return event
 
 
