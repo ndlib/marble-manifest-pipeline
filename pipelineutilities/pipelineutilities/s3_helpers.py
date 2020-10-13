@@ -326,6 +326,7 @@ def json_serial(obj):
         return obj.isoformat()
     raise TypeError("Type %s not serializable" % type(obj))
 
+
 # python -c 'from s3_helpers import *; test()'
 def test():
     bucket_name = "marble-manifest-prod-processbucket-kskqchthxshg"
