@@ -6,7 +6,7 @@ from unittest.mock import patch
 import json
 import os
 import io
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from dependencies.pipelineutilities.pipeline_config import setup_pipeline_config
 from files_api import FilesApi, _serialize_json, _get_expire_time
@@ -33,8 +33,8 @@ class Test(unittest.TestCase):
 
     def test_02_get_expire_time(self):
         """ test_02_get_expire_time """
-        actual_results = _get_expire_time(datetime(2020, 10, 13, 9, 0, 0, 0), 3)
-        expected_results = 1602853200
+        actual_results = _get_expire_time(datetime(2020, 10, 13, 9, 0, 0, 0, tzinfo=timezone.utc), 3)
+        expected_results = 1602838800
         self.assertEqual(actual_results, expected_results)
 
     @patch('files_api._get_expire_time')
