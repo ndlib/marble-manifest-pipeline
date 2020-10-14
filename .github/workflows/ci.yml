@@ -1,0 +1,27 @@
+# This workflow will build source code and run tests across different versions of Python
+# More information may be found here: https://docs.github.com/en/free-pro-team@latest/actions/guides/building-and-testing-python
+
+name: Python CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_requests:
+    branches: [ master ]
+
+jobs:
+  build-and-run-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Python version ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: $ {{ matrix.python-version }}
+    - run: pip install -r dev-requirements.txt
+    - run: ./run-all-tests.sh
