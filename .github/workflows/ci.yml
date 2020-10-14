@@ -22,6 +22,6 @@ jobs:
     - name: Use Python version ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
-        python-version: $ {{ matrix.python-version }}
+        python-version: ${{ matrix.python-version }}
     - run: pip install -r dev-requirements.txt
     - run: ./run-all-tests.sh
