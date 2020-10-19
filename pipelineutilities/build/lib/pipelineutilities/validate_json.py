@@ -263,6 +263,7 @@ standard_json_schema = {
         "schemaPath": {"type": "string"},
         "bendoItem": {"type": "string"},
         "objectFileGroupId": {"type": "string"},
+        "defaultFilePath": {"type": "string"},
         "width": {"type": "integer"},
         "height": {"type": "integer"},
         "items": {
