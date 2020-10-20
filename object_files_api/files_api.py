@@ -106,6 +106,7 @@ class FilesApi():
             my_json = dict(file_info)
             my_json['sequence'] = i
             my_json['id'] = my_json.get('key', '')
+            my_json['objectFileGroupId'] = my_json.get('fileId')  # required to join with standard.json
             collection_list.append(my_json)
             if self.dynamo_table_available:
                 self._save_json_to_dynamo(my_json)

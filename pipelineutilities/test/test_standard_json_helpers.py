@@ -3,7 +3,8 @@ import _set_path  # noqa: F401
 import json
 import os
 from pipelineutilities.standard_json_helpers import _remove_brackets, _remove_trailing_punctuation, _clean_up_standard_json_strings, \
-    _load_language_codes, _add_language_display, _clean_up_standard_json_recursive, _add_publishers_node, _add_objectFileGroupId
+    _load_language_codes, _add_language_display, _clean_up_standard_json_recursive, _add_publishers_node, _add_objectFileGroupId, \
+    _find_object_file_group_id, _find_default_file_path, _add_sequence
 import unittest
 
 
@@ -165,7 +166,7 @@ class Test(unittest.TestCase):
             'id': '1234.567',
             'level': 'manifest',
             'items': [
-                {'level': 'file', 'filePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}]
+                {'level': 'file', 'filePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view', 'objectFileGroupId': '1234.567'}]
         }
         actual_results = _add_objectFileGroupId(standard_json)
         expected_results = {
@@ -173,8 +174,43 @@ class Test(unittest.TestCase):
             'level': 'manifest',
             'objectFileGroupId': '1234.567',
             'items': [
-                {'level': 'file', 'filePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}
+                {'level': 'file', 'filePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view', 'objectFileGroupId': '1234.567'}
             ]
+        }
+        self.assertEqual(actual_results, expected_results)
+
+    def test_10_find_object_file_group_id(self):
+        """ test_10_find_object_file_group_id """
+        item = {'objectFileGroupId': '123', 'filePath': '456'}
+        actual_results = _find_object_file_group_id(item)
+        expected_results = '123'
+        self.assertEqual(actual_results, expected_results)
+
+    def test_11__find_default_file_path(self):
+        """ test_11_find_default_image_id """
+        item = {'filePath': 'some/path/123.jpg', 'fileId': 'google_file_id_456'}
+        actual_results = _find_default_file_path(item)
+        expected_results = 'some/path/123.jpg'
+        self.assertEqual(actual_results, expected_results)
+
+    def test_12_find_default_file_path(self):
+        """ test_12_find_default_file_path """
+        item = {'fileId': 'google_file_id_456'}
+        actual_results = _find_default_file_path(item)
+        expected_results = 'google_file_id_456'
+        self.assertEqual(actual_results, expected_results)
+
+    def test_13__add_sequence(self):
+        """ test_13_add_sequence """
+        standard_json = {
+            'id': '123',
+            'items': [{'id': '234'}, {"id": '345'}]
+        }
+        actual_results = _add_sequence(standard_json)
+        expected_results = {
+            'id': '123',
+            'sequence': 0,
+            'items': [{'id': '234', 'sequence': 1}, {"id": '345', 'sequence': 2}]
         }
         self.assertEqual(actual_results, expected_results)
 

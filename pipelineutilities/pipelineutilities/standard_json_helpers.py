@@ -27,6 +27,7 @@ class StandardJsonHelpers():
         standard_json = _clean_up_standard_json_recursive(standard_json)
         standard_json = get_size_of_images(standard_json)
         standard_json = _add_objectFileGroupId(standard_json)
+        standard_json = _add_sequence(standard_json)
         if not validate_standard_json(standard_json):
             standard_json = {}
         else:
@@ -119,21 +120,59 @@ def _load_language_codes() -> list:
     return load_language_codes()
 
 
-def _add_objectFileGroupId(standard_json: dict) -> dict:
+def _add_objectFileGroupId(standard_json: dict) -> dict:  # noqa: C901
     level = standard_json.get('level', 'manifest')
     if level == 'manifest':
         # manifests can only have files nested directly under them
+        object_file_group_id_found = standard_json.get('objectFileGroupId', '') > ''
+        default_file_path_found = standard_json.get('defaultFilePath', '') > ''
         for item in standard_json.get('items', ''):
             if item.get('level', '') == 'file':
-                object_file_group_id = item.get('objectFileGroupId', '')
-                if not object_file_group_id:
-                    object_file_group_id = id_from_url(item.get('filePath', ''))
-                if not object_file_group_id:
-                    object_file_group_id = standard_json.get('id', '')
-                standard_json['objectFileGroupId'] = object_file_group_id
-                break
+                if not object_file_group_id_found:
+                    object_file_group_id = _find_object_file_group_id(item)
+                    if object_file_group_id:
+                        standard_json['objectFileGroupId'] = object_file_group_id
+                        object_file_group_id_found = True
+                if not default_file_path_found and item.get('thumbnail', False):
+                    default_file_path = _find_default_file_path(item)
+                    if default_file_path:
+                        standard_json['defaultFilePath'] = default_file_path
+                        default_file_path_found = True
+                if object_file_group_id_found and default_file_path_found:
+                    break
     elif level == 'collection':
         # collections can only have manifests nested directly under them
         for item in standard_json.get('items', ''):
             item = _add_objectFileGroupId(item)
+    return standard_json
+
+
+def _find_object_file_group_id(item: dict) -> str:
+    """ Use cascading logic to find object_file_group_id """
+    object_file_group_id = item.get('objectFileGroupId', '')
+    if not object_file_group_id:
+        print("calling id_from_url passing ", item.get('filePath', ''))
+        object_file_group_id = id_from_url(item.get('filePath', ''))
+    return object_file_group_id
+
+
+def _find_default_file_path(item: dict) -> str:
+    """Use cascading logic to find file path of the representational default file """
+    default_file_path = item.get('filePath', '')
+    if not default_file_path:
+        default_file_path = item.get('fileId', '')
+    return default_file_path
+
+
+def _add_sequence(standard_json: dict) -> dict:
+    """ add sequence to standard.json to make sure we keep items ordered correctly """
+    sequence = 0
+    for item in standard_json.get('items', []):
+        sequence += 1
+        if 'sequence' not in item:
+            item['sequence'] = sequence
+        if 'items' in item:
+            item = _add_sequence(item)
+    if 'sequence' not in standard_json:
+        standard_json['sequence'] = 0
     return standard_json
