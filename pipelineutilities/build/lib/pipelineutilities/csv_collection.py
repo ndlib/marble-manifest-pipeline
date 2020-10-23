@@ -178,13 +178,9 @@ def _file_paths(row, config):
 
     return {
         "iiifImageUri": config['image-server-base-url'] + uri_path,
-        "iiifImageFilePath": "s3://" + config['image-server-bucket'] + path,
         "iiifUri": config["manifest-server-base-url"] + path + "/canvas",
-        "iiifFilePath": "s3://" + config['manifest-server-bucket'] + path + "/canvas/index.json",
         "metsUri": "",
-        "metsFilePath": "",
         "schemaUri": "",
-        "schemaPath": "",
     }
 
 
@@ -195,13 +191,9 @@ def _manifest_paths(row, config):
 
     return {
         "iiifImageUri": "",
-        "iiifImageFilePath": "",
         "iiifUri": config["manifest-server-base-url"] + path + "/manifest",
-        "iiifFilePath": "s3://" + config['manifest-server-bucket'] + path + "/manifest",
         "metsUri": config["manifest-server-base-url"] + path + "/mets.xml",
-        "metsFilePath": "s3://" + config['manifest-server-bucket'] + path + "/mets.xml",
         "schemaUri": config["manifest-server-base-url"] + path,
-        "schemaPath": "s3://" + config['manifest-server-bucket'] + path + "/index.json",
     }
 
 

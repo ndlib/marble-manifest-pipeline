@@ -81,7 +81,7 @@
   "level": "manifest",
   "objectFileGroupId": "1934.007.001",
   "apiVersion": 1,
-  "fileCreatedDate": "2020-10-05",
+  "fileCreatedDate": "2020-10-22",
   "digitalAccess": "Regular",
   "items": [
     {
@@ -103,16 +103,12 @@
       "copyrightStatus": "Public domain",
       "objectFileGroupId": "1934_007_001-v0003.jpg",
       "apiVersion": 1,
-      "fileCreatedDate": "2020-10-05",
+      "fileCreatedDate": "2020-10-22",
       "digitalAccess": "Regular",
       "iiifImageUri": "https://image-iiif.library.nd.edu/iiif/2/1934.007.001%2F1934_007_001-v0003",
-      "iiifImageFilePath": "s3://marble-data-broker-publicbucket-1kvqtwnvkhra2/1934.007.001/1934_007_001-v0003",
       "iiifUri": "https://presentation-iiif.library.nd.edu/1934.007.001/1934_007_001-v0003/canvas",
-      "iiifFilePath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1934.007.001/1934_007_001-v0003/canvas/index.json",
       "metsUri": "",
-      "metsFilePath": "",
-      "schemaUri": "",
-      "schemaPath": ""
+      "schemaUri": ""
     },
     {
       "id": "1934_007_001-v0001.jpg",
@@ -133,16 +129,12 @@
       "copyrightStatus": "Public domain",
       "objectFileGroupId": "1934_007_001-v0001.jpg",
       "apiVersion": 1,
-      "fileCreatedDate": "2020-10-05",
+      "fileCreatedDate": "2020-10-22",
       "digitalAccess": "Regular",
       "iiifImageUri": "https://image-iiif.library.nd.edu/iiif/2/1934.007.001%2F1934_007_001-v0001",
-      "iiifImageFilePath": "s3://marble-data-broker-publicbucket-1kvqtwnvkhra2/1934.007.001/1934_007_001-v0001",
       "iiifUri": "https://presentation-iiif.library.nd.edu/1934.007.001/1934_007_001-v0001/canvas",
-      "iiifFilePath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1934.007.001/1934_007_001-v0001/canvas/index.json",
       "metsUri": "",
-      "metsFilePath": "",
-      "schemaUri": "",
-      "schemaPath": ""
+      "schemaUri": ""
     },
     {
       "id": "1934_007_001-v0002.jpg",
@@ -163,24 +155,16 @@
       "copyrightStatus": "Public domain",
       "objectFileGroupId": "1934_007_001-v0002.jpg",
       "apiVersion": 1,
-      "fileCreatedDate": "2020-10-05",
+      "fileCreatedDate": "2020-10-22",
       "digitalAccess": "Regular",
       "iiifImageUri": "https://image-iiif.library.nd.edu/iiif/2/1934.007.001%2F1934_007_001-v0002",
-      "iiifImageFilePath": "s3://marble-data-broker-publicbucket-1kvqtwnvkhra2/1934.007.001/1934_007_001-v0002",
       "iiifUri": "https://presentation-iiif.library.nd.edu/1934.007.001/1934_007_001-v0002/canvas",
-      "iiifFilePath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1934.007.001/1934_007_001-v0002/canvas/index.json",
       "metsUri": "",
-      "metsFilePath": "",
-      "schemaUri": "",
-      "schemaPath": ""
+      "schemaUri": ""
     }
   ],
   "iiifImageUri": "",
-  "iiifImageFilePath": "",
   "iiifUri": "https://presentation-iiif.library.nd.edu/1934.007.001/manifest",
-  "iiifFilePath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1934.007.001/manifest",
   "metsUri": "https://presentation-iiif.library.nd.edu/1934.007.001/mets.xml",
-  "metsFilePath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1934.007.001/mets.xml",
-  "schemaUri": "https://presentation-iiif.library.nd.edu/1934.007.001",
-  "schemaPath": "s3://marble-manifest-prod-manifestbucket-lpnnaj4jaxl5/1934.007.001/index.json"
+  "schemaUri": "https://presentation-iiif.library.nd.edu/1934.007.001"
 }

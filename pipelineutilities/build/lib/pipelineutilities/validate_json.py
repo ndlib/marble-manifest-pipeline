@@ -254,16 +254,13 @@ standard_json_schema = {
             "additionalProperties": False
         },
         "iiifImageUri": {"type": "string"},
-        "iiifImageFilePath": {"type": "string"},
         "iiifUri": {"type": "string"},
-        "iiifFilePath": {"type": "string"},
         "metsUri": {"type": "string"},
-        "metsFilePath": {"type": "string"},
         "schemaUri": {"type": "string"},
-        "schemaPath": {"type": "string"},
         "bendoItem": {"type": "string"},
         "objectFileGroupId": {"type": "string"},
         "defaultFilePath": {"type": "string"},
+        "key": {"type": "string"},
         "width": {"type": "integer"},
         "height": {"type": "integer"},
         "items": {

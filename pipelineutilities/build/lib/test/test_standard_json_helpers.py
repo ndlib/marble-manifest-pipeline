@@ -186,22 +186,43 @@ class Test(unittest.TestCase):
         expected_results = '123'
         self.assertEqual(actual_results, expected_results)
 
-    def test_11__find_default_file_path(self):
+    def test_11_find_default_file_path(self):
         """ test_11_find_default_image_id """
+        item = {'key': 'some/path/abc.jpg', 'filePath': 'some/path/123.jpg', 'fileId': 'google_file_id_456'}
+        actual_results = _find_default_file_path(item)
+        expected_results = 'some/path/abc.jpg'
+        self.assertEqual(actual_results, expected_results)
+
+    def test_12_find_default_file_path(self):
+        """ test_12_find_default_image_id """
+        item = {'id': '1934_007_001-v0003.jpg', 'filePath': "https://drive.google.com/a/nd.edu/file/d/1801JSqSXsRD9CIXl-dFkJdlXV8wLrOCi/view", 'fileId': 'google_file_id_456'}
+        actual_results = _find_default_file_path(item)
+        expected_results = '1934_007_001-v0003.jpg'
+        self.assertEqual(actual_results, expected_results)
+
+    def test_13_find_default_file_path(self):
+        """ test_13_find_default_image_id """
+        item = {'filePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif', 'fileId': 'google_file_id_456'}
+        actual_results = _find_default_file_path(item)
+        expected_results = 'digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'
+        self.assertEqual(actual_results, expected_results)
+
+    def test_14_find_default_file_path(self):
+        """ test_14_find_default_image_id """
         item = {'filePath': 'some/path/123.jpg', 'fileId': 'google_file_id_456'}
         actual_results = _find_default_file_path(item)
         expected_results = 'some/path/123.jpg'
         self.assertEqual(actual_results, expected_results)
 
-    def test_12_find_default_file_path(self):
-        """ test_12_find_default_file_path """
+    def test_15_find_default_file_path(self):
+        """ test_16_find_default_file_path """
         item = {'fileId': 'google_file_id_456'}
         actual_results = _find_default_file_path(item)
         expected_results = 'google_file_id_456'
         self.assertEqual(actual_results, expected_results)
 
-    def test_13__add_sequence(self):
-        """ test_13_add_sequence """
+    def test_16_add_sequence(self):
+        """ test_16_add_sequence """
         standard_json = {
             'id': '123',
             'items': [{'id': '234'}, {"id": '345'}]

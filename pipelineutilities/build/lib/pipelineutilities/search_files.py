@@ -188,6 +188,8 @@ def crawl_available_files(config):
 
                 if id:
                     obj = _convert_dict_to_camel_case(obj)
+                    if 'eTag' in obj:
+                        obj['eTag'] = obj['eTag'].replace('"', '')  # strip duplicated quotes: {'ETag': '"8b50cfed39b7d8bcb4bd652446fe8adf"'}  # noqa: E501
                     if not order_field.get(id, False):
                         order_field[id] = {
                             "fileId": id,
@@ -305,7 +307,9 @@ def augement_file_record(obj, id, url, config):
     obj['path'] = "s3://" + os.path.join(bucket, obj['key'])
     obj['sourceUri'] = url
     obj["iiifImageUri"] = os.path.join(config['image-server-base-url'], obj.get('key'))
-    obj["iiifImageFilePath"] = "s3://" + os.path.join(config['image-server-bucket'], obj.get('key'))
+    # Added from here down for consistency.  Once dependencies are updated, we will need to remove fileId, and iiifImageUir
+    obj['objectFileGroupId'] = id
+    obj["iiifUri"] = os.path.join(config['image-server-base-url'], obj.get('key'))
 
 
 def determine_time_threshold_for_processing(time_in_min):
