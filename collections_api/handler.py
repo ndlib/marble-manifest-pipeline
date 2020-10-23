@@ -24,14 +24,13 @@ def run(event, _context):
     if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
     config = setup_pipeline_config(event)
-    print("config = ", config)
     collections_api_class = CollectionsApi(config)
     collections_api_class.save_collection_details(['aleph', 'archivesspace', 'curate', 'embark'])
     event['collectionsApiComplete'] = True
     return event
 
 
-# export SSM_KEY_BASE=/all/new-csv
+# export SSM_KEY_BASE=/all/stacks/steve-manifest
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
 def test():

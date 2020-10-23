@@ -141,9 +141,13 @@ def _add_objectFileGroupId(standard_json: dict) -> dict:  # noqa: C901
                 if object_file_group_id_found and default_file_path_found:
                     break
     elif level == 'collection':
-        # collections can only have manifests nested directly under them
+        # collections can have collections or manifests nested directly under them
         for item in standard_json.get('items', ''):
             item = _add_objectFileGroupId(item)
+            if item.get('objectFileGroupId', '') and not standard_json.get('objectFileGroupId', ''):
+                standard_json['objectFileGroupId'] = item['objectFileGroupId']
+            if item.get('defaultFilePath', '') and not standard_json.get('defaultFilePath', ''):
+                standard_json['defaultFilePath'] = item['defaultFilePath']
     return standard_json
 
 
@@ -151,14 +155,20 @@ def _find_object_file_group_id(item: dict) -> str:
     """ Use cascading logic to find object_file_group_id """
     object_file_group_id = item.get('objectFileGroupId', '')
     if not object_file_group_id:
-        print("calling id_from_url passing ", item.get('filePath', ''))
         object_file_group_id = id_from_url(item.get('filePath', ''))
     return object_file_group_id
 
 
 def _find_default_file_path(item: dict) -> str:
     """Use cascading logic to find file path of the representational default file """
-    default_file_path = item.get('filePath', '')
+    default_file_path = item.get('key', '')
+    if "https://drive.google.com/a/nd.edu" in item.get('filePath', ''):
+        default_file_path = item.get('id', '')
+    regex_expression = r'http[s]?:[/]{2}[\w+\.]+/'
+    if not default_file_path and re.match(regex_expression, item.get('filePath', '')):
+        default_file_path = re.sub(regex_expression, '', item.get('filePath', ''))
+    if not default_file_path:
+        default_file_path = item.get('filePath', '')
     if not default_file_path:
         default_file_path = item.get('fileId', '')
     return default_file_path

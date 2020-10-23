@@ -27,9 +27,10 @@ class Test(unittest.TestCase):
         config['local'] = True
         add_paths_to_json_object_class = AddPathsToJsonObject(config)
         standard_json_with_files = add_paths_to_json_object_class.add_paths(standard_json)
-        # with open(local_folder + './MSNEA8011_EAD_with_files_and_paths.json', 'w') as f:
+        file_name = local_folder + './MSNEA8011_EAD_with_files_and_paths.json'
+        # with open(file_name, 'w') as f:
         #     json.dump(standard_json_with_files, f, indent=2)
-        with open(local_folder + './MSNEA8011_EAD_with_files_and_paths.json', 'r') as input_source:
+        with open(file_name, 'r') as input_source:
             expected_json = json.load(input_source)
         self.assertEqual(expected_json, standard_json_with_files)
 

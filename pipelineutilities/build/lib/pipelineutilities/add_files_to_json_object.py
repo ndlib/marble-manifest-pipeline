@@ -56,6 +56,7 @@ class AddFilesToJsonObject():
                     each_file_dict['level'] = 'file'
                     each_file_dict['parentId'] = parent_id
                     each_file_dict['id'] = os.path.basename(obj['key'])
+                    each_file_dict['key'] = obj['key']
                     each_file_dict['thumbnail'] = (each_file_dict['id'] == item_id)
                     each_file_dict['description'] = ""
                     if each_file_dict['id'] == item_id:

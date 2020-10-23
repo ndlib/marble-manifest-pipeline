@@ -21,7 +21,9 @@ class Test(unittest.TestCase):
             standard_json = json.load(input_source)
         config = {}
         config['local'] = True
-        # To re-create copy of hash_of_available_files, uncomment the following lines and run in libnd
+        # To re-create copy of hash_of_available_files, uncomment the following lines, connect aws vault to libnd, and run in libnd
+        # Also, uncomment lines 16-18 in add_files_to_json_object.py
+        # re-comment when done
         # config['rbsc-image-bucket'] = "libnd-smb-rbsc"
         # config['local'] = False
         # config['image-server-base-url'] = "image-server-base-url"
