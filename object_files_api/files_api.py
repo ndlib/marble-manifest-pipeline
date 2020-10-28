@@ -136,7 +136,7 @@ class FilesApi():
         success_flag = True
         files_json = _serialize_json(files_json)
         if 'expireTime' not in files_json:
-            files_json['expireTime'] = _get_expire_time(datetime.now(), 3)
+            files_json['expireTime'] = _get_expire_time(datetime.now(), int(self.config.get('files-time-to-live-days', 3)))
         if self.dynamo_table_available:
             try:
                 self.files_table.put_item(Item=files_json)

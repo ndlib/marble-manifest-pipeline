@@ -30,7 +30,7 @@ class SaveStandardJsonToDynamo():
                 # files_needing_processed_class = FilesNeedingProcessed(self.config)
                 # if files_needing_processed_class.record_files_needing_processed(standard_json, export_all_files_flag):
                 #     success_flag = _save_json_to_s3(config['process-bucket'], key_name, standard_json)
-                success_flag = self._save_json_to_dynamo(standard_json, _get_expire_time(3))
+                success_flag = self._save_json_to_dynamo(standard_json, _get_expire_time(int(self.config.get('metadata-time-to-live-days', 3))))
         return success_flag
 
     def _save_json_to_dynamo(self, standard_json: dict, expire_time: int) -> bool:
@@ -44,12 +44,12 @@ class SaveStandardJsonToDynamo():
         if 'expireTime' not in new_dict:
             new_dict['expireTime'] = expire_time
         try:
-            standard_json_table = boto3.resource('dynamodb').Table(self.config['standard-json-tablename'])
-            standard_json_table.put_item(Item=new_dict)
+            metadata_table = boto3.resource('dynamodb').Table(self.config['metadata-tablename'])
+            metadata_table.put_item(Item=new_dict)
         except ClientError as ce:
             success_flag = False
             capture_exception(ce)
-            print(f"Error saving to {self.config['standard-json-tablename']} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
+            print(f"Error saving to {self.config['metadata-tablename']} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
         return success_flag
 
 
