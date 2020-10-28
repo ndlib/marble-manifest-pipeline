@@ -162,8 +162,8 @@ def _find_object_file_group_id(item: dict) -> str:
 def _find_default_file_path(item: dict) -> str:
     """Use cascading logic to find file path of the representational default file """
     default_file_path = item.get('key', '')
-    if "https://drive.google.com/a/nd.edu" in item.get('filePath', ''):
-        default_file_path = item.get('id', '')
+    if "https://drive.google.com/a/nd.edu" in item.get('filePath', '') or "https://curate.nd.edu" in item.get('filePath', ''):
+        default_file_path = item.get('collectionId', '') + '/' + item.get('id', '')
     regex_expression = r'http[s]?:[/]{2}[\w+\.]+/'
     if not default_file_path and re.match(regex_expression, item.get('filePath', '')):
         default_file_path = re.sub(regex_expression, '', item.get('filePath', ''))

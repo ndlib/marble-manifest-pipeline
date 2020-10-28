@@ -2,7 +2,10 @@
 """ Module to launch application """
 
 import _set_path  # noqa
+import io
+import json
 import os
+from datetime import datetime, timedelta
 from pathlib import Path
 from harvest_aleph_marc import HarvestAlephMarc  # noqa: #402
 from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
@@ -20,9 +23,13 @@ def run(event, _context):
     config = setup_pipeline_config(event)
     if config:
         marc_records_url = "https://alephprod.library.nd.edu/aleph_tmp/marble.mrc"
-        harvest_marc_class = HarvestAlephMarc(config, event, marc_records_url)
+        time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
+        print("Will break after ", time_to_break)
+        harvest_marc_class = HarvestAlephMarc(config, event, marc_records_url, time_to_break)
         harvest_marc_class.process_marc_records_from_stream()
-    event['alephHarvestComplete'] = True
+        if event["alephExecutionCount"] >= event["maximumAlephExecutions"]:
+            event['alephHarvestComplete'] = True
+
     return event
 
 
@@ -36,6 +43,10 @@ def _supplement_event(event):
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
     if 'local-path' not in event:
         event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
+    event['alephHarvestComplete'] = event.get('alephHarvestComplete', False)
+    event['alephExecutionCount'] = event.get('alephExecutionCount', 0) + 1
+    event['maximumAlephExecutions'] = 5
+    event['maxAlephIdProcessed'] = event.get('maxAlephIdProcessed', '')
     return
 
 
@@ -49,7 +60,23 @@ def _supplement_event(event):
 # python 'run_all_tests.py'
 def test():
     """ test exection """
-    event = {}
-    event['local'] = False
+    filename = 'event.json'
+    if os.path.exists(filename):
+        with io.open(filename, 'r', encoding='utf-8') as json_file:
+            event = json.load(json_file)
+    else:
+        event = {}
+        event['local'] = False
+        event['seconds-to-allow-for-processing'] = 60
     event = run(event, {})
+
+    if not event['alephHarvestComplete']:
+        with open('event.json', 'w') as output_file:
+            json.dump(event, output_file, indent=2)
+    else:
+        try:
+            os.remove('event.json')
+        except FileNotFoundError:
+            pass
+
     print(event)

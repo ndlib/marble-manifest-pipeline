@@ -7,6 +7,7 @@ and saves it to the manifest bucket.
 
 import time
 import json
+from datetime import datetime
 import os
 import requests
 from sentry_sdk import capture_exception
@@ -20,9 +21,10 @@ from pymarc import MARCReader
 
 class HarvestAlephMarc():
     """ This performs all Marc-related processing """
-    def __init__(self, config, event, marc_records_url):
+    def __init__(self, config: dict, event: dict, marc_records_url: str, time_to_break: datetime):
         self.config = config
         self.marc_records_url = marc_records_url
+        self.time_to_break = time_to_break
         self.start_time = time.time()
         self.event = event
         self.temporary_local_path = '/tmp'
@@ -45,7 +47,7 @@ class HarvestAlephMarc():
             capture_exception('Error caught trying to process url ' + url)
         return marc_records_stream
 
-    def process_marc_records_from_stream(self, test_mode_flag: bool = False) -> int:
+    def process_marc_records_from_stream(self, test_mode_flag: bool = False) -> int:  # noqa: C901
         """ Process each marc record read from the stream """
         processed_records_count = 0
         try:
@@ -58,24 +60,29 @@ class HarvestAlephMarc():
         transform_marc_json_class = TransformMarcJson()
         add_files_to_json_object_class = AddFilesToJsonObject(self.config)
         standard_json_helpers_class = StandardJsonHelpers(self.config)
+        completed_flag = True
         try:
             for marc_record in marc_reader:
                 marc_record_as_json = json.loads(marc_record.as_json())
                 json_record = transform_marc_json_class.build_json_from_marc_json(marc_record_as_json)
                 if json_record:
-                    print("Aleph identifier ", json_record.get("id", ""), " - ", int(time.time() - self.start_time), " seconds.")
-                    json_record = add_files_to_json_object_class.add_files(json_record)
-                    json_record = standard_json_helpers_class.enhance_standard_json(json_record)
-                    self._save_json_record(json_record)
-                    processed_records_count += 1
+                    aleph_id = json_record.get("id", "")
+                    if aleph_id > self.event['maxAlephIdProcessed']:
+                        print("Aleph identifier ", aleph_id, " - ", int(time.time() - self.start_time), " seconds.")
+                        json_record = add_files_to_json_object_class.add_files(json_record)
+                        json_record = standard_json_helpers_class.enhance_standard_json(json_record)
+                        self._save_json_record(json_record)
+                        processed_records_count += 1
+                        self.event['maxAlephIdProcessed'] = aleph_id
                 if False:  # change to True to output test files locally.from pymarc import MARCReader
                     filename = self._save_local_marc_json_for_testing(marc_record_as_json)
                     self._save_local_standard_json_for_testing(filename, json_record)
-                if test_mode_flag:
+                if test_mode_flag or datetime.now() >= self.time_to_break:
+                    completed_flag = False
                     break
         except Exception as e:
             capture_exception(e)
-
+        self.event['alephHarvestComplete'] = completed_flag
         if not self.event['local']:
             print("Saved to s3: ", os.path.join(self.config['process-bucket'], self.config['process-bucket-data-basepath']))  # noqa: #501
         return processed_records_count
