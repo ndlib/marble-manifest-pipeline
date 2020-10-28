@@ -22,10 +22,7 @@ def run(event, _context):
     """ Main run routine for module """
     """ Note:  on 10/28/2020 we made a change to step functions that run these lambdas to run step funcitons in parallel.
         As a result of this change, this module may accept as "event" either a dictionary, or an array of dictionaries. """
-    if isinstance(event, dict):
-        myevent = event
-    else:
-        myevent = _get_appropriate_event_dict(event)
+    myevent = _get_appropriate_event_dict(event)
     myevent['local'] = myevent.get("local", False)
     if 'ssm_key_base' not in myevent and 'SSM_KEY_BASE' in os.environ:
         myevent['ssm_key_base'] = os.environ['SSM_KEY_BASE']
@@ -33,10 +30,7 @@ def run(event, _context):
     collections_api_class = CollectionsApi(config)
     collections_api_class.save_collection_details(['aleph', 'archivesspace', 'curate', 'embark'])
     myevent['collectionsApiComplete'] = True
-    if isinstance(event, dict):
-        event = myevent
-    else:
-        event = _update_original_event(event, myevent)
+    event = _update_original_event(event, myevent)
     return event
 
 
@@ -63,10 +57,13 @@ def _find_right_dict_in_list(event: list, key_to_find: str) -> int:
 
 
 def _update_original_event(event: list, myevent: dict) -> dict:
-    i = _find_right_dict_in_list(event, 'collectionsApiComplete')
-    if i:
-        for k, v in myevent.items():
-            event[i][k] = v
+    if isinstance(event, dict):
+        event = myevent
+    elif isinstance(event, list):
+        i = _find_right_dict_in_list(event, 'collectionsApiComplete')
+        if i:
+            for k, v in myevent.items():
+                event[i][k] = v
     return event
 
 
