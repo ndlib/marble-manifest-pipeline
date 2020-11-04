@@ -114,6 +114,7 @@ class Test(unittest.TestCase):
                 {"creators": [{"display": "test4"}]}
             ],
             "languages": [{'display': 'English', 'alpha2': 'en', 'alpha3': 'eng'}],
+            "level": "manifest",
             "publishers": [{'display': 'abc, xyz', 'publisherName': 'abc', 'publisherLocation': 'xyz'}],
             "collections": [{'display': "Capt. Francis O'Neill Collection of Irish Studies (University of Notre Dame. Library)"}]
         }

@@ -90,7 +90,7 @@ def test():
         event = {}
         event["local"] = False
         event["ids"] = [
-            # "https://archivesspace.library.nd.edu/repositories/2/resources/1652",  # Collegiate Jazz Festival
+            "https://archivesspace.library.nd.edu/repositories/2/resources/1652",  # Collegiate Jazz Festival
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1447",
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1567",
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1644",  # Irish Broadsides

@@ -36,10 +36,22 @@ class StandardJsonHelpers():
 
 
 def _clean_up_standard_json_recursive(standard_json: dict) -> dict:
-    """ Recursively clean up standard_json strings """
+    """ Recursively clean up standard_json strings
+        also set level to 'manifest' (if no child items that are manifest or collection level)
+             or 'collection' (if child items exist that are manifest or collection level).       """
     standard_json = _clean_up_standard_json_strings(standard_json)
+    items_exist = False
+    level_should_be_collection = False
     for item in standard_json.get('items', []):
         item = _clean_up_standard_json_recursive(item)
+        if item.get('level', '') in ('manifest', 'collection'):
+            level_should_be_collection = True
+        items_exist = True
+    if items_exist:
+        if level_should_be_collection:
+            standard_json['level'] = 'collection'
+        else:
+            standard_json['level'] = 'manifest'
     return standard_json
 
 
