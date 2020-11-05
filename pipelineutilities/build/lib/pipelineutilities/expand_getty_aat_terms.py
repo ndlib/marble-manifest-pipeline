@@ -26,6 +26,9 @@ def expand_aat_terms(subject: dict) -> dict:
             subject['broaderTerms'] = broader_terms
         if parent_terms:
             subject['parentTerms'] = parent_terms
+        variants = _get_variants(aat_xml)
+        if variants:
+            subject['variants'] = variants
         if not validate_json(subject, get_subject_json_schema(), True):
             subject = None
     return subject
@@ -164,6 +167,21 @@ def _get_xml_tree_given_xml_string(xml_string: str, id_url: str) -> ElementTree:
         print("Error converting to xml results of this url: " + id_url)
         capture_exception(e)
     return xml_tree
+
+
+def _get_variants(xml: ElementTree) -> list:
+    """ Get braoder terms if any """
+    variant_terms = []
+    xpaths = ['./Subject/Terms/Non-Preferred_Term']
+    for xpath in xpaths:
+        for xml_term in xml.findall(xpath):
+            language = xml_term.find('./Term_Languages/Term_Language/Language')
+            if language is not None:
+                if 'English' in language.text:
+                    variant_term = xml_term.find('./Term_Text')
+                    if variant_term is not None:
+                        variant_terms.append(variant_term.text)
+    return variant_terms
 
 
 # testing:

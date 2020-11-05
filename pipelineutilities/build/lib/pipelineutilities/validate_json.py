@@ -263,6 +263,7 @@ standard_json_schema = {
         "key": {"type": "string"},
         "width": {"type": "integer"},
         "height": {"type": "integer"},
+        "hierarchySearchable": {"type": "boolean"},
         "items": {
             "type": "array",
             "items": {"$ref": "#"},
