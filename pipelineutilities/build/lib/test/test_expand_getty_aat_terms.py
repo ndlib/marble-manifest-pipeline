@@ -92,7 +92,41 @@ class Test(unittest.TestCase):
                 {'authority': 'AAT', 'term': 'costume by function', 'uri': 'http://vocab.getty.edu/aat/300212133', 'parentTerm': 'costume (mode of fashion)'},
                 {'authority': 'AAT', 'term': 'costume (mode of fashion)', 'uri': 'http://vocab.getty.edu/aat/300178802'}
             ],
-            'parentTerms': ['headdresses', 'ceremonial costume']
+            'parentTerms': ['headdresses', 'ceremonial costume'],
+            'variants': ['crown'],
+        }
+        self.assertEqual(actual_results, expected_results)
+
+    @patch('pipelineutilities.expand_getty_aat_terms._get_xml_string_given_url')
+    def test_07_get_xml_string_given_url(self, mock_get_xml_string_given_url):
+        """ text_07 basically test the whole process given a mocked xml """
+        with open(local_folder + 'getty_aat_term_300250130.xml', 'r') as xml_file:
+            xml_string = xml_file.read()
+        mock_get_xml_string_given_url.return_value = xml_string
+        sample_subject = {
+            "authority": "AAT",
+            "term": "Canis familiaris (species)",
+            "uri": "http://vocab.getty.edu/aat/9999"
+        }
+        actual_results = expand_aat_terms(sample_subject)
+        expected_results = {
+            'authority': 'AAT',
+            'term': 'Canis familiaris (species)',
+            'uri': 'http://vocab.getty.edu/aat/9999',
+            'description': 'Domesticated species of Canis, formerly believed to be descended from Canis lupus, gray wolves; however, recent studies suggest that gray wolves and domestic dogs instead have a common ancestor, now extinct. Dogs come in a variety of shapes, and sizes and over 400 distinct breeds. All domestic or feral dogs are descended from a single common ancestral species. For more than 12,000 years, it has lived with humans as a hunting companion, protector, and as herders and guardians of sheep, goats, and cattle. Today, dogs are employed as aids to the blind and disabled, or for police work. In Western art, dogs have generally come to symbolize faithfulness and loyalty, however, in other cultures they can symbolizes a varity of traits, ranging from unclean to seducer.',  # noqa: E501
+            'broaderTerms': [
+                {'authority': 'AAT', 'term': 'Canis (genus)', 'uri': 'http://vocab.getty.edu/aat/300265714', 'parentTerm': 'Canidae (family)'},
+                {'authority': 'AAT', 'term': 'Canidae (family)', 'uri': 'http://vocab.getty.edu/aat/300265713', 'parentTerm': 'Carnivora (order)'},
+                {'authority': 'AAT', 'term': 'Carnivora (order)', 'uri': 'http://vocab.getty.edu/aat/300310328', 'parentTerm': 'Mammalia (class)'},
+                {'authority': 'AAT', 'term': 'Mammalia (class)', 'uri': 'http://vocab.getty.edu/aat/300265707', 'parentTerm': 'Vertebrata (subphylum)'},
+                {'authority': 'AAT', 'term': 'Vertebrata (subphylum)', 'uri': 'http://vocab.getty.edu/aat/300265720', 'parentTerm': 'Chordata (phylum)'},
+                {'authority': 'AAT', 'term': 'Chordata (phylum)', 'uri': 'http://vocab.getty.edu/aat/300266513', 'parentTerm': 'Animalia (kingdom)'},
+                {'authority': 'AAT', 'term': 'Animalia (kingdom)', 'uri': 'http://vocab.getty.edu/aat/300249395', 'parentTerm': 'Eukaryota (domain)'},
+                {'authority': 'AAT', 'term': 'Eukaryota (domain)', 'uri': 'http://vocab.getty.edu/aat/300265677', 'parentTerm': 'living organisms (entities)'},
+                {'authority': 'AAT', 'term': 'living organisms (entities)', 'uri': 'http://vocab.getty.edu/aat/300390503'}
+            ],
+            'parentTerms': ['Canis (genus)'],
+            'variants': ['dogs', 'dog'],
         }
         self.assertEqual(actual_results, expected_results)
 

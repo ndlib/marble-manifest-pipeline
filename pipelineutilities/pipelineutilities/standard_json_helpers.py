@@ -21,6 +21,8 @@ class StandardJsonHelpers():
         add_paths_to_json_object_class = AddPathsToJsonObject(self.config)
         fix_creators_in_json_object_class = FixCreatorsInJsonObject(self.config)
         report_missing_fields_class = ReportMissingFields(self.config)
+        if 'hierarchySearchable' not in standard_json:
+            standard_json['hierarchySearchable'] = False
         standard_json = add_paths_to_json_object_class.add_paths(standard_json)
         standard_json = fix_creators_in_json_object_class.fix_creators(standard_json)
         standard_json = expand_subject_terms_recursive(standard_json)
@@ -38,7 +40,8 @@ class StandardJsonHelpers():
 def _clean_up_standard_json_recursive(standard_json: dict) -> dict:
     """ Recursively clean up standard_json strings
         also set level to 'manifest' (if no child items that are manifest or collection level)
-             or 'collection' (if child items exist that are manifest or collection level).       """
+             or 'collection' (if child items exist that are manifest or collection level).
+        Note:  This must be run before _add_objectFileGroupId so level is defined before it is referenced. """
     standard_json = _clean_up_standard_json_strings(standard_json)
     items_exist = False
     level_should_be_collection = False
@@ -133,6 +136,7 @@ def _load_language_codes() -> list:
 
 
 def _add_objectFileGroupId(standard_json: dict) -> dict:  # noqa: C901
+    """ Note:  This must be run after _clean_up_standard_json_recursive has defined level """
     level = standard_json.get('level', 'manifest')
     if level == 'manifest':
         # manifests can only have files nested directly under them

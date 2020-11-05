@@ -1,7 +1,7 @@
 # test_clean_up_composite_json.py
 """ test clean_up_composite_json """
 import unittest
-from clean_up_composite_json import CleanUpCompositeJson
+from clean_up_composite_json import CleanUpCompositeJson, _is_hierachy_searchable
 
 
 class Test(unittest.TestCase):
@@ -16,7 +16,7 @@ class Test(unittest.TestCase):
         clean_up_content_class = CleanUpCompositeJson({})
         families_array = clean_up_content_class._find_parent_child_relationships(objects)
         expected_object = [{'parentId': 'abc', 'childId': 'abc.a', 'sequence': 0}, {'parentId': 'abc', 'childId': 'abc.b', 'sequence': 0}]
-        self.assertTrue(families_array == expected_object)
+        self.assertEqual(families_array, expected_object)
 
     def test_2_remove_child_node_from_objects(self):
         """ test_2 _remove_child_node_from_objects """
@@ -51,8 +51,8 @@ class Test(unittest.TestCase):
         }
         clean_up_content_class = CleanUpCompositeJson({})
         fixed_objects = clean_up_content_class._fix_parent_child_relationships(objects)
-        expected_object = {'abc': {'id': 'abc', 'items': [{'id': 'abc.a', 'title': 'thing a', 'sequence': 0}, {'id': 'abc.b', 'title': 'thing b', 'sequence': 0}]}}
-        self.assertTrue(fixed_objects == expected_object)
+        expected_object = {'abc': {'hierarchySearchable': False, 'id': 'abc', 'items': [{'id': 'abc.a', 'title': 'thing a', 'sequence': 0}, {'id': 'abc.b', 'title': 'thing b', 'sequence': 0}]}}
+        self.assertEqual(fixed_objects, expected_object)
 
     def test_5_clean_up_composite_json(self):
         """ test_5 _clean_up_composite_json """
@@ -66,11 +66,11 @@ class Test(unittest.TestCase):
         }
         clean_up_content_class = CleanUpCompositeJson({})
         fixed_composite_json = clean_up_content_class._clean_up_composite_json(composite_json)
-        expected_composite_json = {'objects': {'abc': {'id': 'abc', 'items': [{'id': 'abc.a', 'title': 'thing a', 'sequence': 0}, {'id': 'abc.b', 'title': 'thing b', 'sequence': 0}]}}}
-        self.assertTrue(fixed_composite_json == expected_composite_json)
+        expected_composite_json = {'objects': {'abc': {'hierarchySearchable': False, 'id': 'abc', 'items': [{'id': 'abc.a', 'title': 'thing a', 'sequence': 0}, {'id': 'abc.b', 'title': 'thing b', 'sequence': 0}]}}}
+        self.assertEqual(fixed_composite_json, expected_composite_json)
 
     def test_6_cleaned_up_content(self):
-        """ test_5 _cleaned_up_content """
+        """ test_6_cleaned_up_content """
         composite_json = {
             "objects":
                 {
@@ -80,8 +80,31 @@ class Test(unittest.TestCase):
                 }
         }
         fixed_composite_json = CleanUpCompositeJson(composite_json).cleaned_up_content
-        expected_composite_json = {'objects': {'abc': {'id': 'abc', 'items': [{'id': 'abc.a', 'title': 'thing a', 'sequence': 0}, {'id': 'abc.b', 'title': 'thing b', 'sequence': 0}]}}}
-        self.assertTrue(fixed_composite_json == expected_composite_json)
+        expected_composite_json = {'objects': {'abc': {'hierarchySearchable': False, 'id': 'abc', 'items': [{'id': 'abc.a', 'title': 'thing a', 'sequence': 0}, {'id': 'abc.b', 'title': 'thing b', 'sequence': 0}]}}}
+        self.assertEqual(fixed_composite_json, expected_composite_json)
+
+    def test_7_is_hierachy_searchable(self):
+        """ test_7_is_hierachy_searchable """
+        child_id = '1990.005.001.a'
+        results = _is_hierachy_searchable(child_id)
+        self.assertEqual(results, False)
+        child_id = '2008.004.002'
+        results = _is_hierachy_searchable(child_id)
+        self.assertEqual(results, True)
+
+    def test_8_cleaned_up_content_searchable(self):
+        """ test_8_cleaned_up_content_searchable """
+        composite_json = {
+            "objects":
+                {
+                    "abc": {"id": "abc", "children": [{"id": "abc.1"}, {"id": "abc.2"}]},
+                    "abc.1": {"id": "abc.1", "title": "thing a"},
+                    "abc.2": {"id": "abc.2", "title": "thing b"}
+                }
+        }
+        fixed_composite_json = CleanUpCompositeJson(composite_json).cleaned_up_content
+        expected_composite_json = {'objects': {'abc': {'hierarchySearchable': True, 'id': 'abc', 'items': [{'id': 'abc.1', 'title': 'thing a', 'sequence': 0}, {'id': 'abc.2', 'title': 'thing b', 'sequence': 0}]}}}
+        self.assertEqual(fixed_composite_json, expected_composite_json)
 
 
 def suite():

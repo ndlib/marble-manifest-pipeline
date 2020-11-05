@@ -1,3 +1,0 @@
-../pipelineutilities/
-python-i18n
-polib

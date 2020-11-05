@@ -23,6 +23,7 @@ class CleanUpCompositeJson():
             child_id = family["childId"]
             sequence = family["sequence"]
             parent = objects[parent_id]
+            parent['hierarchySearchable'] = _is_hierachy_searchable(child_id)
             if "items" not in parent:
                 parent["items"] = []
             if child_id in objects:
@@ -60,3 +61,11 @@ class CleanUpCompositeJson():
                 if len(objects[parent_id]["children"]) == 0:
                     del objects[parent_id]["children"]
         return objects
+
+
+def _is_hierachy_searchable(child_id: str) -> bool:
+    """ If the suffix of a child_id is numeric, the whole hierarchy is searchable to the leaf nodes.
+        If the suffix of a child_id is alphabetic, the whole hierarchy is not searchable. """
+    pieces_of_child_id_list = child_id.split('.')
+    suffix = pieces_of_child_id_list[len(pieces_of_child_id_list) - 1]
+    return suffix.isnumeric()
