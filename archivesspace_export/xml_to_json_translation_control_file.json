@@ -161,7 +161,7 @@
 				"format": "array",
 				"externalProcess": "format_related_ids",
 				"passLabels": [{"related_ids": "related_ids"}]
-		},
+			},
 			{
 				"label": "child",
 				"otherNodes": "childDetails",
@@ -170,6 +170,12 @@
 				"collapseTree": true,
 				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
 					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}]
+			},
+			{
+				"label": "geographicLocations",
+				"otherNodes": "geographicLocations",
+				"xpath": "./controlaccess/geogname",
+				"optional": true
 			},
 			{
 				"removeNodes": ["passedParentId", "related_ids"]
@@ -415,9 +421,38 @@
 				"format": "text"
 			},
 			{
-				"label": "uri",
-				"constant": "",
+				"label": "authFileNumber",
+				"xpath": ".",
+				"returnAttributeName": "authfilenumber",
 				"optional": false,
+				"format": "text"
+			},
+			{
+				"label": "uri",
+				"optional": false,
+				"format": "text",
+				"externalProcess": "format_subject_uri",
+				"passLabels": [{"authFileNumber": "authFileNumber"}]
+			},
+			{
+				"removeNodes": ["authFileNumber"]
+			}
+		]
+	},
+
+	"geographicLocations": {
+		"FieldsToExtract": [
+			{
+				"label": "display",
+				"xpath": ".",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "authority",
+				"xpath": ".",
+				"returnAttributeName": "source",
+				"optional": true,
 				"format": "text"
 			}
 		]

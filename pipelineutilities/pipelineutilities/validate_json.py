@@ -264,6 +264,18 @@ standard_json_schema = {
         "width": {"type": "integer"},
         "height": {"type": "integer"},
         "hierarchySearchable": {"type": "boolean"},
+        "geographicLocations": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "display": {"type": "string"},
+                    "authority": {"type": "string"},
+                },
+                "additionalProperties": False
+            }
+        },
+
         "items": {
             "type": "array",
             "items": {"$ref": "#"},

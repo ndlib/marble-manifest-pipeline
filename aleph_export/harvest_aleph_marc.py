@@ -68,11 +68,12 @@ class HarvestAlephMarc():
                 if json_record:
                     aleph_id = json_record.get("id", "")
                     if aleph_id > self.event['maxAlephIdProcessed']:
-                        print("Aleph identifier ", aleph_id, " - ", int(time.time() - self.start_time), " seconds.")
-                        json_record = add_files_to_json_object_class.add_files(json_record)
-                        json_record = standard_json_helpers_class.enhance_standard_json(json_record)
-                        self._save_json_record(json_record)
-                        processed_records_count += 1
+                        if aleph_id in self.event['ids'] or len(self.event['ids']) == 0:
+                            print("Aleph identifier ", aleph_id, " - ", int(time.time() - self.start_time), " seconds.")
+                            json_record = add_files_to_json_object_class.add_files(json_record)
+                            json_record = standard_json_helpers_class.enhance_standard_json(json_record)
+                            self._save_json_record(json_record)
+                            processed_records_count += 1
                         self.event['maxAlephIdProcessed'] = aleph_id
                 if False:  # change to True to output test files locally.from pymarc import MARCReader
                     filename = self._save_local_marc_json_for_testing(marc_record_as_json)

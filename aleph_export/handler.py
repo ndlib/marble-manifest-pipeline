@@ -51,7 +51,6 @@ def _supplement_event(event):
 
 
 # setup:
-# export SSM_KEY_BASE=/all/new-csv
 # export SSM_KEY_BASE=/all/stacks/steve-manifest
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
@@ -68,6 +67,7 @@ def test():
         event = {}
         event['local'] = False
         event['seconds-to-allow-for-processing'] = 60
+        event['ids'] = ['000650138', '000944739', '001586302']
     event = run(event, {})
 
     if not event['alephHarvestComplete']:

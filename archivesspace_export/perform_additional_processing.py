@@ -33,6 +33,9 @@ def perform_additional_processing(json_node: dict, field: dict, schema_api_versi
     elif external_process_name == 'format_related_ids':
         if 'related_ids' in parameters_json:
             return_value = _format_related_ids(parameters_json["related_ids"])
+    elif external_process_name == 'format_subject_uri':
+        if 'authFileNumber' in parameters_json:
+            return_value = _format_subject_uri(parameters_json["authFileNumber"])
     return return_value
 
 
@@ -94,4 +97,15 @@ def _format_related_ids(value_found: list) -> list:
         found_list = re.findall(regex, value)
         if len(found_list) > 0:
             results.append(found_list[0])
+    return results
+
+
+def _format_subject_uri(value_found: str) -> str:
+    """ Return formatted uri or empty string.
+    They come in the form: "sh 95001476 "
+    We will return the form: "https://id.loc.gov/authorities/subjects/sh95001476.html" """
+    results = ''
+    regex = r'sh [0-9]*'
+    if re.findall(regex, value_found):
+        results = 'https://id.loc.gov/authorities/subjects/' + value_found.replace(' ', '') + '.html'
     return results

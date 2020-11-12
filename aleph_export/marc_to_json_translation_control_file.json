@@ -176,6 +176,12 @@
 				"externalProcess": "define_level",
 				"passLabels": [{"items": "items"}],
 				"format": "text"
+			},
+			{
+				"label": "geographicLocations",
+				"otherNodes": "geographicLocations",
+				"optional": true,
+				"format": "array"
 			}
 		]
 	},
@@ -229,5 +235,17 @@
 				"format": "text"
 			}
 		]
+	},
+	"geographicLocations": {
+		"FieldsToExtract": [
+			{ "label": "display",
+						"fields": ["752"],
+						"subfields": ["a", "b", "c", "d"],
+						"subfieldSeparator": ", ",
+						"format": "text",
+						"optional": true,
+						"note": "these subfields are defined here: https://www.loc.gov/marc/bibliographic/bd752.html"
+			}
+		]	
 	}
 }

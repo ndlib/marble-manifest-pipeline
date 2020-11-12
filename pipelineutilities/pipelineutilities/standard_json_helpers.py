@@ -67,7 +67,7 @@ def _clean_up_standard_json_strings(standard_json: dict) -> dict:
     if 'publisher' in standard_json:
         standard_json['publishers'] = _add_publishers_node(standard_json['publisher'])
         standard_json.pop('publisher')
-    lists_to_clean = ['creators', 'contributors', 'subjects', 'publishers', 'collections']
+    lists_to_clean = ['creators', 'contributors', 'subjects', 'publishers', 'collections', 'geographicLocations']
     for list_name in lists_to_clean:
         for individual_node in standard_json.get(list_name, []):
             if individual_node.get('display', ''):

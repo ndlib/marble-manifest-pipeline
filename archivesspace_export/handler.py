@@ -77,7 +77,7 @@ def _init_sentry():
 
 
 # setup:
-# SSM_KEY_BASE=/all/stacks/steve-manifest
+# export SSM_KEY_BASE=/all/stacks/steve-manifest
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
 def test():
@@ -90,7 +90,8 @@ def test():
         event = {}
         event["local"] = False
         event["ids"] = [
-            "https://archivesspace.library.nd.edu/repositories/2/resources/1652",  # Collegiate Jazz Festival
+            # "https://archivesspace.library.nd.edu/repositories/2/resources/1652",  # Collegiate Jazz Festival
+            "https://archivesspace.library.nd.edu/repositories/3/resources/1631",    # Inquisitions (MSHLAT0090_EAD)
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1447",
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1567",
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1644",  # Irish Broadsides
