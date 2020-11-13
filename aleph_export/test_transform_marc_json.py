@@ -38,23 +38,23 @@ class Test(unittest.TestCase):
         sepcial_subfields_list = []
         actual_results = self.transform_marc_json_class._get_required_subfields(subfields_dict, subfields_needed_list, sepcial_subfields_list, " ")
         expected_results = "Crocker, Richard L., author, performer."
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
         sepcial_subfields_list = ["d"]
         actual_results = self.transform_marc_json_class._get_required_subfields(subfields_dict, subfields_needed_list, sepcial_subfields_list, " ")
         expected_results = "Crocker, Richard L., author, performer.^^^1910-1963,"
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_02_get_required_positions(self):
         input_string = "02253njm a2200457Ii 4500"
         positions_needed = [6]
         actual_results = self.transform_marc_json_class._get_required_positions(input_string, positions_needed)
         expected_results = "j"
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
         input_string = "190829s2009    cauccnn  di       n lat d"
         positions_needed = [35, 36, 37]
         actual_results = self.transform_marc_json_class._get_required_positions(input_string, positions_needed)
         expected_results = "lat"
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_03_default_to_appropriate_data_type(self):
         format = "array"
@@ -134,21 +134,21 @@ class Test(unittest.TestCase):
         json_field_definition = {"label": "title", "fields": ["245"], "subfields": ["a", "b"], "format": "text"}
         actual_results = self.transform_marc_json_class._get_value_from_marc_field(json_field_definition, self.marc_record_as_json)
         expected_results = "New edition of a general Collection of the ancient Irish music : containing a variety of Irish Airs, never before published, and also the compositions of Conolan and Carolan, collected from the harpers, etc., in the different provinces of Ireland, and adapted for the pianoforte /"  # noqa
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
         json_field_definition = {"label": "collectionId", "fields": ["001"], "format": "text"}
         actual_results = self.transform_marc_json_class._get_value_from_marc_field(json_field_definition, self.marc_record_as_json)
         expected_results = "000297305"
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_07_get_json_node_value_from_marc(self):
         json_field_definition = {"label": "collectionId", "fields": ["001"], "format": "text"}
         actual_results = self.transform_marc_json_class._get_json_node_value_from_marc(json_field_definition, self.marc_record_as_json, {})
         expected_results = "000297305"
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
         json_field_definition = {"label": "publisher2", "otherNodes": "publisher", "format": "node"}
         actual_results = self.transform_marc_json_class._get_json_node_value_from_marc(json_field_definition, self.marc_record_as_json, {})
         expected_results = {'publisherName': 'published by I. Willis', 'publisherLocation': 'Dublin,'}
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_08_mutate_marc_record_as_json(self):
         mutated_marc_record_as_json = self.transform_marc_json_class._mutate_marc_record_as_json(self.marc_record_as_json)
@@ -156,12 +156,12 @@ class Test(unittest.TestCase):
         #     json.dump(mutated_marc_record_as_json, output_file, indent=2, default=str)
         with open(local_folder + 'test/sample_marc_mutated.json', 'r') as input_source:
             expected_json = json.load(input_source)
-        self.assertTrue(mutated_marc_record_as_json == expected_json)
+        self.assertEqual(mutated_marc_record_as_json, expected_json)
 
     def test_09_build_json_for_control_section(self):
         actual_results = self.transform_marc_json_class.build_json_for_control_section(self.marc_record_as_json, "publisher", {})
         expected_results = {'publisherName': 'published by I. Willis', 'publisherLocation': 'Dublin,'}
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_10_build_json_from_marc_json(self):
         actual_results = self.transform_marc_json_class.build_json_from_marc_json(self.marc_record_as_json)
@@ -171,7 +171,7 @@ class Test(unittest.TestCase):
             expected_json = json.load(input_source)
         file_created_date_from_sample = expected_json.get("fileCreatedDate", "")
         actual_results = self.fix_file_created_date(actual_results, file_created_date_from_sample)
-        self.assertTrue(actual_results == expected_json)
+        self.assertEqual(actual_results, expected_json)
 
     def fix_file_created_date(self, json_object, file_created_date):
         json_object["fileCreatedDate"] = file_created_date

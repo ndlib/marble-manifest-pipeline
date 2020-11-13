@@ -26,7 +26,13 @@ class TransformMarcJson():
         json_record = seeded_json.copy()
         for json_field_definition in self.json_control[section_name]['FieldsToExtract']:
             if 'label' in json_field_definition:
-                json_record[json_field_definition['label']] = self._get_json_node_value_from_marc(json_field_definition, marc_record_as_json, json_record)  # noqa: E501
+                node_value = self._get_json_node_value_from_marc(json_field_definition, marc_record_as_json, json_record)
+                optional = json_field_definition.get('optional', False)
+                if not(optional) \
+                    or (isinstance(node_value, str) and node_value != '') \
+                    or (isinstance(node_value, dict) and node_value != {}) \
+                    or (isinstance(node_value, list) and node_value != [] and node_value != [{}]):  # noqa: E125
+                    json_record[json_field_definition['label']] = node_value
         return json_record
 
     def _mutate_marc_record_as_json(self, marc_record_as_json: dict) -> dict:
@@ -92,7 +98,7 @@ class TransformMarcJson():
             node = do_extra_processing(node, extra_processing)
         return node
 
-    def _process_this_field(self, json_field_definition: dict, key: str, value: str) -> str:
+    def _process_this_field(self, json_field_definition: dict, key: str, value: str) -> bool:
         """ This returns a boolean indicating whether or not this field should be processed """
         results = False
         fields = json_field_definition.get("fields", "")
@@ -169,3 +175,11 @@ def read_marc_to_json_translation_control_file(filename: str):
         print('Cannot open ' + filename)
         raise
     return data
+
+
+def return_None_if_needed(value_found: (str, dict, list), json_field_definition: dict) -> dict:
+    """ If a field is not populated, and is optional, return None. """
+    if value_found is not None:  # intentionally want to check for None, because if {} results in false, but I want to replace {} with None
+        if value_found == {} and json_field_definition.get("optional", False):
+            value_found = None
+    return value_found
