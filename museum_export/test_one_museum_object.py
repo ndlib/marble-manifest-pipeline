@@ -22,8 +22,8 @@ class Test(unittest.TestCase):
         self.config = setup_pipeline_config(self.event)
         self.time_to_break = datetime.now() + timedelta(seconds=self.config['seconds-to-allow-for-processing'])
 
-    def test_1_get_embark_metadata_url(self):
-        """ test_2 _get_embark_metadata_url """
+    def test_01_get_embark_metadata_url(self):
+        """ test_01 _get_embark_metadata_url """
         with io.open(local_folder + 'test/1934.007.001_image_files.json', 'r', encoding='utf-8') as json_file:
             image_file_info = json.load(json_file)
         with io.open(local_folder + 'test/1934.007.001_web_kiosk.json', 'r', encoding='utf-8') as json_file:

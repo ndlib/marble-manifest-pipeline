@@ -17,6 +17,7 @@ from get_image_info_for_all_objects import GetImageInfoForAllObjects
 from pipelineutilities.save_standard_json import save_standard_json
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
+from save_json_to_dynamo import SaveJsonToDynamo
 
 
 class ProcessWebKioskJsonMetadata():
@@ -33,6 +34,7 @@ class ProcessWebKioskJsonMetadata():
         self.save_local_copy = False
         self.delete_local_copy = False
         self.start_time = time.time()
+        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('files-tablename', ''), self.config.get('files-time-to-live-days', 3))
 
     def get_composite_json_metadata(self, mode: str) -> dict:
         """ Build URL, call URL, save resulting output to disk """
@@ -93,6 +95,7 @@ class ProcessWebKioskJsonMetadata():
                     standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
                     save_standard_json_to_dynamo_class.save_standard_json(standard_json)
                     save_standard_json(self.config, standard_json, export_all_files_flag)
+                    self._save_google_image_data_to_dynamo(standard_json)
                     object_value["recordProcessedFlag"] = True
                     objects_processed += 1
                     if datetime.now() >= self.time_to_break:
@@ -135,6 +138,16 @@ class ProcessWebKioskJsonMetadata():
             recent_past_string = recent_past.strftime('%m/%d/%Y')
             url = base_url + "&query=mod_date%3E%22" + recent_past_string + "%22"
         return url
+
+    def _save_google_image_data_to_dynamo(self, standard_json: dict):
+        """ Save google image data to dynamo recursively """
+        if standard_json.get('level', '') == 'file':
+            new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
+            new_dict['id'] = new_dict.get('parentId', '') + '/' + new_dict.get('id', '')  # change id to form parentId + filename (from id = filename)
+            new_dict['objectFileGroupId'] = new_dict['parentId']
+            self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict)
+        for item in standard_json.get('items', []):
+            self._save_google_image_data_to_dynamo(item)
 
 
 def delete_file(folder_name: str, file_name: str):

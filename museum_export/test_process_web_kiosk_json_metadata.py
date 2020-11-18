@@ -38,65 +38,35 @@ class Test(unittest.TestCase):
         self.config = setup_pipeline_config(self.event)
         self.time_to_break = datetime.now() + timedelta(seconds=self.config['seconds-to-allow-for-processing'])
 
-    def test_1_get_embark_metadata_url(self):
-        """ test_2 _get_embark_metadata_url """
-        event = {"mode": "ids", "ids": ["1934.007.001"]}
+    def test_01_get_embark_metadata_url(self):
+        """ test_01 _get_embark_metadata_url """
+        event = {"mode": "ids", "ids": ["1934.007.001"], "files-tablename": "some-table-name"}
         json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
         actual_results = json_web_kiosk_class._get_embark_metadata_url("ids", "1934.007.001")
         expected_results = "http://notredame.dom5182.com:8080/results.html?layout=marble&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
-        self.assertTrue(actual_results == expected_results)
-
-    # Eliminated this test to eliminate really calling the url without mocking
-    # def test_2_get_metadata_given_url(self):
-    #     """ test_1 _get_metadata_given_url
-    #         This really calls the url without mocking.
-    #         Note:  each time we update the template on the Web Kiosk server, we must re-save the results here.
-    #     """
-    #     event = {"mode": "ids", "ids": ["1934.007.001"]}
-    #     json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
-    #     url = "http://notredame.dom5182.com:8080/results.html?layout=marble_hash&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
-    #     actual_results = json_web_kiosk_class._get_metadata_given_url(url)
-    #     actual_results["objects"]["1934.007.001"]["modifiedDate"] = "9/16/2020 09:10:03"  # Set modified date to a fixed date to make comparisons easier later
-    #     filename = local_folder + 'test/1934.007.001_web_kiosk.json'
-    #     # Note:  Each time we save the template, we will need to re-save this test json file
-    #     # with open(filename, 'w') as f:
-    #     #     json.dump(actual_results, f, indent=2)
-    #     with io.open(filename, 'r', encoding='utf-8') as json_file:
-    #         expected_results = json.load(json_file)
-    #     self.assertEqual(actual_results, expected_results)
-
-    # Eliminated this test to eliminate really calling the url without mocking
-    # def test_3_process_composite_json_metadata(self):
-    #     event = {"mode": "ids", "ids": ["1934.007.001"], "local": True}
-    #     with io.open(local_folder + 'test/1934.007.001_web_kiosk.json', 'r', encoding='utf-8') as json_file:
-    #         composite_json = json.load(json_file)
-    #     with io.open(local_folder + 'test/1934.007.001_image_files.json', 'r', encoding='utf-8') as json_file:
-    #         image_file_info = json.load(json_file)
-    #     running_unit_tests = True
-    #     json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
-    #     count_objects_processed = json_web_kiosk_class.process_composite_json_metadata(composite_json, image_file_info, running_unit_tests)
-    #     self.assertTrue(count_objects_processed == 1)
+        self.assertEqual(actual_results, expected_results)
 
     @patch('process_web_kiosk_json_metadata.ProcessWebKioskJsonMetadata._get_metadata_given_url')
-    def test_4_get_composite_json_for_all_named_ids(self, mock_get_metadata_given_url):
-        event = {"mode": "ids", "ids": ["1934.007.001"], "local": True}
+    def test_02_get_composite_json_for_all_named_ids(self, mock_get_metadata_given_url):
+        """ test_02_get_composite_json_for_all_named_ids """
+        event = {"mode": "ids", "ids": ["1934.007.001"], "local": True, "files-tablename": "some-table-name"}
         with io.open(local_folder + 'test/1934.007.001_web_kiosk.json', 'r', encoding='utf-8') as json_file:
             composite_json = json.load(json_file)
         mock_get_metadata_given_url.return_value = composite_json
         json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
         actual_results = json_web_kiosk_class._get_composite_json_for_all_named_ids("ids")
-        self.assertTrue(actual_results == composite_json)
+        self.assertEqual(actual_results, composite_json)
 
     @patch('get_image_info_for_all_objects.GetImageInfoForAllObjects', fake_images_for_mocking)
-    def test_5_find_images_for_composite_json_metadata(self):
+    def test_03_find_images_for_composite_json_metadata(self):
         """ Testing find_images_for_composite_json_metadata by mocking a whole class,
             using fake_images_for_mocking to substitute for calling GetImageInfoForAllObjects. """
-        event = {"mode": "ids", "ids": ["1934.007.001"], "local": True}
+        event = {"mode": "ids", "ids": ["1934.007.001"], "local": True, "files-tablename": "some-table-name"}
         with io.open(local_folder + 'test/1934.007.001_web_kiosk.json', 'r', encoding='utf-8') as json_file:
             composite_json = json.load(json_file)
         json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
         actual_results = json_web_kiosk_class.find_images_for_composite_json_metadata(composite_json)
-        self.assertTrue(actual_results == {"abc": 123})
+        self.assertEqual(actual_results, {"abc": 123})
 
 
 def suite():

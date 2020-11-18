@@ -99,11 +99,11 @@ def test():
         event = {}
         event["local"] = False
         event["mode"] = "full"
-        # event['seconds-to-allow-for-processing'] = 60
-        # event["mode"] = "ids"
+        event['seconds-to-allow-for-processing'] = 60
+        event["mode"] = "ids"
         # event['ids'] = ['1999.024', '1952.019', '2018.009, 218.049.004']
         # event['ids'] = ['1994.042', '1994.042.a', '1994.042.b']  # , '1990.005.001']
-        # event["ids"] = ["1990.005.001", "1990.005.001.a", "1990.005.001.b"]  # parent / child objects
+        event["ids"] = ["1990.005.001", "1990.005.001.a", "1990.005.001.b"]  # parent / child objects
         # event["export_all_files_flag"] = True
         # event["ids"] = ["1979.032.003"]  # objects with special characters to strip
         # event["ids"] = ["L1986.032.002"]  # objects with missing Google images on Google Drive

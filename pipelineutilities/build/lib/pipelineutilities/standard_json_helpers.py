@@ -41,11 +41,16 @@ def _clean_up_standard_json_recursive(standard_json: dict) -> dict:
     """ Recursively clean up standard_json strings
         also set level to 'manifest' (if no child items that are manifest or collection level)
              or 'collection' (if child items exist that are manifest or collection level).
+        This now also removes any empty relatedIds lists and adds a treePath to save tree hierarchy.
         Note:  This must be run before _add_objectFileGroupId so level is defined before it is referenced. """
     standard_json = _clean_up_standard_json_strings(standard_json)
+    if 'relatedIds' in standard_json and len(standard_json.get('relatedIds', [])) == 0:
+        del standard_json['relatedIds']
     items_exist = False
     level_should_be_collection = False
     for item in standard_json.get('items', []):
+        if item.get('parentId'):
+            item['treePath'] = standard_json.get('treePath', '') + ',' + item['parentId']
         item = _clean_up_standard_json_recursive(item)
         if item.get('level', '') in ('manifest', 'collection'):
             level_should_be_collection = True
