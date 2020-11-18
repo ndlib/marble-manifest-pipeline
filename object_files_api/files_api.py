@@ -1,15 +1,13 @@
 """ Files API """
-import boto3
 import os
 import io
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 import json
 import time
 from s3_helpers import write_s3_json, read_s3_json, delete_s3_key
 from api_helpers import json_serial
 from search_files import crawl_available_files
-from sentry_sdk import capture_exception
-from botocore.exceptions import ClientError
+from save_json_to_dynamo import SaveJsonToDynamo
 
 
 class FilesApi():
@@ -24,7 +22,7 @@ class FilesApi():
         else:
             self.directory = os.path.join(os.path.dirname(__file__), 'cache')
         self.start_time = time.time()
-        self.dynamo_table_available = self._init_dynamo_table()
+        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config['files-tablename'], self.config.get('files-time-to-live-days', 3))
         self.resumption_filename = 'file_objects_list_partially_processed.json'
 
     def save_files_details(self):
@@ -52,18 +50,6 @@ class FilesApi():
         else:
             write_s3_json(self.config['manifest-server-bucket'], 'objectFiles/all/index.json', file_objects)
         return file_objects
-
-    def _init_dynamo_table(self) -> bool:
-        """ Create boto3 resource for dynamo table """
-        success_flag = False
-        if not self.event['local']:
-            try:
-                self.files_table = boto3.resource('dynamodb').Table(self.config['files-tablename'])
-                success_flag = True
-            except ClientError as ce:
-                capture_exception(ce)
-                print(f"Error saving to {self.config['files-tablename']} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
-        return success_flag
 
     def _save_progress(self, all_files_listing: dict):
         """ This is used to save progress in order to resume execution later """
@@ -108,8 +94,7 @@ class FilesApi():
             my_json['id'] = my_json.get('key', '')
             my_json['objectFileGroupId'] = my_json.get('fileId')  # required to join with standard.json
             collection_list.append(my_json)
-            if self.dynamo_table_available:
-                self._save_json_to_dynamo(my_json)
+            self.save_json_to_dynamo_class.save_json_to_dynamo(my_json)
         return collection_list
 
     def _cache_s3_call(self, file_name: str, objects: dict):
@@ -130,39 +115,3 @@ class FilesApi():
                 return json.load(json_file)
         else:
             return {}
-
-    def _save_json_to_dynamo(self, files_json: dict) -> bool:
-        """ Save each item to dynamo """
-        success_flag = True
-        files_json = _serialize_json(files_json)
-        if 'expireTime' not in files_json:
-            files_json['expireTime'] = _get_expire_time(datetime.now(), int(self.config.get('files-time-to-live-days', 3)))
-        if self.dynamo_table_available:
-            try:
-                self.files_table.put_item(Item=files_json)
-            except ClientError as ce:
-                success_flag = False
-                capture_exception(ce)
-                print(f"Error saving to {self.config['files-tablename']} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
-        else:
-            success_flag = False
-        return success_flag
-
-
-def _serialize_json(json_node: dict) -> dict:
-    """ This fixes a problem when trying to save datetime information to dynamo """
-    if isinstance(json_node, dict):
-        for k, v in json_node.items():
-            if isinstance(v, (datetime, date)):
-                json_node[k] = v.isoformat()
-            elif isinstance(v, list):
-                json_node[k] = _serialize_json(v)
-    elif isinstance(json_node, list):
-        for node in json_node:
-            node = _serialize_json(node)
-    return json_node
-
-
-def _get_expire_time(initial_datetime: datetime, days_in_future: int = 3) -> int:
-    """ Return Unix timestamp of initial_datetime plus days_in_future days."""
-    return int(datetime.timestamp(initial_datetime + timedelta(days=days_in_future)))

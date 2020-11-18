@@ -93,10 +93,13 @@ def _format_related_ids(value_found: list) -> list:
     They come in the form: "https://onesearch.library.nd.edu/primo-explore/search?query=any,contains,ndu_aleph001586302&tab=nd_campus&search_scope=nd_campus&vid=NDU" """
     results = []
     regex = r'ndu_aleph[0-9]*'
+    sequence = 0
     for value in value_found:
         found_list = re.findall(regex, value)
         if len(found_list) > 0:
-            results.append(found_list[0])
+            sequence += 1
+            node = {"id": found_list[0].replace('ndu_aleph', ''), "sequence": sequence}
+            results.append(node)
     return results
 
 

@@ -112,7 +112,7 @@ standard_json_schema = {
             "type": "array",
             "items": {
                 "id": {"type": "string"},
-                "sequence": {"type": "string"}
+                "sequence": {"type": "integer"}
             }
         },
         "level": {"enum": ["collection", "manifest", "file"]},
@@ -275,7 +275,8 @@ standard_json_schema = {
                 "additionalProperties": False
             }
         },
-
+        "size": {"type": "integer"},
+        "treePath": {"type": "string"},
         "items": {
             "type": "array",
             "items": {"$ref": "#"},
