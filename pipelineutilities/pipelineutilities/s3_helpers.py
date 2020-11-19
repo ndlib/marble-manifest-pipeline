@@ -5,6 +5,7 @@ import json
 from os.path import basename
 from os import remove
 import hashlib
+import re
 
 
 def get_matching_s3_objects(bucket: str, prefix: str = "", suffix: str = "") -> list:
@@ -56,8 +57,7 @@ class InprocessBucket():
     def write_sub_manifest(self, data):
         path = data.get('id')
         path = path.replace(self.manifest_url + "/", '')
-        path = path.replace(self.id, 'metadata')
-        path = path + "/index.json"
+        path = re.sub(r'^' + self.id + '[/]', 'metadata/', path)        path = path + "/index.json"
         path = self.basepath + "/" + path
         # .replace(self.id, 'metadata') + "/index.json"
         write_s3_json(self.process_bucket, path, data)

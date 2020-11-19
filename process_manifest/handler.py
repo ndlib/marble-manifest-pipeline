@@ -78,7 +78,6 @@ def sub_manifests(manifest):
     for item in manifest.get('items', []):
         if item.get('type').lower() == 'manifest':
             ret.append(item)
-
         ret = ret + sub_manifests(item)
 
     return ret
@@ -89,11 +88,14 @@ def test():
     # import pprint
     # pp = pprint.PrettyPrinter(indent=4)
     event = {
-        'ssm_key_base': '/all/marble-manifest-prod',
-        'config-file': '2020-06-22-13:55:36.698390.json',
-        'process-bucket': 'marble-manifest-prod-processbucket-kskqchthxshg',
+        'ssm_key_base': '/all/sm-prod-manifest',
+        'config-file': '2020-10-24-08:00:38.786177.json',
+        'seconds-to-allow-for-processing': 60,
+        'process-bucket': 'sm-prod-manifest-processbuckete5460fc2-dgivk9llzj2h',
+        'process_manifest_run_number': 1,
+        'processed_ids': [],
         'ids': [
-            'BPP1001_EAD'
+            '2012.045.001'
         ],
         'errors': []
     }
