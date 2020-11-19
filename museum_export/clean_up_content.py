@@ -26,6 +26,7 @@ class CleanUpContent():
         standard_json = self._clean_up_creation_place(standard_json)
         standard_json = self._clean_up_object_special_characters(standard_json)
         standard_json = self._define_digital_access(standard_json)
+        standard_json = self._remove_unnecessary_relatedIds(standard_json, self._get_parent_child_id_list(standard_json))
         if standard_json.get("level", "manifest") != "file" and "digitalAssets" in standard_json:
             add_image_records_as_child_items_class = AddImageRecordsAsChildItems(self.image_files)
             standard_json = add_image_records_as_child_items_class.add_images_as_children(standard_json)
@@ -121,3 +122,30 @@ class CleanUpContent():
         standard_json["apiVersion"] = self.api_version
         standard_json["fileCreatedDate"] = str(date.today())
         return standard_json
+
+    def _remove_unnecessary_relatedIds(self, standard_json: dict, parent_child_id_list: list) -> dict:
+        """ In the dataset we get back from Web Kiosk, both parent-child relationships
+            and also non-parent-sibling relationships are returned as relatedIds.
+            Since the parent-child relationships are already captured as items,
+            we need to remove those from relatedIds, so only non - parent - sibling relationships remain. """
+        related_id_list = []
+        if 'relatedIds' in standard_json:
+            for related_id in standard_json['relatedIds']:
+                r_id = related_id.get('id', '')
+                if r_id and r_id not in parent_child_id_list:
+                    related_id_list.append(related_id)
+            del standard_json['relatedIds']
+            if related_id_list:
+                standard_json['relatedIds'] = related_id_list
+        for item in standard_json.get('items', []):
+            item = self._remove_unnecessary_relatedIds(item, parent_child_id_list)
+        return standard_json
+
+    def _get_parent_child_id_list(self, standard_json: dict) -> list:
+        """ return a list of all ids defined in the parent/child structure """
+        parent_child_id_list = []
+        parent_child_id_list.append(standard_json['id'])
+        for item in standard_json.get('items', []):
+            if item.get('level', 'manifest') != 'file':
+                parent_child_id_list.extend(self._get_parent_child_id_list(item))
+        return parent_child_id_list

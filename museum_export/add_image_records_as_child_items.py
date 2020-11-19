@@ -25,7 +25,7 @@ class AddImageRecordsAsChildItems():
         image_item = {}
         file_name = digital_asset.get("fileDescription", "")
         if file_name in self.image_files:
-            image_item['id'] = file_name
+            image_item['id'] = file_name  # note: this will be updated later to be treePath + fileName
             image_item['level'] = 'file'
             image_item['sequence'] = int(digital_asset.get("sequence", 0))
             image_item['title'] = file_name
@@ -51,4 +51,5 @@ class AddImageRecordsAsChildItems():
             from_parent_item['copyrightStatus'] = object['copyrightStatus']
         if 'copyrightStatemtnt' in object:
             from_parent_item['copyrightStatement'] = object['copyrightStatement']
+        from_parent_item['objectFileGroupId'] = object['id']
         return from_parent_item

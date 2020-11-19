@@ -70,6 +70,21 @@ class Test(unittest.TestCase):
         expected_string = "something's wrong with\nspecial characters"
         self.assertEqual(fixed_string, expected_string)
 
+    def test_07_get_parent_child_id_list(self):
+        """ test_07_get_parent_child_id_list """
+        standard_json = {"id": "1", "items": [{"id": "1a"}, {"id": "1b", "items": [{"id": "1b.1"}, {"id": "1b.2"}]}]}
+        actual_results = self.clean_up_content_class._get_parent_child_id_list(standard_json)
+        expected_results = ['1', '1a', '1b', '1b.1', '1b.2']
+        self.assertEqual(actual_results, expected_results)
+
+    def test_08_remove_unnecessary_relatedIds(self):
+        """ test_08_remove_unnecessary_relatedIds """
+        parent_child_id_list = ['1', '1a', '1b', '1b.1', '1b.2']
+        standard_json = {"id": "1", "items": [{"id": "1a", "relatedIds": [{"id": "1b"}, {"id": "something_else"}]}, {"id": "1b", "relatedIds": [{"id": "1a"}], "items": [{"id": "1b.1", "relatedIds": [{"id": "1b.2"}]}, {"id": "1b.2"}]}]}  # noqa: #501
+        actual_results = self.clean_up_content_class._remove_unnecessary_relatedIds(standard_json, parent_child_id_list)
+        expected_results = {"id": "1", "items": [{"id": "1a", "relatedIds": [{"id": "something_else"}]}, {"id": "1b", "items": [{"id": "1b.1"}, {"id": "1b.2"}]}]}
+        self.assertEqual(actual_results, expected_results)
+
 
 def suite():
     """ define test suite """

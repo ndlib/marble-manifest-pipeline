@@ -196,7 +196,7 @@ class Test(unittest.TestCase):
 
     def test_12_find_default_file_path(self):
         """ test_12_find_default_image_id """
-        item = {'collectionId': '1934.007.001', 'id': '1934_007_001-v0003.jpg', 'filePath': "https://drive.google.com/a/nd.edu/file/d/1801JSqSXsRD9CIXl-dFkJdlXV8wLrOCi/view", 'fileId': 'google_file_id_456'}
+        item = {'collectionId': 'something_irrelevant', 'id': '1934.007.001/1934_007_001-v0003.jpg', 'filePath': "https://drive.google.com/a/nd.edu/file/d/1801JSqSXsRD9CIXl-dFkJdlXV8wLrOCi/view", 'fileId': 'google_file_id_456'}  # noqa: #501
         actual_results = _find_default_file_path(item)
         expected_results = '1934.007.001/1934_007_001-v0003.jpg'
         self.assertEqual(actual_results, expected_results)
