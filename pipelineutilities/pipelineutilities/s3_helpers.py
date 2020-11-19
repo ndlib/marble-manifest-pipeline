@@ -57,7 +57,8 @@ class InprocessBucket():
     def write_sub_manifest(self, data):
         path = data.get('id')
         path = path.replace(self.manifest_url + "/", '')
-        path = re.sub(r'^' + self.id + '[/]', 'metadata/', path)        path = path + "/index.json"
+        path = re.sub(r'^' + self.id + '[/]', 'metadata/', path)
+        path = path + "/index.json"
         path = self.basepath + "/" + path
         # .replace(self.id, 'metadata') + "/index.json"
         write_s3_json(self.process_bucket, path, data)
