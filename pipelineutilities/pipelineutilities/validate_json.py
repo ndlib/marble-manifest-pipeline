@@ -115,6 +115,14 @@ standard_json_schema = {
                 "sequence": {"type": "integer"}
             }
         },
+        "childIds": {
+            "description": "This facilitates defining non-parent-child relationships.",
+            "type": "array",
+            "items": {
+                "id": {"type": "string"},
+                "sequence": {"type": "integer"}
+            }
+        },
         "level": {"enum": ["collection", "manifest", "file"]},
         "title": {"type": "string"},
         "createdDate": {
