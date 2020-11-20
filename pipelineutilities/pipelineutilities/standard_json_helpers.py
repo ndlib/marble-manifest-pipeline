@@ -50,9 +50,11 @@ def _clean_up_standard_json_recursive(standard_json: dict) -> dict:
     level_should_be_collection = False
     for item in standard_json.get('items', []):
         if item.get('parentId'):
-            item['treePath'] = standard_json.get('treePath', '') + ',' + item['parentId']
+            item['treePath'] = standard_json.get('treePath', '') + item['parentId'] + '/'
         item = _clean_up_standard_json_recursive(item)
-        if item.get('level', '') in ('manifest', 'collection'):
+        if item.get('level', '') == 'file' and ("https://drive.google.com/a/nd.edu" in item.get('filePath', '') or "https://curate.nd.edu" in item.get('filePath', '')):
+            item['id'] = item.get('treePath', '') + item.get('title', '')  # set id for google or curate files to be treePath plus fileName
+        elif item.get('level', '') in ('manifest', 'collection'):
             level_should_be_collection = True
         items_exist = True
     if items_exist:
@@ -167,8 +169,8 @@ def _add_objectFileGroupId(standard_json: dict) -> dict:  # noqa: C901
             item = _add_objectFileGroupId(item)
             if item.get('objectFileGroupId', '') and not standard_json.get('objectFileGroupId', ''):
                 standard_json['objectFileGroupId'] = item['objectFileGroupId']
-            if item.get('defaultFilePath', '') and not standard_json.get('defaultFilePath', ''):
-                standard_json['defaultFilePath'] = item['defaultFilePath']
+            if item.get('level', '') == 'file' and item.get('thumbnail', True):
+                standard_json['defaultFilePath'] = _find_default_file_path(item)
     return standard_json
 
 
@@ -184,7 +186,7 @@ def _find_default_file_path(item: dict) -> str:
     """Use cascading logic to find file path of the representational default file """
     default_file_path = item.get('key', '')
     if "https://drive.google.com/a/nd.edu" in item.get('filePath', '') or "https://curate.nd.edu" in item.get('filePath', ''):
-        default_file_path = item.get('collectionId', '') + '/' + item.get('id', '')
+        default_file_path = item.get('id', '')
     regex_expression = r'http[s]?:[/]{2}[\w+\.]+/'
     if not default_file_path and re.match(regex_expression, item.get('filePath', '')):
         default_file_path = re.sub(regex_expression, '', item.get('filePath', ''))

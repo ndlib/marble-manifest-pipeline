@@ -155,7 +155,7 @@
 				"format": "array"
 			},
 			{
-				"label": "relatedIds",
+				"label": "childIds",
 				"note": "This must run after related_ids above.",
 				"optional": true,
 				"format": "array",
