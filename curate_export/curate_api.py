@@ -61,12 +61,12 @@ class CurateApi():
                         json.dump(curate_json, output_file, indent=2, ensure_ascii=False)
 
         standard_json = self.translate_curate_json_node_class.build_json_from_curate_json(curate_json, "root", {})
-        standard_json_helpers_class = StandardJsonHelpers(self.config)
-        standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
         if self.save_standard_json_locally:
             with open(self.local_folder + "test/" + item_id + "_preliminary_standard.json", "w") as output_file:
                 json.dump(standard_json, output_file, indent=2, ensure_ascii=False)
         standard_json = self.create_standard_json_class.build_standard_json_tree(standard_json, members)
+        standard_json_helpers_class = StandardJsonHelpers(self.config)
+        standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
         if standard_json:
             if self.save_standard_json_locally:
                 with open(self.local_folder + "test/" + item_id + "_standard.json", "w") as output_file:
