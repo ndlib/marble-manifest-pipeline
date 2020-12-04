@@ -15,6 +15,7 @@ from create_standard_json import CreateStandardJson
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.save_standard_json import save_standard_json
+from save_json_to_dynamo import SaveJsonToDynamo
 
 
 class CurateApi():
@@ -31,6 +32,7 @@ class CurateApi():
         self.create_standard_json_class = CreateStandardJson(config)
         self.local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
         self.attempting_huge_export_with_resumption_flag = False
+        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('files-tablename', ''))
 
     def get_curate_items(self, ids: list) -> bool:
         """ Given a list of ids, process each one that corresponds to a Curate item """
@@ -72,9 +74,12 @@ class CurateApi():
                 with open(self.local_folder + "test/" + item_id + "_standard.json", "w") as output_file:
                     json.dump(standard_json, output_file, indent=2, ensure_ascii=False)
             else:
+                export_all_files_flag = self.event.get('export_all_files_flag', False)
                 save_standard_json(self.config, standard_json)
                 save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
-                save_standard_json_to_dynamo_class.save_standard_json(standard_json)
+                save_standard_json_to_dynamo_class.save_standard_json(standard_json, export_all_files_flag)
+                self._save_curate_image_data_to_dynamo(standard_json)
+
         return standard_json
 
     def _get_curate_json(self, item_id: str) -> dict:
@@ -191,3 +196,12 @@ class CurateApi():
             print('Error caught trying to process url ' + url)
             capture_exception(e)
         return json_response
+
+    def _save_curate_image_data_to_dynamo(self, standard_json: dict):
+        """ Save Curate image data to dynamo recursively """
+        if standard_json.get('level', '') == 'file':
+            new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
+            new_dict['objectFileGroupId'] = new_dict['parentId']
+            self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict)
+        for item in standard_json.get('items', []):
+            self._save_curate_image_data_to_dynamo(item)

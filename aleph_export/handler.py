@@ -66,8 +66,9 @@ def test():
     else:
         event = {}
         event['local'] = False
-        event['seconds-to-allow-for-processing'] = 60
-        event['ids'] = ['000650138', '000944739', '001586302']
+        event['seconds-to-allow-for-processing'] = 900
+        event['ids'] = ['002468275']
+        # event['ids'] = ['001586302', '001587052', '001587050', '001588845', '001590687']
     event = run(event, {})
 
     if not event['alephHarvestComplete']:

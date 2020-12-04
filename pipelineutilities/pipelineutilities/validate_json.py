@@ -94,27 +94,14 @@ subjects_json_schema = {
 
 standard_json_schema = {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "description": "Schema for validating ND.json",
+    "description": "Schema for validating standard.json",
     "title": "Tester for ND.json schema",
     "id": "nd.schema.json",
     "type": "object",
     "properties": {
-        "expireTime": {"type": "integer"},
+        "access": {"type": "string"},
         "apiVersion": {"type": "integer"},
-        "fileCreatedDate": {"type": "string"},
-        "id": {"type": "string"},
-        "sourceSystem": {"type": "string"},
-        "repository": {"type": "string"},
-        "collectionId": {"type": "string"},
-        "parentId": {"type": "string"},
-        "relatedIds": {
-            "description": "This facilitates defining non-parent-child relationships.",
-            "type": "array",
-            "items": {
-                "id": {"type": "string"},
-                "sequence": {"type": "integer"}
-            }
-        },
+        "bendoItem": {"type": "string"},
         "childIds": {
             "description": "This facilitates defining non-parent-child relationships.",
             "type": "array",
@@ -123,14 +110,115 @@ standard_json_schema = {
                 "sequence": {"type": "integer"}
             }
         },
-        "level": {"enum": ["collection", "manifest", "file"]},
-        "title": {"type": "string"},
+        "collectionId": {"type": "string"},
+        "collectionInformation": {"type": "string"},
+        "collections": {
+            "description": "This is a list of names of collections to which this object belongs.",
+            "type": "array",
+            "items": {
+                "anyOf": [
+                    {"type": "string"},
+                    {
+                        "type": "object",
+                        "properties": {"display": {"type": "string"}}
+                    }
+                ]
+            },
+        },
+        "contributors": {
+            "type": "array",
+            "items": {
+                "description": "Schema for validating creator - Note:  We need to require display once that is added uniformly.",
+                "type": "object",
+                "properties": {
+                    "alive": {"type": "boolean"},
+                    "attribution": {"type": "string"},
+                    "display": {"type": "string"},
+                    "endDate": {"type": "string"},
+                    "human": {"type": "boolean"},
+                    "fullName": {"type": "string"},
+                    "lifeDates": {"type": "string"},
+                    "nationality": {"type": "string"},
+                    "role": {"type": "string"},
+                    "startDate": {"type": "string"}
+                },
+                "required": ["fullName"],
+                "additionalProperties": False
+            }
+        },
+        "copyrightStatement": {"type": "string"},
+        "copyrightStatus": {"type": "string"},
+        "copyrightUrl": {"type": "string"},
         "createdDate": {
             "description": "We want dates, like 'c. 1900' or '2020-04-22'.",
             "type": "string"
         },
-        "uniqueIdentifier": {"type": "string"},
+        "creationPlace": {
+            "type": "object",
+            "description": "Schema for validating creationPlace",
+            "properties": {
+                "city": {"type": "string"},
+                "continent": {"type": "string"},
+                "country": {"type": "string"},
+                "county": {"type": "string"},
+                "historic": {"type": "string"},
+                "state": {"type": "string"}
+            },
+            "additionalProperties": False
+        },
+        "creators": {
+            "type": "array",
+            "items": {
+                "description": "Schema for validating creator - Note:  We need to require display once that is added uniformly.",
+                "type": "object",
+                "properties": {
+                    "alive": {"type": "boolean"},
+                    "attribution": {"type": "string"},
+                    "display": {"type": "string"},
+                    "endDate": {"type": "string"},
+                    "fullName": {"type": "string"},
+                    "human": {"type": "boolean"},
+                    "lifeDates": {"type": "string"},
+                    "nationality": {"type": "string"},
+                    "role": {"type": "string"},
+                    "startDate": {"type": "string"}
+                },
+                "required": ["fullName"],
+                "additionalProperties": False
+            }
+        },
+        "dedication": {"type": "string"},
+        "defaultFilePath": {"type": "string"},
+        "description": {"type": "string"},
+        "digitalAccess": {"enum": ["Regular", "Restricted"]},
         "dimensions": {"type": "string"},
+        "expireTime": {"type": "integer"},
+        "fileCreatedDate": {"type": "string"},
+        "fileId": {"anyOf": [{"type": "string"}, {"type": "boolean"}]},
+        "filePath": {"type": "string"},
+        "format": {"type": "string"},
+        "geographicLocations": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "authority": {"type": "string"},
+                    "display": {"type": "string"},
+                },
+                "additionalProperties": False
+            }
+        },
+        "height": {"type": "integer"},
+        "hierarchySearchable": {"type": "boolean"},
+        "id": {"type": "string"},
+        "iiifImageUri": {"type": "string"},
+        "iiifUri": {"type": "string"},
+        "items": {
+            "type": "array",
+            "items": {"$ref": "#"},
+            "default": []
+        },
+        "key": {"type": "string"},
         "languages": {
             "description": "Ultimately, we want languages, like ['english'] or ['english', 'french'].",
             "type": "array",
@@ -140,40 +228,30 @@ standard_json_schema = {
                     {
                         "type": "object",
                         "Properties": {
-                            "display": {"type": "string"},
                             "alpha2": {"type": "string"},
-                            "alpha3": {"type": "string"}
+                            "alpha3": {"type": "string"},
+                            "display": {"type": "string"},
                         }
 
                     }
                 ]
             }
         },
-        "subjects": subjects_definition,
-        "copyrightStatus": {"type": "string"},
-        "copyrightUrl": {"type": "string"},
-        "copyrightStatement": {"type": "string"},
+        "level": {"enum": ["collection", "manifest", "file"]},
         "linkToSource": {"type": "string"},
-        "access": {"type": "string"},
-        "physicalAccess": {"type": "string"},
-        "digitalAccess": {"enum": ["Regular", "Restricted"]},
-        "format": {"type": "string"},
-        "dedication": {"type": "string"},
-        "description": {"type": "string"},
-        "modifiedDate": {"type": "string"},
-        "thumbnail": {"type": "boolean"},
-        "filePath": {"type": "string"},
-        "sequence": {"type": "number"},
-        "collectionInformation": {"type": "string"},
-        "fileId": {"anyOf": [{"type": "string"}, {"type": "boolean"}]},
-        "mimeType": {"type": "string"},
-        "workType": {"type": "string"},
+        "md5Checksum": {"type": "string"},
         "medium": {"type": "string"},
+        "metsUri": {"type": "string"},
+        "mimeType": {"type": "string"},
+        "modifiedDate": {"type": "string"},
+        "objectFileGroupId": {"type": "string"},
+        "parentId": {"type": "string"},
+        "physicalAccess": {"type": "string"},
         "publisher": {
             "type": "object",
             "properties": {
+                "publisherLocation": {"type": "string"},
                 "publisherName": {"type": "string"},
-                "publisherLocation": {"type": "string"}
             },
             "required": ["publisherName"],
             "additionalProperties": False
@@ -191,108 +269,29 @@ standard_json_schema = {
                 "additionalProperties": False
             },
         },
-        "contributors": {
+        "relatedIds": {
+            "description": "This facilitates defining non-parent-child relationships.",
             "type": "array",
             "items": {
-                "description": "Schema for validating creator - Note:  We need to require display once that is added uniformly.",
-                "type": "object",
-                "properties": {
-                    "attribution": {"type": "string"},
-                    "display": {"type": "string"},
-                    "endDate": {"type": "string"},
-                    "fullName": {"type": "string"},
-                    "lifeDates": {"type": "string"},
-                    "human": {"type": "boolean"},
-                    "alive": {"type": "boolean"},
-                    "nationality": {"type": "string"},
-                    "role": {"type": "string"},
-                    "startDate": {"type": "string"}
-                },
-                "required": ["fullName"],
-                "additionalProperties": False
+                "id": {"type": "string"},
+                "sequence": {"type": "integer"}
             }
         },
-        "creators": {
-            "type": "array",
-            "items": {
-                "description": "Schema for validating creator - Note:  We need to require display once that is added uniformly.",
-                "type": "object",
-                "properties": {
-                    "attribution": {"type": "string"},
-                    "display": {"type": "string"},
-                    "endDate": {"type": "string"},
-                    "fullName": {"type": "string"},
-                    "lifeDates": {"type": "string"},
-                    "human": {"type": "boolean"},
-                    "alive": {"type": "boolean"},
-                    "nationality": {"type": "string"},
-                    "role": {"type": "string"},
-                    "startDate": {"type": "string"}
-                },
-                "required": ["fullName"],
-                "additionalProperties": False
-            }
-        },
-        "collections": {
-            "description": "This is a list of names of collections to which this object belongs.",
-            "type": "array",
-            # "items": {"type": "string"}
-            "items": {
-                "anyOf": [
-                    {"type": "string"},
-                    {
-                        "type": "object",
-                        "properties": {"display": {"type": "string"}}
-                    }
-                ]
-            },
-        },
-        "md5Checksum": {"type": "string"},
-        "creationPlace": {
-            "type": "object",
-            "description": "Schema for validating creationPlace",
-            "properties": {
-                "city": {"type": "string"},
-                "continent": {"type": "string"},
-                "country": {"type": "string"},
-                "county": {"type": "string"},
-                "historic": {"type": "string"},
-                "state": {"type": "string"}
-            },
-            "additionalProperties": False
-        },
-        "iiifImageUri": {"type": "string"},
-        "iiifUri": {"type": "string"},
-        "metsUri": {"type": "string"},
+        "repository": {"type": "string"},
         "schemaUri": {"type": "string"},
-        "bendoItem": {"type": "string"},
-        "objectFileGroupId": {"type": "string"},
-        "defaultFilePath": {"type": "string"},
-        "key": {"type": "string"},
-        "width": {"type": "integer"},
-        "height": {"type": "integer"},
-        "hierarchySearchable": {"type": "boolean"},
-        "geographicLocations": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "display": {"type": "string"},
-                    "authority": {"type": "string"},
-                },
-                "additionalProperties": False
-            }
-        },
+        "sequence": {"type": "number"},
         "size": {"type": "integer"},
+        "sourceSystem": {"type": "string"},
+        "subjects": subjects_definition,
+        "thumbnail": {"type": "boolean"},
+        "title": {"type": "string"},
         "treePath": {"type": "string"},
-        "items": {
-            "type": "array",
-            "items": {"$ref": "#"},
-            "default": []
-        }
+        "uniqueIdentifier": {"type": "string"},
+        "width": {"type": "integer"},
+        "workType": {"type": "string"},
     },
     "required": ["id", "parentId", "collectionId", "apiVersion", "fileCreatedDate"],
-    "additionalProperties": False
+    "additionalProperties": False,
 }
 
 

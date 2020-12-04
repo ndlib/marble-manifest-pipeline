@@ -10,15 +10,14 @@ from botocore.exceptions import ClientError
 
 class SaveJsonToDynamo():
     """ Save Json to Dynamo """
-    def __init__(self, config: dict, table_name: str, expire_time_days_in_future: int = 3, dynamo_records_expire_time: int = None):
+    def __init__(self, config: dict, table_name: str, expire_time_days_in_future: int = None):
         """ User may pass either expire_time_days_in_future to define time_to_live for dynamo records
             User could also optionally pass a specific expire time """
         self.table_name = table_name
         self.local = config.get('local', True)
         self.dynamo_table_available = self._init_dynamo_table()
-        if dynamo_records_expire_time:
-            self.expire_time = dynamo_records_expire_time
-        else:
+        self.expire_time = None
+        if expire_time_days_in_future:
             self.expire_time = _get_expire_time(datetime.now(), int(expire_time_days_in_future))
 
     def _init_dynamo_table(self) -> bool:
@@ -41,7 +40,7 @@ class SaveJsonToDynamo():
             dynamo_record_expire_time = self.expire_time
         success_flag = True
         json_dict = _serialize_json(json_dict)
-        if 'expireTime' not in json_dict:
+        if 'expireTime' not in json_dict and dynamo_record_expire_time:
             json_dict['expireTime'] = dynamo_record_expire_time
         try:
             self.table.put_item(Item=json_dict)

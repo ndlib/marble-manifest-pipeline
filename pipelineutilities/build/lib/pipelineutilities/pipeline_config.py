@@ -47,7 +47,10 @@ default_config = {
     "seconds-to-allow-for-processing": 600,
     "hours-threshold-for-incremental-harvest": 72,
     "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai",
-    "pipeline-control-folder": "pipeline_control"
+    "pipeline-control-folder": "pipeline_control",
+    "related-ids-file": "related_ids.json",
+    "source-systems-requiring-metadata-expire-time": ["EmbARK"],
+    "source-systems-requiring-special-file-processing": ["Curate", "EmbARK"]
 }
 
 local_ssm = {
