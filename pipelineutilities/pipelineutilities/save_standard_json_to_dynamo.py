@@ -21,9 +21,9 @@ class SaveStandardJsonToDynamo():
     def __init__(self, config: dict):
         self.config = config
         self.related_ids_updated = False
-        self.related_ids = self._read_related_ids()
         self.table_name = self.config.get('metadata-tablename')
         self.local = config.get('local', True)
+        self.related_ids = self._read_related_ids()
         self.dynamo_table_available = self._init_dynamo_table()
         self.save_default_file_metadata_to_dynamo_class = SaveDefaultFileMetadataToDynamo(self.config)
 
@@ -71,9 +71,10 @@ class SaveStandardJsonToDynamo():
     def _read_related_ids(self) -> dict:
         """ Read related_ids.json into local dictionary """
         related_ids = {}
-        bucket = self.config.get("process-bucket")
-        s3_key = self._get_related_ids_s3_key()
-        related_ids = read_s3_json(bucket, s3_key)
+        if not self.local:
+            bucket = self.config.get("process-bucket")
+            s3_key = self._get_related_ids_s3_key()
+            related_ids = read_s3_json(bucket, s3_key)
         return related_ids
 
     def _append_related_ids(self, standard_json) -> dict:
