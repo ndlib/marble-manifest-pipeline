@@ -104,6 +104,6 @@ def _format_collections(value: list) -> dict:
     """ Add display to collections.  """
     results = []
     for each_value in value:
-        node = {"display": each_value}
+        node = {"display": each_value.replace(" (University of Notre Dame. Library)", "")}
         results.append(node)
     return results

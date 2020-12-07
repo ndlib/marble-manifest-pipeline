@@ -27,7 +27,7 @@ class Test(unittest.TestCase):
         """ test_03_init_save_json_to_dynamo """
         mock_get_expire_time.return_value = 1602853200
         config = {"local": True}
-        save_json_to_dynamo_class = SaveJsonToDynamo(config, 'some-table-name')
+        save_json_to_dynamo_class = SaveJsonToDynamo(config, 'some-table-name', 3)
         self.assertEqual(save_json_to_dynamo_class.expire_time, 1602853200)
         self.assertEqual(save_json_to_dynamo_class.dynamo_table_available, False)
 

@@ -34,7 +34,7 @@ class ProcessWebKioskJsonMetadata():
         self.save_local_copy = False
         self.delete_local_copy = False
         self.start_time = time.time()
-        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('files-tablename', ''), self.config.get('files-time-to-live-days', 3))
+        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('files-tablename', ''))
 
     def get_composite_json_metadata(self, mode: str) -> dict:
         """ Build URL, call URL, save resulting output to disk """
@@ -93,8 +93,8 @@ class ProcessWebKioskJsonMetadata():
                 if 'uniqueIdentifier' in object_value and not object_value.get("recordProcessedFlag", False):
                     standard_json = process_one_museum_object_class.process_object(object_value)
                     standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
-                    save_standard_json_to_dynamo_class.save_standard_json(standard_json)
-                    save_standard_json(self.config, standard_json, export_all_files_flag)
+                    save_standard_json_to_dynamo_class.save_standard_json(standard_json, export_all_files_flag)
+                    save_standard_json(self.config, standard_json)
                     self._save_google_image_data_to_dynamo(standard_json)
                     object_value["recordProcessedFlag"] = True
                     objects_processed += 1
@@ -143,7 +143,6 @@ class ProcessWebKioskJsonMetadata():
         """ Save google image data to dynamo recursively """
         if standard_json.get('level', '') == 'file':
             new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
-            new_dict['id'] = new_dict.get('parentId', '') + '/' + new_dict.get('id', '')  # change id to form parentId + filename (from id = filename)
             new_dict['objectFileGroupId'] = new_dict['parentId']
             self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict)
         for item in standard_json.get('items', []):

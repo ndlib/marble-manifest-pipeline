@@ -22,7 +22,7 @@ class FilesApi():
         else:
             self.directory = os.path.join(os.path.dirname(__file__), 'cache')
         self.start_time = time.time()
-        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config['files-tablename'], self.config.get('files-time-to-live-days', 3))
+        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config['files-tablename'])
         self.resumption_filename = 'file_objects_list_partially_processed.json'
 
     def save_files_details(self):

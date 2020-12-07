@@ -15,7 +15,7 @@ class FilesNeedingProcessed():
         """ Save the dictionary of files needing processed to S3, appending it to the existing dictionary if one exists."""
         success_flag = True
         source_system = standard_json.get("sourceSystem", "")
-        if source_system not in ("Curate", "EmbARK"):
+        if source_system not in self.config.get("source-systems-requiring-special-file-processing"):
             return success_flag
         files_dict = self._create_files_dict(standard_json, export_all_files_flag, None)
         bucket_name = self.config["process-bucket"]
