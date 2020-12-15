@@ -178,6 +178,12 @@
 				"optional": true
 			},
 			{
+				"label": "subjects",
+				"otherNodes": "subjects",
+				"xpath": "./controlaccess/genreform",
+				"optional": true
+			},
+			{
 				"removeNodes": ["passedParentId", "related_ids"]
 			},
 			{

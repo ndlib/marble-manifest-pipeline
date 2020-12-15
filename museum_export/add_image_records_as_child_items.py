@@ -38,6 +38,7 @@ class AddImageRecordsAsChildItems():
             image_item['modifiedDate'] = google_image_info['modifiedTime']
             image_item['mimeType'] = google_image_info['mimeType']
             image_item['size'] = int(google_image_info['size'])
+            image_item['sourceType'] = 'Google'
         return image_item
 
     def _add_child_content_from_parent(self, object: dict) -> dict:

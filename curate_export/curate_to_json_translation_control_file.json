@@ -146,9 +146,9 @@
 				"!constant": "Curate",
 				"!format": "text"
 			},
-			{ "!label": "repository",
-				"!constant": "Curate",
-				"!format": "text"
+			{ "label": "sourceType",
+				"constant": "Curate",
+				"format": "text"
 			},
 			{ "label": "title",
 				"fields": ["label"],

@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "fileCreatedDate": "2020-12-04",
+  "fileCreatedDate": "2020-12-15",
   "sourceSystem": "Curate",
   "repository": "Curate",
   "sequence": 1,
@@ -36,7 +36,8 @@
       "sourceSystem": "Curate",
       "repository": "Curate",
       "apiVersion": 1,
-      "fileCreatedDate": "2020-12-04",
+      "fileCreatedDate": "2020-12-15",
+      "sourceType": "Curate",
       "title": "1845-08-02_Commencement.pdf",
       "description": "1845-08-02_Commencement.pdf",
       "id": "pz50gt57r3h",

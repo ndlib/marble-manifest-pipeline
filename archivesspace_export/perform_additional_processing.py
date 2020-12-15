@@ -108,7 +108,7 @@ def _format_subject_uri(value_found: str) -> str:
     They come in the form: "sh 95001476 "
     We will return the form: "https://id.loc.gov/authorities/subjects/sh95001476.html" """
     results = ''
-    regex = r'sh [0-9]*'
+    regex = r'^sh [0-9]*'
     if re.findall(regex, value_found):
         results = 'https://id.loc.gov/authorities/subjects/' + value_found.replace(' ', '') + '.html'
     return results
