@@ -282,6 +282,7 @@ standard_json_schema = {
         "sequence": {"type": "number"},
         "size": {"type": "integer"},
         "sourceSystem": {"type": "string"},
+        "sourceType": {"type": "string"},
         "subjects": subjects_definition,
         "thumbnail": {"type": "boolean"},
         "title": {"type": "string"},

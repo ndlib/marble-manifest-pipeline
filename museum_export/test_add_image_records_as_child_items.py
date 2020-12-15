@@ -64,7 +64,8 @@ class Test(unittest.TestCase):
             "title": "1990_005_001-v0004.jpg",
             "fileId": "1lxLLreSLq3v1bbvO9FsD3PMf4IV-m238",
             "modifiedDate": "2019-07-01T15:42:41.648Z",
-            "mimeType": "image/jpeg"
+            "mimeType": "image/jpeg",
+            'sourceType': 'Google'
         }
         self.assertEqual(image_item, expected_object)
 
@@ -113,6 +114,7 @@ class Test(unittest.TestCase):
                     'collectionId': '1990.005.001',
                     'parentId': '1990.005.001',
                     'sourceSystem': 'EmbARK',
+                    'sourceType': 'Google',
                     'repository': 'museum',
                     'objectFileGroupId': '1990.005.001'
                 },
@@ -132,6 +134,7 @@ class Test(unittest.TestCase):
                     'collectionId': '1990.005.001',
                     'parentId': '1990.005.001',
                     'sourceSystem': 'EmbARK',
+                    'sourceType': 'Google',
                     'repository': 'museum',
                     'objectFileGroupId': '1990.005.001'
                 }

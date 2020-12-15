@@ -141,13 +141,14 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_10_test_add_unknown_creator(self):
         """ test 10 add_unknown_creator """
-        standard_json = {}
+        standard_json = {"sourceSystem": "Aleph"}
         actual_results = self.fix_creators_in_json_object_class.add_unknown_creators(standard_json)
         expected_results = {
+            "sourceSystem": "Aleph",
             "creators": [
                 {
                     "fullName": "unknown",
@@ -155,13 +156,14 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_11_test_add_unknown_creator(self):
         """ test 11 add_unknown_creator """
-        standard_json = {"creators": []}
+        standard_json = {"sourceSystem": "Aleph", "creators": []}
         actual_results = self.fix_creators_in_json_object_class.add_unknown_creators(standard_json)
         expected_results = {
+            "sourceSystem": "Aleph",
             "creators": [
                 {
                     "fullName": "unknown",
@@ -169,7 +171,14 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
+
+    def test_11a_test_add_unknown_creator(self):
+        """ test 11a add_unknown_creator for non-Aleph sourceSystem (If not Aleph, return what was passed) """
+        standard_json = {"creators": []}
+        actual_results = self.fix_creators_in_json_object_class.add_unknown_creators(standard_json)
+        expected_results = {"creators": []}
+        self.assertEqual(actual_results, expected_results)
 
     def test_12_test_remove_unknown_creators_if_known_creators_exist(self):
         """ test 12 test_remove_unknown_creators_if_known_creators_exist """
@@ -198,7 +207,7 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_13_test_fix_creators_for_manifest(self):
         """ test 13 test_fix_creators_for_manifest """
@@ -226,13 +235,14 @@ class Test(unittest.TestCase):
             ],
             "creators": []
         }
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_14_test_fix_creators_for_manifest(self):
         """ test 14 test_fix_creators_for_manifest """
-        standard_json = {}
+        standard_json = {"sourceSystem": "Aleph"}
         actual_results = self.fix_creators_in_json_object_class.fix_creators_for_manifest(standard_json)
         expected_results = {
+            "sourceSystem": "Aleph",
             "creators": [
                 {
                     "fullName": "unknown",
@@ -240,7 +250,7 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_15_test_fix_creators_for_manifest(self):
         """ test 15 test_fix_creators_for_manifest """
@@ -261,7 +271,7 @@ class Test(unittest.TestCase):
                 }
             ]
         }
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_16_test_fix_creators_for_collection(self):
         """ test 16 test_fix_creators_for_collection """
@@ -275,7 +285,7 @@ class Test(unittest.TestCase):
         }
         actual_results = self.fix_creators_in_json_object_class.fix_creators_for_collection(standard_json)
         expected_results = {"creators": []}
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_17_test_fix_creators(self):
         """ test 17 test_fix_creators """
@@ -297,13 +307,12 @@ class Test(unittest.TestCase):
         expected_results = {
             "id": 1,
             "level": "collection",
-            "creators": [],
             "items": [
-                {"id": 2, "level": "manifest", "creators": [{"fullName": "unknown", "display": "unknown"}]},
-                {"id": 3, "level": "manifest", "creators": [], "contributors": [{"fullName": "someone"}]}
+                {"id": 2, "level": "manifest"},
+                {"id": 3, "level": "manifest", "contributors": [{"fullName": "someone"}]}
             ]
         }
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_18_test_fix_creators(self):
         """ test 18 test_fix_creators """
@@ -336,7 +345,7 @@ class Test(unittest.TestCase):
             "level": "manifest"
         }
         # print("actual_results = ", actual_results)
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_19_remove_unknown_creators(self):
         """ test 19 remove_unknown_creators """
@@ -369,7 +378,7 @@ class Test(unittest.TestCase):
             "level": "manifest"
         }
         # print("actual_results = ", actual_results)
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
     def test_20_remove_unknown_creators_if_known_creators_exist(self):
         """ test 20 remove_unknown_creators_if_known_creators_exist """
@@ -402,7 +411,7 @@ class Test(unittest.TestCase):
             "level": "manifest"
         }
         # print("actual_results = ", actual_results)
-        self.assertTrue(actual_results == expected_results)
+        self.assertEqual(actual_results, expected_results)
 
 
 def suite():
