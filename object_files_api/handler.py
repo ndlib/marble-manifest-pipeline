@@ -52,6 +52,7 @@ def test():
         event = {}
         event["local"] = False
         event['ssm_key_base'] = '/all/stacks/steve-manifest'
+        event['seconds-to-allow-for-processing'] = 9000
         # event['ssm_key_base'] = '/all/marble-manifest-prod'
         # event['rbsc-image-bucket'] = 'libnd-smb-rbsc'
         # event['image-server-base-url'] = 'http://images.com'

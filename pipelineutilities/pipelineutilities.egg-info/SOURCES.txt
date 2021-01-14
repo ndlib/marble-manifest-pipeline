@@ -45,6 +45,7 @@ pipelineutilities/add_files_to_json_object.py
 pipelineutilities/add_paths_to_json_object.py
 pipelineutilities/creatorField.py
 pipelineutilities/csv_collection.py
+pipelineutilities/dynamo_helpers.py
 pipelineutilities/expand_getty_aat_terms.py
 pipelineutilities/expand_getty_ia_terms.py
 pipelineutilities/expand_loc_terms.py
@@ -78,6 +79,7 @@ test/test_add_files_to_json_object.py
 test/test_add_paths_to_json_object.py
 test/test_creatorField.py
 test/test_csv_collection.py
+test/test_dynamo_helpers.py
 test/test_expand_getty_aat_terms.py
 test/test_expand_getty_ia_terms.py
 test/test_expand_loc_terms.py

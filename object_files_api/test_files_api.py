@@ -20,7 +20,7 @@ class Test(unittest.TestCase):
         self.event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
         self.config = setup_pipeline_config(self.event)
         self.config['test'] = True
-        self.config['files-tablename'] = 'some_random_table_name'
+        self.config['website-metadata-tablename'] = 'some_random_table_name'
         self.files_api_class = FilesApi(self.event, self.config)
 
     def test_01_crawl_available_files_from_s3_or_cache(self):

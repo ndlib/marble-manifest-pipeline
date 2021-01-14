@@ -17,6 +17,7 @@ from get_image_info_for_all_objects import GetImageInfoForAllObjects
 from pipelineutilities.save_standard_json import save_standard_json
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
+from dynamo_helpers import add_file_keys
 from save_json_to_dynamo import SaveJsonToDynamo
 
 
@@ -34,7 +35,7 @@ class ProcessWebKioskJsonMetadata():
         self.save_local_copy = False
         self.delete_local_copy = False
         self.start_time = time.time()
-        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('files-tablename', ''))
+        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('website-metadata-tablename', ''))
 
     def get_composite_json_metadata(self, mode: str) -> dict:
         """ Build URL, call URL, save resulting output to disk """
@@ -144,6 +145,7 @@ class ProcessWebKioskJsonMetadata():
         if standard_json.get('level', '') == 'file':
             new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
             new_dict['objectFileGroupId'] = new_dict['parentId']
+            new_dict = add_file_keys(new_dict)
             self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict)
         for item in standard_json.get('items', []):
             self._save_google_image_data_to_dynamo(item)

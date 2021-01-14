@@ -2,7 +2,7 @@
 Save standard.json to Dynamo
 """
 
-# from record_files_needing_processed import FilesNeedingProcessed
+from datetime import datetime, timedelta
 from validate_json import validate_standard_json
 from sentry_sdk import capture_exception
 from botocore.exceptions import ClientError
@@ -12,7 +12,9 @@ import os
 import boto3
 from boto3.dynamodb.conditions import Key
 from record_files_needing_processed import FilesNeedingProcessed
-from save_default_file_metadata_to_dynamo import SaveDefaultFileMetadataToDynamo  # Moved to init to dramatically speed access for hugely nested trees like zp38w953h0s and MSNEA0504_EAD
+from dynamo_helpers import add_item_keys, add_file_group_keys
+# TODO: remove all references to SaveDefaultFileMetadataToDynamo
+# from save_default_file_metadata_to_dynamo import SaveDefaultFileMetadataToDynamo  # Moved to init to dramatically speed access for hugely nested trees like zp38w953h0s and MSNEA0504_EAD
 
 
 class SaveStandardJsonToDynamo():
@@ -21,11 +23,11 @@ class SaveStandardJsonToDynamo():
     def __init__(self, config: dict):
         self.config = config
         self.related_ids_updated = False
-        self.table_name = self.config.get('metadata-tablename')
+        self.table_name = self.config.get('website-metadata-tablename')
         self.local = config.get('local', True)
         self.related_ids = self._read_related_ids()
         self.dynamo_table_available = self._init_dynamo_table()
-        self.save_default_file_metadata_to_dynamo_class = SaveDefaultFileMetadataToDynamo(self.config)
+        # self.save_default_file_metadata_to_dynamo_class = SaveDefaultFileMetadataToDynamo(self.config)
 
     def save_standard_json(self, standard_json: dict, export_all_files_flag: bool = False) -> bool:
         """ First, validate the standard_json.  If this is the first time this standard_json is being saved,
@@ -35,8 +37,10 @@ class SaveStandardJsonToDynamo():
         success_flag = False
         if validate_standard_json(standard_json):
             if "id" in standard_json:
+                standard_json = add_item_keys(standard_json)
+                # TODO remove files_needing_processed and move this to Google_Export and Curate_Export only
                 if not export_all_files_flag:
-                    export_all_files_flag = not self._id_exists_in_dynamo(standard_json['id'])
+                    export_all_files_flag = not self._id_exists_in_dynamo(standard_json['PK'])
                 files_needing_processed_class = FilesNeedingProcessed(self.config)
                 files_needing_processed_class.record_files_needing_processed(standard_json, export_all_files_flag)
                 success_flag = self._save_json_to_dynamo(standard_json)
@@ -54,19 +58,39 @@ class SaveStandardJsonToDynamo():
         if "childIds" in standard_json:
             self._append_related_ids(standard_json)
         standard_json = self._optionally_update_parent_id(standard_json)
-        self.save_default_file_metadata_to_dynamo_class.save_default_file_metadata(standard_json)
+        # self.save_default_file_metadata_to_dynamo_class.save_default_file_metadata(standard_json)
         new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
-        metadata_time_to_live_days = None
         if standard_json.get("sourceSystem", "") in self.config.get("source-systems-requiring-metadata-expire-time"):
-            metadata_time_to_live_days = self.config.get('metadata-time-to-live-days', 3)
+            new_dict['expireTime'] = int(datetime.timestamp(datetime.now() + timedelta(days=int(self.config.get('metadata-time-to-live-days', 3)))))
+        new_dict = add_item_keys(new_dict)
         try:
-            save_json_to_dynamo_class = SaveJsonToDynamo(self.config, self.config['metadata-tablename'], metadata_time_to_live_days)
-            save_json_to_dynamo_class.save_json_to_dynamo(new_dict)
+            save_json_to_dynamo_class = SaveJsonToDynamo(self.config, self.table_name)
+            record_inserted_flag = save_json_to_dynamo_class.save_json_to_dynamo(new_dict)
+            if record_inserted_flag is None:
+                success_flag = False
+            if record_inserted_flag and new_dict.get('objectFileGroupId'):
+                file_group_record = self._build_file_group_record(new_dict)
+                self._save_file_group_record(file_group_record)
         except ClientError as ce:
             success_flag = False
             capture_exception(ce)
-            print(f"Error saving to {self.config['metadata-tablename']} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
+            print(f"Error saving to {self.table_name} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
         return success_flag
+
+    def _save_file_group_record(self, file_group_record: dict) -> bool:
+        """ Save the File Group record to DynamoDB """
+        success_flag = True
+        if file_group_record:
+            save_json_to_dynamo_class = SaveJsonToDynamo(self.config, self.table_name)
+            save_json_to_dynamo_class.save_json_to_dynamo(file_group_record)
+        return success_flag
+
+    def _build_file_group_record(self, standard_json: dict) -> dict:
+        """ Build the File Group record to be saved into DynamoDB"""
+        file_group_record = {}
+        file_group_record['objectFileGroupId'] = standard_json.get('objectFileGroupId')
+        file_group_record = add_file_group_keys(file_group_record)
+        return file_group_record
 
     def _read_related_ids(self) -> dict:
         """ Read related_ids.json into local dictionary """
@@ -123,10 +147,10 @@ class SaveStandardJsonToDynamo():
             return False
         if self.dynamo_table_available:
             try:
-                result = self.table.query(KeyConditionExpression=Key("id").eq(id))
+                result = self.table.query(KeyConditionExpression=Key("PK").eq(id))
                 if len(result.get('Items', [])) > 0:
                     success_flag = True
             except ClientError as ce:
                 capture_exception(ce)
-                print(f"Error querying {self.table_name} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
+                print(f"save_standard_json_to_dynamo._id_exists_in_dynamo Error querying {self.table_name} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
         return success_flag
