@@ -13,6 +13,7 @@ from pipelineutilities.pipeline_config import setup_pipeline_config, load_config
 import sentry_sdk   # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
 from pipelineutilities.s3_helpers import read_s3_json
+from dynamo_helpers import save_source_system_record
 
 
 if 'SENTRY_DSN' in os.environ:
@@ -27,6 +28,8 @@ def run(event: dict, context: dict) -> dict:
     if config:
         time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
         print("Will break after ", time_to_break)
+        if event.get('curateExecutionCount', 0) == 1 and not event.get('local'):
+            save_source_system_record('Curate', config.get('website-metadata-tablename'))
         curate_config = load_config_ssm(config['curate_keys_ssm_base'])
         config.update(curate_config)
         # if "filenames" in event:
@@ -41,9 +44,9 @@ def run(event: dict, context: dict) -> dict:
             print("ids to process: ", event["ids"])
             curate_api_class = CurateApi(config, event, time_to_break)
             event["curateHarvestComplete"] = curate_api_class.get_curate_items(event["ids"])
-        if event["curate_execution_count"] >= event["max_curate_executions"] and not event["curateHarvestComplete"]:
+        if event["curateExecutionCount"] >= event["maxCurateExecutions"] and not event["curateHarvestComplete"]:
             event["curateHarvestComplete"] = True
-            sentry_sdk.capture_message('Curate did not complete harvest after maximum executions threshold of ' + str(event["max_curate_executions"]))
+            sentry_sdk.capture_message('Curate did not complete harvest after maximum executions threshold of ' + str(event["maxCurateExecutions"]))
     return event
 
 
@@ -57,8 +60,8 @@ def _supplement_event(event: dict) -> dict:
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
     if 'local-path' not in event:
         event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
-    event["curate_execution_count"] = event.get("curate_execution_count", 0) + 1
-    event["max_curate_executions"] = event.get("max_curate_executions", 5)
+    event["curateExecutionCount"] = event.get("curateExecutionCount", 0) + 1
+    event["maxCurateExecutions"] = event.get("maxCurateExecutions", 10)
     return
 
 
@@ -75,7 +78,7 @@ def read_ids_from_s3(process_bucket: str, s3_path: str, section: str) -> list:
 
 
 # setup:
-# export SSM_KEY_BASE=/all/new-csv
+# export SSM_KEY_BASE=/all/stacks/steve-manifest
 # aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
 # python -c 'from handler import *; test()'
 
@@ -90,6 +93,7 @@ def test(identifier=""):
     else:
         event = {}
         event['local'] = False
+        event['seconds-to-allow-for-processing'] = 9000
         if event['local']:
             # event['seconds-to-allow-for-processing'] = 30
             # und:zp38w953h0s = Commencement Programs
@@ -104,7 +108,7 @@ def test(identifier=""):
             event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
             # event['ids'] = ["und:zp38w953h0s", "und:zp38w953p3c"]
             # event['ids'] = []  # force to read from s3 file.
-        event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
+        # event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
     event = run(event, {})
 
     if not event['curateHarvestComplete']:

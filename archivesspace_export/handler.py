@@ -15,6 +15,7 @@ from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.s3_helpers import read_s3_json
 from pipelineutilities.save_standard_json import save_standard_json
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
+from dynamo_helpers import save_source_system_record
 
 
 def run(event: dict, _context: dict):
@@ -31,6 +32,8 @@ def run(event: dict, _context: dict):
     start_time = time.time()
     time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
     print("Will break after ", time_to_break)
+    if event.get('archivesSpaceExecutionCount', 0) == 1 and not event.get('local'):
+        save_source_system_record('ArchivesSpace', config.get('website-metadata-tablename'))
     harvest_oai_eads_class = HarvestOaiEads(config)
     add_files_to_json_object_class = AddFilesToJsonObject(config)
     standard_json_helpers_class = StandardJsonHelpers(config)
@@ -47,6 +50,8 @@ def run(event: dict, _context: dict):
         del ids[0]
     event['archivesSpaceHarvestComplete'] = (len(ids) == 0)
     event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-data-basepath'])
+    if event["archivesSpaceExecutionCount"] >= event["maximumArchivesSpaceExecutions"]:
+        event['archivesSpaceHarvestComplete'] = True
     return event
 
 
@@ -55,6 +60,8 @@ def _supplement_event(event: dict) -> dict:
         event['archivesSpaceHarvestComplete'] = False
     if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
+    event['archivesSpaceExecutionCount'] = event.get('alephExecutionCount', 0) + 1
+    event['maximumArchivesSpaceExecutions'] = 10
     return event
 
 
@@ -89,9 +96,10 @@ def test():
     else:
         event = {}
         event["local"] = False
+        event['seconds-to-allow-for-processing'] = 9000
         event["ids"] = [
             # "https://archivesspace.library.nd.edu/repositories/2/resources/1652",  # Collegiate Jazz Festival
-            "https://archivesspace.library.nd.edu/repositories/3/resources/1631",    # Inquisitions (MSHLAT0090_EAD)
+            # "https://archivesspace.library.nd.edu/repositories/3/resources/1631",    # Inquisitions (MSHLAT0090_EAD)
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1447",
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1567",
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1644",  # Irish Broadsides

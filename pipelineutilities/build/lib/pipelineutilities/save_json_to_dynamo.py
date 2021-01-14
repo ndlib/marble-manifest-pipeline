@@ -3,22 +3,18 @@ Save json to Dynamo
 """
 
 import boto3
-from datetime import datetime, timedelta, date
+from datetime import datetime, date
 from sentry_sdk import capture_exception
 from botocore.exceptions import ClientError
 
 
 class SaveJsonToDynamo():
     """ Save Json to Dynamo """
-    def __init__(self, config: dict, table_name: str, expire_time_days_in_future: int = None):
-        """ User may pass either expire_time_days_in_future to define time_to_live for dynamo records
-            User could also optionally pass a specific expire time """
+    def __init__(self, config: dict, table_name: str):
+        """ Init now only needs config and table_name.  No knowledge of the table structure is needed. """
         self.table_name = table_name
         self.local = config.get('local', True)
         self.dynamo_table_available = self._init_dynamo_table()
-        self.expire_time = None
-        if expire_time_days_in_future:
-            self.expire_time = _get_expire_time(datetime.now(), int(expire_time_days_in_future))
 
     def _init_dynamo_table(self) -> bool:
         """ Create boto3 resource for dynamo table, returning a boolean flag indicating if this resource exists """
@@ -32,23 +28,26 @@ class SaveJsonToDynamo():
                 print(f"Error saving to {self.table_name} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
         return success_flag
 
-    def save_json_to_dynamo(self, json_dict: dict, dynamo_record_expire_time: int = None) -> bool:
-        """ Save json information to dynamo.  User may override default calculated expire_time if they choose. """
+    def save_json_to_dynamo(self, json_dict: dict) -> bool:
+        """ Save json information to dynamo, return values include:
+            True - record was inserted
+            False - record was updated
+            None - no database action took place. """
         if not self.dynamo_table_available:
-            return False
-        if not dynamo_record_expire_time:
-            dynamo_record_expire_time = self.expire_time
-        success_flag = True
+            return None
+        record_inserted_flag = None
         json_dict = _serialize_json(json_dict)
-        if 'expireTime' not in json_dict and dynamo_record_expire_time:
-            json_dict['expireTime'] = dynamo_record_expire_time
         try:
-            self.table.put_item(Item=json_dict)
+            # TODO: research using update_item.  This will require some pretty fundamental changes.  This would allow us to maintain dateAddedToDynamo.
+            results = self.table.put_item(Item=json_dict, ReturnValues='ALL_OLD')
+            if results.get('Attributes'):
+                record_inserted_flag = False  # record was successfully updated
+            else:
+                record_inserted_flag = True
         except ClientError as ce:
-            success_flag = False
             capture_exception(ce)
-            print(f"Error saving to {self.table_name} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
-        return success_flag
+            print(f"save_json_to_dynamo.py/save_json_to_dynamo Error saving to {self.table_name} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
+        return record_inserted_flag
 
 
 def _serialize_json(json_node: dict) -> dict:
@@ -63,8 +62,3 @@ def _serialize_json(json_node: dict) -> dict:
         for node in json_node:
             node = _serialize_json(node)
     return json_node
-
-
-def _get_expire_time(initial_datetime: datetime, days_in_future: int = 3) -> int:
-    """ Return Unix timestamp of initial_datetime plus days_in_future days."""
-    return int(datetime.timestamp(initial_datetime + timedelta(days=days_in_future)))

@@ -11,7 +11,7 @@ from harvest_aleph_marc import HarvestAlephMarc  # noqa: #402
 from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
 import sentry_sdk   # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
-
+from dynamo_helpers import save_source_system_record
 
 if 'SENTRY_DSN' in os.environ:
     sentry_sdk.init(dsn=os.environ['SENTRY_DSN'], integrations=[AwsLambdaIntegration()])
@@ -25,6 +25,8 @@ def run(event, _context):
         marc_records_url = "https://alephprod.library.nd.edu/aleph_tmp/marble.mrc"
         time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
         print("Will break after ", time_to_break)
+        if event.get('alephExecutionCount', 0) == 1 and not event.get('local'):
+            save_source_system_record('Aleph', config.get('website-metadata-tablename'))
         harvest_marc_class = HarvestAlephMarc(config, event, marc_records_url, time_to_break)
         harvest_marc_class.process_marc_records_from_stream()
         if event["alephExecutionCount"] >= event["maximumAlephExecutions"]:
@@ -45,7 +47,7 @@ def _supplement_event(event):
         event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     event['alephHarvestComplete'] = event.get('alephHarvestComplete', False)
     event['alephExecutionCount'] = event.get('alephExecutionCount', 0) + 1
-    event['maximumAlephExecutions'] = 5
+    event['maximumAlephExecutions'] = 10
     event['maxAlephIdProcessed'] = event.get('maxAlephIdProcessed', '')
     return
 
@@ -66,8 +68,8 @@ def test():
     else:
         event = {}
         event['local'] = False
-        event['seconds-to-allow-for-processing'] = 900
-        event['ids'] = ['002468275']
+        event['seconds-to-allow-for-processing'] = 9000
+        # event['ids'] = ['002468275']
         # event['ids'] = ['001586302', '001587052', '001587050', '001588845', '001590687']
     event = run(event, {})
 

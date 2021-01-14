@@ -8,6 +8,7 @@ from s3_helpers import write_s3_json, read_s3_json, delete_s3_key
 from api_helpers import json_serial
 from search_files import crawl_available_files
 from save_json_to_dynamo import SaveJsonToDynamo
+from dynamo_helpers import add_file_keys
 
 
 class FilesApi():
@@ -22,7 +23,7 @@ class FilesApi():
         else:
             self.directory = os.path.join(os.path.dirname(__file__), 'cache')
         self.start_time = time.time()
-        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config['files-tablename'])
+        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config['website-metadata-tablename'])
         self.resumption_filename = 'file_objects_list_partially_processed.json'
 
     def save_files_details(self):
@@ -94,6 +95,7 @@ class FilesApi():
             my_json['id'] = my_json.get('key', '')
             my_json['objectFileGroupId'] = my_json.get('fileId')  # required to join with standard.json
             collection_list.append(my_json)
+            my_json = add_file_keys(my_json)
             self.save_json_to_dynamo_class.save_json_to_dynamo(my_json)
         return collection_list
 

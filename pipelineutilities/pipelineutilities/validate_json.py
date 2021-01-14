@@ -99,6 +99,12 @@ standard_json_schema = {
     "id": "nd.schema.json",
     "type": "object",
     "properties": {
+        "GSI1PK": {"type": "string"},
+        "GSI1SK": {"type": "string"},
+        "GSI2PK": {"type": "string"},
+        "GSI2SK": {"type": "string"},
+        "PK": {"type": "string"},
+        "SK": {"type": "string"},
         "access": {"type": "string"},
         "apiVersion": {"type": "integer"},
         "bendoItem": {"type": "string"},
@@ -187,6 +193,8 @@ standard_json_schema = {
                 "additionalProperties": False
             }
         },
+        "dateAddedToDynamo": {"type": "string"},
+        "dateModifiedInDynamo": {"type": "string"},
         "dedication": {"type": "string"},
         "defaultFilePath": {"type": "string"},
         "description": {"type": "string"},
@@ -287,6 +295,7 @@ standard_json_schema = {
         "thumbnail": {"type": "boolean"},
         "title": {"type": "string"},
         "treePath": {"type": "string"},
+        "type": {"type": "string"},
         "uniqueIdentifier": {"type": "string"},
         "width": {"type": "integer"},
         "workType": {"type": "string"},

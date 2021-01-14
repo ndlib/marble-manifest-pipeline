@@ -1,9 +1,8 @@
 """ test save_json_to_dynamo """
 import _set_path  # noqa
 import unittest
-from unittest.mock import patch
-from datetime import datetime, timezone
-from pipelineutilities.save_json_to_dynamo import SaveJsonToDynamo, _serialize_json, _get_expire_time
+from datetime import datetime
+from pipelineutilities.save_json_to_dynamo import _serialize_json
 
 
 class Test(unittest.TestCase):
@@ -15,21 +14,6 @@ class Test(unittest.TestCase):
         expected_results = {'abc': '2020-10-13T09:00:00'}
         actual_results = _serialize_json(test_json)
         self.assertEqual(actual_results, expected_results)
-
-    def test_02_get_expire_time(self):
-        """ test_02_get_expire_time """
-        actual_results = _get_expire_time(datetime(2020, 10, 13, 9, 0, 0, 0, tzinfo=timezone.utc), 3)
-        expected_results = 1602838800
-        self.assertEqual(actual_results, expected_results)
-
-    @patch('pipelineutilities.save_json_to_dynamo._get_expire_time')
-    def test_03_init_save_json_to_dynamo(self, mock_get_expire_time):
-        """ test_03_init_save_json_to_dynamo """
-        mock_get_expire_time.return_value = 1602853200
-        config = {"local": True}
-        save_json_to_dynamo_class = SaveJsonToDynamo(config, 'some-table-name', 3)
-        self.assertEqual(save_json_to_dynamo_class.expire_time, 1602853200)
-        self.assertEqual(save_json_to_dynamo_class.dynamo_table_available, False)
 
 
 def suite():

@@ -16,6 +16,7 @@ from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.save_standard_json import save_standard_json
 from save_json_to_dynamo import SaveJsonToDynamo
+from dynamo_helpers import add_file_keys
 
 
 class CurateApi():
@@ -32,7 +33,7 @@ class CurateApi():
         self.create_standard_json_class = CreateStandardJson(config)
         self.local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
         self.attempting_huge_export_with_resumption_flag = False
-        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('files-tablename', ''))
+        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('website-metadata-tablename', ''))
 
     def get_curate_items(self, ids: list) -> bool:
         """ Given a list of ids, process each one that corresponds to a Curate item """
@@ -202,6 +203,7 @@ class CurateApi():
         if standard_json.get('level', '') == 'file':
             new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
             new_dict['objectFileGroupId'] = new_dict['parentId']
+            new_dict = add_file_keys(new_dict)
             self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict)
         for item in standard_json.get('items', []):
             self._save_curate_image_data_to_dynamo(item)
