@@ -60,7 +60,6 @@ pipelineutilities/record_files_needing_processed.py
 pipelineutilities/report_missing_fields.py
 pipelineutilities/s3_helpers.py
 pipelineutilities/s3_sync.py
-pipelineutilities/save_default_file_metadata_to_dynamo.py
 pipelineutilities/save_json_to_dynamo.py
 pipelineutilities/save_standard_json.py
 pipelineutilities/save_standard_json_to_dynamo.py
@@ -91,7 +90,6 @@ test/test_record_files_needing_processed.py
 test/test_report_missing_fields.py
 test/test_s3_helpers.py
 test/test_s3_sync.py
-test/test_save_default_file_metadata_to_dynamo.py
 test/test_save_json_to_dynamo.py
 test/test_save_standard_json_to_dynamo.py
 test/test_search_files.py

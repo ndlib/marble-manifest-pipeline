@@ -13,8 +13,6 @@ import boto3
 from boto3.dynamodb.conditions import Key
 from record_files_needing_processed import FilesNeedingProcessed
 from dynamo_helpers import add_item_keys, add_file_group_keys
-# TODO: remove all references to SaveDefaultFileMetadataToDynamo
-# from save_default_file_metadata_to_dynamo import SaveDefaultFileMetadataToDynamo  # Moved to init to dramatically speed access for hugely nested trees like zp38w953h0s and MSNEA0504_EAD
 
 
 class SaveStandardJsonToDynamo():
@@ -26,8 +24,7 @@ class SaveStandardJsonToDynamo():
         self.table_name = self.config.get('website-metadata-tablename')
         self.local = config.get('local', True)
         self.related_ids = self._read_related_ids()
-        self.dynamo_table_available = self._init_dynamo_table()
-        # self.save_default_file_metadata_to_dynamo_class = SaveDefaultFileMetadataToDynamo(self.config)
+        self.dynamo_table_available = self._init_dynamo_table()  # TODO: remove this when we move FilesNeedingProcessed to Museum and Curate exports
 
     def save_standard_json(self, standard_json: dict, export_all_files_flag: bool = False) -> bool:
         """ First, validate the standard_json.  If this is the first time this standard_json is being saved,
@@ -58,7 +55,6 @@ class SaveStandardJsonToDynamo():
         if "childIds" in standard_json:
             self._append_related_ids(standard_json)
         standard_json = self._optionally_update_parent_id(standard_json)
-        # self.save_default_file_metadata_to_dynamo_class.save_default_file_metadata(standard_json)
         new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
         if standard_json.get("sourceSystem", "") in self.config.get("source-systems-requiring-metadata-expire-time"):
             new_dict['expireTime'] = int(datetime.timestamp(datetime.now() + timedelta(days=int(self.config.get('metadata-time-to-live-days', 3)))))
@@ -128,7 +124,7 @@ class SaveStandardJsonToDynamo():
             standard_json["sequence"] = self.related_ids[standard_json["id"]].get("sequence")
         return standard_json
 
-    def _init_dynamo_table(self) -> bool:
+    def _init_dynamo_table(self) -> bool:  # TODO: remove this when we move FilesNeedingProcessed to Museum and Curate exports
         """ Create boto3 resource for dynamo table, returning a boolean flag indicating if this resource exists """
         success_flag = False
         if not self.local:
@@ -140,7 +136,7 @@ class SaveStandardJsonToDynamo():
                 print(f"Error saving to {self.table_name} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
         return success_flag
 
-    def _id_exists_in_dynamo(self, id: str) -> bool:
+    def _id_exists_in_dynamo(self, id: str) -> bool:  # TODO: remove this when we move FilesNeedingProcessed to Museum and Curate exports
         """ Check to see if the id exists in dynamo """
         success_flag = False
         if self.config.get('local'):
