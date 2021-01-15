@@ -40,7 +40,7 @@ class Test(unittest.TestCase):
 
     def test_01_get_embark_metadata_url(self):
         """ test_01 _get_embark_metadata_url """
-        event = {"mode": "ids", "ids": ["1934.007.001"], "files-tablename": "some-table-name"}
+        event = {"mode": "ids", "ids": ["1934.007.001"]}
         json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
         actual_results = json_web_kiosk_class._get_embark_metadata_url("ids", "1934.007.001")
         expected_results = "http://notredame.dom5182.com:8080/results.html?layout=marble&format=json&maximumrecords=-1&recordType=objects_1&query=Disp_Access_No=1934.007.001"
@@ -49,7 +49,7 @@ class Test(unittest.TestCase):
     @patch('process_web_kiosk_json_metadata.ProcessWebKioskJsonMetadata._get_metadata_given_url')
     def test_02_get_composite_json_for_all_named_ids(self, mock_get_metadata_given_url):
         """ test_02_get_composite_json_for_all_named_ids """
-        event = {"mode": "ids", "ids": ["1934.007.001"], "local": True, "files-tablename": "some-table-name"}
+        event = {"mode": "ids", "ids": ["1934.007.001"], "local": True}
         with io.open(local_folder + 'test/1934.007.001_web_kiosk.json', 'r', encoding='utf-8') as json_file:
             composite_json = json.load(json_file)
         mock_get_metadata_given_url.return_value = composite_json
@@ -61,7 +61,7 @@ class Test(unittest.TestCase):
     def test_03_find_images_for_composite_json_metadata(self):
         """ Testing find_images_for_composite_json_metadata by mocking a whole class,
             using fake_images_for_mocking to substitute for calling GetImageInfoForAllObjects. """
-        event = {"mode": "ids", "ids": ["1934.007.001"], "local": True, "files-tablename": "some-table-name"}
+        event = {"mode": "ids", "ids": ["1934.007.001"], "local": True}
         with io.open(local_folder + 'test/1934.007.001_web_kiosk.json', 'r', encoding='utf-8') as json_file:
             composite_json = json.load(json_file)
         json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
