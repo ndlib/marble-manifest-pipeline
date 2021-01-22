@@ -14,7 +14,7 @@ from process_web_kiosk_json_metadata import ProcessWebKioskJsonMetadata
 from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm
 from clean_up_composite_json import CleanUpCompositeJson
 from s3_helpers import write_s3_json, read_s3_json, s3_file_exists, delete_s3_key
-from dynamo_helpers import save_source_system_record
+from dynamo_helpers import save_source_system_record, save_file_system_record
 
 
 if 'SENTRY_DSN' in os.environ:
@@ -38,7 +38,8 @@ def run(event, _context):
     json_web_kiosk_class = ProcessWebKioskJsonMetadata(config, event, time_to_break)
     if event["museumExecutionCount"] == 1:
         if not event.get('local'):
-            save_source_system_record('EmbARK', config.get('website-metadata-tablename'))
+            save_file_system_record(config.get('website-metadata-tablename'), 'Google', 'Museum')
+            save_source_system_record(config.get('website-metadata-tablename'), 'EmbARK')
         composite_json = json_web_kiosk_class.get_composite_json_metadata(mode)
         museum_image_metadata = json_web_kiosk_class.find_images_for_composite_json_metadata(composite_json)
         composite_json = CleanUpCompositeJson(composite_json).cleaned_up_content
@@ -103,13 +104,12 @@ def test():
         event["local"] = False
         event["mode"] = "full"
         event['seconds-to-allow-for-processing'] = 9000
+        event['export_all_files_flag'] = True  # test exporting all files needing processing
         # event["mode"] = "ids"
         # event['ids'] = ['1999.024', '1952.019', '2018.009, 218.049.004']
         # event['ids'] = ['1994.042', '1994.042.a', '1994.042.b']  # , '1990.005.001']
         # event["ids"] = ["1990.005.001", "1990.005.001.a", "1990.005.001.b", "1957.007.031", "1957.007.032", "1981.081.001"]  # parent / child objects
-        # event["export_all_files_flag"] = True
         # event["ids"] = ["1979.032.003"]  # objects with special characters to strip
-        # event["ids"] = ["L1986.032.002"]  # objects with missing Google images on Google Drive
         # event["ids"] = ["2017.039.005", "1986.052.007.005", "1978.062.002.003"]  # Objects with hidden parents
         # Test these temp IDs:  IL2019.006.002, IL1992.065.004, L1986.032.002, AA1966.031
     event = run(event, {})

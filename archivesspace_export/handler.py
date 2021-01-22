@@ -12,10 +12,10 @@ from harvest_oai_eads import HarvestOaiEads  # noqa: #502
 from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
 from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
-from pipelineutilities.s3_helpers import read_s3_json
 from pipelineutilities.save_standard_json import save_standard_json
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
-from dynamo_helpers import save_source_system_record
+from dynamo_helpers import save_source_system_record, save_harvest_ids
+from read_from_dynamo import ReadFromDynamo
 
 
 def run(event: dict, _context: dict):
@@ -27,13 +27,15 @@ def run(event: dict, _context: dict):
     _init_sentry()
     config = setup_pipeline_config(event)
     if not event.get("ids", False):
-        event["ids"] = read_ids_from_s3(config['process-bucket'], "source_system_export_ids.json", "ArchivesSpace")
+        string_list_to_save = _read_harvest_ids_from_json('./source_system_export_ids.json')
+        save_harvest_ids(config, 'ArchivesSpace', string_list_to_save, config.get('website-metadata-tablename'))
+        event['ids'] = _read_harvest_ids_from_dynamo(config.get('website-metadata-tablename'), 'ArchivesSpace')
     # config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     start_time = time.time()
     time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
     print("Will break after ", time_to_break)
     if event.get('archivesSpaceExecutionCount', 0) == 1 and not event.get('local'):
-        save_source_system_record('ArchivesSpace', config.get('website-metadata-tablename'))
+        save_source_system_record(config.get('website-metadata-tablename'), 'ArchivesSpace')
     harvest_oai_eads_class = HarvestOaiEads(config)
     add_files_to_json_object_class = AddFilesToJsonObject(config)
     standard_json_helpers_class = StandardJsonHelpers(config)
@@ -65,17 +67,17 @@ def _supplement_event(event: dict) -> dict:
     return event
 
 
-def read_ids_from_s3(process_bucket: str, s3_path: str, section: str) -> list:
-    """ Read ids from control file in an s3 bucket """
-    ids = []
-    try:
-        json_hash = read_s3_json(process_bucket, s3_path)
-        if section in json_hash:
-            ids = json_hash[section]
-    except Exception as e:
-        sentry_sdk.capture_exception(e)
-        print("Control file does not exit:", process_bucket, s3_path)
-    return ids
+def _read_harvest_ids_from_json(json_file_name: str) -> dict:
+    """ read local json file into a dictionary, return information related to ArchivesSpace """
+    with open(json_file_name) as json_file:
+        data = json.load(json_file)
+    return data['ArchivesSpace']
+
+
+def _read_harvest_ids_from_dynamo(dynamo_table_name, source_system_name) -> list:
+    read_from_dynamo_class = ReadFromDynamo({'local': False}, dynamo_table_name)
+    results = read_from_dynamo_class.read_items_to_harvest(source_system_name)
+    return results
 
 
 def _init_sentry():

@@ -16,7 +16,8 @@ from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.save_standard_json import save_standard_json
 from save_json_to_dynamo import SaveJsonToDynamo
-from dynamo_helpers import add_file_keys
+from dynamo_helpers import add_file_keys, save_file_group_record
+from record_files_needing_processed import FilesNeedingProcessed
 
 
 class CurateApi():
@@ -78,8 +79,8 @@ class CurateApi():
                 export_all_files_flag = self.event.get('export_all_files_flag', False)
                 save_standard_json(self.config, standard_json)
                 save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
-                save_standard_json_to_dynamo_class.save_standard_json(standard_json, export_all_files_flag)
-                self._save_curate_image_data_to_dynamo(standard_json)
+                save_standard_json_to_dynamo_class.save_standard_json(standard_json)
+                self._save_curate_image_data_to_dynamo(standard_json, export_all_files_flag)
 
         return standard_json
 
@@ -198,12 +199,16 @@ class CurateApi():
             capture_exception(e)
         return json_response
 
-    def _save_curate_image_data_to_dynamo(self, standard_json: dict):
+    def _save_curate_image_data_to_dynamo(self, standard_json: dict, export_all_files_flag: False):
         """ Save Curate image data to dynamo recursively """
         if standard_json.get('level', '') == 'file':
             new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
             new_dict['objectFileGroupId'] = new_dict['parentId']
             new_dict = add_file_keys(new_dict)
-            self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict)
+            record_inserted_flag = self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict, False)
+            if record_inserted_flag or export_all_files_flag:
+                save_file_group_record(self.config['website-metadata-tablename'], new_dict.get('objectFileGroupId'), new_dict.get('storageSystem'), new_dict.get('typeOfData'))
+                files_needing_processed_class = FilesNeedingProcessed(self.config)
+                files_needing_processed_class.record_files_needing_processed(standard_json, True)
         for item in standard_json.get('items', []):
-            self._save_curate_image_data_to_dynamo(item)
+            self._save_curate_image_data_to_dynamo(item, export_all_files_flag)

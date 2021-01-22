@@ -8,7 +8,7 @@ from s3_helpers import write_s3_json, read_s3_json, delete_s3_key
 from api_helpers import json_serial
 from search_files import crawl_available_files
 from save_json_to_dynamo import SaveJsonToDynamo
-from dynamo_helpers import add_file_keys
+from dynamo_helpers import add_file_keys, save_file_group_record, save_file_system_record
 
 
 class FilesApi():
@@ -25,6 +25,8 @@ class FilesApi():
         self.start_time = time.time()
         self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config['website-metadata-tablename'])
         self.resumption_filename = 'file_objects_list_partially_processed.json'
+        if not self.event['local']:
+            save_file_system_record(config.get('website-metadata-tablename'), 'S3', 'RBSC website bucket')
 
     def save_files_details(self):
         """ This will crawl available files, then loop through the file listing, saving each to dynamo """
@@ -97,6 +99,8 @@ class FilesApi():
             collection_list.append(my_json)
             my_json = add_file_keys(my_json)
             self.save_json_to_dynamo_class.save_json_to_dynamo(my_json)
+            if i == 1 and not self.config.get('local', True):
+                save_file_group_record(self.config['website-metadata-tablename'], my_json.get('objectFileGroupId'), my_json.get('storageSystem', 'S3'), my_json.get('typeOfData', 'RBSC website bucket'))
         return collection_list
 
     def _cache_s3_call(self, file_name: str, objects: dict):

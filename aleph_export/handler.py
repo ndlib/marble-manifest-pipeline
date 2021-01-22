@@ -26,7 +26,7 @@ def run(event, _context):
         time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
         print("Will break after ", time_to_break)
         if event.get('alephExecutionCount', 0) == 1 and not event.get('local'):
-            save_source_system_record('Aleph', config.get('website-metadata-tablename'))
+            save_source_system_record(config.get('website-metadata-tablename'), 'Aleph')
         harvest_marc_class = HarvestAlephMarc(config, event, marc_records_url, time_to_break)
         harvest_marc_class.process_marc_records_from_stream()
         if event["alephExecutionCount"] >= event["maximumAlephExecutions"]:

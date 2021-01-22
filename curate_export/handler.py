@@ -12,8 +12,8 @@ from curate_api import CurateApi
 from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm
 import sentry_sdk   # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
-from pipelineutilities.s3_helpers import read_s3_json
-from dynamo_helpers import save_source_system_record
+from dynamo_helpers import save_source_system_record, save_harvest_ids, save_file_system_record
+from read_from_dynamo import ReadFromDynamo
 
 
 if 'SENTRY_DSN' in os.environ:
@@ -29,17 +29,14 @@ def run(event: dict, context: dict) -> dict:
         time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
         print("Will break after ", time_to_break)
         if event.get('curateExecutionCount', 0) == 1 and not event.get('local'):
-            save_source_system_record('Curate', config.get('website-metadata-tablename'))
+            save_source_system_record(config.get('website-metadata-tablename'), 'Curate')
         curate_config = load_config_ssm(config['curate_keys_ssm_base'])
         config.update(curate_config)
-        # if "filenames" in event:
-        #     for filename in event["filenames"]:
-        #         json_curate_item = read_batch_ingest_combined_csv(filename)
-        #         with open(filename + '.json', 'w') as f:
-        #             json.dump(json_curate_item, f, indent=2)
+        save_file_system_record(config.get('website-metadata-tablename'), 'Curate', 'Curate')
         if not event.get("ids", False):
-            event["ids"] = read_ids_from_s3(config['process-bucket'], "source_system_export_ids.json", "Curate")
-        # print("event after ids added = ", event)
+            string_list_to_save = _read_harvest_ids_from_json('./source_system_export_ids.json')
+            save_harvest_ids(config, 'Curate', string_list_to_save, config.get('website-metadata-tablename'))
+            event['ids'] = _read_harvest_ids_from_dynamo(config.get('website-metadata-tablename'), 'Curate')
         if "ids" in event:
             print("ids to process: ", event["ids"])
             curate_api_class = CurateApi(config, event, time_to_break)
@@ -65,16 +62,17 @@ def _supplement_event(event: dict) -> dict:
     return
 
 
-def read_ids_from_s3(process_bucket: str, s3_path: str, section: str) -> list:
-    ids = []
-    try:
-        json_hash = read_s3_json(process_bucket, s3_path)
-        if section in json_hash:
-            ids = json_hash[section]
-    except Exception as e:
-        sentry_sdk.capture_exception(e)
-        print("Control file does not exit:", process_bucket, s3_path)
-    return ids
+def _read_harvest_ids_from_json(json_file_name: str) -> dict:
+    """ read local json file into a dictionary, return information related to Curate """
+    with open(json_file_name) as json_file:
+        data = json.load(json_file)
+    return data['Curate']
+
+
+def _read_harvest_ids_from_dynamo(dynamo_table_name, source_system_name) -> list:
+    read_from_dynamo_class = ReadFromDynamo({'local': False}, dynamo_table_name)
+    results = read_from_dynamo_class.read_items_to_harvest(source_system_name)
+    return results
 
 
 # setup:
@@ -96,19 +94,14 @@ def test(identifier=""):
         event['seconds-to-allow-for-processing'] = 9000
         if event['local']:
             # event['seconds-to-allow-for-processing'] = 30
-            # und:zp38w953h0s = Commencement Programs
-            # und:zp38w953p3c = Chinese Catholic-themed paintings
             # und:qz20sq9094h = Architectural Lantern Slides (huge)
             # ks65h992w12 = Epistemological Letters
             # 1z40ks6792x = Varieties of Democracy - has sub-collections
-            # n296ww75n6f = Gregorian Archive
-            # event['ids'] = ["und:1z40ks6792x"]
             event['ids'] = ["und:zp38w953h0s"]  # Commencement Programs
             event['ids'] = ["und:zp38w953p3c"]  # Chinese Catholic-themed paintings
             event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
-            # event['ids'] = ["und:zp38w953h0s", "und:zp38w953p3c"]
-            # event['ids'] = []  # force to read from s3 file.
-        # event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
+        event['ids'] = []  # force read from Dynamo
+        event['export_all_files_flag'] = True  # test exporting all files needing processing
     event = run(event, {})
 
     if not event['curateHarvestComplete']:
