@@ -210,6 +210,16 @@
 				"extraProcessing": "extract_field_from_characterization_xml",
 				"fieldToExtract": "./fileinfo/md5checksum",
 				"format": "text"
+			},
+			{
+				"label": "storageSystem",
+				"constant": "Curate",
+				"format": "text"
+			},
+			{
+				"label": "typeOfData",
+				"constant": "Curate",
+				"format": "text"
 			}
 		]
 	}

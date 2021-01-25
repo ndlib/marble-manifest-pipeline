@@ -17,8 +17,9 @@ from get_image_info_for_all_objects import GetImageInfoForAllObjects
 from pipelineutilities.save_standard_json import save_standard_json
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
-from dynamo_helpers import add_file_keys
+from dynamo_helpers import add_file_keys, save_file_group_record
 from save_json_to_dynamo import SaveJsonToDynamo
+from record_files_needing_processed import FilesNeedingProcessed
 
 
 class ProcessWebKioskJsonMetadata():
@@ -94,9 +95,9 @@ class ProcessWebKioskJsonMetadata():
                 if 'uniqueIdentifier' in object_value and not object_value.get("recordProcessedFlag", False):
                     standard_json = process_one_museum_object_class.process_object(object_value)
                     standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
-                    save_standard_json_to_dynamo_class.save_standard_json(standard_json, export_all_files_flag)
+                    save_standard_json_to_dynamo_class.save_standard_json(standard_json)
                     save_standard_json(self.config, standard_json)
-                    self._save_google_image_data_to_dynamo(standard_json)
+                    self._save_google_image_data_to_dynamo(standard_json, export_all_files_flag)
                     object_value["recordProcessedFlag"] = True
                     objects_processed += 1
                     if datetime.now() >= self.time_to_break:
@@ -140,15 +141,21 @@ class ProcessWebKioskJsonMetadata():
             url = base_url + "&query=mod_date%3E%22" + recent_past_string + "%22"
         return url
 
-    def _save_google_image_data_to_dynamo(self, standard_json: dict):
+    def _save_google_image_data_to_dynamo(self, standard_json: dict, export_all_files_flag: bool = False):
         """ Save google image data to dynamo recursively """
         if standard_json.get('level', '') == 'file':
             new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
             new_dict['objectFileGroupId'] = new_dict['parentId']
+            new_dict['storageSystem'] = 'Google'
+            new_dict['typeOfData'] = 'Museum'
             new_dict = add_file_keys(new_dict)
-            self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict)
+            record_inserted_flag = self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict, True)
+            if record_inserted_flag or export_all_files_flag:
+                save_file_group_record(self.config['website-metadata-tablename'], new_dict.get('objectFileGroupId'), new_dict.get('storageSystem'), new_dict.get('typeOfData'))
+                files_needing_processed_class = FilesNeedingProcessed(self.config)
+                files_needing_processed_class.record_files_needing_processed(standard_json, True)
         for item in standard_json.get('items', []):
-            self._save_google_image_data_to_dynamo(item)
+            self._save_google_image_data_to_dynamo(item, export_all_files_flag)
 
 
 def delete_file(folder_name: str, file_name: str):

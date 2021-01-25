@@ -56,6 +56,7 @@ pipelineutilities/google_utilities.py
 pipelineutilities/load_language_codes.py
 pipelineutilities/load_standard_json.py
 pipelineutilities/pipeline_config.py
+pipelineutilities/read_from_dynamo.py
 pipelineutilities/record_files_needing_processed.py
 pipelineutilities/report_missing_fields.py
 pipelineutilities/s3_helpers.py

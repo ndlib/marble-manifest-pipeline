@@ -8,8 +8,6 @@ from pathlib import Path
 from datetime import datetime
 from pipelineutilities.record_files_needing_processed import FilesNeedingProcessed
 from pipelineutilities.pipeline_config import setup_pipeline_config
-# from s3_helpers import s3_file_exists
-# from save_standard_json import save_standard_json
 
 
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
@@ -75,31 +73,6 @@ class Test(unittest.TestCase):
         actual_results = self.files_needing_processed_class._get_key_given_file_path("https://curate.nd.edu/api/items/download/pz50gt57r3h")
         expected_results = "curate"
         self.assertTrue(actual_results == expected_results)
-
-    # def test_07_s3_file_exists(self):
-    #     # This test requires an active connection to aws
-    #     # I'll leave it here to uncomment and run interactively, but we can't have it run automatically as part of a deploy
-    #     results = s3_file_exists("new-csv-processbucket-10dr776tnq9be", "source_system_export_ids.json")
-    #     self.assertTrue(results)
-    #     results = s3_file_exists("new-csv-processbucket-10dr776tnq9be", "xsource_system_export_ids.json")
-    #     self.assertFalse(results)
-    #     results = s3_file_exists("xnew-csv-processbucket-10dr776tnq9be", "source_system_export_ids.json")
-    #     self.assertFalse(results)
-
-    # def test_08_record_files_needing_processed(self):
-    #     # This test requires an active connection to aws
-    #     # I'll leave it here to uncomment and run interactively, but we can't have it run automatically as part of a deploy
-    #     results = self.files_needing_processed_class.record_files_needing_processed(self.standard_json, False)
-    #     self.assertTrue(results)
-    #     results = self.files_needing_processed_class.record_files_needing_processed(self.standard_json, True)
-    #     self.assertTrue(results)
-    #
-    # def test_09_saved_standard_json(self):
-    #     # This test requires an active connection to aws
-    #     # I'll leave it here to uncomment and run interactively, but we can't have it run automatically as part of a deploy
-    #     self.config['process-bucket'] = 'new-csv-processbucket-10dr776tnq9be'
-    #     results = save_standard_json(self.config, self.standard_json)
-    #     self.assertTrue(results)
 
 
 def suite():
