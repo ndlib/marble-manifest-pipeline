@@ -4,7 +4,7 @@ import _set_path  # noqa
 import os
 import json
 import unittest
-from create_json_from_xml import createJsonFromXml
+from create_json_from_xml import createJsonFromXml, get_xml_node_value
 import xml.etree.ElementTree as ET
 
 
@@ -78,6 +78,14 @@ class Test(unittest.TestCase):
             expected_results = {'id': 'aspace_8f5be6708c2e98e57a60eddf20e36679', 'title': 'Theophilus Parsons, Journal, vol. 1', 'createdDate': 'January 1819-December 1820', 'uniqueIdentifier': 'MSN/EA 8011-1-B', 'items': [{'level': 'file', 'thumbnail': True, 'description': 'Theophilus Parsons, Journal, vol. 1', 'filePath': 'https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg', 'parentId': 'aspace_8f5be6708c2e98e57a60eddf20e36679', 'id': 'MSN-EA_8011-01-B-000a.jpg'}], 'level': 'manifest'}  # noqa: E501
             self.assertEqual(expected_results, actual_results)
             break
+
+    def test_4_test_get_xml_node_value(self):
+        """ test 4_test_get_xml_node_value """
+        xml = '<p>Access to university records in any format(paper, digital, photographic, or audiovisual) is governed by state and federal laws, University of Notre Dame policy, and the <extref href = "http://archives.nd.edu/about/accesspolicy.pdf" >University of Notre Dame Archives Access Guidelines </extref>and is subject to review under the supervision of the Head of the University Archives.</p>'  # noqa: E501
+        xml_record = xml_record = ET.fromstring(xml)
+        actual_results = get_xml_node_value(xml_record, None, [])
+        expected_results = 'Access to university records in any format(paper, digital, photographic, or audiovisual) is governed by state and federal laws, University of Notre Dame policy, and the <a href="http://archives.nd.edu/about/accesspolicy.pdf">University of Notre Dame Archives Access Guidelines </a>and is subject to review under the supervision of the Head of the University Archives.'  # noqa: #501
+        self.assertEqual(actual_results, expected_results)
 
     def fix_file_created_date(self, standard_json: dict, file_created_date: str) -> dict:
         if "fileCreatedDate" in standard_json:
