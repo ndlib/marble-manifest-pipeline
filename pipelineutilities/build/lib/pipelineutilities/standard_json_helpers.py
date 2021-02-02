@@ -15,6 +15,7 @@ class StandardJsonHelpers():
     """ Standard Json Helpers Class """
     def __init__(self, config: dict):
         self.config = config
+        self.local = config.get('local', True)
 
     def enhance_standard_json(self, standard_json: dict) -> dict:
         """ Enhance various standard json nodes """
@@ -25,7 +26,11 @@ class StandardJsonHelpers():
             standard_json['hierarchySearchable'] = False
         standard_json = add_paths_to_json_object_class.add_paths(standard_json)
         standard_json = fix_creators_in_json_object_class.fix_creators(standard_json)
-        standard_json = expand_subject_terms_recursive(standard_json)
+        dynamo_table_name = self.config.get('website-metadata-tablename')
+        self.table_name = self.config.get('website-metadata-tablename')
+        if self.local:
+            dynamo_table_name = None  # pass dynamo_table_name to save data only if not running in local mode
+        standard_json = expand_subject_terms_recursive(standard_json, dynamo_table_name)
         standard_json = _clean_up_standard_json_recursive(standard_json)
         standard_json = get_size_of_images(standard_json)
         standard_json = _add_objectFileGroupId(standard_json)

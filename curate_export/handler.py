@@ -12,7 +12,7 @@ from curate_api import CurateApi
 from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm
 import sentry_sdk   # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
-from dynamo_helpers import save_source_system_record, save_harvest_ids, save_file_system_record
+from dynamo_save_functions import save_source_system_record, save_harvest_ids, save_file_system_record
 from read_from_dynamo import ReadFromDynamo
 
 

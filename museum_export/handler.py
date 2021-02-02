@@ -14,7 +14,7 @@ from process_web_kiosk_json_metadata import ProcessWebKioskJsonMetadata
 from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm
 from clean_up_composite_json import CleanUpCompositeJson
 from s3_helpers import write_s3_json, read_s3_json, s3_file_exists, delete_s3_key
-from dynamo_helpers import save_source_system_record, save_file_system_record
+from dynamo_save_functions import save_source_system_record, save_file_system_record
 
 
 if 'SENTRY_DSN' in os.environ:
@@ -84,7 +84,7 @@ def _suplement_event(event):
         event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
     event['museumHarvestComplete'] = event.get('museumHarvestComplete', False)
     event["museumExecutionCount"] = event.get("museumExecutionCount", 0) + 1
-    event["maximumMuseumExecutions"] = event.get("maximumMuseumExecutions", 15)
+    event["maximumMuseumExecutions"] = event.get("maximumMuseumExecutions", 20)
     return
 
 

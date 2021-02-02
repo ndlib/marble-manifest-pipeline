@@ -10,6 +10,7 @@ from save_json_to_dynamo import SaveJsonToDynamo
 from s3_helpers import read_s3_json, write_s3_json
 import os
 from dynamo_helpers import add_item_keys  # , add_file_group_keys
+from dynamo_save_functions import save_parent_override_record
 
 
 class SaveStandardJsonToDynamo():
@@ -73,6 +74,8 @@ class SaveStandardJsonToDynamo():
     def _append_related_ids(self, standard_json) -> dict:
         """ update local dictionary with related ids """
         for related_id in standard_json.get("childIds", []):
+            if not self.local:
+                save_parent_override_record(self.table_name, related_id.get("id"), standard_json.get("id"), related_id.get("sequence"))  # added to save to dynamo
             node = {"parentId": standard_json.get("id"), "sequence": related_id.get("sequence")}
             self.related_ids[related_id.get("id")] = node
             self.related_ids_updated = True

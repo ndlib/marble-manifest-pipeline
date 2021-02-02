@@ -17,7 +17,8 @@ from get_image_info_for_all_objects import GetImageInfoForAllObjects
 from pipelineutilities.save_standard_json import save_standard_json
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
-from dynamo_helpers import add_file_keys, save_file_group_record
+from dynamo_helpers import add_file_keys
+from dynamo_save_functions import save_file_group_record, save_file_to_process_record
 from save_json_to_dynamo import SaveJsonToDynamo
 from record_files_needing_processed import FilesNeedingProcessed
 
@@ -151,6 +152,7 @@ class ProcessWebKioskJsonMetadata():
             new_dict = add_file_keys(new_dict)
             record_inserted_flag = self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict, True)
             if record_inserted_flag or export_all_files_flag:
+                save_file_to_process_record(self.config['website-metadata-tablename'], new_dict, False)
                 save_file_group_record(self.config['website-metadata-tablename'], new_dict.get('objectFileGroupId'), new_dict.get('storageSystem'), new_dict.get('typeOfData'))
                 files_needing_processed_class = FilesNeedingProcessed(self.config)
                 files_needing_processed_class.record_files_needing_processed(standard_json, True)

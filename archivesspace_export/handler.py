@@ -14,7 +14,7 @@ from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.save_standard_json import save_standard_json
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
-from dynamo_helpers import save_source_system_record, save_harvest_ids
+from dynamo_save_functions import save_source_system_record, save_harvest_ids
 from read_from_dynamo import ReadFromDynamo
 
 
@@ -100,7 +100,7 @@ def test():
         event["local"] = False
         event['seconds-to-allow-for-processing'] = 9000
         event["ids"] = [
-            "https://archivesspace.library.nd.edu/repositories/2/resources/1652",  # Collegiate Jazz Festival
+            # "https://archivesspace.library.nd.edu/repositories/2/resources/1652",  # Collegiate Jazz Festival
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1631",    # Inquisitions (MSHLAT0090_EAD)
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1447",
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1567",

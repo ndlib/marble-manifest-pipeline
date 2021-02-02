@@ -31,7 +31,16 @@ def validate_standard_json(json_to_test: dict) -> bool:
 
 
 subject_properties = {
+    "GSI1PK": {"type": "string"},
+    "GSI1SK": {"type": "string"},
+    "GSI2PK": {"type": "string"},
+    "GSI2SK": {"type": "string"},
+    "PK": {"type": "string"},
+    "SK": {"type": "string"},
+    "TYPE": {"type": "string"},
     "authority": {"type": "string"},
+    "dateAddedToDynamo": {"type": "string"},
+    "dateModifiedInDynamo": {"type": "string"},
     "display": {"type": "string"},
     "term": {"type": "string"},
     "uri": {"type": "string"},

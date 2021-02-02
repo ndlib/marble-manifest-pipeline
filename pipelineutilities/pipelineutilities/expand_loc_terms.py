@@ -1,4 +1,4 @@
-# expand_subject_terms.py
+# expand_loc_terms.py
 """ Expand Library of Congress Subject Heading (LCSH) terms """
 import json
 import requests
