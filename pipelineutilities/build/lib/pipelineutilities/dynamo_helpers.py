@@ -1,7 +1,6 @@
 """ dynamo_helpers.py
     This module will hold all DynamoDB specific key information for each entity added here
 """
-from save_json_to_dynamo import SaveJsonToDynamo
 from datetime import datetime
 
 
@@ -86,46 +85,72 @@ def add_file_systems_keys(json_record: dict) -> dict:
     return json_record
 
 
-def save_source_system_record(dynamo_table_name: str, source_system_name: str, save_only_new_records: bool = True):
-    """ Save Source System Name """
-    config = {'local': False}
-    json_record = {'sourceSystem': source_system_name}
-    json_record = add_source_system_keys(json_record)
-    save_json_to_dynamo_class = SaveJsonToDynamo(config, dynamo_table_name)
-    save_json_to_dynamo_class.save_json_to_dynamo(json_record, save_only_new_records)
-    return
+def add_parent_override_keys(json_record: dict) -> dict:
+    """ Add dynamoDB keys to Parent Override record to be saved
+        Required values include: id (itemId), parentId """
+    json_record['PK'] = 'ITEM#' + format_key_value(json_record.get('id'))
+    json_record['SK'] = 'PARENT#' + format_key_value(json_record.get('parentId'))
+    json_record['TYPE'] = 'ParentOverride'
+    json_record['GSI1PK'] = 'PARENTOVERRIDE'
+    json_record['GSI1SK'] = json_record['PK']
+    json_record['dateAddedToDynamo'] = get_iso_date_as_string()
+    json_record['dateModifiedInDynamo'] = json_record['dateAddedToDynamo']
+    return json_record
 
 
-def save_file_system_record(dynamo_table_name: str, storage_system: str, type_of_data: str, save_only_new_records: bool = True):
-    """ Save File System Name """
-    config = {'local': False}
-    json_record = {'storageSystem': storage_system}
-    json_record['typeOfData'] = type_of_data
-    json_record = add_file_systems_keys(json_record)
-    save_json_to_dynamo_class = SaveJsonToDynamo(config, dynamo_table_name)
-    save_json_to_dynamo_class.save_json_to_dynamo(json_record, save_only_new_records)
-    return
+def add_file_to_process_keys(json_record: dict) -> dict:
+    """ Add dynamoDB keys to FileToProcess record to be saved
+        Required values include: filePath, storageSystem, typeOfData
+        Examples of storageSystem include: S3 and Google and Curate
+        Examples of typeOfData include: Museum and 'RBSC website bucket' and Curate"""
+    json_record['PK'] = 'FILETOPROCESS'
+    json_record['SK'] = 'FILEPATH#' + format_key_value(json_record.get('filePath'))
+    json_record['TYPE'] = 'FileToProcess'
+    json_record['GSI1PK'] = 'FILETOPROCESS'
+    json_record['GSI1SK'] = 'FILESYSTEM#' + format_key_value(json_record.get('storageSystem')) + '#' + format_key_value(json_record.get('typeOfData'))
+    json_record['dateAddedToDynamo'] = get_iso_date_as_string()
+    json_record['dateModifiedInDynamo'] = json_record['dateAddedToDynamo']
+    return json_record
 
 
-def save_file_group_record(dynamo_table_name: str, object_file_group_id: str, storage_system: str, type_of_data: str, save_only_new_records: bool = True):
-    """ Save File System Name """
-    config = {'local': False}
-    json_record = {'objectFileGroupId': object_file_group_id}
-    json_record['storageSystem'] = storage_system
-    json_record['typeOfData'] = type_of_data
-    json_record = add_file_group_keys(json_record)
-    save_json_to_dynamo_class = SaveJsonToDynamo(config, dynamo_table_name)
-    save_json_to_dynamo_class.save_json_to_dynamo(json_record, save_only_new_records)
-    return
+def add_website_keys(json_record: dict) -> dict:
+    """ Add dynamoDB keys to Website record to be saved
+        Required values include: id (website name) """
+    json_record['PK'] = 'WEBSITE'
+    json_record['SK'] = 'WEBSITE#' + format_key_value(json_record.get('id'))
+    json_record['TYPE'] = 'WebSite'
+    json_record['GSI1PK'] = json_record['SK']
+    json_record['GSI1SK'] = json_record['SK']
+    json_record['dateAddedToDynamo'] = get_iso_date_as_string()
+    json_record['dateModifiedInDynamo'] = json_record['dateAddedToDynamo']
+    return json_record
 
 
-def save_harvest_ids(config: dict, source_system: str, string_list_to_save: list, dynamo_table_name: str, save_only_new_records: bool = True):
-    """ Loop through items to harvest, saving each to DynamoDB with appropriate keys """
-    save_json_to_dynamo_class = SaveJsonToDynamo(config, dynamo_table_name)
-    for harvest_item_id in string_list_to_save:
-        new_record = {'sourceSystem': source_system, 'harvestItemId': harvest_item_id}
-        new_record = add_item_to_harvest_keys(new_record)
-        save_json_to_dynamo_class.save_json_to_dynamo(new_record, save_only_new_records)
+def add_subject_term_to_expand_keys(json_record: dict) -> dict:
+    """ Add dynamoDB keys to TermToExpand record to be saved
+        Required values include: uri, authority
+        Note:  valid authorities include:  AAT, IA, FAST, LCSH, LOC """
+    json_record['PK'] = 'SUBJECTTERMTOEXPAND'
+    json_record['SK'] = 'URI#' + format_key_value(json_record.get('uri'))
+    json_record['TYPE'] = 'SubjectTermToExpand'
+    json_record['GSI1PK'] = 'SUBJECTTERMTOEXPAND'
+    json_record['GSI1SK'] = 'AUTHORITY#' + format_key_value(json_record.get('uri'))
+    json_record['dateAddedToDynamo'] = get_iso_date_as_string()
+    json_record['dateModifiedInDynamo'] = json_record['dateAddedToDynamo']
+    return json_record
+
+
+def add_expanded_subject_term_keys(json_record: dict) -> dict:
+    """ Add dynamoDB keys to ExpandedTerm record to be saved
+        Required values include: uri """
+    json_record['PK'] = 'EXPANDEDSUBJECTTERM'
+    json_record['SK'] = 'URI#' + format_key_value(json_record.get('uri'))
+    json_record['TYPE'] = 'ExpandedSubjectTerm'
+    json_record['dateAddedToDynamo'] = get_iso_date_as_string()
+    json_record['dateModifiedInDynamo'] = json_record['dateAddedToDynamo']
+    json_record.pop('GSI1PK', None)
+    json_record.pop('GSI2PK', None)
+    return json_record
 
 
 def format_key_value(key_value: str) -> str:

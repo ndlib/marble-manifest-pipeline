@@ -8,7 +8,8 @@ from s3_helpers import write_s3_json, read_s3_json, delete_s3_key
 from api_helpers import json_serial
 from search_files import crawl_available_files
 from save_json_to_dynamo import SaveJsonToDynamo
-from dynamo_helpers import add_file_keys, save_file_group_record, save_file_system_record
+from dynamo_helpers import add_file_keys
+from dynamo_save_functions import save_file_group_record, save_file_system_record, save_file_to_process_record
 
 
 class FilesApi():
@@ -97,10 +98,14 @@ class FilesApi():
             my_json['id'] = my_json.get('key', '')
             my_json['objectFileGroupId'] = my_json.get('fileId')  # required to join with standard.json
             collection_list.append(my_json)
+            my_json['storageSystem'] = my_json.get('storageSystem', 'S3')
+            my_json['typeOfData'] = my_json.get('typeOfData', 'RBSC website bucket')
+            my_json['filePath'] = my_json.get('path', '')
             my_json = add_file_keys(my_json)
             self.save_json_to_dynamo_class.save_json_to_dynamo(my_json)
             if i == 1 and not self.config.get('local', True):
-                save_file_group_record(self.config['website-metadata-tablename'], my_json.get('objectFileGroupId'), my_json.get('storageSystem', 'S3'), my_json.get('typeOfData', 'RBSC website bucket'))
+                save_file_to_process_record(self.config['website-metadata-tablename'], my_json)
+                save_file_group_record(self.config['website-metadata-tablename'], my_json.get('objectFileGroupId'), my_json.get('storageSystem'), my_json.get('typeOfData'))
         return collection_list
 
     def _cache_s3_call(self, file_name: str, objects: dict):

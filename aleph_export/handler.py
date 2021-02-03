@@ -11,7 +11,7 @@ from harvest_aleph_marc import HarvestAlephMarc  # noqa: #402
 from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
 import sentry_sdk   # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
-from dynamo_helpers import save_source_system_record
+from dynamo_save_functions import save_source_system_record, save_website_record
 
 if 'SENTRY_DSN' in os.environ:
     sentry_sdk.init(dsn=os.environ['SENTRY_DSN'], integrations=[AwsLambdaIntegration()])
@@ -27,6 +27,9 @@ def run(event, _context):
         print("Will break after ", time_to_break)
         if event.get('alephExecutionCount', 0) == 1 and not event.get('local'):
             save_source_system_record(config.get('website-metadata-tablename'), 'Aleph')
+            # I know these next 2 lines do not belong here.  I'm temporarily putting them here just to make sure Dynamo is initialized.  We will eventually find a better place to put this.
+            save_website_record(config.get('website-metadata-tablename'), 'Marble')
+            save_website_record(config.get('website-metadata-tablename'), 'Inquisitions')
         harvest_marc_class = HarvestAlephMarc(config, event, marc_records_url, time_to_break)
         harvest_marc_class.process_marc_records_from_stream()
         if event["alephExecutionCount"] >= event["maximumAlephExecutions"]:
