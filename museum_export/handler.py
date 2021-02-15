@@ -103,7 +103,7 @@ def test():
         event = {}
         event["local"] = False
         event["mode"] = "full"
-        event['seconds-to-allow-for-processing'] = 9000
+        event['seconds-to-allow-for-processing'] = 3300
         event['export_all_files_flag'] = True  # test exporting all files needing processing
         # event["mode"] = "ids"
         # event['ids'] = ['1999.024', '1952.019', '2018.009, 218.049.004']

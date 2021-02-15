@@ -98,7 +98,7 @@ def test():
     else:
         event = {}
         event["local"] = False
-        event['seconds-to-allow-for-processing'] = 9000
+        event['seconds-to-allow-for-processing'] = 3300
         event["ids"] = [
             # "https://archivesspace.library.nd.edu/repositories/2/resources/1652",  # Collegiate Jazz Festival
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1631",    # Inquisitions (MSHLAT0090_EAD)
