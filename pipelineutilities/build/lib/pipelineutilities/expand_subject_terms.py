@@ -12,7 +12,7 @@ import json  # noqa: F401
 from expand_loc_terms import expand_loc_terms
 from expand_getty_ia_terms import expand_ia_terms
 from expand_getty_aat_terms import expand_aat_terms
-from dynamo_save_functions import save_expanded_subject_term_record, save_subject_term_to_expand_record
+from dynamo_save_functions import save_expanded_subject_term_record, save_subject_term_to_expand_record, save_new_subject_term_authority_record, save_unharvested_subject_term_record
 
 
 def expand_subject_terms(standard_json: dict, dynamo_table_name: str = None) -> dict:  # noqa: C901
@@ -51,7 +51,8 @@ def expand_subject_terms(standard_json: dict, dynamo_table_name: str = None) -> 
             elif authority in ('LOCAL'):
                 pass  # we can't expand Local authority
             elif authority not in ('X'):
-                print("unknown authority in ", subject)
+                save_new_subject_term_authority_record(dynamo_table_name, authority, standard_json.get('sourceSystem', ''), standard_json.get('id'))
+                save_unharvested_subject_term_record(dynamo_table_name, authority, standard_json.get('sourceSystem', ''), subject.get('term'), standard_json.get('id'), subject.get('uri'))
             elif subject.get('uri', ''):
                 print('unable to expand subject uri in ', subject)
 

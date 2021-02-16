@@ -153,6 +153,46 @@ def add_expanded_subject_term_keys(json_record: dict) -> dict:
     return json_record
 
 
+def add_website_item_keys(json_record: dict) -> dict:
+    """ Add dynamoDB keys to WebsiteItem record to be saved
+        Required values include: websiteId, id (itemId) """
+    json_record['PK'] = 'WEBSITE#' + format_key_value(json_record.get('websiteId'))
+    json_record['SK'] = 'ITEM#' + format_key_value(json_record.get('id'))
+    json_record['TYPE'] = 'WebsiteItem'
+    json_record['GSI1PK'] = json_record['PK']
+    json_record['GSI1SK'] = 'ADDED#' + get_iso_date_as_string()
+    json_record['dateAddedToDynamo'] = get_iso_date_as_string()
+    json_record['dateModifiedInDynamo'] = json_record['dateAddedToDynamo']
+    json_record['itemId'] = json_record['id']
+    return json_record
+
+
+def add_new_subject_term_authority_keys(json_record: dict) -> dict:
+    """ Add dynamoDB keys to NewSubjectTermAuthority record to be saved
+        Required values include: authority, sourceSystem """
+    json_record['PK'] = 'NEWSUBJECTTERMAUTHORITY'
+    json_record['SK'] = 'AUTHORITY#' + format_key_value(json_record.get('authority', ''))
+    json_record['TYPE'] = 'NewSubjectTermAuthority'
+    json_record['GSI1PK'] = json_record['PK']
+    json_record['GSI1SK'] = 'SOURCESYSTEM#' + format_key_value(json_record.get('sourceSystem'))
+    json_record['dateAddedToDynamo'] = get_iso_date_as_string()
+    json_record['dateModifiedInDynamo'] = json_record['dateAddedToDynamo']
+    return json_record
+
+
+def add_unharvested_subject_term_keys(json_record: dict) -> dict:
+    """ Add dynamoDB keys to NewSubjectTermAuthority record to be saved
+        Required values include: term, authority, source_system """
+    json_record['PK'] = 'UNHARVESTEDSUBJECTTERM'
+    json_record['SK'] = 'TERM#' + format_key_value(json_record.get('term'))
+    json_record['TYPE'] = 'UnharvestedSubjectTerm'
+    json_record['GSI1PK'] = json_record['PK']
+    json_record['GSI1SK'] = 'AUTHORITY#' + format_key_value(json_record.get('authority', ''))
+    json_record['dateAddedToDynamo'] = get_iso_date_as_string()
+    json_record['dateModifiedInDynamo'] = json_record['dateAddedToDynamo']
+    return json_record
+
+
 def format_key_value(key_value: str) -> str:
     """ All of our DynamoDB keys must be upper case, with spaces stripped. """
     if isinstance(key_value, str):

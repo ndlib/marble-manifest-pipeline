@@ -9,8 +9,8 @@ from botocore.exceptions import ClientError
 from save_json_to_dynamo import SaveJsonToDynamo
 from s3_helpers import read_s3_json, write_s3_json
 import os
-from dynamo_helpers import add_item_keys  # , add_file_group_keys
-from dynamo_save_functions import save_parent_override_record
+from dynamo_helpers import add_item_keys
+from dynamo_save_functions import save_parent_override_record, save_website_item_record
 
 
 class SaveStandardJsonToDynamo():
@@ -56,6 +56,8 @@ class SaveStandardJsonToDynamo():
             record_inserted_flag = save_json_to_dynamo_class.save_json_to_dynamo(new_dict, save_only_new_records)
             if record_inserted_flag is None:
                 success_flag = False
+            if new_dict.get('parentId') == 'root':  # add WebsiteItem record to dynamo for all root items
+                save_website_item_record(self.table_name, new_dict['id'], 'Marble')
         except ClientError as ce:
             success_flag = False
             capture_exception(ce)
