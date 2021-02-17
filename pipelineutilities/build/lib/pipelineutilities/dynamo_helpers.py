@@ -126,33 +126,6 @@ def add_website_keys(json_record: dict) -> dict:
     return json_record
 
 
-def add_subject_term_to_expand_keys(json_record: dict) -> dict:
-    """ Add dynamoDB keys to TermToExpand record to be saved
-        Required values include: uri, authority
-        Note:  valid authorities include:  AAT, IA, FAST, LCSH, LOC """
-    json_record['PK'] = 'SUBJECTTERMTOEXPAND'
-    json_record['SK'] = 'URI#' + format_key_value(json_record.get('uri'))
-    json_record['TYPE'] = 'SubjectTermToExpand'
-    json_record['GSI1PK'] = 'SUBJECTTERMTOEXPAND'
-    json_record['GSI1SK'] = 'AUTHORITY#' + format_key_value(json_record.get('uri'))
-    json_record['dateAddedToDynamo'] = get_iso_date_as_string()
-    json_record['dateModifiedInDynamo'] = json_record['dateAddedToDynamo']
-    return json_record
-
-
-def add_expanded_subject_term_keys(json_record: dict) -> dict:
-    """ Add dynamoDB keys to ExpandedTerm record to be saved
-        Required values include: uri """
-    json_record['PK'] = 'EXPANDEDSUBJECTTERM'
-    json_record['SK'] = 'URI#' + format_key_value(json_record.get('uri'))
-    json_record['TYPE'] = 'ExpandedSubjectTerm'
-    json_record['dateAddedToDynamo'] = get_iso_date_as_string()
-    json_record['dateModifiedInDynamo'] = json_record['dateAddedToDynamo']
-    json_record.pop('GSI1PK', None)
-    json_record.pop('GSI2PK', None)
-    return json_record
-
-
 def add_website_item_keys(json_record: dict) -> dict:
     """ Add dynamoDB keys to WebsiteItem record to be saved
         Required values include: websiteId, id (itemId) """
@@ -190,6 +163,26 @@ def add_unharvested_subject_term_keys(json_record: dict) -> dict:
     json_record['GSI1SK'] = 'AUTHORITY#' + format_key_value(json_record.get('authority', ''))
     json_record['dateAddedToDynamo'] = get_iso_date_as_string()
     json_record['dateModifiedInDynamo'] = json_record['dateAddedToDynamo']
+    return json_record
+
+
+def add_subject_term_keys(json_record: dict, saving_expanded_record_flag: bool = False) -> dict:
+    """ Add dynamoDB keys to SubjectTerm record to be saved
+        Required values include: uri, authority """
+    json_record['PK'] = 'SUBJECTTERM'
+    json_record['SK'] = 'URI#' + format_key_value(json_record.get('uri'))
+    json_record['TYPE'] = 'SubjectTerm'
+    if 'dateAddedToDynamo' not in json_record:
+        json_record['dateAddedToDynamo'] = get_iso_date_as_string()
+    if saving_expanded_record_flag and 'dateModifiedInDynamo' not in json_record:
+        json_record['dateModifiedInDynamo'] = get_iso_date_as_string()
+    json_record['GSI1PK'] = json_record['PK']
+    json_record['GSI1SK'] = 'AUTHORITY#' + format_key_value(json_record.get('authority', '')) + '#'
+    json_record['GSI2PK'] = json_record['PK']
+    json_record['GSI2SK'] = 'LASTHARVESTDATE#'
+    if 'dateModifiedInDynamo' in json_record:
+        json_record['GSI1SK'] = 'AUTHORITY#' + format_key_value(json_record.get('authority', '')) + '#' + json_record['dateModifiedInDynamo']
+        json_record['GSI2SK'] = 'LASTHARVESTDATE#' + json_record['dateModifiedInDynamo']
     return json_record
 
 

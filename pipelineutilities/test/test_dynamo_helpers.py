@@ -1,10 +1,11 @@
 """ test save_json_to_dynamo """
+
 import _set_path  # noqa
 import unittest
 from pipelineutilities.dynamo_helpers import format_key_value, add_item_keys, add_file_group_keys, add_file_keys, \
     add_source_system_keys, add_item_to_harvest_keys, add_file_systems_keys, add_parent_override_keys, \
-    add_file_to_process_keys, add_website_keys, add_subject_term_to_expand_keys, add_expanded_subject_term_keys, \
-    add_website_item_keys, add_new_subject_term_authority_keys, add_unharvested_subject_term_keys
+    add_file_to_process_keys, add_website_keys, \
+    add_website_item_keys, add_new_subject_term_authority_keys, add_unharvested_subject_term_keys, add_subject_term_keys
 
 
 class Test(unittest.TestCase):
@@ -129,33 +130,6 @@ class Test(unittest.TestCase):
         del actual_results['dateModifiedInDynamo']
         self.assertEqual(actual_results, expected_results)
 
-    def test_11_add_subject_term_to_expand_keys(self):
-        """ test_11_aadd_subject_term_to_expand_keys """
-        json_record = {'authority': 'AAT', 'uri': 'http://vocab.getty.edu/aat/300010662'}
-        actual_results = add_subject_term_to_expand_keys(json_record)
-        expected_results = {
-            'authority': 'AAT', 'uri': 'http://vocab.getty.edu/aat/300010662',
-            'PK': 'SUBJECTTERMTOEXPAND', 'SK': 'URI#HTTP://VOCAB.GETTY.EDU/AAT/300010662',
-            'TYPE': 'SubjectTermToExpand',
-            'GSI1PK': 'SUBJECTTERMTOEXPAND', 'GSI1SK': 'AUTHORITY#HTTP://VOCAB.GETTY.EDU/AAT/300010662'
-        }
-        del actual_results['dateAddedToDynamo']
-        del actual_results['dateModifiedInDynamo']
-        self.assertEqual(actual_results, expected_results)
-
-    def test_12_add_expanded_subject_term_keys(self):
-        """ test_12_add_expanded_subject_term_keys """
-        json_record = {'uri': 'http://vocab.getty.edu/aat/300010662'}
-        actual_results = add_expanded_subject_term_keys(json_record)
-        expected_results = {
-            'uri': 'http://vocab.getty.edu/aat/300010662',
-            'PK': 'EXPANDEDSUBJECTTERM', 'SK': 'URI#HTTP://VOCAB.GETTY.EDU/AAT/300010662',
-            'TYPE': 'ExpandedSubjectTerm'
-        }
-        del actual_results['dateAddedToDynamo']
-        del actual_results['dateModifiedInDynamo']
-        self.assertEqual(actual_results, expected_results)
-
     def test_13_add_website_item_term_keys(self):
         """ test_13_add_website_item_term_keys """
         json_record = {'id': 'abc123', 'websiteId': 'my website'}
@@ -168,7 +142,7 @@ class Test(unittest.TestCase):
             'GSI1PK': 'WEBSITE#MYWEBSITE'
         }
         del actual_results['dateAddedToDynamo']
-        del actual_results['dateModifiedInDynamo']
+        actual_results.pop('dateModifiedInDynamo', None)
         del actual_results['GSI1SK']
         self.assertEqual(actual_results, expected_results)
 
@@ -183,7 +157,7 @@ class Test(unittest.TestCase):
             'GSI1PK': 'NEWSUBJECTTERMAUTHORITY', 'GSI1SK': 'SOURCESYSTEM#SOMESOURCE'
         }
         del actual_results['dateAddedToDynamo']
-        del actual_results['dateModifiedInDynamo']
+        actual_results.pop('dateModifiedInDynamo', None)
         self.assertEqual(actual_results, expected_results)
 
     def test_15_add_unharvested_subject_term_keys(self):
@@ -197,7 +171,37 @@ class Test(unittest.TestCase):
             'GSI1PK': 'UNHARVESTEDSUBJECTTERM', 'GSI1SK': 'AUTHORITY#NEWAUTHORITY'
         }
         del actual_results['dateAddedToDynamo']
-        del actual_results['dateModifiedInDynamo']
+        actual_results.pop('dateModifiedInDynamo', None)
+        self.assertEqual(actual_results, expected_results)
+
+    def test_16_add_subject_term_keys(self):
+        """ test_16_add_subject_term_keys for insert"""
+        json_record = {'uri': 'some uri', 'authority': 'some authority'}
+        actual_results = add_subject_term_keys(json_record)
+        expected_results = {
+            'uri': 'some uri', 'authority': 'some authority',
+            'PK': 'SUBJECTTERM', 'SK': 'URI#SOMEURI',
+            'TYPE': 'SubjectTerm',
+            'GSI1PK': 'SUBJECTTERM', 'GSI1SK': 'AUTHORITY#SOMEAUTHORITY#',
+            'GSI2PK': 'SUBJECTTERM', 'GSI2SK': 'LASTHARVESTDATE#'}
+        del actual_results['dateAddedToDynamo']
+        actual_results.pop('dateModifiedInDynamo', None)
+        self.assertEqual(actual_results, expected_results)
+
+    def test_17_add_subject_term_keys(self):
+        """ test_17_add_subject_term_keys for update """
+        json_record = {'uri': 'some uri', 'authority': 'some authority'}
+        actual_results = add_subject_term_keys(json_record, True)
+        expected_results = {
+            'uri': 'some uri', 'authority': 'some authority',
+            'PK': 'SUBJECTTERM', 'SK': 'URI#SOMEURI',
+            'TYPE': 'SubjectTerm',
+            'GSI1PK': 'SUBJECTTERM', 'GSI1SK': 'AUTHORITY#SOMEAUTHORITY#',
+            'GSI2PK': 'SUBJECTTERM', 'GSI2SK': 'LASTHARVESTDATE#'}
+        expected_results['GSI1SK'] = expected_results.get('GSI1SK') + actual_results['dateModifiedInDynamo']
+        expected_results['GSI2SK'] = expected_results.get('GSI2SK') + actual_results['dateModifiedInDynamo']
+        del actual_results['dateAddedToDynamo']
+        actual_results.pop('dateModifiedInDynamo', None)
         self.assertEqual(actual_results, expected_results)
 
 

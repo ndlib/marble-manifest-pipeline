@@ -105,7 +105,8 @@ def test():
         event["mode"] = "full"
         event['seconds-to-allow-for-processing'] = 3300
         event['export_all_files_flag'] = True  # test exporting all files needing processing
-        # event["mode"] = "ids"
+        event["mode"] = "ids"
+        event['ids'] = ['1934.007.001']
         # event['ids'] = ['1999.024', '1952.019', '2018.009, 218.049.004']
         # event['ids'] = ['1994.042', '1994.042.a', '1994.042.b']  # , '1990.005.001']
         # event["ids"] = ["1990.005.001", "1990.005.001.a", "1990.005.001.b", "1957.007.031", "1957.007.032", "1981.081.001"]  # parent / child objects
