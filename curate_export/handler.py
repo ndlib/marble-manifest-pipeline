@@ -37,10 +37,13 @@ def run(event: dict, context: dict) -> dict:
             string_list_to_save = _read_harvest_ids_from_json('./source_system_export_ids.json')
             save_harvest_ids(config, 'Curate', string_list_to_save, config.get('website-metadata-tablename'))
             event['ids'] = _read_harvest_ids_from_dynamo(config.get('website-metadata-tablename'), 'Curate')
+            event['countToProcess'] = len(event['ids'])
+
         if "ids" in event:
             print("ids to process: ", event["ids"])
             curate_api_class = CurateApi(config, event, time_to_break)
             event["curateHarvestComplete"] = curate_api_class.get_curate_items(event["ids"])
+        event['countRemaining'] = len(event['ids'])
         if event["curateExecutionCount"] >= event["maxCurateExecutions"] and not event["curateHarvestComplete"]:
             event["curateHarvestComplete"] = True
             sentry_sdk.capture_message('Curate did not complete harvest after maximum executions threshold of ' + str(event["maxCurateExecutions"]))

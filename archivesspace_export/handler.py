@@ -30,6 +30,7 @@ def run(event: dict, _context: dict):
         string_list_to_save = _read_harvest_ids_from_json('./source_system_export_ids.json')
         save_harvest_ids(config, 'ArchivesSpace', string_list_to_save, config.get('website-metadata-tablename'))
         event['ids'] = _read_harvest_ids_from_dynamo(config.get('website-metadata-tablename'), 'ArchivesSpace')
+        event['countToProcess'] = len(event['ids'])
     # config['rbsc-image-bucket'] = "libnd-smb-rbsc"
     start_time = time.time()
     time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
@@ -50,6 +51,7 @@ def run(event: dict, _context: dict):
             save_standard_json(config, standard_json)
             save_standard_json_to_dynamo_class.save_standard_json(standard_json)
         del ids[0]
+    event['countRemaining'] = len(event['ids'])
     event['archivesSpaceHarvestComplete'] = (len(ids) == 0)
     event['eadsSavedToS3'] = os.path.join(config['process-bucket'], config['process-bucket-data-basepath'])
     if event["archivesSpaceExecutionCount"] >= event["maximumArchivesSpaceExecutions"]:
@@ -62,7 +64,7 @@ def _supplement_event(event: dict) -> dict:
         event['archivesSpaceHarvestComplete'] = False
     if 'ssm_key_base' not in event and 'SSM_KEY_BASE' in os.environ:
         event['ssm_key_base'] = os.environ['SSM_KEY_BASE']
-    event['archivesSpaceExecutionCount'] = event.get('alephExecutionCount', 0) + 1
+    event['archivesSpaceExecutionCount'] = event.get('archivesSpaceExecutionCount', 0) + 1
     event['maximumArchivesSpaceExecutions'] = 10
     return event
 

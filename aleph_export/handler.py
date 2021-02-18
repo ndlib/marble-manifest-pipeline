@@ -31,7 +31,9 @@ def run(event, _context):
             save_website_record(config.get('website-metadata-tablename'), 'Marble')
             save_website_record(config.get('website-metadata-tablename'), 'Inquisitions')
         harvest_marc_class = HarvestAlephMarc(config, event, marc_records_url, time_to_break)
-        harvest_marc_class.process_marc_records_from_stream()
+        records_harvested = harvest_marc_class.process_marc_records_from_stream()
+        key = 'countHarvestedLoop' + str(event["alephExecutionCount"])
+        event[key] = records_harvested
         if event["alephExecutionCount"] >= event["maximumAlephExecutions"]:
             event['alephHarvestComplete'] = True
 

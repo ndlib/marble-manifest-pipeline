@@ -25,12 +25,16 @@ def run(event, _context):
         time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
         print("Will break after ", time_to_break)
         subject_terms = get_subject_terms_needing_expanded(config.get('website-metadata-tablename'), 1)
+        if 'countToProcess' not in event:
+            event['countToProcess'] = len(subject_terms)
+
         print('count of subject terms we need to expand = ', len(subject_terms))
         while len(subject_terms):
             subject = subject_terms.pop(0)
             expand_subject_term(subject, config.get('website-metadata-tablename'))
             if datetime.now() > time_to_break:
                 break
+        event['countRemaining'] = len(subject_terms)
         if len(subject_terms) == 0:
             event['expandSubjectTermsComplete'] = True
         if event["expandSubjectTermsExecutionCount"] >= event["maximumExpandSubjectTermsExecutions"]:
@@ -67,7 +71,7 @@ def test():
     else:
         event = {}
         event['local'] = False
-        event['seconds-to-allow-for-processing'] = 3550
+        event['seconds-to-allow-for-processing'] = 30
 
     event = run(event, {})
 
