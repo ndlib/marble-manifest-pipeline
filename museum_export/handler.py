@@ -43,6 +43,7 @@ def run(event, _context):
         composite_json = json_web_kiosk_class.get_composite_json_metadata(mode)
         museum_image_metadata = json_web_kiosk_class.find_images_for_composite_json_metadata(composite_json)
         composite_json = CleanUpCompositeJson(composite_json).cleaned_up_content
+        event['countToProcess'] = len(composite_json.get('objects'))
         write_s3_json(config['process-bucket'], 'museum_composite_metadata.json', composite_json)
         write_s3_json(config['process-bucket'], 'museum_image_metadata.json', museum_image_metadata)
     else:
@@ -50,7 +51,7 @@ def run(event, _context):
         museum_image_metadata = read_s3_json(config['process-bucket'], 'museum_image_metadata.json')
 
     if composite_json:
-        json_web_kiosk_class.process_composite_json_metadata(composite_json, museum_image_metadata)
+        objects_processed = json_web_kiosk_class.process_composite_json_metadata(composite_json, museum_image_metadata)
         event['museumHarvestComplete'] = _done_processing(composite_json)
     else:
         print('No JSON to process')
@@ -64,6 +65,8 @@ def run(event, _context):
             delete_s3_key(config['process-bucket'], 'museum_image_metadata.json')
     elif composite_json:
         write_s3_json(config['process-bucket'], 'museum_composite_metadata.json', composite_json)
+        key = 'countHarvestedLoop' + str(event["museumExecutionCount"])
+        event[key] = objects_processed
 
     return event
 
@@ -103,10 +106,10 @@ def test():
         event = {}
         event["local"] = False
         event["mode"] = "full"
-        event['seconds-to-allow-for-processing'] = 3300
+        event['seconds-to-allow-for-processing'] = 240
         event['export_all_files_flag'] = True  # test exporting all files needing processing
-        event["mode"] = "ids"
-        event['ids'] = ['1934.007.001']
+        # event["mode"] = "ids"
+        # event['ids'] = ['1934.007.001']
         # event['ids'] = ['1999.024', '1952.019', '2018.009, 218.049.004']
         # event['ids'] = ['1994.042', '1994.042.a', '1994.042.b']  # , '1990.005.001']
         # event["ids"] = ["1990.005.001", "1990.005.001.a", "1990.005.001.b", "1957.007.031", "1957.007.032", "1981.081.001"]  # parent / child objects
