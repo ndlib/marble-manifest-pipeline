@@ -1,6 +1,4 @@
-"""
-Save json to Dynamo
-"""
+""" Save json to Dynamo """
 
 import boto3
 from datetime import datetime, date
@@ -54,6 +52,29 @@ class SaveJsonToDynamo():
                 capture_exception(ce)
                 print(f"save_json_to_dynamo.py/save_json_to_dynamo Error saving to {self.table_name} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
         return record_inserted_flag
+
+    def save_json_to_dynamo_returning_results(self, json_dict: dict, return_values: str = "ALL_OLD", save_only_new_records: bool = False) -> bool:
+        """ Save json information to dynamo.
+            If save_only_new_records is True, only save the record if the Primary Key (PK + SK) does not already exist
+            return_values parameter must be either "ALL_OLD" or "NONE"
+            Dynamo results will be returned to the user """
+        if not self.dynamo_table_available:
+            return None
+        json_dict = _serialize_json(json_dict)
+        condition_expression = None
+        results = {}
+        if save_only_new_records:
+            condition_expression = 'attribute_not_exists(PK) AND attribute_not_exists(SK)'
+        if return_values != "ALL_OLD":
+            return_values = "NONE"
+        kwargs = _build_put_item_parameters(json_dict, "ALL_OLD", condition_expression)
+        try:
+            results = self.table.put_item(**kwargs)
+        except ClientError as ce:
+            if ce.response['Error']['Code'] != 'ConditionalCheckFailedException':
+                capture_exception(ce)
+                print(f"save_json_to_dynamo.py/save_json_to_dynamo_returning_results Error saving to {self.table_name} table - {ce.response['Error']['Code']} - {ce.response['Error']['Message']}")
+        return results
 
 
 def _build_put_item_parameters(json_dict: dict, return_values: str = None, condition_expression: str = None) -> dict:

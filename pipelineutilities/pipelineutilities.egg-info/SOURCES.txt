@@ -46,6 +46,7 @@ pipelineutilities/add_paths_to_json_object.py
 pipelineutilities/creatorField.py
 pipelineutilities/csv_collection.py
 pipelineutilities/dynamo_helpers.py
+pipelineutilities/dynamo_query_functions.py
 pipelineutilities/dynamo_save_functions.py
 pipelineutilities/expand_getty_aat_terms.py
 pipelineutilities/expand_getty_ia_terms.py
