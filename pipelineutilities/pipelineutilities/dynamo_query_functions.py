@@ -47,3 +47,33 @@ def get_subject_terms_needing_expanded(table_name: str, days_before_expanding_te
         except ClientError as ce:
             capture_exception(ce)
     return results
+
+
+def get_item_record(table_name: str, item_id: str) -> dict:
+    """ Query Item record from dynamo based on item_id """
+    results = {}
+    if item_id:
+        pk = 'ITEM#' + format_key_value(item_id)
+        sk = pk
+        try:
+            table = boto3.resource('dynamodb').Table(table_name)
+            response = table.get_item(Key={'PK': pk, 'SK': sk})
+            results = response.get('Item', {})
+        except ClientError as ce:
+            capture_exception(ce)
+    return results
+
+
+def get_file_record(table_name: str, file_id: str) -> dict:
+    """ Query Item record from dynamo based on item_id """
+    results = {}
+    if file_id:
+        pk = 'FILE'
+        sk = 'FILE#' + format_key_value(file_id)
+        try:
+            table = boto3.resource('dynamodb').Table(table_name)
+            response = table.get_item(Key={'PK': pk, 'SK': sk})
+            results = response.get('Item', {})
+        except ClientError as ce:
+            capture_exception(ce)
+    return results
