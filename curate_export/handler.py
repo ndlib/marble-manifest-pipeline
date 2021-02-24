@@ -8,7 +8,7 @@ import json
 from datetime import datetime, timedelta
 from pathlib import Path
 from curate_api import CurateApi
-# from read_batch_ingest_combined_csv import read_batch_ingest_combined_csv
+from s3_helpers import delete_s3_key, s3_file_exists, write_s3_json
 from pipelineutilities.pipeline_config import setup_pipeline_config, load_config_ssm
 import sentry_sdk   # noqa: E402
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
@@ -28,21 +28,24 @@ def run(event: dict, context: dict) -> dict:
     if config:
         time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
         print("Will break after ", time_to_break)
-        if event.get('curateExecutionCount', 0) == 1 and not event.get('local'):
+        if event.get('curateExecutionCount', 0) == 1 and not event.get('local', True):
             save_source_system_record(config.get('website-metadata-tablename'), 'Curate')
-        curate_config = load_config_ssm(config['curate_keys_ssm_base'])
-        config.update(curate_config)
-        save_file_system_record(config.get('website-metadata-tablename'), 'Curate', 'Curate')
-        if not event.get("ids", False):
-            string_list_to_save = _read_harvest_ids_from_json('./source_system_export_ids.json')
-            save_harvest_ids(config, 'Curate', string_list_to_save, config.get('website-metadata-tablename'))
-            event['ids'] = _read_harvest_ids_from_dynamo(config.get('website-metadata-tablename'), 'Curate')
-            event['countToProcess'] = len(event['ids'])
+            _save_seed_files_to_s3(config['process-bucket'], 'save')
+        if not config.get('local', True):
+            curate_config = load_config_ssm(config['curate_keys_ssm_base'])
+            config.update(curate_config)
+            save_file_system_record(config.get('website-metadata-tablename'), 'Curate', 'Curate')
+            if not event.get("ids", False):
+                string_list_to_save = _read_harvest_ids_from_json('./source_system_export_ids.json', 'Curate')
+                string_list_to_save = _read_harvest_ids_from_json('./source_system_export_ids.json', 'Curate')
+                save_harvest_ids(config, 'Curate', string_list_to_save, config.get('website-metadata-tablename'))
+                event['ids'] = _read_harvest_ids_from_dynamo(config.get('website-metadata-tablename'), 'Curate')
+                event['countToProcess'] = len(event['ids'])
 
         if "ids" in event:
             print("ids to process: ", event["ids"])
             curate_api_class = CurateApi(config, event, time_to_break)
-            event["curateHarvestComplete"] = curate_api_class.get_curate_items(event["ids"])
+            event["curateHarvestComplete"] = curate_api_class.process_curate_items(event["ids"])
         event['countRemaining'] = len(event['ids'])
         if event["curateExecutionCount"] >= event["maxCurateExecutions"] and not event["curateHarvestComplete"]:
             event["curateHarvestComplete"] = True
@@ -65,17 +68,44 @@ def _supplement_event(event: dict) -> dict:
     return
 
 
-def _read_harvest_ids_from_json(json_file_name: str) -> dict:
+def _read_harvest_ids_from_json(json_file_name: str, section_to_return: str = 'Curate') -> dict:
     """ read local json file into a dictionary, return information related to Curate """
     with open(json_file_name) as json_file:
         data = json.load(json_file)
-    return data['Curate']
+    return data.get(section_to_return, [])
 
 
 def _read_harvest_ids_from_dynamo(dynamo_table_name, source_system_name) -> list:
     read_from_dynamo_class = ReadFromDynamo({'local': False}, dynamo_table_name)
     results = read_from_dynamo_class.read_items_to_harvest(source_system_name)
     return results
+
+
+def _save_seed_files_to_s3(bucket_name, folder_name):
+    local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
+    for file_name in os.listdir(folder_name):
+        local_file_name = os.path.join(local_folder, folder_name, file_name)
+        if os.path.isfile(local_file_name):
+            with io.open(local_file_name, 'r', encoding='utf-8') as json_file:
+                json_to_save = json.load(json_file)
+            s3_key = os.path.join(folder_name, file_name)
+            _delete_multipart_s3_file_if_necessary(bucket_name, s3_key)
+            print('saving filename to s3 = ', file_name)
+            write_s3_json(bucket_name, s3_key, json_to_save)
+
+
+def _delete_multipart_s3_file_if_necessary(bucket_name, s3_key):
+    """ If files were manually uploaded through the aws console and are large (35 meg in my example)
+        AWS Console loads then using a multipart upload, whose md5 checksum we cannot accommodate.
+        If our file we are checking is such a file, delete it so we can reload it. """
+    obj_dict = s3_file_exists(bucket_name, s3_key)
+    if not obj_dict:
+        return
+
+    etag = (obj_dict['ETag'])
+    etag = etag[1:-1]  # strip quotes
+    if '-' in etag:
+        delete_s3_key(bucket_name, s3_key)
 
 
 # setup:
@@ -94,7 +124,9 @@ def test(identifier=""):
     else:
         event = {}
         event['local'] = False
-        event['seconds-to-allow-for-processing'] = 9000
+        event['ids'] = []  # default to read from Dynamo
+        event['seconds-to-allow-for-processing'] = 600
+        # event['local'] = True
         if event['local']:
             # event['seconds-to-allow-for-processing'] = 30
             # und:qz20sq9094h = Architectural Lantern Slides (huge)
@@ -103,8 +135,8 @@ def test(identifier=""):
             event['ids'] = ["und:zp38w953h0s"]  # Commencement Programs
             event['ids'] = ["und:zp38w953p3c"]  # Chinese Catholic-themed paintings
             event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
-        event['ids'] = []  # force read from Dynamo
-        event['export_all_files_flag'] = True  # test exporting all files needing processing
+        # event['ids'] = ["und:qz20sq9094h"]  # Architectural Lantern Slides (huge)
+        # event['export_all_files_flag'] = True  # test exporting all files needing processing
     event = run(event, {})
 
     if not event['curateHarvestComplete']:
