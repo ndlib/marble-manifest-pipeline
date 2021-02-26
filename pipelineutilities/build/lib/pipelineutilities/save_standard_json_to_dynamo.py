@@ -16,12 +16,13 @@ from dynamo_save_functions import save_parent_override_record, save_website_item
 class SaveStandardJsonToDynamo():
     """ Save Standard Json to Dynamo """
 
-    def __init__(self, config: dict):
+    def __init__(self, config: dict, time_to_break: int = None):
         self.config = config
         self.related_ids_updated = False
         self.table_name = self.config.get('website-metadata-tablename')
         self.local = config.get('local', True)
         self.related_ids = self._read_related_ids()
+        self.time_to_break = time_to_break
 
     def save_standard_json(self, standard_json: dict, save_only_new_records: bool = False) -> bool:  # , export_all_files_flag: bool = False) -> bool:
         """ First, validate the standard_json.  If this is the first time this standard_json is being saved,
@@ -37,12 +38,12 @@ class SaveStandardJsonToDynamo():
                     self._save_related_ids()
         return success_flag
 
-    def _save_json_to_dynamo(self, standard_json: dict, save_only_new_records: bool = False) -> bool:
+    def _save_json_to_dynamo(self, standard_json: dict, save_only_new_records: bool = False) -> bool:  # noqa: C901
         """ Save each item recursively to dynamo then save root """
         success_flag = True
         if "items" in standard_json:
             for item in standard_json['items']:
-                if item.get("level") != "file":
+                if item.get("level") != "file" and (not self.time_to_break or datetime.now() < self.time_to_break):
                     self._save_json_to_dynamo(item)
         if "childIds" in standard_json:
             self._append_related_ids(standard_json)
@@ -51,6 +52,8 @@ class SaveStandardJsonToDynamo():
         if standard_json.get("sourceSystem", "") in self.config.get("source-systems-requiring-metadata-expire-time"):
             new_dict['expireTime'] = int(datetime.timestamp(datetime.now() + timedelta(days=int(self.config.get('metadata-time-to-live-days', 3)))))
         new_dict = add_item_keys(new_dict)
+        if self.time_to_break and datetime.now() > self.time_to_break:
+            return False
         try:
             save_json_to_dynamo_class = SaveJsonToDynamo(self.config, self.table_name)
             record_inserted_flag = save_json_to_dynamo_class.save_json_to_dynamo(new_dict, save_only_new_records)

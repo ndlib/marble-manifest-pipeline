@@ -33,7 +33,7 @@ class CurateApi():
         self.start_time = time.time()
         self.time_to_break = time_to_break
         self.translate_curate_json_node_class = TranslateCurateJsonNode(config)
-        self.save_standard_json_locally = event.get("local", False)
+        self.save_standard_json_locally = True  # event.get("local", False)
         self.create_standard_json_class = CreateStandardJson(config)
         self.local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
         self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('website-metadata-tablename', ''))
@@ -55,7 +55,7 @@ class CurateApi():
                 break
         return not aborted_processing
 
-    def process_curate_item(self, item_id: str) -> dict:
+    def process_curate_item(self, item_id: str) -> dict:  # noqa: C901
         """ Get json metadata for a curate item given an item_id
             Note: query is of the form: curate-server-base-url + "/api/items/<pid>" """
         standard_json = {}
@@ -76,22 +76,24 @@ class CurateApi():
                     save_standard_json(self.config, standard_json)
                     self.event['itemBeingProcessed']['savedStandardJsonToS3'] = True
                 if save_required_flag and datetime.now() < self.time_to_break and not self.event['itemBeingProcessed'].get('savedStandardJsonToDynamo', False):
-                    save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
+                    save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config, self.time_to_break)
                     print("saving standard_json to dynamo recursively for", item_id, 'after', int(time.time() - self.start_time), 'seconds')
                     save_standard_json_to_dynamo_class.save_standard_json(standard_json)
-                    self.event['itemBeingProcessed']['savedStandardJsonToDynamo'] = True
+                    if datetime.now() < self.time_to_break:
+                        self.event['itemBeingProcessed']['savedStandardJsonToDynamo'] = True
                 if datetime.now() < self.time_to_break and not self.event['itemBeingProcessed'].get('savedFilesNeedingProcessedToDynamo', False):
-                    first_file_json = self._find_first_file_in_standard_json(standard_json)
-                    save_file_required_flag = self._save_file_to_dynamo_required(first_file_json)
-                    if (save_required_flag or export_all_files_flag or save_file_required_flag):
+                    # first_file_json = self._find_first_file_in_standard_json(standard_json)
+                    # save_file_required_flag = self._save_file_to_dynamo_required(first_file_json)  # TODO: Generalize instead of assuming if the first file is saved, all are saved
+                    if (save_required_flag or export_all_files_flag):  # or save_file_required_flag)
                         print("saving curate image data recursively to dynamo for", item_id)
                         file_needed_updated = self._save_curate_image_data_to_dynamo(standard_json, export_all_files_flag)
-                        self.event['itemBeingProcessed']['savedFilesNeedingProcessedToDynamo'] = True
-                        if file_needed_updated:
-                            print("updating files needing processed for", item_id, 'after', int(time.time() - self.start_time), 'seconds')
-                            files_needing_processed_class = FilesNeedingProcessed(self.config)
-                            files_needing_processed_class.record_files_needing_processed(standard_json, True)
-                        self.event.pop('itemBeingProcessed', None)
+                        if datetime.now() < self.time_to_break:
+                            self.event['itemBeingProcessed']['savedFilesNeedingProcessedToDynamo'] = True
+                            if file_needed_updated:
+                                print("updating files needing processed for", item_id, 'after', int(time.time() - self.start_time), 'seconds')
+                                files_needing_processed_class = FilesNeedingProcessed(self.config)
+                                files_needing_processed_class.record_files_needing_processed(standard_json, True)
+                            self.event.pop('itemBeingProcessed', None)
                 if datetime.now() < self.time_to_break:
                     self.event.pop('itemBeingProcessed', None)
                 print('finished processing', item_id, 'after', int(time.time() - self.start_time), 'seconds')
@@ -100,11 +102,7 @@ class CurateApi():
     def _get_standard_json(self, curate_json: dict) -> dict:
         """ Decide whether to use saved standard_json or whether to create it ourselves from curate_json"""
         item_id = curate_json.get('id')
-        date_from_curate = curate_json.get('dateSubmitted')[:10]
-        saved_standard_json = self._get_saved_standard_json(item_id)
-        date_from_saved_standard_json = saved_standard_json.get('modifiedDate')
-        # print("date_from_curate =", date_from_curate, "date_from_saved_standard_json =", date_from_saved_standard_json)
-        if not date_from_saved_standard_json or date_from_curate > date_from_saved_standard_json:
+        if self._generate_new_standard_json_required(curate_json):
             print("generating new standard_json")
             standard_json = self.translate_curate_json_node_class.build_json_from_curate_json(curate_json, "root", {})
             if self.save_standard_json_locally:
@@ -117,7 +115,7 @@ class CurateApi():
             self._save_standard_json_for_future_processing(standard_json)
         else:
             print('using saved standard.json')
-            standard_json = saved_standard_json
+            standard_json = self._get_saved_standard_json(item_id)
         return standard_json
 
     def _get_saved_standard_json(self, item_id: str) -> dict:
@@ -137,7 +135,7 @@ class CurateApi():
     def _save_standard_json_for_future_processing(self, standard_json: dict):
         """ Once we get standard_json, save it so we can process more easily next time. """
         item_id = standard_json.get('id', '')
-        if self.config.get('local', True):
+        if self.config.get('local', True) or self.save_standard_json_locally:
             filename = os.path.join(self.local_folder, "save", item_id + "_standard.json")
             with open(filename, 'w') as f:
                 json.dump(standard_json, f, indent=2)
@@ -158,7 +156,8 @@ class CurateApi():
                     save_file_to_process_record(self.config['website-metadata-tablename'], new_dict, False)
                     save_file_group_record(self.config['website-metadata-tablename'], new_dict.get('objectFileGroupId'), new_dict.get('storageSystem'), new_dict.get('typeOfData'))
         for item in standard_json.get('items', []):
-            self._save_curate_image_data_to_dynamo(item, export_all_files_flag, file_needed_updated)
+            if datetime.now < self.time_to_break:
+                self._save_curate_image_data_to_dynamo(item, export_all_files_flag, file_needed_updated)
         return file_needed_updated
 
     def _save_standard_json_to_dynamo_required(self, standard_json: dict) -> bool:
@@ -194,5 +193,29 @@ class CurateApi():
             return True
         if saved_file_json.get('modifiedDate', '')[:10] < first_file_json.get('modifiedDate', '')[:10]:
             print('Need to save files because saved_file_date:', saved_file_json.get('modifiedDate', '')[:10], ' < date of first file in std json: ', first_file_json.get('modifiedDate', '')[:10])
+            return True
+        return False
+
+    def _generate_new_standard_json_required(self, curate_json: dict) -> bool:
+        """ If there is a manual request to save json to dynamo, then generate standard json.
+            If there is no saved_standard_json, then generate standard json
+            If date of existing standard json is older than the modified date in cureate, then generate standard json.
+            If validate_json.py has been updated more recently than the date in standard json, then generate standard json.
+            Otherwise, flag no generation needed. """
+        item_id = curate_json.get('id')
+        if item_id == 'qz20sq9094h' and not self.save_standard_json_locally:
+            return False  # special case for Architectural Lantern Slides, which take over 2 hours to create standard json, which can only be generated locally.
+        if self.event.get('forceSaveStandardJson'):
+            return True
+        saved_standard_json = self._get_saved_standard_json(item_id)
+        if not saved_standard_json:
+            return True
+        date_from_curate = curate_json.get('dateSubmitted')[:10]
+        date_from_saved_standard_json = saved_standard_json.get('modifiedDate')
+        if not date_from_saved_standard_json or date_from_curate > date_from_saved_standard_json:
+            return True
+        validate_json_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'dependencies', 'pipelineutilities', 'validate_json.py')
+        validate_json_modified_date = datetime.fromtimestamp(os.path.getmtime(validate_json_path))
+        if validate_json_modified_date.isoformat() > date_from_saved_standard_json:
             return True
         return False

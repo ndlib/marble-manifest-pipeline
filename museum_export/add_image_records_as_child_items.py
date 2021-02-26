@@ -33,7 +33,9 @@ class AddImageRecordsAsChildItems():
             image_item['thumbnail'] = digital_asset.get("thumbnail", False)
             google_image_info = self.image_files[file_name]
             image_item['md5Checksum'] = google_image_info['md5Checksum']
-            image_item['filePath'] = 'https://drive.google.com/a/nd.edu/file/d/' + google_image_info['id'] + '/view'  # noqa: E501
+            image_item['sourceFilePath'] = 'https://drive.google.com/a/nd.edu/file/d/' + google_image_info['id'] + '/view'  # noqa: E501
+            image_item['sourceUri'] = 'https://drive.google.com/a/nd.edu/file/d/' + google_image_info['id'] + '/view'  # We probably don't need both the above line and this line
+            # note: filePath will be added later to be the treePath + fileName
             image_item['fileId'] = google_image_info['id']
             image_item['modifiedDate'] = google_image_info['modifiedTime']
             image_item['mimeType'] = google_image_info['mimeType']

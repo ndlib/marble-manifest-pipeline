@@ -48,7 +48,7 @@ class Test(unittest.TestCase):
             "sequence": 1,
             "thumbnail": True,
             "fileDescription": "1990_005_001-v0004.jpg",
-            "filePath": "/Media/images/1990/1990/1990_005_001/1990_005_001-v0004.jpg"
+            "sourceFilePath": "/Media/images/1990/1990/1990_005_001/1990_005_001-v0004.jpg"
         }
         process_one_museum_object_class = AddImageRecordsAsChildItems(self.image_info)
         image_item = process_one_museum_object_class._create_item_record_for_image(digital_asset)
@@ -58,7 +58,8 @@ class Test(unittest.TestCase):
             "level": "file",
             "description": "1990_005_001-v0004.jpg",
             "md5Checksum": "65a7bc5841defa6e7f9bce0f89c12411",
-            "filePath": "https://drive.google.com/a/nd.edu/file/d/1lxLLreSLq3v1bbvO9FsD3PMf4IV-m238/view",
+            "sourceFilePath": "https://drive.google.com/a/nd.edu/file/d/1lxLLreSLq3v1bbvO9FsD3PMf4IV-m238/view",
+            "sourceUri": "https://drive.google.com/a/nd.edu/file/d/1lxLLreSLq3v1bbvO9FsD3PMf4IV-m238/view",
             "sequence": 1,
             "size": 5651708,
             "title": "1990_005_001-v0004.jpg",
@@ -78,13 +79,13 @@ class Test(unittest.TestCase):
                     "sequence": 1,
                     "thumbnail": True,
                     "fileDescription": "1990_005_001-v0004.jpg",
-                    "filePath": "/Media/images/1990/1990/1990_005_001/1990_005_001-v0004.jpg"
+                    "sourceFilePath": "/Media/images/1990/1990/1990_005_001/1990_005_001-v0004.jpg"
                 },
                 {
                     "sequence": 2,
                     "thumbnail": False,
                     "fileDescription": "1990_005_001-v0003.jpg",
-                    "filePath": "/Media/images/1990/1990/1990_005_001/1990_005_001-v0003.jpg"
+                    "sourceFilePath": "/Media/images/1990/1990/1990_005_001/1990_005_001-v0003.jpg"
                 }
             ]
         }
@@ -106,7 +107,8 @@ class Test(unittest.TestCase):
                     'description': '1990_005_001-v0004.jpg',
                     'thumbnail': True,
                     'md5Checksum': '65a7bc5841defa6e7f9bce0f89c12411',
-                    'filePath': 'https://drive.google.com/a/nd.edu/file/d/1lxLLreSLq3v1bbvO9FsD3PMf4IV-m238/view',
+                    'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/1lxLLreSLq3v1bbvO9FsD3PMf4IV-m238/view',
+                    'sourceUri': 'https://drive.google.com/a/nd.edu/file/d/1lxLLreSLq3v1bbvO9FsD3PMf4IV-m238/view',
                     'fileId': '1lxLLreSLq3v1bbvO9FsD3PMf4IV-m238',
                     'modifiedDate': '2019-07-01T15:42:41.648Z',
                     'mimeType': 'image/jpeg',
@@ -126,7 +128,8 @@ class Test(unittest.TestCase):
                     'description': '1990_005_001-v0003.jpg',
                     'thumbnail': False,
                     'md5Checksum': '2ae1d9f082fc0aad7ca7086bdad20ef0',
-                    'filePath': 'https://drive.google.com/a/nd.edu/file/d/1MrC-QDlkdMDR0rgdTENqwdlD7lY3AGe6/view',
+                    'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/1MrC-QDlkdMDR0rgdTENqwdlD7lY3AGe6/view',
+                    'sourceUri': 'https://drive.google.com/a/nd.edu/file/d/1MrC-QDlkdMDR0rgdTENqwdlD7lY3AGe6/view',
                     'fileId': '1MrC-QDlkdMDR0rgdTENqwdlD7lY3AGe6',
                     'modifiedDate': '2019-07-01T15:42:29.933Z',
                     'mimeType': 'image/jpeg',

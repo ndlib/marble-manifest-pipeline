@@ -1,7 +1,7 @@
 # test_clean_up_composite_json.py
 """ test clean_up_composite_json """
 import unittest
-from clean_up_composite_json import CleanUpCompositeJson, _is_hierachy_searchable
+from clean_up_composite_json import CleanUpCompositeJson, _is_hierachy_searchable, _get_iso_date, _fix_modified_dates
 
 
 class Test(unittest.TestCase):
@@ -105,6 +105,27 @@ class Test(unittest.TestCase):
         fixed_composite_json = CleanUpCompositeJson(composite_json).cleaned_up_content
         expected_composite_json = {'objects': {'abc': {'hierarchySearchable': True, 'id': 'abc', 'items': [{'id': 'abc.1', 'title': 'thing a', 'sequence': 0}, {'id': 'abc.2', 'title': 'thing b', 'sequence': 0}]}}}
         self.assertEqual(fixed_composite_json, expected_composite_json)
+
+    def test_9_get_iso_date(self):
+        """ test_9_get_iso_date """
+        self.assertEqual(_get_iso_date('01/22/2021 13:28:27'), '2021-01-22T13:28:27')
+        self.assertEqual(_get_iso_date('1/2/2021 13:28:27'), '2021-01-02T13:28:27')
+        self.assertEqual(_get_iso_date('1/3/2021 1:28:27'), '2021-01-03T01:28:27')
+        self.assertEqual(_get_iso_date('1/4/2021 1:2:27'), '2021-01-04T01:02:27')
+        self.assertEqual(_get_iso_date('1/5/2021 1:2:3'), '2021-01-05T01:02:03')
+
+    def test_10_fix_modified_dates(self):
+        """ test_10_fix_modified_dates """
+        objects = {
+            "abc": {"id": "abc", "modifiedDate": "01/02/2003 1:2:3"},
+            "abc.1": {"id": "abc.1", "modifiedDate": "02/03/2004 1:2:3"}
+        }
+        actual_results = _fix_modified_dates(objects)
+        expected_results = {
+            'abc': {'id': 'abc', 'modifiedDate': '2003-01-02T01:02:03'},
+            'abc.1': {'id': 'abc.1', 'modifiedDate': '2004-02-03T01:02:03'}
+        }
+        self.assertEqual(actual_results, expected_results)
 
 
 def suite():

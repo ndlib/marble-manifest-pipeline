@@ -100,7 +100,7 @@ class FilesApi():
             collection_list.append(my_json)
             my_json['storageSystem'] = my_json.get('storageSystem', 'S3')
             my_json['typeOfData'] = my_json.get('typeOfData', 'RBSC website bucket')
-            my_json['filePath'] = my_json.get('path', '')
+            my_json['sourceFilePath'] = my_json.get('path', '')
             my_json = add_file_keys(my_json)
             self.save_json_to_dynamo_class.save_json_to_dynamo(my_json)
             if i == 1 and not self.config.get('local', True):

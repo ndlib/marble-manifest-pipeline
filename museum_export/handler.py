@@ -67,17 +67,18 @@ def run(event, _context):
         write_s3_json(config['process-bucket'], 'museum_composite_metadata.json', composite_json)
         key = 'countHarvestedLoop' + str(event["museumExecutionCount"])
         event[key] = objects_processed
-
+        event['countRemaining'] = len(composite_json.get('objects'))
     return event
 
 
 def _done_processing(composite_json):
-    done_flag = True
-    if "objects" in composite_json:
-        for _key, value in composite_json["objects"].items():
-            if not value.get("recordProcessedFlag", False):
-                done_flag = False
-    return done_flag
+    return len(composite_json.get('objects')) == 0
+    # done_flag = True
+    # if "objects" in composite_json:
+    #     for _key, value in composite_json["objects"].items():
+    #         if not value.get("recordProcessedFlag", False):
+    #             done_flag = False
+    # return done_flag
 
 
 def _suplement_event(event):
@@ -106,9 +107,9 @@ def test():
         event = {}
         event["local"] = False
         event["mode"] = "full"
-        event['seconds-to-allow-for-processing'] = 240
+        event['seconds-to-allow-for-processing'] = 60 * 50
         event['export_all_files_flag'] = True  # test exporting all files needing processing
-        event["mode"] = "ids"
+        # event["mode"] = "ids"
         # event['ids'] = ['1934.007.001']
         # event['ids'] = ['1999.024', '1952.019', '2018.009, 218.049.004']
         # event['ids'] = ['1994.042', '1994.042.a', '1994.042.b']  # , '1990.005.001']
@@ -117,6 +118,7 @@ def test():
         # event["ids"] = ["2017.039.005", "1986.052.007.005", "1978.062.002.003"]  # Objects with hidden parents
         # Test these temp IDs:  IL2019.006.002, IL1992.065.004, L1986.032.002, AA1966.031
         event['ids'] = ['2019.001.003']
+        event['forceSaveStandardJson'] = False
     event = run(event, {})
 
     if not event['museumHarvestComplete']:

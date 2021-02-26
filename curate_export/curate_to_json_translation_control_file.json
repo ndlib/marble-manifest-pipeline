@@ -100,7 +100,12 @@
 				"fields": ["description"],
 				"format": "text"
 			},
-			{ "label": "filePath",
+			{ "label": "sourceFilePath",
+				"fields": ["representative"],
+				"format": "text"
+			},
+			{
+				"label": "sourceUri",
 				"fields": ["representative"],
 				"format": "text"
 			},
@@ -134,18 +139,6 @@
 	},
 	"containedFiles" : {
 		"FieldsToExtract": [
-			{ "!label": "apiVersion",
-				"!extraProcessing": "schema_api_version",
-				"!format": "text"
-			},
-			{ "!label": "fileCreatedDate",
-				"!extraProcessing": "file_created_date",
-				"!format": "text"
-			},
-			{ "!label": "sourceSystem",
-				"!constant": "Curate",
-				"!format": "text"
-			},
 			{ "label": "sourceType",
 				"constant": "Curate",
 				"format": "text"

@@ -4,6 +4,7 @@ import boto3
 import botocore
 from datetime import datetime, timedelta
 from pipelineutilities.s3_helpers import read_s3_json, write_s3_json
+import re
 
 
 class FilesNeedingProcessed():
@@ -83,6 +84,14 @@ class FilesNeedingProcessed():
         return (date_to_check >= export_since_date)
 
     def _get_date_from_date_field(self, date_field: str) -> datetime:
+        if re.findall(r'\d{4}-\d{1,2}-\d{1,2}T\d{1,2}:\d{1,2}:\d{1,2}Z', date_field):
+            return datetime.strptime(date_field, '%Y-%m-%dT%H:%M:%SZ')
+        if re.findall(r'\d{4}-\d{1,2}-\d{1,2}T\d{1,2}:\d{1,2}:\d{1,2}.\d{1,6}Z', date_field):
+            return datetime.strptime(date_field, '%Y-%m-%dT%H:%M:%S.%fZ')
+        if re.findall(r'\d{4}-\d{1,2}-\d{1,2}T\d{1,2}:\d{1,2}:\d{1,2}', date_field):
+            return datetime.strptime(date_field, '%Y-%m-%dT%H:%M:%S')
+        return datetime.now()
+
         try:
             date_to_check = datetime.strptime(date_field, '%Y-%m-%dT%H:%M:%SZ')
         except Exception:

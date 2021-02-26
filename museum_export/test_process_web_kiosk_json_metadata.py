@@ -8,7 +8,7 @@ import json
 import os
 import io
 from datetime import datetime, timedelta
-from process_web_kiosk_json_metadata import ProcessWebKioskJsonMetadata
+from process_web_kiosk_json_metadata import ProcessWebKioskJsonMetadata, _is_date_in_iso_format, _get_last_modified_date_from_dynamo
 from dependencies.pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
 
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
@@ -67,6 +67,40 @@ class Test(unittest.TestCase):
         json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
         actual_results = json_web_kiosk_class.find_images_for_composite_json_metadata(composite_json)
         self.assertEqual(actual_results, {"abc": 123})
+
+    def test_04_is_date_in_iso_format(self):
+        """ test_04_is_date_in_iso_format """
+        self.assertTrue(_is_date_in_iso_format('2003-01-02T01:02:03'))
+        self.assertFalse(_is_date_in_iso_format('1/2/20032 01:02:03'))
+
+    @patch('dynamo_query_functions.get_item_record')
+    def test_05_save_standard_json_to_dynamo_required(self, mock_item_record):
+        """ test_05_save_standard_json_to_dynamo_required
+        Test by passing forceSaveStandatdJson as True """
+        event = {"mode": "ids", "ids": ["1934.007.001"], "local": True, "forceSaveStandardJson": True}
+        mock_item_record.return_value = {}
+        web_kiosk_json = {"uniqueIdentifier": "abc123", "modifiedDate": "2021-01-14T15:25:04"}
+        json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
+        actual_results = json_web_kiosk_class._save_standard_json_to_dynamo_required(web_kiosk_json)
+        self.assertTrue(actual_results)
+
+    @patch('dynamo_query_functions.get_item_record')
+    def test_06_save_standard_json_to_dynamo_required(self, mock_item_record):
+        """ test_06_save_standard_json_to_dynamo_required
+        Test if existing record doesn't exist in dynamo """
+        event = {"mode": "ids", "ids": ["1934.007.001"], "local": True}
+        mock_item_record.return_value = {}
+        web_kiosk_json = {"uniqueIdentifier": "abc123", "modifiedDate": "2021-01-14T15:25:04"}
+        json_web_kiosk_class = ProcessWebKioskJsonMetadata(self.config, event, self.time_to_break)
+        actual_results = json_web_kiosk_class._save_standard_json_to_dynamo_required(web_kiosk_json)
+        self.assertTrue(actual_results)
+
+    def test_07_get_last_modified_date_from_dynamo(self):
+        """ test_07_get_last_modified_date_from_dynamo """
+        self.assertEqual(None, _get_last_modified_date_from_dynamo({}))
+        self.assertEqual(None, _get_last_modified_date_from_dynamo({"modifiedDate": "01/02/2003"}))
+        self.assertEqual(None, _get_last_modified_date_from_dynamo({"modifiedDate": "2021/01/14T15:25:04"}))
+        self.assertEqual("2021-01-14T15:25:04", _get_last_modified_date_from_dynamo({"modifiedDate": "2021-01-14T15:25:04"}))
 
 
 def suite():

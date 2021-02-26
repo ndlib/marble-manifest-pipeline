@@ -49,7 +49,7 @@ default_config = {
     "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai",
     "pipeline-control-folder": "pipeline_control",
     "related-ids-file": "related_ids.json",
-    "source-systems-requiring-metadata-expire-time": ["EmbARK"],
+    "source-systems-requiring-metadata-expire-time": [],
     "source-systems-requiring-special-file-processing": ["Curate", "EmbARK"]
 }
 

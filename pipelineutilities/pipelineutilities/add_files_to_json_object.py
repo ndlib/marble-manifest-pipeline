@@ -61,7 +61,7 @@ class AddFilesToJsonObject():
                     each_file_dict['description'] = ""
                     if each_file_dict['id'] == item_id:
                         each_file_dict['description'] = item_description
-                    each_file_dict['filePath'] = obj['path']
+                    each_file_dict['sourceFilePath'] = obj['path']
                     sequence += 1
                     each_file_dict['sequence'] = obj.get('order', sequence)
                     each_file_dict['title'] = obj['label']

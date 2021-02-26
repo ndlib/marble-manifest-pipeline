@@ -307,9 +307,19 @@ def augement_file_record(obj, id, url, config):
     obj['path'] = "s3://" + os.path.join(bucket, obj['key'])
     obj['sourceUri'] = url
     obj["iiifImageUri"] = os.path.join(config['image-server-base-url'], obj.get('key'))
-    # Added from here down for consistency.  Once dependencies are updated, we will need to remove fileId, and iiifImageUir
+    # Added from here down for consistency.  Once dependencies are updated, we will need to remove fileId, and iiifImageUri
     obj['objectFileGroupId'] = id
     obj["iiifUri"] = os.path.join(config['image-server-base-url'], obj.get('key'))
+    # Added from here down 2/25/2021 for consistency.  Once dependencies are updated, we need to remove iiifUri and iiifImageUri
+    obj["iiifImageServiceUri"] = config['image-server-base-url']
+    obj["sourceBucketName"] = bucket
+    obj["sourceFilePath"] = obj.get('key')
+    file_extension = os.path.splitext(obj.get('key'))[1]
+    obj['filePath'] = os.path.splitext(obj.get('key'))[0]
+    if file_extension in ('.jpg', '.tif'):
+        obj['filePath'] = obj['filePath'] + '.tif'
+    else:
+        obj['filePath'] = obj.get('key')
 
 
 def determine_time_threshold_for_processing(time_in_min):
