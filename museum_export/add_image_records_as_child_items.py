@@ -3,7 +3,7 @@ from pipelineutilities.add_files_to_json_object import change_file_extensions_to
 
 
 class AddImageRecordsAsChildItems():
-    def __init__(self, image_files, config: dict = {}):
+    def __init__(self, image_files, config: dict):
         self.image_files = image_files
         self.config = config
 
