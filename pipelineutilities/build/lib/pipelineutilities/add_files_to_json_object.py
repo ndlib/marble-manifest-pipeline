@@ -94,7 +94,7 @@ class AddFilesToJsonObject():
                 break
 
 
-def change_file_extensions_to_tif(each_file_dict: dict, file_extensions_to_protect_from_changing_to_tif: list = []) -> dict:
+def change_file_extensions_to_tif(each_file_dict: dict, file_extensions_to_protect_from_changing_to_tif: list) -> dict:
     """ Change all file extensions to tif except those defined to be protected."""
     for node_name in ['id', 'filePath', 'description', 'title']:
         if node_name in each_file_dict:
