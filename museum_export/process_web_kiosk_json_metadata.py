@@ -90,7 +90,7 @@ class ProcessWebKioskJsonMetadata():
         objects_processed = 0
         if 'objects' in composite_json:
             objects = composite_json["objects"]
-            export_all_files_flag = self.event.get('export_all_files_flag', False)
+            export_all_files_flag = self.event.get('exportAllFilesFlag', False)
             process_one_museum_object_class = ProcessOneMuseumObject(self.config, image_file_info, self.start_time)
             standard_json_helpers_class = StandardJsonHelpers(self.config)
             save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
@@ -112,7 +112,6 @@ class ProcessWebKioskJsonMetadata():
                     objects.pop(object_key, None)
                     if datetime.now() >= self.time_to_break:
                         break
-                    print(1 / 0)
         if self.delete_local_copy:
             delete_file(self.folder_name, self.file_name)
         if not self.event.get("local", False):
@@ -174,26 +173,19 @@ class ProcessWebKioskJsonMetadata():
             If validate_json.py has been updated more recently than the dateModifiedInDynamo in the dynamo record, then flag save.
             Otherwise, flag no save needed. """
         if self.event.get('forceSaveStandardJson'):
-            print("forceSaveStandardJson = True")
             return True
         item_id = web_kiosk_json.get('uniqueIdentifier')
         record_from_dynamo = {}
         if not self.config.get('local', True) and self.config.get('website-metadata-tablename', '') and item_id:
             record_from_dynamo = get_item_record(self.config.get('website-metadata-tablename', ''), item_id)
         if not record_from_dynamo:
-            print('no record from dynamo')
             return True
         last_modified_date_string_from_dynamo = _get_last_modified_date_from_dynamo(record_from_dynamo)
-        print("last_modified_date_string_from_dynamo = ", last_modified_date_string_from_dynamo)
-        print("web_kiosk_json.get('modifiedDate') = ", web_kiosk_json.get('modifiedDate'))
         if not last_modified_date_string_from_dynamo or web_kiosk_json.get('modifiedDate') > last_modified_date_string_from_dynamo:
-            print("web_kiosk_json = ", web_kiosk_json)
             return True
         validate_json_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'dependencies', 'pipelineutilities', 'validate_json.py')
         validate_json_modified_date = datetime.fromtimestamp(os.path.getmtime(validate_json_path))
-        print("validate_json_modified_date.isoformat() = ", validate_json_modified_date.isoformat())
         if validate_json_modified_date.isoformat() > record_from_dynamo.get('dateModifiedInDynamo'):
-            print("validate_json_modified_date.isoformat() = ", validate_json_modified_date.isoformat())
             return True
         return False
 

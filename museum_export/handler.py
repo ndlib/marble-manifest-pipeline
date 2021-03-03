@@ -107,8 +107,8 @@ def test():
         event = {}
         event["local"] = False
         event["mode"] = "full"
-        event['seconds-to-allow-for-processing'] = 60 * 50
-        event['export_all_files_flag'] = True  # test exporting all files needing processing
+        event['seconds-to-allow-for-processing'] = 60 * 10
+        # event['exportAllFilesFlag'] = True  # test exporting all files needing processing
         # event["mode"] = "ids"
         # event['ids'] = ['1934.007.001']
         # event['ids'] = ['1999.024', '1952.019', '2018.009, 218.049.004']
@@ -117,7 +117,7 @@ def test():
         # event["ids"] = ["1979.032.003"]  # objects with special characters to strip
         # event["ids"] = ["2017.039.005", "1986.052.007.005", "1978.062.002.003"]  # Objects with hidden parents
         # Test these temp IDs:  IL2019.006.002, IL1992.065.004, L1986.032.002, AA1966.031
-        event['ids'] = ['2019.001.003']
+        # event['ids'] = ['2019.001.003']
         event['forceSaveStandardJson'] = False
     event = run(event, {})
 

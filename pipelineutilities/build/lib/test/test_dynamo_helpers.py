@@ -102,15 +102,16 @@ class Test(unittest.TestCase):
 
     def test_09_add_file_to_process_keys(self):
         """ test_09_add_file_to_process_keys """
-        json_record = {'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/1ZGi24M2EeCR9PiYfW_sCPYQcZmTM0dWZ/view', 'parentId': 'dad'}
+        json_record = {'filePath': 'https://drive.google.com/a/nd.edu/file/d/1ZGi24M2EeCR9PiYfW_sCPYQcZmTM0dWZ/view', 'parentId': 'dad'}
         json_record['storageSystem'] = 'Google'
         json_record['typeOfData'] = 'Museum'
         actual_results = add_file_to_process_keys(json_record)
         expected_results = {
-            'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/1ZGi24M2EeCR9PiYfW_sCPYQcZmTM0dWZ/view', 'parentId': 'dad', 'storageSystem': 'Google', 'typeOfData': 'Museum',
+            'filePath': 'https://drive.google.com/a/nd.edu/file/d/1ZGi24M2EeCR9PiYfW_sCPYQcZmTM0dWZ/view', 'parentId': 'dad', 'storageSystem': 'Google', 'typeOfData': 'Museum',
             'PK': 'FILETOPROCESS', 'SK': 'FILEPATH#HTTPS://DRIVE.GOOGLE.COM/A/ND.EDU/FILE/D/1ZGI24M2EECR9PIYFW_SCPYQCZMTM0DWZ/VIEW',
             'TYPE': 'FileToProcess',
-            'GSI1PK': 'FILETOPROCESS', 'GSI1SK': 'FILESYSTEM#GOOGLE#MUSEUM'
+            'GSI1PK': 'FILETOPROCESS', 'GSI1SK': 'FILESYSTEM#GOOGLE#MUSEUM',
+            'GSI2PK': 'FILETOPROCESS', 'GSI2SK': 'DATELASTPROCESSED#'
         }
         del actual_results['dateAddedToDynamo']
         del actual_results['dateModifiedInDynamo']

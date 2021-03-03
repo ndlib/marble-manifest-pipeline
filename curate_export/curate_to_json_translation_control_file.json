@@ -178,7 +178,7 @@
 				"format": "text",
 				"extraProcessing": "link_to_source"
 			},
-			{ "label": "filePath",
+			{ "label": "sourceFilePath",
 				"fields": ["downloadUrl"],
 				"format": "text"
 			},

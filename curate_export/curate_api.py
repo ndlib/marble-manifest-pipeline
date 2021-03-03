@@ -8,6 +8,7 @@ import json
 from datetime import datetime
 import os
 import io
+from pathlib import Path
 from translate_curate_json_node import TranslateCurateJsonNode
 from create_standard_json import CreateStandardJson
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
@@ -15,7 +16,7 @@ from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDyn
 from pipelineutilities.save_standard_json import save_standard_json
 from save_json_to_dynamo import SaveJsonToDynamo
 from dynamo_helpers import add_file_keys
-from dynamo_query_functions import get_item_record, get_file_record
+from dynamo_query_functions import get_item_record
 from dynamo_save_functions import save_file_group_record, save_file_to_process_record
 from record_files_needing_processed import FilesNeedingProcessed
 from s3_helpers import read_s3_json, write_s3_json
@@ -33,7 +34,7 @@ class CurateApi():
         self.start_time = time.time()
         self.time_to_break = time_to_break
         self.translate_curate_json_node_class = TranslateCurateJsonNode(config)
-        self.save_standard_json_locally = True  # event.get("local", False)
+        self.save_standard_json_locally = event.get("local", False)  # To generate standard_json locally, set "local" to false, and temporarily set save_standard_json_locally to True
         self.create_standard_json_class = CreateStandardJson(config)
         self.local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
         self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('website-metadata-tablename', ''))
@@ -69,7 +70,7 @@ class CurateApi():
                 with open(self.local_folder + "test/" + item_id + "_standard.json", "w") as output_file:
                     json.dump(standard_json, output_file, indent=2, ensure_ascii=False)
             else:
-                export_all_files_flag = self.event.get('export_all_files_flag', False)
+                export_all_files_flag = self.event.get('exportAllFilesFlag', False)
                 save_required_flag = self._save_standard_json_to_dynamo_required(standard_json)
                 if save_required_flag and datetime.now() < self.time_to_break and not self.event['itemBeingProcessed'].get('savedStandardJsonToS3', False):
                     print("saving standard_json to S3 for", item_id, 'after', int(time.time() - self.start_time), 'seconds')
@@ -82,17 +83,14 @@ class CurateApi():
                     if datetime.now() < self.time_to_break:
                         self.event['itemBeingProcessed']['savedStandardJsonToDynamo'] = True
                 if datetime.now() < self.time_to_break and not self.event['itemBeingProcessed'].get('savedFilesNeedingProcessedToDynamo', False):
-                    # first_file_json = self._find_first_file_in_standard_json(standard_json)
-                    # save_file_required_flag = self._save_file_to_dynamo_required(first_file_json)  # TODO: Generalize instead of assuming if the first file is saved, all are saved
-                    if (save_required_flag or export_all_files_flag):  # or save_file_required_flag)
-                        print("saving curate image data recursively to dynamo for", item_id)
+                    if (save_required_flag or export_all_files_flag):
                         file_needed_updated = self._save_curate_image_data_to_dynamo(standard_json, export_all_files_flag)
                         if datetime.now() < self.time_to_break:
                             self.event['itemBeingProcessed']['savedFilesNeedingProcessedToDynamo'] = True
                             if file_needed_updated:
                                 print("updating files needing processed for", item_id, 'after', int(time.time() - self.start_time), 'seconds')
                                 files_needing_processed_class = FilesNeedingProcessed(self.config)
-                                files_needing_processed_class.record_files_needing_processed(standard_json, True)
+                                files_needing_processed_class.record_files_needing_processed(standard_json, True)  # If we got here, force reprocessing of all files in standard json
                             self.event.pop('itemBeingProcessed', None)
                 if datetime.now() < self.time_to_break:
                     self.event.pop('itemBeingProcessed', None)
@@ -146,18 +144,25 @@ class CurateApi():
     def _save_curate_image_data_to_dynamo(self, standard_json: dict, export_all_files_flag: False, file_needed_updated: bool = False):
         """ Save Curate image data to dynamo recursively """
         if standard_json.get('level', '') == 'file':
-            new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
-            if not new_dict.get('id', '').lower().endswith('.xml'):
-                new_dict['objectFileGroupId'] = new_dict['parentId']
-                new_dict = add_file_keys(new_dict)
-                record_inserted_flag = self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict, False)
-                if record_inserted_flag or export_all_files_flag:
-                    file_needed_updated = True
-                    save_file_to_process_record(self.config['website-metadata-tablename'], new_dict, False)
-                    save_file_group_record(self.config['website-metadata-tablename'], new_dict.get('objectFileGroupId'), new_dict.get('storageSystem'), new_dict.get('typeOfData'))
+            resume_saving_images_after_id = self.event['itemBeingProcessed'].get('resumeSavingImagesAfterId')
+            if not resume_saving_images_after_id or (resume_saving_images_after_id and resume_saving_images_after_id == standard_json.get('id')):
+                self.event['itemBeingProcessed'].pop('resumeSavingImagesAfterId', None)
+                file_extension = Path(standard_json.get('id', '')).suffix
+                if file_extension not in self.config.get('unwanted-file-extensions-from-curate', []):
+                    new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
+                    new_dict['objectFileGroupId'] = new_dict['parentId']
+                    new_dict = add_file_keys(new_dict)
+                    self.event['itemBeingProcessed']['lastImageProcessed'] = new_dict.get('id')
+                    record_inserted_flag = self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict, not export_all_files_flag)
+                    if record_inserted_flag or export_all_files_flag:
+                        file_needed_updated = True
+                        save_file_to_process_record(self.config['website-metadata-tablename'], new_dict, False)
+                        save_file_group_record(self.config['website-metadata-tablename'], new_dict.get('objectFileGroupId'), new_dict.get('storageSystem'), new_dict.get('typeOfData'))
         for item in standard_json.get('items', []):
-            if datetime.now < self.time_to_break:
+            if datetime.now() < self.time_to_break:
                 self._save_curate_image_data_to_dynamo(item, export_all_files_flag, file_needed_updated)
+        if datetime.now() > self.time_to_break:
+            self.event['itemBeingProcessed']['resumeSavingImagesAfterId'] = self.event['itemBeingProcessed']['lastImageProcessed']
         return file_needed_updated
 
     def _save_standard_json_to_dynamo_required(self, standard_json: dict) -> bool:
@@ -171,28 +176,6 @@ class CurateApi():
         if not saved_standard_json_root_json:
             return True
         if saved_standard_json_root_json.get('fileCreatedDate') < standard_json.get('fileCreatedDate'):
-            return True
-        return False
-
-    def _find_first_file_in_standard_json(self, standard_json: dict) -> dict:
-        """ Find the first file in standard_json """
-        if standard_json.get('level') == 'file':
-            return standard_json
-        else:
-            for item in standard_json.get('items', []):
-                return_value = self._find_first_file_in_standard_json(item)
-                if return_value:
-                    return return_value
-
-    def _save_file_to_dynamo_required(self, first_file_json: dict) -> bool:
-        """ If the record for this file doesn't already exist in dynamo, then flag save.
-            If the record saved in dynamo was generated before the modifiedDate for this record, then flag save.
-            Otherwise, flag no save needed. """
-        saved_file_json = get_file_record(self.config.get('website-metadata-tablename', ''), first_file_json.get('id'))
-        if not saved_file_json:
-            return True
-        if saved_file_json.get('modifiedDate', '')[:10] < first_file_json.get('modifiedDate', '')[:10]:
-            print('Need to save files because saved_file_date:', saved_file_json.get('modifiedDate', '')[:10], ' < date of first file in std json: ', first_file_json.get('modifiedDate', '')[:10])
             return True
         return False
 

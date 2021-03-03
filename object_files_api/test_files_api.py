@@ -35,7 +35,7 @@ class Test(unittest.TestCase):
         all_directories = self.files_api_class._crawl_available_files_from_s3_or_cache(False)
         for _key, value in all_directories.items():
             actual_results = self.files_api_class._save_file_objects_per_collection(value)
-            self.assertEqual(actual_results[0]['id'], actual_results[0]['key'])
+            self.assertEqual(actual_results[0]['id'], actual_results[0]['key'].replace('.jpg', '.tif'))
             break
 
 

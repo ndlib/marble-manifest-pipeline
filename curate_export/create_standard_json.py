@@ -1,5 +1,7 @@
 # create_standard_json.py
 from translate_curate_json_node import TranslateCurateJsonNode
+from pathlib import Path
+from pipelineutilities.add_files_to_json_object import change_file_extensions_to_tif
 from pipelineutilities.validate_json import validate_standard_json
 from clean_up_standard_json import clean_up_standard_json
 
@@ -44,11 +46,11 @@ class CreateStandardJson():
                     parent_node = self._get_parent_node(standard_json, ancestry_list)
                     if parent_node:
                         child_json = self.translate_curate_json_node_class.build_json_from_curate_json(member_value, "root", {})
+                        child_json = self._remove_unwanted_children(child_json)
                         child_json["collectionId"] = parent_node["collectionId"]
                         parent_id = parent_node["id"]
                         child_json["parentId"] = parent_id
                         child_json["sequence"] = self._accumulate_sequences_by_parent(parent_id)
-                        # self._fix_child_file_info(child_json)
                         if "items" not in parent_node:
                             parent_node["items"] = []
                         parent_node["items"].append(child_json)
@@ -92,3 +94,20 @@ class CreateStandardJson():
             sequence_to_use = self.sequences_within_parent[my_parent_id] + 1
         self.sequences_within_parent[my_parent_id] = sequence_to_use
         return sequence_to_use
+
+    def _is_unwanted_child(self, child_json: dict) -> bool:
+        """ We don't want to accumulate "file" records of type "jpg", "jpeg", (these should also have tiff equivalents included) or "xml" """
+        if child_json.get('level') == 'file':
+            file_name = child_json.get('title')
+            file_extension = Path(file_name).suffix
+            if file_extension in self.config.get('unwanted-file-extensions-from-curate', []):
+                return True
+        return False
+
+    def _remove_unwanted_children(self, standard_json: dict) -> dict:
+        """ Remove child file items we don't want """
+        if 'items' in standard_json:
+            standard_json['items'][:] = [item for item in standard_json['items'] if not self._is_unwanted_child(item)]
+            for item in standard_json['items']:
+                item = change_file_extensions_to_tif(item, self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
+        return standard_json

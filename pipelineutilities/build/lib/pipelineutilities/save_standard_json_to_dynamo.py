@@ -24,7 +24,7 @@ class SaveStandardJsonToDynamo():
         self.related_ids = self._read_related_ids()
         self.time_to_break = time_to_break
 
-    def save_standard_json(self, standard_json: dict, save_only_new_records: bool = False) -> bool:  # , export_all_files_flag: bool = False) -> bool:
+    def save_standard_json(self, standard_json: dict, save_only_new_records: bool = False) -> bool:
         """ First, validate the standard_json.  If this is the first time this standard_json is being saved,
             we will need to make sure all images and related files get processed.
             We next call a process to record files needing processed.

@@ -303,7 +303,7 @@ standard_json_schema = {
         "sourceBucketName": {"type": "string"},
         "sourceFilePath": {"type": "string"},
         "sourceSystem": {"type": "string"},
-        "sourceType": {"enum": ["Curate", "Google", "S3"]},
+        "sourceType": {"enum": ["Curate", "Museum", "S3"]},
         "sourceUri": {"type": "string"},
         "storageSystem": {"enum": ["Curate", "Google", "S3"]},
         "subjects": subjects_definition,

@@ -60,7 +60,7 @@ def _clean_up_standard_json_recursive(standard_json: dict, image_server_base_url
         if item.get('level', '') == 'file':
             if image_server_base_url:
                 item["iiifImageServiceUri"] = image_server_base_url
-            if item.get('sourceType', 'x') in ['Curate', 'Google']:
+            if item.get('sourceType', 'x') in ['Curate', 'Museum']:
                 item['id'] = item.get('treePath', '') + item.get('title', '')  # set id for google or curate files to be treePath plus fileName
                 item['filePath'] = item.get('treePath', '') + item.get('title', '')  # set filePath for google or curate files to be treePath plus fileName
         elif item.get('level', '') in ('manifest', 'collection'):
@@ -194,15 +194,18 @@ def _find_object_file_group_id(item: dict) -> str:
 def _find_default_file_path(item: dict) -> str:
     """Use cascading logic to find file path of the representational default file """
     default_file_path = item.get('key', '')
-    if "https://drive.google.com/a/nd.edu" in item.get('sourceFilePath', '') or "https://curate.nd.edu" in item.get('sourceFilePath', ''):
+    # if "https://drive.google.com/a/nd.edu" in item.get('sourceFilePath', '') or "https://curate.nd.edu" in item.get('sourceFilePath', ''):
+    if item.get('sourceType', 'x') in ['Curate', 'Museum']:
         default_file_path = item.get('id', '')
     regex_expression = r'http[s]?:[/]{2}[\w+\.]+/'
-    if not default_file_path and re.match(regex_expression, item.get('sourceFilePath', '')):
+    if not default_file_path and re.match(regex_expression, item.get('sourceFilePath', '')):  # TODO: verify this still works.  It may need to be changed to sourceUri?
         default_file_path = re.sub(regex_expression, '', item.get('sourceFilePath', ''))
     if not default_file_path:
-        default_file_path = item.get('sourceFilePath', '')
+        default_file_path = item.get('filePath', '')
     if not default_file_path:
         default_file_path = item.get('fileId', '')
+    if not default_file_path:
+        default_file_path = item.get('id', '')
     return default_file_path
 
 

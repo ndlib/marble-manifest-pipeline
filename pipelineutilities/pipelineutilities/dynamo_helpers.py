@@ -100,7 +100,7 @@ def add_parent_override_keys(json_record: dict) -> dict:
 
 def add_file_to_process_keys(json_record: dict) -> dict:
     """ Add dynamoDB keys to FileToProcess record to be saved
-        Required values include: filePath, storageSystem, typeOfData
+        Required values include: filePath, storageSystem, typeOfData, dateLastProcessed
         Examples of storageSystem include: S3 and Google and Curate
         Examples of typeOfData include: Museum and 'RBSC website bucket' and Curate"""
     json_record['PK'] = 'FILETOPROCESS'
@@ -108,6 +108,8 @@ def add_file_to_process_keys(json_record: dict) -> dict:
     json_record['TYPE'] = 'FileToProcess'
     json_record['GSI1PK'] = 'FILETOPROCESS'
     json_record['GSI1SK'] = 'FILESYSTEM#' + format_key_value(json_record.get('storageSystem')) + '#' + format_key_value(json_record.get('typeOfData'))
+    json_record['GSI2PK'] = 'FILETOPROCESS'
+    json_record['GSI2SK'] = 'DATELASTPROCESSED#' + format_key_value(json_record.get('dateLastProcessed', ''))  # Note this will always be blank at harvest time
     json_record['dateAddedToDynamo'] = get_iso_date_as_string()
     json_record['dateModifiedInDynamo'] = json_record['dateAddedToDynamo']
     return json_record
