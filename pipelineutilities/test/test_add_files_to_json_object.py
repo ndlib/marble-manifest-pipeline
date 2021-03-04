@@ -4,7 +4,7 @@ import _set_path  # noqa
 import os
 import json
 import unittest
-from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
+from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject, change_file_extensions_to_tif
 
 
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
@@ -15,7 +15,7 @@ class Test(unittest.TestCase):
     def setUp(self):
         pass
 
-    def test_1_test_creating_json_from_xml(self):
+    def test_01_test_creating_json_from_xml(self):
         """ test test_creating_json_from_xml """
         with open(local_folder + '/MSNEA8011_EAD.json', 'r') as input_source:
             standard_json = json.load(input_source)
@@ -37,7 +37,8 @@ class Test(unittest.TestCase):
 
         self.assertEqual(expected_json, standard_json_with_files)
 
-    def test_2_file_exists_in_list(self):
+    def test_02_file_exists_in_list(self):
+        """ test_02_file_exists_in_list """
         files_list = [{"id": "MSN-COL_8501-05.b.150.jpg"}, {"id": "MSN-COL_8501-05.a.150.jpg"}]
         config = {}
         config['local'] = True
@@ -45,13 +46,61 @@ class Test(unittest.TestCase):
         self.assertTrue(add_file_to_json_object_class._file_exists_in_list(files_list, "MSN-COL_8501-05.b.150.jpg"))
         self.assertFalse(add_file_to_json_object_class._file_exists_in_list(files_list, "abc.txt"))
 
-    def test_3_remove_existing_file_from_list(self):
+    def test_03_remove_existing_file_from_list(self):
+        """test_03_remove_existing_file_from_list"""
         files_list = [{"id": "MSN-COL_8501-05.b.150.jpg"}, {"id": "MSN-COL_8501-05.a.150.jpg"}]
         config = {}
         config['local'] = True
         add_file_to_json_object_class = AddFilesToJsonObject(config)
         add_file_to_json_object_class._remove_existing_file_from_list(files_list, "MSN-COL_8501-05.b.150.jpg")
         self.assertEqual(files_list, [{"id": "MSN-COL_8501-05.a.150.jpg"}])
+
+    def test_04_change_file_extensions_to_tif(self):
+        """ test_04_change_file_extensions_to_tif """
+        config = {}
+        config['local'] = True
+        each_file_dict = {
+            "id": "1995.033.001/1995.033.001.a/1995_033_001_a-v0004.jpg",
+            "title": "1995_033_001_a-v0004.jpg",
+            "description": "1995_033_001_a-v0004.jpg",
+            "mimeType": "image/jpeg",
+            "filePath": "1995.033.001/1995.033.001.a/1995_033_001_a-v0004.jpg"
+        }
+        actual_results = change_file_extensions_to_tif(each_file_dict, ['.pdf'])
+        expected_results = {
+            'id': '1995.033.001/1995.033.001.a/1995_033_001_a-v0004.tif',
+            'title': '1995_033_001_a-v0004.tif',
+            'description': '1995_033_001_a-v0004.tif',
+            'mimeType': 'image/jpeg',
+            'filePath': '1995.033.001/1995.033.001.a/1995_033_001_a-v0004.tif'
+        }
+        self.assertEqual(actual_results, expected_results)
+
+    def test_05_change_file_extensions_to_tif(self):
+        """ test_05_change_file_extensions_to_tif """
+        config = {}
+        config['local'] = True
+        each_file_dict = {
+            "id": "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg"
+        }
+        actual_results = change_file_extensions_to_tif(each_file_dict, ['.pdf'])
+        expected_results = {
+            'id': 'https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.tif'
+        }
+        self.assertEqual(actual_results, expected_results)
+
+    def test_06_change_file_extensions_to_tif(self):
+        """ test_06_change_file_extensions_to_tif """
+        config = {}
+        config['local'] = True
+        each_file_dict = {
+            "id": "https://rarebooks library nd edu/digital/bookreader/MSN EA 8011 1 B/images/ B 000a"
+        }
+        actual_results = change_file_extensions_to_tif(each_file_dict, ['.pdf'])
+        expected_results = {
+            'id': 'https://rarebooks library nd edu/digital/bookreader/MSN EA 8011 1 B/images/ B 000a'
+        }
+        self.assertEqual(actual_results, expected_results)
 
 
 def suite():

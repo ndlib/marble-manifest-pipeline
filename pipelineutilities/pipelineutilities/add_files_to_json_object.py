@@ -1,5 +1,6 @@
 import json
 import os
+from pathlib import Path
 from datetime import datetime
 from search_files import id_from_url, crawl_available_files  # noqa: #402
 
@@ -47,6 +48,7 @@ class AddFilesToJsonObject():
                 file_items.pop(index)
                 sequence = 0
                 for obj in self.hash_of_available_files[id_to_find]['files']:
+                    each_file_dict = {}
                     each_file_dict['objectFileGroupId'] = id_to_find
                     each_file_dict['collectionId'] = collection_id
                     each_file_dict['sourceSystem'] = source_system
@@ -56,15 +58,15 @@ class AddFilesToJsonObject():
                     each_file_dict['level'] = 'file'
                     each_file_dict['parentId'] = parent_id
                     each_file_dict['id'] = os.path.basename(obj['key'])
-                    each_file_dict['key'] = obj['key']
+                    each_file_dict['key'] = str(obj['key'])
                     each_file_dict['thumbnail'] = (each_file_dict['id'] == item_id)
                     each_file_dict['description'] = ""
                     if each_file_dict['id'] == item_id:
                         each_file_dict['description'] = item_description
-                    each_file_dict['filePath'] = obj['path']
+                    each_file_dict['sourceFilePath'] = str(obj['path'])
                     sequence += 1
                     each_file_dict['sequence'] = obj.get('order', sequence)
-                    each_file_dict['title'] = obj['label']
+                    each_file_dict['title'] = str(obj['label'])
                     if obj['lastModified']:
                         each_file_dict['modifiedDate'] = obj['lastModified']
                         if isinstance(each_file_dict['modifiedDate'], str):
@@ -75,6 +77,7 @@ class AddFilesToJsonObject():
                     each_file_dict['md5Checksum'] = obj['eTag'].replace("'", "").replace('"', '')  # strip duplicated quotes: {'ETag': '"8b50cfed39b7d8bcb4bd652446fe8adf"'}  # noqa: E501
                     if self._file_exists_in_list(file_items, each_file_dict['id']):
                         self._remove_existing_file_from_list(file_items, each_file_dict['id'])
+                    each_file_dict = change_file_extensions_to_tif(each_file_dict, self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
                     file_items.append(dict(each_file_dict))
         return file_items
 
@@ -89,3 +92,14 @@ class AddFilesToJsonObject():
             if item.get("id", "") == id:
                 file_items.pop(index)
                 break
+
+
+def change_file_extensions_to_tif(each_file_dict: dict, file_extensions_to_protect_from_changing_to_tif: list) -> dict:
+    """ Change all file extensions to tif except those defined to be protected."""
+    for node_name in ['id', 'filePath', 'description', 'title']:
+        if node_name in each_file_dict:
+            node_value = each_file_dict[node_name]
+            file_extension = Path(node_value).suffix
+            if file_extension and '.' in file_extension and file_extension.lower() not in file_extensions_to_protect_from_changing_to_tif:
+                each_file_dict[node_name] = node_value.replace(file_extension, '.tif')
+    return each_file_dict

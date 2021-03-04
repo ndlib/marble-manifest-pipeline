@@ -28,7 +28,7 @@ class CleanUpContent():
         standard_json = self._define_digital_access(standard_json)
         standard_json = self._remove_unnecessary_relatedIds(standard_json, self._get_parent_child_id_list(standard_json))
         if standard_json.get("level", "manifest") != "file" and "digitalAssets" in standard_json:
-            add_image_records_as_child_items_class = AddImageRecordsAsChildItems(self.image_files)
+            add_image_records_as_child_items_class = AddImageRecordsAsChildItems(self.image_files, self.config)
             standard_json = add_image_records_as_child_items_class.add_images_as_children(standard_json)
         if "children" in standard_json:
             del standard_json["children"]

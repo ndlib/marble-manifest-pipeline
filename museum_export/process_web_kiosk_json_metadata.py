@@ -18,7 +18,9 @@ from pipelineutilities.save_standard_json import save_standard_json
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from dynamo_helpers import add_file_keys
+from pipelineutilities.dynamo_query_functions import get_item_record
 from dynamo_save_functions import save_file_group_record, save_file_to_process_record
+import re
 from save_json_to_dynamo import SaveJsonToDynamo
 from record_files_needing_processed import FilesNeedingProcessed
 
@@ -83,27 +85,32 @@ class ProcessWebKioskJsonMetadata():
             print("Completed retrieving Google image file info after", int(time.time() - self.start_time), 'seconds.')
         return image_file_info
 
-    def process_composite_json_metadata(self, composite_json: dict, image_file_info: dict, running_unit_tests: bool = False) -> int:
+    def process_composite_json_metadata(self, composite_json: dict, image_file_info: dict) -> int:
         """ Split big composite metadata file into individual small metadata files """
         objects_processed = 0
         if 'objects' in composite_json:
             objects = composite_json["objects"]
-            export_all_files_flag = self.event.get('export_all_files_flag', False)
+            export_all_files_flag = self.event.get('exportAllFilesFlag', False)
             process_one_museum_object_class = ProcessOneMuseumObject(self.config, image_file_info, self.start_time)
             standard_json_helpers_class = StandardJsonHelpers(self.config)
             save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(self.config)
-            for _object_key, object_value in objects.items():
-                if 'uniqueIdentifier' in object_value and not object_value.get("recordProcessedFlag", False):
-                    standard_json = process_one_museum_object_class.process_object(object_value)
-                    standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
-                    save_standard_json_to_dynamo_class.save_standard_json(standard_json)
-                    save_standard_json(self.config, standard_json)
-                    self._save_google_image_data_to_dynamo(standard_json, export_all_files_flag)
-                    object_value["recordProcessedFlag"] = True
-                    objects_processed += 1
+            list_of_keys = list(objects.keys())
+            list_of_keys.sort()
+            for object_key in list_of_keys:
+                object_value = objects[object_key]
+                if 'uniqueIdentifier' in object_value:
+                    save_required_flag = self._save_standard_json_to_dynamo_required(object_value)
+                    if save_required_flag and datetime.now() < self.time_to_break:
+                        standard_json = process_one_museum_object_class.process_object(object_value)
+                        standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
+                        save_standard_json_to_dynamo_class.save_standard_json(standard_json)
+                        save_standard_json(self.config, standard_json)
+                        self._save_google_image_data_to_dynamo(standard_json, export_all_files_flag)
+                        objects_processed += 1
+                    else:
+                        print('no need to re-process standard json for ', object_value.get('uniqueIdentifier'))
+                    objects.pop(object_key, None)
                     if datetime.now() >= self.time_to_break:
-                        break
-                    if running_unit_tests:
                         break
         if self.delete_local_copy:
             delete_file(self.folder_name, self.file_name)
@@ -158,6 +165,47 @@ class ProcessWebKioskJsonMetadata():
                 files_needing_processed_class.record_files_needing_processed(standard_json, True)
         for item in standard_json.get('items', []):
             self._save_google_image_data_to_dynamo(item, export_all_files_flag)
+
+    def _save_standard_json_to_dynamo_required(self, web_kiosk_json: dict) -> bool:
+        """ If there is a manual request to save json to dynamo, then flag save.
+            If the root record for this item doesn't already exist in dynamo, then flag save.
+            If the record saved in dynamo was generated before the currently generated json, then flag save.
+            If validate_json.py has been updated more recently than the dateModifiedInDynamo in the dynamo record, then flag save.
+            Otherwise, flag no save needed. """
+        if self.event.get('forceSaveStandardJson'):
+            return True
+        item_id = web_kiosk_json.get('uniqueIdentifier')
+        record_from_dynamo = {}
+        if not self.config.get('local', True) and self.config.get('website-metadata-tablename', '') and item_id:
+            record_from_dynamo = get_item_record(self.config.get('website-metadata-tablename', ''), item_id)
+        if not record_from_dynamo:
+            return True
+        last_modified_date_string_from_dynamo = _get_last_modified_date_from_dynamo(record_from_dynamo)
+        if not last_modified_date_string_from_dynamo or web_kiosk_json.get('modifiedDate') > last_modified_date_string_from_dynamo:
+            return True
+        validate_json_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'dependencies', 'pipelineutilities', 'validate_json.py')
+        validate_json_modified_date = datetime.fromtimestamp(os.path.getmtime(validate_json_path))
+        if validate_json_modified_date.isoformat() > record_from_dynamo.get('dateModifiedInDynamo'):
+            return True
+        return False
+
+
+def _get_last_modified_date_from_dynamo(record_from_dynamo: dict) -> str:
+    modified_date_from_dynamo = record_from_dynamo.get('modifiedDate')
+    if not modified_date_from_dynamo:
+        return None
+    if not _is_date_in_iso_format(modified_date_from_dynamo):
+        return None
+    return modified_date_from_dynamo
+
+
+def _is_date_in_iso_format(date_string: str) -> bool:
+    """ return True if it looks like this: 2003-01-02T01:02:03, else False """
+    regex = r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}'
+    found_list = re.findall(regex, date_string)
+    if found_list:
+        return True
+    return False
 
 
 def delete_file(folder_name: str, file_name: str):

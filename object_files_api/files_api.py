@@ -10,6 +10,7 @@ from search_files import crawl_available_files
 from save_json_to_dynamo import SaveJsonToDynamo
 from dynamo_helpers import add_file_keys
 from dynamo_save_functions import save_file_group_record, save_file_system_record, save_file_to_process_record
+from add_files_to_json_object import change_file_extensions_to_tif
 
 
 class FilesApi():
@@ -100,11 +101,13 @@ class FilesApi():
             collection_list.append(my_json)
             my_json['storageSystem'] = my_json.get('storageSystem', 'S3')
             my_json['typeOfData'] = my_json.get('typeOfData', 'RBSC website bucket')
-            my_json['filePath'] = my_json.get('path', '')
+            my_json['sourceFilePath'] = my_json.get('path', '')
+            my_json = change_file_extensions_to_tif(my_json, self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
             my_json = add_file_keys(my_json)
-            self.save_json_to_dynamo_class.save_json_to_dynamo(my_json)
+            if not self.config.get('local', False):
+                self.save_json_to_dynamo_class.save_json_to_dynamo(my_json)
+                save_file_to_process_record(self.config['website-metadata-tablename'], my_json)  # TODO: Determine if file date is more recent that most recently processed date. Only insert if newer.
             if i == 1 and not self.config.get('local', True):
-                save_file_to_process_record(self.config['website-metadata-tablename'], my_json)
                 save_file_group_record(self.config['website-metadata-tablename'], my_json.get('objectFileGroupId'), my_json.get('storageSystem'), my_json.get('typeOfData'))
         return collection_list
 

@@ -35,6 +35,8 @@ def _suplement_event(event):
     event['objectFilesApiComplete'] = event.get('objectFilesApiComplete', False)
     event["objectFilesApi_execution_count"] = event.get("objectFilesApi_execution_count", 0) + 1
     event["maximum_objectFilesApi_executions"] = event.get("maximum_objectFilesApi_executions", 10)
+    if 'local' not in event:
+        event['local'] = False
     return
 
 

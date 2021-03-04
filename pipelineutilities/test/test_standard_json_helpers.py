@@ -144,8 +144,8 @@ class Test(unittest.TestCase):
             'id': 'abc',
             'level': 'manifest',
             'items': [
-                {'level': 'file', 'filePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'},
-                {'level': 'file', 'filePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}]
+                {'level': 'file', 'sourceFilePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'},
+                {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}]
         }
         actual_results = _add_objectFileGroupId(standard_json)
         expected_results = {
@@ -153,8 +153,8 @@ class Test(unittest.TestCase):
             'level': 'manifest',
             'objectFileGroupId': 'BOO_000297305',
             'items': [
-                {'level': 'file', 'filePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'},
-                {'level': 'file', 'filePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}
+                {'level': 'file', 'sourceFilePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'},
+                {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}
             ]
         }
         self.assertEqual(actual_results, expected_results)
@@ -167,7 +167,7 @@ class Test(unittest.TestCase):
             'id': '1234.567',
             'level': 'manifest',
             'items': [
-                {'level': 'file', 'filePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view', 'objectFileGroupId': '1234.567'}]
+                {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view', 'objectFileGroupId': '1234.567'}]
         }
         actual_results = _add_objectFileGroupId(standard_json)
         expected_results = {
@@ -175,35 +175,35 @@ class Test(unittest.TestCase):
             'level': 'manifest',
             'objectFileGroupId': '1234.567',
             'items': [
-                {'level': 'file', 'filePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view', 'objectFileGroupId': '1234.567'}
+                {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view', 'objectFileGroupId': '1234.567'}
             ]
         }
         self.assertEqual(actual_results, expected_results)
 
     def test_10_find_object_file_group_id(self):
         """ test_10_find_object_file_group_id """
-        item = {'objectFileGroupId': '123', 'filePath': '456'}
+        item = {'objectFileGroupId': '123', 'sourceFilePath': '456'}
         actual_results = _find_object_file_group_id(item)
         expected_results = '123'
         self.assertEqual(actual_results, expected_results)
 
     def test_11_find_default_file_path(self):
         """ test_11_find_default_image_id """
-        item = {'key': 'some/path/abc.jpg', 'filePath': 'some/path/123.jpg', 'fileId': 'google_file_id_456'}
+        item = {'key': 'some/path/abc.jpg', 'sourceFilePath': 'some/path/123.jpg', 'fileId': 'google_file_id_456'}
         actual_results = _find_default_file_path(item)
         expected_results = 'some/path/abc.jpg'
         self.assertEqual(actual_results, expected_results)
 
     def test_12_find_default_file_path(self):
         """ test_12_find_default_image_id """
-        item = {'collectionId': 'something_irrelevant', 'id': '1934.007.001/1934_007_001-v0003.jpg', 'filePath': "https://drive.google.com/a/nd.edu/file/d/1801JSqSXsRD9CIXl-dFkJdlXV8wLrOCi/view", 'fileId': 'google_file_id_456'}  # noqa: #501
+        item = {'collectionId': 'something_irrelevant', 'id': '1934.007.001/1934_007_001-v0003.jpg', 'sourceType': "Museum", 'fileId': 'google_file_id_456'}  # noqa: #501
         actual_results = _find_default_file_path(item)
         expected_results = '1934.007.001/1934_007_001-v0003.jpg'
         self.assertEqual(actual_results, expected_results)
 
     def test_13_find_default_file_path(self):
         """ test_13_find_default_image_id """
-        item = {'filePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif', 'fileId': 'google_file_id_456'}
+        item = {'sourceFilePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif', 'fileId': 'google_file_id_456'}
         actual_results = _find_default_file_path(item)
         expected_results = 'digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'
         self.assertEqual(actual_results, expected_results)

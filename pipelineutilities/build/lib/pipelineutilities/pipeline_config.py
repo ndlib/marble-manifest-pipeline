@@ -49,8 +49,10 @@ default_config = {
     "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai",
     "pipeline-control-folder": "pipeline_control",
     "related-ids-file": "related_ids.json",
-    "source-systems-requiring-metadata-expire-time": ["EmbARK"],
-    "source-systems-requiring-special-file-processing": ["Curate", "EmbARK"]
+    "source-systems-requiring-metadata-expire-time": [],
+    "source-systems-requiring-special-file-processing": ["Curate", "EmbARK"],
+    "file-extensions-to-protect-from-changing-to-tif": [".pdf"],  # all other files will be assumed to be image files, and will be changed to .tif
+    "unwanted-file-extensions-from-curate": [".jpg", ".jpeg", ".xml"],  # Curate images should be saved as both .tif and .jpg.  Skip .jpg.  Skip .xml too
 }
 
 local_ssm = {

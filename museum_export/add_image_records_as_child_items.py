@@ -1,9 +1,11 @@
 # add_image_records_as_child_items
+from pipelineutilities.add_files_to_json_object import change_file_extensions_to_tif
 
 
 class AddImageRecordsAsChildItems():
-    def __init__(self, image_files):
+    def __init__(self, image_files, config: dict):
         self.image_files = image_files
+        self.config = config
 
     def add_images_as_children(self, object: dict) -> dict:
         """ This will add each image found on disk as a child item, and will delete the digitalAssets node """
@@ -33,12 +35,14 @@ class AddImageRecordsAsChildItems():
             image_item['thumbnail'] = digital_asset.get("thumbnail", False)
             google_image_info = self.image_files[file_name]
             image_item['md5Checksum'] = google_image_info['md5Checksum']
-            image_item['filePath'] = 'https://drive.google.com/a/nd.edu/file/d/' + google_image_info['id'] + '/view'  # noqa: E501
+            image_item['sourceUri'] = 'https://drive.google.com/a/nd.edu/file/d/' + google_image_info['id'] + '/view'
+            # note: filePath will be added later to be the treePath + fileName
             image_item['fileId'] = google_image_info['id']
             image_item['modifiedDate'] = google_image_info['modifiedTime']
             image_item['mimeType'] = google_image_info['mimeType']
             image_item['size'] = int(google_image_info['size'])
-            image_item['sourceType'] = 'Google'
+            image_item['sourceType'] = 'Museum'
+            image_item = change_file_extensions_to_tif(image_item, self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
         return image_item
 
     def _add_child_content_from_parent(self, object: dict) -> dict:

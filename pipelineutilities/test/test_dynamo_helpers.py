@@ -110,7 +110,8 @@ class Test(unittest.TestCase):
             'filePath': 'https://drive.google.com/a/nd.edu/file/d/1ZGi24M2EeCR9PiYfW_sCPYQcZmTM0dWZ/view', 'parentId': 'dad', 'storageSystem': 'Google', 'typeOfData': 'Museum',
             'PK': 'FILETOPROCESS', 'SK': 'FILEPATH#HTTPS://DRIVE.GOOGLE.COM/A/ND.EDU/FILE/D/1ZGI24M2EECR9PIYFW_SCPYQCZMTM0DWZ/VIEW',
             'TYPE': 'FileToProcess',
-            'GSI1PK': 'FILETOPROCESS', 'GSI1SK': 'FILESYSTEM#GOOGLE#MUSEUM'
+            'GSI1PK': 'FILETOPROCESS', 'GSI1SK': 'FILESYSTEM#GOOGLE#MUSEUM',
+            'GSI2PK': 'FILETOPROCESS', 'GSI2SK': 'DATELASTPROCESSED#'
         }
         del actual_results['dateAddedToDynamo']
         del actual_results['dateModifiedInDynamo']
