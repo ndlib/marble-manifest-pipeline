@@ -34,6 +34,7 @@ class StandardJsonHelpers():
         standard_json = _clean_up_standard_json_recursive(standard_json, self.config.get('image-server-base-url'))
         standard_json = get_size_of_images(standard_json)
         standard_json = _add_objectFileGroupId(standard_json)
+        standard_json = _insert_pdf_images(standard_json)
         standard_json = _add_sequence(standard_json)
         if not validate_standard_json(standard_json):
             standard_json = {}
@@ -220,4 +221,25 @@ def _add_sequence(standard_json: dict) -> dict:
             item = _add_sequence(item)
     if 'sequence' not in standard_json:
         standard_json['sequence'] = 0
+    return standard_json
+
+def _insert_pdf_images(standard_json: dict):
+    tif_items = []
+    for item in standard_json.get('items', []):
+        if item.get('level') == 'file' and item.get('id', '').lower().endswith('.pdf'):
+            if 'sequence' not in item:
+                item['sequence'] = 1
+            item_clone = dict(item)
+            item_clone['id'] = item_clone.get('id').replace('.pdf', '.tif')
+            item['sequence'] = item.get('sequence') + 1
+            if 'thumbnail' in item:
+                item['thumbnail'] = False
+                item_clone['thumbnail'] = True
+            tif_items.append(item_clone)
+        if 'items' in item:
+            item = _insert_pdf_images(item)
+    if tif_items:
+        updated_file_path = standard_json.get('defaultFilePath', '').replace('.pdf', '.tif')
+        standard_json['defaultFilePath'] = updated_file_path
+        standard_json['items'].extend(tif_items)
     return standard_json
