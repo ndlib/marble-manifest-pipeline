@@ -223,6 +223,7 @@ def _add_sequence(standard_json: dict) -> dict:
         standard_json['sequence'] = 0
     return standard_json
 
+
 def _insert_pdf_images(standard_json: dict):
     tif_items = []
     for item in standard_json.get('items', []):
