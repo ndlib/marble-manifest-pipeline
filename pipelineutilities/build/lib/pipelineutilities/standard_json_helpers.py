@@ -231,8 +231,8 @@ def _insert_pdf_images(standard_json: dict):
             if 'sequence' not in item:
                 item['sequence'] = 1
             item_clone = dict(item)
-            item_clone['id'] = item_clone.get('id').replace('.pdf', '.tif')
             item['sequence'] = item.get('sequence') + 1
+            _update_pdf_fields(item_clone)
             if 'thumbnail' in item:
                 item['thumbnail'] = False
                 item_clone['thumbnail'] = True
@@ -240,7 +240,15 @@ def _insert_pdf_images(standard_json: dict):
         if 'items' in item:
             item = _insert_pdf_images(item)
     if tif_items:
-        updated_file_path = standard_json.get('defaultFilePath', '').replace('.pdf', '.tif')
-        standard_json['defaultFilePath'] = updated_file_path
+        if 'defaultFilePath' in standard_json:
+            updated_file_path = standard_json.get('defaultFilePath').replace('.pdf', '.tif')
+            standard_json['defaultFilePath'] = updated_file_path
         standard_json['items'].extend(tif_items)
     return standard_json
+
+
+def _update_pdf_fields(standard_json: dict):
+    fields = ['id', 'filePath', 'description', 'title']
+    for field in fields:
+        if field in standard_json:
+            standard_json[field] = standard_json.get(field).replace('.pdf', '.tif')
