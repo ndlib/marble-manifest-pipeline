@@ -2,6 +2,7 @@ from xml.etree import ElementTree
 from create_json_from_xml import createJsonFromXml
 import requests  # noqa: E402
 from dependencies.sentry_sdk import capture_exception
+from dynamo_query_functions import get_item_record
 
 
 class HarvestOaiEads():
@@ -21,7 +22,13 @@ class HarvestOaiEads():
         if xml_string:
             xml_tree = self._get_xml_tree_given_xml_string(xml_string, id_url)
             xml_record = xml_tree.find('./GetRecord/record')
-            standard_json = self._process_record(oai_url, xml_record)
+            date_modified_in_source_system = self._get_modified_date_from_xml_record(xml_record)
+            item_id = self._get_id_from_xml_record(xml_record)
+            date_modified_in_dynamo = self._get_modified_date_from_dynamo(item_id)
+            if date_modified_in_source_system > date_modified_in_dynamo or self.config.get('forceSaveStandardJson', False):
+                standard_json = self._process_record(oai_url, xml_record)
+            else:
+                print("Metadata current in DynamoDB, no need to reprocess ", item_id, ' from ', id_url)
         return standard_json
 
     def _get_oai_url_given_id_url(self, user_interface_url: str) -> str:
@@ -72,3 +79,16 @@ class HarvestOaiEads():
         """ Call a process to create ND.JSON from complex ArchivesSpace EAD xml """
         standard_json = self.jsonFromXMLClass.get_standard_json_from_xml(xml_record)
         return standard_json
+
+    def _get_modified_date_from_xml_record(self, xml_record: ElementTree) -> str:
+        """ Return modified date from xml_record """
+        return xml_record.find("./header/datestamp").text
+
+    def _get_id_from_xml_record(self, xml_record: ElementTree) -> str:
+        """ Return Item Id from xml_record """
+        return xml_record.find("./metadata/ead/eadheader/eadid").text
+
+    def _get_modified_date_from_dynamo(self, item_id: str) -> str:
+        """ Modified Date represents the date modified in the source system record stored in dynamo """
+        record_from_dynamo = get_item_record(self.config.get('website-metadata-tablename'), item_id)
+        return record_from_dynamo.get('modifiedDate', '')

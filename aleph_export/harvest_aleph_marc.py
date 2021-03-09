@@ -13,6 +13,7 @@ import requests
 from sentry_sdk import capture_exception
 from transform_marc_json import TransformMarcJson
 from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
+from pipelineutilities.dynamo_query_functions import get_item_record
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.save_standard_json import save_standard_json
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
@@ -43,7 +44,7 @@ class HarvestAlephMarc():
             capture_exception('Connection refused on url ' + url)
         except ConnectionError:
             capture_exception('ConnectionError when trying to call url ' + url)
-        except:  # noqa E722 - intentionally ignore warning about bare exceptfrom pymarc import MARCReader 
+        except:  # noqa E722 - intentionally ignore warning about bare exceptfrom pymarc import MARCReader
             capture_exception('Error caught trying to process url ' + url)
         return marc_records_stream
 
@@ -68,7 +69,8 @@ class HarvestAlephMarc():
                 if json_record:
                     aleph_id = json_record.get("id", "")
                     if aleph_id > self.event['maxAlephIdProcessed']:
-                        if aleph_id in self.event['ids'] or len(self.event['ids']) == 0:
+                        process_record_flag = self._get_process_record_flag(json_record)
+                        if process_record_flag and (aleph_id in self.event['ids'] or len(self.event['ids']) == 0):
                             print("Aleph identifier ", aleph_id, " - ", int(time.time() - self.start_time), " seconds.")
                             json_record = add_files_to_json_object_class.add_files(json_record)
                             json_record = standard_json_helpers_class.enhance_standard_json(json_record)
@@ -118,3 +120,20 @@ class HarvestAlephMarc():
         fully_qualified_file_name = os.path.join(directory, json_file_name)
         with open(os.path.join('test', fully_qualified_file_name), "w") as file1:
             file1.write(json.dumps(json_record, indent=2))
+
+    def _get_process_record_flag(self, json_record: dict):
+        """ Process if forced, if no modifiedDate in source system, or if date in source system is newer than date (if any) in dynamo. """
+        if self.config.get('forceSaveStandardJson', False):
+            return True
+        date_modified_in_source_system = json_record.get('modifiedDate', '')
+        if not date_modified_in_source_system:
+            return True
+        if date_modified_in_source_system > self._get_modified_date_from_dynamo(json_record.get('id')):
+            return True
+        print("No need to reprocess ", json_record.get('id'))
+        return False
+
+    def _get_modified_date_from_dynamo(self, item_id: str) -> str:
+        """ Modified Date represents the date modified in the source system record stored in dynamo """
+        record_from_dynamo = get_item_record(self.config.get('website-metadata-tablename'), item_id)
+        return record_from_dynamo.get('modifiedDate', '')

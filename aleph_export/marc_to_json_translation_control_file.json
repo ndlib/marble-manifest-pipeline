@@ -127,6 +127,13 @@
 				"format": "text",
 				"extraProcessing": "link_to_source"
 			},
+			{
+				"label": "modifiedDate",
+				"fields": ["005"],
+				"format": "text",
+				"extraProcessing": "format_modified_date",
+				"note": "On 3/9/2021, Lisa S. pointed out that the 005 field only record when a person modifies a record.  I need the CAT fields that capture every time anyone or anything updates a record.  There are many CAT fields for every Aleph record.  I contacted Aaron B. 3/9/2021 to request including CAT fields."
+			},
 			{"label": "publisher",
 				"otherNodes": "publisher",
 				"format": "node"
