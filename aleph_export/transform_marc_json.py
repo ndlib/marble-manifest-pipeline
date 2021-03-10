@@ -22,7 +22,6 @@ class TransformMarcJson():
         return standard_json
 
     def build_json_for_control_section(self, marc_record_as_json: dict, section_name: str, seeded_json: dict) -> dict:
-        # json_record = {}
         json_record = seeded_json.copy()
         for json_field_definition in self.json_control[section_name]['FieldsToExtract']:
             if 'label' in json_field_definition:
@@ -33,6 +32,9 @@ class TransformMarcJson():
                     or (isinstance(node_value, dict) and node_value != {}) \
                     or (isinstance(node_value, list) and node_value != [] and node_value != [{}]):  # noqa: E125
                     json_record[json_field_definition['label']] = node_value
+            if 'removeNodes' in json_field_definition:
+                for node_to_remove in json_field_definition.get('removeNodes'):
+                    json_record.pop(node_to_remove, None)
         return json_record
 
     def _mutate_marc_record_as_json(self, marc_record_as_json: dict) -> dict:

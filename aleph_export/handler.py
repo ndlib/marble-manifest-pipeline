@@ -23,6 +23,7 @@ def run(event, _context):
     config = setup_pipeline_config(event)
     if config:
         marc_records_url = "https://alephprod.library.nd.edu/aleph_tmp/marble.mrc"
+        # marc_records_url = "https://alephprep.library.nd.edu/aleph_tmp/marble.mrc"
         time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
         print("Will break after ", time_to_break)
         if event.get('alephExecutionCount', 0) == 1 and not event.get('local'):
@@ -76,6 +77,7 @@ def test():
         event['seconds-to-allow-for-processing'] = 9000
         # event['ids'] = ['002468275']
         # event['ids'] = ['001586302', '001587052', '001587050', '001588845', '001590687']
+        # event['forceSaveStandardJson'] = True
     event = run(event, {})
 
     if not event['alephHarvestComplete']:

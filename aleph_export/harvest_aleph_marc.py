@@ -30,6 +30,10 @@ class HarvestAlephMarc():
         self.event = event
         self.temporary_local_path = '/tmp'
         self.marc_records_stream = self._open_marc_records_stream()
+        validate_json_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'dependencies', 'pipelineutilities', 'validate_json.py')
+        self.validate_json_modified_date = datetime.fromtimestamp(os.path.getmtime(validate_json_path)).isoformat()
+        local_control_file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'marc_to_json_translation_control_file.json')
+        self.local_control_file_modified_date = datetime.fromtimestamp(os.path.getmtime(local_control_file_path)).isoformat()
         # self.marc_records_stream = open('./test/mikala1.bib.mrk', 'rb')
 
     def _open_marc_records_stream(self):
@@ -122,18 +126,22 @@ class HarvestAlephMarc():
             file1.write(json.dumps(json_record, indent=2))
 
     def _get_process_record_flag(self, json_record: dict):
-        """ Process if forced, if no modifiedDate in source system, or if date in source system is newer than date (if any) in dynamo. """
+        """ Process if forced, if no modifiedDate in source system, or if date in source system is newer than date (if any) in dynamo.
+            Also process if the record does not exist in dynamo or if either the validate_json file or the local control json file are newer than the date the dynamo record was last modified """
         if self.config.get('forceSaveStandardJson', False):
             return True
         date_modified_in_source_system = json_record.get('modifiedDate', '')
         if not date_modified_in_source_system:
             return True
-        if date_modified_in_source_system > self._get_modified_date_from_dynamo(json_record.get('id')):
+        record_from_dynamo = get_item_record(self.config.get('website-metadata-tablename'), json_record.get('id'))
+        if not record_from_dynamo:
             return True
-        print("No need to reprocess ", json_record.get('id'))
+        modified_date_from_dynamo = record_from_dynamo.get('modifiedDate')
+        if date_modified_in_source_system > modified_date_from_dynamo:
+            return True
+        if self.validate_json_modified_date > record_from_dynamo.get('dateModifiedInDynamo'):
+            return True
+        if self.local_control_file_modified_date > record_from_dynamo.get('dateModifiedInDynamo'):
+            return True
+        print(json_record.get('id'), 'already current in Dynamo. No need to reprocess.')
         return False
-
-    def _get_modified_date_from_dynamo(self, item_id: str) -> str:
-        """ Modified Date represents the date modified in the source system record stored in dynamo """
-        record_from_dynamo = get_item_record(self.config.get('website-metadata-tablename'), item_id)
-        return record_from_dynamo.get('modifiedDate', '')

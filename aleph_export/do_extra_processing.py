@@ -21,8 +21,10 @@ def do_extra_processing(value: str, extra_processing: str) -> str:
         results = _format_call_number(value)
     elif extra_processing == "format_collections":
         results = _format_collections(value)
-    elif extra_processing == "format_modified_date":
-        results = _format_modified_date(value)
+    elif extra_processing == "format_manually_modified_date":
+        results = _format_manually_modified_date(value)
+    elif extra_processing == "find_latest_date_batch_modified_date":
+        results = _find_latest_date_batch_modified_date(value)
     return results
 
 
@@ -112,8 +114,18 @@ def _format_collections(value: list) -> dict:
     return results
 
 
-def _format_modified_date(value: str) -> str:
+def _format_manually_modified_date(value: str) -> str:
     """ Date comes from Aleph looking like this: 20191121125041.0
         return 2019-11-21T12:50:41.0"""
     date_obj = datetime.datetime.strptime(value, '%Y%m%d%H%M%S.%f')
     return date_obj.isoformat()
+
+
+def _find_latest_date_batch_modified_date(value: str) -> str:
+    """ We will receive value like this: ['20191121 1240', '20191121 1241', '20191121 1243'] """
+    latest_modified_date = ''
+    for date_str in value:
+        this_iso_date = datetime.datetime.strptime(date_str, '%Y%m%d %H%M').isoformat()
+        if this_iso_date > latest_modified_date:
+            latest_modified_date = this_iso_date
+    return latest_modified_date

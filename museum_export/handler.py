@@ -94,7 +94,7 @@ def _suplement_event(event):
 
 # setup:
 # export SSM_KEY_BASE=/all/stacks/steve-manifest
-# aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
+# aws-vault exec testlibnd-superAdmin
 # python -c 'from handler import *; test()'
 # python 'run_all_tests.py'
 def test():
