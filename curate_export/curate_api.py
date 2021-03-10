@@ -194,7 +194,7 @@ class CurateApi():
             If validate_json.py has been updated more recently than the date in standard json, then generate standard json.
             Otherwise, flag no generation needed. """
         item_id = curate_json.get('id')
-        if item_id == 'qz20sq9094h':  # and not self.save_standard_json_locally:
+        if item_id == 'qz20sq9094h' and not self.save_standard_json_locally:
             return False  # special case for Architectural Lantern Slides, which take over 2 hours to create standard json, which can only be generated locally.
         if self.event.get('forceSaveStandardJson'):
             print('forceSaveStandardJson')
