@@ -39,6 +39,10 @@ class CurateApi():
         self.local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
         self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('website-metadata-tablename', ''))
         self.get_curate_metadata_class = GetCurateMetadata(config, event, time_to_break)
+        validate_json_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'dependencies', 'pipelineutilities', 'validate_json.py')
+        self.validate_json_modified_date = datetime.fromtimestamp(os.path.getmtime(validate_json_path)).isoformat()
+        local_control_file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'curate_to_json_translation_control_file.json')
+        self.local_control_file_modified_date = datetime.fromtimestamp(os.path.getmtime(local_control_file_path)).isoformat()
 
     def process_curate_items(self, ids: list) -> bool:
         """ Given a list of ids, process each one that corresponds to a Curate item """
@@ -177,6 +181,10 @@ class CurateApi():
             return True
         if saved_standard_json_root_json.get('fileCreatedDate') < standard_json.get('fileCreatedDate'):
             return True
+        if self.validate_json_modified_date > saved_standard_json_root_json.get('dateModifiedInDynamo'):
+            return True
+        if self.local_control_file_modified_date > saved_standard_json_root_json.get('dateModifiedInDynamo'):
+            return True
         return False
 
     def _generate_new_standard_json_required(self, curate_json: dict) -> bool:
@@ -189,16 +197,24 @@ class CurateApi():
         if item_id == 'qz20sq9094h' and not self.save_standard_json_locally:
             return False  # special case for Architectural Lantern Slides, which take over 2 hours to create standard json, which can only be generated locally.
         if self.event.get('forceSaveStandardJson'):
+            print('forceSaveStandardJson')
             return True
         saved_standard_json = self._get_saved_standard_json(item_id)
         if not saved_standard_json:
+            print('saved_standard_json does not exist')
             return True
         date_from_curate = curate_json.get('dateSubmitted')[:10]
         date_from_saved_standard_json = saved_standard_json.get('modifiedDate')
         if not date_from_saved_standard_json or date_from_curate > date_from_saved_standard_json:
+            print('date_from_curate', date_from_curate, '> date_from_saved_standard_json', date_from_saved_standard_json)
             return True
-        validate_json_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'dependencies', 'pipelineutilities', 'validate_json.py')
-        validate_json_modified_date = datetime.fromtimestamp(os.path.getmtime(validate_json_path))
-        if validate_json_modified_date.isoformat() > date_from_saved_standard_json:
+        saved_standard_json_root_json = get_item_record(self.config.get('website-metadata-tablename', ''), item_id)
+        date_dynamo_record_modified = saved_standard_json_root_json.get('dateModifiedInDynamo')
+        if self.validate_json_modified_date > date_dynamo_record_modified:
+            print('validate_json_modified_date', self.validate_json_modified_date, '> date_dynamo_record_modified', date_dynamo_record_modified)
             return True
+        if self.local_control_file_modified_date > date_dynamo_record_modified:
+            print('local_control_file_modified_date', self.local_control_file_modified_date, '> date_dynamo_record_modified', date_dynamo_record_modified)
+            return True
+        print(item_id, 'already current in Dynamo.  No need to reprocess')
         return False

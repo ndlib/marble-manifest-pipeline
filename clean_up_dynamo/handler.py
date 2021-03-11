@@ -34,8 +34,15 @@ def delete_file_records(table_name: str):
         results = query_dynamo_records(table_name, **kwargs)
         with table.batch_writer() as batch:
             for record in results.get('Items', []):
+                delete_record_flag = False
                 file_extension = Path(record.get('SK')).suffix
                 if file_extension and '.' in file_extension and file_extension.lower() in ['.xml']:  # '.jpg'
+                    delete_record_flag = True
+                elif record.get('sourceType') == 'Google':
+                    delete_record_flag = True
+                elif file_extension and file_extension.lower() in ['.jpg'] and record.get('sourceType') in ['Museum', 'Curate']:
+                    delete_record_flag = True
+                if delete_record_flag:
                     print('deleting record = ', record.get('SK'))
                     # delete_dynamo_record(table_name, record.get('PK'), record.get('SK'))
                     batch.delete_item(Key={'PK': record.get('PK'), 'SK': record.get('SK')})

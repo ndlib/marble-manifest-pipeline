@@ -127,10 +127,29 @@
 				"format": "text",
 				"extraProcessing": "link_to_source"
 			},
+			{	"label": "manuallyModifiedDate",
+				"fields": ["005"],
+				"format": "text",
+				"extraProcessing": "format_manually_modified_date",
+				"note": "The 005 field only record when a person modifies a record."
+			},
+			{"label": "batchModifiedDate",
+				"fields": ["CAT"],
+				"selection": "range",
+				"subfields": ["c", "h"],
+				"extraProcessing": "find_latest_date_batch_modified_date",
+				"format": "array"
+			},
+			{"label": "modifiedDate",
+				"externalProcess": "find_latest_modified_date",
+				"passLabels": [{"batchModifiedDate": "batchModifiedDate", "manuallyModifiedDate": "manuallyModifiedDate"}],
+				"format": "text"
+			},
 			{"label": "publisher",
 				"otherNodes": "publisher",
 				"format": "node"
 			},
+			{"removeNodes": ["batchModifiedDate", "manuallyModifiedDate"]},
 			{ "label": "format",
 				"fields": ["300"],
 				"subfields": ["a"],

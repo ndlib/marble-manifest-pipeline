@@ -1,7 +1,10 @@
+from datetime import datetime
+import os
+import requests  # noqa: E402
 from xml.etree import ElementTree
 from create_json_from_xml import createJsonFromXml
-import requests  # noqa: E402
 from dependencies.sentry_sdk import capture_exception
+from dynamo_query_functions import get_item_record
 
 
 class HarvestOaiEads():
@@ -12,6 +15,10 @@ class HarvestOaiEads():
         self.jsonFromXMLClass = createJsonFromXml()
         self.temporary_local_path = '/tmp'
         self.require_dao_flag = False
+        validate_json_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'dependencies', 'pipelineutilities', 'validate_json.py')
+        self.validate_json_modified_date = datetime.fromtimestamp(os.path.getmtime(validate_json_path)).isoformat()
+        local_control_file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'xml_to_json_translation_control_file.json')
+        self.local_control_file_modified_date = datetime.fromtimestamp(os.path.getmtime(local_control_file_path)).isoformat()
 
     def get_standard_json_from_archives_space_url(self, id_url: str) -> dict:
         """ Retrieve one EAD xml record given the ArchivesSpace identifier """
@@ -21,7 +28,13 @@ class HarvestOaiEads():
         if xml_string:
             xml_tree = self._get_xml_tree_given_xml_string(xml_string, id_url)
             xml_record = xml_tree.find('./GetRecord/record')
-            standard_json = self._process_record(oai_url, xml_record)
+            item_id = self._get_id_from_xml_record(xml_record)
+            date_modified_in_source_system = self._get_modified_date_from_xml_record(xml_record)
+            process_record_flag = self._get_process_record_flag(item_id, date_modified_in_source_system)
+            if process_record_flag:
+                standard_json = self._process_record(oai_url, xml_record)
+            else:
+                print(item_id, 'already current in Dynamo. No need to reprocess', id_url)
         return standard_json
 
     def _get_oai_url_given_id_url(self, user_interface_url: str) -> str:
@@ -72,3 +85,35 @@ class HarvestOaiEads():
         """ Call a process to create ND.JSON from complex ArchivesSpace EAD xml """
         standard_json = self.jsonFromXMLClass.get_standard_json_from_xml(xml_record)
         return standard_json
+
+    def _get_modified_date_from_xml_record(self, xml_record: ElementTree) -> str:
+        """ Return modified date from xml_record """
+        return xml_record.find("./header/datestamp").text
+
+    def _get_id_from_xml_record(self, xml_record: ElementTree) -> str:
+        """ Return Item Id from xml_record """
+        return xml_record.find("./metadata/ead/eadheader/eadid").text
+
+    def _get_modified_date_from_dynamo(self, item_id: str) -> str:
+        """ Modified Date represents the date modified in the source system record stored in dynamo """
+        record_from_dynamo = get_item_record(self.config.get('website-metadata-tablename'), item_id)
+        return record_from_dynamo.get('modifiedDate', '')
+
+    def _get_process_record_flag(self, item_id: str, date_modified_in_source_system: str):
+        """ Process if forced, if no modifiedDate in source system, or if date in source system is newer than date (if any) in dynamo.
+            Also process if the record does not exist in dynamo or if either the validate_json file or the local control json file are newer than the date the dynamo record was last modified """
+        if self.config.get('forceSaveStandardJson', False):
+            return True
+        if not date_modified_in_source_system:
+            return True
+        record_from_dynamo = get_item_record(self.config.get('website-metadata-tablename'), item_id)
+        if not record_from_dynamo:
+            return True
+        modified_date_from_dynamo = record_from_dynamo.get('modifiedDate')
+        if date_modified_in_source_system > modified_date_from_dynamo:
+            return True
+        if self.validate_json_modified_date > record_from_dynamo.get('dateModifiedInDynamo'):
+            return True
+        if self.local_control_file_modified_date > record_from_dynamo.get('dateModifiedInDynamo'):
+            return True
+        return False

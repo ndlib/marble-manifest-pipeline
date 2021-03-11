@@ -20,6 +20,8 @@ def get_value_from_external_process(json_node: dict, field: dict, schema_api_ver
             return_value = os.path.basename(parameters_json['filename'])
     elif external_process_name == 'define_digital_access':
         return_value = _define_digital_access(parameters_json.get("copyrightStatus", ""))
+    elif external_process_name == 'find_latest_modified_date':
+        return_value = find_latest_modified_date(parameters_json.get('batchModifiedDate'), parameters_json.get('manuallyModifiedDate'))
     return return_value
 
 
@@ -56,3 +58,10 @@ def get_seed_nodes_json(json_node: dict, seed_nodes_control: dict) -> dict:
             if value in json_node:
                 seed_json_output[key] = json_node[value]
     return seed_json_output
+
+
+def find_latest_modified_date(batch_modified_date: str, manually_modified_date: str) -> str:
+    """ return which ever modified date is the most recent """
+    if batch_modified_date > manually_modified_date:
+        return batch_modified_date
+    return manually_modified_date

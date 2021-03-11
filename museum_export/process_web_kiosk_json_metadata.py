@@ -40,6 +40,8 @@ class ProcessWebKioskJsonMetadata():
         self.delete_local_copy = False
         self.start_time = time.time()
         self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('website-metadata-tablename', ''))
+        validate_json_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'dependencies', 'pipelineutilities', 'validate_json.py')
+        self.validate_json_modified_date = datetime.fromtimestamp(os.path.getmtime(validate_json_path)).isoformat()
 
     def get_composite_json_metadata(self, mode: str) -> dict:
         """ Build URL, call URL, save resulting output to disk """
@@ -183,9 +185,7 @@ class ProcessWebKioskJsonMetadata():
         last_modified_date_string_from_dynamo = _get_last_modified_date_from_dynamo(record_from_dynamo)
         if not last_modified_date_string_from_dynamo or web_kiosk_json.get('modifiedDate') > last_modified_date_string_from_dynamo:
             return True
-        validate_json_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'dependencies', 'pipelineutilities', 'validate_json.py')
-        validate_json_modified_date = datetime.fromtimestamp(os.path.getmtime(validate_json_path))
-        if validate_json_modified_date.isoformat() > record_from_dynamo.get('dateModifiedInDynamo'):
+        if self.validate_json_modified_date > record_from_dynamo.get('dateModifiedInDynamo'):
             return True
         return False
 

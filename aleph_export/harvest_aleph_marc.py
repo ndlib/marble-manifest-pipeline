@@ -13,6 +13,7 @@ import requests
 from sentry_sdk import capture_exception
 from transform_marc_json import TransformMarcJson
 from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
+from pipelineutilities.dynamo_query_functions import get_item_record
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.save_standard_json import save_standard_json
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
@@ -29,6 +30,10 @@ class HarvestAlephMarc():
         self.event = event
         self.temporary_local_path = '/tmp'
         self.marc_records_stream = self._open_marc_records_stream()
+        validate_json_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'dependencies', 'pipelineutilities', 'validate_json.py')
+        self.validate_json_modified_date = datetime.fromtimestamp(os.path.getmtime(validate_json_path)).isoformat()
+        local_control_file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'marc_to_json_translation_control_file.json')
+        self.local_control_file_modified_date = datetime.fromtimestamp(os.path.getmtime(local_control_file_path)).isoformat()
         # self.marc_records_stream = open('./test/mikala1.bib.mrk', 'rb')
 
     def _open_marc_records_stream(self):
@@ -43,7 +48,7 @@ class HarvestAlephMarc():
             capture_exception('Connection refused on url ' + url)
         except ConnectionError:
             capture_exception('ConnectionError when trying to call url ' + url)
-        except:  # noqa E722 - intentionally ignore warning about bare exceptfrom pymarc import MARCReader 
+        except:  # noqa E722 - intentionally ignore warning about bare exceptfrom pymarc import MARCReader
             capture_exception('Error caught trying to process url ' + url)
         return marc_records_stream
 
@@ -68,7 +73,8 @@ class HarvestAlephMarc():
                 if json_record:
                     aleph_id = json_record.get("id", "")
                     if aleph_id > self.event['maxAlephIdProcessed']:
-                        if aleph_id in self.event['ids'] or len(self.event['ids']) == 0:
+                        process_record_flag = self._get_process_record_flag(json_record)
+                        if process_record_flag and (aleph_id in self.event['ids'] or len(self.event['ids']) == 0):
                             print("Aleph identifier ", aleph_id, " - ", int(time.time() - self.start_time), " seconds.")
                             json_record = add_files_to_json_object_class.add_files(json_record)
                             json_record = standard_json_helpers_class.enhance_standard_json(json_record)
@@ -118,3 +124,24 @@ class HarvestAlephMarc():
         fully_qualified_file_name = os.path.join(directory, json_file_name)
         with open(os.path.join('test', fully_qualified_file_name), "w") as file1:
             file1.write(json.dumps(json_record, indent=2))
+
+    def _get_process_record_flag(self, json_record: dict):
+        """ Process if forced, if no modifiedDate in source system, or if date in source system is newer than date (if any) in dynamo.
+            Also process if the record does not exist in dynamo or if either the validate_json file or the local control json file are newer than the date the dynamo record was last modified """
+        if self.config.get('forceSaveStandardJson', False):
+            return True
+        date_modified_in_source_system = json_record.get('modifiedDate', '')
+        if not date_modified_in_source_system:
+            return True
+        record_from_dynamo = get_item_record(self.config.get('website-metadata-tablename'), json_record.get('id'))
+        if not record_from_dynamo:
+            return True
+        modified_date_from_dynamo = record_from_dynamo.get('modifiedDate')
+        if date_modified_in_source_system > modified_date_from_dynamo:
+            return True
+        if self.validate_json_modified_date > record_from_dynamo.get('dateModifiedInDynamo'):
+            return True
+        if self.local_control_file_modified_date > record_from_dynamo.get('dateModifiedInDynamo'):
+            return True
+        print(json_record.get('id'), 'already current in Dynamo. No need to reprocess.')
+        return False

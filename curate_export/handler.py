@@ -37,7 +37,6 @@ def run(event: dict, context: dict) -> dict:
             save_file_system_record(config.get('website-metadata-tablename'), 'Curate', 'Curate')
             if not event.get("ids", False):
                 string_list_to_save = _read_harvest_ids_from_json('./source_system_export_ids.json', 'Curate')
-                string_list_to_save = _read_harvest_ids_from_json('./source_system_export_ids.json', 'Curate')
                 save_harvest_ids(config, 'Curate', string_list_to_save, config.get('website-metadata-tablename'))
                 event['ids'] = _read_harvest_ids_from_dynamo(config.get('website-metadata-tablename'), 'Curate')
                 event['countToProcess'] = len(event['ids'])
@@ -110,7 +109,7 @@ def _delete_multipart_s3_file_if_necessary(bucket_name, s3_key):
 
 # setup:
 # export SSM_KEY_BASE=/all/stacks/steve-manifest
-# aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
+# aws-vault exec testlibnd-superAdmin
 # python -c 'from handler import *; test()'
 
 # testing:
@@ -135,7 +134,7 @@ def test(identifier=""):
             event['ids'] = ["und:zp38w953h0s"]  # Commencement Programs
             event['ids'] = ["und:zp38w953p3c"]  # Chinese Catholic-themed paintings
             event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
-        event['ids'] = ["und:qz20sq9094h"]  # Architectural Lantern Slides (huge)
+        # event['ids'] = ["und:qz20sq9094h"]  # Architectural Lantern Slides (huge)
         # event['exportAllFilesFlag'] = True  # test exporting all files needing processing
         # event['forceSaveStandardJson'] = True
     event = run(event, {})
