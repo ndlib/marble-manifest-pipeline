@@ -4,7 +4,7 @@ import json
 import os
 from pipelineutilities.standard_json_helpers import _remove_brackets, _remove_trailing_punctuation, _clean_up_standard_json_strings, \
     _load_language_codes, _add_language_display, _clean_up_standard_json_recursive, _add_publishers_node, _add_objectFileGroupId, \
-    _find_object_file_group_id, _find_default_file_path, _add_sequence
+    _find_object_file_group_id, _find_default_file_path, _add_sequence, _insert_pdf_images
 import unittest
 
 
@@ -236,6 +236,23 @@ class Test(unittest.TestCase):
         }
         self.assertEqual(actual_results, expected_results)
 
+    def test_17_insert_pdf_images(self):
+        """ test_17_insert_pdf_images """
+        standard_json = {
+            'id': '123',
+            'defaultFilePath': 'test/foo.pdf',
+            'items': [{'id': 'foo.pdf', 'level': 'file'}]
+        }
+        actual_results = _insert_pdf_images(standard_json)
+        expected_results = {
+            'id': '123',
+            'defaultFilePath': 'test/foo.tif',
+            'items': [
+                {'id': 'foo.pdf', 'level': 'file', 'sequence': 2},
+                {'id': 'foo.tif', 'level': 'file', 'sequence': 1}
+            ]
+        }
+        self.assertEqual(actual_results, expected_results)
 
 def suite():
     """ define test suite """
