@@ -77,3 +77,45 @@ def get_file_record(table_name: str, file_id: str) -> dict:
         except ClientError as ce:
             capture_exception(ce)
     return results
+
+
+def get_file_to_process_record(table_name: str, destination_file_path: str) -> dict:
+    """ Query FileToProcess record from dynamo based on destination_file_path """
+    results = {}
+    if destination_file_path:
+        pk = 'FILETOPROCESS'
+        sk = 'FILEPATH#' + format_key_value(destination_file_path)
+        try:
+            table = boto3.resource('dynamodb').Table(table_name)
+            response = table.get_item(Key={'PK': pk, 'SK': sk})
+            results = response.get('Item', {})
+        except ClientError as ce:
+            capture_exception(ce)
+    return results
+
+
+def get_all_file_to_process_records_by_storage_system(table_name: str, storage_system: str, type_of_data: str = None) -> dict:
+    results = {}
+    if storage_system:
+        GSI1PK = 'FILETOPROCESS'
+        GSI1SK = 'FILESYSTEM#' + format_key_value(storage_system)
+        if type_of_data:
+            GSI1SK += '#' + format_key_value(type_of_data)
+        index = 'GSI1'
+        kwargs = {'IndexName': index}
+        kwargs['KeyConditionExpression'] = Key('GSI1PK').eq(GSI1PK) & Key('GSI1SK').begins_with(GSI1SK)
+        kwargs['ProjectionExpression'] = 'id, filePath, dateModifiedInDynamo'
+        try:
+            while True:
+                table = boto3.resource('dynamodb').Table(table_name)
+                response = table.query(**kwargs)
+                for item in response.get('Items', []):
+                    new_node = {'filePath': item.get('filePath', ''), 'dateModifiedInDynamo': item.get('dateModifiedInDynamo')}
+                    results[item.get('id')] = new_node
+                if response.get('LastEvaluatedKey'):
+                    kwargs['ExclusiveStartKey'] = response.get('LastEvaluatedKey')
+                else:
+                    break
+        except ClientError as ce:
+            capture_exception(ce)
+    return results

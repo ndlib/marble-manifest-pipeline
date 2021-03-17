@@ -2,6 +2,7 @@
 Save standard.json to Dynamo
 """
 
+import boto3
 from datetime import datetime, timedelta
 from validate_json import validate_standard_json
 from sentry_sdk import capture_exception
@@ -9,8 +10,8 @@ from botocore.exceptions import ClientError
 from save_json_to_dynamo import SaveJsonToDynamo
 from s3_helpers import read_s3_json, write_s3_json
 import os
-from dynamo_helpers import add_item_keys
-from dynamo_save_functions import save_parent_override_record, save_website_item_record
+from dynamo_helpers import add_item_keys, add_website_item_keys, add_file_keys
+from dynamo_save_functions import save_parent_override_record, save_file_to_process_record, save_file_group_record
 
 
 class SaveStandardJsonToDynamo():
@@ -23,6 +24,9 @@ class SaveStandardJsonToDynamo():
         self.local = config.get('local', True)
         self.related_ids = self._read_related_ids()
         self.time_to_break = time_to_break
+        if not self.local:
+            self.table = boto3.resource('dynamodb').Table(self.table_name)
+            self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config['website-metadata-tablename'])
 
     def save_standard_json(self, standard_json: dict, save_only_new_records: bool = False) -> bool:
         """ First, validate the standard_json.  If this is the first time this standard_json is being saved,
@@ -30,7 +34,7 @@ class SaveStandardJsonToDynamo():
             We next call a process to record files needing processed.
             We then save the standard_json. """
         success_flag = False
-        if validate_standard_json(standard_json):
+        if validate_standard_json(standard_json) and not self.local:
             if "id" in standard_json:
                 standard_json = add_item_keys(standard_json)
                 success_flag = self._save_json_to_dynamo(standard_json, save_only_new_records)
@@ -45,6 +49,8 @@ class SaveStandardJsonToDynamo():
             for item in standard_json['items']:
                 if item.get("level") != "file" and (not self.time_to_break or datetime.now() < self.time_to_break):
                     self._save_json_to_dynamo(item)
+                if item.get("level") == 'file' and item.get('storageSystem', '') == 'Uri':
+                    self._save_special_file_record(item)
         if "childIds" in standard_json:
             self._append_related_ids(standard_json)
         standard_json = self._optionally_update_parent_id(standard_json)
@@ -55,12 +61,12 @@ class SaveStandardJsonToDynamo():
         if self.time_to_break and datetime.now() > self.time_to_break:
             return False
         try:
-            save_json_to_dynamo_class = SaveJsonToDynamo(self.config, self.table_name)
-            record_inserted_flag = save_json_to_dynamo_class.save_json_to_dynamo(new_dict, save_only_new_records)
-            if record_inserted_flag is None:
-                success_flag = False
-            if new_dict.get('parentId') == 'root':  # add WebsiteItem record to dynamo for all root items
-                save_website_item_record(self.table_name, new_dict['id'], 'Marble')
+            with self.table.batch_writer() as batch:
+                batch.put_item(Item=new_dict)
+                if new_dict.get('parentId') == 'root':  # add WebsiteItem record to dynamo for all root items
+                    webiste_item_record = {'id': new_dict['id'], 'websiteId': 'Marble'}
+                    webiste_item_record = add_website_item_keys(webiste_item_record)
+                    batch.put_item(Item=webiste_item_record)
         except ClientError as ce:
             success_flag = False
             capture_exception(ce)
@@ -104,3 +110,11 @@ class SaveStandardJsonToDynamo():
             standard_json["parentId"] = self.related_ids[standard_json["id"]].get("parentId")
             standard_json["sequence"] = self.related_ids[standard_json["id"]].get("sequence")
         return standard_json
+
+    def _save_special_file_record(self, standard_json: dict):
+        """ Files are automatically stored elsewhere for Curate, Museum, and S3, but not for Uri """
+        if not self.local and standard_json.get('level') == 'file' and standard_json.get('storageSystem') == 'Uri':
+            standard_json = add_file_keys(standard_json)
+            self.save_json_to_dynamo_class.save_json_to_dynamo(standard_json)
+            save_file_to_process_record(self.config['website-metadata-tablename'], standard_json)
+            save_file_group_record(self.config['website-metadata-tablename'], standard_json.get('objectFileGroupId'), standard_json.get('storageSystem'), standard_json.get('typeOfData'))

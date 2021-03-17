@@ -124,7 +124,7 @@ def test(identifier=""):
         event = {}
         event['local'] = False
         event['ids'] = []  # default to read from Dynamo
-        event['seconds-to-allow-for-processing'] = 600 * 20 * 10
+        event['seconds-to-allow-for-processing'] = 60 * 10 * 6
         # event['local'] = True
         if event['local']:
             # event['seconds-to-allow-for-processing'] = 30

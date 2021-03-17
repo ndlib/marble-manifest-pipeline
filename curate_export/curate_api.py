@@ -3,6 +3,7 @@ Curate_API
 Calls the Curate API, massages results to create standard json output, which is then saved.
 """
 
+import boto3
 import time
 import json
 from datetime import datetime
@@ -15,9 +16,8 @@ from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.save_standard_json import save_standard_json
 from save_json_to_dynamo import SaveJsonToDynamo
-from dynamo_helpers import add_file_keys
-from dynamo_query_functions import get_item_record
-from dynamo_save_functions import save_file_group_record, save_file_to_process_record
+from dynamo_helpers import add_file_keys, add_file_to_process_keys, add_file_group_keys, get_iso_date_as_string
+from dynamo_query_functions import get_item_record, get_all_file_to_process_records_by_storage_system
 from record_files_needing_processed import FilesNeedingProcessed
 from s3_helpers import read_s3_json, write_s3_json
 from get_curate_metadata import GetCurateMetadata
@@ -33,16 +33,21 @@ class CurateApi():
             self.curate_header = {"X-Api-Token": self.config["curate-token"]}
         self.start_time = time.time()
         self.time_to_break = time_to_break
+        self.table_name = self.config.get('website-metadata-tablename', '')
         self.translate_curate_json_node_class = TranslateCurateJsonNode(config)
         self.save_standard_json_locally = event.get("local", False)  # To generate standard_json locally, set "local" to false, and temporarily set save_standard_json_locally to True
         self.create_standard_json_class = CreateStandardJson(config)
         self.local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
-        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('website-metadata-tablename', ''))
+        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.table_name)
         self.get_curate_metadata_class = GetCurateMetadata(config, event, time_to_break)
         validate_json_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'dependencies', 'pipelineutilities', 'validate_json.py')
         self.validate_json_modified_date = datetime.fromtimestamp(os.path.getmtime(validate_json_path)).isoformat()
         local_control_file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'curate_to_json_translation_control_file.json')
         self.local_control_file_modified_date = datetime.fromtimestamp(os.path.getmtime(local_control_file_path)).isoformat()
+        self.file_to_process_records_in_dynamo = {}
+        if not self.config.get('local', True):
+            self.file_to_process_records_in_dynamo = get_all_file_to_process_records_by_storage_system(self.table_name, 'Curate', 'Curate')
+            self.table = boto3.resource('dynamodb').Table(self.table_name)
 
     def process_curate_items(self, ids: list) -> bool:
         """ Given a list of ids, process each one that corresponds to a Curate item """
@@ -91,6 +96,7 @@ class CurateApi():
                         file_needed_updated = self._save_curate_image_data_to_dynamo(standard_json, export_all_files_flag)
                         if datetime.now() < self.time_to_break:
                             self.event['itemBeingProcessed']['savedFilesNeedingProcessedToDynamo'] = True
+                            # We will remove the following block once image processing starts to use AppSync
                             if file_needed_updated:
                                 print("updating files needing processed for", item_id, 'after', int(time.time() - self.start_time), 'seconds')
                                 files_needing_processed_class = FilesNeedingProcessed(self.config)
@@ -157,11 +163,20 @@ class CurateApi():
                     new_dict['objectFileGroupId'] = new_dict['parentId']
                     new_dict = add_file_keys(new_dict)
                     self.event['itemBeingProcessed']['lastImageProcessed'] = new_dict.get('id')
-                    record_inserted_flag = self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict, not export_all_files_flag)
-                    if record_inserted_flag or export_all_files_flag:
-                        file_needed_updated = True
-                        save_file_to_process_record(self.config['website-metadata-tablename'], new_dict, False)
-                        save_file_group_record(self.config['website-metadata-tablename'], new_dict.get('objectFileGroupId'), new_dict.get('storageSystem'), new_dict.get('typeOfData'))
+                    with self.table.batch_writer() as batch:
+                        batch.put_item(Item=new_dict)
+                        item_id = new_dict.get('id')
+                        if export_all_files_flag or item_id not in self.file_to_process_records_in_dynamo or new_dict.get('modifiedDate', '') > self.file_to_process_records_in_dynamo[item_id].get('dateModifiedInDynamo', ''):
+                            file_needed_updated = True
+                            different_dict = dict(new_dict)
+                            different_dict = add_file_to_process_keys(different_dict)
+                            batch.put_item(Item=different_dict)
+                            file_group_record = {'objectFileGroupId': new_dict.get('objectFileGroupId')}
+                            file_group_record['storageSystem'] = new_dict.get('storageSystem')
+                            file_group_record['typeOfData'] = new_dict.get('typeOfData')
+                            file_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
+                            file_group_record = add_file_group_keys(file_group_record)
+                            batch.put_item(Item=file_group_record)
         for item in standard_json.get('items', []):
             if datetime.now() < self.time_to_break:
                 self._save_curate_image_data_to_dynamo(item, export_all_files_flag, file_needed_updated)

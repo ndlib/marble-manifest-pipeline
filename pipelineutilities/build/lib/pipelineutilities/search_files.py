@@ -200,8 +200,10 @@ def crawl_available_files(config):
                             "files": [],
                         }
 
-                    if not order_field[id]["lastModified"] or obj['lastModified'] > order_field[id]["lastModified"]:
-                        order_field[id]["lastModified"] = obj['lastModified']
+                    last_modified_iso = obj['lastModified'].isoformat()
+                    obj['lastModified'] = obj['lastModified'].isoformat()
+                    if not order_field[id]["lastModified"] or last_modified_iso > order_field[id]["lastModified"]:
+                        order_field[id]["lastModified"] = last_modified_iso
 
                     augement_file_record(obj, id, url, config)
 
@@ -212,7 +214,7 @@ def crawl_available_files(config):
 def list_updated_files(config: dict, minutes_to_test: int):
     bucket = config['rbsc-image-bucket']
     print("crawling image files in this bucket: ", bucket)
-    time_threshold_for_processing = determine_time_threshold_for_processing(minutes_to_test)
+    time_threshold_for_processing = determine_time_threshold_for_processing(minutes_to_test).isoformat()
     for directory in folders_to_crawl:
         files = get_matching_s3_objects(bucket, directory)
         for file in files:
@@ -222,7 +224,7 @@ def list_updated_files(config: dict, minutes_to_test: int):
 
                 file = _convert_dict_to_camel_case(file)
 
-                if id and file['lastModified'] >= time_threshold_for_processing:
+                if id and file['lastModified'].isoformat() >= time_threshold_for_processing:
                     augement_file_record(file, id, url, config)
                     yield file
 
@@ -279,8 +281,10 @@ def list_all_directories(config: dict):
                             "files": [],
                         }
 
-                    if not order_field[directory_id]['objects'][id]["LastModified"] or obj['LastModified'] > order_field[directory_id]['objects'][id]["LastModified"]:
-                        order_field[directory_id]['objects'][id]["LastModified"] = obj['LastModified']
+                    last_modified_iso = obj['LastModified'].isoformat()
+                    obj['LastModified'] = obj['LastModified'].isoformat()
+                    if not order_field[directory_id]['objects'][id]["LastModified"] or last_modified_iso > order_field[directory_id]['objects'][id]["LastModified"]:
+                        order_field[directory_id]['objects'][id]["LastModified"] = last_modified_iso
 
                     augement_file_record(obj, id, url, config)
 
@@ -304,10 +308,10 @@ def augement_file_record(obj, id, url, config):
     obj['label'] = make_label(url, id)
     obj['sourceType'] = 'S3'
     obj['source'] = bucket
-    obj['path'] = "s3://" + os.path.join(bucket, obj['key'])
+    obj['path'] = obj['key']
     obj['sourceUri'] = url
     obj["iiifImageUri"] = os.path.join(config['image-server-base-url'], obj.get('key'))
-    # Added from here down for consistency.  Once dependencies are updated, we will need to remove fileId, and iiifImageUri
+    # Added from here down for consistency.  Once dependencies are updated, we will need to remove iiifImageUri
     obj['objectFileGroupId'] = id
     obj["iiifUri"] = os.path.join(config['image-server-base-url'], obj.get('key'))
     # Added from here down 2/25/2021 for consistency.  Once dependencies are updated, we need to remove iiifUri and iiifImageUri

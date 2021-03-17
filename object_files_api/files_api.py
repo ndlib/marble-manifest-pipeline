@@ -1,4 +1,5 @@
 """ Files API """
+import boto3
 import os
 import io
 from datetime import datetime, timedelta
@@ -7,10 +8,10 @@ import time
 from s3_helpers import write_s3_json, read_s3_json, delete_s3_key
 from api_helpers import json_serial
 from search_files import crawl_available_files
-from save_json_to_dynamo import SaveJsonToDynamo
-from dynamo_helpers import add_file_keys
-from dynamo_save_functions import save_file_group_record, save_file_system_record, save_file_to_process_record
+from dynamo_helpers import add_file_keys, add_file_to_process_keys, add_file_group_keys, get_iso_date_as_string
+from dynamo_save_functions import save_file_system_record
 from add_files_to_json_object import change_file_extensions_to_tif
+from pipelineutilities.dynamo_query_functions import get_all_file_to_process_records_by_storage_system
 
 
 class FilesApi():
@@ -25,10 +26,14 @@ class FilesApi():
         else:
             self.directory = os.path.join(os.path.dirname(__file__), 'cache')
         self.start_time = time.time()
-        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config['website-metadata-tablename'])
+        self.table_name = self.config.get('website-metadata-tablename', '')
         self.resumption_filename = 'file_objects_list_partially_processed.json'
         if not self.event['local']:
-            save_file_system_record(config.get('website-metadata-tablename'), 'S3', 'RBSC website bucket')
+            save_file_system_record(self.table_name, 'S3', 'RBSC website bucket')
+        self.file_to_process_records_in_dynamo = {}
+        if not self.config.get('local', True):
+            self.file_to_process_records_in_dynamo = get_all_file_to_process_records_by_storage_system(self.config.get('website-metadata-tablename', ''), 'S3')
+            self.table = boto3.resource('dynamodb').Table(self.table_name)
 
     def save_files_details(self):
         """ This will crawl available files, then loop through the file listing, saving each to dynamo """
@@ -105,10 +110,20 @@ class FilesApi():
             my_json = change_file_extensions_to_tif(my_json, self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
             my_json = add_file_keys(my_json)
             if not self.config.get('local', False):
-                self.save_json_to_dynamo_class.save_json_to_dynamo(my_json)
-                save_file_to_process_record(self.config['website-metadata-tablename'], my_json)  # TODO: Determine if file date is more recent that most recently processed date. Only insert if newer.
-            if i == 1 and not self.config.get('local', True):
-                save_file_group_record(self.config['website-metadata-tablename'], my_json.get('objectFileGroupId'), my_json.get('storageSystem'), my_json.get('typeOfData'))
+                with self.table.batch_writer() as batch:
+                    batch.put_item(Item=my_json)
+                    item_id = my_json.get('id')
+                    if self.event.get('exportAllFilesFlag', False) or item_id not in self.file_to_process_records_in_dynamo or my_json.get('modifiedDate', '') > self.file_to_process_records_in_dynamo[item_id].get('dateModifiedInDynamo', ''):  # noqa: #501
+                        different_json = dict(my_json)
+                        different_json = add_file_to_process_keys(different_json)
+                        batch.put_item(Item=different_json)
+                    if i == 1:
+                        file_group_record = {'objectFileGroupId': my_json.get('objectFileGroupId')}
+                        file_group_record['storageSystem'] = my_json.get('storageSystem')
+                        file_group_record['typeOfData'] = my_json.get('typeOfData')
+                        file_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
+                        file_group_record = add_file_group_keys(file_group_record)
+                        batch.put_item(Item=file_group_record)
         return collection_list
 
     def _cache_s3_call(self, file_name: str, objects: dict):

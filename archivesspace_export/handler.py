@@ -102,7 +102,7 @@ def test():
         event["local"] = False
         event['seconds-to-allow-for-processing'] = 3300
         event["ids"] = [
-            # "https://archivesspace.library.nd.edu/repositories/2/resources/1652",  # Collegiate Jazz Festival
+            # "https://archivesspace.library.nd.edu/repositories/2/resources/1652",  # Collegiate Jazz Festival - These contain PDFs
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1631",    # Inquisitions (MSHLAT0090_EAD)
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1447",
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1567",
@@ -112,6 +112,9 @@ def test():
         # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1524"]
         # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/2038"]
         # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1567"]
+        event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1439"]
+        # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/2/resources/1652"]  # Collegiate Jazz Festival - These contain PDFs
+        event['forceSaveStandardJson'] = True
     event = run(event, {})
 
     if not event['archivesSpaceHarvestComplete']:
