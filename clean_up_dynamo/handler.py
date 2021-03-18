@@ -14,12 +14,12 @@ if 'SENTRY_DSN' in os.environ:
 
 
 def run(event: dict, context: dict) -> dict:
-    event['fileRecordsDeleted'] = delete_file_records(event.get('website-metadata-tablename'))  # 2252 .xml files deleted
-    event['fileToHarvestRecordsDeleted'] = delete_file_to_process_records(event.get('website-metadata-tablename'))  # 5488 records deleted
+    event['fileRecordsDeleted'] = delete_file_records(event.get('website-metadata-tablename'), event.get('deleteAllFileRecords', False))  # 2252 .xml files deleted
+    event['fileToHarvestRecordsDeleted'] = delete_file_to_process_records(event.get('website-metadata-tablename'), event.get('deleteAllFileToProcessRecords', False))  # 5488 records deleted
     return event
 
 
-def delete_file_records(table_name: str):
+def delete_file_records(table_name: str, delete_all_records: bool):
     """ Delete certain File records, depending on criteria below """
     print("deleting File records")
     pk = 'FILE'
@@ -42,7 +42,7 @@ def delete_file_records(table_name: str):
                     delete_record_flag = True
                 elif file_extension and file_extension.lower() in ['.jpg'] and record.get('sourceType') in ['Museum', 'Curate']:
                     delete_record_flag = True
-                if delete_record_flag:
+                if delete_record_flag or delete_all_records:
                     print('deleting record = ', record.get('SK'))
                     # delete_dynamo_record(table_name, record.get('PK'), record.get('SK'))
                     batch.delete_item(Key={'PK': record.get('PK'), 'SK': record.get('SK')})
@@ -54,7 +54,7 @@ def delete_file_records(table_name: str):
     return records_deleted
 
 
-def delete_file_to_process_records(table_name: str):
+def delete_file_to_process_records(table_name: str, delete_all_records: bool):
     """ Delete certain FileToProcess records, depending on criteria below """
     print("deleting FileToProcess records")
     pk = 'FILETOPROCESS'
@@ -77,7 +77,7 @@ def delete_file_to_process_records(table_name: str):
                     delete_record_flag = True
                 elif file_extension and file_extension.lower() in ['.jpg'] and record.get('sourceType') in ['Museum', 'Curate']:
                     delete_record_flag = True
-                if delete_record_flag:
+                if delete_record_flag or delete_all_records:
                     print('deleting record = ', record.get('SK'))
                     records_deleted += 1
                     # delete_dynamo_record(table_name, record.get('PK'), record.get('SK'))
@@ -113,7 +113,7 @@ def delete_dynamo_record(table_name: str, pk: str, sk: str) -> dict:
 
 # setup:
 # export SSM_KEY_BASE=/all/stacks/steve-manifest
-# aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
+# aws-vault exec testlibnd-superAdmin
 # python -c 'from handler import *; test()'
 
 # testing:
@@ -124,5 +124,8 @@ def test(identifier=""):
     """ test exection """
     event = {}
     event['website-metadata-tablename'] = 'steve-manifest-websiteMetadata470E321C-1NPIJYOXUCVHU'
+    event['deleteAllFileRecords'] = True
+    event['deleteAllFileToProcessRecords'] = True
+    print(1 / 0)  # make sure we don't accidentally run this
     event = run(event, {})
     print(event)

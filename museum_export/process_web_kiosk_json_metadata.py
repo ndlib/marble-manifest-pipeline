@@ -6,6 +6,7 @@ This routine reads a potentially huge single JSON metadata output file from Web 
     They are then uploaded to a Google Team Drive, and deleted locally.
 """
 
+import boto3
 import json
 from datetime import datetime, timedelta
 import os
@@ -17,9 +18,8 @@ from get_image_info_for_all_objects import GetImageInfoForAllObjects
 from pipelineutilities.save_standard_json import save_standard_json
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
-from dynamo_helpers import add_file_keys
-from pipelineutilities.dynamo_query_functions import get_item_record
-from dynamo_save_functions import save_file_group_record, save_file_to_process_record
+from dynamo_helpers import add_file_keys, add_file_to_process_keys, add_file_group_keys, get_iso_date_as_string
+from pipelineutilities.dynamo_query_functions import get_item_record, get_all_file_to_process_records_by_storage_system
 import re
 from save_json_to_dynamo import SaveJsonToDynamo
 from record_files_needing_processed import FilesNeedingProcessed
@@ -39,9 +39,14 @@ class ProcessWebKioskJsonMetadata():
         self.save_local_copy = False
         self.delete_local_copy = False
         self.start_time = time.time()
-        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.config.get('website-metadata-tablename', ''))
+        self.table_name = self.config.get('website-metadata-tablename', '')
+        self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.table_name)
         validate_json_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'dependencies', 'pipelineutilities', 'validate_json.py')
         self.validate_json_modified_date = datetime.fromtimestamp(os.path.getmtime(validate_json_path)).isoformat()
+        self.file_to_process_records_in_dynamo = {}
+        if not self.config.get('local', True):
+            self.file_to_process_records_in_dynamo = get_all_file_to_process_records_by_storage_system(self.table_name, 'Google', 'Museum')
+            self.table = boto3.resource('dynamodb').Table(self.table_name)
 
     def get_composite_json_metadata(self, mode: str) -> dict:
         """ Build URL, call URL, save resulting output to disk """
@@ -159,12 +164,22 @@ class ProcessWebKioskJsonMetadata():
             new_dict['storageSystem'] = 'Google'
             new_dict['typeOfData'] = 'Museum'
             new_dict = add_file_keys(new_dict)
-            record_inserted_flag = self.save_json_to_dynamo_class.save_json_to_dynamo(new_dict, True)
-            if record_inserted_flag or export_all_files_flag:
-                save_file_to_process_record(self.config['website-metadata-tablename'], new_dict, False)
-                save_file_group_record(self.config['website-metadata-tablename'], new_dict.get('objectFileGroupId'), new_dict.get('storageSystem'), new_dict.get('typeOfData'))
-                files_needing_processed_class = FilesNeedingProcessed(self.config)
-                files_needing_processed_class.record_files_needing_processed(standard_json, True)
+            item_id = new_dict.get('id')
+            with self.table.batch_writer() as batch:
+                batch.put_item(Item=new_dict)
+                if export_all_files_flag or item_id not in self.file_to_process_records_in_dynamo or new_dict.get('modifiedDate', '') > self.file_to_process_records_in_dynamo[item_id].get('dateModifiedInDynamo', ''):
+                    different_json = dict(new_dict)
+                    different_json = add_file_to_process_keys(different_json)
+                    batch.put_item(Item=different_json)
+                    file_group_record = {'objectFileGroupId': new_dict.get('objectFileGroupId')}
+                    file_group_record['storageSystem'] = new_dict.get('storageSystem')
+                    file_group_record['typeOfData'] = new_dict.get('typeOfData')
+                    file_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
+                    file_group_record = add_file_group_keys(file_group_record)
+                    batch.put_item(Item=file_group_record)
+                    # These next 2 lines will need to be removed once image processing is modified to use AppSync
+                    files_needing_processed_class = FilesNeedingProcessed(self.config)
+                    files_needing_processed_class.record_files_needing_processed(standard_json, True)
         for item in standard_json.get('items', []):
             self._save_google_image_data_to_dynamo(item, export_all_files_flag)
 
@@ -181,11 +196,14 @@ class ProcessWebKioskJsonMetadata():
         if not self.config.get('local', True) and self.config.get('website-metadata-tablename', '') and item_id:
             record_from_dynamo = get_item_record(self.config.get('website-metadata-tablename', ''), item_id)
         if not record_from_dynamo:
+            print("record not in dynamo")
             return True
         last_modified_date_string_from_dynamo = _get_last_modified_date_from_dynamo(record_from_dynamo)
         if not last_modified_date_string_from_dynamo or web_kiosk_json.get('modifiedDate') > last_modified_date_string_from_dynamo:
+            print("last_modified_date_string_from_dynamo = ", last_modified_date_string_from_dynamo, 'web_kiosk_modified_date = ', web_kiosk_json.get('modifiedDate'))
             return True
         if self.validate_json_modified_date > record_from_dynamo.get('dateModifiedInDynamo'):
+            # print('validate_json_modified_date =', self.validate_json_modified_date, 'dateModifiedInDynamo', record_from_dynamo.get('dateModifiedInDynamo'))
             return True
         return False
 

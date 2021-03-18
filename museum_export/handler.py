@@ -67,7 +67,7 @@ def run(event, _context):
         write_s3_json(config['process-bucket'], 'museum_composite_metadata.json', composite_json)
         key = 'countHarvestedLoop' + str(event["museumExecutionCount"])
         event[key] = objects_processed
-        event['countRemaining'] = len(composite_json.get('objects'))
+    event['countRemaining'] = len(composite_json.get('objects'))
     return event
 
 
@@ -107,7 +107,7 @@ def test():
         event = {}
         event["local"] = False
         event["mode"] = "full"
-        event['seconds-to-allow-for-processing'] = 60 * 10
+        event['seconds-to-allow-for-processing'] = 60 * 10 * 5
         # event['exportAllFilesFlag'] = True  # test exporting all files needing processing
         # event["mode"] = "ids"
         # event['ids'] = ['1934.007.001']

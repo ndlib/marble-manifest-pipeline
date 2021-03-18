@@ -60,6 +60,7 @@ def test():
         # event['image-server-base-url'] = 'http://images.com'
         # event['image-server-bucket'] = 's3://images'
         # event['manifest-server-bucket'] = 'steve-manifest-manifestbucket46c412a5-19kyrt97zbq12'
+        event['exportAllFilesFlag'] = True
     event = run(event, {})
 
     if not event['objectFilesApiComplete']:

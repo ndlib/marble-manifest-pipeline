@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 from datetime import datetime
 from search_files import id_from_url, crawl_available_files  # noqa: #402
+from urllib import parse
 
 
 class AddFilesToJsonObject():
@@ -26,11 +27,11 @@ class AddFilesToJsonObject():
                 elif item.get("level", "") == "file":
                     file_path = item.get("filePath", "")
                     if file_path:
-                        self._add_other_files_given_uri(standard_json["items"], index, file_path)
+                        self._add_other_files_given_uri(standard_json["items"], index, file_path, standard_json.get('uniqueIdentifier', ''))
                         break  # assumption is that we process only the first item to find additional files
         return standard_json
 
-    def _add_other_files_given_uri(self, file_items: list, index: int, file_path: str):
+    def _add_other_files_given_uri(self, file_items: list, index: int, file_path: str, parent_unique_identifier: str):
         """ This accepts an image uri, and finds (and appends to the standard_json)
             all related images. """
         each_file_dict = {}
@@ -57,12 +58,16 @@ class AddFilesToJsonObject():
                     each_file_dict['fileCreatedDate'] = file_created_date
                     each_file_dict['level'] = 'file'
                     each_file_dict['parentId'] = parent_id
-                    each_file_dict['id'] = os.path.basename(obj['key'])
+                    # each_file_dict['id'] = os.path.basename(obj['key'])
+                    each_file_dict['id'] = obj['key']  # going forward, I believe we will want id to be the full destination path
+                    each_file_dict['filePath'] = obj['key']  # going forward, I believe we will want id to be the full destination path
                     each_file_dict['key'] = str(obj['key'])
-                    each_file_dict['thumbnail'] = (each_file_dict['id'] == item_id)
+                    each_file_dict['thumbnail'] = (each_file_dict['id'] == item_id or os.path.basename(obj['key']) == item_id)
                     each_file_dict['description'] = ""
-                    if each_file_dict['id'] == item_id:
+                    if each_file_dict['id'] == item_id or os.path.basename(obj['key']) == item_id:
                         each_file_dict['description'] = item_description
+                    else:
+                        each_file_dict['description'] = os.path.basename(obj['key'])
                     each_file_dict['sourceFilePath'] = str(obj['path'])
                     sequence += 1
                     each_file_dict['sequence'] = obj.get('order', sequence)
@@ -70,7 +75,7 @@ class AddFilesToJsonObject():
                     if obj['lastModified']:
                         each_file_dict['modifiedDate'] = obj['lastModified']
                         if isinstance(each_file_dict['modifiedDate'], str):
-                            obj['lastModified'] = obj['lastModified'].replace("+00:00", "")
+                            obj['lastModified'] = obj['lastModified'].replace("+00:00", "").replace("T", " ").replace('Z', '')
                             each_file_dict['modifiedDate'] = datetime.strptime(obj['lastModified'], '%Y-%m-%d %H:%M:%S').isoformat() + '+00:00Z'
                         elif isinstance(each_file_dict['modifiedDate'], datetime):
                             each_file_dict['modifiedDate'] = obj['lastModified'].isoformat() + 'Z'
@@ -79,6 +84,9 @@ class AddFilesToJsonObject():
                         self._remove_existing_file_from_list(file_items, each_file_dict['id'])
                     each_file_dict = change_file_extensions_to_tif(each_file_dict, self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
                     file_items.append(dict(each_file_dict))
+        else:
+            _fix_file_metadata_not_on_s3(file_items[index], parent_unique_identifier)
+            file_items[index] = change_file_extensions_to_tif(file_items[index], self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
         return file_items
 
     def _file_exists_in_list(self, file_items: list, id: str) -> bool:
@@ -92,6 +100,36 @@ class AddFilesToJsonObject():
             if item.get("id", "") == id:
                 file_items.pop(index)
                 break
+
+
+def _fix_file_metadata_not_on_s3(file_item: dict, parent_unique_identifier: str):
+    """ filePath is likely URL where to find file.  change to sourceUri (or sourceFilePath if not URL).
+        Change filePath to be destination where this file should be placed (treePath plus filename)
+        Add title and description to be filename if they don't exist.
+        Set objectFileGroupId to parent_unique_identifier
+        Set id to be same as new filePath """
+    file_path = file_item.get('filePath')
+    file_name = os.path.basename(file_path)
+    if file_path.startswith('http'):
+        source_uri = file_path
+        file_item['sourceUri'] = source_uri
+        file_item['storageSystem'] = 'Uri'
+        file_item['sourceType'] = 'Uri'
+        file_item['typeOfData'] = 'Uri'
+        if file_item.get('treePath'):
+            file_item['filePath'] = os.path.join(file_item.get('treePath'), file_name)
+        else:
+            file_path = parse.urlparse(source_uri).path
+            if file_path.startswith('/'):
+                file_path = file_path[1:]
+            file_item['filePath'] = file_path
+    else:
+        file_item['sourceFilePath'] = file_path
+    file_item['title'] = file_item.get('title', file_name)
+    file_item['description'] = file_item.get('description', file_name)
+    file_item['objectFileGroupId'] = parent_unique_identifier
+    file_item['id'] = file_item.get('filePath')
+    return file_item
 
 
 def change_file_extensions_to_tif(each_file_dict: dict, file_extensions_to_protect_from_changing_to_tif: list) -> dict:

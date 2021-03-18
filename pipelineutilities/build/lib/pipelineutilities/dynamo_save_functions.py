@@ -4,7 +4,7 @@
 from save_json_to_dynamo import SaveJsonToDynamo
 from dynamo_helpers import add_file_group_keys, add_source_system_keys, add_item_to_harvest_keys, add_file_systems_keys, get_iso_date_as_string, \
     add_parent_override_keys, add_file_to_process_keys, add_website_keys, \
-    add_website_item_keys, add_new_subject_term_authority_keys, add_unharvested_subject_term_keys, \
+    add_new_subject_term_authority_keys, add_unharvested_subject_term_keys, \
     add_subject_term_keys
 
 
@@ -88,15 +88,15 @@ def save_website_record(dynamo_table_name: str, web_site_name: str, save_only_ne
     save_json_to_dynamo_class.save_json_to_dynamo(json_record, save_only_new_records)
 
 
-def save_website_item_record(dynamo_table_name: str, item_id: str, website_id: str, save_only_new_records: bool = True):
-    """ Save WebsiteItem record to dynamo """
-    config = {'local': False}
-    if item_id and website_id:
-        json_record = {'id': item_id}
-        json_record['websiteId'] = website_id
-        json_record = add_website_item_keys(json_record)
-        save_json_to_dynamo_class = SaveJsonToDynamo(config, dynamo_table_name)
-        save_json_to_dynamo_class.save_json_to_dynamo(json_record, save_only_new_records)
+# def save_website_item_record(dynamo_table_name: str, item_id: str, website_id: str, save_only_new_records: bool = True):
+#     """ Save WebsiteItem record to dynamo """
+#     config = {'local': False}
+#     if item_id and website_id:
+#         json_record = {'id': item_id}
+#         json_record['websiteId'] = website_id
+#         json_record = add_website_item_keys(json_record)
+#         save_json_to_dynamo_class = SaveJsonToDynamo(config, dynamo_table_name)
+#         save_json_to_dynamo_class.save_json_to_dynamo(json_record, save_only_new_records)
 
 
 def save_new_subject_term_authority_record(dynamo_table_name: str, authority: str, source_system: str, id: str, save_only_new_records: bool = True):
