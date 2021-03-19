@@ -55,6 +55,8 @@ class createJsonFromXml():
             value = field.get('constant', '')
         elif 'fromLabels' in field:
             value = get_value_from_labels(json_output, field)
+        elif 'addTagAsValue' in field:
+            value = xml_root.tag
         elif 'externalProcess' in field:
             value = perform_additional_processing(json_output, field, self.schema_api_version)
         elif 'removeNodes' in field:
