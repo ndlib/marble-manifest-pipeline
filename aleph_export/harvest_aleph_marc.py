@@ -136,12 +136,12 @@ class HarvestAlephMarc():
         record_from_dynamo = get_item_record(self.config.get('website-metadata-tablename'), json_record.get('id'))
         if not record_from_dynamo:
             return True
-        modified_date_from_dynamo = record_from_dynamo.get('modifiedDate')
+        modified_date_from_dynamo = record_from_dynamo.get('modifiedDate', '')
         if date_modified_in_source_system > modified_date_from_dynamo:
             return True
-        if self.validate_json_modified_date > record_from_dynamo.get('dateModifiedInDynamo'):
+        if self.validate_json_modified_date > record_from_dynamo.get('dateModifiedInDynamo', ''):
             return True
-        if self.local_control_file_modified_date > record_from_dynamo.get('dateModifiedInDynamo'):
+        if self.local_control_file_modified_date > record_from_dynamo.get('dateModifiedInDynamo', ''):
             return True
         print(json_record.get('id'), 'already current in Dynamo. No need to reprocess.')
         return False
