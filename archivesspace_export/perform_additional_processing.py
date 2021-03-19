@@ -36,6 +36,8 @@ def perform_additional_processing(json_node: dict, field: dict, schema_api_versi
     elif external_process_name == 'format_subject_uri':
         if 'authFileNumber' in parameters_json:
             return_value = _format_subject_uri(parameters_json["authFileNumber"])
+    elif external_process_name == 'clean_up_subjects':
+        return_value = _clean_up_subjects(parameters_json.get('subjects', []))
     return return_value
 
 
@@ -112,3 +114,10 @@ def _format_subject_uri(value_found: str) -> str:
     if re.findall(regex, value_found):
         results = 'https://id.loc.gov/authorities/subjects/' + value_found.replace(' ', '') + '.html'
     return results
+
+
+def _clean_up_subjects(subject_list: list) -> list:
+    subject_list[:] = [subject for subject in subject_list if subject.get('tag', '') != 'genreform']
+    for subject in subject_list:
+        subject.pop('tag', None)
+    return subject_list

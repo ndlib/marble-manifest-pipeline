@@ -27,7 +27,10 @@ class AddFilesToJsonObject():
                 elif item.get("level", "") == "file":
                     file_path = item.get("filePath", "")
                     if file_path:
-                        self._add_other_files_given_uri(standard_json["items"], index, file_path, standard_json.get('uniqueIdentifier', ''))
+                        parent_unique_identifier = standard_json.get('uniqueIdentifier')
+                        if not parent_unique_identifier:
+                            parent_unique_identifier = standard_json.get('id')
+                        self._add_other_files_given_uri(standard_json["items"], index, file_path, parent_unique_identifier)
                         break  # assumption is that we process only the first item to find additional files
         return standard_json
 
@@ -127,7 +130,10 @@ def _fix_file_metadata_not_on_s3(file_item: dict, parent_unique_identifier: str)
         file_item['sourceFilePath'] = file_path
     file_item['title'] = file_item.get('title', file_name)
     file_item['description'] = file_item.get('description', file_name)
-    file_item['objectFileGroupId'] = parent_unique_identifier
+    object_file_group_id = id_from_url(file_path)
+    if not object_file_group_id:
+        object_file_group_id = parent_unique_identifier
+    file_item['objectFileGroupId'] = object_file_group_id
     file_item['id'] = file_item.get('filePath')
     return file_item
 

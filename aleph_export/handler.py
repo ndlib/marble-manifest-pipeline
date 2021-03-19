@@ -75,9 +75,9 @@ def test():
         event = {}
         event['local'] = False
         event['seconds-to-allow-for-processing'] = 9000
-        # event['ids'] = ['002468275']
+        event['ids'] = ['005096943']
         # event['ids'] = ['001586302', '001587052', '001587050', '001588845', '001590687']
-        # event['forceSaveStandardJson'] = True
+        event['forceSaveStandardJson'] = True
     event = run(event, {})
 
     if not event['alephHarvestComplete']:
