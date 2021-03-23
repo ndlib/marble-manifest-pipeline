@@ -5,7 +5,8 @@ import unittest
 from pipelineutilities.dynamo_helpers import format_key_value, add_item_keys, add_file_group_keys, add_file_keys, \
     add_source_system_keys, add_item_to_harvest_keys, add_file_systems_keys, add_parent_override_keys, \
     add_file_to_process_keys, add_website_keys, \
-    add_website_item_keys, add_new_subject_term_authority_keys, add_unharvested_subject_term_keys, add_subject_term_keys
+    add_website_item_keys, add_new_subject_term_authority_keys, add_unharvested_subject_term_keys, add_subject_term_keys, \
+    _add_more_file_fields
 
 
 class Test(unittest.TestCase):
@@ -203,6 +204,27 @@ class Test(unittest.TestCase):
         expected_results['GSI2SK'] = expected_results.get('GSI2SK') + actual_results['dateModifiedInDynamo']
         del actual_results['dateAddedToDynamo']
         actual_results.pop('dateModifiedInDynamo', None)
+        self.assertEqual(actual_results, expected_results)
+
+    def test_18_add_more_file_fields(self):
+        """ test_18_add_more_file_fields"""
+        json_record = {"filePath": "collections/ead_xml/images/MSN-EA_5031/MSN-EA_5031-01.a.150.tif"}
+        actual_results = _add_more_file_fields(json_record, 'http://SomeIiifServeruri')
+        expected_results = {
+            'filePath': 'collections/ead_xml/images/MSN-EA_5031/MSN-EA_5031-01.a.150.tif',
+            'mediaServer': 'http://SomeIiifServeruri',
+            'mimeType': 'image/tiff', 'mediaResourceId': 'collections%2Fead_xml%2Fimages%2FMSN-EA_5031%2FMSN-EA_5031-01.a.150'
+        }
+        self.assertEqual(actual_results, expected_results)
+
+    def test_19_add_more_file_fields(self):
+        """ test_18_add_more_file_fields"""
+        json_record = {"filePath": "collections/ead_xml/images/MSN-EA_5031/MSN-EA_5031-01.a.150.pdf"}
+        actual_results = _add_more_file_fields(json_record, 'http://SomeIiifServeruri')
+        expected_results = {
+            'filePath': 'collections/ead_xml/images/MSN-EA_5031/MSN-EA_5031-01.a.150.pdf',
+            'mimeType': 'application/pdf'
+        }
         self.assertEqual(actual_results, expected_results)
 
 

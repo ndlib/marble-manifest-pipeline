@@ -41,9 +41,9 @@ def _suplement_event(event):
 
 
 # export SSM_KEY_BASE=/all/stacks/steve-manifest
-# aws-vault exec testlibnd-superAdmin --session-ttl=1h --assume-role-ttl=1h --
+# aws-vault exec testlibnd-superAdmin
 
-# aws-vault exec libnd-wse-admin --session-ttl=1h --assume-role-ttl=1h --
+# aws-vault exec libnd-wse-admin
 # python -c 'from handler import *; test()'
 def test():
     filename = 'event.json'
@@ -54,13 +54,14 @@ def test():
         event = {}
         event["local"] = False
         event['ssm_key_base'] = '/all/stacks/steve-manifest'
-        event['seconds-to-allow-for-processing'] = 9000
+        event['seconds-to-allow-for-processing'] = 60 * 10 * 5
         # event['ssm_key_base'] = '/all/marble-manifest-prod'
         # event['rbsc-image-bucket'] = 'libnd-smb-rbsc'
         # event['image-server-base-url'] = 'http://images.com'
         # event['image-server-bucket'] = 's3://images'
         # event['manifest-server-bucket'] = 'steve-manifest-manifestbucket46c412a5-19kyrt97zbq12'
         event['exportAllFilesFlag'] = True
+        event['forceSaveStandardJson'] = True
     event = run(event, {})
 
     if not event['objectFilesApiComplete']:

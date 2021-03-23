@@ -118,7 +118,8 @@ def test():
         # event["ids"] = ["2017.039.005", "1986.052.007.005", "1978.062.002.003"]  # Objects with hidden parents
         # Test these temp IDs:  IL2019.006.002, IL1992.065.004, L1986.032.002, AA1966.031
         # event['ids'] = ['2019.001.003']
-        event['forceSaveStandardJson'] = False
+        event['exportAllFilesFlag'] = True
+        event['forceSaveStandardJson'] = True
     event = run(event, {})
 
     if not event['museumHarvestComplete']:
