@@ -2,6 +2,8 @@
     This module will hold all DynamoDB specific key information for each entity added here
 """
 from datetime import datetime
+import os
+from pathlib import Path
 
 
 def add_item_keys(json_record: dict) -> dict:
@@ -36,7 +38,7 @@ def add_file_group_keys(json_record: dict) -> dict:
     return json_record
 
 
-def add_file_keys(json_record: dict) -> dict:
+def add_file_keys(json_record: dict, iiif_image_service_uri: str = None) -> dict:
     """ Add DynamoDB keys to File record to be saved
         Required values include: id, objectFileGroupId, sequence """
     json_record['PK'] = 'FILE'
@@ -46,6 +48,7 @@ def add_file_keys(json_record: dict) -> dict:
     zero_padded_sequence = format(json_record.get('sequence', 0), '05d')  # zero-pad sequence numbers so they sort correctly as strings
     json_record['GSI1SK'] = 'SORT#' + str(zero_padded_sequence)
     json_record['dateModifiedInDynamo'] = get_iso_date_as_string()
+    json_record = _add_more_file_fields(json_record, iiif_image_service_uri)
     return json_record
 
 
@@ -198,3 +201,21 @@ def format_key_value(key_value: str) -> str:
 def get_iso_date_as_string() -> str:
     """ This Returns local time, not UTC time """
     return datetime.now().isoformat()
+
+
+def _add_more_file_fields(json_record: dict, iiif_image_service_uri: str = None) -> dict:
+    """ Add mimeType (if absent), add mediaServer and mediaResourceId """
+    file_path = json_record.get('filePath')
+    if file_path:
+        file_extension = Path(file_path).suffix
+        if file_extension and '.' in file_extension and file_extension.lower() in ['.tif']:
+            json_record['mimeType'] = json_record.get('mimeType', 'image/tiff')
+            file_path_no_extension = os.path.join(Path(file_path).parent, Path(file_path).stem)
+            json_record['mediaResourceId'] = file_path_no_extension.replace('/', '%2F')
+            if not iiif_image_service_uri:
+                iiif_image_service_uri = json_record.get('iiifImageServiceUri', '')
+            if iiif_image_service_uri:
+                json_record['mediaServer'] = iiif_image_service_uri
+        elif file_extension and '.' in file_extension and file_extension.lower() in ['.pdf']:
+            json_record['mimeType'] = json_record.get('mimeType', 'application/pdf')
+    return json_record

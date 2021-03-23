@@ -108,7 +108,7 @@ class FilesApi():
             my_json['typeOfData'] = my_json.get('typeOfData', 'RBSC website bucket')
             my_json['sourceFilePath'] = my_json.get('path', '')
             my_json = change_file_extensions_to_tif(my_json, self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
-            my_json = add_file_keys(my_json)
+            my_json = add_file_keys(my_json, self.config.get('image-server-base-url', ''))
             if not self.config.get('local', False):
                 with self.table.batch_writer() as batch:
                     batch.put_item(Item=my_json)

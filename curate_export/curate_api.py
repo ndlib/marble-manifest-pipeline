@@ -161,7 +161,7 @@ class CurateApi():
                 if file_extension not in self.config.get('unwanted-file-extensions-from-curate', []):
                     new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
                     new_dict['objectFileGroupId'] = new_dict['parentId']
-                    new_dict = add_file_keys(new_dict)
+                    new_dict = add_file_keys(new_dict, self.config.get('image-server-base-url', ''))
                     self.event['itemBeingProcessed']['lastImageProcessed'] = new_dict.get('id')
                     with self.table.batch_writer() as batch:
                         batch.put_item(Item=new_dict)

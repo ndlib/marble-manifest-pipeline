@@ -124,7 +124,7 @@ def test(identifier=""):
         event = {}
         event['local'] = False
         event['ids'] = []  # default to read from Dynamo
-        event['seconds-to-allow-for-processing'] = 60 * 10 * 6
+        event['seconds-to-allow-for-processing'] = 60 * 10 * 5
         # event['local'] = True
         if event['local']:
             # event['seconds-to-allow-for-processing'] = 30
@@ -135,8 +135,8 @@ def test(identifier=""):
             event['ids'] = ["und:zp38w953p3c"]  # Chinese Catholic-themed paintings
             event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
         # event['ids'] = ["und:qz20sq9094h"]  # Architectural Lantern Slides (huge)
-        # event['exportAllFilesFlag'] = True  # test exporting all files needing processing
-        # event['forceSaveStandardJson'] = True
+        event['exportAllFilesFlag'] = True
+        event['forceSaveStandardJson'] = True
     event = run(event, {})
 
     if not event['curateHarvestComplete']:

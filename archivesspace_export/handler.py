@@ -100,7 +100,7 @@ def test():
     else:
         event = {}
         event["local"] = False
-        event['seconds-to-allow-for-processing'] = 3300
+        event['seconds-to-allow-for-processing'] = 60 * 10 * 5
         event["ids"] = [
             # "https://archivesspace.library.nd.edu/repositories/2/resources/1652",  # Collegiate Jazz Festival - These contain PDFs
             # "https://archivesspace.library.nd.edu/repositories/3/resources/1631",    # Inquisitions (MSHLAT0090_EAD)
@@ -112,9 +112,10 @@ def test():
         # event["ids"] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1524"]
         # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/2038"]
         # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1567"]
-        event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1439"]
-        event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1644"]  # Irish Broadsides
+        # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1439"]
+        # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1644"]  # Irish Broadsides
         # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/2/resources/1652"]  # Collegiate Jazz Festival - These contain PDFs
+        event['exportAllFilesFlag'] = True
         event['forceSaveStandardJson'] = True
     event = run(event, {})
 

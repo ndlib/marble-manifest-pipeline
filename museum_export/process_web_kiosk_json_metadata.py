@@ -163,7 +163,7 @@ class ProcessWebKioskJsonMetadata():
             new_dict['objectFileGroupId'] = new_dict['parentId']
             new_dict['storageSystem'] = 'Google'
             new_dict['typeOfData'] = 'Museum'
-            new_dict = add_file_keys(new_dict)
+            new_dict = add_file_keys(new_dict, self.config.get('image-server-base-url', ''))
             item_id = new_dict.get('id')
             with self.table.batch_writer() as batch:
                 batch.put_item(Item=new_dict)

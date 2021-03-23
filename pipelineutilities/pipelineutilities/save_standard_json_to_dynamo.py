@@ -114,7 +114,7 @@ class SaveStandardJsonToDynamo():
     def _save_special_file_record(self, standard_json: dict):
         """ Files are automatically stored elsewhere for Curate, Museum, and S3, but not for Uri """
         if not self.local and standard_json.get('level') == 'file' and standard_json.get('storageSystem') == 'Uri':
-            standard_json = add_file_keys(standard_json)
+            standard_json = add_file_keys(standard_json, self.config.get('image-server-base-url', ''))
             self.save_json_to_dynamo_class.save_json_to_dynamo(standard_json)
             save_file_to_process_record(self.config['website-metadata-tablename'], standard_json)
             save_file_group_record(self.config['website-metadata-tablename'], standard_json.get('objectFileGroupId'), standard_json.get('storageSystem'), standard_json.get('typeOfData'))

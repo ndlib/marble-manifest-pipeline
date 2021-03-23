@@ -201,6 +201,13 @@
 				"otherNodes": "geographicLocations",
 				"optional": true,
 				"format": "array"
+			},
+			{
+				"label": "digitizationSource",
+				"fields": ["593"],
+				"subfields": ["a"],
+				"optional": true,
+				"format": "text"
 			}
 		]
 	},
