@@ -1,4 +1,0 @@
-../pipelineutilities/
-sentry_sdk
-requests
-jsonschema

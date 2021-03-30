@@ -14,7 +14,6 @@ setup.py
 ./pipelineutilities/google_utilities.py
 ./pipelineutilities/load_standard_json.py
 ./pipelineutilities/pipeline_config.py
-./pipelineutilities/record_files_needing_processed.py
 ./pipelineutilities/s3_helpers.py
 ./pipelineutilities/s3_sync.py
 ./pipelineutilities/save_standard_json.py
@@ -34,7 +33,6 @@ setup.py
 ./test/test_expand_subject_terms.py
 ./test/test_fix_creators_in_json_object.py
 ./test/test_pipeline_config.py
-./test/test_record_files_needing_processed.py
 ./test/test_s3_helpers.py
 ./test/test_s3_sync.py
 ./test/test_search_files.py
@@ -59,7 +57,6 @@ pipelineutilities/load_language_codes.py
 pipelineutilities/load_standard_json.py
 pipelineutilities/pipeline_config.py
 pipelineutilities/read_from_dynamo.py
-pipelineutilities/record_files_needing_processed.py
 pipelineutilities/report_missing_fields.py
 pipelineutilities/s3_helpers.py
 pipelineutilities/s3_sync.py
@@ -89,7 +86,6 @@ test/test_expand_subject_terms.py
 test/test_fix_creators_in_json_object.py
 test/test_get_size_of_images.py
 test/test_pipeline_config.py
-test/test_record_files_needing_processed.py
 test/test_report_missing_fields.py
 test/test_s3_helpers.py
 test/test_s3_sync.py
