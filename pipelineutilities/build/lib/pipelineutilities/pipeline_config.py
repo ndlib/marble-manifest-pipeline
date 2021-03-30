@@ -48,7 +48,6 @@ default_config = {
     "hours-threshold-for-incremental-harvest": 72,
     "archive-space-server-base-url": "https://archivesspace.library.nd.edu/oai",
     "pipeline-control-folder": "pipeline_control",
-    "related-ids-file": "related_ids.json",
     "source-systems-requiring-metadata-expire-time": [],
     "source-systems-requiring-special-file-processing": ["Curate", "EmbARK"],
     "file-extensions-to-protect-from-changing-to-tif": [".pdf"],  # all other files will be assumed to be image files, and will be changed to .tif
