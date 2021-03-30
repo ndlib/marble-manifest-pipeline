@@ -143,8 +143,8 @@ class TestCsvCollection(unittest.TestCase):
     def test_add_additional_paths_for_files(self):
         _add_additional_paths(objects[2], config)
 
-        self.assertEqual("image-server-base-url/collectionId%2FfileId1", objects[2]['iiifImageUri'])
-        self.assertEqual("manifest-server-base-url/collectionId/fileId1/canvas", objects[2]['iiifUri'])
+        self.assertEqual("image-server-base-url/fileId1", objects[2]['iiifImageUri'])
+        self.assertEqual("manifest-server-base-url/fileId1/canvas", objects[2]['iiifUri'])
         self.assertEqual("", objects[2]['metsUri'])
         self.assertEqual("", objects[2]['schemaUri'])
 

@@ -2,6 +2,7 @@ import boto3
 import re
 import os
 from datetime import datetime, date, timedelta, timezone
+from pathlib import Path
 from urllib.parse import urlparse
 # saved live path
 # "libnd-smb-rbsc": ["digital/bookreader", "collections/ead_xml/images"]
@@ -313,7 +314,7 @@ def augement_file_record(obj, id, url, config):
     obj["iiifImageUri"] = os.path.join(config['image-server-base-url'], obj.get('key'))
     # Added from here down for consistency.  Once dependencies are updated, we will need to remove iiifImageUri
     obj['objectFileGroupId'] = id
-    obj["iiifUri"] = os.path.join(config['image-server-base-url'], obj.get('key'))
+    obj["iiifUri"] = os.path.join(config['image-server-base-url'], obj.get('key'))  # Note this is overwritten by csv_collections.py/_manifest_paths
     # Added from here down 2/25/2021 for consistency.  Once dependencies are updated, we need to remove iiifUri and iiifImageUri
     obj["iiifImageServiceUri"] = config['image-server-base-url']
     obj["sourceBucketName"] = bucket
@@ -324,6 +325,7 @@ def augement_file_record(obj, id, url, config):
         obj['filePath'] = obj['filePath'] + '.tif'
     else:
         obj['filePath'] = obj.get('key')
+    obj = _add_more_file_fields(obj, config['image-server-base-url'])
 
 
 def determine_time_threshold_for_processing(time_in_min):
@@ -347,6 +349,24 @@ def json_serial(obj):
     if isinstance(obj, (datetime, date)):
         return obj.isoformat()
     raise TypeError("Type %s not serializable" % type(obj))
+
+
+def _add_more_file_fields(json_record: dict, iiif_image_service_uri: str = None) -> dict:
+    """ Add mimeType (if absent), add mediaServer and mediaResourceId """
+    file_path = json_record.get('filePath')
+    if file_path:
+        file_extension = Path(file_path).suffix
+        if file_extension and file_extension.lower() in ['.tif']:
+            json_record['mimeType'] = json_record.get('mimeType', 'image/tiff')
+            file_path_no_extension = os.path.join(Path(file_path).parent, Path(file_path).stem)
+            json_record['mediaResourceId'] = file_path_no_extension.replace('/', '%2F')
+            if not iiif_image_service_uri:
+                iiif_image_service_uri = json_record.get('iiifImageServiceUri', '')
+            if iiif_image_service_uri:
+                json_record['mediaServer'] = iiif_image_service_uri
+        elif file_extension and file_extension.lower() in ['.pdf']:
+            json_record['mimeType'] = json_record.get('mimeType', 'application/pdf')
+    return json_record
 
 
 # python -c 'from search_files import *; test()'

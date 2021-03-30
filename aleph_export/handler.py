@@ -75,7 +75,7 @@ def test():
         event = {}
         event['local'] = False
         event['seconds-to-allow-for-processing'] = 60 * 10 * 5
-        # event['ids'] = ['005096943']
+        event['ids'] = ['002204685']
         # event['ids'] = ['001586302', '001587052', '001587050', '001588845', '001590687']
         event['exportAllFilesFlag'] = True
         event['forceSaveStandardJson'] = True
