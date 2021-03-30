@@ -18,7 +18,6 @@ from pipelineutilities.save_standard_json import save_standard_json
 from save_json_to_dynamo import SaveJsonToDynamo
 from dynamo_helpers import add_file_keys, add_file_to_process_keys, add_file_group_keys, get_iso_date_as_string
 from dynamo_query_functions import get_item_record, get_all_file_to_process_records_by_storage_system
-from record_files_needing_processed import FilesNeedingProcessed
 from s3_helpers import read_s3_json, write_s3_json
 from get_curate_metadata import GetCurateMetadata
 
@@ -93,14 +92,9 @@ class CurateApi():
                         self.event['itemBeingProcessed']['savedStandardJsonToDynamo'] = True
                 if datetime.now() < self.time_to_break and not self.event['itemBeingProcessed'].get('savedFilesNeedingProcessedToDynamo', False):
                     if (save_required_flag or export_all_files_flag):
-                        file_needed_updated = self._save_curate_image_data_to_dynamo(standard_json, export_all_files_flag)
+                        self._save_curate_image_data_to_dynamo(standard_json, export_all_files_flag)
                         if datetime.now() < self.time_to_break:
                             self.event['itemBeingProcessed']['savedFilesNeedingProcessedToDynamo'] = True
-                            # We will remove the following block once image processing starts to use AppSync
-                            if file_needed_updated:
-                                print("updating files needing processed for", item_id, 'after', int(time.time() - self.start_time), 'seconds')
-                                files_needing_processed_class = FilesNeedingProcessed(self.config)
-                                files_needing_processed_class.record_files_needing_processed(standard_json, True)  # If we got here, force reprocessing of all files in standard json
                             self.event.pop('itemBeingProcessed', None)
                 if datetime.now() < self.time_to_break:
                     self.event.pop('itemBeingProcessed', None)

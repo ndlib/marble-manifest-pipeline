@@ -15,10 +15,6 @@ pushd bendo_export
 ./local_install.sh
 popd
 
-pushd collections_api
-./local_install.sh
-popd
-
 pushd curate_export
 ./local_install.sh
 popd

@@ -22,7 +22,6 @@ from dynamo_helpers import add_file_keys, add_file_to_process_keys, add_file_gro
 from pipelineutilities.dynamo_query_functions import get_item_record, get_all_file_to_process_records_by_storage_system
 import re
 from save_json_to_dynamo import SaveJsonToDynamo
-from record_files_needing_processed import FilesNeedingProcessed
 
 
 class ProcessWebKioskJsonMetadata():
@@ -177,9 +176,6 @@ class ProcessWebKioskJsonMetadata():
                     file_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
                     file_group_record = add_file_group_keys(file_group_record)
                     batch.put_item(Item=file_group_record)
-                    # These next 2 lines will need to be removed once image processing is modified to use AppSync
-                    files_needing_processed_class = FilesNeedingProcessed(self.config)
-                    files_needing_processed_class.record_files_needing_processed(standard_json, True)
         for item in standard_json.get('items', []):
             self._save_google_image_data_to_dynamo(item, export_all_files_flag)
 
