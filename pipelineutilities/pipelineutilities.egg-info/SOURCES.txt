@@ -90,6 +90,5 @@ test/test_report_missing_fields.py
 test/test_s3_helpers.py
 test/test_s3_sync.py
 test/test_save_json_to_dynamo.py
-test/test_save_standard_json_to_dynamo.py
 test/test_search_files.py
 test/test_standard_json_helpers.py

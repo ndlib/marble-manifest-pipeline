@@ -119,3 +119,28 @@ def get_all_file_to_process_records_by_storage_system(table_name: str, storage_s
         except ClientError as ce:
             capture_exception(ce)
     return results
+
+
+def get_all_parent_override_records(table_name: str) -> dict:
+    results = {}
+    if table_name:
+        GSI1PK = 'PARENTOVERRIDE'
+        index = 'GSI1'
+        kwargs = {'IndexName': index}
+        kwargs['KeyConditionExpression'] = Key('GSI1PK').eq(GSI1PK)
+        kwargs['ProjectionExpression'] = '#id, #parentId, #sequence'
+        kwargs['ExpressionAttributeNames'] = {'#id': 'id', '#parentId': 'parentId', '#sequence': 'sequence'}  # Use this format when dealing with fields using DynamoDB key words
+        try:
+            while True:
+                table = boto3.resource('dynamodb').Table(table_name)
+                response = table.query(**kwargs)
+                for item in response.get('Items', []):
+                    new_node = {'parentId': item.get('parentId', ''), 'sequence': int(item.get('sequence', 0))}
+                    results[item.get('id')] = new_node
+                if response.get('LastEvaluatedKey'):
+                    kwargs['ExclusiveStartKey'] = response.get('LastEvaluatedKey')
+                else:
+                    break
+        except ClientError as ce:
+            capture_exception(ce)
+    return results
