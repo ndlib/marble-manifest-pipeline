@@ -356,7 +356,7 @@ def _add_more_file_fields(json_record: dict, iiif_image_service_uri: str = None)
     file_path = json_record.get('filePath')
     if file_path:
         file_extension = Path(file_path).suffix
-        if file_extension and '.' in file_extension and file_extension.lower() in ['.tif']:
+        if file_extension and file_extension.lower() in ['.tif']:
             json_record['mimeType'] = json_record.get('mimeType', 'image/tiff')
             file_path_no_extension = os.path.join(Path(file_path).parent, Path(file_path).stem)
             json_record['mediaResourceId'] = file_path_no_extension.replace('/', '%2F')
@@ -364,7 +364,7 @@ def _add_more_file_fields(json_record: dict, iiif_image_service_uri: str = None)
                 iiif_image_service_uri = json_record.get('iiifImageServiceUri', '')
             if iiif_image_service_uri:
                 json_record['mediaServer'] = iiif_image_service_uri
-        elif file_extension and '.' in file_extension and file_extension.lower() in ['.pdf']:
+        elif file_extension and file_extension.lower() in ['.pdf']:
             json_record['mimeType'] = json_record.get('mimeType', 'application/pdf')
     return json_record
 
