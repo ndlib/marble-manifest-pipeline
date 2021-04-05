@@ -28,6 +28,7 @@ skip_files = [
 # patterns we skip if the folder matches these
 skip_folders = [
     r"^.*resource.frk.*$",
+    r"^.*resourc[0-9].frk.*$",
 ]
 
 # patterns that corrispond to urls we can parse
