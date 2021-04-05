@@ -14,8 +14,8 @@ if 'SENTRY_DSN' in os.environ:
 
 
 def run(event: dict, context: dict) -> dict:
-    # event['fileRecordsDeleted'] = delete_file_records(event.get('website-metadata-tablename'), event.get('deleteAllFileRecords', False))  # 2252 .xml files deleted
-    # event['fileToHarvestRecordsDeleted'] = delete_file_to_process_records(event.get('website-metadata-tablename'), event.get('deleteAllFileToProcessRecords', False))  # 5488 records deleted
+    event['fileRecordsDeleted'] = delete_file_records(event.get('website-metadata-tablename'), event.get('deleteAllFileRecords', False))  # 2252 .xml files deleted
+    event['fileToHarvestRecordsDeleted'] = delete_file_to_process_records(event.get('website-metadata-tablename'), event.get('deleteAllFileToProcessRecords', False))  # 5488 records deleted
     delete_specific_file_records(event.get('website-metadata-tablename'))
     return event
 
@@ -37,7 +37,7 @@ def delete_file_records(table_name: str, delete_all_records: bool):
             for record in results.get('Items', []):
                 delete_record_flag = False
                 file_extension = Path(record.get('SK')).suffix
-                if file_extension and '.' in file_extension and file_extension.lower() in ['.xml']:  # '.jpg'
+                if file_extension and '.' in file_extension and file_extension.lower() in ['.xml', '.jpg']:  # '.jpg'
                     delete_record_flag = True
                 elif record.get('sourceType') == 'Google':
                     delete_record_flag = True
@@ -75,7 +75,7 @@ def delete_specific_file_records(table_name: str):
         'digital/MARBLE-images/MAN/MAN_002204763/MAN_002204763_002.tif',
         'digital/MARBLE-images/MAN/MAN_002204366/MAN_002204366_001.tif',
         'digital/MARBLE-images/MAN/MAN_002203265/MAN_002203265_001.tif',
-        'digital/MARBLE-images/MAN/MAN_002203292/MAN_002203292_001\x7f.tif',
+        'digital/MARBLE-images/MAN/MAN_002203292/MAN_002203292_001.tif',
         'digital/MARBLE-images/MAN/MAN_002203894/MAN_002203894_001.tif',
         'digital/MARBLE-images/MAN/MAN_002204291/MAN_002204291_001.tif',
         'digital/MARBLE-images/MAN/MAN_002202427/MAN_002202427_001.tif',
@@ -134,7 +134,7 @@ def delete_file_to_process_records(table_name: str, delete_all_records: bool):
             for record in results.get('Items', []):
                 delete_record_flag = False
                 file_extension = Path(record.get('SK')).suffix
-                if file_extension and '.' in file_extension and file_extension.lower() in ['.xml']:  # '.jpg'
+                if file_extension and '.' in file_extension and file_extension.lower() in ['.xml', '.jpg']:  # '.jpg'
                     delete_record_flag = True
                 elif record.get('sourceType') == 'Google':
                     delete_record_flag = True
@@ -188,9 +188,9 @@ def test(identifier=""):
     event = {}
     event['website-metadata-tablename'] = 'steve-manifest-websiteMetadata470E321C-1NPIJYOXUCVHU'
     event['website-metadata-tablename'] = 'marbleb-prod-manifest-websiteMetadata470E321C-5EJSG31E16Z7'
-    event['website-metadata-tablename'] = 'marbleb-test-manifest-websiteMetadata470E321C-JJG277N1OMMC'
-    # event['deleteAllFileRecords'] = True
-    # event['deleteAllFileToProcessRecords'] = True
+    # event['website-metadata-tablename'] = 'marbleb-test-manifest-websiteMetadata470E321C-JJG277N1OMMC'
+    event['deleteAllFileRecords'] = False
+    event['deleteAllFileToProcessRecords'] = False
     # print(1 / 0)  # make sure we don't accidentally run this
     event = run(event, {})
     print(event)
