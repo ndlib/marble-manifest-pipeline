@@ -114,7 +114,7 @@ def _fix_file_metadata_not_on_s3(file_item: dict, parent_unique_identifier: str)
     file_path = file_item.get('filePath')
     file_name = os.path.basename(file_path)
     if file_path.startswith('http'):
-        source_uri = file_path
+        source_uri = file_path.replace('http://archives.nd.edu', 'https://archives.nd.edu')
         file_item['sourceUri'] = source_uri
         file_item['storageSystem'] = 'Uri'
         file_item['sourceType'] = 'Uri'

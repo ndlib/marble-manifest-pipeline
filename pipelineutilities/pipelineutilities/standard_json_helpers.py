@@ -9,6 +9,7 @@ from load_language_codes import load_language_codes
 from report_missing_fields import ReportMissingFields
 from get_size_of_images import get_size_of_images
 from search_files import id_from_url
+from add_files_to_json_object import change_file_extensions_to_tif
 
 
 class StandardJsonHelpers():
@@ -31,7 +32,7 @@ class StandardJsonHelpers():
         if self.local:
             dynamo_table_name = None  # pass dynamo_table_name to save data only if not running in local mode
         standard_json = expand_subject_terms_recursive(standard_json, dynamo_table_name)
-        standard_json = _clean_up_standard_json_recursive(standard_json, self.config.get('image-server-base-url'))
+        standard_json = _clean_up_standard_json_recursive(standard_json, self.config.get('image-server-base-url'), self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
         standard_json = get_size_of_images(standard_json)
         standard_json = _add_objectFileGroupId(standard_json)
         standard_json = _insert_pdf_images(standard_json)
@@ -43,7 +44,7 @@ class StandardJsonHelpers():
         return standard_json
 
 
-def _clean_up_standard_json_recursive(standard_json: dict, image_server_base_url: str = None) -> dict:
+def _clean_up_standard_json_recursive(standard_json: dict, image_server_base_url: str, file_extensions_to_protect_from_changing_to_tif: list) -> dict:
     """ Recursively clean up standard_json strings
         also set level to 'manifest' (if no child items that are manifest or collection level)
              or 'collection' (if child items exist that are manifest or collection level).
@@ -57,8 +58,9 @@ def _clean_up_standard_json_recursive(standard_json: dict, image_server_base_url
     for item in standard_json.get('items', []):
         if item.get('parentId'):
             item['treePath'] = standard_json.get('treePath', '') + item['parentId'] + '/'
-        item = _clean_up_standard_json_recursive(item, image_server_base_url)
+        item = _clean_up_standard_json_recursive(item, image_server_base_url, file_extensions_to_protect_from_changing_to_tif)
         if item.get('level', '') == 'file':
+            item = change_file_extensions_to_tif(item, file_extensions_to_protect_from_changing_to_tif)
             if image_server_base_url:
                 item["iiifImageServiceUri"] = image_server_base_url
             if item.get('sourceType', 'x') in ['Curate', 'Museum']:
