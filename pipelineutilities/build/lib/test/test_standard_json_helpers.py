@@ -104,7 +104,7 @@ class Test(unittest.TestCase):
             "publisher": {'publisherName': 'abc', 'publisherLocation': 'xyz'},
             "collections": [{'display': "Capt. Francis O'Neill Collection of Irish Studies (University of Notre Dame. Library)/"}]
         }
-        actual_results = _clean_up_standard_json_recursive(standard_json)
+        actual_results = _clean_up_standard_json_recursive(standard_json, '', [])
         expected_results = {
             "description": "something really dumb",
             "title": "test0",
@@ -253,6 +253,7 @@ class Test(unittest.TestCase):
             ]
         }
         self.assertEqual(actual_results, expected_results)
+
 
 def suite():
     """ define test suite """

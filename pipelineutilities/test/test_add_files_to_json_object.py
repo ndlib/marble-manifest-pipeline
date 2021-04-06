@@ -117,7 +117,7 @@ class Test(unittest.TestCase):
             'filePath': 'CJF_EAD/aspace_b55b4e723bdd5a5cee9f67f18e66fbb1/aspace_0d7c59e17cb4e513ffd55cabdd751059/aspace_82ca319eea9fa935d315cbf2bd491de0/dcjf1960.pdf',
             'id': 'CJF_EAD/aspace_b55b4e723bdd5a5cee9f67f18e66fbb1/aspace_0d7c59e17cb4e513ffd55cabdd751059/aspace_82ca319eea9fa935d315cbf2bd491de0/dcjf1960.pdf',
             "treePath": "CJF_EAD/aspace_b55b4e723bdd5a5cee9f67f18e66fbb1/aspace_0d7c59e17cb4e513ffd55cabdd751059/aspace_82ca319eea9fa935d315cbf2bd491de0/",
-            'sourceUri': 'http://archives.nd.edu/ndcjf/dcjf1960.pdf',
+            'sourceUri': 'https://archives.nd.edu/ndcjf/dcjf1960.pdf',
             'objectFileGroupId': 'abc',
             'title': 'dcjf1960.pdf',
             "storageSystem": "Uri",
