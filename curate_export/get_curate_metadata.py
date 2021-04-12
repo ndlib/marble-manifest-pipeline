@@ -30,6 +30,8 @@ class GetCurateMetadata():
     def get_curate_json(self, item_id: str) -> dict:
         """ Decide whether to use saved curate json or whether to get it ourselves, returning curate_json"""
         curate_root_json = self._get_root_item_from_curate(item_id)
+        if not curate_root_json:
+            return {}
         date_from_curate = curate_root_json.get('dateSubmitted')[:10]
         saved_curate_json = self._get_saved_curate_json(item_id)
         date_from_saved_curate_json = saved_curate_json.get('dateSubmitted', '')[:10]

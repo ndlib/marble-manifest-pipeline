@@ -19,10 +19,11 @@ def run(event, _context):
     ssm_key_base = os.environ.get('SSM_KEY_BASE')
     graphql_api_id_key_path = os.path.join(ssm_key_base, 'graphql-api-id')  # need to add this to ssm via marble-blueprints
     graphql_api_id = _get_parameter(graphql_api_id_key_path)
-    graphql_api_id = 'e7mqujivhrar3oc7tbrf5gy5lm'  # need this in ssm
-    graphql_api_id = 'moazpuqvgvfy3dfy7maqjfihpq'  # need this in ssm
-    graphql_api_key_key_path = os.path.join(ssm_key_base, 'graphql-api-key')
-    rotate_graphql_api_keys(graphql_api_id, graphql_api_key_key_path)
+    # graphql_api_id = 'e7mqujivhrar3oc7tbrf5gy5lm'  # need this in ssm
+    # graphql_api_id = 'moazpuqvgvfy3dfy7maqjfihpq'  # need this in ssm
+    # graphql_api_key_key_path = os.path.join(ssm_key_base, 'graphql-api-key')
+    # rotate_graphql_api_keys(graphql_api_id, graphql_api_key_key_path)
+    _delete_expired_api_keys(graphql_api_id)
     return event
 
 
@@ -54,10 +55,11 @@ def _generate_new_api_key(graphql_api_id: str, new_expire_time: int) -> str:
     return key_id
 
 
-def _list_api_keys(graphql_api_id: str):
+def _delete_expired_api_keys(graphql_api_id: str):
     response = boto3.client('appsync').list_api_keys(apiId=graphql_api_id)
     for api_key in response.get('apiKeys'):
-        print('api_key = ', api_key.get('id'), api_key.get('expires'), api_key.get('deletes'))
+        if api_key.get('expires') < datetime.datetime.now().timestamp():
+            boto3.client('appsync').delete_api_key(apiId=graphql_api_id, id=api_key.get('id'))
 
 
 def _get_expire_time(days: int = 3) -> int:

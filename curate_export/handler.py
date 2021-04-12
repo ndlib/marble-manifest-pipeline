@@ -135,6 +135,7 @@ def test(identifier=""):
             event['ids'] = ["und:zp38w953p3c"]  # Chinese Catholic-themed paintings
             event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
         # event['ids'] = ["und:qz20sq9094h"]  # Architectural Lantern Slides (huge)
+        event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
         event['exportAllFilesFlag'] = True
         event['forceSaveStandardJson'] = True
     event = run(event, {})

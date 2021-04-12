@@ -70,6 +70,8 @@ class CurateApi():
         standard_json = {}
         print("starting to process item", item_id, 'after', int(time.time() - self.start_time), 'seconds')
         curate_json = self.get_curate_metadata_class.get_curate_json(item_id)
+        if not curate_json:
+            return {}
         self.event['itemBeingProcessed']['gotCurateJson'] = True
         standard_json = self._get_standard_json(curate_json)
         self.event['itemBeingProcessed']['gotStandardJson'] = True
