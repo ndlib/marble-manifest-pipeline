@@ -61,8 +61,6 @@ def _clean_up_standard_json_recursive(standard_json: dict, image_server_base_url
         item = _clean_up_standard_json_recursive(item, image_server_base_url, file_extensions_to_protect_from_changing_to_tif)
         if item.get('level', '') == 'file':
             item = change_file_extensions_to_tif(item, file_extensions_to_protect_from_changing_to_tif)
-            if image_server_base_url:
-                item["iiifImageServiceUri"] = image_server_base_url
             if item.get('sourceType', 'x') in ['Curate', 'Museum']:
                 item['id'] = item.get('treePath', '') + item.get('title', '')  # set id for google or curate files to be treePath plus fileName
                 item['filePath'] = item.get('treePath', '') + item.get('title', '')  # set filePath for google or curate files to be treePath plus fileName

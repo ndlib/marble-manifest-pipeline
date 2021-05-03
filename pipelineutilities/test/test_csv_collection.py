@@ -142,27 +142,15 @@ class TestCsvCollection(unittest.TestCase):
 
     def test_add_additional_paths_for_files(self):
         _add_additional_paths(objects[2], config)
-
-        self.assertEqual("image-server-base-url/fileId1", objects[2]['iiifImageUri'])
-        self.assertEqual("manifest-server-base-url/fileId1/canvas", objects[2]['iiifUri'])
-        self.assertEqual("", objects[2]['metsUri'])
-        self.assertEqual("", objects[2]['schemaUri'])
+        self.assertEqual("manifest-server-base-url/canvas/fileId1", objects[2]['iiifUri'])
 
     def test_add_additional_paths_for_manifests(self):
         _add_additional_paths(objects[1], config)
-
-        self.assertEqual("", objects[1]['iiifImageUri'])
-        self.assertEqual("manifest-server-base-url/collectionId/itemId/manifest", objects[1]['iiifUri'])
-        self.assertEqual("manifest-server-base-url/collectionId/itemId/mets.xml", objects[1]['metsUri'])
-        self.assertEqual("manifest-server-base-url/collectionId/itemId", objects[1]['schemaUri'])
+        self.assertEqual("manifest-server-base-url/manifest/collectionId%2FitemId", objects[1]['iiifUri'])
 
     def test_add_additional_paths_for_collections(self):
         _add_additional_paths(objects[0], config)
-
-        self.assertEqual("", objects[0]['iiifImageUri'])
-        self.assertEqual("manifest-server-base-url/collectionId/manifest", objects[0]['iiifUri'])
-        self.assertEqual("manifest-server-base-url/collectionId/mets.xml", objects[0]['metsUri'])
-        self.assertEqual("manifest-server-base-url/collectionId", objects[0]['schemaUri'])
+        self.assertEqual("manifest-server-base-url/manifest/collectionId", objects[0]['iiifUri'])
 
     def test_add_image_dimensions(self):
         # if the height and width is in the image_data it pulls that

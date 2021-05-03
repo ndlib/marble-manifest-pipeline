@@ -115,7 +115,7 @@ def test():
         # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1439"]
         # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1644"]  # Irish Broadsides
         # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/2/resources/1652"]  # Collegiate Jazz Festival - These contain PDFs
-        event['ids'] = ["https://archivesspace.library.nd.edu/repositories/2/resources/1652", "https://archivesspace.library.nd.edu/repositories/3/resources/1479"]
+        # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/2/resources/1652", "https://archivesspace.library.nd.edu/repositories/3/resources/1479"]
         event['exportAllFilesFlag'] = True
         event['forceSaveStandardJson'] = True
     event = run(event, {})
