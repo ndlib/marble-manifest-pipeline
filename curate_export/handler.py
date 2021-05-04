@@ -85,12 +85,15 @@ def _save_seed_files_to_s3(bucket_name, folder_name):
     for file_name in os.listdir(folder_name):
         local_file_name = os.path.join(local_folder, folder_name, file_name)
         if os.path.isfile(local_file_name):
-            with io.open(local_file_name, 'r', encoding='utf-8') as json_file:
-                json_to_save = json.load(json_file)
-            s3_key = os.path.join(folder_name, file_name)
-            _delete_multipart_s3_file_if_necessary(bucket_name, s3_key)
-            print('saving filename to s3 = ', file_name)
-            write_s3_json(bucket_name, s3_key, json_to_save)
+            try:
+                with io.open(local_file_name, 'r', encoding='utf-8') as json_file:
+                    json_to_save = json.load(json_file)
+                s3_key = os.path.join(folder_name, file_name)
+                _delete_multipart_s3_file_if_necessary(bucket_name, s3_key)
+                print('saving filename to s3 = ', file_name)
+                write_s3_json(bucket_name, s3_key, json_to_save)
+            except:  # noqa E722 - intentionally ignore warning about bare except 
+                pass
 
 
 def _delete_multipart_s3_file_if_necessary(bucket_name, s3_key):
@@ -135,7 +138,7 @@ def test(identifier=""):
             event['ids'] = ["und:zp38w953p3c"]  # Chinese Catholic-themed paintings
             event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
         # event['ids'] = ["und:qz20sq9094h"]  # Architectural Lantern Slides (huge)
-        event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
+        # event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
         event['exportAllFilesFlag'] = True
         event['forceSaveStandardJson'] = True
     event = run(event, {})

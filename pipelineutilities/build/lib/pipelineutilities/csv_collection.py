@@ -85,26 +85,24 @@ def _file_paths(row, config):
     # uri_path = '/' + row.get('collectionId') + '%2F' + id_no_extension
     uri_path = '/' + id_no_extension.replace('/', '%2F')
     # path = '/' + row.get('collectionId') + "/" + id_no_extension
-    path = "/" + id_no_extension
+    path = "/" + id_no_extension.replace('/', '%2F')
 
     return {
-        "iiifImageUri": config['image-server-base-url'] + uri_path,
-        "iiifUri": config["manifest-server-base-url"] + path + "/canvas",
-        "metsUri": "",
-        "schemaUri": "",
+        "iiifImageUri": config['image-server-base-url'] + uri_path,  # Note:  we need to remove this once we remove manifest creation from the marble-manifest-pipeline
+        "iiifUri": config["manifest-server-base-url"] + "/canvas" + path,
+        "iiifResourceId": "canvas" + path
     }
 
 
 def _manifest_paths(row, config):
     path = "/" + row.get('collectionId')
     if row.get('collectionId') != row.get('id'):
-        path = path + "/" + row.get("id")
+        path = path + "%2F" + row.get("id")  # Note:  If this doesn't work, we may need to use the standard json treePath, if it is set by this point
 
     return {
         "iiifImageUri": "",
-        "iiifUri": config["manifest-server-base-url"] + path + "/manifest",
-        "metsUri": config["manifest-server-base-url"] + path + "/mets.xml",
-        "schemaUri": config["manifest-server-base-url"] + path,
+        "iiifUri": config["manifest-server-base-url"] + "/manifest" + path,
+        "iiifResourceId": "manifest" + path
     }
 
 

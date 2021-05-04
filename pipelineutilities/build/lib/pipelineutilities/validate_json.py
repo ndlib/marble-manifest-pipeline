@@ -232,8 +232,8 @@ standard_json_schema = {
         "hierarchySearchable": {"type": "boolean"},
         "id": {"type": "string"},
         "iiifImageUri": {"type": "string"},
-        "iiifImageServiceUri": {"type": "string"},
-        "iiifUri": {"type": "string"},
+        "iiifResourceId": {"type": "string"},
+        "iiifUri": {"type": "string"},  # This will be obsolete once websites transition to using iiifResourceId
         "items": {
             "type": "array",
             "items": {"$ref": "#"},
@@ -264,7 +264,6 @@ standard_json_schema = {
         "mediaResourceId": {"type": "string"},
         "mediaServer": {"type": "string"},
         "medium": {"type": "string"},
-        "metsUri": {"type": "string"},
         "mimeType": {"type": "string"},
         "modifiedDate": {"type": "string"},
         "objectFileGroupId": {"type": "string"},
@@ -301,7 +300,6 @@ standard_json_schema = {
             }
         },
         "repository": {"type": "string"},
-        "schemaUri": {"type": "string"},
         "sequence": {"type": "number"},
         "size": {"type": "integer"},
         "sourceBucketName": {"type": "string"},

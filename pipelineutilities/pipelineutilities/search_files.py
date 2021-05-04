@@ -312,12 +312,8 @@ def augement_file_record(obj, id, url, config):
     obj['source'] = bucket
     obj['path'] = obj['key']
     obj['sourceUri'] = url
-    obj["iiifImageUri"] = os.path.join(config['image-server-base-url'], obj.get('key'))
-    # Added from here down for consistency.  Once dependencies are updated, we will need to remove iiifImageUri
     obj['objectFileGroupId'] = id
-    obj["iiifUri"] = os.path.join(config['image-server-base-url'], obj.get('key'))  # Note this is overwritten by csv_collections.py/_manifest_paths
-    # Added from here down 2/25/2021 for consistency.  Once dependencies are updated, we need to remove iiifUri and iiifImageUri
-    obj["iiifImageServiceUri"] = config['image-server-base-url']
+    # obj["iiifUri"] = os.path.join(config["manifest-server-base-url"], obj.get('key'))  # Note this is overwritten by csv_collections.py/_manifest_paths
     obj["sourceBucketName"] = bucket
     obj["sourceFilePath"] = obj.get('key')
     file_extension = os.path.splitext(obj.get('key'))[1]
@@ -361,8 +357,6 @@ def _add_more_file_fields(json_record: dict, iiif_image_service_uri: str = None)
             json_record['mimeType'] = json_record.get('mimeType', 'image/tiff')
             file_path_no_extension = os.path.join(Path(file_path).parent, Path(file_path).stem)
             json_record['mediaResourceId'] = file_path_no_extension.replace('/', '%2F')
-            if not iiif_image_service_uri:
-                iiif_image_service_uri = json_record.get('iiifImageServiceUri', '')
             if iiif_image_service_uri:
                 json_record['mediaServer'] = iiif_image_service_uri
         elif file_extension and file_extension.lower() in ['.pdf']:

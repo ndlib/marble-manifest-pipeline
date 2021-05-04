@@ -107,7 +107,7 @@ class CurateApi():
         """ Decide whether to use saved standard_json or whether to create it ourselves from curate_json"""
         item_id = curate_json.get('id')
         if self._generate_new_standard_json_required(curate_json):
-            print("generating new standard_json")
+            print("generating new standard_json for ", item_id)
             standard_json = self.translate_curate_json_node_class.build_json_from_curate_json(curate_json, "root", {})
             if self.save_standard_json_locally:
                 with open(self.local_folder + "test/" + item_id + "_preliminary_standard.json", "w") as output_file:
@@ -118,7 +118,7 @@ class CurateApi():
             standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
             self._save_standard_json_for_future_processing(standard_json)
         else:
-            print('using saved standard.json')
+            print('using saved standard.json for ', item_id)
             standard_json = self._get_saved_standard_json(item_id)
         return standard_json
 
@@ -208,16 +208,16 @@ class CurateApi():
         if item_id == 'qz20sq9094h' and not self.save_standard_json_locally:
             return False  # special case for Architectural Lantern Slides, which take over 2 hours to create standard json, which can only be generated locally.
         if self.event.get('forceSaveStandardJson'):
-            print('forceSaveStandardJson')
+            print('forceSaveStandardJson for ', item_id)
             return True
         saved_standard_json = self._get_saved_standard_json(item_id)
         if not saved_standard_json:
-            print('saved_standard_json does not exist')
+            print('saved_standard_json does not exist for ', item_id)
             return True
         date_from_curate = curate_json.get('dateSubmitted')[:10]
         date_from_saved_standard_json = saved_standard_json.get('modifiedDate')
         if not date_from_saved_standard_json or date_from_curate > date_from_saved_standard_json:
-            print('date_from_curate', date_from_curate, '> date_from_saved_standard_json', date_from_saved_standard_json)
+            print('date_from_curate', date_from_curate, '> date_from_saved_standard_json', date_from_saved_standard_json, 'for ', item_id)
             return True
         saved_standard_json_root_json = get_item_record(self.config.get('website-metadata-tablename', ''), item_id)
         date_dynamo_record_modified = saved_standard_json_root_json.get('dateModifiedInDynamo')
@@ -227,5 +227,5 @@ class CurateApi():
         if self.local_control_file_modified_date > date_dynamo_record_modified:
             print('local_control_file_modified_date', self.local_control_file_modified_date, '> date_dynamo_record_modified', date_dynamo_record_modified)
             return True
-        print(item_id, 'already current in Dynamo.  No need to reprocess')
+        print(item_id, 'already current in Dynamo.  No need to reprocess', item_id)
         return False
