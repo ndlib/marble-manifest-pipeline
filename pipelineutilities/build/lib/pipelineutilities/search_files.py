@@ -10,11 +10,16 @@ from urllib.parse import urlparse
 bucket_to_url = {
     "libnd-smb-rbsc": 'https://rarebooks.library.nd.edu/',
     "rbsc-test-files": 'https://rarebooks.library.nd.edu/',
+    "mlk-multimedia-333680067100": 'https://mlk-multimedia.library.nd.edu/',
+    "marble-multimedia-333680067100": 'https://marble-multimedia.library.nd.edu/',
+    "marble-multimedia-230391840102": 'https://marble-multimedia.library.nd.edu/',
 }
 
 folders_to_crawl = [
     "digital",
-    "collections/ead_xml/images"
+    "collections/ead_xml/images",
+    "audio",
+    "video"
 ]
 
 # patterns we skip if the file matches these
@@ -35,6 +40,8 @@ skip_folders = [
 valid_urls = [
     r"http[s]?:[/]{2}rarebooks[.]library.*",
     r"http[s]?:[/]{2}rarebooks[.]nd.*",
+    r"http[s]?:[/]{2}.*-multimedia[.]library.*",
+    r"http[s]?:[/]{2}.*-multimedia[.]nd.*",
 ]
 
 regexps = {
@@ -66,7 +73,13 @@ regexps = {
         r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
         r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{1,3}))",
         r"(^[0-9]{4})",
-    ]
+    ],
+    "audio": [
+        r"(.*\.mp3)",
+    ],
+    "video": [
+        r"(.*\.mp4)",
+    ],
 }
 # urls in this list do not have a group note in the output of the parse_filename function
 urls_without_a_group = [
@@ -158,6 +171,8 @@ def make_label(url, id):
     label = url.replace(id, "")
     label = label.replace(".jpg", "")
     label = label.replace(".tif", "")
+    label = label.replace(".mp3", "")
+    label = label.replace(".mp4", "")
     label = label.replace("-", " ")
     label = label.replace("_", " ")
     label = label.replace(".", " ")
@@ -176,9 +191,8 @@ def _convert_dict_to_camel_case(obj: dict) -> dict:
     return obj
 
 
-def crawl_available_files(config):
+def crawl_available_files(config: dict, bucket: string):
     order_field = {}
-    bucket = config['rbsc-image-bucket']
     print("crawling image files in this bucket: ", bucket)
     for directory in folders_to_crawl:
         objects = get_matching_s3_objects(bucket, directory)
@@ -207,14 +221,13 @@ def crawl_available_files(config):
                     if not order_field[id]["lastModified"] or last_modified_iso > order_field[id]["lastModified"]:
                         order_field[id]["lastModified"] = last_modified_iso
 
-                    augement_file_record(obj, id, url, config)
+                    augement_file_record(obj, id, url, config, bucket)
 
                     order_field[id]['files'].append(obj)
     return order_field
 
 
-def list_updated_files(config: dict, minutes_to_test: int):
-    bucket = config['rbsc-image-bucket']
+def list_updated_files(config: dict, bucket: string, minutes_to_test: int):
     print("crawling image files in this bucket: ", bucket)
     time_threshold_for_processing = determine_time_threshold_for_processing(minutes_to_test).isoformat()
     for directory in folders_to_crawl:
@@ -227,12 +240,11 @@ def list_updated_files(config: dict, minutes_to_test: int):
                 file = _convert_dict_to_camel_case(file)
 
                 if id and file['lastModified'].isoformat() >= time_threshold_for_processing:
-                    augement_file_record(file, id, url, config)
+                    augement_file_record(file, id, url, config, bucket)
                     yield file
 
 
-def list_all_files(config: dict):
-    bucket = config['rbsc-image-bucket']
+def list_all_files(config: dict, bucket: string):
     print("crawling image files in this bucket: ", bucket)
     for directory in folders_to_crawl:
         objects = get_matching_s3_objects(bucket, directory)
@@ -240,14 +252,13 @@ def list_all_files(config: dict):
             if is_tracked_file(obj.get('Key')):
                 url = bucket_to_url[bucket] + obj.get('Key')
                 id = key_to_id(obj.get('Key'))
-                augement_file_record(obj, id, url, config)
+                augement_file_record(obj, id, url, config, bucket)
 
                 yield obj
 
 
-def list_all_directories(config: dict):
+def list_all_directories(config: dict, bucket: string):
     order_field = {}
-    bucket = config['rbsc-image-bucket']
     print("crawling image files in this bucket: ", bucket)
     for directory in folders_to_crawl:
         objects = get_matching_s3_objects(bucket, directory)
@@ -278,7 +289,7 @@ def list_all_directories(config: dict):
                             "path": directory,
                             "label": id.replace(directory_id, "").ltrim("-").replace("-", " "),
                             "directory_id": directory,
-                            "Source": "RBSC",
+                            "Source": "RBSC" if bucket == config['rbsc-image-bucket'] else "Multimedia",
                             "LastModified": False,
                             "files": [],
                         }
@@ -288,7 +299,7 @@ def list_all_directories(config: dict):
                     if not order_field[directory_id]['objects'][id]["LastModified"] or last_modified_iso > order_field[directory_id]['objects'][id]["LastModified"]:
                         order_field[directory_id]['objects'][id]["LastModified"] = last_modified_iso
 
-                    augement_file_record(obj, id, url, config)
+                    augement_file_record(obj, id, url, config, bucket)
 
                     order_field[directory_id]['objects'][id]['files'].append(obj)
 
@@ -303,9 +314,7 @@ def is_directory(file):
     return file and re.match(".*[/]$", file) and not re.match("^[.]", file)
 
 
-def augement_file_record(obj, id, url, config):
-    bucket = config['rbsc-image-bucket']
-
+def augement_file_record(obj, id, url, config, bucket):
     obj['fileId'] = id
     obj['label'] = make_label(url, id)
     obj['sourceType'] = 'S3'
@@ -337,7 +346,7 @@ def determine_time_threshold_for_processing(time_in_min):
 def is_tracked_file(file):
     if file_should_be_skipped(file):
         return False
-    return re.match(r"^.*[.]((jpe?g)|(tif)|(pdf))$", file, re.IGNORECASE)
+    return re.match(r"^.*[.]((jpe?g)|(tif)|(pdf)|(mp[34]))$", file, re.IGNORECASE)
 
 
 def json_serial(obj):
@@ -361,6 +370,10 @@ def _add_more_file_fields(json_record: dict, iiif_image_service_uri: str = None)
                 json_record['mediaServer'] = iiif_image_service_uri
         elif file_extension and file_extension.lower() in ['.pdf']:
             json_record['mimeType'] = json_record.get('mimeType', 'application/pdf')
+        elif file_extension and file_extension.lower() in ['.mp3']:
+            json_record['mimeType'] = json_record.get('mimeType', 'audio/mpeg')
+        elif file_extension and file_extension.lower() in ['.mp4']:
+            json_record['mimeType'] = json_record.get('mimeType', 'video/mp4')
     return json_record
 
 
@@ -372,8 +385,9 @@ def test():
     config = setup_pipeline_config(event)
     # change to the prod bucket
     config['rbsc-image-bucket'] = "libnd-smb-rbsc"
-    # data = list_updated_files(config, 1000000)
-    data = crawl_available_files(config)
+    config['multimedia-bucket'] = "marble-multimedia-230391840102"
+    # data = list_updated_files(config, config['rbsc-image-bucket'], 1000000)
+    data = crawl_available_files(config, config['rbsc-image-bucket'])
     for id, value in data.items():
         print(id)
         print(value)

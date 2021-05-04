@@ -12,6 +12,7 @@ default_config = {
     "museum-server-username": "",
     "museum-server-password": "",
     "rbsc-image-bucket": "rbsc-test-files",
+    "multimedia-bucket": "mlk-multimedia-333680067100",
     "museum-server-base-url": "http://notredame.dom5182.com:8080",
     "process-bucket-read-basepath": "process",
     "process-bucket-csv-basepath": "csv",
