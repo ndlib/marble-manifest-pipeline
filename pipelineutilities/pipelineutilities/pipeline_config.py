@@ -51,7 +51,7 @@ default_config = {
     "pipeline-control-folder": "pipeline_control",
     "source-systems-requiring-metadata-expire-time": [],
     "source-systems-requiring-special-file-processing": ["Curate", "EmbARK"],
-    "file-extensions-to-protect-from-changing-to-tif": [".pdf"],  # all other files will be assumed to be image files, and will be changed to .tif
+    "file-extensions-to-protect-from-changing-to-tif": [".pdf", ".mp3", ".mp4"],  # all other files will be assumed to be image files, and will be changed to .tif
     "unwanted-file-extensions-from-curate": [".jpg", ".jpeg", ".xml"],  # Curate images should be saved as both .tif and .jpg.  Skip .jpg.  Skip .xml too
 }
 
