@@ -741,7 +741,7 @@ language_codes = [
         "alpha3-b": "sot"
     },
     {
-        "English": "Spanish",
+        "English": "Spanish; Castilian",
         "alpha2": "es",
         "alpha3-b": "spa"
     },

@@ -75,12 +75,19 @@ regexps = {
         r"(^[0-9]{4})",
     ],
     "audio": [
-        r"(.*\.mp3)",
+        r"/([^/]*)/[^/]*\.mp3",  # Gets the directory the .mp3 is in
     ],
     "video": [
-        r"(.*\.mp4)",
+        r"/([^/]*)/[^/]*\.mp4",  # Gets the directory the .mp4 is in
     ],
 }
+
+# Regexps for these folders should use the full path as input instead of just the filename
+full_path_folders = [
+    "audio",
+    "video",
+]
+
 # urls in this list do not have a group note in the output of the parse_filename function
 urls_without_a_group = [
     r"^[a-zA-Z]+_[a-zA-Z][0-9]{2}.*$",  # CodeLat_b04
@@ -100,15 +107,18 @@ def id_from_url(url):
     # directory = os.path.dirname(url.path)
 
     test_expressions = []
+    use_full_path = False
     for key in regexps:
         if key in url.path:
             test_expressions = regexps[key]
+            if key in full_path_folders:
+                use_full_path = True
             break
 
     for exp in test_expressions:
-        test = re.findall(exp, file)
+        test = re.search(exp, url.path if use_full_path else file)
         if test:
-            return test[0]
+            return test.group(1)
 
     return False
 
@@ -191,7 +201,7 @@ def _convert_dict_to_camel_case(obj: dict) -> dict:
     return obj
 
 
-def crawl_available_files(config: dict, bucket: string):
+def crawl_available_files(config: dict, bucket: str):
     order_field = {}
     print("crawling image files in this bucket: ", bucket)
     for directory in folders_to_crawl:
@@ -227,7 +237,7 @@ def crawl_available_files(config: dict, bucket: string):
     return order_field
 
 
-def list_updated_files(config: dict, bucket: string, minutes_to_test: int):
+def list_updated_files(config: dict, bucket: str, minutes_to_test: int):
     print("crawling image files in this bucket: ", bucket)
     time_threshold_for_processing = determine_time_threshold_for_processing(minutes_to_test).isoformat()
     for directory in folders_to_crawl:
@@ -244,7 +254,7 @@ def list_updated_files(config: dict, bucket: string, minutes_to_test: int):
                     yield file
 
 
-def list_all_files(config: dict, bucket: string):
+def list_all_files(config: dict, bucket: str):
     print("crawling image files in this bucket: ", bucket)
     for directory in folders_to_crawl:
         objects = get_matching_s3_objects(bucket, directory)
@@ -257,7 +267,7 @@ def list_all_files(config: dict, bucket: string):
                 yield obj
 
 
-def list_all_directories(config: dict, bucket: string):
+def list_all_directories(config: dict, bucket: str):
     order_field = {}
     print("crawling image files in this bucket: ", bucket)
     for directory in folders_to_crawl:
