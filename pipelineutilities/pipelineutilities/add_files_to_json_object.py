@@ -14,7 +14,7 @@ class AddFilesToJsonObject():
             with open(parent_folder + 'test/hash_of_available_files.json', 'r') as input_source:
                 self.hash_of_available_files = json.load(input_source)
         else:
-            self.hash_of_available_files = crawl_available_files(self.config)
+            self.hash_of_available_files = crawl_available_files(self.config, self.config['rbsc-image-bucket'])
             # with open(parent_folder + 'test/hash_of_available_files.json', 'w') as f:
             #     json.dump(self.hash_of_available_files, f, indent=2, default=str)
 

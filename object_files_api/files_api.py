@@ -30,6 +30,7 @@ class FilesApi():
         self.resumption_filename = 'file_objects_list_partially_processed.json'
         if not self.event['local']:
             save_file_system_record(self.table_name, 'S3', 'RBSC website bucket')
+            save_file_system_record(self.table_name, 'S3', 'Multimedia bucket')
         self.file_to_process_records_in_dynamo = {}
         if not self.config.get('local', True):
             self.file_to_process_records_in_dynamo = get_all_file_to_process_records_by_storage_system(self.config.get('website-metadata-tablename', ''), 'S3')
@@ -38,7 +39,9 @@ class FilesApi():
     def save_files_details(self):
         """ This will crawl available files, then loop through the file listing, saving each to dynamo """
         if self.event['objectFilesApi_execution_count'] == 1:
-            all_files_listing = self._crawl_available_files_from_s3_or_cache(True)
+            rbsc_files = self._crawl_available_files_from_s3_or_cache(self.config['rbsc-image-bucket'], True)
+            multimedia_files = self._crawl_available_files_from_s3_or_cache(self.config['multimedia-bucket'], True)
+            all_files_listing = {**rbsc_files, **multimedia_files}
         else:
             all_files_listing = self._resume_execution()
         file_objects = []
@@ -131,11 +134,11 @@ class FilesApi():
         with open(file_name, 'w') as outfile:
             json.dump(objects, outfile, default=json_serial, sort_keys=True, indent=2)
 
-    def _crawl_available_files_from_s3_or_cache(self, force_use_s3: bool = False) -> dict:
+    def _crawl_available_files_from_s3_or_cache(self, bucket: str, force_use_s3: bool = False) -> dict:
         """ Find all related files, whether from querying S3 or loading from a local json file. """
         cache_file = os.path.join(self.directory, 'crawl_available_files_cache.json')
         if force_use_s3 or (not self.config.get("test", False) and not self.config.get('local', False)):
-            objects = crawl_available_files(self.config)
+            objects = crawl_available_files(self.config, bucket)
             if self.config.get('local', False):
                 self._cache_s3_call(cache_file, objects)
             return objects
