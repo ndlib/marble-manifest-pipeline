@@ -37,6 +37,11 @@
 				"fields": ["id"],
 				"format": "text"
 			},
+			{
+				"label": "objectFileGroupId",
+				"fields": ["id"],
+				"format": "text"
+			},
 			{ "label": "creators",
 				"fields": ["creator"],
 				"extraProcessing": "format_creators",

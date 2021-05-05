@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "fileCreatedDate": "2021-05-03",
+  "fileCreatedDate": "2021-05-05",
   "sourceSystem": "Curate",
   "repository": "Curate",
   "sequence": 1,
@@ -8,6 +8,7 @@
   "collectionId": "zp38w953p3c",
   "parentId": "root",
   "id": "zp38w953p3c",
+  "objectFileGroupId": "zp38w953p3c",
   "creators": [
     {
       "fullName": "王肅達 Wang Suda, 1910-1963 [creator]",
@@ -33,7 +34,7 @@
   "items": [
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 1,
@@ -41,6 +42,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "r494vh57780",
+      "objectFileGroupId": "r494vh57780",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -68,7 +70,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0014.tif",
           "description": "PO_005069928-0014.tif",
@@ -105,7 +107,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 2,
@@ -113,6 +115,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "qj72p557k2d",
+      "objectFileGroupId": "qj72p557k2d",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -140,7 +143,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0012.tif",
           "description": "PO_005069928-0012.tif",
@@ -177,7 +180,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 3,
@@ -185,6 +188,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "qv33rv07d5h",
+      "objectFileGroupId": "qv33rv07d5h",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -212,7 +216,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0013.tif",
           "description": "PO_005069928-0013.tif",
@@ -249,7 +253,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 4,
@@ -257,6 +261,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "s1784j06r7k",
+      "objectFileGroupId": "s1784j06r7k",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -284,7 +289,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0017.tif",
           "description": "PO_005069928-0017.tif",
@@ -321,7 +326,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 5,
@@ -329,6 +334,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "sb397656m0x",
+      "objectFileGroupId": "sb397656m0x",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -356,7 +362,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0018.tif",
           "description": "PO_005069928-0018.tif",
@@ -393,7 +399,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 6,
@@ -401,6 +407,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "w0892805470",
+      "objectFileGroupId": "w0892805470",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -428,7 +435,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0027.tif",
           "description": "PO_005069928-0027.tif",
@@ -465,7 +472,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 7,
@@ -473,6 +480,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "pn89d508231",
+      "objectFileGroupId": "pn89d508231",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -500,7 +508,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0009.tif",
           "description": "PO_005069928-0009.tif",
@@ -537,7 +545,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 8,
@@ -545,6 +553,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "wm117m04t3w",
+      "objectFileGroupId": "wm117m04t3w",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -572,7 +581,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0029.tif",
           "description": "PO_005069928-0029.tif",
@@ -609,7 +618,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 9,
@@ -617,6 +626,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "ww72b854n6b",
+      "objectFileGroupId": "ww72b854n6b",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -644,7 +654,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0030.tif",
           "description": "PO_005069928-0030.tif",
@@ -681,7 +691,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 10,
@@ -689,6 +699,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "th83kw55z2c",
+      "objectFileGroupId": "th83kw55z2c",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -716,7 +727,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0022.tif",
           "description": "PO_005069928-0022.tif",
@@ -753,7 +764,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 11,
@@ -761,6 +772,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "n583xs58v8k",
+      "objectFileGroupId": "n583xs58v8k",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -788,7 +800,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0004.tif",
           "description": "PO_005069928-0004.tif",
@@ -825,7 +837,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 12,
@@ -833,6 +845,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "pc289g5870s",
+      "objectFileGroupId": "pc289g5870s",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -860,7 +873,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0008.tif",
           "description": "PO_005069928-0008.tif",
@@ -897,7 +910,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 13,
@@ -905,6 +918,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "tt44pk05s5n",
+      "objectFileGroupId": "tt44pk05s5n",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -932,7 +946,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0023.tif",
           "description": "PO_005069928-0023.tif",
@@ -969,7 +983,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 14,
@@ -977,6 +991,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "vd66vx05g13",
+      "objectFileGroupId": "vd66vx05g13",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1004,7 +1019,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0025.tif",
           "description": "PO_005069928-0025.tif",
@@ -1041,7 +1056,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 15,
@@ -1049,6 +1064,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "p2676t08c7f",
+      "objectFileGroupId": "p2676t08c7f",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1076,7 +1092,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0007.tif",
           "description": "PO_005069928-0007.tif",
@@ -1113,7 +1129,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 16,
@@ -1121,6 +1137,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "q811kh07q93",
+      "objectFileGroupId": "q811kh07q93",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1148,7 +1165,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0011.tif",
           "description": "PO_005069928-0011.tif",
@@ -1185,7 +1202,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 17,
@@ -1193,6 +1210,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "pz50gt57w6s",
+      "objectFileGroupId": "pz50gt57w6s",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1220,7 +1238,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0010.tif",
           "description": "PO_005069928-0010.tif",
@@ -1257,7 +1275,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 18,
@@ -1265,6 +1283,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "v405s755m85",
+      "objectFileGroupId": "v405s755m85",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1292,7 +1311,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0024.tif",
           "description": "PO_005069928-0024.tif",
@@ -1329,7 +1348,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 19,
@@ -1337,6 +1356,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "ng451g08q1v",
+      "objectFileGroupId": "ng451g08q1v",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1364,7 +1384,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0005.tif",
           "description": "PO_005069928-0005.tif",
@@ -1401,7 +1421,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 20,
@@ -1409,6 +1429,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "ns064458j4b",
+      "objectFileGroupId": "ns064458j4b",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1436,7 +1457,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0006.tif",
           "description": "PO_005069928-0006.tif",
@@ -1473,7 +1494,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 21,
@@ -1481,6 +1502,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "t722h70639h",
+      "objectFileGroupId": "t722h70639h",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1508,7 +1530,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0021.tif",
           "description": "PO_005069928-0021.tif",
@@ -1545,7 +1567,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 22,
@@ -1553,6 +1575,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "mk61rf59628",
+      "objectFileGroupId": "mk61rf59628",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1580,7 +1603,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0002.tif",
           "description": "PO_005069928-0002.tif",
@@ -1617,7 +1640,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 23,
@@ -1625,6 +1648,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "mw22v40915j",
+      "objectFileGroupId": "mw22v40915j",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1652,7 +1676,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0003.tif",
           "description": "PO_005069928-0003.tif",
@@ -1689,7 +1713,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 24,
@@ -1697,6 +1721,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "vq27zk5594k",
+      "objectFileGroupId": "vq27zk5594k",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1724,7 +1749,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0026.tif",
           "description": "PO_005069928-0026.tif",
@@ -1761,7 +1786,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 25,
@@ -1769,6 +1794,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "sx61dj56866",
+      "objectFileGroupId": "sx61dj56866",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1796,7 +1822,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0020.tif",
           "description": "PO_005069928-0020.tif",
@@ -1833,7 +1859,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 26,
@@ -1841,6 +1867,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "sn009w06f3r",
+      "objectFileGroupId": "sn009w06f3r",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1868,7 +1895,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0019.tif",
           "description": "PO_005069928-0019.tif",
@@ -1905,7 +1932,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 27,
@@ -1913,6 +1940,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "w9504x5500w",
+      "objectFileGroupId": "w9504x5500w",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -1940,7 +1968,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0028.tif",
           "description": "PO_005069928-0028.tif",
@@ -1977,7 +2005,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 28,
@@ -1985,6 +2013,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "rf55z607314",
+      "objectFileGroupId": "rf55z607314",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -2012,7 +2041,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0015.tif",
           "description": "PO_005069928-0015.tif",
@@ -2049,7 +2078,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 29,
@@ -2057,6 +2086,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "m900ns09b9z",
+      "objectFileGroupId": "m900ns09b9z",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -2084,7 +2114,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0001.tif",
           "description": "PO_005069928-0001.tif",
@@ -2121,7 +2151,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-05",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 30,
@@ -2129,6 +2159,7 @@
       "collectionId": "zp38w953p3c",
       "parentId": "zp38w953p3c",
       "id": "rr171v56x49",
+      "objectFileGroupId": "rr171v56x49",
       "creators": [
         {
           "fullName": "Thomas M. Megan, S.V.D., 1899-1951 [commissioner]",
@@ -2156,7 +2187,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-03",
+          "fileCreatedDate": "2021-05-05",
           "sourceType": "Curate",
           "title": "PO_005069928-0016.tif",
           "description": "PO_005069928-0016.tif",
@@ -2192,7 +2223,6 @@
       ]
     }
   ],
-  "objectFileGroupId": "zp38w953p3c",
   "iiifImageUri": "",
   "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c",
   "iiifResourceId": "manifest/zp38w953p3c",

@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "fileCreatedDate": "2021-05-03",
+  "fileCreatedDate": "2021-05-05",
   "sourceSystem": "Curate",
   "repository": "Curate",
   "sequence": 1,
@@ -8,6 +8,7 @@
   "collectionId": "zp38w953p3c",
   "parentId": "root",
   "id": "zp38w953p3c",
+  "objectFileGroupId": "zp38w953p3c",
   "creators": [
     {
       "fullName": "王肅達 Wang Suda, 1910-1963 [creator]",
