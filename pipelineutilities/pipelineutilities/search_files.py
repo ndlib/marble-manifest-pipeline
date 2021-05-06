@@ -12,7 +12,9 @@ bucket_to_url = {
     "rbsc-test-files": 'https://rarebooks.library.nd.edu/',
     "mlk-multimedia-333680067100": 'https://mlk-multimedia.library.nd.edu/',
     "marble-multimedia-333680067100": 'https://marble-multimedia.library.nd.edu/',
+    "marble-multimedia-test-333680067100": 'https://marble-multimedia-test.library.nd.edu/',
     "marble-multimedia-230391840102": 'https://marble-multimedia.library.nd.edu/',
+    "marble-multimedia-test-230391840102": 'https://marble-multimedia-test.library.nd.edu/',
 }
 
 folders_to_crawl = [
