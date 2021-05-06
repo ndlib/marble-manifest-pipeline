@@ -81,28 +81,14 @@ def _add_additional_paths(row, config):
 
 
 def _file_paths(row, config):
-    id_no_extension = os.path.splitext(row.get('id'))[0]
-    # uri_path = '/' + row.get('collectionId') + '%2F' + id_no_extension
-    uri_path = '/' + id_no_extension.replace('/', '%2F')
-    # path = '/' + row.get('collectionId') + "/" + id_no_extension
-    path = "/" + id_no_extension.replace('/', '%2F')
-
     return {
-        "iiifImageUri": config['image-server-base-url'] + uri_path,  # Note:  we need to remove this once we remove manifest creation from the marble-manifest-pipeline
-        "iiifUri": config["manifest-server-base-url"] + "/canvas" + path,
-        "iiifResourceId": "canvas" + path
+        "iiifResourceId": "canvas" + '/' + row.get('id', '').replace('/', '%2F')
     }
 
 
 def _manifest_paths(row, config):
-    path = "/" + row.get('collectionId')
-    if row.get('collectionId') != row.get('id'):
-        path = path + "%2F" + row.get("id")  # Note:  If this doesn't work, we may need to use the standard json treePath, if it is set by this point
-
     return {
-        "iiifImageUri": "",
-        "iiifUri": config["manifest-server-base-url"] + "/manifest" + path,
-        "iiifResourceId": "manifest" + path
+        "iiifResourceId": "manifest" + '/' + row.get('id', '').replace('/', '%2F')
     }
 
 

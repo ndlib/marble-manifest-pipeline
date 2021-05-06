@@ -81,7 +81,7 @@
   "level": "manifest",
   "objectFileGroupId": "1934.007.001",
   "apiVersion": 1,
-  "fileCreatedDate": "2021-05-03",
+  "fileCreatedDate": "2021-05-06",
   "digitalAccess": "Regular",
   "items": [
     {
@@ -105,11 +105,9 @@
       "copyrightStatus": "Public domain",
       "objectFileGroupId": "1934.007.001",
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-06",
       "digitalAccess": "Regular",
-      "iiifImageUri": "https://image-iiif.library.nd.edu/iiif/2/1934_007_001-v0003",
-      "iiifUri": "https://presentation-iiif.library.nd.edu/canvas/1934_007_001-v0003",
-      "iiifResourceId": "canvas/1934_007_001-v0003"
+      "iiifResourceId": "canvas/1934_007_001-v0003.tif"
     },
     {
       "id": "1934_007_001-v0001.tif",
@@ -132,11 +130,9 @@
       "copyrightStatus": "Public domain",
       "objectFileGroupId": "1934.007.001",
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-06",
       "digitalAccess": "Regular",
-      "iiifImageUri": "https://image-iiif.library.nd.edu/iiif/2/1934_007_001-v0001",
-      "iiifUri": "https://presentation-iiif.library.nd.edu/canvas/1934_007_001-v0001",
-      "iiifResourceId": "canvas/1934_007_001-v0001"
+      "iiifResourceId": "canvas/1934_007_001-v0001.tif"
     },
     {
       "id": "1934_007_001-v0002.tif",
@@ -159,14 +155,10 @@
       "copyrightStatus": "Public domain",
       "objectFileGroupId": "1934.007.001",
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-03",
+      "fileCreatedDate": "2021-05-06",
       "digitalAccess": "Regular",
-      "iiifImageUri": "https://image-iiif.library.nd.edu/iiif/2/1934_007_001-v0002",
-      "iiifUri": "https://presentation-iiif.library.nd.edu/canvas/1934_007_001-v0002",
-      "iiifResourceId": "canvas/1934_007_001-v0002"
+      "iiifResourceId": "canvas/1934_007_001-v0002.tif"
     }
   ],
-  "iiifImageUri": "",
-  "iiifUri": "https://presentation-iiif.library.nd.edu/manifest/1934.007.001",
   "iiifResourceId": "manifest/1934.007.001"
 }
