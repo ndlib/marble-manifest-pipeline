@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "fileCreatedDate": "2021-05-05",
+  "fileCreatedDate": "2021-05-06",
   "sourceSystem": "Curate",
   "repository": "Curate",
   "sequence": 1,
@@ -34,7 +34,7 @@
   "items": [
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 1,
@@ -70,7 +70,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0014.tif",
           "description": "PO_005069928-0014.tif",
@@ -86,17 +86,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/rb68x923t0f",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/rb68x923t0f",
-          "iiifResourceId": "canvas/rb68x923t0f",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fr494vh57780%2FPO_005069928-0014.tif",
           "treePath": "zp38w953p3c/r494vh57780/",
           "filePath": "zp38w953p3c/r494vh57780/PO_005069928-0014.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fr494vh57780",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fr494vh57780",
+      "iiifResourceId": "manifest/r494vh57780",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -107,7 +103,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 2,
@@ -143,7 +139,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0012.tif",
           "description": "PO_005069928-0012.tif",
@@ -159,17 +155,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/qr46qz24443",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/qr46qz24443",
-          "iiifResourceId": "canvas/qr46qz24443",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fqj72p557k2d%2FPO_005069928-0012.tif",
           "treePath": "zp38w953p3c/qj72p557k2d/",
           "filePath": "zp38w953p3c/qj72p557k2d/PO_005069928-0012.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fqj72p557k2d",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fqj72p557k2d",
+      "iiifResourceId": "manifest/qj72p557k2d",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -180,7 +172,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 3,
@@ -216,7 +208,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0013.tif",
           "description": "PO_005069928-0013.tif",
@@ -232,17 +224,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/r207tm73z7b",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/r207tm73z7b",
-          "iiifResourceId": "canvas/r207tm73z7b",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fqv33rv07d5h%2FPO_005069928-0013.tif",
           "treePath": "zp38w953p3c/qv33rv07d5h/",
           "filePath": "zp38w953p3c/qv33rv07d5h/PO_005069928-0013.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fqv33rv07d5h",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fqv33rv07d5h",
+      "iiifResourceId": "manifest/qv33rv07d5h",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -253,7 +241,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 4,
@@ -289,7 +277,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0017.tif",
           "description": "PO_005069928-0017.tif",
@@ -305,17 +293,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/s752697399c",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/s752697399c",
-          "iiifResourceId": "canvas/s752697399c",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fs1784j06r7k%2FPO_005069928-0017.tif",
           "treePath": "zp38w953p3c/s1784j06r7k/",
           "filePath": "zp38w953p3c/s1784j06r7k/PO_005069928-0017.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fs1784j06r7k",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fs1784j06r7k",
+      "iiifResourceId": "manifest/s1784j06r7k",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -326,7 +310,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 5,
@@ -362,7 +346,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0018.tif",
           "description": "PO_005069928-0018.tif",
@@ -378,17 +362,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/sj13902352h",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/sj13902352h",
-          "iiifResourceId": "canvas/sj13902352h",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fsb397656m0x%2FPO_005069928-0018.tif",
           "treePath": "zp38w953p3c/sb397656m0x/",
           "filePath": "zp38w953p3c/sb397656m0x/PO_005069928-0018.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fsb397656m0x",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fsb397656m0x",
+      "iiifResourceId": "manifest/sb397656m0x",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -399,7 +379,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 6,
@@ -435,7 +415,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0027.tif",
           "description": "PO_005069928-0027.tif",
@@ -451,17 +431,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/w6634171p9h",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/w6634171p9h",
-          "iiifResourceId": "canvas/w6634171p9h",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fw0892805470%2FPO_005069928-0027.tif",
           "treePath": "zp38w953p3c/w0892805470/",
           "filePath": "zp38w953p3c/w0892805470/PO_005069928-0027.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fw0892805470",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fw0892805470",
+      "iiifResourceId": "manifest/w0892805470",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -472,7 +448,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 7,
@@ -508,7 +484,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0009.tif",
           "description": "PO_005069928-0009.tif",
@@ -524,17 +500,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/pv63fx74m5c",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/pv63fx74m5c",
-          "iiifResourceId": "canvas/pv63fx74m5c",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fpn89d508231%2FPO_005069928-0009.tif",
           "treePath": "zp38w953p3c/pn89d508231/",
           "filePath": "zp38w953p3c/pn89d508231/PO_005069928-0009.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fpn89d508231",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fpn89d508231",
+      "iiifResourceId": "manifest/pn89d508231",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -545,7 +517,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 8,
@@ -581,7 +553,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0029.tif",
           "description": "PO_005069928-0029.tif",
@@ -597,17 +569,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/ws859c71c5x",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/ws859c71c5x",
-          "iiifResourceId": "canvas/ws859c71c5x",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fwm117m04t3w%2FPO_005069928-0029.tif",
           "treePath": "zp38w953p3c/wm117m04t3w/",
           "filePath": "zp38w953p3c/wm117m04t3w/PO_005069928-0029.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fwm117m04t3w",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fwm117m04t3w",
+      "iiifResourceId": "manifest/wm117m04t3w",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -618,7 +586,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 9,
@@ -654,7 +622,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0030.tif",
           "description": "PO_005069928-0030.tif",
@@ -670,17 +638,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/x346d221687",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/x346d221687",
-          "iiifResourceId": "canvas/x346d221687",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fww72b854n6b%2FPO_005069928-0030.tif",
           "treePath": "zp38w953p3c/ww72b854n6b/",
           "filePath": "zp38w953p3c/ww72b854n6b/PO_005069928-0030.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fww72b854n6b",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fww72b854n6b",
+      "iiifResourceId": "manifest/ww72b854n6b",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -691,7 +655,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 10,
@@ -727,7 +691,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0022.tif",
           "description": "PO_005069928-0022.tif",
@@ -743,17 +707,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/tq57np22h47",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/tq57np22h47",
-          "iiifResourceId": "canvas/tq57np22h47",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fth83kw55z2c%2FPO_005069928-0022.tif",
           "treePath": "zp38w953p3c/th83kw55z2c/",
           "filePath": "zp38w953p3c/th83kw55z2c/PO_005069928-0022.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fth83kw55z2c",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fth83kw55z2c",
+      "iiifResourceId": "manifest/th83kw55z2c",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -764,7 +724,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 11,
@@ -800,7 +760,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0004.tif",
           "description": "PO_005069928-0004.tif",
@@ -816,17 +776,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/nc580k25f0f",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/nc580k25f0f",
-          "iiifResourceId": "canvas/nc580k25f0f",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fn583xs58v8k%2FPO_005069928-0004.tif",
           "treePath": "zp38w953p3c/n583xs58v8k/",
           "filePath": "zp38w953p3c/n583xs58v8k/PO_005069928-0004.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fn583xs58v8k",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fn583xs58v8k",
+      "iiifResourceId": "manifest/n583xs58v8k",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -837,7 +793,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 12,
@@ -873,7 +829,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0008.tif",
           "description": "PO_005069928-0008.tif",
@@ -889,17 +845,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/pk02c824s23",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/pk02c824s23",
-          "iiifResourceId": "canvas/pk02c824s23",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fpc289g5870s%2FPO_005069928-0008.tif",
           "treePath": "zp38w953p3c/pc289g5870s/",
           "filePath": "zp38w953p3c/pc289g5870s/PO_005069928-0008.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fpc289g5870s",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fpc289g5870s",
+      "iiifResourceId": "manifest/pc289g5870s",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -910,7 +862,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 13,
@@ -946,7 +898,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0023.tif",
           "description": "PO_005069928-0023.tif",
@@ -962,17 +914,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/v118rb72b7r",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/v118rb72b7r",
-          "iiifResourceId": "canvas/v118rb72b7r",
+          "iiifResourceId": "canvas/zp38w953p3c%2Ftt44pk05s5n%2FPO_005069928-0023.tif",
           "treePath": "zp38w953p3c/tt44pk05s5n/",
           "filePath": "zp38w953p3c/tt44pk05s5n/PO_005069928-0023.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Ftt44pk05s5n",
-      "iiifResourceId": "manifest/zp38w953p3c%2Ftt44pk05s5n",
+      "iiifResourceId": "manifest/tt44pk05s5n",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -983,7 +931,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 14,
@@ -1019,7 +967,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0025.tif",
           "description": "PO_005069928-0025.tif",
@@ -1035,17 +983,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/vm40xp7213w",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/vm40xp7213w",
-          "iiifResourceId": "canvas/vm40xp7213w",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fvd66vx05g13%2FPO_005069928-0025.tif",
           "treePath": "zp38w953p3c/vd66vx05g13/",
           "filePath": "zp38w953p3c/vd66vx05g13/PO_005069928-0025.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fvd66vx05g13",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fvd66vx05g13",
+      "iiifResourceId": "manifest/vd66vx05g13",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -1056,7 +1000,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 15,
@@ -1092,7 +1036,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0007.tif",
           "description": "PO_005069928-0007.tif",
@@ -1108,17 +1052,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/p8418k74x9z",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/p8418k74x9z",
-          "iiifResourceId": "canvas/p8418k74x9z",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fp2676t08c7f%2FPO_005069928-0007.tif",
           "treePath": "zp38w953p3c/p2676t08c7f/",
           "filePath": "zp38w953p3c/p2676t08c7f/PO_005069928-0007.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fp2676t08c7f",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fp2676t08c7f",
+      "iiifResourceId": "manifest/p2676t08c7f",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -1129,7 +1069,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 16,
@@ -1165,7 +1105,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0011.tif",
           "description": "PO_005069928-0011.tif",
@@ -1181,17 +1121,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/qf85n874910",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/qf85n874910",
-          "iiifResourceId": "canvas/qf85n874910",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fq811kh07q93%2FPO_005069928-0011.tif",
           "treePath": "zp38w953p3c/q811kh07q93/",
           "filePath": "zp38w953p3c/q811kh07q93/PO_005069928-0011.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fq811kh07q93",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fq811kh07q93",
+      "iiifResourceId": "manifest/q811kh07q93",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -1202,7 +1138,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 17,
@@ -1238,7 +1174,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0010.tif",
           "description": "PO_005069928-0010.tif",
@@ -1254,17 +1190,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/q524jm24f8p",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/q524jm24f8p",
-          "iiifResourceId": "canvas/q524jm24f8p",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fpz50gt57w6s%2FPO_005069928-0010.tif",
           "treePath": "zp38w953p3c/pz50gt57w6s/",
           "filePath": "zp38w953p3c/pz50gt57w6s/PO_005069928-0010.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fpz50gt57w6s",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fpz50gt57w6s",
+      "iiifResourceId": "manifest/pz50gt57w6s",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -1275,7 +1207,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 18,
@@ -1311,7 +1243,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0024.tif",
           "description": "PO_005069928-0024.tif",
@@ -1327,17 +1259,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/v979v12260v",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/v979v12260v",
-          "iiifResourceId": "canvas/v979v12260v",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fv405s755m85%2FPO_005069928-0024.tif",
           "treePath": "zp38w953p3c/v405s755m85/",
           "filePath": "zp38w953p3c/v405s755m85/PO_005069928-0024.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fv405s755m85",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fv405s755m85",
+      "iiifResourceId": "manifest/v405s755m85",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -1348,7 +1276,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 19,
@@ -1384,7 +1312,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0005.tif",
           "description": "PO_005069928-0005.tif",
@@ -1400,17 +1328,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/np19377583x",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/np19377583x",
-          "iiifResourceId": "canvas/np19377583x",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fng451g08q1v%2FPO_005069928-0005.tif",
           "treePath": "zp38w953p3c/ng451g08q1v/",
           "filePath": "zp38w953p3c/ng451g08q1v/PO_005069928-0005.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fng451g08q1v",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fng451g08q1v",
+      "iiifResourceId": "manifest/ng451g08q1v",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -1421,7 +1345,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 20,
@@ -1457,7 +1381,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0006.tif",
           "description": "PO_005069928-0006.tif",
@@ -1473,17 +1397,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/nz805x2536q",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/nz805x2536q",
-          "iiifResourceId": "canvas/nz805x2536q",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fns064458j4b%2FPO_005069928-0006.tif",
           "treePath": "zp38w953p3c/ns064458j4b/",
           "filePath": "zp38w953p3c/ns064458j4b/PO_005069928-0006.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fns064458j4b",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fns064458j4b",
+      "iiifResourceId": "manifest/ns064458j4b",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -1494,7 +1414,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 21,
@@ -1530,7 +1450,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0021.tif",
           "description": "PO_005069928-0021.tif",
@@ -1546,17 +1466,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/td96k072p14",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/td96k072p14",
-          "iiifResourceId": "canvas/td96k072p14",
+          "iiifResourceId": "canvas/zp38w953p3c%2Ft722h70639h%2FPO_005069928-0021.tif",
           "treePath": "zp38w953p3c/t722h70639h/",
           "filePath": "zp38w953p3c/t722h70639h/PO_005069928-0021.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Ft722h70639h",
-      "iiifResourceId": "manifest/zp38w953p3c%2Ft722h70639h",
+      "iiifResourceId": "manifest/t722h70639h",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -1567,7 +1483,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 22,
@@ -1603,7 +1519,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0002.tif",
           "description": "PO_005069928-0002.tif",
@@ -1619,17 +1535,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/ms35t725r4v",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/ms35t725r4v",
-          "iiifResourceId": "canvas/ms35t725r4v",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fmk61rf59628%2FPO_005069928-0002.tif",
           "treePath": "zp38w953p3c/mk61rf59628/",
           "filePath": "zp38w953p3c/mk61rf59628/PO_005069928-0002.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fmk61rf59628",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fmk61rf59628",
+      "iiifResourceId": "manifest/mk61rf59628",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -1640,7 +1552,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 23,
@@ -1676,7 +1588,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0003.tif",
           "description": "PO_005069928-0003.tif",
@@ -1692,17 +1604,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/n296ww75k75",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/n296ww75k75",
-          "iiifResourceId": "canvas/n296ww75k75",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fmw22v40915j%2FPO_005069928-0003.tif",
           "treePath": "zp38w953p3c/mw22v40915j/",
           "filePath": "zp38w953p3c/mw22v40915j/PO_005069928-0003.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fmw22v40915j",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fmw22v40915j",
+      "iiifResourceId": "manifest/mw22v40915j",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -1713,7 +1621,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 24,
@@ -1749,7 +1657,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0026.tif",
           "description": "PO_005069928-0026.tif",
@@ -1765,17 +1673,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/vx021c21v61",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/vx021c21v61",
-          "iiifResourceId": "canvas/vx021c21v61",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fvq27zk5594k%2FPO_005069928-0026.tif",
           "treePath": "zp38w953p3c/vq27zk5594k/",
           "filePath": "zp38w953p3c/vq27zk5594k/PO_005069928-0026.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fvq27zk5594k",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fvq27zk5594k",
+      "iiifResourceId": "manifest/vq27zk5594k",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -1786,7 +1690,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 25,
@@ -1822,7 +1726,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0020.tif",
           "description": "PO_005069928-0020.tif",
@@ -1838,17 +1742,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/t435gb22t8t",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/t435gb22t8t",
-          "iiifResourceId": "canvas/t435gb22t8t",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fsx61dj56866%2FPO_005069928-0020.tif",
           "treePath": "zp38w953p3c/sx61dj56866/",
           "filePath": "zp38w953p3c/sx61dj56866/PO_005069928-0020.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fsx61dj56866",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fsx61dj56866",
+      "iiifResourceId": "manifest/sx61dj56866",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -1859,7 +1759,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 26,
@@ -1895,7 +1795,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0019.tif",
           "description": "PO_005069928-0019.tif",
@@ -1911,17 +1811,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/st74cn7305s",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/st74cn7305s",
-          "iiifResourceId": "canvas/st74cn7305s",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fsn009w06f3r%2FPO_005069928-0019.tif",
           "treePath": "zp38w953p3c/sn009w06f3r/",
           "filePath": "zp38w953p3c/sn009w06f3r/PO_005069928-0019.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fsn009w06f3r",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fsn009w06f3r",
+      "iiifResourceId": "manifest/sn009w06f3r",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -1932,7 +1828,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 27,
@@ -1968,7 +1864,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0028.tif",
           "description": "PO_005069928-0028.tif",
@@ -1984,17 +1880,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/wh246q21j2g",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/wh246q21j2g",
-          "iiifResourceId": "canvas/wh246q21j2g",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fw9504x5500w%2FPO_005069928-0028.tif",
           "treePath": "zp38w953p3c/w9504x5500w/",
           "filePath": "zp38w953p3c/w9504x5500w/PO_005069928-0028.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fw9504x5500w",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fw9504x5500w",
+      "iiifResourceId": "manifest/w9504x5500w",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -2005,7 +1897,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 28,
@@ -2041,7 +1933,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0015.tif",
           "description": "PO_005069928-0015.tif",
@@ -2057,17 +1949,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/rn300z73n3m",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/rn300z73n3m",
-          "iiifResourceId": "canvas/rn300z73n3m",
+          "iiifResourceId": "canvas/zp38w953p3c%2Frf55z607314%2FPO_005069928-0015.tif",
           "treePath": "zp38w953p3c/rf55z607314/",
           "filePath": "zp38w953p3c/rf55z607314/PO_005069928-0015.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Frf55z607314",
-      "iiifResourceId": "manifest/zp38w953p3c%2Frf55z607314",
+      "iiifResourceId": "manifest/rf55z607314",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -2078,7 +1966,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 29,
@@ -2114,7 +2002,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0001.tif",
           "description": "PO_005069928-0001.tif",
@@ -2130,17 +2018,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/mg74qj75x1k",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/mg74qj75x1k",
-          "iiifResourceId": "canvas/mg74qj75x1k",
+          "iiifResourceId": "canvas/zp38w953p3c%2Fm900ns09b9z%2FPO_005069928-0001.tif",
           "treePath": "zp38w953p3c/m900ns09b9z/",
           "filePath": "zp38w953p3c/m900ns09b9z/PO_005069928-0001.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Fm900ns09b9z",
-      "iiifResourceId": "manifest/zp38w953p3c%2Fm900ns09b9z",
+      "iiifResourceId": "manifest/m900ns09b9z",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -2151,7 +2035,7 @@
     },
     {
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-05",
+      "fileCreatedDate": "2021-05-06",
       "sourceSystem": "Curate",
       "repository": "Curate",
       "sequence": 30,
@@ -2187,7 +2071,7 @@
           "sourceSystem": "Curate",
           "repository": "Curate",
           "apiVersion": 1,
-          "fileCreatedDate": "2021-05-05",
+          "fileCreatedDate": "2021-05-06",
           "sourceType": "Curate",
           "title": "PO_005069928-0016.tif",
           "description": "PO_005069928-0016.tif",
@@ -2203,17 +2087,13 @@
           "storageSystem": "Curate",
           "typeOfData": "Curate",
           "sequence": 2,
-          "iiifImageUri": "https://image-iiif-testlib.libraries.nd.edu/iiif/2/rx913n23g6v",
-          "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/canvas/rx913n23g6v",
-          "iiifResourceId": "canvas/rx913n23g6v",
+          "iiifResourceId": "canvas/zp38w953p3c%2Frr171v56x49%2FPO_005069928-0016.tif",
           "treePath": "zp38w953p3c/rr171v56x49/",
           "filePath": "zp38w953p3c/rr171v56x49/PO_005069928-0016.tif"
         }
       ],
       "level": "manifest",
-      "iiifImageUri": "",
-      "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c%2Frr171v56x49",
-      "iiifResourceId": "manifest/zp38w953p3c%2Frr171v56x49",
+      "iiifResourceId": "manifest/rr171v56x49",
       "treePath": "zp38w953p3c/",
       "publishers": [
         {
@@ -2223,8 +2103,6 @@
       ]
     }
   ],
-  "iiifImageUri": "",
-  "iiifUri": "https://presentation-iiif-steve.libraries.nd.edu/manifest/zp38w953p3c",
   "iiifResourceId": "manifest/zp38w953p3c",
   "hierarchySearchable": false,
   "publishers": [

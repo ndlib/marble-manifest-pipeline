@@ -142,15 +142,15 @@ class TestCsvCollection(unittest.TestCase):
 
     def test_add_additional_paths_for_files(self):
         _add_additional_paths(objects[2], config)
-        self.assertEqual("manifest-server-base-url/canvas/fileId1", objects[2]['iiifUri'])
+        self.assertEqual("canvas/fileId1", objects[2]['iiifResourceId'])
 
     def test_add_additional_paths_for_manifests(self):
         _add_additional_paths(objects[1], config)
-        self.assertEqual("manifest-server-base-url/manifest/collectionId%2FitemId", objects[1]['iiifUri'])
+        self.assertEqual("manifest/itemId", objects[1]['iiifResourceId'])
 
     def test_add_additional_paths_for_collections(self):
         _add_additional_paths(objects[0], config)
-        self.assertEqual("manifest-server-base-url/manifest/collectionId", objects[0]['iiifUri'])
+        self.assertEqual("manifest/collectionId", objects[0]['iiifResourceId'])
 
     def test_add_image_dimensions(self):
         # if the height and width is in the image_data it pulls that

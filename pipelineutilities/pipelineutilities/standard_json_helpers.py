@@ -25,7 +25,6 @@ class StandardJsonHelpers():
         report_missing_fields_class = ReportMissingFields(self.config)
         if 'hierarchySearchable' not in standard_json:
             standard_json['hierarchySearchable'] = False
-        standard_json = add_paths_to_json_object_class.add_paths(standard_json)
         standard_json = fix_creators_in_json_object_class.fix_creators(standard_json)
         dynamo_table_name = self.config.get('website-metadata-tablename')
         self.table_name = self.config.get('website-metadata-tablename')
@@ -33,6 +32,7 @@ class StandardJsonHelpers():
             dynamo_table_name = None  # pass dynamo_table_name to save data only if not running in local mode
         standard_json = expand_subject_terms_recursive(standard_json, dynamo_table_name)
         standard_json = _clean_up_standard_json_recursive(standard_json, self.config.get('image-server-base-url'), self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
+        standard_json = add_paths_to_json_object_class.add_paths(standard_json)  # <- paths need to be added after id is updated for Curate and EmbARK and after treePath is defined
         standard_json = get_size_of_images(standard_json)
         standard_json = _add_objectFileGroupId(standard_json)
         standard_json = _insert_pdf_images(standard_json)

@@ -332,7 +332,6 @@ def augement_file_record(obj, id, url, config, bucket):
     obj['path'] = obj['key']
     obj['sourceUri'] = url
     obj['objectFileGroupId'] = id
-    # obj["iiifUri"] = os.path.join(config["manifest-server-base-url"], obj.get('key'))  # Note this is overwritten by csv_collections.py/_manifest_paths
     obj["sourceBucketName"] = bucket
     obj["sourceFilePath"] = obj.get('key')
     file_extension = os.path.splitext(obj.get('key'))[1]
