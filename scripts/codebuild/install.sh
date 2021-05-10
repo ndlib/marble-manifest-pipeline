@@ -23,14 +23,6 @@ pushd expand_subject_terms_lambda
 ./local_install.sh
 popd
 
-pushd finalize
-./local_install.sh
-popd
-
-pushd init
-./local_install.sh
-popd
-
 pushd metadata_rules
 ./local_install.sh
 popd
@@ -40,9 +32,5 @@ pushd museum_export
 popd
 
 pushd object_files_api
-./local_install.sh
-popd
-
-pushd process_manifest
 ./local_install.sh
 popd

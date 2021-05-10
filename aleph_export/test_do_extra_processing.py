@@ -3,7 +3,7 @@
 import _set_path  # noqa
 import unittest
 import os
-from do_extra_processing import do_extra_processing, _lookup_work_type, _format_subjects, \
+from do_extra_processing import do_extra_processing, _format_subjects, \
     _format_creators, _translate_repository, _format_call_number
 
 
@@ -12,11 +12,6 @@ local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
 
 class Test(unittest.TestCase):
     """ Class for test fixtures """
-
-    def test_1_lookup_work_type(self):
-        """ test _lookup_work_type"""
-        result = _lookup_work_type("a")
-        self.assertTrue(result == "Language material")
 
     def test_2_format_subjects(self):
         subjects_list = ["test", "test_with^^^example_uri"]
