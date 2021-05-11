@@ -99,17 +99,6 @@ class Test(unittest.TestCase):
         key = "655"
         actual_results = self.transform_marc_json_class._process_this_field(json_field_definition, key, value)
         self.assertFalse(actual_results)
-        json_field_definition = {
-            "label": "workType",
-            "fields": ["leader"],
-            "positions": [6],
-            "extraProcessing": "lookup_work_type",
-            "format": "text"
-        }
-        key = "leader"
-        value = "02219ccm a2200409Ki 4500"
-        actual_results = self.transform_marc_json_class._process_this_field(json_field_definition, key, value)
-        self.assertTrue(actual_results)
 
     def test_05a_process_this_field(self):
         """ Test restricting based on ind1 """

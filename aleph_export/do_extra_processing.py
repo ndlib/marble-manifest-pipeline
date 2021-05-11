@@ -9,8 +9,6 @@ def do_extra_processing(value: str, extra_processing: str) -> str:
     results = ""
     if extra_processing == "link_to_source":
         results = "https://onesearch.library.nd.edu/permalink/f/1phik6l/ndu_aleph" + value
-    elif extra_processing == "lookup_work_type":
-        results = _lookup_work_type(value)
     elif extra_processing == "format_subjects":
         results = _format_subjects(value)
     elif extra_processing == "format_creators":
@@ -26,26 +24,6 @@ def do_extra_processing(value: str, extra_processing: str) -> str:
     elif extra_processing == "find_latest_date_batch_modified_date":
         results = _find_latest_date_batch_modified_date(value)
     return results
-
-
-def _lookup_work_type(key_to_find: str) -> str:
-    """ Worktype requires translation using this dictionary. """
-    work_type_dict = {"a": "Language material",
-                      "t": "Manuscript language material",
-                      "m": "Computer file",
-                      "e": "Cartographic material",
-                      "f": "Manuscript cartographic material",
-                      "p": "Mixed materials",
-                      "i": "Nonmusical sound recording",
-                      "j": "Musical sound recording",
-                      "c": "Notated music",
-                      "d": "Manuscript notated music",
-                      "g": "Projected medium",
-                      "k": "Two-dimensional nonprojected graphic",
-                      "o": "Kit",
-                      "r": "Three-dimensional artifact or naturally occuring object"
-                      }
-    return work_type_dict.get(key_to_find, "")
 
 
 def _format_subjects(value: list) -> dict:

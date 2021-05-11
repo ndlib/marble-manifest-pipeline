@@ -12,7 +12,6 @@ setup.py
 ./pipelineutilities/expand_subject_terms.py
 ./pipelineutilities/fix_creators_in_json_object.py
 ./pipelineutilities/google_utilities.py
-./pipelineutilities/load_standard_json.py
 ./pipelineutilities/pipeline_config.py
 ./pipelineutilities/s3_helpers.py
 ./pipelineutilities/s3_sync.py
@@ -54,7 +53,6 @@ pipelineutilities/fix_creators_in_json_object.py
 pipelineutilities/get_size_of_images.py
 pipelineutilities/google_utilities.py
 pipelineutilities/load_language_codes.py
-pipelineutilities/load_standard_json.py
 pipelineutilities/pipeline_config.py
 pipelineutilities/read_from_dynamo.py
 pipelineutilities/report_missing_fields.py

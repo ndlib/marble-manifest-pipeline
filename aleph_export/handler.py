@@ -24,6 +24,7 @@ def run(event, _context):
     if config:
         marc_records_url = "https://alephprod.library.nd.edu/aleph_tmp/marble.mrc"
         # marc_records_url = "https://alephprep.library.nd.edu/aleph_tmp/marble.mrc"
+        # marc_records_url = "https://aleph23-prep.library.nd.edu/aleph_tmp/marble.mrc"
         time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
         print("Will break after ", time_to_break)
         if event.get('alephExecutionCount', 0) == 1 and not event.get('local'):
@@ -78,6 +79,7 @@ def test():
         # event['ids'] = ['002204685']
         # event['ids'] = ['001588674']
         # event['ids'] = ['001586302', '001587052', '001587050', '001588845', '001590687']
+        # event['ids'] = ['000297305']
         event['exportAllFilesFlag'] = True
         event['forceSaveStandardJson'] = True
     event = run(event, {})

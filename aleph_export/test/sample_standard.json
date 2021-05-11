@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "fileCreatedDate": "2021-03-09",
+  "fileCreatedDate": "2021-05-10",
   "sourceSystem": "Aleph",
   "repository": "RARE",
   "sequence": 1,
@@ -48,7 +48,7 @@
   ],
   "collections": [],
   "createdDate": "[1796?]",
-  "workType": "Notated music",
+  "workType": "",
   "subjects": [
     {
       "term": "Folk songs -- Ireland -- Instrumental settings."
@@ -89,7 +89,7 @@
       "sourceSystem": "Aleph",
       "repository": "RARE",
       "apiVersion": 1,
-      "fileCreatedDate": "2021-03-09",
+      "fileCreatedDate": "2021-05-10",
       "level": "file",
       "sequence": 1,
       "thumbnail": true,

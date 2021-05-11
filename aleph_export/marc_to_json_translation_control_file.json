@@ -82,10 +82,10 @@
 				"subfields": ["c"],
 				"format": "text"
 			},
-			{ "label": "workType",
-				"fields": ["leader"],
-				"positions": [6],
-				"extraProcessing": "lookup_work_type",
+			{
+				"label": "workType",
+				"fields": ["TYP"],
+				"subfields": ["a"],
 				"format": "text"
 			},
 			{ "label": "subjects",
