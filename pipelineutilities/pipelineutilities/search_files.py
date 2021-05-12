@@ -50,6 +50,7 @@ regexps = {
     "ead_xml": [
         r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
         r"([a-zA-Z]{3}_[0-9]{2,4}-[0-9]+)",
+        r"(^[0-9]{4}-[0-9]{2})",
     ],
     "MARBLE-images": [
         r"([a-zA-Z]{3}_[0-9]{9})",
@@ -106,6 +107,7 @@ def id_from_url(url):
 
     if file_should_be_skipped(url.path):
         return False
+
     test_expressions = []
     use_full_path = False
     for key in regexps:
@@ -114,10 +116,12 @@ def id_from_url(url):
             if key in full_path_folders:
                 use_full_path = True
             break
+
     for exp in test_expressions:
         test = re.search(exp, url.path if use_full_path else file)
         if test:
             return test.group(1)
+
     return False
 
 

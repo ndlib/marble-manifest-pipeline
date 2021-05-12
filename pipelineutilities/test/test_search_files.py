@@ -34,6 +34,8 @@ temp_ids_example = {
     "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-2-B/images/MSN-EA_8011-02-B-000a.jpg": "MSN-EA_8011-02",  # noqa: #501
     "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-01.150.jpg": "MSN-CW_8010",  # noqa: #501
     "https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif": "BOO_000297305",  # noqa: #501
+    "https://rarebooks.library.nd.edu/digital/MARBLE-images/MSSP_7000/MSSP_7000-02.tif": "MSSP_7000-02",  # noqa: #501
+    "https://rarebooks.library.nd.edu/digital/MARBLE-images/MSH-LAT_001/MSH-LAT_001-107-0001.tif": "MSH-LAT_001-107",  # noqa: #501
     "https://rarebooks.nd.edu/digital/civil_war/letters/images/jordan/5000-01.a.150.jpg": "5000-01",
     "https://rarebooks.nd.edu/digital/civil_war/letters/images/mckinney/5003-02.a.150.jpg": "5003-02",
     "https://rarebooks.nd.edu/digital/colonial_american/records/images/massachusetts/bristol/2717-01.a.150.jpg": "2717-01",
@@ -41,9 +43,10 @@ temp_ids_example = {
     "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001-001.150.jpg": "8001",
     "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/arthur/8001-001a.150.jpg": "8001",
     "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-00-cover2.150.jpg": "MSN-CW_8010",
-    "https://rarebooks.library.nd.edu/collections/ead_xml/images/MSN-EA_5002/5002-01.a.150.jpg": "5002-01",
+
     "https://marble-multimedia.library.nd.edu/audio/MyAudioCollection/Example.mp3": "MyAudioCollection",
 }
+
 
 valid_urls = [
     'https://rarebooks.library.nd.edu/path/to/file.jpg',
@@ -80,6 +83,7 @@ class TestSearchFiles(unittest.TestCase):
 
     def test_id_from_url(self):
         for url in temp_ids_example:
+            print("hi-----------")
             self.assertEqual(id_from_url(url), temp_ids_example[url])
 
     def test_url_can_be_harvested(self):
