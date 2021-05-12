@@ -39,11 +39,12 @@ regexps = {
     "ead_xml": [
         r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
         r"([a-zA-Z]{3}_[0-9]{2,4}-[0-9]+)",
-        r"(^[0-9]{4}-[0-9]{2})",
     ],
     "MARBLE-images": [
         r"([a-zA-Z]{3}_[0-9]{9})",
-        r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{4})"
+        r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{4})",
+        r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{3}-[0-9]{3})",
+        r"(^[a-zA-Z]{4}_[0-9]{4}-[0-9]{2})",
     ],
     "letters": [
         r"(^[0-9]{4}-[0-9]{2})",
@@ -81,20 +82,15 @@ def id_from_url(url):
 
     if file_should_be_skipped(url.path):
         return False
-
-    directory = os.path.dirname(url.path)
-
     test_expressions = []
     for key in regexps:
         if key in url.path:
             test_expressions = regexps[key]
             break
-
     for exp in test_expressions:
         test = re.findall(exp, file)
         if test:
             return test[0]
-
     return False
 
 
@@ -343,6 +339,6 @@ def test():
     data = crawl_available_files(config)
     for id, value in data.items():
         print(id)
-        print(value)
+        # print(value)
 
     return
