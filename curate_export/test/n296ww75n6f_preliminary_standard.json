@@ -1,0 +1,49 @@
+{
+  "apiVersion": 1,
+  "fileCreatedDate": "2021-05-06",
+  "sourceSystem": "Curate",
+  "repository": "Curate",
+  "sequence": 1,
+  "title": "A Gregorian Archive : sound recordings of Gregorian Chant in a study edition",
+  "collectionId": "n296ww75n6f",
+  "parentId": "root",
+  "id": "n296ww75n6f",
+  "objectFileGroupId": "n296ww75n6f",
+  "creators": [
+    {
+      "fullName": "Richard L. Crocker",
+      "display": "Richard L. Crocker"
+    }
+  ],
+  "contributors": [
+    {
+      "fullName": "Adeline Mueller [Singer]",
+      "display": "Adeline Mueller [Singer]"
+    },
+    {
+      "fullName": "Lisa Spivak [Singer]",
+      "display": "Lisa Spivak [Singer]"
+    },
+    {
+      "fullName": "Rachel Carson [Singer]",
+      "display": "Rachel Carson [Singer]"
+    },
+    {
+      "fullName": "Hunter Hensley [Singer]",
+      "display": "Hunter Hensley [Singer]"
+    }
+  ],
+  "access": "University of Notre Dame::Hesburgh Libraries::General",
+  "physicalAccess": "University of Notre Dame::Hesburgh Libraries::General",
+  "digitalAccess": "Regular",
+  "createdDate": "2019-10-25T00:00:00Z",
+  "modifiedDate": "2020-01-15T00:00:00Z",
+  "workType": "LibraryCollection",
+  "linkToSource": "https://curate.nd.edu/show/n296ww75n6f",
+  "publisher": {
+    "publisherName": "University of Notre Dame::Hesburgh Libraries::General"
+  },
+  "description": "In this collection of pamphlets and sound recording, Dr. Richard Crocker created a study edition of the repertory of Gregorian melodies for the Mass propers circa 850 AD. Each type of chant-- Introit, Gradual, Alleluia, Tract, Offertory, and Communion-- is recorded as a group and further divided into modal groups. The recordings use primarily solo voices.",
+  "bendoItem": "n296ww75n6f",
+  "level": "manifest"
+}

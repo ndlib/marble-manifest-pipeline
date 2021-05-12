@@ -13,7 +13,9 @@ class FixCreatorsInJsonObject():
             3.  For manifests
                 If Creators is unknown and Contributors exist, remove creators node.
                 If neither Creators nor Contributors exist, add Creators unknown node.
-            4.  Do nothing for Files level. """
+            4.  Do nothing for Files level.
+            5.  Added 12/15/2020 - if the only creator is unknown, remove the creators node
+                for all sourceSystems other than aleph. """
         current_level = standard_json.get("level", "")
         if current_level == "collection":
             standard_json = self.fix_creators_for_collection(standard_json)
@@ -23,6 +25,10 @@ class FixCreatorsInJsonObject():
             for item in standard_json["items"]:
                 if item.get("level", "") in ["manifest", "collection"]:
                     item = self.fix_creators(item)
+        if standard_json.get("sourceSystem", "") != 'Aleph' and self.unknown_creators_exist(standard_json):
+            standard_json.pop("creators", None)
+        if standard_json.get("creators", []) == []:
+            standard_json.pop("creators", None)
         return standard_json
 
     def fix_creators_for_collection(self, standard_json: dict) -> dict:
@@ -90,7 +96,9 @@ class FixCreatorsInJsonObject():
         return standard_json
 
     def add_unknown_creators(self, standard_json: dict) -> dict:
-        """ Add node for unknown creators """
+        """ Add node for unknown creators - only for Aleph sourceSystem """
+        if standard_json.get("sourceSystem") != "Aleph":
+            return standard_json
         if "creators" not in standard_json:
             standard_json["creators"] = []
         unknown_node = {}

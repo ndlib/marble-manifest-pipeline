@@ -49,6 +49,21 @@
 				"otherNodes": "subjects",
 				"xpath": "./metadata/ead/archdesc/controlaccess/*"
 			},
+			{
+				"externalProcess": "clean_up_subjects",
+				"passLabels": [
+					{
+						"subjects": "subjects"
+					}
+				]
+			},
+			{
+				"label": "format",
+				"xpath": "./metadata/ead/archdesc/controlaccess/genreform",
+				"optional": true,
+				"format": "text",
+				"!note": "changed from subjects to format 3/19/21"
+			},
 			{ "label": "copyrightStatus",
 				"constant": "",
 				"format": "text"
@@ -82,9 +97,11 @@
 				"format": "text"
 			},
 			{
-				"label": "format",
+				"label": "workType",
+				"!label": "format",
 				"constant": "Mixed Materials",
-				"format": "text"
+				"format": "text",
+				"!note": "changed from format to workType 3/19/21"
 			},
 			{
 				"label": "dedication",
@@ -155,13 +172,13 @@
 				"format": "array"
 			},
 			{
-				"label": "relatedIds",
+				"label": "childIds",
 				"note": "This must run after related_ids above.",
 				"optional": true,
 				"format": "array",
 				"externalProcess": "format_related_ids",
 				"passLabels": [{"related_ids": "related_ids"}]
-		},
+			},
 			{
 				"label": "child",
 				"otherNodes": "childDetails",
@@ -170,6 +187,21 @@
 				"collapseTree": true,
 				"seedNodes": [{"collectionId": "collectionId"}, {"passedParentId": "id"}, {"sourceSystem": "sourceSystem"}, {"repository": "repository"},
 					{"apiVersion": "apiVersion"}, {"fileCreatedDate": "fileCreatedDate"}]
+			},
+			{
+				"label": "geographicLocations",
+				"otherNodes": "geographicLocations",
+				"xpath": "./controlaccess/geogname",
+				"optional": true
+			},
+			{
+				"label": "format",
+				"!label": "subjects",
+				"!otherNodes": "subjects",
+				"xpath": "./controlaccess/genreform",
+				"optional": true,
+				"format": "text",
+				"!note": "changed from subjects to format 3/19/21"
 			},
 			{
 				"removeNodes": ["passedParentId", "related_ids"]
@@ -415,9 +447,45 @@
 				"format": "text"
 			},
 			{
-				"label": "uri",
-				"constant": "",
+				"label": "authFileNumber",
+				"xpath": ".",
+				"returnAttributeName": "authfilenumber",
 				"optional": false,
+				"format": "text"
+			},
+			{
+				"label": "tag",
+				"xpath": ".",
+				"addTagAsValue": true,
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "uri",
+				"optional": false,
+				"format": "text",
+				"externalProcess": "format_subject_uri",
+				"passLabels": [{"authFileNumber": "authFileNumber"}]
+			},
+			{
+				"removeNodes": ["authFileNumber"]
+			}
+		]
+	},
+
+	"geographicLocations": {
+		"FieldsToExtract": [
+			{
+				"label": "display",
+				"xpath": ".",
+				"optional": true,
+				"format": "text"
+			},
+			{
+				"label": "authority",
+				"xpath": ".",
+				"returnAttributeName": "source",
+				"optional": true,
 				"format": "text"
 			}
 		]

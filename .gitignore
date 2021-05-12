@@ -8,3 +8,5 @@ dependencies/
 manifest_utils.py
 secrets/
 .vscode
+**/build
+**/dist

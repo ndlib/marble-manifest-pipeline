@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "fileCreatedDate": "2020-08-26",
+  "fileCreatedDate": "2021-05-10",
   "sourceSystem": "Aleph",
   "repository": "RARE",
   "sequence": 1,
@@ -48,7 +48,7 @@
   ],
   "collections": [],
   "createdDate": "[1796?]",
-  "workType": "Notated music",
+  "workType": "",
   "subjects": [
     {
       "term": "Folk songs -- Ireland -- Instrumental settings."
@@ -70,6 +70,7 @@
   "copyrightStatement": "",
   "digitalAccess": "Regular",
   "linkToSource": "https://onesearch.library.nd.edu/permalink/f/1phik6l/ndu_aleph000297305",
+  "modifiedDate": "2019-11-21T12:50:41",
   "publisher": {
     "publisherName": "published by I. Willis",
     "publisherLocation": "Dublin,"
@@ -88,7 +89,7 @@
       "sourceSystem": "Aleph",
       "repository": "RARE",
       "apiVersion": 1,
-      "fileCreatedDate": "2020-08-26",
+      "fileCreatedDate": "2021-05-10",
       "level": "file",
       "sequence": 1,
       "thumbnail": true,

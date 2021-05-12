@@ -55,6 +55,8 @@ class createJsonFromXml():
             value = field.get('constant', '')
         elif 'fromLabels' in field:
             value = get_value_from_labels(json_output, field)
+        elif 'addTagAsValue' in field:
+            value = xml_root.tag
         elif 'externalProcess' in field:
             value = perform_additional_processing(json_output, field, self.schema_api_version)
         elif 'removeNodes' in field:
@@ -115,7 +117,20 @@ def get_xml_node_value(item: ElementTree, return_attribute_name: str, exclude_pa
     if return_attribute_name in item.attrib:
         value_found = item.attrib[return_attribute_name]
     else:
-        value_found = item.text
+        safe_to_try_tostring = False
+        for child in item:
+            if child.tag == 'extref':
+                safe_to_try_tostring = True
+            else:
+                safe_to_try_tostring = False
+                break
+        if safe_to_try_tostring:
+            root_tag = item.tag
+            value_found = ElementTree.tostring(item, encoding='unicode')
+            value_found = value_found.replace('<' + root_tag + '>', '').replace('</' + root_tag + '>', '')
+            value_found = value_found.replace('<extref', '<a').replace('</extref>', '</a>')
+        else:
+            value_found = item.text
     value_found = exclude_if_pattern_matches(exclude_pattern, value_found)
     value_found = strip_unwanted_whitespace(value_found)
     return value_found

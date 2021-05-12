@@ -128,6 +128,8 @@ class TranslateCurateJsonNode():
             json_results = self.build_json_from_curate_json(file_json, "containedFiles", seed_json)
             # print("json_results = ", json_results)
             json_results["sequence"] = sequence
+            if sequence == 1:
+                json_results['thumbnail'] = True  # set first file as default file for an item
             sequence += 1
             # May need to re-instate this code - keep for now.
             # if json_results.get("md5Checksum", "") == "" and \

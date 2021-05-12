@@ -1,4 +1,6 @@
 # clean_up_composite_json.py
+from datetime import datetime
+import re
 
 
 class CleanUpCompositeJson():
@@ -11,6 +13,7 @@ class CleanUpCompositeJson():
     def _clean_up_composite_json(composite_json: dict) -> dict:
         """ This calls all other modules locally """
         objects = composite_json.get("objects", {})
+        objects = _fix_modified_dates(objects)
         objects = CleanUpCompositeJson._fix_parent_child_relationships(objects)
         composite_json["objects"] = objects
         return composite_json
@@ -23,6 +26,7 @@ class CleanUpCompositeJson():
             child_id = family["childId"]
             sequence = family["sequence"]
             parent = objects[parent_id]
+            parent['hierarchySearchable'] = _is_hierachy_searchable(child_id)
             if "items" not in parent:
                 parent["items"] = []
             if child_id in objects:
@@ -60,3 +64,29 @@ class CleanUpCompositeJson():
                 if len(objects[parent_id]["children"]) == 0:
                     del objects[parent_id]["children"]
         return objects
+
+
+def _is_hierachy_searchable(child_id: str) -> bool:
+    """ If the suffix of a child_id is numeric, the whole hierarchy is searchable to the leaf nodes.
+        If the suffix of a child_id is alphabetic, the whole hierarchy is not searchable. """
+    pieces_of_child_id_list = child_id.split('.')
+    suffix = pieces_of_child_id_list[len(pieces_of_child_id_list) - 1]
+    return suffix.isnumeric()
+
+
+def _fix_modified_dates(objects: dict) -> dict:
+    """ change the modifiedDate for every record from m/d/y h:m:s to iso format """
+    for k, v in objects.items():
+        if v.get('modifiedDate'):
+            objects[k]['modifiedDate'] = _get_iso_date(v.get('modifiedDate'))
+    return objects
+
+
+def _get_iso_date(date_string: str) -> str:
+    """ convert date from the form 1/22/2021 13:28:27 to iso format """
+    regex = r'\d{1,2}/\d{1,2}/\d{4} \d{1,2}:\d{1,2}:\d{1,2}'
+    found_list = re.findall(regex, date_string)
+    if found_list:
+        date_value = datetime.strptime(date_string, '%m/%d/%Y %H:%M:%S')
+        return date_value.isoformat()
+    return date_string

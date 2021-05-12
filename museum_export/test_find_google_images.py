@@ -10,15 +10,15 @@ class Test(unittest.TestCase):
     def setUp(self):
         self.find_google_images_class = FindGoogleImages({}, {})
 
-    def test_1_build_google_query_string(self):
-        """ test_1 _build_google_query_string """
+    def test_01_build_google_query_string(self):
+        """ test_01 _build_google_query_string """
         image_file_list = ["abc.jpg", "123.jpg"]
         google_query_string = self.find_google_images_class._build_google_query_string(image_file_list)
         expected_query_string = "trashed = False and mimeType contains 'image' and ( name = 'abc.jpg' or  name = '123.jpg')"
-        self.assertTrue(google_query_string == expected_query_string)
+        self.assertEqual(google_query_string, expected_query_string)
 
-    def test_2_save_file_info_to_hash(self):
-        """ test_2 save_file_info_to_hash """
+    def test_02_save_file_info_to_hash(self):
+        """ test_02 save_file_info_to_hash """
         query_results = [
             {
                 "id": "1k3X8fGfrBQyQaJtj4CGmg9C0nOt5XauA",
@@ -72,7 +72,7 @@ class Test(unittest.TestCase):
                 "size": "566551"
             }
         }
-        self.assertTrue(result_hash == expected_hash)
+        self.assertEqual(result_hash, expected_hash)
 
 
 def suite():

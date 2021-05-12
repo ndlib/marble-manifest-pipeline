@@ -3,7 +3,8 @@ import _set_path  # noqa: F401
 import json
 import os
 from pipelineutilities.standard_json_helpers import _remove_brackets, _remove_trailing_punctuation, _clean_up_standard_json_strings, \
-    _load_language_codes, _add_language_display, _clean_up_standard_json_recursive, _add_publishers_node
+    _load_language_codes, _add_language_display, _clean_up_standard_json_recursive, _add_publishers_node, _add_objectFileGroupId, \
+    _find_object_file_group_id, _find_default_file_path, _add_sequence, _insert_pdf_images
 import unittest
 
 
@@ -66,7 +67,7 @@ class Test(unittest.TestCase):
         actual_results = _clean_up_standard_json_strings(standard_json)
         expected_results = {
             "description": "something really dumb",
-            "title": "test0",
+            "title": "test0,",
             "subjects": [{"display": "test1"}, {"display": "test2"}],
             "contributors": [{"display": "test3"}],
             "languages": [{'display': 'English', 'alpha2': 'en', 'alpha3': 'eng'}]
@@ -93,7 +94,7 @@ class Test(unittest.TestCase):
         """ test_06_clean_up_standard_json_recursive"""
         standard_json = {
             "description": "something [really] dumb",
-            "title": "test0,",
+            "title": "test0/",
             "subjects": [{"display": "test1/"}, {"display": "test2."}],
             "contributors": [{"display": "test3:"}],
             "items": [
@@ -103,7 +104,7 @@ class Test(unittest.TestCase):
             "publisher": {'publisherName': 'abc', 'publisherLocation': 'xyz'},
             "collections": [{'display': "Capt. Francis O'Neill Collection of Irish Studies (University of Notre Dame. Library)/"}]
         }
-        actual_results = _clean_up_standard_json_recursive(standard_json)
+        actual_results = _clean_up_standard_json_recursive(standard_json, '', [])
         expected_results = {
             "description": "something really dumb",
             "title": "test0",
@@ -113,6 +114,7 @@ class Test(unittest.TestCase):
                 {"creators": [{"display": "test4"}]}
             ],
             "languages": [{'display': 'English', 'alpha2': 'en', 'alpha3': 'eng'}],
+            "level": "manifest",
             "publishers": [{'display': 'abc, xyz', 'publisherName': 'abc', 'publisherLocation': 'xyz'}],
             "collections": [{'display': "Capt. Francis O'Neill Collection of Irish Studies (University of Notre Dame. Library)"}]
         }
@@ -132,6 +134,124 @@ class Test(unittest.TestCase):
                 "publisherLocation": "Dublin,"
             }
         ]
+        self.assertEqual(actual_results, expected_results)
+
+    def test_08_add_objectFileGroupId(self):
+        """ test_08_add_objectFileGroupId """
+        with open(local_folder + '1976.046.json', 'r', encoding='utf-8') as json_file:
+            standard_json = json.load(json_file)
+        standard_json = {
+            'id': 'abc',
+            'level': 'manifest',
+            'items': [
+                {'level': 'file', 'sourceFilePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'},
+                {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}]
+        }
+        actual_results = _add_objectFileGroupId(standard_json)
+        expected_results = {
+            'id': 'abc',
+            'level': 'manifest',
+            'objectFileGroupId': 'BOO_000297305',
+            'items': [
+                {'level': 'file', 'sourceFilePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'},
+                {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}
+            ]
+        }
+        self.assertEqual(actual_results, expected_results)
+
+    def test_09_add_objectFileGroupId_museum(self):
+        """ test_09_add_objectFileGroupId """
+        with open(local_folder + '1976.046.json', 'r', encoding='utf-8') as json_file:
+            standard_json = json.load(json_file)
+        standard_json = {
+            'id': '1234.567',
+            'level': 'manifest',
+            'items': [
+                {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view', 'objectFileGroupId': '1234.567'}]
+        }
+        actual_results = _add_objectFileGroupId(standard_json)
+        expected_results = {
+            'id': '1234.567',
+            'level': 'manifest',
+            'objectFileGroupId': '1234.567',
+            'items': [
+                {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view', 'objectFileGroupId': '1234.567'}
+            ]
+        }
+        self.assertEqual(actual_results, expected_results)
+
+    def test_10_find_object_file_group_id(self):
+        """ test_10_find_object_file_group_id """
+        item = {'objectFileGroupId': '123', 'sourceFilePath': '456'}
+        actual_results = _find_object_file_group_id(item)
+        expected_results = '123'
+        self.assertEqual(actual_results, expected_results)
+
+    def test_11_find_default_file_path(self):
+        """ test_11_find_default_image_id """
+        item = {'key': 'some/path/abc.jpg', 'sourceFilePath': 'some/path/123.jpg', 'fileId': 'google_file_id_456'}
+        actual_results = _find_default_file_path(item)
+        expected_results = 'some/path/abc.jpg'
+        self.assertEqual(actual_results, expected_results)
+
+    def test_12_find_default_file_path(self):
+        """ test_12_find_default_image_id """
+        item = {'collectionId': 'something_irrelevant', 'id': '1934.007.001/1934_007_001-v0003.jpg', 'sourceType': "Museum", 'fileId': 'google_file_id_456'}  # noqa: #501
+        actual_results = _find_default_file_path(item)
+        expected_results = '1934.007.001/1934_007_001-v0003.jpg'
+        self.assertEqual(actual_results, expected_results)
+
+    def test_13_find_default_file_path(self):
+        """ test_13_find_default_image_id """
+        item = {'sourceFilePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif', 'fileId': 'google_file_id_456'}
+        actual_results = _find_default_file_path(item)
+        expected_results = 'digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'
+        self.assertEqual(actual_results, expected_results)
+
+    def test_14_find_default_file_path(self):
+        """ test_14_find_default_image_id """
+        item = {'filePath': 'some/path/123.jpg', 'fileId': 'google_file_id_456'}
+        actual_results = _find_default_file_path(item)
+        expected_results = 'some/path/123.jpg'
+        self.assertEqual(actual_results, expected_results)
+
+    def test_15_find_default_file_path(self):
+        """ test_16_find_default_file_path """
+        item = {'fileId': 'google_file_id_456'}
+        actual_results = _find_default_file_path(item)
+        expected_results = 'google_file_id_456'
+        self.assertEqual(actual_results, expected_results)
+
+    def test_16_add_sequence(self):
+        """ test_16_add_sequence """
+        standard_json = {
+            'id': '123',
+            'items': [{'id': '234'}, {"id": '345'}]
+        }
+        actual_results = _add_sequence(standard_json)
+        expected_results = {
+            'id': '123',
+            'sequence': 0,
+            'items': [{'id': '234', 'sequence': 1}, {"id": '345', 'sequence': 2}]
+        }
+        self.assertEqual(actual_results, expected_results)
+
+    def test_17_insert_pdf_images(self):
+        """ test_17_insert_pdf_images """
+        standard_json = {
+            'id': '123',
+            'defaultFilePath': 'test/foo.pdf',
+            'items': [{'id': 'foo.pdf', 'level': 'file'}]
+        }
+        actual_results = _insert_pdf_images(standard_json)
+        expected_results = {
+            'id': '123',
+            'defaultFilePath': 'test/foo.tif',
+            'items': [
+                {'id': 'foo.pdf', 'level': 'file', 'sequence': 2},
+                {'id': 'foo.tif', 'level': 'file', 'sequence': 1}
+            ]
+        }
         self.assertEqual(actual_results, expected_results)
 
 

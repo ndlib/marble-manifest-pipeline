@@ -142,39 +142,15 @@ class TestCsvCollection(unittest.TestCase):
 
     def test_add_additional_paths_for_files(self):
         _add_additional_paths(objects[2], config)
-
-        self.assertEqual("image-server-base-url/collectionId%2FfileId1", objects[2]['iiifImageUri'])
-        self.assertEqual("s3://image-server-bucket/collectionId/fileId1", objects[2]['iiifImageFilePath'])
-        self.assertEqual("manifest-server-base-url/collectionId/fileId1/canvas", objects[2]['iiifUri'])
-        self.assertEqual("s3://manifest-server-bucket/collectionId/fileId1/canvas/index.json", objects[2]['iiifFilePath'])
-        self.assertEqual("", objects[2]['metsUri'])
-        self.assertEqual("", objects[2]['metsFilePath'])
-        self.assertEqual("", objects[2]['schemaUri'])
-        self.assertEqual("", objects[2]['schemaPath'])
+        self.assertEqual("canvas/fileId1", objects[2]['iiifResourceId'])
 
     def test_add_additional_paths_for_manifests(self):
         _add_additional_paths(objects[1], config)
-
-        self.assertEqual("", objects[1]['iiifImageUri'])
-        self.assertEqual("", objects[1]['iiifImageFilePath'])
-        self.assertEqual("manifest-server-base-url/collectionId/itemId/manifest", objects[1]['iiifUri'])
-        self.assertEqual("s3://manifest-server-bucket/collectionId/itemId/manifest", objects[1]['iiifFilePath'])
-        self.assertEqual("manifest-server-base-url/collectionId/itemId/mets.xml", objects[1]['metsUri'])
-        self.assertEqual("s3://manifest-server-bucket/collectionId/itemId/mets.xml", objects[1]['metsFilePath'])
-        self.assertEqual("manifest-server-base-url/collectionId/itemId", objects[1]['schemaUri'])
-        self.assertEqual("s3://manifest-server-bucket/collectionId/itemId/index.json", objects[1]['schemaPath'])
+        self.assertEqual("manifest/itemId", objects[1]['iiifResourceId'])
 
     def test_add_additional_paths_for_collections(self):
         _add_additional_paths(objects[0], config)
-
-        self.assertEqual("", objects[0]['iiifImageUri'])
-        self.assertEqual("", objects[0]['iiifImageFilePath'])
-        self.assertEqual("manifest-server-base-url/collectionId/manifest", objects[0]['iiifUri'])
-        self.assertEqual("s3://manifest-server-bucket/collectionId/manifest", objects[0]['iiifFilePath'])
-        self.assertEqual("manifest-server-base-url/collectionId/mets.xml", objects[0]['metsUri'])
-        self.assertEqual("s3://manifest-server-bucket/collectionId/mets.xml", objects[0]['metsFilePath'])
-        self.assertEqual("manifest-server-base-url/collectionId", objects[0]['schemaUri'])
-        self.assertEqual("s3://manifest-server-bucket/collectionId/index.json", objects[0]['schemaPath'])
+        self.assertEqual("manifest/collectionId", objects[0]['iiifResourceId'])
 
     def test_add_image_dimensions(self):
         # if the height and width is in the image_data it pulls that

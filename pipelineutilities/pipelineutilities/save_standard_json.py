@@ -1,7 +1,6 @@
 import os
 import botocore
 from s3_helpers import write_s3_json, s3_file_exists
-from record_files_needing_processed import FilesNeedingProcessed
 from validate_json import validate_standard_json
 
 
@@ -17,9 +16,7 @@ def save_standard_json(config: dict, standard_json: dict, export_all_files_flag:
             standard_json_already_exists_flag = s3_file_exists(config['process-bucket'], key_name)
             if not export_all_files_flag:
                 export_all_files_flag = (not standard_json_already_exists_flag)
-            files_needing_processed_class = FilesNeedingProcessed(config)
-            if files_needing_processed_class.record_files_needing_processed(standard_json, export_all_files_flag):
-                success_flag = _save_json_to_s3(config['process-bucket'], key_name, standard_json)
+            success_flag = _save_json_to_s3(config['process-bucket'], key_name, standard_json)
             success_flag = _save_to_manifest_bucket(config, standard_json)
     return success_flag
 

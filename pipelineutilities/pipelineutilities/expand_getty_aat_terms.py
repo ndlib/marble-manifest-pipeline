@@ -26,6 +26,9 @@ def expand_aat_terms(subject: dict) -> dict:
             subject['broaderTerms'] = broader_terms
         if parent_terms:
             subject['parentTerms'] = parent_terms
+        variants = _get_variants(aat_xml)
+        if variants:
+            subject['variants'] = variants
         if not validate_json(subject, get_subject_json_schema(), True):
             subject = None
     return subject
@@ -83,12 +86,14 @@ def _get_each_broader_term(xml: ElementTree, xpath: str) -> list:
 
 def _parse_parent_string_into_broader_terms(parent_string: str) -> list:
     """ Given the string of the parent hierarchy, return list of broader terms """
+    break_on_terms = ["styles, periods, and cultures by region"]
     broader_terms = []
-    parent_list = parent_string.split(",")
+    parent_list = parent_string.split("],")
     for i, list_item in enumerate(parent_list):
+        list_item += ']'  # add back in bracket we removed as part of the split        term = _get_term_from_string(list_item)
         term = _get_term_from_string(list_item)
         uri = _get_uri_from_string(list_item)
-        if 'hierarchy name' in term:
+        if 'hierarchy name' in term or term in break_on_terms:
             break
         broader_term = {}
         broader_term['authority'] = 'AAT'
@@ -96,8 +101,8 @@ def _parse_parent_string_into_broader_terms(parent_string: str) -> list:
         if uri:
             broader_term['uri'] = uri
         if i < len(parent_list) - 1:
-            parent_term = _get_term_from_string(parent_list[i + 1])
-            if 'hierarchy name' not in parent_term:
+            parent_term = _get_term_from_string(parent_list[i + 1] + ']')
+            if 'hierarchy name' not in parent_term and parent_term not in break_on_terms:
                 broader_term['parentTerm'] = parent_term
         broader_terms.append(broader_term)
     return broader_terms
@@ -134,7 +139,9 @@ def _get_xml_string_given_url(url) -> str:
     except TimeoutError as e:
         capture_exception(e)
         print("TimeoutError calling " + url)
-
+    except Exception as e:
+        capture_exception(e)
+        print(str(e) + " Error calling " + url)
     return xml_string
 
 
@@ -162,14 +169,29 @@ def _get_xml_tree_given_xml_string(xml_string: str, id_url: str) -> ElementTree:
     return xml_tree
 
 
+def _get_variants(xml: ElementTree) -> list:
+    """ Get braoder terms if any """
+    variant_terms = []
+    xpaths = ['./Subject/Terms/Non-Preferred_Term']
+    for xpath in xpaths:
+        for xml_term in xml.findall(xpath):
+            language = xml_term.find('./Term_Languages/Term_Language/Language')
+            if language is not None:
+                if 'English' in language.text:
+                    variant_term = xml_term.find('./Term_Text')
+                    if variant_term is not None:
+                        variant_terms.append(variant_term.text)
+    return variant_terms
+
+
 # testing:
 # python -c 'from expand_getty_aat_terms import *; test()'
 def test():
     """ test exection """
     seed_json = {
         "authority": "AAT",
-        "term": "crowns",
-        "uri": "http://vocab.getty.edu/aat/300046020",
+        "term": "Benin",
+        "uri": "http://vocab.getty.edu/aat/300015777",
     }
     resulting_json = expand_aat_terms(seed_json)
     print("Final output = ", resulting_json)

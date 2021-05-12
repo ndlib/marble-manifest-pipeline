@@ -2,6 +2,7 @@
 """ test harvest_aleph_marc """
 import _set_path  # noqa
 import unittest
+from datetime import datetime
 from pathlib import Path
 from harvest_aleph_marc import HarvestAlephMarc
 from dependencies.pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
@@ -14,7 +15,7 @@ class Test(unittest.TestCase):
         self.event['local-path'] = str(Path(__file__).parent.absolute()) + "/../example/"
         self.config = setup_pipeline_config(self.event)
         marc_records_url = "https://alephprod.library.nd.edu/aleph_tmp/marble.mrc"
-        self.harvest_marc_class = HarvestAlephMarc(self.config, self.event, marc_records_url)
+        self.harvest_marc_class = HarvestAlephMarc(self.config, self.event, marc_records_url, datetime.now())
 
     def test_1_return_csv_from_json(self):
         return

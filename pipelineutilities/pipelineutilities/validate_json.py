@@ -31,7 +31,16 @@ def validate_standard_json(json_to_test: dict) -> bool:
 
 
 subject_properties = {
+    "GSI1PK": {"type": "string"},
+    "GSI1SK": {"type": "string"},
+    "GSI2PK": {"type": "string"},
+    "GSI2SK": {"type": "string"},
+    "PK": {"type": "string"},
+    "SK": {"type": "string"},
+    "TYPE": {"type": "string"},
     "authority": {"type": "string"},
+    "dateAddedToDynamo": {"type": "string"},
+    "dateModifiedInDynamo": {"type": "string"},
     "display": {"type": "string"},
     "term": {"type": "string"},
     "uri": {"type": "string"},
@@ -94,137 +103,35 @@ subjects_json_schema = {
 
 standard_json_schema = {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "description": "Schema for validating ND.json",
+    "description": "Schema for validating standard.json",
     "title": "Tester for ND.json schema",
     "id": "nd.schema.json",
     "type": "object",
     "properties": {
+        "GSI1PK": {"type": "string"},
+        "GSI1SK": {"type": "string"},
+        "GSI2PK": {"type": "string"},
+        "GSI2SK": {"type": "string"},
+        "PK": {"type": "string"},
+        "SK": {"type": "string"},
+        "TYPE": {"type": "string"},
+        "access": {"type": "string"},
+        "additionalNotes": {"type": "string"},
         "apiVersion": {"type": "integer"},
-        "fileCreatedDate": {"type": "string"},
-        "id": {"type": "string"},
-        "sourceSystem": {"type": "string"},
-        "repository": {"type": "string"},
-        "collectionId": {"type": "string"},
-        "parentId": {"type": "string"},
-        "relatedIds": {
+        "bendoItem": {"type": "string"},
+        "childIds": {
             "description": "This facilitates defining non-parent-child relationships.",
             "type": "array",
             "items": {
                 "id": {"type": "string"},
-                "sequence": {"type": "string"}
+                "sequence": {"type": "integer"}
             }
         },
-        "level": {"type": "string"},
-        "title": {"type": "string"},
-        "createdDate": {
-            "description": "We want dates, like 'c. 1900' or '2020-04-22'.",
-            "type": "string"
-        },
-        "uniqueIdentifier": {"type": "string"},
-        "dimensions": {"type": "string"},
-        "languages": {
-            "description": "Ultimately, we want languages, like ['english'] or ['english', 'french'].",
-            "type": "array",
-            "items": {
-                "anyOf": [
-                    {"type": "string"},
-                    {
-                        "type": "object",
-                        "Properties": {
-                            "display": {"type": "string"},
-                            "alpha2": {"type": "string"},
-                            "alpha3": {"type": "string"}
-                        }
-
-                    }
-                ]
-            }
-        },
-        "subjects": subjects_definition,
-        "copyrightStatus": {"type": "string"},
-        "copyrightUrl": {"type": "string"},
-        "copyrightStatement": {"type": "string"},
-        "linkToSource": {"type": "string"},
-        "access": {"type": "string"},
-        "physicalAccess": {"type": "string"},
-        "digitalAccess": {"enum": ["Regular", "Restricted"]},
-        "format": {"type": "string"},
-        "dedication": {"type": "string"},
-        "description": {"type": "string"},
-        "modifiedDate": {"type": "string"},
-        "thumbnail": {"type": "boolean"},
-        "filePath": {"type": "string"},
-        "sequence": {"type": "number"},
+        "collectionId": {"type": "string"},
         "collectionInformation": {"type": "string"},
-        "fileId": {"anyOf": [{"type": "string"}, {"type": "boolean"}]},
-        "mimeType": {"type": "string"},
-        "workType": {"type": "string"},
-        "medium": {"type": "string"},
-        "publisher": {
-            "type": "object",
-            "properties": {
-                "publisherName": {"type": "string"},
-                "publisherLocation": {"type": "string"}
-            },
-            "required": ["publisherName"],
-            "additionalProperties": False
-        },
-        "publishers": {
-            "type": "object",
-            "properties": {
-                "display": {"type": "string"},
-                "publisherName": {"type": "string"},
-                "publisherLocation": {"type": "string"}
-            },
-            "required": ["display"],
-            "additionalProperties": False
-        },
-        "contributors": {
-            "type": "array",
-            "items": {
-                "description": "Schema for validating creator - Note:  We need to require display once that is added uniformly.",
-                "type": "object",
-                "properties": {
-                    "attribution": {"type": "string"},
-                    "display": {"type": "string"},
-                    "endDate": {"type": "string"},
-                    "fullName": {"type": "string"},
-                    "lifeDates": {"type": "string"},
-                    "human": {"type": "boolean"},
-                    "alive": {"type": "boolean"},
-                    "nationality": {"type": "string"},
-                    "role": {"type": "string"},
-                    "startDate": {"type": "string"}
-                },
-                "required": ["fullName"],
-                "additionalProperties": False
-            }
-        },
-        "creators": {
-            "type": "array",
-            "items": {
-                "description": "Schema for validating creator - Note:  We need to require display once that is added uniformly.",
-                "type": "object",
-                "properties": {
-                    "attribution": {"type": "string"},
-                    "display": {"type": "string"},
-                    "endDate": {"type": "string"},
-                    "fullName": {"type": "string"},
-                    "lifeDates": {"type": "string"},
-                    "human": {"type": "boolean"},
-                    "alive": {"type": "boolean"},
-                    "nationality": {"type": "string"},
-                    "role": {"type": "string"},
-                    "startDate": {"type": "string"}
-                },
-                "required": ["fullName"],
-                "additionalProperties": False
-            }
-        },
         "collections": {
             "description": "This is a list of names of collections to which this object belongs.",
             "type": "array",
-            # "items": {"type": "string"}
             "items": {
                 "anyOf": [
                     {"type": "string"},
@@ -235,7 +142,34 @@ standard_json_schema = {
                 ]
             },
         },
-        "md5Checksum": {"type": "string"},
+        "contributors": {
+            "type": "array",
+            "items": {
+                "description": "Schema for validating creator - Note:  We need to require display once that is added uniformly.",
+                "type": "object",
+                "properties": {
+                    "alive": {"type": "boolean"},
+                    "attribution": {"type": "string"},
+                    "display": {"type": "string"},
+                    "endDate": {"type": "string"},
+                    "human": {"type": "boolean"},
+                    "fullName": {"type": "string"},
+                    "lifeDates": {"type": "string"},
+                    "nationality": {"type": "string"},
+                    "role": {"type": "string"},
+                    "startDate": {"type": "string"}
+                },
+                "required": ["fullName"],
+                "additionalProperties": False
+            }
+        },
+        "copyrightStatement": {"type": "string"},
+        "copyrightStatus": {"type": "string"},
+        "copyrightUrl": {"type": "string"},
+        "createdDate": {
+            "description": "We want dates, like 'c. 1900' or '2020-04-22'.",
+            "type": "string"
+        },
         "creationPlace": {
             "type": "object",
             "description": "Schema for validating creationPlace",
@@ -249,23 +183,142 @@ standard_json_schema = {
             },
             "additionalProperties": False
         },
+        "creators": {
+            "type": "array",
+            "items": {
+                "description": "Schema for validating creator - Note:  We need to require display once that is added uniformly.",
+                "type": "object",
+                "properties": {
+                    "alive": {"type": "boolean"},
+                    "attribution": {"type": "string"},
+                    "display": {"type": "string"},
+                    "endDate": {"type": "string"},
+                    "fullName": {"type": "string"},
+                    "human": {"type": "boolean"},
+                    "lifeDates": {"type": "string"},
+                    "nationality": {"type": "string"},
+                    "role": {"type": "string"},
+                    "startDate": {"type": "string"}
+                },
+                "required": ["fullName"],
+                "additionalProperties": False
+            }
+        },
+        "dateAddedToDynamo": {"type": "string"},
+        "dateModifiedInDynamo": {"type": "string"},
+        "dedication": {"type": "string"},
+        "defaultFilePath": {"type": "string"},
+        "description": {"type": "string"},
+        "digitalAccess": {"enum": ["Regular", "Restricted"]},
+        "digitizationSource": {"type": "string"},
+        "dimensions": {"type": "string"},
+        "expireTime": {"type": "integer"},
+        "fileCreatedDate": {"type": "string"},
+        "fileId": {"anyOf": [{"type": "string"}, {"type": "boolean"}]},
+        "filePath": {"type": "string"},
+        "format": {"type": "string"},
+        "geographicLocations": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "authority": {"type": "string"},
+                    "display": {"type": "string"},
+                },
+                "additionalProperties": False
+            }
+        },
+        "height": {"type": "integer"},
+        "hierarchySearchable": {"type": "boolean"},
+        "id": {"type": "string"},
         "iiifImageUri": {"type": "string"},
-        "iiifImageFilePath": {"type": "string"},
-        "iiifUri": {"type": "string"},
-        "iiifFilePath": {"type": "string"},
-        "metsUri": {"type": "string"},
-        "metsFilePath": {"type": "string"},
-        "schemaUri": {"type": "string"},
-        "schemaPath": {"type": "string"},
-        "bendoItem": {"type": "string"},  # added 6/10/2020 to support Curate, and subsequent bendo processing
+        "iiifResourceId": {"type": "string"},
+        "iiifUri": {"type": "string"},  # This will be obsolete once websites transition to using iiifResourceId
         "items": {
             "type": "array",
             "items": {"$ref": "#"},
             "default": []
-        }
+        },
+        "key": {"type": "string"},
+        "languages": {
+            "description": "Ultimately, we want languages, like ['english'] or ['english', 'french'].",
+            "type": "array",
+            "items": {
+                "anyOf": [
+                    {"type": "string"},
+                    {
+                        "type": "object",
+                        "Properties": {
+                            "alpha2": {"type": "string"},
+                            "alpha3": {"type": "string"},
+                            "display": {"type": "string"},
+                        }
+
+                    }
+                ]
+            }
+        },
+        "level": {"enum": ["collection", "manifest", "file"]},
+        "linkToSource": {"type": "string"},
+        "md5Checksum": {"type": "string"},
+        "mediaResourceId": {"type": "string"},
+        "mediaServer": {"type": "string"},
+        "medium": {"type": "string"},
+        "mimeType": {"type": "string"},
+        "modifiedDate": {"type": "string"},
+        "objectFileGroupId": {"type": "string"},
+        "parentId": {"type": "string"},
+        "physicalAccess": {"type": "string"},
+        "publisher": {
+            "type": "object",
+            "properties": {
+                "publisherLocation": {"type": "string"},
+                "publisherName": {"type": "string"},
+            },
+            "required": ["publisherName"],
+            "additionalProperties": False
+        },
+        "publishers": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "display": {"type": "string"},
+                    "publisherName": {"type": "string"},
+                    "publisherLocation": {"type": "string"}
+                },
+                "required": ["display"],
+                "additionalProperties": False
+            },
+        },
+        "relatedIds": {
+            "description": "This facilitates defining non-parent-child relationships.",
+            "type": "array",
+            "items": {
+                "id": {"type": "string"},
+                "sequence": {"type": "integer"}
+            }
+        },
+        "repository": {"type": "string"},
+        "sequence": {"type": "number"},
+        "size": {"type": "integer"},
+        "sourceBucketName": {"type": "string"},
+        "sourceFilePath": {"type": "string"},
+        "sourceSystem": {"type": "string"},
+        "sourceType": {"enum": ["Curate", "Museum", "S3", "Uri"]},
+        "sourceUri": {"type": "string"},
+        "storageSystem": {"enum": ["Curate", "Google", "S3", "Uri"]},
+        "subjects": subjects_definition,
+        "thumbnail": {"type": "boolean"},
+        "title": {"type": "string"},
+        "treePath": {"type": "string"},
+        "typeOfData": {"enum": ["Curate", "Museum", "RBSC website bucket", "Multimedia bucket", "Uri"]},
+        "uniqueIdentifier": {"type": "string"},
+        "width": {"type": "integer"},
+        "workType": {"type": "string"},
     },
     "required": ["id", "parentId", "collectionId", "apiVersion", "fileCreatedDate"],
-    "additionalProperties": False
+    "additionalProperties": False,
 }
 
 
