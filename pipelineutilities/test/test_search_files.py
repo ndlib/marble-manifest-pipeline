@@ -83,7 +83,6 @@ class TestSearchFiles(unittest.TestCase):
 
     def test_id_from_url(self):
         for url in temp_ids_example:
-            print("hi-----------")
             self.assertEqual(id_from_url(url), temp_ids_example[url])
 
     def test_url_can_be_harvested(self):
