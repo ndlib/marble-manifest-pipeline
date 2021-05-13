@@ -28,7 +28,7 @@ default_config = {
     "local-path": "please set me",
     "required-fields-by-source-system": {
         "EmbARK": {
-            "notify": ["hbertold@nd.edu"],
+            "notify": ["vperdomo@nd.edu"],
             "required-fields": {
                 "Title": "title",
                 "Creators": "creators",
