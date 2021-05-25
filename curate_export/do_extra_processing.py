@@ -4,7 +4,7 @@ from datetime import date
 from extract_field_from_characterization_xml import extract_field_from_characterization_xml
 
 
-def do_extra_processing(value: str or dict, extra_processing: str, json_field_definition: dict, bendo_server_base_url: str, schema_api_version: int, standard_json: dict) -> str or dict or list or int:
+def do_extra_processing(value: str or dict, extra_processing: str, json_field_definition: dict, bendo_server_base_url: str, schema_api_version: int, standard_json: dict) -> str or dict or list or int:  # noqa: C901
     """ If extra processing is required, make appropriate calls to perform that additional processing. """
     results = ""
     parameters_json = {}
@@ -25,6 +25,12 @@ def do_extra_processing(value: str or dict, extra_processing: str, json_field_de
         results = schema_api_version
     elif extra_processing == 'file_created_date':
         results = str(date.today())
+    elif extra_processing == 'pick_created_date':
+        results = _pick_created_date(parameters_json)
+    elif extra_processing == 'pick_geographic_location':
+        results = _pick_geographic_location(parameters_json)
+    elif extra_processing == 'pick_access':
+        results = _pick_access(parameters_json)
     elif extra_processing == 'define_level':
         results = 'manifest'
         if 'items' in parameters_json:
@@ -90,6 +96,31 @@ def _format_creators_given_string(contributors_string: str) -> dict:
         node['fullName'] = contributors_string
     node["display"] = node.get("fullName", "")
     return node
+
+
+def _pick_created_date(parameters_json: dict) -> str:
+    """ return first occurrance of: date, or created, or dateSubmitted """
+    return parameters_json.get('date', parameters_json.get('created', parameters_json.get('dateSubmitted', None)))
+
+
+def _pick_geographic_location(parameters_json: dict) -> list:
+    """ Sometimes, curate has an array, and sometimes an array within an array, where the inner-most array will have strings.  We need to accommodate both. """
+    """ placeOfCreation has this format: ["Ani, Kars Province, Turkey",  " +40.507500+43.572777.", "Ani"].  We will choose the first one that contains a comma"""
+    if 'placeOfCreation' not in parameters_json:
+        return []
+    for place_string in parameters_json.get("placeOfCreation", []):
+        if isinstance(place_string, list):
+            if len(place_string) == 0:
+                return []
+            place_string = place_string[0]
+        if ',' in place_string:
+            return [{"display": place_string}]
+    return []
+
+
+def _pick_access(parameters_json: dict) -> str:
+    """ return permissions_use if it exists, else "creator_administrative_unit, else none """
+    return parameters_json.get('permissions_use', parameters_json.get('creator_administrative_unit', None))
 
 
 def define_manifest_level(items: list) -> str:

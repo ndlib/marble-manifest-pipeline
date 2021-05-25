@@ -5,7 +5,7 @@ import unittest
 import json
 import os
 from pathlib import Path
-from translate_curate_json_node import TranslateCurateJsonNode
+from translate_curate_json_node import TranslateCurateJsonNode, remove_nodes_from_dictionary
 from dependencies.pipelineutilities.pipeline_config import setup_pipeline_config
 
 
@@ -68,6 +68,14 @@ class Test(unittest.TestCase):
         file_created_date_from_sample = expected_results.get("fileCreatedDate", "")
         actual_results = self.fix_file_created_date(actual_results, file_created_date_from_sample)
         self.assertEqual(actual_results, expected_results)
+
+    def test_04_remove_nodes_from_dictionary(self):
+        """ test_04 remove_nodes_from_dictionary """
+        json_field_definition = {"removeNodes": ["one", "two"]}
+        value_passed = {"one": 1, "two": 2, "three": 3}
+        remove_nodes_from_dictionary(value_passed, json_field_definition)
+        expected_value = {"three": 3}
+        self.assertEqual(value_passed, expected_value)
 
     def fix_file_created_date(self, json_object, file_created_date):
         json_object["fileCreatedDate"] = file_created_date

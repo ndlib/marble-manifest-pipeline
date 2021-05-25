@@ -160,7 +160,7 @@ def write_s3_json(s3_bucket: str, s3_key: str, json_dict: dict, **kwargs) -> Non
     :param json_dict: Dict file data to add as json
     :param kwargs: Additional params to pass to boto object.put
     """
-    filedata = json.dumps(json_dict, default=json_serial)
+    filedata = json.dumps(json_dict, default=json_serial, sort_keys=True)
     kwargs['ContentType'] = 'text/json'
     write_s3_file(s3_bucket, s3_key, filedata, **kwargs)
 
@@ -257,7 +257,7 @@ def upload_json(s3Bucket, s3Path, json_data) -> None:
     """
     local_file = f"/tmp/{basename(s3Path)}"
     with open(local_file, 'w') as outfile:
-        json.dump(json_data, outfile)
+        json.dump(json_data, outfile, sort_keys=True)
     upload_file(s3Bucket, s3Path, local_file)
     remove(local_file)
 

@@ -78,7 +78,7 @@ class CurateApi():
         if standard_json:
             if self.save_standard_json_locally:
                 with open(self.local_folder + "test/" + item_id + "_standard.json", "w") as output_file:
-                    json.dump(standard_json, output_file, indent=2, ensure_ascii=False)
+                    json.dump(standard_json, output_file, indent=2, ensure_ascii=False, sort_keys=True)
             else:
                 export_all_files_flag = self.event.get('exportAllFilesFlag', False)
                 save_required_flag = self._save_standard_json_to_dynamo_required(standard_json)
@@ -111,7 +111,7 @@ class CurateApi():
             standard_json = self.translate_curate_json_node_class.build_json_from_curate_json(curate_json, "root", {})
             if self.save_standard_json_locally:
                 with open(self.local_folder + "test/" + item_id + "_preliminary_standard.json", "w") as output_file:
-                    json.dump(standard_json, output_file, indent=2, ensure_ascii=False)
+                    json.dump(standard_json, output_file, indent=2, ensure_ascii=False, sort_keys=True)
             members = curate_json.get('members', [])
             standard_json = self.create_standard_json_class.build_standard_json_tree(standard_json, members)
             standard_json_helpers_class = StandardJsonHelpers(self.config)
@@ -142,7 +142,7 @@ class CurateApi():
         if self.config.get('local', True) or self.save_standard_json_locally:
             filename = os.path.join(self.local_folder, "save", item_id + "_standard.json")
             with open(filename, 'w') as f:
-                json.dump(standard_json, f, indent=2)
+                json.dump(standard_json, f, indent=2, sort_keys=True)
         else:
             key = os.path.join('save', item_id + '_standard.json')
             write_s3_json(self.config['process-bucket'], key, standard_json)
