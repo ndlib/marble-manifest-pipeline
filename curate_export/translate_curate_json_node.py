@@ -31,6 +31,8 @@ class TranslateCurateJsonNode():
                                 standard_json[json_field_definition['label']].append(results)
                         else:
                             standard_json[json_field_definition['label']] = results
+                elif 'removeNodes' in json_field_definition:
+                    results = remove_nodes_from_dictionary(standard_json, json_field_definition)
         if not validate_standard_json(standard_json):
             standard_json = {}
         return standard_json
@@ -139,6 +141,14 @@ class TranslateCurateJsonNode():
             #     json_results["md5Checksum"] = bendo_info.get("X-Content-Md5", "")
             results.append(json_results)
         return results
+
+
+def remove_nodes_from_dictionary(json_object: dict, json_field_definition: dict) -> None:
+    """ Remove specific nodes from the dictionary. """
+    remove_nodes = json_field_definition.get('removeNodes', '')
+    for node_to_remove in remove_nodes:
+        json_object.pop(node_to_remove, None)
+    return None
 
 
 def read_curate_to_json_translation_control_file(filename: str) -> dict:

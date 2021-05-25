@@ -5,7 +5,8 @@ import unittest
 import os
 from datetime import date
 from do_extra_processing import _format_creators_given_string, _format_creators, _format_subjects, \
-    _format_publisher, get_seed_nodes_json, do_extra_processing
+    _format_publisher, get_seed_nodes_json, do_extra_processing, _pick_created_date, _pick_geographic_location, \
+    _pick_access
 
 
 local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
@@ -116,6 +117,51 @@ class Test(unittest.TestCase):
         actual_results = get_seed_nodes_json(json_node, seed_nodes_control)
         # print("actual_results = ", actual_results)
         expected_results = json_node
+        self.assertTrue(actual_results == expected_results)
+
+    def test_10_pick_created_date(self):
+        """ test_10_pick_created_date """
+        actual_results = _pick_created_date({'date': "1870-1914", 'created': '1901-01-01', 'dateSubmitted': '2021-05-24'})
+        expected_results = "1870-1914"
+        actual_results = _pick_created_date({'created': '1901-01-01', 'dateSubmitted': '2021-05-24'})
+        expected_results = "1901-01-01"
+        actual_results = _pick_created_date({'dateSubmitted': '2021-05-24'})
+        expected_results = "2021-05-24"
+        self.assertTrue(actual_results == expected_results)
+
+    def test_11_pick_created_date_2(self):
+        """ test_11_pick_created_date_2 """
+        value_passed = ""
+        extra_processing = "pick_created_date"
+        json_field_definition = {
+            "label": "createdDate",
+            "passLabels": [{"dates": "dates"}, {"created": "created"}, {"dateSubmitted": "dateSubmitted"}],
+            "extraProcessing": "pick_created_date",
+            "format": "text"
+        }
+        standard_json = {
+            "id": "1",
+            "date": "1901-01-01",
+            "dateSubmitted": "2021-05-24",
+            "created": "1901-01-01"
+        }
+        actual_results = do_extra_processing(value_passed, extra_processing, json_field_definition, "", 1, standard_json)
+        expected_results = "1901-01-01"
+        self.assertTrue(actual_results == expected_results)
+
+    def test_12_pick_geographic_location(self):
+        """ test_12_pick_geographic_location """
+        actual_results = _pick_geographic_location({"placeOfCreation": ["Ani, Kars Province, Turkey", " +40.507500+43.572777.", "Ani"]})
+        expected_results = [{'display': 'Ani, Kars Province, Turkey'}]
+        self.assertTrue(actual_results == expected_results)
+        actual_results = _pick_geographic_location({"placeOfCreation": [["Ani, Kars Province, Turkey", " +40.507500+43.572777.", "Ani"]]})
+        expected_results = [{'display': 'Ani, Kars Province, Turkey'}]
+        self.assertTrue(actual_results == expected_results)
+
+    def test_13_pick_access(self):
+        """ test_13_pick_access """
+        actual_results = _pick_access({"permissions_use": "To view the physical lantern slide, please contact the Architecture Library to arrange an appointment.", "creator_administrative_unit": "University of Notre Dame::School of Architecture"})  # noqa: E501
+        expected_results = "To view the physical lantern slide, please contact the Architecture Library to arrange an appointment."
         self.assertTrue(actual_results == expected_results)
 
 

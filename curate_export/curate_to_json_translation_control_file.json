@@ -52,22 +52,82 @@
 				"extraProcessing": "format_creators",
 				"format": "array"
 			},
-			{ "label": "access",
+			{ "!label": "access",
+				"!fields": ["creator#administrative_unit"],
+				"!format": "text"
+			},
+			{ "!label": "physicalAccess",
+				"!fields": ["creator#administrative_unit"],
+				"!format": "text"
+			},
+			{ "label": "creator_administrative_unit",
 				"fields": ["creator#administrative_unit"],
 				"format": "text"
 			},
-			{ "label": "physicalAccess",
-				"fields": ["creator#administrative_unit"],
+			{ "label": "permissions_use",
+				"fields": ["permissions#use"],
 				"format": "text"
 			},
+			{
+				"label": "access",
+				"passLabels": [{"creator_administrative_unit": "creator_administrative_unit"}, {"permissions_use": "permissions_use"}],
+				"extraProcessing": "pick_access",
+				"format": "text"
+			},
+			{
+				"label": "physicalAccess",
+				"passLabels": [{"creator_administrative_unit": "creator_administrative_unit"}, {"permissions_use": "permissions_use"}],
+				"extraProcessing": "pick_access",
+				"format": "text"
+			},
+
 			{ "label": "digitalAccess",
 				"constant": "Regular",
 				"format": "text"
 			},
-			{ "label": "createdDate",
+			{ "!label": "createdDate",
+				"!fields": ["dateSubmitted"],
+				"!format": "text",
+				"!datePattern": "%Y-%m-%d"
+			},
+			{
+				"label": "date",
+				"fields": ["date"
+				],
+				"format": "text",
+				"!datePattern": "%Y-%m-%d"
+			},
+			{
+				"label": "created",
+				"fields": ["dates"],
+				"format": "text",
+				"datePattern": "%Y-%m-%d"
+			},
+			{
+				"label": "dateSubmitted",
 				"fields": ["dateSubmitted"],
 				"format": "text",
 				"datePattern": "%Y-%m-%d"
+			},
+			{
+				"label": "createdDate",
+				"passLabels": [{"date": "date"}, {"created": "created"}, {"dateSubmitted": "dateSubmitted"}],
+				"extraProcessing": "pick_created_date",
+				"format": "text"
+			},
+			{
+				"label": "placeOfCreation",
+				"fields": ["placeOfCreation"],
+				"format": "array"
+			},
+			{
+				"label": "geographicLocations",
+				"passLabels": [{"placeOfCreation": "placeOfCreation"}],
+				"extraProcessing": "pick_geographic_location",
+				"format": "array"
+			},
+			{
+				"removeNodes": ["date", "created", "dateSubmitted", "placeOfCreation", "creator_administrative_unit", "permissions_use"]
 			},
 			{ "label": "modifiedDate",
 				"fields": ["modified"],
