@@ -5,7 +5,7 @@ from save_json_to_dynamo import SaveJsonToDynamo
 from dynamo_helpers import add_file_group_keys, add_source_system_keys, add_item_to_harvest_keys, add_file_systems_keys, get_iso_date_as_string, \
     add_parent_override_keys, add_file_to_process_keys, add_website_keys, \
     add_new_subject_term_authority_keys, add_unharvested_subject_term_keys, \
-    add_subject_term_keys
+    add_subject_term_keys, add_image_group_keys, add_media_group_keys
 
 
 def save_source_system_record(dynamo_table_name: str, source_system_name: str, save_only_new_records: bool = True):
@@ -46,6 +46,33 @@ def save_file_group_record(dynamo_table_name: str, object_file_group_id: str, st
     save_json_to_dynamo_class.save_json_to_dynamo(json_record, save_only_new_records)
     return
 
+
+def save_image_group_record(dynamo_table_name: str, image_group_id: str, storage_system: str, type_of_data: str, save_only_new_records: bool = True):
+    """ Save Image Group Record """
+    config = {'local': False}
+    json_record = {'imageGroupId': image_group_id}
+    json_record['storageSystem'] = storage_system
+    json_record['typeOfData'] = type_of_data
+    if not save_only_new_records:
+        json_record['dateAddedToDynamo'] = get_iso_date_as_string()
+    json_record = add_image_group_keys(json_record)
+    save_json_to_dynamo_class = SaveJsonToDynamo(config, dynamo_table_name)
+    save_json_to_dynamo_class.save_json_to_dynamo(json_record, save_only_new_records)
+    return
+
+
+def save_media_group_record(dynamo_table_name: str, media_group_id: str, storage_system: str, type_of_data: str, save_only_new_records: bool = True):
+    """ Save Media Group Record """
+    config = {'local': False}
+    json_record = {'mediaGroupId': media_group_id}
+    json_record['storageSystem'] = storage_system
+    json_record['typeOfData'] = type_of_data
+    if not save_only_new_records:
+        json_record['dateAddedToDynamo'] = get_iso_date_as_string()
+    json_record = add_media_group_keys(json_record)
+    save_json_to_dynamo_class = SaveJsonToDynamo(config, dynamo_table_name)
+    save_json_to_dynamo_class.save_json_to_dynamo(json_record, save_only_new_records)
+    return
 
 def save_harvest_ids(config: dict, source_system: str, string_list_to_save: list, dynamo_table_name: str, save_only_new_records: bool = True):
     """ Loop through items to harvest, saving each to DynamoDB with appropriate keys """

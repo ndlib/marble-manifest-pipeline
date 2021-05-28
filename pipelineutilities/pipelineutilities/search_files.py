@@ -80,6 +80,7 @@ regexps = {
     ],
     "audio": [
         r"/([^/]*)/[^/]*\.mp3",  # Gets the directory the .mp3 is in
+        r"/([^/]*)/[^/]*\.wav",  # Gets the directory the .wav is in
     ],
     "video": [
         r"/([^/]*)/[^/]*\.mp4",  # Gets the directory the .mp4 is in
@@ -185,6 +186,7 @@ def make_label(url, id):
     label = label.replace(".tif", "")
     label = label.replace(".mp3", "")
     label = label.replace(".mp4", "")
+    label = label.replace(".wav", "")
     label = label.replace("-", " ")
     label = label.replace("_", " ")
     label = label.replace(".", " ")
@@ -333,7 +335,6 @@ def augement_file_record(obj, id, url, config, bucket):
     obj['source'] = bucket
     obj['path'] = obj['key']
     obj['sourceUri'] = url
-    obj['objectFileGroupId'] = id
     obj["sourceBucketName"] = bucket
     obj["sourceFilePath"] = obj.get('key')
     file_extension = os.path.splitext(obj.get('key'))[1]
@@ -342,6 +343,11 @@ def augement_file_record(obj, id, url, config, bucket):
         obj['filePath'] = obj['filePath'] + '.tif'
     else:
         obj['filePath'] = obj.get('key')
+    if is_media_file(config.get('media-file-extensions', []), obj['filePath']):
+        obj['mediaGroupId'] = id
+    else:
+        obj['objectFileGroupId'] = id
+        obj['imageGroupId'] = id
     obj = _add_more_file_fields(obj, config['image-server-base-url'])
 
 
@@ -385,7 +391,17 @@ def _add_more_file_fields(json_record: dict, iiif_image_service_uri: str = None)
             json_record['mimeType'] = json_record.get('mimeType', 'audio/mpeg')
         elif file_extension and file_extension.lower() in ['.mp4']:
             json_record['mimeType'] = json_record.get('mimeType', 'video/mp4')
+        elif file_extension and file_extension.lower() in ['.wav']:
+            json_record['mimeType'] = json_record.get('mimeType', 'audio/wav')
     return json_record
+
+
+def is_media_file(media_file_extensions: list, file_name: str) -> bool:
+    """ If the file extension is in a list of media_file_extensions, then return True (this is a media file), else return False """
+    file_extension = Path(file_name).suffix
+    if file_extension in media_file_extensions:
+        return True
+    return False
 
 
 # python -c 'from search_files import *; test()'

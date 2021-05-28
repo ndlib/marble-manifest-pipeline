@@ -208,6 +208,7 @@ standard_json_schema = {
         "dateModifiedInDynamo": {"type": "string"},
         "dedication": {"type": "string"},
         "defaultFilePath": {"type": "string"},
+        "defaultImageId": {"type": "string"},
         "description": {"type": "string"},
         "digitalAccess": {"enum": ["Regular", "Restricted"]},
         "digitizationSource": {"type": "string"},
@@ -234,6 +235,7 @@ standard_json_schema = {
         "iiifImageUri": {"type": "string"},
         "iiifResourceId": {"type": "string"},
         "iiifUri": {"type": "string"},  # This will be obsolete once websites transition to using iiifResourceId
+        "imageGroupId": {"type": "string"},
         "items": {
             "type": "array",
             "items": {"$ref": "#"},
@@ -263,6 +265,7 @@ standard_json_schema = {
         "md5Checksum": {"type": "string"},
         "mediaResourceId": {"type": "string"},
         "mediaServer": {"type": "string"},
+        "mediaGroupId": {"type": "string"},
         "medium": {"type": "string"},
         "mimeType": {"type": "string"},
         "modifiedDate": {"type": "string"},

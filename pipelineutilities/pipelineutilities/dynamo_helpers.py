@@ -52,6 +52,64 @@ def add_file_keys(json_record: dict, iiif_image_service_uri: str = None) -> dict
     return json_record
 
 
+def add_image_group_keys(json_record: dict) -> dict:
+    """ Add DynamoDB keys to Image Group record to be saved
+        Required values include: imageGroupId, storageSystem, typeOfData """
+    json_record['PK'] = 'IMAGEGROUP'
+    json_record['SK'] = 'IMAGEGROUP#' + format_key_value(json_record.get('imageGroupId'))
+    json_record['TYPE'] = 'ImageGroup'
+    json_record['GSI1PK'] = json_record['SK']
+    json_record['GSI1SK'] = '#NAME#' + format_key_value(json_record.get('imageGroupId'))
+    json_record['GSI2PK'] = "FILESYSTEM#" + format_key_value(json_record.get('storageSystem')) + '#' + format_key_value(json_record.get('typeOfData'))
+    json_record['GSI2SK'] = json_record['SK']
+    json_record['dateAddedToDynamo'] = get_iso_date_as_string()
+    json_record['dateModifiedInDynamo'] = get_iso_date_as_string()
+    return json_record
+
+
+def add_image_keys(json_record: dict, iiif_image_service_uri: str = None) -> dict:
+    """ Add DynamoDB keys to Image record to be saved
+        Required values include: id, imageGroupId, sequence """
+    json_record['PK'] = 'IMAGE'
+    json_record['SK'] = 'IMAGE#' + format_key_value(json_record.get('id'))
+    json_record['TYPE'] = 'Image'
+    json_record['GSI1PK'] = 'IMAGEGROUP#' + format_key_value(json_record.get('imageGroupId'))
+    zero_padded_sequence = format(json_record.get('sequence', 0), '05d')  # zero-pad sequence numbers so they sort correctly as strings
+    json_record['GSI1SK'] = 'SORT#' + str(zero_padded_sequence)
+    json_record['dateModifiedInDynamo'] = get_iso_date_as_string()
+    json_record = _add_more_file_fields(json_record, iiif_image_service_uri)
+    return json_record
+
+
+def add_media_group_keys(json_record: dict) -> dict:
+    """ Add DynamoDB keys to Media Group record to be saved
+        Required values include: mediaGroupId, storageSystem, typeOfData """
+    json_record['PK'] = 'MEDIAGROUP'
+    json_record['SK'] = 'MEDIAGROUP#' + format_key_value(json_record.get('mediaGroupId'))
+    json_record['TYPE'] = 'MediaGroup'
+    json_record['GSI1PK'] = json_record['SK']
+    json_record['GSI1SK'] = '#NAME#' + format_key_value(json_record.get('mediaGroupId'))
+    json_record['GSI2PK'] = "FILESYSTEM#" + format_key_value(json_record.get('storageSystem')) + '#' + format_key_value(json_record.get('typeOfData'))
+    json_record['GSI2SK'] = json_record['SK']
+    json_record['dateAddedToDynamo'] = get_iso_date_as_string()
+    json_record['dateModifiedInDynamo'] = get_iso_date_as_string()
+    return json_record
+
+
+def add_media_keys(json_record: dict, media_service_uri: str = None) -> dict:
+    """ Add DynamoDB keys to Media record to be saved
+        Required values include: id, mediaGroupId, sequence """
+    json_record['PK'] = 'MEDIA'
+    json_record['SK'] = 'MEDIA#' + format_key_value(json_record.get('id'))
+    json_record['TYPE'] = 'Media'
+    json_record['GSI1PK'] = 'MEDIAGROUP#' + format_key_value(json_record.get('mediaGroupId'))
+    zero_padded_sequence = format(json_record.get('sequence', 0), '05d')  # zero-pad sequence numbers so they sort correctly as strings
+    json_record['GSI1SK'] = 'SORT#' + str(zero_padded_sequence)
+    json_record['dateModifiedInDynamo'] = get_iso_date_as_string()
+    json_record = _add_more_file_fields(json_record, media_service_uri)
+    return json_record
+
+
 def add_source_system_keys(json_record: dict) -> dict:
     """ Add DynamoDB keys to Source System record to be saved
         Required values include: sourceSystem """
@@ -203,8 +261,9 @@ def get_iso_date_as_string() -> str:
     return datetime.now().isoformat()
 
 
-def _add_more_file_fields(json_record: dict, iiif_image_service_uri: str = None) -> dict:
+def _add_more_file_fields(json_record: dict, image_or_media_service_uri: str = None) -> dict:
     """ Add mimeType (if absent), add mediaServer and mediaResourceId """
+    """ Note: While %2F works for both the iiif_image_service and for the multimedia service, only iiif_image_service requires %2F instead of / """
     file_path = json_record.get('filePath')
     if file_path:
         file_extension = Path(file_path).suffix
@@ -212,8 +271,8 @@ def _add_more_file_fields(json_record: dict, iiif_image_service_uri: str = None)
             json_record['mimeType'] = json_record.get('mimeType', 'image/tiff')
             file_path_no_extension = os.path.join(Path(file_path).parent, Path(file_path).stem)
             json_record['mediaResourceId'] = file_path_no_extension.replace('/', '%2F')
-            if iiif_image_service_uri:
-                json_record['mediaServer'] = iiif_image_service_uri
+            if image_or_media_service_uri:
+                json_record['mediaServer'] = image_or_media_service_uri
         elif file_extension and '.' in file_extension and file_extension.lower() in ['.pdf']:
             json_record['mimeType'] = json_record.get('mimeType', 'application/pdf')
     return json_record

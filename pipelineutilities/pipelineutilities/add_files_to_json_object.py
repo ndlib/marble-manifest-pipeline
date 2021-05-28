@@ -2,7 +2,7 @@ import json
 import os
 from pathlib import Path
 from datetime import datetime
-from search_files import id_from_url, crawl_available_files  # noqa: #402
+from search_files import id_from_url, crawl_available_files, is_media_file  # noqa: #402
 from urllib import parse
 
 
@@ -53,7 +53,11 @@ class AddFilesToJsonObject():
                 sequence = 0
                 for obj in self.hash_of_available_files[id_to_find]['files']:
                     each_file_dict = {}
-                    each_file_dict['objectFileGroupId'] = id_to_find
+                    if is_media_file(self.config.get('media-file-extensions', []), obj['key']):
+                        each_file_dict['mediaGroupId'] = id_to_find
+                    else:
+                        each_file_dict['objectFileGroupId'] = id_to_find
+                        each_file_dict['imageGroupId'] = id_to_find
                     each_file_dict['collectionId'] = collection_id
                     each_file_dict['sourceSystem'] = source_system
                     each_file_dict['repository'] = repository
@@ -61,7 +65,6 @@ class AddFilesToJsonObject():
                     each_file_dict['fileCreatedDate'] = file_created_date
                     each_file_dict['level'] = 'file'
                     each_file_dict['parentId'] = parent_id
-                    # each_file_dict['id'] = os.path.basename(obj['key'])
                     each_file_dict['id'] = obj['key']  # going forward, I believe we will want id to be the full destination path
                     each_file_dict['filePath'] = obj['key']  # going forward, I believe we will want id to be the full destination path
                     each_file_dict['key'] = str(obj['key'])
@@ -88,7 +91,7 @@ class AddFilesToJsonObject():
                     each_file_dict = change_file_extensions_to_tif(each_file_dict, self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
                     file_items.append(dict(each_file_dict))
         else:
-            _fix_file_metadata_not_on_s3(file_items[index], parent_unique_identifier)
+            _fix_file_metadata_not_on_s3(file_items[index], parent_unique_identifier, self.config.get('media-file-extensions', []))
             file_items[index] = change_file_extensions_to_tif(file_items[index], self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
         return file_items
 
@@ -105,11 +108,11 @@ class AddFilesToJsonObject():
                 break
 
 
-def _fix_file_metadata_not_on_s3(file_item: dict, parent_unique_identifier: str):
+def _fix_file_metadata_not_on_s3(file_item: dict, parent_unique_identifier: str, media_file_extensions: list) -> dict:
     """ filePath is likely URL where to find file.  change to sourceUri (or sourceFilePath if not URL).
         Change filePath to be destination where this file should be placed (treePath plus filename)
         Add title and description to be filename if they don't exist.
-        Set objectFileGroupId to parent_unique_identifier
+        Set objectFileGroupId (ImageGroupId) or mediaGroupId to parent_unique_identifier
         Set id to be same as new filePath """
     file_path = file_item.get('filePath')
     file_name = os.path.basename(file_path)
@@ -133,7 +136,11 @@ def _fix_file_metadata_not_on_s3(file_item: dict, parent_unique_identifier: str)
     object_file_group_id = id_from_url(file_path)
     if not object_file_group_id:
         object_file_group_id = parent_unique_identifier
-    file_item['objectFileGroupId'] = object_file_group_id
+    if is_media_file(media_file_extensions, file_name):
+        file_item['mediaGroupId'] = object_file_group_id
+    else:
+        file_item['objectFileGroupId'] = object_file_group_id
+        file_item['imageGroupId'] = object_file_group_id
     file_item['id'] = file_item.get('filePath')
     return file_item
 

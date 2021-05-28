@@ -3,7 +3,7 @@ import _set_path  # noqa: F401
 import json
 import os
 from pipelineutilities.standard_json_helpers import _remove_brackets, _remove_trailing_punctuation, _clean_up_standard_json_strings, \
-    _load_language_codes, _add_language_display, _clean_up_standard_json_recursive, _add_publishers_node, _add_objectFileGroupId, \
+    _load_language_codes, _add_language_display, _clean_up_standard_json_recursive, _add_publishers_node, _add_imageGroupId, \
     _find_object_file_group_id, _find_default_file_path, _add_sequence, _insert_pdf_images
 import unittest
 
@@ -136,8 +136,8 @@ class Test(unittest.TestCase):
         ]
         self.assertEqual(actual_results, expected_results)
 
-    def test_08_add_objectFileGroupId(self):
-        """ test_08_add_objectFileGroupId """
+    def test_08_add_imageGroupId(self):
+        """ test_08_add_imageGroupId """
         with open(local_folder + '1976.046.json', 'r', encoding='utf-8') as json_file:
             standard_json = json.load(json_file)
         standard_json = {
@@ -147,11 +147,12 @@ class Test(unittest.TestCase):
                 {'level': 'file', 'sourceFilePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'},
                 {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}]
         }
-        actual_results = _add_objectFileGroupId(standard_json)
+        actual_results = _add_imageGroupId(standard_json)
         expected_results = {
             'id': 'abc',
             'level': 'manifest',
             'objectFileGroupId': 'BOO_000297305',
+            'imageGroupId': 'BOO_000297305',
             'items': [
                 {'level': 'file', 'sourceFilePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'},
                 {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}
@@ -159,8 +160,8 @@ class Test(unittest.TestCase):
         }
         self.assertEqual(actual_results, expected_results)
 
-    def test_09_add_objectFileGroupId_museum(self):
-        """ test_09_add_objectFileGroupId """
+    def test_09_add_imageGroupId_museum(self):
+        """ test_09_add_imageGroupId """
         with open(local_folder + '1976.046.json', 'r', encoding='utf-8') as json_file:
             standard_json = json.load(json_file)
         standard_json = {
@@ -169,7 +170,7 @@ class Test(unittest.TestCase):
             'items': [
                 {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view', 'objectFileGroupId': '1234.567'}]
         }
-        actual_results = _add_objectFileGroupId(standard_json)
+        actual_results = _add_imageGroupId(standard_json)
         expected_results = {
             'id': '1234.567',
             'level': 'manifest',

@@ -1,6 +1,7 @@
 import _set_path  # noqa
 import unittest
-from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_tracked_file, is_directory, _convert_dict_to_camel_case
+from pipelineutilities.search_files import id_from_url, url_can_be_harvested, file_should_be_skipped, is_tracked_file, is_directory, _convert_dict_to_camel_case, \
+    is_media_file
 
 
 example_ids = {
@@ -157,6 +158,12 @@ class TestSearchFiles(unittest.TestCase):
         for i, test in enumerate(tests):
             result = _convert_dict_to_camel_case(test)
             self.assertEqual(result, results[i])
+
+    def test_08_is_media_file(self):
+        """ test_08_is_media_file """
+        self.assertTrue(is_media_file(['.pdf', '.mp3', '.mp4'], "some/file.pdf"))
+        self.assertFalse(is_media_file(['.pdf', '.mp3', '.mp4'], "some/file.tif"))
+        self.assertTrue(is_media_file(['.pdf', '.mp3', '.mp4'], "https://some/file.pdf"))
 
 
 if __name__ == '__main__':
