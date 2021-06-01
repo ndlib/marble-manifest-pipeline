@@ -37,6 +37,7 @@ class StandardJsonHelpers():
         standard_json = _add_imageGroupId(standard_json)
         standard_json = _insert_pdf_images(standard_json)
         standard_json = _add_sequence(standard_json)
+        standard_json = _add_defaultFilePath_recursive(standard_json)
         if not validate_standard_json(standard_json):
             standard_json = {}
         else:
@@ -162,13 +163,16 @@ def _add_imageGroupId(standard_json: dict) -> dict:  # noqa: C901
         default_file_path_found = standard_json.get('defaultFilePath', '') > ''
         for item in standard_json.get('items', ''):
             if item.get('level', '') == 'file':
-                if not object_file_group_id_found:
+                if not object_file_group_id_found:  # This will be obsolete once imageGroupId is adopted
                     object_file_group_id = _find_object_file_group_id(item)
                     if object_file_group_id:
                         standard_json['objectFileGroupId'] = object_file_group_id
                         object_file_group_id_found = True
                 if not image_group_id_found:
-                    image_group_id = _find_image_group_id(item)
+                    if item.get('sourceSystem', '') == 'Curate':
+                        image_group_id = standard_json.get('id')
+                    else:
+                        image_group_id = _find_image_group_id(item)
                     if image_group_id:
                         standard_json['imageGroupId'] = image_group_id
                         image_group_id_found = True
@@ -177,7 +181,7 @@ def _add_imageGroupId(standard_json: dict) -> dict:  # noqa: C901
                     if default_file_path:
                         standard_json['defaultFilePath'] = default_file_path
                         default_file_path_found = True
-                if object_file_group_id_found and default_file_path_found:
+                if object_file_group_id_found and image_group_id_found and default_file_path_found:
                     break
     elif level == 'collection':
         # collections can have collections or manifests nested directly under them
@@ -192,7 +196,7 @@ def _add_imageGroupId(standard_json: dict) -> dict:  # noqa: C901
     return standard_json
 
 
-def _find_object_file_group_id(item: dict) -> str:
+def _find_object_file_group_id(item: dict) -> str:  # This will be obsolete once imageGroupId is adopted
     """ Use cascading logic to find object_file_group_id """
     object_file_group_id = item.get('objectFileGroupId', '')
     if not object_file_group_id:
@@ -268,3 +272,17 @@ def _update_pdf_fields(standard_json: dict):
     for field in fields:
         if field in standard_json:
             standard_json[field] = standard_json.get(field).replace('.pdf', '.tif')
+
+
+def _add_defaultFilePath_recursive(standard_json: dict) -> dict:
+    """ perform depth-first search to populate defaultFilePath for all non-file records. """
+    for item in standard_json.get('items', []):
+        if 'items' in item:
+            item = _add_defaultFilePath_recursive(item)
+        if 'defaultFilePath' in item and 'defaultFilePath' not in standard_json:
+            standard_json['defaultFilePath'] = item['defaultFilePath']
+        elif item.get('level') == 'file' and 'defaultFilePath' not in standard_json:
+            default_file_path = _find_default_file_path(item)
+            if default_file_path:
+                standard_json['defaultFilePath'] = default_file_path
+    return standard_json

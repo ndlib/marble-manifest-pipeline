@@ -7,8 +7,8 @@ import json
 import time
 from s3_helpers import write_s3_json, read_s3_json, delete_s3_key
 from api_helpers import json_serial
-from search_files import crawl_available_files
-from dynamo_helpers import add_file_keys, add_file_to_process_keys, add_file_group_keys, get_iso_date_as_string
+from search_files import crawl_available_files, is_media_file
+from dynamo_helpers import add_file_to_process_keys, add_file_group_keys, get_iso_date_as_string, add_image_group_keys, add_media_group_keys, add_media_keys, add_image_keys
 from dynamo_save_functions import save_file_system_record
 from add_files_to_json_object import change_file_extensions_to_tif
 from pipelineutilities.dynamo_query_functions import get_all_file_to_process_records_by_storage_system
@@ -42,13 +42,8 @@ class FilesApi():
             rbsc_files = self._crawl_available_files_from_s3_or_cache(self.config['rbsc-image-bucket'], True)
             multimedia_files = self._crawl_available_files_from_s3_or_cache(self.config['multimedia-bucket'], True)
             all_files_listing = {**rbsc_files, **multimedia_files}
-            with open('rbsc_files.json', 'w') as output_file:
-                json.dump(rbsc_files, output_file, indent=2, sort_keys=True)
-            with open('multimedia_files.json', 'w') as output_file:
-                json.dump(multimedia_files, output_file, indent=2, sort_keys=True)
-            with open('all_files_listing.json', 'w') as output_file:
-                json.dump(all_files_listing, output_file, indent=2, sort_keys=True)
-            print(1 / 0)
+            # with open('multimedia_files.json', 'w') as output_file:
+            #     json.dump(multimedia_files, output_file, indent=2, sort_keys=True)
         else:
             all_files_listing = self._resume_execution()
         file_objects = []
@@ -112,14 +107,19 @@ class FilesApi():
             my_json = dict(file_info)
             my_json['sequence'] = i
             my_json['id'] = my_json.get('key', '')
-            my_json['objectFileGroupId'] = my_json.get('fileId')  # required to join with standard.json
-            my_json['imageGroupId'] = my_json.get('fileId')  # required to join with standard.json  (replacing objectFileGroupId)
+            if is_media_file(self.config.get('media-file-extensions', []), my_json.get('id')):
+                my_json['mediaGroupId'] = my_json.get('mediaGroupId', my_json.get('fileId'))
+                my_json['typeOfData'] = my_json.get('typeOfData', 'Multimedia bucket')
+                my_json = add_media_keys(my_json, self.config.get('media-server-base-url', ''))
+            else:
+                my_json['objectFileGroupId'] = my_json.get('fileId')  # required to join with standard.json
+                my_json['imageGroupId'] = my_json.get('fileId')  # required to join with standard.json  (replacing objectFileGroupId)
+                my_json = change_file_extensions_to_tif(my_json, self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
+                my_json = add_image_keys(my_json, self.config.get('image-server-base-url', ''))
+            my_json['typeOfData'] = my_json.get('typeOfData', 'RBSC website bucket')
             collection_list.append(my_json)
             my_json['storageSystem'] = my_json.get('storageSystem', 'S3')
-            my_json['typeOfData'] = my_json.get('typeOfData', 'RBSC website bucket')
             my_json['sourceFilePath'] = my_json.get('path', '')
-            my_json = change_file_extensions_to_tif(my_json, self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
-            my_json = add_file_keys(my_json, self.config.get('image-server-base-url', ''))
             if not self.config.get('local', False):
                 with self.table.batch_writer() as batch:
                     batch.put_item(Item=my_json)
@@ -129,7 +129,7 @@ class FilesApi():
                         file_to_process_json = add_file_to_process_keys(file_to_process_json)
                         batch.put_item(Item=file_to_process_json)
                     if i == 1:
-                        if my_json.get('objectFileGroupId'):
+                        if my_json.get('objectFileGroupId'):  # This will be removed once we transition to imageGroupId and mediaGroupId
                             file_group_record = {'objectFileGroupId': my_json.get('objectFileGroupId')}
                             file_group_record['storageSystem'] = my_json.get('storageSystem')
                             file_group_record['typeOfData'] = my_json.get('typeOfData')
@@ -141,8 +141,15 @@ class FilesApi():
                             image_group_record['storageSystem'] = my_json.get('storageSystem')
                             image_group_record['typeOfData'] = my_json.get('typeOfData')
                             image_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
-                            image_group_record = add_file_group_keys(image_group_record)
+                            image_group_record = add_image_group_keys(image_group_record)
                             batch.put_item(Item=image_group_record)
+                        if my_json.get('mediaGroupId'):
+                            media_group_record = {'mediaGroupId': my_json.get('mediaGroupId')}
+                            media_group_record['storageSystem'] = my_json.get('storageSystem')
+                            media_group_record['typeOfData'] = my_json.get('typeOfData')
+                            media_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
+                            media_group_record = add_media_group_keys(media_group_record)
+                            batch.put_item(Item=media_group_record)
         return collection_list
 
     def _cache_s3_call(self, file_name: str, objects: dict):

@@ -15,8 +15,10 @@ class CleanUpContent():
 
     def clean_up_content(self, standard_json: dict) -> dict:
         """ This calls all other modules locally """
-        if 'objectFileGroupId' not in standard_json:
+        if 'objectFileGroupId' not in standard_json:  # Once imageGroupId is adopted, we will remove this
             standard_json['objectFileGroupId'] = standard_json['id']
+        if 'imageGroupId' not in standard_json:
+            standard_json['imageGroupId'] = standard_json['id']
         standard_json = self._define_worktype(standard_json)
         standard_json = self._fix_modified_date(standard_json)
         standard_json = self._fix_creators(standard_json)

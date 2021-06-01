@@ -18,7 +18,7 @@ from get_image_info_for_all_objects import GetImageInfoForAllObjects
 from pipelineutilities.save_standard_json import save_standard_json
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
-from dynamo_helpers import add_file_keys, add_file_to_process_keys, add_file_group_keys, get_iso_date_as_string
+from dynamo_helpers import add_image_keys, add_file_to_process_keys, add_file_group_keys, get_iso_date_as_string, add_image_group_keys
 from pipelineutilities.dynamo_query_functions import get_item_record, get_all_file_to_process_records_by_storage_system
 import re
 from save_json_to_dynamo import SaveJsonToDynamo
@@ -159,10 +159,11 @@ class ProcessWebKioskJsonMetadata():
         """ Save google image data to dynamo recursively """
         if standard_json.get('level', '') == 'file':
             new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
-            new_dict['objectFileGroupId'] = new_dict['parentId']
+            new_dict['objectFileGroupId'] = new_dict['parentId']  # This will be replaced once imageGroupId is adopted
+            new_dict['imageGroupId'] = new_dict['parentId']
             new_dict['storageSystem'] = 'Google'
             new_dict['typeOfData'] = 'Museum'
-            new_dict = add_file_keys(new_dict, self.config.get('image-server-base-url', ''))
+            new_dict = add_image_keys(new_dict, self.config.get('image-server-base-url', ''))
             item_id = new_dict.get('id')
             with self.table.batch_writer() as batch:
                 batch.put_item(Item=new_dict)
@@ -170,12 +171,20 @@ class ProcessWebKioskJsonMetadata():
                     different_json = dict(new_dict)
                     different_json = add_file_to_process_keys(different_json)
                     batch.put_item(Item=different_json)
-                    file_group_record = {'objectFileGroupId': new_dict.get('objectFileGroupId')}
-                    file_group_record['storageSystem'] = new_dict.get('storageSystem')
-                    file_group_record['typeOfData'] = new_dict.get('typeOfData')
-                    file_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
-                    file_group_record = add_file_group_keys(file_group_record)
-                    batch.put_item(Item=file_group_record)
+                    if 'objectFileGroupId' in new_dict:
+                        file_group_record = {'objectFileGroupId': new_dict.get('objectFileGroupId')}
+                        file_group_record['storageSystem'] = new_dict.get('storageSystem')
+                        file_group_record['typeOfData'] = new_dict.get('typeOfData')
+                        file_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
+                        file_group_record = add_file_group_keys(file_group_record)
+                        batch.put_item(Item=file_group_record)
+                    if 'imageGroupId' in new_dict:
+                        image_group_record = {'imageGroupId': new_dict.get('imageGroupId')}
+                        image_group_record['storageSystem'] = new_dict.get('storageSystem')
+                        image_group_record['typeOfData'] = new_dict.get('typeOfData')
+                        image_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
+                        image_group_record = add_image_group_keys(image_group_record)
+                        batch.put_item(Item=image_group_record)
         for item in standard_json.get('items', []):
             self._save_google_image_data_to_dynamo(item, export_all_files_flag)
 

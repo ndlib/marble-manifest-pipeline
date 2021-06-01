@@ -56,5 +56,6 @@ class AddImageRecordsAsChildItems():
             from_parent_item['copyrightStatus'] = object['copyrightStatus']
         if 'copyrightStatemtnt' in object:
             from_parent_item['copyrightStatement'] = object['copyrightStatement']
-        from_parent_item['objectFileGroupId'] = object['id']
+        from_parent_item['objectFileGroupId'] = object['id']  # Once imageGroupId is adopted, we will remove this
+        from_parent_item['imageGroupId'] = object['id']
         return from_parent_item

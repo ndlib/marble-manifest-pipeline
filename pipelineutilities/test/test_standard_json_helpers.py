@@ -4,7 +4,7 @@ import json
 import os
 from pipelineutilities.standard_json_helpers import _remove_brackets, _remove_trailing_punctuation, _clean_up_standard_json_strings, \
     _load_language_codes, _add_language_display, _clean_up_standard_json_recursive, _add_publishers_node, _add_imageGroupId, \
-    _find_object_file_group_id, _find_default_file_path, _add_sequence, _insert_pdf_images
+    _find_object_file_group_id, _find_default_file_path, _add_sequence, _insert_pdf_images, _add_defaultFilePath_recursive
 import unittest
 
 
@@ -217,10 +217,42 @@ class Test(unittest.TestCase):
         self.assertEqual(actual_results, expected_results)
 
     def test_15_find_default_file_path(self):
-        """ test_16_find_default_file_path """
+        """ test_15_find_default_file_path """
         item = {'fileId': 'google_file_id_456'}
         actual_results = _find_default_file_path(item)
         expected_results = 'google_file_id_456'
+        self.assertEqual(actual_results, expected_results)
+
+    def test_15_5_find_default_file_path(self):
+        """ test_15_5_find_default_file_path """
+        item = {
+            "apiVersion": 1,
+            "bendoItem": "3x816m33k26",
+            "collectionId": "qz20sq9094h",
+            "createdDate": "2017-07-05T00:00:00Z",
+            "description": "Mexico-Chichen-Itza-Restored-Temple.tif",
+            "fileCreatedDate": "2021-06-01",
+            "filePath": "qz20sq9094h/2j62s467n8w/4q77fq99t0z/Mexico-Chichen-Itza-Restored-Temple.tif",
+            "id": "qz20sq9094h/2j62s467n8w/4q77fq99t0z/Mexico-Chichen-Itza-Restored-Temple.tif",
+            "iiifResourceId": "canvas/qz20sq9094h%2F2j62s467n8w%2F4q77fq99t0z%2FMexico-Chichen-Itza-Restored-Temple.tif",
+            "level": "file",
+            "md5Checksum": "c1805a986707e4580a94fc8ba674d870",
+            "mimeType": "image/tiff",
+            "modifiedDate": "2017-07-05T00:00:00Z",
+            "parentId": "4q77fq99t0z",
+            "repository": "Curate",
+            "sequence": 3,
+            "sourceSystem": "Curate",
+            "sourceType": "Curate",
+            "sourceUri": "https://curate.nd.edu/api/items/download/5138jd49n38",
+            "storageSystem": "Curate",
+            "title": "Mexico-Chichen-Itza-Restored-Temple.tif",
+            "treePath": "qz20sq9094h/2j62s467n8w/4q77fq99t0z/",
+            "typeOfData": "Curate",
+            "workType": "GenericFile"
+        }
+        actual_results = _find_default_file_path(item)
+        expected_results = 'qz20sq9094h/2j62s467n8w/4q77fq99t0z/Mexico-Chichen-Itza-Restored-Temple.tif'
         self.assertEqual(actual_results, expected_results)
 
     def test_16_add_sequence(self):
@@ -251,6 +283,79 @@ class Test(unittest.TestCase):
             'items': [
                 {'id': 'foo.pdf', 'level': 'file', 'sequence': 2},
                 {'id': 'foo.tif', 'level': 'file', 'sequence': 1}
+            ]
+        }
+        self.assertEqual(actual_results, expected_results)
+
+    def test_18_add_defaultFilePath_recursive(self):
+        """ test_18_add_defaultFilePath_recursive """
+        standard_json = {
+            'id': '1',
+            'items': [
+                {'id': '1.1', 'level': 'manifest', 'items': [{'id': '1.1.1.tif', 'level': 'file', 'sourceType': 'Museum'}]},
+                {'id': '1.2.jpg', 'level': 'file', 'sourceType': 'Museum'},
+            ]
+        }
+        actual_results = _add_defaultFilePath_recursive(standard_json)
+        expected_results = {
+            'id': '1',
+            'defaultFilePath': '1.1.1.tif',
+            'items': [
+                {'id': '1.1', 'level': 'manifest', 'defaultFilePath': '1.1.1.tif', 'items': [{'id': '1.1.1.tif', 'level': 'file', 'sourceType': 'Museum'}]},
+                {'id': '1.2.jpg', 'level': 'file', 'sourceType': 'Museum'},
+            ]
+        }
+        self.assertEqual(actual_results, expected_results)
+
+    def test_19_add_defaultFilePath_recursive(self):
+        """ test_19_add_defaultFilePath_recursive """
+        standard_json = {
+            "defaultFilePath": "qz20sq9094h/3b59183417x/Armenia-Any-palace-Bahlavounis.tif",
+            "id": "qz20sq9094h",
+            "imageGroupId": "qz20sq9094h",
+            "items": [
+                {
+                    "id": "2j62s467n8w",
+                    "items": [
+                        {
+                            "id": "4q77fq99t0z",
+                            "items": [
+                                {
+                                    "id": "qz20sq9094h/2j62s467n8w/4q77fq99t0z/Mexico-Chichen-Itza-Restored-Temple.tif",
+                                    "level": "file",
+                                    "mimeType": "image/tiff",
+                                    "sourceType": "Curate",
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+        actual_results = _add_defaultFilePath_recursive(standard_json)
+        expected_results = {
+            'defaultFilePath': 'qz20sq9094h/3b59183417x/Armenia-Any-palace-Bahlavounis.tif',
+            'id': 'qz20sq9094h',
+            'imageGroupId': 'qz20sq9094h',
+            'items': [
+                {
+                    'id': '2j62s467n8w',
+                    'items': [
+                        {
+                            'id': '4q77fq99t0z',
+                            'items': [
+                                {
+                                    'id': 'qz20sq9094h/2j62s467n8w/4q77fq99t0z/Mexico-Chichen-Itza-Restored-Temple.tif',
+                                    'level': 'file',
+                                    'mimeType': 'image/tiff',
+                                    'sourceType': 'Curate'
+                                }
+                            ],
+                            'defaultFilePath': 'qz20sq9094h/2j62s467n8w/4q77fq99t0z/Mexico-Chichen-Itza-Restored-Temple.tif'
+                        }
+                    ],
+                    'defaultFilePath': 'qz20sq9094h/2j62s467n8w/4q77fq99t0z/Mexico-Chichen-Itza-Restored-Temple.tif'
+                }
             ]
         }
         self.assertEqual(actual_results, expected_results)
