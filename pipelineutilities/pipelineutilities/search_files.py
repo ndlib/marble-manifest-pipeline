@@ -11,10 +11,14 @@ bucket_to_url = {
     "libnd-smb-rbsc": 'https://rarebooks.library.nd.edu/',
     "rbsc-test-files": 'https://rarebooks.library.nd.edu/',
     "mlk-multimedia-333680067100": 'https://mlk-multimedia.library.nd.edu/',
+    "steve-multimedia-333680067100": 'https://steve-multimedia.library.nd.edu/',
+    "sm-multimedia-333680067100": 'https://sm-multimedia.library.nd.edu/',
     "marble-multimedia-333680067100": 'https://marble-multimedia.library.nd.edu/',
     "marble-multimedia-test-333680067100": 'https://marble-multimedia-test.library.nd.edu/',
     "marble-multimedia-230391840102": 'https://marble-multimedia.library.nd.edu/',
     "marble-multimedia-test-230391840102": 'https://marble-multimedia-test.library.nd.edu/',
+    "marbleb-multimedia-230391840102": 'https://marble-multimedia.library.nd.edu/',
+    "marbleb-multimedia-test-230391840102": 'https://marble-multimedia-test.library.nd.edu/',
 }
 
 folders_to_crawl = [
@@ -80,6 +84,7 @@ regexps = {
     ],
     "audio": [
         r"/([^/]*)/[^/]*\.mp3",  # Gets the directory the .mp3 is in
+        r"/([^/]*)/[^/]*\.wav",  # Gets the directory the .wav is in
     ],
     "video": [
         r"/([^/]*)/[^/]*\.mp4",  # Gets the directory the .mp4 is in
@@ -185,6 +190,7 @@ def make_label(url, id):
     label = label.replace(".tif", "")
     label = label.replace(".mp3", "")
     label = label.replace(".mp4", "")
+    label = label.replace(".wav", "")
     label = label.replace("-", " ")
     label = label.replace("_", " ")
     label = label.replace(".", " ")
@@ -203,6 +209,14 @@ def _convert_dict_to_camel_case(obj: dict) -> dict:
     return obj
 
 
+def get_url_from_bucket_plus_key(bucket: str, key: str) -> str:
+    """ Added to simplify creating url from key, especially in testing environment """
+    if bucket in bucket_to_url:
+        return bucket_to_url[bucket] + key
+    else:
+        return bucket_to_url["marbleb-multimedia-230391840102"] + key
+
+
 def crawl_available_files(config: dict, bucket: str):
     order_field = {}
     print("crawling image files in this bucket: ", bucket)
@@ -211,7 +225,7 @@ def crawl_available_files(config: dict, bucket: str):
         for obj in objects:
             key = obj.get('Key')
             if is_tracked_file(key):
-                url = bucket_to_url[bucket] + key
+                url = get_url_from_bucket_plus_key(bucket, key)
                 id = id_from_url(url)
 
                 if id:
@@ -246,7 +260,7 @@ def list_updated_files(config: dict, bucket: str, minutes_to_test: int):
         files = get_matching_s3_objects(bucket, directory)
         for file in files:
             if is_tracked_file(file.get('Key')):
-                url = bucket_to_url[bucket] + file.get('Key')
+                url = get_url_from_bucket_plus_key(bucket, file.get('Key'))
                 id = id_from_url(url)
 
                 file = _convert_dict_to_camel_case(file)
@@ -262,7 +276,7 @@ def list_all_files(config: dict, bucket: str):
         objects = get_matching_s3_objects(bucket, directory)
         for obj in objects:
             if is_tracked_file(obj.get('Key')):
-                url = bucket_to_url[bucket] + obj.get('Key')
+                url = get_url_from_bucket_plus_key(bucket, obj.get('Key'))
                 id = key_to_id(obj.get('Key'))
                 augement_file_record(obj, id, url, config, bucket)
 
@@ -277,7 +291,7 @@ def list_all_directories(config: dict, bucket: str):
         for obj in objects:
             if is_tracked_file(obj.get('Key')):
                 key = obj.get('Key')
-                url = bucket_to_url[bucket] + key
+                url = get_url_from_bucket_plus_key(bucket, key)
                 if is_directory(key):
                     directory = key
                 else:
@@ -333,7 +347,6 @@ def augement_file_record(obj, id, url, config, bucket):
     obj['source'] = bucket
     obj['path'] = obj['key']
     obj['sourceUri'] = url
-    obj['objectFileGroupId'] = id
     obj["sourceBucketName"] = bucket
     obj["sourceFilePath"] = obj.get('key')
     file_extension = os.path.splitext(obj.get('key'))[1]
@@ -342,7 +355,16 @@ def augement_file_record(obj, id, url, config, bucket):
         obj['filePath'] = obj['filePath'] + '.tif'
     else:
         obj['filePath'] = obj.get('key')
-    obj = _add_more_file_fields(obj, config['image-server-base-url'])
+    if is_media_file(config.get('media-file-extensions', []), obj['filePath']):
+        obj['mediaGroupId'] = id
+        viewer_image_server_base_url = config['media-server-base-url']
+        strip_extension_for_media_resource_id = False
+    else:
+        obj['objectFileGroupId'] = id
+        obj['imageGroupId'] = id
+        viewer_image_server_base_url = config['image-server-base-url']
+        strip_extension_for_media_resource_id = True
+    obj = _add_more_file_fields(obj, viewer_image_server_base_url, strip_extension_for_media_resource_id)
 
 
 def determine_time_threshold_for_processing(time_in_min):
@@ -357,7 +379,7 @@ def determine_time_threshold_for_processing(time_in_min):
 def is_tracked_file(file):
     if file_should_be_skipped(file):
         return False
-    return re.match(r"^.*[.]((jpe?g)|(tif)|(pdf)|(mp[34]))$", file, re.IGNORECASE)
+    return re.match(r"^.*[.]((jpe?g)|(tif)|(pdf)|(wav)|(mp[34]))$", file, re.IGNORECASE)
 
 
 def json_serial(obj):
@@ -368,24 +390,45 @@ def json_serial(obj):
     raise TypeError("Type %s not serializable" % type(obj))
 
 
-def _add_more_file_fields(json_record: dict, iiif_image_service_uri: str = None) -> dict:
+def _add_more_file_fields(json_record: dict, iiif_image_service_uri: str = None, strip_extension_for_media_resource_id: bool = True) -> dict:
     """ Add mimeType (if absent), add mediaServer and mediaResourceId """
     file_path = json_record.get('filePath')
     if file_path:
-        file_extension = Path(file_path).suffix
-        if file_extension and file_extension.lower() in ['.tif']:
-            json_record['mimeType'] = json_record.get('mimeType', 'image/tiff')
+        file_extension = Path(file_path).suffix.lower()
+        if file_extension and 'mimeType' not in json_record:
+            json_record['mimeType'] = _get_mime_type_given_file_extension(file_extension)
+        if strip_extension_for_media_resource_id:
             file_path_no_extension = os.path.join(Path(file_path).parent, Path(file_path).stem)
             json_record['mediaResourceId'] = file_path_no_extension.replace('/', '%2F')
-            if iiif_image_service_uri:
-                json_record['mediaServer'] = iiif_image_service_uri
-        elif file_extension and file_extension.lower() in ['.pdf']:
-            json_record['mimeType'] = json_record.get('mimeType', 'application/pdf')
-        elif file_extension and file_extension.lower() in ['.mp3']:
-            json_record['mimeType'] = json_record.get('mimeType', 'audio/mpeg')
-        elif file_extension and file_extension.lower() in ['.mp4']:
-            json_record['mimeType'] = json_record.get('mimeType', 'video/mp4')
+        else:
+            json_record['mediaResourceId'] = file_path.replace('/', '%2F')
+        if iiif_image_service_uri:
+            json_record['mediaServer'] = iiif_image_service_uri
     return json_record
+
+
+def _get_mime_type_given_file_extension(file_extension: str) -> str:
+    if not file_extension:
+        return ""
+    if file_extension in ['.tif']:
+        return 'image/tiff'
+    elif file_extension in ['.pdf']:
+        return 'application/pdf'
+    elif file_extension in ['.mp3']:
+        return 'audio/mpeg'
+    elif file_extension in ['.mp4']:
+        return 'video/mp4'
+    elif file_extension in ['.wav']:
+        return 'audio/wav'
+    return ''
+
+
+def is_media_file(media_file_extensions: list, file_name: str) -> bool:
+    """ If the file extension is in a list of media_file_extensions, then return True (this is a media file), else return False """
+    file_extension = Path(file_name).suffix
+    if file_extension in media_file_extensions:
+        return True
+    return False
 
 
 # python -c 'from search_files import *; test()'

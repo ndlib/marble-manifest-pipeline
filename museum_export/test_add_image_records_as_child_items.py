@@ -40,7 +40,7 @@ class Test(unittest.TestCase):
         sample_object = {"id": "abc", "collectionId": "col1", "parentId": "mom", "sourceSystem": "authoritative system", "repository": "sample repository"}
         process_one_museum_object_class = AddImageRecordsAsChildItems({}, {})
         actual_results = process_one_museum_object_class._add_child_content_from_parent(sample_object)
-        expected_results = {'collectionId': 'col1', 'parentId': 'abc', 'sourceSystem': 'authoritative system', 'repository': 'sample repository', 'objectFileGroupId': 'abc'}
+        expected_results = {'collectionId': 'col1', 'imageGroupId': 'abc', 'parentId': 'abc', 'sourceSystem': 'authoritative system', 'repository': 'sample repository', 'objectFileGroupId': 'abc'}
         self.assertEqual(actual_results, expected_results)
 
     def test_02_format_image_as_child(self):
@@ -117,7 +117,8 @@ class Test(unittest.TestCase):
                     'sourceSystem': 'EmbARK',
                     'sourceType': 'Museum',
                     'repository': 'museum',
-                    'objectFileGroupId': '1990.005.001'
+                    'objectFileGroupId': '1990.005.001',
+                    'imageGroupId': '1990.005.001'
                 },
                 {
                     'id': '1990_005_001-v0003.tif',
@@ -137,7 +138,8 @@ class Test(unittest.TestCase):
                     'sourceSystem': 'EmbARK',
                     'sourceType': 'Museum',
                     'repository': 'museum',
-                    'objectFileGroupId': '1990.005.001'
+                    'objectFileGroupId': '1990.005.001',
+                    'imageGroupId': '1990.005.001'
                 }
             ]
         }

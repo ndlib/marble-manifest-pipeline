@@ -80,8 +80,9 @@
   "modifiedDate": "2020-09-16T09:10:03Z",
   "level": "manifest",
   "objectFileGroupId": "1934.007.001",
+  "imageGroupId": "1934.007.001",
   "apiVersion": 1,
-  "fileCreatedDate": "2021-05-06",
+  "fileCreatedDate": "2021-06-01",
   "digitalAccess": "Regular",
   "items": [
     {
@@ -104,8 +105,9 @@
       "repository": "museum",
       "copyrightStatus": "Public domain",
       "objectFileGroupId": "1934.007.001",
+      "imageGroupId": "1934.007.001",
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-06",
+      "fileCreatedDate": "2021-06-01",
       "digitalAccess": "Regular",
       "iiifResourceId": "canvas/1934_007_001-v0003.tif"
     },
@@ -129,8 +131,9 @@
       "repository": "museum",
       "copyrightStatus": "Public domain",
       "objectFileGroupId": "1934.007.001",
+      "imageGroupId": "1934.007.001",
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-06",
+      "fileCreatedDate": "2021-06-01",
       "digitalAccess": "Regular",
       "iiifResourceId": "canvas/1934_007_001-v0001.tif"
     },
@@ -154,8 +157,9 @@
       "repository": "museum",
       "copyrightStatus": "Public domain",
       "objectFileGroupId": "1934.007.001",
+      "imageGroupId": "1934.007.001",
       "apiVersion": 1,
-      "fileCreatedDate": "2021-05-06",
+      "fileCreatedDate": "2021-06-01",
       "digitalAccess": "Regular",
       "iiifResourceId": "canvas/1934_007_001-v0002.tif"
     }

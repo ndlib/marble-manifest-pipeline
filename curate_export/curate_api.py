@@ -16,7 +16,7 @@ from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.save_standard_json import save_standard_json
 from save_json_to_dynamo import SaveJsonToDynamo
-from dynamo_helpers import add_file_keys, add_file_to_process_keys, add_file_group_keys, get_iso_date_as_string
+from dynamo_helpers import add_image_keys, add_file_to_process_keys, add_file_group_keys, get_iso_date_as_string, add_image_group_keys
 from dynamo_query_functions import get_item_record, get_all_file_to_process_records_by_storage_system
 from s3_helpers import read_s3_json, write_s3_json
 from get_curate_metadata import GetCurateMetadata
@@ -157,7 +157,8 @@ class CurateApi():
                 if file_extension not in self.config.get('unwanted-file-extensions-from-curate', []):
                     new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
                     new_dict['objectFileGroupId'] = new_dict['parentId']  # make sure files point to their parent id
-                    new_dict = add_file_keys(new_dict, self.config.get('image-server-base-url', ''))
+                    new_dict['imageGroupId'] = new_dict['parentId']  # make sure files point to their parent id
+                    new_dict = add_image_keys(new_dict, self.config.get('image-server-base-url', ''))
                     self.event['itemBeingProcessed']['lastImageProcessed'] = new_dict.get('id')
                     with self.table.batch_writer() as batch:
                         batch.put_item(Item=new_dict)
@@ -167,12 +168,20 @@ class CurateApi():
                             different_dict = dict(new_dict)
                             different_dict = add_file_to_process_keys(different_dict)
                             batch.put_item(Item=different_dict)
-                            file_group_record = {'objectFileGroupId': new_dict.get('objectFileGroupId')}
-                            file_group_record['storageSystem'] = new_dict.get('storageSystem')
-                            file_group_record['typeOfData'] = new_dict.get('typeOfData')
-                            file_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
-                            file_group_record = add_file_group_keys(file_group_record)
-                            batch.put_item(Item=file_group_record)
+                            if 'objectFileGroupId' in new_dict:
+                                file_group_record = {'objectFileGroupId': new_dict.get('objectFileGroupId')}
+                                file_group_record['storageSystem'] = new_dict.get('storageSystem')
+                                file_group_record['typeOfData'] = new_dict.get('typeOfData')
+                                file_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
+                                file_group_record = add_file_group_keys(file_group_record)
+                                batch.put_item(Item=file_group_record)
+                            if 'imageGroupId' in new_dict:
+                                image_group_record = {'imageGroupId': new_dict.get('imageGroupId')}
+                                image_group_record['storageSystem'] = new_dict.get('storageSystem')
+                                image_group_record['typeOfData'] = new_dict.get('typeOfData')
+                                image_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
+                                image_group_record = add_image_group_keys(image_group_record)
+                                batch.put_item(Item=image_group_record)
         for item in standard_json.get('items', []):
             if datetime.now() < self.time_to_break:
                 self._save_curate_image_data_to_dynamo(item, export_all_files_flag, file_needed_updated)

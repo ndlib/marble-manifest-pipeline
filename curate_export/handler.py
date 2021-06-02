@@ -130,15 +130,11 @@ def test(identifier=""):
         event['seconds-to-allow-for-processing'] = 60 * 10 * 5
         # event['local'] = True
         if event['local']:
-            # event['seconds-to-allow-for-processing'] = 30
-            # und:qz20sq9094h = Architectural Lantern Slides (huge)
+            # Note: we are no longer harvesting zp38w953p3c - Chinese Catholic-themed paintings or n296ww75n6f - Gregorian Archive
             # ks65h992w12 = Epistemological Letters
             # 1z40ks6792x = Varieties of Democracy - has sub-collections
             event['ids'] = ["und:zp38w953h0s"]  # Commencement Programs
-            event['ids'] = ["und:zp38w953p3c"]  # Chinese Catholic-themed paintings
-            event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
         # event['ids'] = ["und:qz20sq9094h"]  # Architectural Lantern Slides (huge)
-        # event['ids'] = ["und:n296ww75n6f"]  # Gregorian Archive
         event['exportAllFilesFlag'] = True
         event['forceSaveStandardJson'] = True
     event = run(event, {})

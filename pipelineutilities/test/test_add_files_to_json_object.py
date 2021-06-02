@@ -106,19 +106,46 @@ class Test(unittest.TestCase):
         """ test_07_fix_file_metadata_not_on_s3 """
         file_item = {
             "description": "Collegiate Jazz Festival 1960",
+            "filePath": "http://archives.nd.edu/ndcjf/dcjf1960.jpg",
+            "id": "dcjf1960.jpg",
+            "treePath": "CJF_EAD/aspace_b55b4e723bdd5a5cee9f67f18e66fbb1/aspace_0d7c59e17cb4e513ffd55cabdd751059/aspace_82ca319eea9fa935d315cbf2bd491de0/"
+        }
+        parent_unique_identifier = 'abc'
+        media_file_extensions = ['.pdf', '.mp3', '.mp4']
+        actual_results = _fix_file_metadata_not_on_s3(file_item, parent_unique_identifier, media_file_extensions)
+
+        expected_results = {
+            'description': 'Collegiate Jazz Festival 1960',
+            'filePath': 'CJF_EAD/aspace_b55b4e723bdd5a5cee9f67f18e66fbb1/aspace_0d7c59e17cb4e513ffd55cabdd751059/aspace_82ca319eea9fa935d315cbf2bd491de0/dcjf1960.jpg',
+            'id': 'CJF_EAD/aspace_b55b4e723bdd5a5cee9f67f18e66fbb1/aspace_0d7c59e17cb4e513ffd55cabdd751059/aspace_82ca319eea9fa935d315cbf2bd491de0/dcjf1960.jpg',
+            'treePath': 'CJF_EAD/aspace_b55b4e723bdd5a5cee9f67f18e66fbb1/aspace_0d7c59e17cb4e513ffd55cabdd751059/aspace_82ca319eea9fa935d315cbf2bd491de0/',
+            'sourceUri': 'https://archives.nd.edu/ndcjf/dcjf1960.jpg',
+            'storageSystem': 'Uri',
+            'sourceType': 'Uri',
+            'typeOfData': 'Uri',
+            'title': 'dcjf1960.jpg',
+            'objectFileGroupId': 'abc',
+            'imageGroupId': 'abc'}
+        self.assertEqual(actual_results, expected_results)
+
+    def test_07_fix_file_metadata_not_on_s3_part2(self):
+        """ test_07_fix_file_metadata_not_on_s3_part2 """
+        file_item = {
+            "description": "Collegiate Jazz Festival 1960",
             "filePath": "http://archives.nd.edu/ndcjf/dcjf1960.pdf",
             "id": "dcjf1960.pdf",
             "treePath": "CJF_EAD/aspace_b55b4e723bdd5a5cee9f67f18e66fbb1/aspace_0d7c59e17cb4e513ffd55cabdd751059/aspace_82ca319eea9fa935d315cbf2bd491de0/"
         }
         parent_unique_identifier = 'abc'
-        actual_results = _fix_file_metadata_not_on_s3(file_item, parent_unique_identifier)
+        media_file_extensions = ['.pdf', '.mp3', '.mp4']
+        actual_results = _fix_file_metadata_not_on_s3(file_item, parent_unique_identifier, media_file_extensions)
         expected_results = {
             'description': 'Collegiate Jazz Festival 1960',
             'filePath': 'CJF_EAD/aspace_b55b4e723bdd5a5cee9f67f18e66fbb1/aspace_0d7c59e17cb4e513ffd55cabdd751059/aspace_82ca319eea9fa935d315cbf2bd491de0/dcjf1960.pdf',
             'id': 'CJF_EAD/aspace_b55b4e723bdd5a5cee9f67f18e66fbb1/aspace_0d7c59e17cb4e513ffd55cabdd751059/aspace_82ca319eea9fa935d315cbf2bd491de0/dcjf1960.pdf',
             "treePath": "CJF_EAD/aspace_b55b4e723bdd5a5cee9f67f18e66fbb1/aspace_0d7c59e17cb4e513ffd55cabdd751059/aspace_82ca319eea9fa935d315cbf2bd491de0/",
             'sourceUri': 'https://archives.nd.edu/ndcjf/dcjf1960.pdf',
-            'objectFileGroupId': 'abc',
+            'mediaGroupId': 'abc',
             'title': 'dcjf1960.pdf',
             "storageSystem": "Uri",
             "sourceType": "Uri",

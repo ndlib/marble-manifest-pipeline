@@ -6,7 +6,7 @@ from pipelineutilities.dynamo_helpers import format_key_value, add_item_keys, ad
     add_source_system_keys, add_item_to_harvest_keys, add_file_systems_keys, add_parent_override_keys, \
     add_file_to_process_keys, add_website_keys, \
     add_website_item_keys, add_new_subject_term_authority_keys, add_unharvested_subject_term_keys, add_subject_term_keys, \
-    _add_more_file_fields
+    _add_more_file_fields, add_image_group_keys, add_image_keys, add_media_group_keys, add_media_keys
 
 
 class Test(unittest.TestCase):
@@ -225,6 +225,54 @@ class Test(unittest.TestCase):
             'filePath': 'collections/ead_xml/images/MSN-EA_5031/MSN-EA_5031-01.a.150.pdf',
             'mimeType': 'application/pdf'
         }
+        self.assertEqual(actual_results, expected_results)
+
+    def test_20_add_image_group_keys(self):
+        """ test_20_add_image_group_keys """
+        standard_json = {'imageGroupId': 'abc 123', 'storageSystem': 'S3', 'typeOfData': 'RBSC website bucket'}
+        actual_results = add_image_group_keys(standard_json)
+        expected_results = {
+            'imageGroupId': 'abc 123', 'storageSystem': 'S3', 'typeOfData': 'RBSC website bucket',
+            'PK': 'IMAGEGROUP', 'SK': 'IMAGEGROUP#ABC123', 'TYPE': 'ImageGroup',
+            'GSI1PK': 'IMAGEGROUP#ABC123', 'GSI1SK': '#NAME#ABC123',
+            'GSI2PK': 'FILESYSTEM#S3#RBSCWEBSITEBUCKET', 'GSI2SK': 'IMAGEGROUP#ABC123'}
+        del actual_results['dateAddedToDynamo']
+        del actual_results['dateModifiedInDynamo']
+        self.assertEqual(actual_results, expected_results)
+
+    def test_21_add_image_keys(self):
+        """ test_21_add_image_keys """
+        standard_json = {'id': 'some id', 'imageGroupId': 'abc 123', 'sequence': 2}
+        actual_results = add_image_keys(standard_json)
+        expected_results = {
+            'id': 'some id', 'imageGroupId': 'abc 123', 'sequence': 2,
+            'PK': 'IMAGE', 'SK': 'IMAGE#SOMEID', 'TYPE': 'Image',
+            'GSI1PK': 'IMAGEGROUP#ABC123', 'GSI1SK': 'SORT#00002'}
+        del actual_results['dateModifiedInDynamo']
+        self.assertEqual(actual_results, expected_results)
+
+    def test_22_add_media_group_keys(self):
+        """ test_22_add_media_group_keys """
+        standard_json = {'mediaGroupId': 'abc 123', 'storageSystem': 'S3', 'typeOfData': 'RBSC website bucket'}
+        actual_results = add_media_group_keys(standard_json)
+        expected_results = {
+            'mediaGroupId': 'abc 123', 'storageSystem': 'S3', 'typeOfData': 'RBSC website bucket',
+            'PK': 'MEDIAGROUP', 'SK': 'MEDIAGROUP#ABC123', 'TYPE': 'MediaGroup',
+            'GSI1PK': 'MEDIAGROUP#ABC123', 'GSI1SK': '#NAME#ABC123',
+            'GSI2PK': 'FILESYSTEM#S3#RBSCWEBSITEBUCKET', 'GSI2SK': 'MEDIAGROUP#ABC123'}
+        del actual_results['dateAddedToDynamo']
+        del actual_results['dateModifiedInDynamo']
+        self.assertEqual(actual_results, expected_results)
+
+    def test_23_add_media_keys(self):
+        """ test_23_add_media_keys """
+        standard_json = {'id': 'some id', 'mediaGroupId': 'abc 123', 'sequence': 2}
+        actual_results = add_media_keys(standard_json)
+        expected_results = {
+            'id': 'some id', 'mediaGroupId': 'abc 123', 'sequence': 2,
+            'PK': 'MEDIA', 'SK': 'MEDIA#SOMEID', 'TYPE': 'Media',
+            'GSI1PK': 'MEDIAGROUP#ABC123', 'GSI1SK': 'SORT#00002'}
+        del actual_results['dateModifiedInDynamo']
         self.assertEqual(actual_results, expected_results)
 
 

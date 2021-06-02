@@ -25,7 +25,7 @@
 			},
 			{ "label": "title",
 				"fields": ["245"],
-				"subfields": ["a", "b"],
+				"subfields": ["a", "b", "f", "g", "k", "n", "p", "s"],
 				"format": "text"
 			},
 			{ "label": "collectionId",

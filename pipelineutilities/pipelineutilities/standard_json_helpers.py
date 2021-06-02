@@ -34,9 +34,10 @@ class StandardJsonHelpers():
         standard_json = _clean_up_standard_json_recursive(standard_json, self.config.get('image-server-base-url'), self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
         standard_json = add_paths_to_json_object_class.add_paths(standard_json)  # <- paths need to be added after id is updated for Curate and EmbARK and after treePath is defined
         standard_json = get_size_of_images(standard_json)
-        standard_json = _add_objectFileGroupId(standard_json)
+        standard_json = _add_imageGroupId(standard_json)
         standard_json = _insert_pdf_images(standard_json)
         standard_json = _add_sequence(standard_json)
+        standard_json = _add_defaultFilePath_recursive(standard_json)
         if not validate_standard_json(standard_json):
             standard_json = {}
         else:
@@ -49,7 +50,7 @@ def _clean_up_standard_json_recursive(standard_json: dict, image_server_base_url
         also set level to 'manifest' (if no child items that are manifest or collection level)
              or 'collection' (if child items exist that are manifest or collection level).
         This now also removes any empty relatedIds lists and adds a treePath to save tree hierarchy.
-        Note:  This must be run before _add_objectFileGroupId so level is defined before it is referenced. """
+        Note:  This must be run before _add_imageGroupId so level is defined before it is referenced. """
     standard_json = _clean_up_standard_json_strings(standard_json)
     if 'relatedIds' in standard_json and len(standard_json.get('relatedIds', [])) == 0:
         del standard_json['relatedIds']
@@ -152,44 +153,63 @@ def _load_language_codes() -> list:
     return load_language_codes()
 
 
-def _add_objectFileGroupId(standard_json: dict) -> dict:  # noqa: C901
+def _add_imageGroupId(standard_json: dict) -> dict:  # noqa: C901
     """ Note:  This must be run after _clean_up_standard_json_recursive has defined level """
     level = standard_json.get('level', 'manifest')
     if level == 'manifest':
         # manifests can only have files nested directly under them
         object_file_group_id_found = standard_json.get('objectFileGroupId', '') > ''
+        image_group_id_found = standard_json.get('imageGroupId', '') > ''
         default_file_path_found = standard_json.get('defaultFilePath', '') > ''
         for item in standard_json.get('items', ''):
             if item.get('level', '') == 'file':
-                if not object_file_group_id_found:
+                if not object_file_group_id_found:  # This will be obsolete once imageGroupId is adopted
                     object_file_group_id = _find_object_file_group_id(item)
                     if object_file_group_id:
                         standard_json['objectFileGroupId'] = object_file_group_id
                         object_file_group_id_found = True
+                if not image_group_id_found:
+                    if item.get('sourceSystem', '') == 'Curate':
+                        image_group_id = standard_json.get('id')
+                    else:
+                        image_group_id = _find_image_group_id(item)
+                    if image_group_id:
+                        standard_json['imageGroupId'] = image_group_id
+                        image_group_id_found = True
                 if not default_file_path_found and item.get('thumbnail', False):
                     default_file_path = _find_default_file_path(item)
                     if default_file_path:
                         standard_json['defaultFilePath'] = default_file_path
                         default_file_path_found = True
-                if object_file_group_id_found and default_file_path_found:
+                if object_file_group_id_found and image_group_id_found and default_file_path_found:
                     break
     elif level == 'collection':
         # collections can have collections or manifests nested directly under them
         for item in standard_json.get('items', ''):
-            item = _add_objectFileGroupId(item)
+            item = _add_imageGroupId(item)
             if item.get('objectFileGroupId', '') and not standard_json.get('objectFileGroupId', ''):
                 standard_json['objectFileGroupId'] = item['objectFileGroupId']
+            if item.get('imageGroupId', '') and not standard_json.get('imageGroupId', ''):
+                standard_json['imageGroupId'] = item['imageGroupId']
             if item.get('level', '') == 'file' and item.get('thumbnail', True):
                 standard_json['defaultFilePath'] = _find_default_file_path(item)
     return standard_json
 
 
-def _find_object_file_group_id(item: dict) -> str:
+def _find_object_file_group_id(item: dict) -> str:  # This will be obsolete once imageGroupId is adopted
     """ Use cascading logic to find object_file_group_id """
     object_file_group_id = item.get('objectFileGroupId', '')
     if not object_file_group_id:
         object_file_group_id = id_from_url(item.get('sourceFilePath', ''))
     return object_file_group_id
+
+
+def _find_image_group_id(item: dict) -> str:
+    """ Get image_group_id from imageGroupId, then from id_from_url if missing. """
+    image_group_id = item.get('imageGroupId', '')
+    if not image_group_id:
+        image_group_id = id_from_url(item.get('sourceFilePath', ''))
+    return image_group_id
 
 
 def _find_default_file_path(item: dict) -> str:
@@ -252,3 +272,17 @@ def _update_pdf_fields(standard_json: dict):
     for field in fields:
         if field in standard_json:
             standard_json[field] = standard_json.get(field).replace('.pdf', '.tif')
+
+
+def _add_defaultFilePath_recursive(standard_json: dict) -> dict:
+    """ perform depth-first search to populate defaultFilePath for all non-file records. """
+    for item in standard_json.get('items', []):
+        if 'items' in item:
+            item = _add_defaultFilePath_recursive(item)
+        if 'defaultFilePath' in item and 'defaultFilePath' not in standard_json:
+            standard_json['defaultFilePath'] = item['defaultFilePath']
+        elif item.get('level') == 'file' and 'defaultFilePath' not in standard_json:
+            default_file_path = _find_default_file_path(item)
+            if default_file_path:
+                standard_json['defaultFilePath'] = default_file_path
+    return standard_json
