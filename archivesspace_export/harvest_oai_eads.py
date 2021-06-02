@@ -28,13 +28,14 @@ class HarvestOaiEads():
         if xml_string:
             xml_tree = self._get_xml_tree_given_xml_string(xml_string, id_url)
             xml_record = xml_tree.find('./GetRecord/record')
-            item_id = self._get_id_from_xml_record(xml_record)
-            date_modified_in_source_system = self._get_modified_date_from_xml_record(xml_record)
-            process_record_flag = self._get_process_record_flag(item_id, date_modified_in_source_system)
-            if process_record_flag:
-                standard_json = self._process_record(oai_url, xml_record)
-            else:
-                print(item_id, 'already current in Dynamo. No need to reprocess', id_url)
+            if xml_record is not None:  # Occassionally, we get malformed results from ArchivesSpace.  This protects against that.
+                item_id = self._get_id_from_xml_record(xml_record)
+                date_modified_in_source_system = self._get_modified_date_from_xml_record(xml_record)
+                process_record_flag = self._get_process_record_flag(item_id, date_modified_in_source_system)
+                if process_record_flag:
+                    standard_json = self._process_record(oai_url, xml_record)
+                else:
+                    print(item_id, 'already current in Dynamo. No need to reprocess', id_url)
         return standard_json
 
     def _get_oai_url_given_id_url(self, user_interface_url: str) -> str:
