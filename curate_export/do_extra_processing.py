@@ -31,6 +31,8 @@ def do_extra_processing(value: str or dict, extra_processing: str, json_field_de
         results = _pick_geographic_location(parameters_json)
     elif extra_processing == 'pick_access':
         results = _pick_access(parameters_json)
+    elif extra_processing == 'pick_repository':
+        results = _pick_repository(parameters_json)
     elif extra_processing == 'define_level':
         results = 'manifest'
         if 'items' in parameters_json:
@@ -121,6 +123,13 @@ def _pick_geographic_location(parameters_json: dict) -> list:
 def _pick_access(parameters_json: dict) -> str:
     """ return permissions_use if it exists, else "creator_administrative_unit, else none """
     return parameters_json.get('permissions_use', parameters_json.get('creator_administrative_unit', None))
+
+
+def _pick_repository(parameters_json: dict) -> str:
+    """ return HESB for Architectural Lantern Slides, UNDA """
+    if parameters_json.get('collectionId', '') == "qz20sq9094h":  # Architectural Lantern Slides return HESB
+        return 'HESB'
+    return 'UNDA'
 
 
 def define_manifest_level(items: list) -> str:

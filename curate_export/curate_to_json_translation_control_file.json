@@ -13,10 +13,6 @@
 				"constant": "Curate",
 				"format": "text"
 			},
-			{ "label": "repository",
-				"constant": "Curate",
-				"format": "text"
-			},
 			{ "label": "sequence",
 				"constant": 1,
 				"format": "text"
@@ -27,6 +23,12 @@
 			},
 			{ "label": "collectionId",
 				"fields": ["id"],
+				"format": "text"
+			},
+			{
+				"label": "repository",
+				"passLabels": [{"collectionId": "collectionId"}],
+				"extraProcessing": "pick_repository",
 				"format": "text"
 			},
 			{ "label": "parentId",
