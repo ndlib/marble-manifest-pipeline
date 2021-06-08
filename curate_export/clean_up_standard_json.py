@@ -38,15 +38,19 @@ def _fix_level(standard_json: dict) -> dict:
     return standard_json
 
 
-def _fix_ids(standard_json: dict, collection_id: str = None, parent_id: str = None) -> dict:
+def _fix_ids(standard_json: dict, collection_id: str = None, parent_id: str = None, repository: str = None) -> dict:
     """ Because of the way we append "members" to the json tree, we need to fix collectionId and parentId """
     if collection_id is None:
         collection_id = standard_json.get("collectionId", standard_json.get("id", ""))
+    if repository is None:
+        repository = standard_json.get("repository")
+    else:
+        standard_json['repository'] = repository
     standard_json["collectionId"] = collection_id
     if parent_id is not None:
         standard_json["parentId"] = parent_id
     if "items" in standard_json:
         parent_id = standard_json.get("id", "")
         for item in standard_json["items"]:
-            item = _fix_ids(item, collection_id, parent_id)
+            item = _fix_ids(item, collection_id, parent_id, repository)
     return standard_json
