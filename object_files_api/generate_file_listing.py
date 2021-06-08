@@ -19,7 +19,7 @@ def test():
         csv_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         csv_writer.writeheader()
 
-        for k, v in files_json.items():
+        for _k, v in files_json.items():
             directory = v.get('directory')
             if 'MARBLE-images' not in directory:
                 file_id = v.get('fileId')
