@@ -272,6 +272,7 @@ def _update_pdf_fields(standard_json: dict):
     for field in fields:
         if field in standard_json:
             standard_json[field] = standard_json.get(field).replace('.pdf', '.tif')
+    standard_json['mimeType'] = 'image/tiff'  # correct the mimeType to reflect tiff
 
 
 def _add_defaultFilePath_recursive(standard_json: dict) -> dict:

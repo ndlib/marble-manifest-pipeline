@@ -16,10 +16,11 @@ from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
 from pipelineutilities.save_standard_json import save_standard_json
 from save_json_to_dynamo import SaveJsonToDynamo
-from dynamo_helpers import add_image_keys, add_file_to_process_keys, add_file_group_keys, get_iso_date_as_string, add_image_group_keys
+from dynamo_helpers import add_image_keys, add_file_to_process_keys, add_file_group_keys, get_iso_date_as_string, add_image_group_keys, add_media_keys, add_media_group_keys, add_file_keys
 from dynamo_query_functions import get_item_record, get_all_file_to_process_records_by_storage_system
 from s3_helpers import read_s3_json, write_s3_json
 from get_curate_metadata import GetCurateMetadata
+from search_files import is_media_file
 
 
 class CurateApi():
@@ -147,7 +148,7 @@ class CurateApi():
             key = os.path.join('save', item_id + '_standard.json')
             write_s3_json(self.config['process-bucket'], key, standard_json)
 
-    def _save_curate_image_data_to_dynamo(self, standard_json: dict, export_all_files_flag: False, file_needed_updated: bool = False):
+    def _save_curate_image_data_to_dynamo(self, standard_json: dict, export_all_files_flag: False, file_needed_updated: bool = False):  # noqa: C901
         """ Save Curate image data to dynamo recursively """
         if standard_json.get('level', '') == 'file':
             resume_saving_images_after_id = self.event['itemBeingProcessed'].get('resumeSavingImagesAfterId')
@@ -156,19 +157,29 @@ class CurateApi():
                 file_extension = Path(standard_json.get('id', '')).suffix
                 if file_extension not in self.config.get('unwanted-file-extensions-from-curate', []):
                     new_dict = {i: standard_json[i] for i in standard_json if i != 'items'}
-                    new_dict['objectFileGroupId'] = new_dict['parentId']  # make sure files point to their parent id
-                    new_dict['imageGroupId'] = new_dict['parentId']  # make sure files point to their parent id
-                    new_dict = add_image_keys(new_dict, self.config.get('image-server-base-url', ''))
                     self.event['itemBeingProcessed']['lastImageProcessed'] = new_dict.get('id')
                     with self.table.batch_writer() as batch:
+                        self.event['itemBeingProcessed']['lastImageProcessed'] = new_dict.get('id')
+                        if is_media_file(self.config.get('media-file-extensions', []), new_dict.get('id')):
+                            new_dict['mediaGroupId'] = new_dict.get('mediaGroupId', new_dict.get('parentId'))  # make sure media points to their parent id
+                            # new_dict['typeOfData'] = new_dict.get('typeOfData', 'Multimedia bucket')  # TODO: Add this once we copy Curate content to the media bucket
+                            new_dict = add_media_keys(new_dict, self.config.get('media-server-base-url', ''))
+                            print("media_record = ", new_dict)
+                        else:
+                            new_dict['objectFileGroupId'] = new_dict['parentId']  # make sure files point to their parent id
+                            file_record = new_dict.copy()  # TODO: This will be removed once we transition to using images instead of files
+                            file_record = add_file_keys(file_record, self.config.get('image-server-base-url', ''))
+                            batch.put_item(Item=file_record)
+                            new_dict['imageGroupId'] = new_dict['parentId']  # make sure files point to their parent id
+                            new_dict = add_image_keys(new_dict, self.config.get('image-server-base-url', ''))
                         batch.put_item(Item=new_dict)
                         item_id = new_dict.get('id')
                         if export_all_files_flag or item_id not in self.file_to_process_records_in_dynamo or new_dict.get('modifiedDate', '') > self.file_to_process_records_in_dynamo[item_id].get('dateModifiedInDynamo', ''):
                             file_needed_updated = True
-                            different_dict = dict(new_dict)
-                            different_dict = add_file_to_process_keys(different_dict)
-                            batch.put_item(Item=different_dict)
-                            if 'objectFileGroupId' in new_dict:
+                            file_to_process_record = dict(new_dict)
+                            file_to_process_record = add_file_to_process_keys(file_to_process_record)
+                            batch.put_item(Item=file_to_process_record)
+                            if 'objectFileGroupId' in new_dict:  # TODO: This will be removed once we transition to using images instead of files
                                 file_group_record = {'objectFileGroupId': new_dict.get('objectFileGroupId')}
                                 file_group_record['storageSystem'] = new_dict.get('storageSystem')
                                 file_group_record['typeOfData'] = new_dict.get('typeOfData')
@@ -182,6 +193,13 @@ class CurateApi():
                                 image_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
                                 image_group_record = add_image_group_keys(image_group_record)
                                 batch.put_item(Item=image_group_record)
+                            if 'mediaGroupId' in new_dict:
+                                media_group_record = {'mediaGroupId': new_dict.get('mediaGroupId')}
+                                media_group_record['storageSystem'] = new_dict.get('storageSystem')
+                                media_group_record['typeOfData'] = new_dict.get('typeOfData')
+                                media_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
+                                media_group_record = add_media_group_keys(media_group_record)
+                                batch.put_item(Item=media_group_record)
         for item in standard_json.get('items', []):
             if datetime.now() < self.time_to_break:
                 self._save_curate_image_data_to_dynamo(item, export_all_files_flag, file_needed_updated)

@@ -135,6 +135,7 @@ def test(identifier=""):
             # 1z40ks6792x = Varieties of Democracy - has sub-collections
             event['ids'] = ["und:zp38w953h0s"]  # Commencement Programs
         # event['ids'] = ["und:qz20sq9094h"]  # Architectural Lantern Slides (huge)
+        event['ids'] = ["und:zp38w953h0s"]  # Commencement Programs
         event['exportAllFilesFlag'] = True
         event['forceSaveStandardJson'] = True
     event = run(event, {})

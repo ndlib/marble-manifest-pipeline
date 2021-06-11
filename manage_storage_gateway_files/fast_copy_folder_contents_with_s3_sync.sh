@@ -1,0 +1,2 @@
+# aws s3 sync s3://rbsc-test-files/digital/MARBLE-images/$2 s3://testlibnd-smb-test/$1/$2 --exclude ._*
+aws s3 sync s3://libnd-smb-rbsc/digital/MARBLE-images/$2 s3://libnd-smb-marble/$1/$2 --exclude ._*

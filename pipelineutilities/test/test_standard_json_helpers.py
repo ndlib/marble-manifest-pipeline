@@ -282,7 +282,7 @@ class Test(unittest.TestCase):
             'defaultFilePath': 'test/foo.tif',
             'items': [
                 {'id': 'foo.pdf', 'level': 'file', 'sequence': 2},
-                {'id': 'foo.tif', 'level': 'file', 'sequence': 1}
+                {'id': 'foo.tif', 'level': 'file', 'sequence': 1, 'mimeType': 'image/tiff'}
             ]
         }
         self.assertEqual(actual_results, expected_results)

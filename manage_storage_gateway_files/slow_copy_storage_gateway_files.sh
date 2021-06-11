@@ -1,0 +1,1 @@
+cp -rf /Volumes/libnd-smb-rbsc/digital/MARBLE-images/$2 /Volumes/libnd-smb-marble/$1/$2
