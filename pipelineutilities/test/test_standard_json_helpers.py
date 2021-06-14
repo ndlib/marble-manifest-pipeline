@@ -145,17 +145,21 @@ class Test(unittest.TestCase):
             'level': 'manifest',
             'items': [
                 {'level': 'file', 'sourceFilePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'},
-                {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}]
+                {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'},
+                {'level': 'file', 'sourceFilePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_001016383/BOO_001016383.pdf'}
+            ]
         }
-        actual_results = _add_imageGroupId(standard_json)
+        actual_results = _add_imageGroupId(standard_json, ['.tif', '.tiff', '.jpg', '.jpeg'], ['.pdf', '.mp3', '.mp4', '.wav'])
         expected_results = {
             'id': 'abc',
             'level': 'manifest',
             'objectFileGroupId': 'BOO_000297305',
             'imageGroupId': 'BOO_000297305',
+            'mediaGroupId': 'BOO_001016383',
             'items': [
-                {'level': 'file', 'sourceFilePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif'},
-                {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'}
+                {'level': 'file', 'sourceFilePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_000297305/BOO_000297305_000001.tif', 'imageGroupId': 'BOO_000297305', 'objectFileGroupId': 'BOO_000297305'},
+                {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view'},
+                {'level': 'file', 'sourceFilePath': 'https://rarebooks.library.nd.edu/digital/MARBLE-images/BOO_001016383/BOO_001016383.pdf', 'mediaGroupId': 'BOO_001016383'}
             ]
         }
         self.assertEqual(actual_results, expected_results)
@@ -170,7 +174,7 @@ class Test(unittest.TestCase):
             'items': [
                 {'level': 'file', 'sourceFilePath': 'https://drive.google.com/a/nd.edu/file/d/17BsDDtqWmozxHZD23HOvIuX8igpBH2sJ/view', 'objectFileGroupId': '1234.567'}]
         }
-        actual_results = _add_imageGroupId(standard_json)
+        actual_results = _add_imageGroupId(standard_json, ['.tif', '.tiff', '.jpg', '.jpeg'], ['.pdf', '.mp3', '.mp4', '.wav'])
         expected_results = {
             'id': '1234.567',
             'level': 'manifest',
@@ -183,10 +187,14 @@ class Test(unittest.TestCase):
 
     def test_10_find_object_file_group_id(self):
         """ test_10_find_object_file_group_id """
-        item = {'objectFileGroupId': '123', 'sourceFilePath': '456'}
-        actual_results = _find_object_file_group_id(item)
-        expected_results = '123'
-        self.assertEqual(actual_results, expected_results)
+        actual_results = _find_object_file_group_id({'objectFileGroupId': '123', 'sourceFilePath': '456'}, 'abc', ['.tif', '.tiff', '.jpg', '.jpeg'])
+        self.assertEqual(actual_results, '123')
+        actual_results = _find_object_file_group_id({'sourceFilePath': '456', 'sourceSystem': 'Curate'}, 'abc', ['.tif', '.tiff', '.jpg', '.jpeg'])
+        self.assertEqual(actual_results, None)
+        actual_results = _find_object_file_group_id({'sourceFilePath': '456.pdf', 'sourceSystem': 'Curate'}, 'abc', ['.tif', '.tiff', '.jpg', '.jpeg'])
+        self.assertEqual(actual_results, None)
+        actual_results = _find_object_file_group_id({'sourceFilePath': '456.tif', 'sourceSystem': 'Curate'}, 'abc', ['.tif', '.tiff', '.jpg', '.jpeg'])
+        self.assertEqual(actual_results, 'abc')
 
     def test_11_find_default_file_path(self):
         """ test_11_find_default_image_id """

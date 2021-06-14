@@ -10,6 +10,7 @@ from report_missing_fields import ReportMissingFields
 from get_size_of_images import get_size_of_images
 from search_files import id_from_url
 from add_files_to_json_object import change_file_extensions_to_tif
+import pathlib
 
 
 class StandardJsonHelpers():
@@ -34,8 +35,8 @@ class StandardJsonHelpers():
         standard_json = _clean_up_standard_json_recursive(standard_json, self.config.get('image-server-base-url'), self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
         standard_json = add_paths_to_json_object_class.add_paths(standard_json)  # <- paths need to be added after id is updated for Curate and EmbARK and after treePath is defined
         standard_json = get_size_of_images(standard_json)
-        standard_json = _add_imageGroupId(standard_json)
         standard_json = _insert_pdf_images(standard_json)
+        standard_json = _add_imageGroupId(standard_json, self.config.get('image-file-extensions'), self.config.get('media-file-extensions'))
         standard_json = _add_sequence(standard_json)
         standard_json = _add_defaultFilePath_recursive(standard_json)
         if not validate_standard_json(standard_json):
@@ -153,63 +154,88 @@ def _load_language_codes() -> list:
     return load_language_codes()
 
 
-def _add_imageGroupId(standard_json: dict) -> dict:  # noqa: C901
+def _add_imageGroupId(standard_json: dict, image_file_extensions: list, media_file_extensions: list) -> dict:  # noqa: C901
     """ Note:  This must be run after _clean_up_standard_json_recursive has defined level """
     level = standard_json.get('level', 'manifest')
     if level == 'manifest':
         # manifests can only have files nested directly under them
-        object_file_group_id_found = standard_json.get('objectFileGroupId', '') > ''
-        image_group_id_found = standard_json.get('imageGroupId', '') > ''
-        default_file_path_found = standard_json.get('defaultFilePath', '') > ''
+        # define specific fields at file level and propogate up the tree
         for item in standard_json.get('items', ''):
             if item.get('level', '') == 'file':
-                if not object_file_group_id_found:  # This will be obsolete once imageGroupId is adopted
-                    object_file_group_id = _find_object_file_group_id(item)
+                # This will be obsolete once imageGroupId is adopted
+                if 'objectFileGroupId' not in item or 'objectFileGroupId' not in standard_json:
+                    object_file_group_id = _find_object_file_group_id(item, standard_json.get('id'), image_file_extensions)
                     if object_file_group_id:
-                        standard_json['objectFileGroupId'] = object_file_group_id
-                        object_file_group_id_found = True
-                if not image_group_id_found:
-                    if item.get('sourceSystem', '') == 'Curate':
-                        image_group_id = standard_json.get('id')
-                    else:
-                        image_group_id = _find_image_group_id(item)
+                        if 'objectFileGroupId' not in item:
+                            item['objectFileGroupId'] = object_file_group_id  # added 6/14/21
+                        if 'objectFileGroupId' not in standard_json:
+                            standard_json['objectFileGroupId'] = object_file_group_id
+                if 'imageGroupId' not in item or 'imageGroupId' not in standard_json:
+                    image_group_id = _find_image_group_id(item, standard_json.get('id'), image_file_extensions)
                     if image_group_id:
-                        standard_json['imageGroupId'] = image_group_id
-                        image_group_id_found = True
-                if not default_file_path_found and item.get('thumbnail', False):
+                        if 'imageGroupId' not in item:
+                            item['imageGroupId'] = image_group_id  # added 6/14/21
+                        if 'imageGroupId' not in standard_json:
+                            standard_json['imageGroupId'] = image_group_id
+                if 'defaultFilePath' not in standard_json and item.get('thumbnail', False):
                     default_file_path = _find_default_file_path(item)
                     if default_file_path:
-                        standard_json['defaultFilePath'] = default_file_path
-                        default_file_path_found = True
-                if object_file_group_id_found and image_group_id_found and default_file_path_found:
-                    break
+                        if 'defaultFilePath' not in standard_json:
+                            standard_json['defaultFilePath'] = default_file_path
+                if 'mediaGroupId' not in item or 'mediaGroupId' not in standard_json:
+                    media_group_id = _find_media_group_id(item, standard_json.get('id'), media_file_extensions)
+                    if media_group_id:
+                        if 'mediaGroupId' not in item:
+                            item['mediaGroupId'] = media_group_id
+                        if 'mediaGroupId' not in standard_json:
+                            standard_json['mediaGroupId'] = media_group_id
     elif level == 'collection':
         # collections can have collections or manifests nested directly under them
         for item in standard_json.get('items', ''):
-            item = _add_imageGroupId(item)
+            item = _add_imageGroupId(item, image_file_extensions, media_file_extensions)
             if item.get('objectFileGroupId', '') and not standard_json.get('objectFileGroupId', ''):
                 standard_json['objectFileGroupId'] = item['objectFileGroupId']
             if item.get('imageGroupId', '') and not standard_json.get('imageGroupId', ''):
                 standard_json['imageGroupId'] = item['imageGroupId']
             if item.get('level', '') == 'file' and item.get('thumbnail', True):
                 standard_json['defaultFilePath'] = _find_default_file_path(item)
+            # if item.get('mediaGroupId', '') and not standard_json.get('mediaGroupId', ''):  # I don't think we want to propogate these up the tree.  If this is a problem, we can add this later.
+            #     standard_json['mediaGroupId'] = item['mediaGroupId']
     return standard_json
 
 
-def _find_object_file_group_id(item: dict) -> str:  # This will be obsolete once imageGroupId is adopted
+def _find_object_file_group_id(item: dict, parent_id: str, image_file_extensions: list) -> str:  # This will be obsolete once imageGroupId is adopted
     """ Use cascading logic to find object_file_group_id """
-    object_file_group_id = item.get('objectFileGroupId', '')
-    if not object_file_group_id:
-        object_file_group_id = id_from_url(item.get('sourceFilePath', ''))
-    return object_file_group_id
+    if item.get('objectFileGroupId', ''):
+        return item.get('objectFileGroupId', '')
+    if not pathlib.Path(item.get('filePath', item.get('sourceFilePath', ''))).suffix in image_file_extensions:
+        return None
+    if item.get('sourceSystem', '') == 'Curate':
+        return parent_id
+
+    return id_from_url(item.get('sourceFilePath', ''))
 
 
-def _find_image_group_id(item: dict) -> str:
+def _find_image_group_id(item: dict, parent_id: str, image_file_extensions: list) -> str:
     """ Get image_group_id from imageGroupId, then from id_from_url if missing. """
-    image_group_id = item.get('imageGroupId', '')
-    if not image_group_id:
-        image_group_id = id_from_url(item.get('sourceFilePath', ''))
-    return image_group_id
+    if item.get('imageGroupId', ''):
+        return item.get('imageGroupId', '')
+    if not pathlib.Path(item.get('filePath', item.get('sourceFilePath', ''))).suffix in image_file_extensions:
+        return None
+    if item.get('sourceSystem', '') == 'Curate':
+        return parent_id
+    return id_from_url(item.get('filePath', item.get('sourceFilePath', '')))
+
+
+def _find_media_group_id(item: dict, parent_id: str, media_file_extensions: list) -> str:
+    """ Get media_group id """
+    if item.get('mediaGroupId', ''):
+        return item.get('mediaGroupId', '')
+    if not pathlib.Path(item.get('filePath', item.get('sourceFilePath', ''))).suffix in media_file_extensions:
+        return None
+    if item.get('sourceSystem', '') == 'Curate':
+        return parent_id
+    return id_from_url(item.get('filePath', item.get('sourceFilePath', '')))
 
 
 def _find_default_file_path(item: dict) -> str:
@@ -253,7 +279,7 @@ def _insert_pdf_images(standard_json: dict):
             item_clone = dict(item)
             item['sequence'] = item.get('sequence') + 1
             _update_pdf_fields(item_clone)
-            if 'thumbnail' in item:
+            if item.get('thumbnail', False):
                 item['thumbnail'] = False
                 item_clone['thumbnail'] = True
             tif_items.append(item_clone)

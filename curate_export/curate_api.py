@@ -36,6 +36,8 @@ class CurateApi():
         self.table_name = self.config.get('website-metadata-tablename', '')
         self.translate_curate_json_node_class = TranslateCurateJsonNode(config)
         self.save_standard_json_locally = event.get("local", False)  # To generate standard_json locally, set "local" to false, and temporarily set save_standard_json_locally to True
+        if not self.save_standard_json_locally and event.get("recreateStandardJsonLocallyButDoNotSaveToDynamo", False):
+            self.save_standard_json_locally = event.get("recreateStandardJsonLocallyButDoNotSaveToDynamo")
         self.create_standard_json_class = CreateStandardJson(config)
         self.local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
         self.save_json_to_dynamo_class = SaveJsonToDynamo(config, self.table_name)
@@ -164,7 +166,6 @@ class CurateApi():
                             new_dict['mediaGroupId'] = new_dict.get('mediaGroupId', new_dict.get('parentId'))  # make sure media points to their parent id
                             # new_dict['typeOfData'] = new_dict.get('typeOfData', 'Multimedia bucket')  # TODO: Add this once we copy Curate content to the media bucket
                             new_dict = add_media_keys(new_dict, self.config.get('media-server-base-url', ''))
-                            print("media_record = ", new_dict)
                         else:
                             new_dict['objectFileGroupId'] = new_dict['parentId']  # make sure files point to their parent id
                             file_record = new_dict.copy()  # TODO: This will be removed once we transition to using images instead of files
