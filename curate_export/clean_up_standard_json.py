@@ -12,8 +12,6 @@ local_folder = os.path.dirname(os.path.realpath(__file__)) + "/"
 
 def clean_up_standard_json(standard_json: dict, config: dict) -> dict:
     """ If extra processing is required, make appropriate calls to perform that additional processing. """
-    if 'objectFileGroupId' not in standard_json:
-        standard_json['objectFileGroupId'] = standard_json['id']
     standard_json = _fix_level(standard_json)
     standard_json = _fix_ids(standard_json)
     add_paths_to_json_object_class = AddPathsToJsonObject(config)

@@ -212,8 +212,9 @@ class Test(unittest.TestCase):
         actual_results = _add_more_file_fields(json_record, 'http://SomeIiifServeruri')
         expected_results = {
             'filePath': 'collections/ead_xml/images/MSN-EA_5031/MSN-EA_5031-01.a.150.tif',
-            'mediaServer': 'http://SomeIiifServeruri',
-            'mimeType': 'image/tiff', 'mediaResourceId': 'collections%2Fead_xml%2Fimages%2FMSN-EA_5031%2FMSN-EA_5031-01.a.150'
+            'mimeType': 'image/tiff',
+            'mediaResourceId': 'collections%2Fead_xml%2Fimages%2FMSN-EA_5031%2FMSN-EA_5031-01.a.150',
+            'mediaServer': 'http://SomeIiifServeruri'
         }
         self.assertEqual(actual_results, expected_results)
 
@@ -223,7 +224,9 @@ class Test(unittest.TestCase):
         actual_results = _add_more_file_fields(json_record, 'http://SomeIiifServeruri')
         expected_results = {
             'filePath': 'collections/ead_xml/images/MSN-EA_5031/MSN-EA_5031-01.a.150.pdf',
-            'mimeType': 'application/pdf'
+            'mimeType': 'application/pdf',
+            'mediaResourceId': 'collections%2Fead_xml%2Fimages%2FMSN-EA_5031%2FMSN-EA_5031-01.a.150.pdf',
+            'mediaServer': 'http://SomeIiifServeruri'
         }
         self.assertEqual(actual_results, expected_results)
 
