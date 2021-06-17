@@ -251,13 +251,19 @@ def add_subject_term_keys(json_record: dict, saving_expanded_record_flag: bool =
 
 def add_supplemental_data_keys(json_record: dict) -> dict:
     """ Add dynamoDB keys to SupplementalData record to be saved
-        Required values include: [websiteId], id (itemId) """
+        Required values include: [websiteId], id (itemId), [imageGroupId], [mediaGroupId] """
     json_record['websiteId'] = json_record.get('websiteId', 'All')
     json_record['PK'] = 'ITEM#' + format_key_value(json_record.get('id'))
     json_record['SK'] = 'SUPPLEMENTALDATA#' + format_key_value(json_record.get('websiteId'))
     json_record['TYPE'] = 'SupplementalData'
     json_record['GSI1PK'] = 'SUPPLEMENTALDATA'
     json_record['GSI1SK'] = 'ITEM#' + format_key_value(json_record.get('id'))
+    if json_record.get('imageGroupId'):
+        json_record['GSI2PK'] = 'SUPPLEMENTALDATA'
+        json_record['GSI2SK'] = 'IMAGEGROUPID#' + format_key_value(json_record.get('imageGroupId'))
+    if json_record.get('mediaGroupId'):
+        json_record['GSI3PK'] = 'SUPPLEMENTALDATA'
+        json_record['GSI3SK'] = 'MEDIAGROUPID#' + format_key_value(json_record.get('mediaGroupId'))
     json_record['dateAddedToDynamo'] = get_iso_date_as_string()
     json_record['dateModifiedInDynamo'] = json_record['dateAddedToDynamo']
     return json_record
