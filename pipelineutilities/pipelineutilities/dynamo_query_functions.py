@@ -3,10 +3,10 @@
 """
 import boto3
 from botocore.exceptions import ClientError
-from boto3.dynamodb.conditions import Key  # , Attr
+from boto3.dynamodb.conditions import Key, Attr
 from sentry_sdk import capture_exception
 from datetime import datetime, timedelta
-from dynamo_helpers import format_key_value
+from dynamo_helpers import format_key_value, add_supplemental_data_keys
 
 
 def get_subject_term_record(table_name: str, uri: str) -> dict:
@@ -144,3 +144,56 @@ def get_all_parent_override_records(table_name: str) -> dict:
         except ClientError as ce:
             capture_exception(ce)
     return results
+
+
+def scan_dynamo_records(table_name: str, **kwargs) -> dict:
+    """ very generic dynamo scan """
+    response = {}
+    try:
+        table = boto3.resource('dynamodb').Table(table_name)
+        response = table.scan(**kwargs)
+    except ClientError as ce:
+        capture_exception(ce)
+    return response
+
+
+def insert_supplemental_data_records(table_name: str, source_systems_list: list):
+    """ Insert SupplementalData records for specific source_systems to include Item fields: id, objectFileGroupId, imageGroupId, mediaGroupId, defaultFilePath """
+    kwargs = {}
+    kwargs['FilterExpression'] = Attr("TYPE").eq("Item")
+    # WARNING:  DynamoDB ignores parenthesis as in     kwargs['FilterExpression'] = Attr("TYPE").eq("Item") and (Attr("sourceSystem").eq("Aleph") or Attr("sourceSystem").eq("ArchivesSpace") )
+    kwargs['ProjectionExpression'] = 'PK, SK, id, objectFileGroupId, imageGroupId, mediaGroupId, defaultFilePath, sourceSystem'
+    records_inserted = 0
+    table = boto3.resource('dynamodb').Table(table_name)
+    while True:
+        results = scan_dynamo_records(table_name, **kwargs)
+        # Note that batch.put_item overwrites any potentially already existing SupplementalData records.  We can't do this, so we must use update_item.
+        for record in results.get('Items', []):
+            if record.get('sourceSystem') in source_systems_list:
+                if record.get('objectFileGroupId') or record.get('imageGroupId') or record.get('mediaGroupId') or record.get('defaultFilePath'):
+                    working_set_json = add_supplemental_data_keys(record.copy())
+                    update_expression = 'SET '
+                    expression_attribute_names = {}
+                    expression_attribute_values = {}
+                    for k, v in working_set_json.items():
+                        if k not in ('PK', 'SK'):  # Note:  we can't update any part of the primary key
+                            update_expression += '#' + k + ' = :' + k + ', '
+                            expression_attribute_names['#' + k] = k
+                            expression_attribute_values[':' + k] = v
+                    update_expression = update_expression[:-2]  # remove the trailing comma and space from the update expression string
+                    try:
+                        table.update_item(
+                            Key={'PK': working_set_json.get('PK'), 'SK': working_set_json.get('SK')},
+                            UpdateExpression=update_expression,
+                            ExpressionAttributeNames=expression_attribute_names,
+                            ExpressionAttributeValues=expression_attribute_values,
+                            ReturnValues="ALL_NEW"
+                        )
+                        records_inserted += 1
+                    except ClientError as ce:
+                        capture_exception(ce)
+        if results.get('LastEvaluatedKey'):
+            kwargs['ExclusiveStartKey'] = results.get('LastEvaluatedKey')
+        else:
+            break
+    return records_inserted

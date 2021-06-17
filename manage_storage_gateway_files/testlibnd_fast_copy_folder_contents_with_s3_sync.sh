@@ -1,0 +1,1 @@
+aws s3 sync s3://sm-prod-foundation-publicbucketa6745c15-1haitstgkiu6w/digital/MARBLE-images/$2 s3://testlibnd-smb-test/$1/$2 --exclude ._*  --exclud *.pdf
