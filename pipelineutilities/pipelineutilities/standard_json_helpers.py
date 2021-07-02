@@ -35,7 +35,6 @@ class StandardJsonHelpers():
         standard_json = _clean_up_standard_json_recursive(standard_json, self.config.get('image-server-base-url'), self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
         standard_json = add_paths_to_json_object_class.add_paths(standard_json)  # <- paths need to be added after id is updated for Curate and EmbARK and after treePath is defined
         standard_json = get_size_of_images(standard_json)
-        standard_json = _insert_pdf_images(standard_json)
         standard_json = _add_imageGroupId(standard_json, self.config.get('image-file-extensions'), self.config.get('media-file-extensions'))
         standard_json = _add_sequence(standard_json)
         standard_json = _add_defaultFilePath_recursive(standard_json)
@@ -245,7 +244,7 @@ def _find_default_file_path(item: dict) -> str:
     if item.get('sourceType', 'x') in ['Curate', 'Museum']:
         default_file_path = item.get('id', '')
     regex_expression = r'http[s]?:[/]{2}[\w+\.]+/'
-    if not default_file_path and re.match(regex_expression, item.get('sourceFilePath', '')):  # TODO: verify this still works.  It may need to be changed to sourceUri?
+    if not default_file_path and re.match(regex_expression, item.get('sourceFilePath', '')):
         default_file_path = re.sub(regex_expression, '', item.get('sourceFilePath', ''))
     if not default_file_path:
         default_file_path = item.get('filePath', '')
@@ -268,37 +267,6 @@ def _add_sequence(standard_json: dict) -> dict:
     if 'sequence' not in standard_json:
         standard_json['sequence'] = 0
     return standard_json
-
-
-def _insert_pdf_images(standard_json: dict):
-    tif_items = []
-    for item in standard_json.get('items', []):
-        if item.get('level') == 'file' and item.get('id', '').lower().endswith('.pdf'):
-            if 'sequence' not in item:
-                item['sequence'] = 1
-            item_clone = dict(item)
-            item['sequence'] = item.get('sequence') + 1
-            _update_pdf_fields(item_clone)
-            if item.get('thumbnail', False):
-                item['thumbnail'] = False
-                item_clone['thumbnail'] = True
-            tif_items.append(item_clone)
-        if 'items' in item:
-            item = _insert_pdf_images(item)
-    if tif_items:
-        if 'defaultFilePath' in standard_json:
-            updated_file_path = standard_json.get('defaultFilePath').replace('.pdf', '.tif')
-            standard_json['defaultFilePath'] = updated_file_path
-        standard_json['items'].extend(tif_items)
-    return standard_json
-
-
-def _update_pdf_fields(standard_json: dict):
-    fields = ['id', 'filePath', 'description', 'title']
-    for field in fields:
-        if field in standard_json:
-            standard_json[field] = standard_json.get(field).replace('.pdf', '.tif')
-    standard_json['mimeType'] = 'image/tiff'  # correct the mimeType to reflect tiff
 
 
 def _add_defaultFilePath_recursive(standard_json: dict) -> dict:

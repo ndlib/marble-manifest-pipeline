@@ -11,7 +11,8 @@ default_config = {
     "museum-google-drive-id": "",
     "museum-server-username": "",
     "museum-server-password": "",
-    "rbsc-image-bucket": "rbsc-test-files",
+    # "rbsc-image-bucket": "rbsc-test-files",
+    "marble-content-bucket": "testlibnd-smb-test",
     "multimedia-bucket": "mlk-multimedia-333680067100",
     "museum-server-base-url": "http://notredame.dom5182.com:8080",
     "process-bucket-read-basepath": "process",
@@ -51,7 +52,7 @@ default_config = {
     "pipeline-control-folder": "pipeline_control",
     "source-systems-requiring-metadata-expire-time": [],
     "source-systems-requiring-special-file-processing": ["Curate", "EmbARK"],
-    "file-extensions-to-protect-from-changing-to-tif": [".pdf", ".mp3", ".mp4"],  # all other files will be assumed to be image files, and will be changed to .tif
+    "file-extensions-to-protect-from-changing-to-tif": [".pdf", ".mp3", ".mp4", ".wav"],  # all other files will be assumed to be image files, and will be changed to .tif
     "unwanted-file-extensions-from-curate": [".jpg", ".jpeg", ".xml"],  # Curate images should be saved as both .tif and .jpg.  Skip .jpg.  Skip .xml too
     "media-file-extensions": ['.pdf', '.mp3', '.mp4', '.wav'],
     "image-file-extensions": ['.tif', '.tiff', '.jpg', '.jpeg'],

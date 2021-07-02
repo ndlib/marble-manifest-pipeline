@@ -53,10 +53,10 @@ def test():
     else:
         event = {}
         event["local"] = False
-        event['ssm_key_base'] = '/all/stacks/steve-manifest'
-        # event['ssm_key_base'] = '/all/stacks/marbleb-prod-manifest'
+        # event['ssm_key_base'] = '/all/stacks/steve-manifest'
+        event['ssm_key_base'] = '/all/stacks/marbleb-prod-manifest'
         event['seconds-to-allow-for-processing'] = 60 * 10 * 5
-        # event['rbsc-image-bucket'] = 'libnd-smb-rbsc'
+        # config['marble-content-bucket'] = 'libnd-smb-marble"
         # event['image-server-base-url'] = 'http://images.com'
         # event['image-server-bucket'] = 's3://images'
         # event['manifest-server-bucket'] = 'steve-manifest-manifestbucket46c412a5-19kyrt97zbq12'

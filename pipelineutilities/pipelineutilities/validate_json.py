@@ -315,7 +315,7 @@ standard_json_schema = {
         "thumbnail": {"type": "boolean"},
         "title": {"type": "string"},
         "treePath": {"type": "string"},
-        "typeOfData": {"enum": ["Curate", "Museum", "RBSC website bucket", "Multimedia bucket", "Uri"]},
+        "typeOfData": {"enum": ["Curate", "Museum", "RBSC website bucket", "Multimedia bucket", "Uri", "Marble content bucket"]},
         "uniqueIdentifier": {"type": "string"},
         "width": {"type": "integer"},
         "workType": {"type": "string"},

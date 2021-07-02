@@ -28,22 +28,26 @@ class FilesApi():
         self.start_time = time.time()
         self.table_name = self.config.get('website-metadata-tablename', '')
         self.resumption_filename = 'file_objects_list_partially_processed.json'
-        if not self.event['local']:
-            save_file_system_record(self.table_name, 'S3', 'RBSC website bucket')
-            save_file_system_record(self.table_name, 'S3', 'Multimedia bucket')
+        print("uncomment this code")
+        # if not self.event['local']:
+        #     save_file_system_record(self.table_name, 'S3', 'RBSC website bucket')
+        #     save_file_system_record(self.table_name, 'S3', 'Multimedia bucket')
         self.file_to_process_records_in_dynamo = {}
         if not self.config.get('local', True):
+            print("pulling file_to_process_records from dynamo")
             self.file_to_process_records_in_dynamo = get_all_file_to_process_records_by_storage_system(self.config.get('website-metadata-tablename', ''), 'S3')
-            self.table = boto3.resource('dynamodb').Table(self.table_name)
+            print("uncomment this code")
+            # self.table = boto3.resource('dynamodb').Table(self.table_name)
 
     def save_files_details(self):
         """ This will crawl available files, then loop through the file listing, saving each to dynamo """
         if self.event['objectFilesApi_execution_count'] == 1:
-            rbsc_files = self._crawl_available_files_from_s3_or_cache(self.config['rbsc-image-bucket'], True)
-            multimedia_files = self._crawl_available_files_from_s3_or_cache(self.config['multimedia-bucket'], True)
-            all_files_listing = {**rbsc_files, **multimedia_files}
-            # with open('multimedia_files.json', 'w') as output_file:
-            #     json.dump(multimedia_files, output_file, indent=2, sort_keys=True)
+            marble_files = self._crawl_available_files_from_s3_or_cache(self.config['marble-content-bucket'], True)
+            # rbsc_files = self._crawl_available_files_from_s3_or_cache(self.config['rbsc-image-bucket'], True)
+            # all_files_listing = {**rbsc_files, **marble_files}
+            all_files_listing = {**marble_files}
+            with open('multimedia_files.json', 'w') as output_file:
+                json.dump(all_files_listing, output_file, indent=2, sort_keys=True)
         else:
             all_files_listing = self._resume_execution()
         file_objects = []
@@ -121,13 +125,18 @@ class FilesApi():
             my_json['storageSystem'] = my_json.get('storageSystem', 'S3')
             my_json['sourceFilePath'] = my_json.get('path', '')
             if not self.config.get('local', False):
-                with self.table.batch_writer() as batch:
-                    batch.put_item(Item=my_json)
+                print("uncomment this code")
+                # with self.table.batch_writer() as batch:
+                if True:
+                    print("uncomment this code")
+                    # batch.put_item(Item=my_json)
                     item_id = my_json.get('id')
                     if self.event.get('exportAllFilesFlag', False) or item_id not in self.file_to_process_records_in_dynamo or my_json.get('modifiedDate', '') > self.file_to_process_records_in_dynamo[item_id].get('dateModifiedInDynamo', ''):  # noqa: #501
                         file_to_process_json = dict(my_json)
                         file_to_process_json = add_file_to_process_keys(file_to_process_json)
-                        batch.put_item(Item=file_to_process_json)
+                        print("uncomment this code")
+                        # batch.put_item(Item=file_to_process_json)
+                        collection_list.append(file_to_process_json)
                     if i == 1:
                         if my_json.get('objectFileGroupId'):  # This will be removed once we transition to imageGroupId and mediaGroupId
                             file_group_record = {'objectFileGroupId': my_json.get('objectFileGroupId')}
@@ -135,21 +144,27 @@ class FilesApi():
                             file_group_record['typeOfData'] = my_json.get('typeOfData')
                             file_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
                             file_group_record = add_file_group_keys(file_group_record)
-                            batch.put_item(Item=file_group_record)
+                            print("uncomment this code")
+                            # batch.put_item(Item=file_group_record)
+                            collection_list.append(file_group_record)
                         if my_json.get('imageGroupId'):
                             image_group_record = {'imageGroupId': my_json.get('imageGroupId')}
                             image_group_record['storageSystem'] = my_json.get('storageSystem')
                             image_group_record['typeOfData'] = my_json.get('typeOfData')
                             image_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
                             image_group_record = add_image_group_keys(image_group_record)
-                            batch.put_item(Item=image_group_record)
+                            print("uncomment this code")
+                            # batch.put_item(Item=image_group_record)
+                            collection_list.append(image_group_record)
                         if my_json.get('mediaGroupId'):
                             media_group_record = {'mediaGroupId': my_json.get('mediaGroupId')}
                             media_group_record['storageSystem'] = my_json.get('storageSystem')
                             media_group_record['typeOfData'] = my_json.get('typeOfData')
                             media_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
                             media_group_record = add_media_group_keys(media_group_record)
-                            batch.put_item(Item=media_group_record)
+                            print("uncomment this code")
+                            # batch.put_item(Item=media_group_record)
+                            collection_list.append(media_group_record)
         return collection_list
 
     def _cache_s3_call(self, file_name: str, objects: dict):

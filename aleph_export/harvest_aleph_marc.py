@@ -12,7 +12,7 @@ import os
 import requests
 from sentry_sdk import capture_exception
 from transform_marc_json import TransformMarcJson
-from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
+# from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 from pipelineutilities.dynamo_query_functions import get_item_record
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.save_standard_json import save_standard_json
@@ -63,7 +63,7 @@ class HarvestAlephMarc():
             capture_exception('TypeError reading from marc_records_stream.  The Aleph server may be down.')
             return processed_records_count
         transform_marc_json_class = TransformMarcJson()
-        add_files_to_json_object_class = AddFilesToJsonObject(self.config)
+        # add_files_to_json_object_class = AddFilesToJsonObject(self.config)
         standard_json_helpers_class = StandardJsonHelpers(self.config)
         completed_flag = True
         try:
@@ -76,7 +76,7 @@ class HarvestAlephMarc():
                         process_record_flag = self._get_process_record_flag(json_record)
                         if process_record_flag and (aleph_id in self.event['ids'] or len(self.event['ids']) == 0):
                             print("Aleph identifier ", aleph_id, " - ", int(time.time() - self.start_time), " seconds.")
-                            json_record = add_files_to_json_object_class.add_files(json_record)
+                            # json_record = add_files_to_json_object_class.add_files(json_record)
                             json_record = standard_json_helpers_class.enhance_standard_json(json_record)
                             self._save_json_record(json_record)
                             processed_records_count += 1
