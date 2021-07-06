@@ -10,7 +10,6 @@ import sentry_sdk
 from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration  # noqa: E402
 from harvest_oai_eads import HarvestOaiEads  # noqa: #502
 from pipelineutilities.pipeline_config import setup_pipeline_config  # noqa: E402
-# from pipelineutilities.add_files_to_json_object import AddFilesToJsonObject
 from pipelineutilities.standard_json_helpers import StandardJsonHelpers
 from pipelineutilities.save_standard_json import save_standard_json
 from pipelineutilities.save_standard_json_to_dynamo import SaveStandardJsonToDynamo
@@ -31,14 +30,12 @@ def run(event: dict, _context: dict):
         save_harvest_ids(config, 'ArchivesSpace', string_list_to_save, config.get('website-metadata-tablename'))
         event['ids'] = _read_harvest_ids_from_dynamo(config.get('website-metadata-tablename'), 'ArchivesSpace')
         event['countToProcess'] = len(event['ids'])
-    # config['marble-content-bucket'] = 'libnd-smb-marble"
     start_time = time.time()
     time_to_break = datetime.now() + timedelta(seconds=config['seconds-to-allow-for-processing'])
     print("Will break after ", time_to_break)
     if event.get('archivesSpaceExecutionCount', 0) == 1 and not event.get('local'):
         save_source_system_record(config.get('website-metadata-tablename'), 'ArchivesSpace')
     harvest_oai_eads_class = HarvestOaiEads(config)
-    # add_files_to_json_object_class = AddFilesToJsonObject(config)
     standard_json_helpers_class = StandardJsonHelpers(config)
     save_standard_json_to_dynamo_class = SaveStandardJsonToDynamo(config)
     ids = event.get("ids", [])
@@ -46,7 +43,6 @@ def run(event: dict, _context: dict):
         standard_json = harvest_oai_eads_class.get_standard_json_from_archives_space_url(ids[0])
         if standard_json:
             print("ArchivesSpace ead_id = ", standard_json.get("id", ""), " source_system_url = ", ids[0], int(time.time() - start_time), 'seconds.')
-            # standard_json = add_files_to_json_object_class.add_files(standard_json)
             standard_json = standard_json_helpers_class.enhance_standard_json(standard_json)
             save_standard_json(config, standard_json)
             save_standard_json_to_dynamo_class.save_standard_json(standard_json)

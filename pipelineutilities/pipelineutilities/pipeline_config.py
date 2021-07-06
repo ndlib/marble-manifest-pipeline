@@ -57,6 +57,7 @@ default_config = {
     "media-file-extensions": ['.pdf', '.mp3', '.mp4', '.wav'],
     "image-file-extensions": ['.tif', '.tiff', '.jpg', '.jpeg'],
     "media-server-base-url": "https://marbleb-multimedia.library.nd.edu",
+    "folder_exposed_through_cdn": "public-access",
 }
 
 local_ssm = {

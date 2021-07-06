@@ -7,7 +7,7 @@ import json
 import time
 from s3_helpers import write_s3_json, read_s3_json, delete_s3_key
 from api_helpers import json_serial
-from search_files import crawl_available_files, is_media_file
+from search_files import crawl_available_files, update_pdf_fields
 from dynamo_helpers import add_file_to_process_keys, add_file_group_keys, get_iso_date_as_string, add_image_group_keys, add_media_group_keys, add_media_keys, add_image_keys
 from dynamo_save_functions import save_file_system_record
 from add_files_to_json_object import change_file_extensions_to_tif
@@ -29,25 +29,23 @@ class FilesApi():
         self.table_name = self.config.get('website-metadata-tablename', '')
         self.resumption_filename = 'file_objects_list_partially_processed.json'
         print("uncomment this code")
-        # if not self.event['local']:
-        #     save_file_system_record(self.table_name, 'S3', 'RBSC website bucket')
-        #     save_file_system_record(self.table_name, 'S3', 'Multimedia bucket')
+        if not self.event['local']:
+            save_file_system_record(self.table_name, 'S3', 'Marble content bucket')
+            save_file_system_record(self.table_name, 'S3', 'Multimedia bucket')
         self.file_to_process_records_in_dynamo = {}
         if not self.config.get('local', True):
             print("pulling file_to_process_records from dynamo")
             self.file_to_process_records_in_dynamo = get_all_file_to_process_records_by_storage_system(self.config.get('website-metadata-tablename', ''), 'S3')
-            print("uncomment this code")
-            # self.table = boto3.resource('dynamodb').Table(self.table_name)
+            self.table = boto3.resource('dynamodb').Table(self.table_name)
+        self.config['forceSaveCrawlAvailableFiles'] = True
 
     def save_files_details(self):
         """ This will crawl available files, then loop through the file listing, saving each to dynamo """
         if self.event['objectFilesApi_execution_count'] == 1:
             marble_files = self._crawl_available_files_from_s3_or_cache(self.config['marble-content-bucket'], True)
-            # rbsc_files = self._crawl_available_files_from_s3_or_cache(self.config['rbsc-image-bucket'], True)
+            # rbsc_files = self._crawl_available_files_from_s3_or_cache(self.config['rbsc-image-bucket'], True)  # save in case we need to crawl the RBSC bucket ever again
             # all_files_listing = {**rbsc_files, **marble_files}
             all_files_listing = {**marble_files}
-            with open('multimedia_files.json', 'w') as output_file:
-                json.dump(all_files_listing, output_file, indent=2, sort_keys=True)
         else:
             all_files_listing = self._resume_execution()
         file_objects = []
@@ -102,7 +100,7 @@ class FilesApi():
             s3_key = os.path.join(self.config['pipeline-control-folder'], self.resumption_filename)
             delete_s3_key(self.config['process-bucket'], s3_key)
 
-    def _save_file_objects_per_collection(self, collection_json: dict) -> list:
+    def _save_file_objects_per_collection(self, collection_json: dict) -> list:  # noqa:  C901
         """ Loop through every file in a collection and save each record into dynamo """
         i = 0
         collection_list = []
@@ -111,41 +109,34 @@ class FilesApi():
             my_json = dict(file_info)
             my_json['sequence'] = i
             my_json['id'] = my_json.get('key', '')
-            if is_media_file(self.config.get('media-file-extensions', []), my_json.get('id')):
-                my_json['mediaGroupId'] = my_json.get('mediaGroupId', my_json.get('fileId'))
-                my_json['typeOfData'] = my_json.get('typeOfData', 'Multimedia bucket')
+            if 'mediaGroupId' in my_json:  # is_media_file(self.config.get('media-file-extensions', []), my_json.get('id')):
                 my_json = add_media_keys(my_json, self.config.get('media-server-base-url', ''))
             else:
-                my_json['objectFileGroupId'] = my_json.get('fileId')  # required to join with standard.json
-                my_json['imageGroupId'] = my_json.get('fileId')  # required to join with standard.json  (replacing objectFileGroupId)
+                update_pdf_fields(my_json)
                 my_json = change_file_extensions_to_tif(my_json, self.config.get("file-extensions-to-protect-from-changing-to-tif", []))
                 my_json = add_image_keys(my_json, self.config.get('image-server-base-url', ''))
-            my_json['typeOfData'] = my_json.get('typeOfData', 'RBSC website bucket')
+            my_json['typeOfData'] = my_json.get('typeOfData', 'Marble content bucket')
             collection_list.append(my_json)
             my_json['storageSystem'] = my_json.get('storageSystem', 'S3')
             my_json['sourceFilePath'] = my_json.get('path', '')
             if not self.config.get('local', False):
-                print("uncomment this code")
-                # with self.table.batch_writer() as batch:
-                if True:
-                    print("uncomment this code")
-                    # batch.put_item(Item=my_json)
+                with self.table.batch_writer() as batch:
+                    batch.put_item(Item=my_json)
                     item_id = my_json.get('id')
-                    if self.event.get('exportAllFilesFlag', False) or item_id not in self.file_to_process_records_in_dynamo or my_json.get('modifiedDate', '') > self.file_to_process_records_in_dynamo[item_id].get('dateModifiedInDynamo', ''):  # noqa: #501
-                        file_to_process_json = dict(my_json)
-                        file_to_process_json = add_file_to_process_keys(file_to_process_json)
-                        print("uncomment this code")
-                        # batch.put_item(Item=file_to_process_json)
-                        collection_list.append(file_to_process_json)
-                    if i == 1:
+                    if self.config.get('folder_exposed_through_cdn') not in my_json.get('id'):  # nothing in the folder exposed through cdn should have image processing done for it.
+                        if self.event.get('exportAllFilesFlag', False) or item_id not in self.file_to_process_records_in_dynamo or my_json.get('modifiedDate', '') > self.file_to_process_records_in_dynamo[item_id].get('dateModifiedInDynamo', ''):  # noqa: #501
+                            file_to_process_json = dict(my_json)
+                            file_to_process_json = add_file_to_process_keys(file_to_process_json)
+                            batch.put_item(Item=file_to_process_json)
+                            collection_list.append(file_to_process_json)
+                    if i == 1:  # Only insert Group records for the first record in each set
                         if my_json.get('objectFileGroupId'):  # This will be removed once we transition to imageGroupId and mediaGroupId
                             file_group_record = {'objectFileGroupId': my_json.get('objectFileGroupId')}
                             file_group_record['storageSystem'] = my_json.get('storageSystem')
                             file_group_record['typeOfData'] = my_json.get('typeOfData')
                             file_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
                             file_group_record = add_file_group_keys(file_group_record)
-                            print("uncomment this code")
-                            # batch.put_item(Item=file_group_record)
+                            batch.put_item(Item=file_group_record)
                             collection_list.append(file_group_record)
                         if my_json.get('imageGroupId'):
                             image_group_record = {'imageGroupId': my_json.get('imageGroupId')}
@@ -153,8 +144,7 @@ class FilesApi():
                             image_group_record['typeOfData'] = my_json.get('typeOfData')
                             image_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
                             image_group_record = add_image_group_keys(image_group_record)
-                            print("uncomment this code")
-                            # batch.put_item(Item=image_group_record)
+                            batch.put_item(Item=image_group_record)
                             collection_list.append(image_group_record)
                         if my_json.get('mediaGroupId'):
                             media_group_record = {'mediaGroupId': my_json.get('mediaGroupId')}
@@ -162,8 +152,7 @@ class FilesApi():
                             media_group_record['typeOfData'] = my_json.get('typeOfData')
                             media_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
                             media_group_record = add_media_group_keys(media_group_record)
-                            print("uncomment this code")
-                            # batch.put_item(Item=media_group_record)
+                            batch.put_item(Item=media_group_record)
                             collection_list.append(media_group_record)
         return collection_list
 
@@ -177,7 +166,7 @@ class FilesApi():
         cache_file = os.path.join(self.directory, 'crawl_available_files_cache.json')
         if force_use_s3 or (not self.config.get("test", False) and not self.config.get('local', False)):
             objects = crawl_available_files(self.config, bucket)
-            if self.config.get('local', False):
+            if self.config.get('local', False) or self.config.get('forceSaveCrawlAvailableFiles', False):
                 self._cache_s3_call(cache_file, objects)
             return objects
         elif os.path.exists(cache_file):

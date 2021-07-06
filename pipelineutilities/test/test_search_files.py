@@ -196,7 +196,8 @@ class TestSearchFiles(unittest.TestCase):
             'mediaGroupId': '005065260',
             'mimeType': 'audio/wav',
             'mediaResourceId': 'media%2F005065260%2FCROCKER_1_01_Universi.wav',
-            'mediaServer': 'https://marbleb-multimedia.library.nd.edu'
+            'mediaServer': 'https://marbleb-multimedia.library.nd.edu',
+            'typeOfData': 'Multimedia bucket'
         }
         self.assertEqual(actual_results, expected_results)
 

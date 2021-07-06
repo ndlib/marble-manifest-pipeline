@@ -53,8 +53,8 @@ def test():
     else:
         event = {}
         event["local"] = False
-        # event['ssm_key_base'] = '/all/stacks/steve-manifest'
-        event['ssm_key_base'] = '/all/stacks/marbleb-prod-manifest'
+        event['ssm_key_base'] = '/all/stacks/steve-manifest'
+        # event['ssm_key_base'] = '/all/stacks/marbleb-prod-manifest'
         event['seconds-to-allow-for-processing'] = 60 * 10 * 5
         # config['marble-content-bucket'] = 'libnd-smb-marble"
         # event['image-server-base-url'] = 'http://images.com'

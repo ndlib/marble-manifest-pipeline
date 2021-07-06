@@ -398,6 +398,7 @@ def augement_file_record(obj: dict, id: str, url: str, config: dict, bucket: str
         obj['mediaServer'] = config['media-server-base-url']
         obj['mediaResourceId'] = obj.get('filePath').replace('/', '%2F')
         obj['sourceUri'] = os.path.join(obj.get('mediaServer'), obj.get('mediaResourceId'))
+        obj['typeOfData'] = 'Multimedia bucket'
     elif (not in_cdn_folder_flag) and (file_extension in config['image-file-extensions'] or file_extension == '.pdf'):
         file_path_without_extension = os.path.splitext(obj.get('key'))[0].replace('public-access/', '')
         obj['filePath'] = obj.get('key')
