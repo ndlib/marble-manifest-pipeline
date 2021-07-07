@@ -15,6 +15,10 @@ pushd bendo_export
 ./local_install.sh
 popd
 
+pushd copy_media_content
+./local_install.sh
+popd
+
 pushd curate_export
 ./local_install.sh
 popd
