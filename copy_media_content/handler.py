@@ -28,7 +28,7 @@ def run(event, _context):
         return
     file_extension = Path(key).suffix
     print("file_extension =", file_extension)
-    if not file_extension or file_extension.lower() not in ['.mp3', '.mp4', '.wav', '.pdf':  # We only want to move media files
+    if not file_extension or file_extension.lower() not in ['.mp3', '.mp4', '.wav', '.pdf']:  # We only want to move media files
         print("Skipping because file is not a media file.")
         return
     new_key = os.path.join('public-access/media', key)
