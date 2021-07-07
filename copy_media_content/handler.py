@@ -27,6 +27,9 @@ def run(event, _context):
     if 'temp/' in key:  # We will only trigger a move for content not in the public-access folder
         print('Skipping because file is in temp folder.')
         return
+    if '/._' in key:
+        print("Skipping hidden resource fork files.")
+        return
     file_extension = Path(key).suffix
     print("file_extension =", file_extension)
     if not file_extension or file_extension.lower() not in ['.mp3', '.mp4', '.wav', '.pdf']:  # We only want to move media files
