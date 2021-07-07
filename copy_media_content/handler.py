@@ -16,10 +16,11 @@ if 'SENTRY_DSN' in os.environ:
 
 def run(event, _context):
     """ Run the process to retrieve and process Aleph metadata. """
-
+    print("event =", event)
     # Get the object from the event and show its content type
     bucket_name = event['Records'][0]['s3']['bucket']['name']
     key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'], encoding='utf-8')
+    print("key =", key)
     if 'public-access/' in key:  # We will only trigger a move for content not in the public-access folder
         print('Skipping because file is in public-access folder.')
         return
