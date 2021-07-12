@@ -8,8 +8,9 @@ from urllib.parse import urlparse
 # "libnd-smb-rbsc": ["digital/bookreader", "collections/ead_xml/images"]
 
 bucket_to_url = {
-    "libnd-smb-rbsc": 'https://rarebooks.library.nd.edu/',
-    "rbsc-test-files": 'https://rarebooks.library.nd.edu/',
+    # "libnd-smb-rbsc": 'https://rarebooks.library.nd.edu/',
+    # "rbsc-test-files": 'https://rarebooks.library.nd.edu/',
+    "libnd-smb-marble": "https://marbleb-multimedia.library.nd.edu/",
     "mlk-multimedia-333680067100": 'https://mlk-multimedia.library.nd.edu/',
     "steve-multimedia-333680067100": 'https://steve-multimedia.libraries.nd.edu/',
     "sm-multimedia-333680067100": 'https://sm-multimedia.libraries.nd.edu/',
@@ -22,10 +23,15 @@ bucket_to_url = {
 }
 
 folders_to_crawl = [
-    "digital",
-    "collections/ead_xml/images",
-    "audio",
-    "video"
+    # "digital",
+    # "collections/ead_xml/images",
+    # "audio",
+    # "video"
+    "public-access",
+    "Aleph",
+    "ArchivesSpace",
+    "Curate",
+    # "other"
 ]
 
 # patterns we skip if the file matches these
@@ -51,50 +57,79 @@ valid_urls = [
 ]
 
 regexps = {
-    "ead_xml": [
-        r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
-        r"([a-zA-Z]{3}_[0-9]{2,4}-[0-9]+)",
-        r"(^[0-9]{4}-[0-9]{2})",
-    ],
-    "MARBLE-images": [
+    # "ead_xml": [
+    #     r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
+    #     r"([a-zA-Z]{3}_[0-9]{2,4}-[0-9]+)",
+    #     r"(^[0-9]{4}-[0-9]{2})",
+    # ],
+    # "MARBLE-images": [
+    #     r"([a-zA-Z]{3}_[0-9]{9})",
+    #     r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{4})",
+    #     r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{3}-[0-9]{3})",
+    #     r"(^[a-zA-Z]{4}_[0-9]{4}-[0-9]{2})",
+    # ],
+    # "letters": [
+    #     r"(^[0-9]{4}-[0-9]{2})",
+    # ],
+    # "colonial_american": [
+    #     r"(^[0-9]{4}-[0-9]{2})",
+    # ],
+    # "diaries_journals": [
+    #     r"(^[0-9]{4})",
+    #     r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4})",
+    # ],
+    # "papers_personal": [
+    #     r"(^[0-9]{4}-[0-9]{2})",
+    # ],
+    # "digital": [
+    #     r"(^El_Duende)",
+    #     r"(^Newberry-Case_[a-zA-Z]{2}_[0-9]{3})",
+    #     r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
+    #     r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{1,3}))",
+    #     r"(^[0-9]{4})",
+    # ],
+    # "audio": [
+    #     r"/([^/]*)/[^/]*\.mp3",  # Gets the directory the .mp3 is in
+    #     r"/([^/]*)/[^/]*\.wav",  # Gets the directory the .wav is in
+    # ],
+    # "video": [
+    #     r"/([^/]*)/[^/]*\.mp4",  # Gets the directory the .mp4 is in
+    # ],
+
+    "Aleph": [
         r"([a-zA-Z]{3}_[0-9]{9})",
         r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{4})",
         r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{3}-[0-9]{3})",
         r"(^[a-zA-Z]{4}_[0-9]{4}-[0-9]{2})",
     ],
-    "letters": [
-        r"(^[0-9]{4}-[0-9]{2})",
+    "ArchivesSpace": [
+        r"([a-zA-Z]{3}_[0-9]{9})",
+        r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{4})",
+        r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{3}-[0-9]{3})",
+        r"(^[a-zA-Z]{4}_[0-9]{4}-[0-9]{2})",
     ],
-    "colonial_american": [
-        r"(^[0-9]{4}-[0-9]{2})",
+    "Curate": [
+        r"/([^/]*)/([^/]*)/[^/]*\.tif",
     ],
-    "diaries_journals": [
-        r"(^[0-9]{4})",
-        r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4})",
+    "other": [
+        r"([a-zA-Z]{3}_[0-9]{9})",
+        r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{4})",
+        r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{3}-[0-9]{3})",
+        r"(^[a-zA-Z]{4}_[0-9]{4}-[0-9]{2})",
     ],
-    "papers_personal": [
-        r"(^[0-9]{4}-[0-9]{2})",
-    ],
-    "digital": [
-        r"(^El_Duende)",
-        r"(^Newberry-Case_[a-zA-Z]{2}_[0-9]{3})",
-        r"([a-zA-Z]{3}-[a-zA-Z]{2}_[0-9]{4}-[0-9]+)",
-        r"(^.*_(?:[0-9]{4}|[a-zA-Z][0-9]{1,3}))",
-        r"(^[0-9]{4})",
-    ],
-    "audio": [
-        r"/([^/]*)/[^/]*\.mp3",  # Gets the directory the .mp3 is in
-        r"/([^/]*)/[^/]*\.wav",  # Gets the directory the .wav is in
-    ],
-    "video": [
-        r"/([^/]*)/[^/]*\.mp4",  # Gets the directory the .mp4 is in
+    "public-access": [  # assumption is that format will be: public-access/media/parentId/filename  we want to return media/parentId/filename, and will chose parentId as GroupId
+        r"/([^/]*)/([^/]*)/[^/]*\.mp4",  # Gets the directory the file is in
+        r"/([^/]*)/([^/]*)/[^/]*\.mp3",  # Gets the directory the file is in
+        r"/([^/]*)/([^/]*)/[^/]*\.wav",  # Gets the directory the file is in
+        r"/([^/]*)/([^/]*)/[^/]*\.pdf",  # Gets the directory the file is in
     ],
 }
 
 # Regexps for these folders should use the full path as input instead of just the filename
 full_path_folders = [
-    "audio",
-    "video",
+    # "audio",
+    # "video",
+    "public-access"
 ]
 
 # urls in this list do not have a group note in the output of the parse_filename function
@@ -103,13 +138,15 @@ urls_without_a_group = [
 ]
 
 
+folder_exposed_through_cdn = 'public-access'
+
+
 def id_from_url(url):
     if not url_can_be_harvested(url):
         return False
 
     url = urlparse(url)
     file = os.path.basename(url.path)
-
     if file_should_be_skipped(url.path):
         return False
 
@@ -125,6 +162,8 @@ def id_from_url(url):
     for exp in test_expressions:
         test = re.search(exp, url.path if use_full_path else file)
         if test:
+            if use_full_path:
+                return test.group(2)
             return test.group(1)
 
     return False
@@ -340,31 +379,44 @@ def is_directory(file):
     return file and re.match(".*[/]$", file) and not re.match("^[.]", file)
 
 
-def augement_file_record(obj, id, url, config, bucket):
+def augement_file_record(obj: dict, id: str, url: str, config: dict, bucket: str) -> dict:
+    ''' Note:  This was changed 7/2/2021 to rename *.pdf to *.tif so the Marble image processor will deal with pdfs correctly. '''
     obj['fileId'] = id
     obj['label'] = make_label(url, id)
     obj['sourceType'] = 'S3'
     obj['source'] = bucket
-    obj['path'] = obj['key']
-    obj['sourceUri'] = url
+    obj['path'] = obj['key'].replace('public-access/', '')
     obj["sourceBucketName"] = bucket
     obj["sourceFilePath"] = obj.get('key')
-    file_extension = os.path.splitext(obj.get('key'))[1]
-    obj['filePath'] = os.path.splitext(obj.get('key'))[0]
-    if file_extension in ('.jpg', '.tif'):
-        obj['filePath'] = obj['filePath'] + '.tif'
-    else:
-        obj['filePath'] = obj.get('key')
-    if is_media_file(config.get('media-file-extensions', []), obj['filePath']):
+    in_cdn_folder_flag = folder_exposed_through_cdn in obj.get('key')
+    file_extension = os.path.splitext(obj.get('key'))[1].lower()
+    if bucket == config.get('marble-content-bucket') and in_cdn_folder_flag and is_media_file(config.get('media-file-extensions', []), obj.get('key')):
+        # references to this file will only be through the CDN, not through S3
+        obj['filePath'] = obj.get('key').replace('public-access/', '')
+        obj['sourceType'] = 'Uri'
         obj['mediaGroupId'] = id
-        viewer_image_server_base_url = config['media-server-base-url']
-        strip_extension_for_media_resource_id = False
-    else:
+        obj['mediaServer'] = config['media-server-base-url']
+        obj['mediaResourceId'] = obj.get('filePath').replace('/', '%2F')
+        obj['sourceUri'] = os.path.join(obj.get('mediaServer'), obj.get('mediaResourceId'))
+        obj['typeOfData'] = 'Multimedia bucket'
+    elif (not in_cdn_folder_flag) and (file_extension in config['image-file-extensions'] or file_extension == '.pdf'):
+        file_path_without_extension = os.path.splitext(obj.get('key'))[0].replace('public-access/', '')
+        obj['filePath'] = obj.get('key')
+        if file_extension in ('.jpg', '.tif'):
+            obj['filePath'] = file_path_without_extension + '.tif'
+        if file_extension == '.pdf':
+            update_pdf_fields(obj)
+            file_extension = '.pdf'
         obj['objectFileGroupId'] = id
         obj['imageGroupId'] = id
-        viewer_image_server_base_url = config['image-server-base-url']
-        strip_extension_for_media_resource_id = True
-    obj = _add_more_file_fields(obj, viewer_image_server_base_url, strip_extension_for_media_resource_id)
+        obj['mediaServer'] = config['image-server-base-url']
+        file_path_no_extension = os.path.join(Path(obj.get('filePath')).parent, Path(obj.get('filePath')).stem)
+        obj['mediaResourceId'] = file_path_no_extension.replace('/', '%2F')
+    else:
+        obj = {}
+    if obj and file_extension and 'mimeType' not in obj:
+        obj['mimeType'] = _get_mime_type_given_file_extension(file_extension)
+    return obj
 
 
 def determine_time_threshold_for_processing(time_in_min):
@@ -388,23 +440,6 @@ def json_serial(obj):
     if isinstance(obj, (datetime, date)):
         return obj.isoformat()
     raise TypeError("Type %s not serializable" % type(obj))
-
-
-def _add_more_file_fields(json_record: dict, iiif_image_service_uri: str = None, strip_extension_for_media_resource_id: bool = True) -> dict:
-    """ Add mimeType (if absent), add mediaServer and mediaResourceId """
-    file_path = json_record.get('filePath')
-    if file_path:
-        file_extension = Path(file_path).suffix.lower()
-        if file_extension and 'mimeType' not in json_record:
-            json_record['mimeType'] = _get_mime_type_given_file_extension(file_extension)
-        if strip_extension_for_media_resource_id:
-            file_path_no_extension = os.path.join(Path(file_path).parent, Path(file_path).stem)
-            json_record['mediaResourceId'] = file_path_no_extension.replace('/', '%2F')
-        else:
-            json_record['mediaResourceId'] = file_path.replace('/', '%2F')
-        if iiif_image_service_uri:
-            json_record['mediaServer'] = iiif_image_service_uri
-    return json_record
 
 
 def _get_mime_type_given_file_extension(file_extension: str) -> str:
@@ -431,6 +466,14 @@ def is_media_file(media_file_extensions: list, file_name: str) -> bool:
     return False
 
 
+def update_pdf_fields(standard_json: dict):
+    fields = ['id', 'filePath', 'description', 'title', 'path']
+    for field in fields:
+        if field in standard_json:
+            standard_json[field] = standard_json.get(field).replace('.pdf', '.tif')
+    standard_json['mimeType'] = 'image/tiff'  # correct the mimeType to reflect tiff
+
+
 # python -c 'from search_files import *; test()'
 def test():
     from pipeline_config import setup_pipeline_config
@@ -438,12 +481,13 @@ def test():
 
     config = setup_pipeline_config(event)
     # change to the prod bucket
-    config['rbsc-image-bucket'] = "libnd-smb-rbsc"
-    config['multimedia-bucket'] = "marble-multimedia-230391840102"
-    # data = list_updated_files(config, config['rbsc-image-bucket'], 1000000)
-    data = crawl_available_files(config, config['rbsc-image-bucket'])
+    # config['rbsc-image-bucket'] = "libnd-smb-rbsc"
+    # config['multimedia-bucket'] = "marble-multimedia-230391840102"
+    config['marble-content-bucket'] = "libnd-smb-marble"
+    # data = list_updated_files(config, config['marble-content-bucket'], 1000000)
+    data = crawl_available_files(config, config['marble-content-bucket'])
     for id, value in data.items():
-        print(id)
+        print("results =", id, value)
         # print(value)
 
     return
