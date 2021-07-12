@@ -37,7 +37,7 @@ class FilesApi():
             print("pulling file_to_process_records from dynamo")
             self.file_to_process_records_in_dynamo = get_all_file_to_process_records_by_storage_system(self.config.get('website-metadata-tablename', ''), 'S3')
             self.table = boto3.resource('dynamodb').Table(self.table_name)
-        self.config['forceSaveCrawlAvailableFiles'] = True
+        self.config['forceSaveCrawlAvailableFiles'] = False
 
     def save_files_details(self):
         """ This will crawl available files, then loop through the file listing, saving each to dynamo """
