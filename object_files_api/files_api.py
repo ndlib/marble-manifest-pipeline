@@ -109,6 +109,8 @@ class FilesApi():
             my_json = dict(file_info)
             my_json['sequence'] = i
             my_json['id'] = my_json.get('key', '')
+            if 'mediaGroupId' not in my_json and 'imageGroupId' not in my_json:
+                continue  # We must have either mediaGroupId or imageGroupId or we can't process this record.
             if 'mediaGroupId' in my_json:  # is_media_file(self.config.get('media-file-extensions', []), my_json.get('id')):
                 my_json = add_media_keys(my_json, self.config.get('media-server-base-url', ''))
             else:
