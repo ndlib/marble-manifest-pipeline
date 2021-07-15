@@ -213,6 +213,30 @@ def find_item_records_with_images(table_name: str):
     return unique_imageGroupIds_referenced
 
 
+def delete_certain_image_records(table_name: str):
+    """ Delete certain File records, depending on criteria below """
+    print("deleting Image records")
+    pk = 'IMAGE'
+    sk = 'IMAGE#DIGITAL/MARBLE-IMAGES'
+    kwargs = {}
+    kwargs['KeyConditionExpression'] = Key('PK').eq(pk) & Key('SK').begins_with(sk)
+    kwargs['ProjectionExpression'] = 'PK, SK, sourceType'
+    done = False
+    records_deleted = 0
+    table = boto3.resource('dynamodb').Table(table_name)
+    while not done:
+        results = query_dynamo_records(table_name, **kwargs)
+        with table.batch_writer() as batch:
+            for record in results.get('Items', []):
+                batch.delete_item(Key={'PK': record.get('PK'), 'SK': record.get('SK')})
+                records_deleted += 1
+        if results.get('LastEvaluatedKey'):
+            kwargs['ExclusiveStartKey'] = results.get('LastEvaluatedKey')
+        else:
+            done = True
+    return records_deleted
+
+
 def query_dynamo_records(table_name: str, **kwargs) -> dict:
     """ very generic dynamo query """
     response = {}
@@ -261,7 +285,7 @@ def test(identifier=""):
         'marbleb-prod-manifest-websiteMetadata470E321C-5EJSG31E16Z7',
         'marbleb-test-manifest-websiteMetadata470E321C-JJG277N1OMMC'
     ]
-    tables_to_process = testlibnd_tables
+    tables_to_process = libnd_tables
     # tables_to_process = libnd_tables
 
     # event['website-metadata-tablename'] = 'steve-manifest-websiteMetadata470E321C-1D6R3LX7EI284'
@@ -274,6 +298,8 @@ def test(identifier=""):
 
     # Do processing desired for all tables listed
     for table_name in tables_to_process:
-        event['website-metadata-tablename'] = table_name
-        event = run(event, {})
-        print(table_name, event)
+        # event['website-metadata-tablename'] = table_name
+        # event = run(event, {})
+        # print(table_name, event)
+        records_deleted = delete_certain_image_records(table_name)
+        print(table_name, " had ", records_deleted, "records deleted.")
