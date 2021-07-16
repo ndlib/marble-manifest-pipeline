@@ -2,14 +2,13 @@
 
 import _set_path  # noqa
 import boto3
-from boto3.dynamodb.conditions import Key, Attr
+from boto3.dynamodb.conditions import Key
 from botocore.exceptions import ClientError
-import os
-from pathlib import Path
 import sentry_sdk   # noqa: E402
 from dynamo_helpers import format_key_value, get_iso_date_as_string
 import datetime
 import json
+import io
 
 
 def query_dynamo_records(table_name: str, **kwargs) -> dict:
@@ -85,7 +84,7 @@ def make_new_user_json(existing_user_json: dict) -> dict:
         json_record['primaryAffiliation'] = 'student'
     json_record['SK'] = 'USER#' + format_key_value(existing_user_json.get('userName'))
     json_record['TYPE'] = 'PortfolioUser'
-
+    json_record['migratedDate'] = get_iso_date_as_string()
     return json_record
 
 
@@ -109,12 +108,15 @@ def make_new_collection_json(collection_json: dict, user_id: str) -> dict:
     json_record['SK'] = 'USER#' + format_key_value(user_id) + '#' + format_key_value(collection_json.get('uuid'))
     json_record['title'] = collection_json.get('title')
     json_record['TYPE'] = 'PortfolioCollection'
+    json_record['migratedDate'] = get_iso_date_as_string()
     return json_record
 
 
 def make_new_item_json(existing_item_json: dict, user_id: str) -> dict:
     json_record = {}
-    json_record['annotation'] = existing_item_json.get('annotation')
+    json_record['annotation'] = ''
+    if existing_item_json.get('annotation') != '{{NULL}}':
+        json_record['annotation'] = existing_item_json.get('annotation')
     json_record['dateAddedToDynamo'] = datetime.datetime.fromtimestamp(existing_item_json.get('created') / 1000).isoformat()
     json_record['dateModifiedInDynamo'] = datetime.datetime.fromtimestamp(existing_item_json.get('updated') / 1000).isoformat()
     json_record['description'] = ''
@@ -133,6 +135,7 @@ def make_new_item_json(existing_item_json: dict, user_id: str) -> dict:
     json_record['title'] = existing_item_json.get('title')
     json_record['TYPE'] = 'PortfolioItem'
     json_record['uri'] = existing_item_json.get('manifest')
+    json_record['migratedDate'] = get_iso_date_as_string()
     return json_record
 
 
@@ -158,11 +161,7 @@ def create_json_records_for_collection(collection_uuid: str) -> list:
     return new_results, old_results
 
 
-def test(identifier=""):
-    """ test exection """
-    # print(find_item_records_with_images('steve-manifest-websiteMetadata470E321C-1D6R3LX7EI284'))
-
-    collections_of_interest_list = ['e899e792-d26a-4ddf-859f-35f1ea0d1143', '85f5e244-0301-46bc-8ee7-9b4fba9cb0e4', '4314ab19-3ef5-4953-99d2-f54215e154b0', 'dc496e00-1610-465b-9eee-1203dc2e62fb']
+def capture_existing_collection_content(collections_of_interest_list: list, old_content_file_name: str, new_content_file_name: str):
     all_new_results = []
     all_old_results = []
 
@@ -171,8 +170,46 @@ def test(identifier=""):
         all_new_results.extend(new_results)
         all_old_results.extend(old_results)
 
-    with open('new_portfolio_results.json', 'w') as output_file:
+    with open(new_content_file_name, 'w') as output_file:
         json.dump(all_new_results, output_file, indent=2)
 
-    with open('old_portfolio_results.json', 'w') as output_file:
+    with open(old_content_file_name, 'w') as output_file:
         json.dump(all_old_results, output_file, indent=2, default=str)
+
+
+def save_collection_content_to_new_table(table_name: str, new_content_file_name: str):
+    with io.open(new_content_file_name, 'r', encoding='utf-8') as json_file:
+        new_content_list = json.load(json_file)
+
+    table = boto3.resource('dynamodb').Table(table_name)
+    with table.batch_writer() as batch:
+        for record_to_insert in new_content_list:
+            batch.put_item(Item=record_to_insert)
+    return
+
+
+def test(identifier=""):
+    """ test exection """
+    # print(find_item_records_with_images('steve-manifest-websiteMetadata470E321C-1D6R3LX7EI284'))
+
+    # testlibnd_tables = [
+    #     'steve-manifest-websiteMetadata470E321C-1D6R3LX7EI284',
+    #     'jon-test-manifest-websiteMetadata470E321C-ZCSU70JC12I0',
+    #     'jon-prod-manifest-websiteMetadata470E321C-8NG755QB2S5I',
+    #     'sm-test-manifest-websiteMetadata470E321C-E5FXU8HUIWQG',
+    #     'sm-prod-manifest-websiteMetadata470E321C-HO7FZQXZXI8M',
+    #     'testlib-prod-manifest-websiteMetadata470E321C-1XA9OOG7PJWEE',
+    #     'testlib-test-manifest-websiteMetadata470E321C-1XQ2EFEWM3UXZ',
+    #     'mlk-manifest-websiteMetadata470E321C-1M04DW0EXCC91'
+    # ]
+    libnd_tables = [
+        'marbleb-prod-manifest-websiteMetadata470E321C-5EJSG31E16Z7',
+        'marbleb-test-manifest-websiteMetadata470E321C-JJG277N1OMMC'
+    ]
+
+    # collections_of_interest_list = ['e899e792-d26a-4ddf-859f-35f1ea0d1143', '85f5e244-0301-46bc-8ee7-9b4fba9cb0e4', '4314ab19-3ef5-4953-99d2-f54215e154b0', 'dc496e00-1610-465b-9eee-1203dc2e62fb']
+    # old_content_file_name = 'old_portfolio_results.json'
+    new_content_file_name = 'new_portfolio_results.json'
+    # capture_existing_collection_content(collections_of_interest_list, old_content_file_name, new_content_file_name)
+    for table_name in libnd_tables:
+        save_collection_content_to_new_table(table_name, new_content_file_name)

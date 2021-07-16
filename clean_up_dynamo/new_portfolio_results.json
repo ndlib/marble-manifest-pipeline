@@ -10,7 +10,8 @@
     "portfolioUserId": "nmurphy3",
     "primaryAffiliation": "student",
     "SK": "USER#NMURPHY3",
-    "TYPE": "PortfolioUser"
+    "TYPE": "PortfolioUser",
+    "migratedDate": "2021-07-16T09:00:33.513491"
   },
   {
     "dateAddedToDynamo": "2021-03-12T14:01:59",
@@ -30,7 +31,8 @@
     "privacy": "public",
     "SK": "USER#NMURPHY3#E899E792-D26A-4DDF-859F-35F1EA0D1143",
     "title": "Renaissance Art",
-    "TYPE": "PortfolioCollection"
+    "TYPE": "PortfolioCollection",
+    "migratedDate": "2021-07-16T09:00:33.513512"
   },
   {
     "annotation": "A comparison of \"Christ on the Cross\" to the \"Crucifixion,\" produced a century before, shows the change in artistic styles that typified the Renaissance. The representation of Jesus's body is much more naturalistic, representing a greater focus on his human body than on his divinity. The colors used are much more sober, showing the movement away from icon-style imagery in Western religious art.",
@@ -50,7 +52,8 @@
     "SK": "USER#NMURPHY3#E899E792-D26A-4DDF-859F-35F1EA0D1143#1961.047.013",
     "title": "Christ on the Cross",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1961.047.013/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1961.047.013/manifest",
+    "migratedDate": "2021-07-16T09:00:33.738890"
   },
   {
     "annotation": "This \"Madonna of Humility\" is from the late 14th century, just before the true spread of the Renaissance through Italy. As such, it represents much of the pre-Renaissance style, as can be noted with the representations of the Madonna and Child, which have a very two-dimensional and not particularly naturalistic style. The icon-like style of the portrait, also typical of Late Middle Ages Western European art, can be seen through the heavy use of gold, the medium of wood, and the arch-like shape of the piece.",
@@ -70,7 +73,8 @@
     "SK": "USER#NMURPHY3#E899E792-D26A-4DDF-859F-35F1EA0D1143#1954.018",
     "title": "Madonna of Humility",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1954.018/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1954.018/manifest",
+    "migratedDate": "2021-07-16T09:00:33.738918"
   },
   {
     "annotation": "This piece, too, is representative of the pre-Renaissance period. Like the \"Madonna of Humility,\" the heavy use of gold showcases the icon-like style of the painting. The exaltation of the figures also adds to this style, seen clearly through the halos on each figure's head. ",
@@ -90,7 +94,8 @@
     "SK": "USER#NMURPHY3#E899E792-D26A-4DDF-859F-35F1EA0D1143#1961.047.004",
     "title": "Crucifixion",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1961.047.004/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1961.047.004/manifest",
+    "migratedDate": "2021-07-16T09:00:33.738943"
   },
   {
     "annotation": "This portrait is representative of the movement towards humanism during the Renaissance. The subject is secular, a change from the predominant theme of religious art pre-Renaissance. Also, the influence of classical sculpture is evidence, reflecting the greater appreciation for Greek and Roman art. ",
@@ -110,7 +115,8 @@
     "SK": "USER#NMURPHY3#E899E792-D26A-4DDF-859F-35F1EA0D1143#2006.069.027",
     "title": "Head of a Young Woman Looking Up",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2006.069.027/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2006.069.027/manifest",
+    "migratedDate": "2021-07-16T09:00:33.738974"
   },
   {
     "annotation": "The \"Adoration of the Magi\" is typical of Northern Renaissance Art. Like other Renaissance artwork, the focus on naturalism in figures can be seen.The \"Northern\" flair can be seen in the fashion of the figures, as well as the more whimsical elements seen in the right side of the picture. ",
@@ -130,7 +136,8 @@
     "SK": "USER#NMURPHY3#E899E792-D26A-4DDF-859F-35F1EA0D1143#2011.006",
     "title": "Adoration of the Magi",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2011.006/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2011.006/manifest",
+    "migratedDate": "2021-07-16T09:00:33.738998"
   },
   {
     "bio": "This is a bio.",
@@ -143,7 +150,8 @@
     "portfolioUserId": "mnarlock",
     "primaryAffiliation": "faculty",
     "SK": "USER#MNARLOCK",
-    "TYPE": "PortfolioUser"
+    "TYPE": "PortfolioUser",
+    "migratedDate": "2021-07-16T09:00:34.196575"
   },
   {
     "dateAddedToDynamo": "2021-02-16T10:34:07",
@@ -163,10 +171,11 @@
     "privacy": "public",
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4",
     "title": "Prints and Posters",
-    "TYPE": "PortfolioCollection"
+    "TYPE": "PortfolioCollection",
+    "migratedDate": "2021-07-16T09:00:34.196599"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T08:53:19",
     "dateModifiedInDynamo": "2021-03-01T13:42:09",
     "description": "",
@@ -183,10 +192,11 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#2009.007.066",
     "title": "The Rights of the Working Class [Derecho de la Clase Obrera]",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2009.007.066/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2009.007.066/manifest",
+    "migratedDate": "2021-07-16T09:00:34.435815"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T09:09:10",
     "dateModifiedInDynamo": "2021-03-01T13:41:55",
     "description": "",
@@ -203,10 +213,11 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#003504839",
     "title": "St. Patrick's day in America",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/003504839/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/003504839/manifest",
+    "migratedDate": "2021-07-16T09:00:34.435843"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T08:53:49",
     "dateModifiedInDynamo": "2021-02-19T09:05:50",
     "description": "",
@@ -223,10 +234,11 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#2009.012.012",
     "title": "The USSR Is Defending the Freedom of the World. Let\u2019s Help! [La USSR Est\u00e1 Defendiendo la Libertad del Mundo. \u00a1Ayud\u00e9mosla!]",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2009.012.012/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2009.012.012/manifest",
+    "migratedDate": "2021-07-16T09:00:34.435869"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T09:09:59",
     "dateModifiedInDynamo": "2021-02-19T09:09:59",
     "description": "",
@@ -243,10 +255,11 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#005095915",
     "title": "1er grand prix d'aviation de l'ae\u0301ro-club de France : circuit d'anjou.",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/005095915/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/005095915/manifest",
+    "migratedDate": "2021-07-16T09:00:34.435892"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T09:09:04",
     "dateModifiedInDynamo": "2021-02-19T09:09:04",
     "description": "",
@@ -263,10 +276,11 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#004862474",
     "title": "Reading the Emancipation Proclamation",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/004862474/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/004862474/manifest",
+    "migratedDate": "2021-07-16T09:00:34.435915"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T09:08:59",
     "dateModifiedInDynamo": "2021-02-19T09:08:59",
     "description": "",
@@ -283,10 +297,11 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#004789783",
     "title": "William H. Harrison : late president of the United States.",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/004789783/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/004789783/manifest",
+    "migratedDate": "2021-07-16T09:00:34.435937"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T08:54:40",
     "dateModifiedInDynamo": "2021-02-19T09:05:50",
     "description": "",
@@ -303,10 +318,11 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#2014.052.008",
     "title": "The Angelic Guards",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.052.008/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.052.008/manifest",
+    "migratedDate": "2021-07-16T09:00:34.435960"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T08:54:03",
     "dateModifiedInDynamo": "2021-02-19T09:05:50",
     "description": "",
@@ -323,10 +339,11 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#2014.052.002",
     "title": "The Thames",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.052.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.052.002/manifest",
+    "migratedDate": "2021-07-16T09:00:34.435983"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T08:54:45",
     "dateModifiedInDynamo": "2021-02-19T09:05:50",
     "description": "",
@@ -343,10 +360,11 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#2014.052.007",
     "title": "Divine Justice",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.052.007/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.052.007/manifest",
+    "migratedDate": "2021-07-16T09:00:34.436006"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T09:08:52",
     "dateModifiedInDynamo": "2021-02-19T09:08:52",
     "description": "",
@@ -363,10 +381,11 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#005096931",
     "title": "U.S.A. bonds",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/005096931/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/005096931/manifest",
+    "migratedDate": "2021-07-16T09:00:34.436028"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T08:53:34",
     "dateModifiedInDynamo": "2021-02-19T09:05:48",
     "description": "",
@@ -383,10 +402,11 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#2009.020.002",
     "title": "Woman and Boy [Mujer y Ni\u00f1o]",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2009.020.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2009.020.002/manifest",
+    "migratedDate": "2021-07-16T09:00:34.436051"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T08:54:55",
     "dateModifiedInDynamo": "2021-02-19T09:05:48",
     "description": "",
@@ -403,10 +423,11 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#2014.052.003",
     "title": "Elysium and Tartarus (State of Final Retribution)",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.052.003/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.052.003/manifest",
+    "migratedDate": "2021-07-16T09:00:34.436073"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T08:55:07",
     "dateModifiedInDynamo": "2021-02-19T09:05:50",
     "description": "",
@@ -423,10 +444,11 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#2014.052.006",
     "title": "Reserved Knowledge",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.052.006/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.052.006/manifest",
+    "migratedDate": "2021-07-16T09:00:34.436096"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-19T08:54:51",
     "dateModifiedInDynamo": "2021-02-19T09:05:50",
     "description": "",
@@ -443,7 +465,8 @@
     "SK": "USER#MNARLOCK#85F5E244-0301-46BC-8EE7-9B4FBA9CB0E4#2014.052.004",
     "title": "Lord Baltimore and the Group of Legislators",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.052.004/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.052.004/manifest",
+    "migratedDate": "2021-07-16T09:00:34.436118"
   },
   {
     "bio": "Collections Database Coordinator, Snite Museum of Art",
@@ -456,7 +479,8 @@
     "portfolioUserId": "hbertold",
     "primaryAffiliation": "staff",
     "SK": "USER#HBERTOLD",
-    "TYPE": "PortfolioUser"
+    "TYPE": "PortfolioUser",
+    "migratedDate": "2021-07-16T09:00:34.883901"
   },
   {
     "dateAddedToDynamo": "2021-02-11T11:28:16",
@@ -476,7 +500,8 @@
     "privacy": "public",
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0",
     "title": "Touchstones of the Twentieth Century: A History of Photography at the University of Notre Dame",
-    "TYPE": "PortfolioCollection"
+    "TYPE": "PortfolioCollection",
+    "migratedDate": "2021-07-16T09:00:34.883922"
   },
   {
     "annotation": "The urbane Doris Ulmann was a leading portraitist on the Upper West Side of Manhattan. In the mid-1920s, she wanted to expand beyond her rarified clientele and took her camera to the country in upstate New York. Later she befriended the Pulitzer-Prize winning writer Julia Mood Peterkin. When visiting Peterkin at her plantation, Lang Syne, in South Carolina, Ulmann had the chance to photograph the farm workers, who lived much as their enslaved forebears. Yet Ulmann\u2019s images also represent sociability, generosity, and repose. This is one of several of Ulmann\u2019s Lang Syne images that present her subject\u2019s occupation as integral to her personality. A woman of dignity and accomplishment, she shares community responsibilities. Ulmann published her photographs, along with a selection of Peterkin\u2019s writing about African American life, in Roll, Jordan, Roll, named for the eighteenth-century Anglican hymn embraced by the African American community.",
@@ -496,7 +521,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2002.012.013",
     "title": "A Quilter from Roll, Jordan, Roll",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2002.012.013/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2002.012.013/manifest",
+    "migratedDate": "2021-07-16T09:00:35.495809"
   },
   {
     "annotation": "As an American bohemian in Paris during the 1920s, Berenice Abbott made memorable portraits of the era\u2019s artists and writers. She became an assistant to Man Ray, who helped refine her technical expertise and introduced her to many artists. Among them was Eug\u00e8ne Atget, who photographed Paris as it changed over his lifetime. When Abbott returned to New York after eight years in France, she found the city much changed. She photographed the transformation of New York, as Atget had recorded the evolution of Paris. For this image Abbott stood with her back to the Hudson River to photograph a row of old buildings warming in the afternoon sun. What seems at first to be a static architectural view teems with life on close inspection. Delivery vehicles represent the transformation of business in Tribeca as an officer directs traffic. Today, this street has become the West Side Highway, with six busy lanes of speeding traffic.",
@@ -516,7 +542,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1979.044",
     "title": "West Street Row: I",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1979.044/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1979.044/manifest",
+    "migratedDate": "2021-07-16T09:00:35.495885"
   },
   {
     "annotation": "As a young man, Robert Demachy befriended the artists and musicians of bohemian Paris, and sketched them at city caf\u00e9s. In 1880 he took up photography and the fashionable gum-bichromate technique. It enabled him to combine photographic imagery with hand drawing to give images a sketchy, expressive quality. \u201cIf a man slavishly copies nature,\u201d Demachy wrote, \u201cno matter if it is with hand and pencil or through a photographic lens, he may be a supreme artist all the while, but that particular work of his cannot be called a work of art.\u201d For Plains of Holland Demachy used a negative he made in the Netherlands. Working from his image, he drew on a sheet of writing paper with a mixture of watery ink, gum arabic, and light-sensitive potassium dichromate. When the sheet was exposed in contact with his negative, the gum hardened in proportion to the amount of light received. When the sheet was washed, an image of tinted gum was left where the artist had drawn.",
@@ -536,7 +563,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2015.061",
     "title": "Plains of Holland",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2015.061/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2015.061/manifest",
+    "migratedDate": "2021-07-16T09:00:35.495914"
   },
   {
     "annotation": "From his teen years Edward Steichen worked simultaneously as a painter and a photographer. In the late 1890s, he made watercolors and oil paintings in a luminous style inspired by Impressionism and the work of James McNeill Whistler. He experimented with visual effects of different colors in several versions of the moon rising through a screen of trees. This photograph is one of them, made on Long Island in summer 1904. To explore color effects in his photographs, Steichen printed this image in platinum, then superimposed layers of colored gum from the same negative on the same sheet. He achieved a similar effect in this enlarged photogravure, made sixty years later, by directing the intaglio printer to ink and wipe the plate with black, blue, and green inks. One of Steichen\u2019s few surviving Moonrise paintings of the 1910s is now in the Snite Museum collection and on view on the second floor.",
@@ -556,7 +584,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2003.039.004",
     "title": "Moonrise, the Pond",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2003.039.004/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2003.039.004/manifest",
+    "migratedDate": "2021-07-16T09:00:35.495944"
   },
   {
     "annotation": "In fall 1936, W. Eugene Smith arrived as a freshman at the University of Notre Dame with a scholarship to work as a student photographer. He dedicated himself more to photography than his studies, and decided after one term to leave the university and become a photojournalist. He worked for Newsweek and LIFE magazine often quarreling with editors. Nevertheless, Smith became the leading American photojournalist of his generation. He worked in the Pacific Theater during World War II, landing on Saipan with the United States Marines. Before their arrival, Japanese civilians and soldiers fled the cities, and the Marines had to hunt for them in the mountains and forests. During one methodical search, the Marines found an infant hidden in a hole by his fleeing mother. Smith captured the moment of the baby\u2019s discovery, just before he was rushed to a military hospital. A mirror image of this photograph appeared in LIFE in summer 1944, in an article on the Saipan operation.",
@@ -576,7 +605,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2005.011",
     "title": "Saipan",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2005.011/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2005.011/manifest",
+    "migratedDate": "2021-07-16T09:00:35.495972"
   },
   {
     "annotation": "The quintessential American Pop artist, Andy Warhol created a mythic persona to complement his art. In the 1960s he photographically transformed magazine reproductions into paintings and prints of stars like Marilyn Monroe and Elvis Presley. Later he developed key designs from original photographs, that he made with a Polaroid Big Shot, an affordable portrait camera with self-developing film...Santa Claus was made for the print series Myths, which caricatures American symbols like Uncle Sam, and Mickey Mouse.",
@@ -596,7 +626,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2008.026.010",
     "title": "Santa Claus",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2008.026.010/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2008.026.010/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496048"
   },
   {
     "annotation": "In 1930 Aaron Siskind was a middle-school English teacher when he joined the Film and Photo League. A Liberal advocate for social change, he created remarkable documentary series on life in the Bowery and in Harlem. Later, he befriended Adolph Gottlieb, Mark Rothko, and Barnett Newman, and shared the discussions that provided the conceptual foundations of Abstract Expressionism. Siskind also explored abstraction in his photographs. This image, made during summer vacation in New England, demonstrates how he used the viewfinder to mark balanced compositions. Siskind often photographed straight on, holding his camera perpendicular to walls and floors. He concentrated an arresting graphic design in these images without surrounding context and or spatial perspective.",
@@ -616,7 +647,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1995.080.003",
     "title": "Broken Window, Gloucester",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1995.080.003/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1995.080.003/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496098"
   },
   {
     "annotation": "\u201cThe object of the Photo-Secession,\u201d wrote Alfred Stieglitz, \u201cis to advance photography as applied to pictorial expression; to draw together those Americans practicing or otherwise interested in the art.\u201d This association of photographers that Stieglitz founded had an its own illustrated journal Camera Work, and a Fifth Avenue gallery to sell its work. Stieglitz took this photograph on a voyage to Germany aboard the S.S. Kaiser Wilhelm II. It is a view from the exclusive promenade deck down into steerage, where economy passengers traveled together. Their bustling social activities are contained by elements of naval architecture. Years later, Stieglitz\u2019s friend Max Weber recognized how the fragmented, flattened space and abstract design of this image embodied the tenets of Cubism. The Steerage appeared in Camera Work in 1911, but this enlarged print on Japanese paper was made for the new arts magazine of 291, meant to redirect attention back to the Photo-secession.",
@@ -636,10 +668,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2014.011",
     "title": "The Steerage",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.011/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.011/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496257"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:38:36",
     "dateModifiedInDynamo": "2021-02-11T11:38:36",
     "description": "",
@@ -656,7 +689,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1977.006",
     "title": "Barbara",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1977.006/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1977.006/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496345"
   },
   {
     "annotation": "Clarence H. White was an Ohio grocer when he took up photography as a hobby. Within a few years he had gained international recognition for his work, and to pursue photography as a profession, he moved his family to New York City. He taught at Columbia University Teachers College in a program run by Arthur Wesley Dow. Each summer White and his family traveled to Maine, to visit the originative Boston photographer F. Holland Day. Together, Day and his guests photographed figures in classical costume, posed in nature. Though made in upstate New York, this romantic figure who evokes a mythical dryad or wood nymph, reflects Day\u2019s style and influence. A few years later, White organized a summer school for art teachers in Maine. It evolved into the Clarence H. White School of Photography in New York, the first American teaching program to consolidate photographic technique with graphic design.",
@@ -676,7 +710,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2008.034",
     "title": "Nude Study",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2008.034/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2008.034/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496400"
   },
   {
     "annotation": "Minor White promoted photography as a means of self-reflection and poetic communication. As an associate of Ansel Adams in San Francisco, he explored themes from Christian mysticism in his landscape photographs. White became the first editor of Aperture magazine in 1952, and moved to Rochester, New York. He missed the natural beauty of California, until he discovered the old agricultural buildings of upstate New York. Over two centuries farming had transformed the region\u2019s landscape, and White realized that their buildings told a story of human interaction with nature. As family patrimony, and functional monuments, they are similar to ecclesiastical buildings. This barn\u2019s central doorway conveys a sense of sanctuary and congregation. For White the cruciform shadow of a utility pole in this photograph was a personal revelation.",
@@ -696,7 +731,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1995.073",
     "title": "Two Barns and Shadow, Dansville, New York from Sequence 10/Rural Cathedrals",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1995.073/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1995.073/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496432"
   },
   {
     "annotation": "The quintessential American Pop artist, Andy Warhol created a mythic persona to complement his art. In the 1960s he photographically transformed magazine reproductions into paintings and prints of stars like Marilyn Monroe and Elvis Presley. Later he developed key designs from original photographs, that he made with a Polaroid Big Shot, an affordable portrait camera with self-developing film...Warhol photographed the women\u2019s shoes for an advertising campaign for the designer Halston.",
@@ -716,7 +752,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2008.026.008",
     "title": "Shoes",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2008.026.008/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2008.026.008/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496464"
   },
   {
     "annotation": "In an era of increasing pressure on the natural environment, Richard Misrach has used photography to document natural splendor, and raise alarms for its well-being. During the 1970s he emerged as a pioneer of color photography for his nocturnal photographs of deserts of Arizona and Southern California. Later he took his camera onto public land in Nevada, sacred to Northern Paiute tribes, that had been used for military bombing tests in the 1950s. In 1997 Misrach and his family moved to a home in the Berkeley hills with a view of the Golden Gate, seven miles away. He marked a spot on the front porch where he could set up and relocate his tripod to photograph changing weather and light effects over the bay. This image, taken at sunrise on November 1, 1998, records a luminous cloud bank moving northward as the morning sunlight warms the atmosphere. Misrach took 700 photographs from his porch, 85 of which appeared in his photobook Golden Gate.",
@@ -736,7 +773,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2009.047.040",
     "title": "11.1.98, 6:45 A.M.",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2009.047.040/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2009.047.040/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496495"
   },
   {
     "annotation": "Born in Italy and raised in Brazil, Frederick Sommer settled in Arizona for his health. He met Max Ernst and Dorothea Tanning, who lived nearby, and was influenced by Surrealism. In 1957, Sommer began experimenting with synthetic negatives. He painted with brown pigment on small pieces of transparent cellophane, and manipulated the paint. Exposed in the enlarger, the clear portions of the sheet printed black, and the colored areas as a range of white and gray. Then he made gelatin silver prints several times larger than the handmade negatives. Sommer named this image for the Swiss Renaissance physician, botanist and alchemist, Paracelsus who is credited with founding the discipline of toxicology. This image appears to represent a human torso, opened in its side and abdomen to reveal an interior, which recalls the profane dissections of medieval anatomists.",
@@ -756,7 +794,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2001.002",
     "title": "Paracelsus",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2001.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2001.002/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496525"
   },
   {
     "annotation": "In 1913 Margrethe Mather was an amateur photographer in Los Angeles, and a frequent figure in aesthetic and liberal political circles. She met Edward Weston, then at work in a suburban portrait studio, and became his assistant and later his lover. Mather introduced Weston to technical refinements, and unfamiliar ideas of illumination, pose and composition. This photograph, from their time of collaboration, reflects Mather\u2019s interest in Japanese design, as well as the soft tonality of Pictorialism. Its bold cropping requires the viewer to imagine the complete figure. By representing the dancer turned from the viewer, Mather shifts our attention from her personality to the sculptural quality of her form. The experience is encouraged by varied shadowy tones and delicate textures.",
@@ -776,7 +815,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2016.018",
     "title": "Ballerina",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2016.018/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2016.018/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496553"
   },
   {
     "annotation": "When Jacques-Henri Lartigue was seven years old his father gave him his first camera and tripod. He needed a stool to reach the viewfinder. At a time of soft-focused Pictorialist photographs, the boy made images of movement and energy, as he and his brother progressed from kites and go-karts, to airplanes and automobiles. They witnessed early flights by aviation pioneers like Louis Bl\u00e9riot, and attended the Grand Prix race of the Automobile Club de France. In 1913, nineteen-year-old Lartigue captured this image of Ren\u00e9 Croquet at the annual race held that year at Amiens. Standing on the roadside, he tried to follow the speeding car with his camera. He was not quite fast enough, and the simultaneous movements of car and shutter resulted in an image in which diagonals seem to fan away from the central axis. Lartigue was insightful enough not to destroy his negative, but to print it.",
@@ -796,7 +836,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2015.045.003",
     "title": "Le Grand Prix",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2015.045.003/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2015.045.003/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496637"
   },
   {
     "annotation": "After studies with Clarence H. White at Columbia University, Dorothea Lange began the career of a photographer in San Francisco. There she met artists like Imogen Cunningham, Ansel Adams and the artist Maynard Dixon, whom she married. During the Great Depression, Lange had an upstairs studio overlooking a vacant lot opposite Pier 23. There, Lois Jordan, a one time ship\u2019s cook, fed the homeless. She appeared in her cook\u2019s whites each day, and the men called her the \u201cWhite Angel.\u201d The lot where Jordan\u2019s soup kitchen stood became known as the White Angel Jungle. This is Lange\u2019s first photograph there, which depicts the destitute lining up for a meal. One older man in a stained hat leans against a railing with an empty cup. This image came to symbolize the Great Depression, a crisis in which dignity and individuality were often lost amid multitudes of the desperate.",
@@ -816,7 +857,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2004.004",
     "title": "The White Angel Breadline",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2004.004/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2004.004/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496706"
   },
   {
     "annotation": "In the first years after the Soviet Revolution, Alexander Rodchenko was one of a small group of progressive artists tasked with forming the visual culture of a new society. He was a professor at VkhUTEMAS (the Higher State Artistic and Technical Studios), an academy conceived to produce well-designed, utilitarian objects for everyday living. Rodchenko embraced photography as a universally accessible visual medium. VkhUTEMAS took over Yushkov House from the Moscow Art Academy, a venerable beaux-arts-style city palace where art had been taught for over a century. When Rodchenko photographed the academy, however, he concentrated on this adjacent dormitory, built on the academy ground after the Revolution. In this Modernist high-rise block, students, faculty and administrators occupied identical apartments. The artist used the building\u2019s geometry as an arresting graphic design element.",
@@ -836,10 +878,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2014.041.003",
     "title": "Balconies from The House on Myasnitskaya Street",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.041.003/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.041.003/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496736"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:57:12",
     "dateModifiedInDynamo": "2021-02-11T11:57:12",
     "description": "",
@@ -856,7 +899,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2007.047.001",
     "title": "On the Edge of Time",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2007.047.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2007.047.001/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496763"
   },
   {
     "annotation": "During the 1960s, photojournalists embedded themselves in the lives of their subjects, hoping to capture their experiences more truthfully. Prominent among them was Danny Lyon. When he became involved with the Civil Rights Movement as a college student, he was appointed staff photographer for the Student Nonviolent Coordinating Committee. In 1967 the photographer was permitted to take his camera into the prisons of Texas, where he made many friends among the inmates over the fourteen-month project. This image is one from a sequence depicting a team preparing the fields for planting on a prison farm in East Texas. White uniforms protect them from the sun as they hoe in unison. Their heads fall below the horizon, as if they are already dead and beneath the earth, digging toward hell.",
@@ -876,7 +920,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1996.035.001",
     "title": "Hoe Line, Ferguson Prison, Huntsville, Texas from Conversations with the Dead",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1996.035.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1996.035.001/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496791"
   },
   {
     "annotation": "In 1936, publisher Henry Luce hired Margaret Bourke-White as the first staff photographer for LIFE, his weekly picture magazine. She covered the European Theater during World War II and became the first woman photographer accredited to the United States Air Force. In 1943 LIFE editors sent her to Gary, to investigate women who had taken industrial jobs in place of men drafted into the service. In this photograph for the magazine, they work as a team with military precision. Contemporary with Bourke-White\u2019s photographs of the welders, the popular song \u201cRosie the Riveter,\u201d by the Four Vagabonds became a hit, with its chorus: \u201cAll the day long / Whether rain or shine, / She\u2019s a part of the assembly line. / She\u2019s making history, / Working for victory: / Rosie . . . the Riveter.\u201d Bourke-White went on to photograph some of the era\u2019s most influential people for LIFE, from Joseph Stalin, to Pope Pius XI, and Mahatma Gandhi.",
@@ -896,10 +941,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2016.007.002",
     "title": "Beveling Armor Plate for Tanks, Gary, Indiana",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2016.007.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2016.007.002/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496819"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:14:17",
     "dateModifiedInDynamo": "2021-02-11T13:14:17",
     "description": "",
@@ -916,10 +962,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2018.007",
     "title": "H-21 Helicopter, Tr\u00e0 B\u00f4ng",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2018.007/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2018.007/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496846"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:55:54",
     "dateModifiedInDynamo": "2021-02-11T11:55:54",
     "description": "",
@@ -936,10 +983,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2007.008.002",
     "title": "Red Jackson, Harlem Gang Leader",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2007.008.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2007.008.002/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496874"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:38:23",
     "dateModifiedInDynamo": "2021-02-11T11:38:23",
     "description": "",
@@ -956,10 +1004,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1976.023.004",
     "title": "Boxers, Cologne",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1976.023.004/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1976.023.004/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496902"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:43:03",
     "dateModifiedInDynamo": "2021-02-11T11:43:03",
     "description": "",
@@ -976,10 +1025,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1993.041.001",
     "title": "New York",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1993.041.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1993.041.001/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496928"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:42:07",
     "dateModifiedInDynamo": "2021-02-11T11:42:07",
     "description": "",
@@ -996,7 +1046,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1983.040.002.007",
     "title": "New York City",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1983.040.002.007/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1983.040.002.007/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496956"
   },
   {
     "annotation": "Walker Evans set out to photograph the prosaic facts of American life, as Walt Whitman, Herman Melville and Henry David Thoreau had described them in their writing. He studied literature in college and spent time in Paris, before returning to a job on Wall Street. Living in Greenwich Village during the 1930s, Evans associated with writers and artists like James Agee, Hart Crane and Ben Shahn. He learned the finer points of photography, studied its history, and tried visually to encapsulate American experience. Evans developed his instinctive sense of pictorial composition to correlate with a direct and plainspoken style of writing. In this image an engaging geometrical interplay is simplified by a straight side view of the farmhouse. The Ford pickup parked outside invites us to imagine its owner, and the home\u2019s interior.",
@@ -1016,7 +1067,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1975.094",
     "title": "Farmhouse, Westchester, New York",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1975.094/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1975.094/manifest",
+    "migratedDate": "2021-07-16T09:00:35.496984"
   },
   {
     "annotation": "The celebrated novelist Wright Morris strove to depict the Midwestern American experience by combining words with original photographic images. While growing up in Omaha he enjoyed two memorable summers with his Uncle Harry and Aunt Clara on their remote Nebraska farm. Morris studied literature in college, then in 1933 he trekked through Europe with a camera to photograph his adventures. In the 1940s Morris combined his photographs with excerpts of original prose \u201cphototexts,\u201d interdependent works of art for exhibition. Some of these projects were published as books, including The Home Place, of 1948. Taken for the project, this photograph of the humble train station at Panama conveys the isolation of the prairie, and evokes Morris\u2019s childhood memories. He often photographed deserted and time-worn buildings on the Plains, standing mute records of past activity.",
@@ -1036,10 +1088,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2015.015.001",
     "title": "Panama, Nebraska",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2015.015.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2015.015.001/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497009"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:10:26",
     "dateModifiedInDynamo": "2021-02-11T13:10:26",
     "description": "",
@@ -1056,7 +1109,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2015.052",
     "title": "Cheese and Crackers",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2015.052/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2015.052/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497031"
   },
   {
     "annotation": "In 1962, Joel Meyerowitz bought a single-lens reflex camera and taught himself to use the darkroom. Every day he went out onto the streets of Manhattan and shot candid 35-mm Kodachrome slides of his fellow New Yorkers. In the darkroom he methodically studied the limitations of chromogenic printing. Meyerowitz bought an old 8 x 10-inch view camera in 1976. It demanded a slower rhythm, and its expensive film caused the photographer to focus on static images without figures. In Vivian\u2019s Things, Meyerowitz used his large camera to investigate light, space and color. Bright seaside light pours into the bedroom of a rented Cape Cod beach house. The reflections from different angles in glass surfaces around the room provide a complex view of the small space. Meyerowitz arranged a riot of colors and patterns reminiscent of the work of Les Nabis, the young Parisian painters of the 1890s\u2014like Pierre Bonnard and \u00c9douard Vuillard\u2014who combined the bright colors of Impressionism with compositional distortion.",
@@ -1076,10 +1130,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1979.032.003",
     "title": "Vivian's Things",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1979.032.003/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1979.032.003/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497056"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:40:17",
     "dateModifiedInDynamo": "2021-02-11T11:40:17",
     "description": "",
@@ -1096,7 +1151,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1977.103.002",
     "title": "White House, Canyon de Chelly",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1977.103.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1977.103.002/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497083"
   },
   {
     "annotation": "Ilse Bing took up photography to aid in her art history thesis. The medium transformed her perception of space and light, and she shifted to the profession of photography. She moved from Frankfurt to Paris in 1930 and became a photojournalist. Her creative work combined geometric studies of light and deep shadow with available light. This image shows not only the artist\u2019s fascination with the physics of reflected light, but also her relationship to her Leica camera, the mechanical tool of her visual creativity. With the use of two mirrors, this image provides both a frontal and profile view of the subject, like a Cubist composition. The large button on the photographer\u2019s cuff disturbs the play between the two. Its geometric form accentuates the play shape, space and tone in this complex image.",
@@ -1116,7 +1172,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2011.028",
     "title": "Self-Portrait with Mirrors",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2011.028/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2011.028/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497111"
   },
   {
     "annotation": "A child of privilege, Alvin Langdon Coburn was introduced to photography by his attentive, widowed mother. She took him to New York, California and Europe, and arranged introductions to Edward Steichen, Robert Demachy and F. Holland Day for the boy. He became the wunderkind of the Photo-Secession. In 1904 the commission for a series of portraits took Coburn to London. He explored the city with his camera, photographing views influenced by the work of James McNeill Whistler and Paul C\u00e9zanne. Over five years he accumulated images that he transformed into photogravure, etching and printing the plates himself. This plate from Coburn\u2019s London series reflects his shift from the aesthetics of Pictorialism to Modernism. Silhouetted in the sunlight, the softened outlines of a horse-drawn omnibus evoke indistinct memories. The poetic image evokes the hazy atmosphere of a city still shrouded in smoke and fog at the turn of the 20th century.",
@@ -1136,10 +1193,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1985.073.001",
     "title": "Hyde Park Corner from London",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1985.073.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1985.073.001/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497138"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:12:42",
     "dateModifiedInDynamo": "2021-02-11T13:12:42",
     "description": "",
@@ -1156,10 +1214,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2016.035",
     "title": "Still Life from Fotoplastik",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2016.035/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2016.035/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497165"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:05:45",
     "dateModifiedInDynamo": "2021-02-11T13:05:45",
     "description": "",
@@ -1176,10 +1235,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2011.014",
     "title": "Frankfurt Station",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2011.014/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2011.014/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497201"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:44:48",
     "dateModifiedInDynamo": "2021-02-11T11:44:48",
     "description": "",
@@ -1196,10 +1256,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1997.041.005.018",
     "title": "Andr\u00e9 Roch Skiing",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1997.041.005.018/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1997.041.005.018/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497519"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:09:00",
     "dateModifiedInDynamo": "2021-02-11T13:09:00",
     "description": "",
@@ -1216,7 +1277,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2014.057.002",
     "title": "Lapperman, Petsamo, Finland",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.057.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.057.002/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497552"
   },
   {
     "annotation": "When Hiroshi Sugimoto graduated from Rikkyo University in 1974, he set off with a backpack and camera instead of taking a salaried job. He settled in Los Angeles to study photography, then moved to New York to work as a creative photographer. Sugimoto\u2019s photographs of displays at the American Museum of Natural History, with their taxidermy mounts in fictive natural habitats, confronted themes of creativity, perception, and time. This image from Sugimoto\u2019s Theaters series grapples with similar issues. To photograph the lavish decor of 1920s American movie palaces, he set up his view camera under the projection booth in each deserted auditorium. He set the timer for the length of a feature film, and ran the movie. The individual frames of the film canceled each other to create a searing white light on screen, illuminating the empty interior. In this way, Sugimoto photographed the opulent room, the duration of the film, and the passage of time.",
@@ -1236,10 +1298,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2002.043",
     "title": "UA Walker Theater, New York from Theaters",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2002.043/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2002.043/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497581"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:06:37",
     "dateModifiedInDynamo": "2021-02-11T13:06:37",
     "description": "",
@@ -1256,10 +1319,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2013.023.002",
     "title": "The Last Man to Die",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2013.023.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2013.023.002/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497608"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:45:53",
     "dateModifiedInDynamo": "2021-02-11T11:45:53",
     "description": "",
@@ -1276,7 +1340,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2000.022",
     "title": "Boy Leaning on a Hydrant",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2000.022/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2000.022/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497635"
   },
   {
     "annotation": "When Ernest Knee was a teenager in Montreal, he acquired his first camera\u2014a Vest Pocket Kodak. Like his forebears he was captivated by the sea, and signed on to a freighter bound for the West Indies. In 1930, however, he was stricken with tuberculosis and moved to the American Southwest, where he met and married the painter Gina Schnaufer. They settled in Tesuque, north of Santa Fe, and began a family. Knee explored the countryside, photographing the Spanish colonial churches of the region. This chapel at La Manga is a private shrine. It was built in 1932 by David Ortega and his neighbors in gratitude for his brother\u2019s recovery from an illness. Knee\u2019s image captures the humble but much-loved sanctuary, glorified by nature with a bright Southwestern sky and a magnificent bank of cumulus clouds.",
@@ -1296,7 +1361,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1996.043.002",
     "title": "Chapel of the Holy Child of Atocha, La Manga, New Mexico",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1996.043.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1996.043.002/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497662"
   },
   {
     "annotation": "In 1897 the City of New Orleans established a licensed pleasure quarter, confining racetracks, gambling houses, and bordellos in a manageable district, and making these activities illegal elsewhere in the city. The scheme was promoted by alderman Sidney Story and the district came to be known as Storyville. Twenty-five-year old Ernest J. Belloc had then been a New Orleans photographer for several years. He was comfortable in Storyville, blocks from where he had grown up, and he photographed in its gaming rooms, opium dens and bordellos. This is one of a series of intimate portraits of women, thought to be Storyville prostitutes. The familiarity of these images has prompted speculation that Bellocq was a brothel habitu\u00e9 and that photographs reveal friendships with the women. This is a recent print from a group of negatives, discovered in 1967, that prompted much creative fantasy about the photographer and his life.",
@@ -1316,7 +1382,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1975.077",
     "title": "Storyville Portrait",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1975.077/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1975.077/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497735"
   },
   {
     "annotation": "Robert Frank moved to New York in 1947, to pursue a career in photography. A decade later, a Guggenheim Foundation Fellowship made it possible for him to journey across America with his camera. He found that the postwar industrial boom had produced a new abundance for Americans, with unprecedented comforts and conveniences. Frank photographed consumers who seem obsessed with these products, but unaware of each other. These marchers gathering before the New York St. Patrick\u2019s Day parade presents a similar alienation. Most of the celebrants appear unaware; only one little girl looks at the photographer. They congregate before a banner proclaiming County Derry as their home. The standard carries a portrait of John Mitchel, the Derry native son and Irish nationalist, who brought his views to the United States before the American Civil War. This symbol of identity visually blocks progress along a canyonlike street, and into the future.",
@@ -1336,7 +1403,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2014.027",
     "title": "Derry",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.027/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.027/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497775"
   },
   {
     "annotation": "As a research scientist and professor of electrical engineering at the Massachusetts Institute of Technology, Harold \u201cDoc\u201d Edgerton developed ultra-high-speed stroboscopic photography. To illuminate supersonic exposures, he engineered lightbulbs filled with argon, and then xenon, that could produce 60 flashes of light per second. In order to demonstrate his stroboscopic lighting systems and envision their broad scientific applications, Edgerton made experimental photographs in the laboratory, often of sports subjects. He recruited Fesler, the Big Ten MVP of 1930 to kick a football in the studio. This split-second exposure reveals the unexpected physics of the event. Fesler\u2019s boot sinks deep into the ball with the force of the kick. A layer of dust dislodged from the ball\u2019s top seam is captured in mid-air.",
@@ -1356,10 +1424,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2014.037",
     "title": "Wes Fesler Kicking a Football",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.037/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.037/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497801"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:13:35",
     "dateModifiedInDynamo": "2021-02-11T13:13:35",
     "description": "",
@@ -1376,10 +1445,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2017.039.005",
     "title": "Throwing Three Balls in the Air to Get a Straight Line (Best of Thirty-Six Attempts)",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2017.039.005/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2017.039.005/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497829"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:41:51",
     "dateModifiedInDynamo": "2021-02-11T11:41:51",
     "description": "",
@@ -1396,10 +1466,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1981.080.001.030",
     "title": "Untitled from Tulsa",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1981.080.001.030/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1981.080.001.030/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497857"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:37:52",
     "dateModifiedInDynamo": "2021-02-11T11:37:52",
     "description": "",
@@ -1416,7 +1487,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1976.002.001",
     "title": "Buzz Aldrin on the Moon",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1976.002.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1976.002.001/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497885"
   },
   {
     "annotation": "Lucy Schwob and Suzanne Malherbe met when they were teenagers, and they remained a committed couple for the rest of their lives. In 1919 they moved from Nantes to Paris, where they exhibited and published the pseudonyms Claude Cahun and Marcel Moore. They associated with booksellers Adrienne Monnier and Sylvia Beach, with experimental theater and the Surrealist movement. Aveux non Avenus is a book of Cahun\u2019s reflective writing illustrated with collotype reproductions of original photocollages. The main motif of these images is the artist herself, photographed in androgynous costumes and makeup. Her face and body are cut out and reassembled like paper dolls into decorative patterns, playfully confusing personal and cultural identity. In this headpiece for chapter three, the shape of her shaved head, multiplied and arranged in a cloverleaf, evoke the pips on playing cards of the French suits of clovers and pikes\u2014or clubs and spades.",
@@ -1436,10 +1508,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2016.024.004",
     "title": "E.D.M. (Sex) from Aveux non avenus",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2016.024.004/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2016.024.004/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497914"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:53:20",
     "dateModifiedInDynamo": "2021-02-11T11:53:20",
     "description": "",
@@ -1456,7 +1529,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2002.020",
     "title": "Saint-Cloud",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2002.020/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2002.020/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497949"
   },
   {
     "annotation": "Brassa\u00ef was one of a remarkable group of Hungarian-born photographers working in Paris between the wars. A night owl, he slept during the day and worked at night. He often photographed in the distressed coal-caf\u00e9s of the Roquette district. French viewers of the day would recognize these underworld subjects by their dress. Since candid photography was impossible, Brassa\u00ef became acquainted with his subjects, buying drinks as he set up his camera and tripod. He deputized an assistant to hold a pan of magnesium flash powder aloft, which Brassa\u00ef ignited as he uncapped the shutter. The explosions of the flash were so brilliant, loud and smelly that Picasso nicknamed him \u201cthe terrorist.\u201d",
@@ -1476,7 +1550,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1977.038",
     "title": "Bal Mussette des Quatre Saisons, Rue de Lappe, Paris",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1977.038/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1977.038/manifest",
+    "migratedDate": "2021-07-16T09:00:35.497980"
   },
   {
     "annotation": "In 1927, Man Ray and his friend Marcel Duchamp moved to Paris. They joined the Surrealist movement and enjoyed its provocative ferment, while Man Ray supported himself as a photographer. He fled to California during World War II, hoping to find work in the film industry. Dismayed that hi European reputation was unknown, the artist reconstructed his lost oeuvre in a catalogue of pivotal works called Objects of My Affection. This photograph from the album documents a construction made from found components. Mounted on a rotating axle is a bicycle mirror with a painted shadow. A cube hangs from a string precisely before the mirror, which reflects its numbered sides. The axle eye also supports doll\u2019s eyes on a spring, and a bell on a cord. If the mirror were set to swing, the reflection would flash, the numbered cube twist, the eyes jiggle, and the bell would sound. Even at rest, the machine suggests these potential effects.",
@@ -1496,10 +1571,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2016.006",
     "title": "Le mirage from Objects of My Affection",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2016.006/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2016.006/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498007"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:38:15",
     "dateModifiedInDynamo": "2021-02-11T11:38:15",
     "description": "",
@@ -1516,7 +1592,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1976.023.003",
     "title": "Conquest of the Skies",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1976.023.003/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1976.023.003/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498035"
   },
   {
     "annotation": "Manuel \u00c1lvarez Bravo worked to represent his profound connection to his native Mexico. He was a photographer for Mexican Folkways magazine when he was assigned to document the activities of Diego Rivera, Jos\u00e9 Clemente Orozco, and other muralists who forged a national identity by representing indigenous culture and history in their paintings. \u00c1lvarez Bravo joined them in this goal, combining poetic observation with allusions to ancient myth, folklore and ritual. This is a portrait of Isabel Villase\u00f1or, a sculptor, poet, musician and noted beauty of the day. She and \u00c1lvarez Bravo both worked on Sergei Eisenstein\u2019s film \u00a1Qu\u00e9 viva M\u00e9xico!, and they became good friends. \u00c1lvarez Bravo portrayed her sitting on a wooden floor, dressed in traditional costume, brushing her luxuriant hair. Knowing that months before Villase\u00f1or had suffered a miscarriage, the photographer wanted to represent the eternal strength of womanhood.",
@@ -1536,10 +1613,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1979.123.001.003",
     "title": "Portrait of Eternity",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1979.123.001.003/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1979.123.001.003/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498065"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:57:32",
     "dateModifiedInDynamo": "2021-02-11T11:57:32",
     "description": "",
@@ -1556,10 +1634,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2008.026.007",
     "title": "Dog",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2008.026.007/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2008.026.007/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498207"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:10:15",
     "dateModifiedInDynamo": "2021-02-11T13:10:15",
     "description": "",
@@ -1576,7 +1655,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2015.047.001",
     "title": "Pool in a Brook, Pond Brook near Whiteface, New Hampshire from In Wildness",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2015.047.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2015.047.001/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498241"
   },
   {
     "annotation": "Imogen Cunningham was a tastemaker and influential teacher on the West Coast over much of the 20th century. She studied photography at University of Washington and the Technical University in Dresden, and worked as an assistant to Edward Curtis, before opening her own studio in Seattle. In 1915, Cunningham married the painter Roi Partridge and began a family. They moved to San Francisco, where Partridge taught at Mills College, and Cunningham stayed at home with their young sons. Each afternoon when they were napping, she made still life photographs with basic equipment and an improvised darkroom. She may have been influenced by Karl Blossfeldt\u2019s enlarged plant studies, but her images are more architectural than taxonomic. For this photograph Cunningham cut a closed blossom from the back yard. She brought it into the dining room, set up her camera, and waited three days for the bloom to open and define a compelling interior space.",
@@ -1596,10 +1676,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1993.011.001",
     "title": "Magnolia Blossom",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1993.011.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1993.011.001/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498270"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:37:22",
     "dateModifiedInDynamo": "2021-02-11T11:37:22",
     "description": "",
@@ -1616,7 +1697,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1975.078",
     "title": "Albanian Woman from Italy, Ellis Island",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1975.078/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1975.078/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498297"
   },
   {
     "annotation": "The photographs of Dave Heath reveal disquieting aspects of the human condition, and the artist\u2019s own struggles with depression. Abandoned as a toddler, he grew up in a Philadelphia orphanage. He escaped the system by enlisting in the Army during the Korean War; later, he studied photography at the Philadelphia College of Art. Guggenheim Foundation Fellowships in 1963 and 1964 enabled Health independently to produce the photobook A Dialogue with Solitude. Its photographs reflect the artist\u2019s compositional instinct and his technical prowess. Most of its images depict ennui, loneliness, and despair, especially among children. By examining childhood sadness, Heath tried to neutralize its power. This boy cries alone, ignored by his mother who turns away in the upper right corner of the frame, tall and emotionally inaccessible. Although the composition sweeps down to emphasize the boy, his small size signals his lonely anguish.",
@@ -1636,7 +1718,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1995.007.004",
     "title": "New York",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1995.007.004/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1995.007.004/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498317"
   },
   {
     "annotation": "After World War I, Joost Schmidt was a member of the first class of advanced students at the Bauhaus. This progressive German academy aimed to educate a new breed of artisans, working without the traditional barriers between craftsmen, fine artists and architects. Schmidt studied with the academy\u2019s chief professors, including Johannes Itten, Paul Klee and Wassily Kandinsky. In 1925 Schmidt joined the senior faculty himself, directing the Plastic Arts Workshop. He also supervised the Advertising, Typography and Printing Workshop, which included the nascent photography program. This photograph of the period shows two sculptural maquettes, perhaps student work. They appear to be made from sheets of tin, folded so that they can stand freely on their own. Schmidt placed the sculptures side by side at the edge of a table, so that their shadows nearly touch, and he closely cropped the image to create a vacillating abstract geometric composition.",
@@ -1656,7 +1739,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2015.043",
     "title": "Sculptural Effects in Tin",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2015.043/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2015.043/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498343"
   },
   {
     "annotation": "As the leading photographer in the African American community of Memphis, Tennessee, Ernest Withers was a familiar figure at proms and graduations, weddings and funerals. His images of regional music and sports, and events of the Civil Rights Movement, appeared in the Defender newspapers. When Memphis Public Works employees struggled for better working conditions, Withers supported their union. In 1968 the sanitation workers went out on strike. Each day they met at Clayborn Temple, then marched peacefully downtown harassed by police and public. \u201cAt the heart of racism is the idea that a man is not a man,\u201d the Reverend James M. Lawson told the strikers, \u201cthat a person is not a person. . . . You are men. You deserve dignity.\u201d This inspired them to carry signs declaring I AM A MAN. This straightforward declaration became a forceful symbol of African American struggle in the Jim Crow South.",
@@ -1676,10 +1760,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2014.023.001",
     "title": "I Am a Man: Sanitation Workers' Strike, Memphis, Tennessee",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.023.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.023.001/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498370"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:35:45",
     "dateModifiedInDynamo": "2021-02-11T11:35:45",
     "description": "",
@@ -1696,7 +1781,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1975.066",
     "title": "Winter Sunrise, Sierra Nevada, from Lone Pine, California",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1975.066/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1975.066/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498415"
   },
   {
     "annotation": "Over the course of the twentieth century, photography became an important tool for scientific inquiry as its objective vision of the physical world often mingled with creative photography. This plate is one from the first photographically-illustrated lunar atlas. Its images were mounted side-by-side to comprise an image over six feet across, which hung in the Ministry of Education pavilion at the Exposition Universelle, a Paris world\u2019s fair celebrating a new millennium. Maurice L\u0153wy and his assistant Pierre-Henri Puiseux made the photographs with the Equatorial Coud\u00e9 telescope. Over 500 clear nights, beginning in 1892, they exposed over 6000 glass plate negatives with the Equatorial Coud\u00e9, detailed enough to be enlarged fifteen times for photogravure printing plates. L\u0153wy\u2019s Atlas photographique was a publishing milestone at the beginning of a century in which photography became increasingly wed to science.",
@@ -1716,10 +1802,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2014.019.003",
     "title": "Posidonius -- Aristotle -- P\u00f4le Nord from Atlas photographique de la lune, vol. VI, plate XXXV",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.019.003/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.019.003/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498482"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:57:49",
     "dateModifiedInDynamo": "2021-02-11T11:57:49",
     "description": "",
@@ -1736,7 +1823,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2008.026.009",
     "title": "Giorgio Armani",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2008.026.009/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2008.026.009/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498519"
   },
   {
     "annotation": "At Columbia University Teachers\u2019 College, Karl Struss studied the principles of design with Arthur Wesley Dow and Max Weber. He was also a prot\u00e9g\u00e9 of Clarence White, and while still a student, Struss developed and patented a soft-focus camera lens for the fashionable Pictorialist style. For this vacation photograph of his sister Hilda, he used a long lens that enabled him to compose in the camera. Struss stood in the shade of a leafy tree and pointed his camera toward the setting sun. He simplified the image into flat, component forms arranged to draw the viewer in. After World War I, Struss moved to Los Angeles and became a silent film cameraman, working with Cecil B. DeMille. In 1927 he shared the first Academy Award for cinematography.",
@@ -1756,7 +1844,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2014.020",
     "title": "Hilda Struss, Nova Scotia",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.020/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.020/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498563"
   },
   {
     "annotation": "World War I was the first widespread conflict in which all the adversaries used photography for surveillance and propaganda. But it was combatants who took most photographs of the war. This stereograph of the Battle of Passchendaele was probably taken by a foot soldier. In World War I armies dug into the earth to protect themselves from enemy fire. To gain ground they climbed to the surface and charged on foot, facing a defensive barrage and severe casualties. This stereograph of Scottish soldiers relaxing in their trenches suggests this process, and reveals the devastation of the countryside near Ypres in Belgium. Its two images were taken simultaneously with a camera with two lenses. When viewed with a device that held the photograph centered on the face, before the focal plane, they combine to create a sense of depth and dimension. This was an old-fashioned entertainment, revived by the war for its descriptive intensity.",
@@ -1776,10 +1865,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1997.044.009.003",
     "title": "Steel-Helmeted Scots Entrenched and Awaiting a Counterattack",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1997.044.009.003/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1997.044.009.003/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498592"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:06:26",
     "dateModifiedInDynamo": "2021-02-11T13:06:26",
     "description": "",
@@ -1796,7 +1886,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2012.097",
     "title": "Scenes from a Marriage #2, Garth & Lisa",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2012.097/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2012.097/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498619"
   },
   {
     "annotation": "In 1983, when Abelardo Morell began teaching at the Massachusetts College of Art in Boston, he began with fundamentals. He blocked the classroom windows with black plastic and gathered the students in the dark. Then he opened a hole in the plastic to reveal the street outside reflected across the walls and ceiling. Morell had turned the room into a camera obscura, and students who had always taken the camera for granted suddenly understood its function. He later traveled around the world setting up cameras obscura and photographing inside them. He captured skyscrapers in New York, the Uffizi in Florence, the Eiffel Tower in Paris and many other places, projected on the walls of nearby hotel rooms. As a fellow at the Civitella Ranieri Foundation in Italy, Morell made this camera obscura photograph in a private home. Inside the modest bedroom, a dreamlike landscape of the Umbrian countryside unfurls like a dream vision, with leafy trees, meadows, and farm fields.",
@@ -1816,7 +1907,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2001.063",
     "title": "Camera Obscura Image of Umbrian Landscape over Bed",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2001.063/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2001.063/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498646"
   },
   {
     "annotation": "One of the first practical techniques for color photography, the Lumi\u00e8re Autochrome was a process that produced glass-plate transparencies meant to be viewed in transmitted light. In 1907 Auguste and Louis Lumi\u00e8re\u2014later pioneers of cinema\u2014introduced color glass plates to the market, sized to standard cameras. The plates were prepared with a layer of microscopic grains of potato starch, dyed red, green, and blue, covered by a panchromatic silver halide emulsion. When exposed in the camera, the minuscule spots of color acted as a mosaic filter for complementary hues, creating a negative image. The plate was reverse-processed as a positive color transparency. The military photographer Jean-Baptiste Tournassoud was a friend of the Lumi\u00e8re Brothers, and one of the first to embrace the Autochrome technique. At the end of World War I he made color propaganda images of the Armistice, the Paris peace talks and negotiation of the Treaty of Versailles.",
@@ -1836,10 +1928,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2017.015.004",
     "title": "Juliette Tournassoud, the Photographer's Daughter",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2017.015.004/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2017.015.004/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498673"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:14:26",
     "dateModifiedInDynamo": "2021-02-11T13:14:26",
     "description": "",
@@ -1856,7 +1949,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2018.010",
     "title": "The Lucy Photo-Booth Shot",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2018.010/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2018.010/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498700"
   },
   {
     "annotation": "In 1934 Bill Brandt moved to England, where two uncles were prosperous partners in the London branch of the family bank. They enabled him to perceive this country and its stratified class system with an outsider\u2019s eye. He photographed both extremities, from the indigent docklands to the elegant Caf\u00e9 Royal. Brandt took this photograph at his uncle Henry\u2019s house in London. In a shot snapped with the automatic timer of his Leica, the maid serves the cheese course to Brandt himself. Their customary, formal interchange takes place at a table set with porcelain, crystal and polished silver, while an oil painting shines in electrified light behind them. This realm of privilege is also one of strict order. Brandt made this photograph while working on The English at Home, a famous photobook contrasting rural and city life, and upper and lower-class English society.",
@@ -1876,10 +1970,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2014.057.001",
     "title": "Self-Portrait",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.057.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.057.001/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498727"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:10:59",
     "dateModifiedInDynamo": "2021-02-11T13:10:59",
     "description": "",
@@ -1896,7 +1991,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2015.062",
     "title": "Four-Sided Dune, Death Valley",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2015.062/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2015.062/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498755"
   },
   {
     "annotation": "At the School of the Museum of Decorative Arts in Berlin Karl Blossfeldt studied with Professor Moritz Meurer who had him collect plant images as models for decorative design. When Blossfeldt taught at the Charlottenburg School of Arts and Crafts he built an enormous camera that could magnify specimens by 30 times. He arranged flowers, buds, and seed capsules before cardboard backgrounds, and exposed his large negatives 12 minutes. This is a closeup of one bloom of the milkweed plant, the favorite of monarch butterflies. Its flowers bloom in spherical clusters a few inches in diameter. Blossfeldt concentrated on just one as if it were a tiny sculpture. His photographs were first exhibited in 1921, and a selection later published in the photobook Urformen der Kunst (Art Forms in Nature). It became a perennial bestseller, and a sourcebook and influence on artists working in a range of media.",
@@ -1916,7 +2012,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1997.033.002",
     "title": "Asclepias syriaca (Cornuti): Silkweed Flower Enlarged Eighteen Times from Urformen der Kunst: Photographische Pflanzenbilder",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1997.033.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1997.033.002/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498783"
   },
   {
     "annotation": "Arnold Newman was the leading American celebrity photographer at a time when picture magazines and newspapers dominated the print media. He used a crisp, focused style to photograph his subjects in their own personal spaces. Newman began his career with portraits of painters, the people he emulated most. Yasuo Kuniyoshi was a widely admired figure among New York artists of the 1930s. He was born and raised in Japan, attended art school in Los Angeles, and became a teacher at the Art Students League in New York. When Newman photographed Kuniyoshi at his studio on 14th Street, amidst his folk art collection, he had been a proud American for over thirty years. Weeks later, the Japanese bombed Pearl Harbor, drawing the United States into World War II; Kuniyoshi was condemned as an \u201cenemy alien.\u201d To avoid incarceration he was forced to declare his allegiance and to record war propaganda speeches for broadcast in Japan.",
@@ -1936,7 +2033,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1980.003",
     "title": "Yasuo Kuniyoshi",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1980.003/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1980.003/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498810"
   },
   {
     "annotation": "Nickolas Muray was an Olympic fencer, a pilot, and a distinguished art collector. In Hollywood, he became a sought-after celebrity portraitist during the 1920s. Muray had studied the printing arts in his native Hungary, and had the technical knowledge to pursue the color process of carbro printing. The process begins when three negatives of the same image are exposed through red, blue and green filters. The resulting gelatin silver bromide prints were chemically transformed into low-relief images of pigmented carbon on transfer paper. When precisely superimposed, these made up full color images on paper. Muray understood further how to transfer these to zinc plates for mass printing. This photograph exemplifies the high-key color preferred for printed reproduction in the 1930s-50s. Its cut-and-paste design and manipulated scale emphasize the advertised products.",
@@ -1956,10 +2054,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2015.027",
     "title": "Untitled (Still Life with Coffee)",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2015.027/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2015.027/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498837"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:09:35",
     "dateModifiedInDynamo": "2021-02-11T13:09:35",
     "description": "",
@@ -1976,7 +2075,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2015.039",
     "title": "Lisbon",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2015.039/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2015.039/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498863"
   },
   {
     "annotation": "After being wounded on the battlefield during World War I, Josef Sudek lost his right arm. It was while recuperating at Invalidovna, the Prague military hospital, that he took up photography. In the 1920s the artist continued to photograph at Invalidovna, exploring the veterans\u2019 lives in visual metaphor. This small contact print captures a ghostly silhouette shrouded in clouds of smoke. Sudek often illuminated his subjects with reflected light, creating an obscure stillness. His personal style and imagery reflect a personal sense of isolation. Self-conscious of his amputation, Sudek isolated himself from society. He photographed the city of Prague in the same mysterious visual style. Carrying his wooden view camera and tripod through the hilly city, he captured the empty cathedral and deserted landscapes in the half-light of dawn.",
@@ -1996,7 +2096,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1998.045",
     "title": "The Veterans Home at Invalidovna, Prague",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1998.045/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1998.045/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498890"
   },
   {
     "annotation": "Like others of her generation, Mary Ellen Mark often embedded herself with her subjects, to capture their lives truthfully. She was a set photographer on location for Milo\u0161 Forman\u2019s film One Flew over the Cuckoo\u2019s Nest, filmed in 1975 at the Oregon State Hospital. She learned about Ward 81, a locked security wing for women. Mark arranged to spend 36 days together with the residents of the secure ward, and photograph their lives. This portrait of Brenda seems unremarkable at first glance. An attractive teenager with long hair and fashionable dress, she sits cross-legged on her institutional steel bed. Illuminated by fluorescent lighting, her room is like that in any dormitory room. Brenda unashamedly displays her left arm, marked by the scars of suicide attempts and other instances of self-harm. Mark\u2019s compassionate approach, before and beyond clicking the shutter, enabled this young woman to share her vulnerability and something of her pain.",
@@ -2016,10 +2117,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2014.056",
     "title": "Brenda Sitting on Her Bed, Ward 81, Oregon State Hospital, Salem",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.056/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.056/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498917"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:14:04",
     "dateModifiedInDynamo": "2021-02-11T13:14:04",
     "description": "",
@@ -2036,10 +2138,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2017.050.043",
     "title": "Untitled from Wild West",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2017.050.043/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2017.050.043/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498945"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:11:12",
     "dateModifiedInDynamo": "2021-02-11T13:11:12",
     "description": "",
@@ -2056,7 +2159,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2015.064.002",
     "title": "Running White Deer, County Wicklow, Ireland",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2015.064.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2015.064.002/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498969"
   },
   {
     "annotation": "In the late 1940s Richard Avedon revolutionized fashion photography, directing his models to behave naturally before his camera. He organized shoots at recognizable locations in Paris and Rome, but also to farms, circuses, and the launch pads of Cape Canaveral. While his fashion and commercial work projected unusual elegance, his portraits revealed surprising aspects of character. Avedon was a great admirer of the great French film director Jean Renoir\u2019s work, and delighted in 1972 to visit him in Beverly Hills. His home was like the South of France, filled with daylight and fresh flowers. The elderly Renoir was ailing and frail, and Avedon worked sensitively to capture a likeness of visual simplicity and psychological complexity. In its full-face bust before a white background, this image typifies Avedon\u2019s portraits work at the time. He concentrated on expression with an asymmetrical visage reflecting a number of different expressions at once.",
@@ -2076,10 +2180,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1976.023.001",
     "title": "Jean Renoir, Director, Beverly Hills, California",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1976.023.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1976.023.001/manifest",
+    "migratedDate": "2021-07-16T09:00:35.498995"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:13:08",
     "dateModifiedInDynamo": "2021-02-11T13:13:08",
     "description": "",
@@ -2096,10 +2201,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2017.015.003",
     "title": "Earthquake Refugees, Zante, Greece",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2017.015.003/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2017.015.003/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499020"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:12:56",
     "dateModifiedInDynamo": "2021-02-11T13:12:56",
     "description": "",
@@ -2116,10 +2222,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2017.006.001",
     "title": "Window and Thatch, South Uist, Outer Hebrides",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2017.006.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2017.006.001/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499047"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:59:28",
     "dateModifiedInDynamo": "2021-02-11T11:59:28",
     "description": "",
@@ -2136,10 +2243,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2009.047.031",
     "title": "Serra Pelada, Brazil",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2009.047.031/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2009.047.031/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499075"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:11:47",
     "dateModifiedInDynamo": "2021-02-11T13:11:47",
     "description": "",
@@ -2156,7 +2264,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2016.009",
     "title": "Girl and Dog",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2016.009/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2016.009/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499164"
   },
   {
     "annotation": "In her photographs of Mexico and Central America, Flor Gardu\u00f1o investigates images that straddle the temporal world and the spiritual realm. In the highlands of South Central Guatemala, this girl carries bunches of lilies to market in a woven basket. Their seasonal blooms mark the season as late spring or early summer. Her traditional Mayan costume of natural, handwoven fabrics. Its colors and patterns reflect her marital status, as well as shared meanings in her village. Cultivated in Central America since the conquest, the Madonna lilies carry their association with the Virgin Mary and the Annunciation. The image evokes the fertile cycle of seasons, and the promise of adolescence.",
@@ -2176,7 +2285,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2005.060.003",
     "title": "Basket of Light",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2005.060.003/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2005.060.003/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499254"
   },
   {
     "annotation": "After World War II, while working for Vogue Irving Penn became a leading fashion photographer, and then began to make portraits for the magazine. To capture unfamiliar qualities of his celebrity sitters, he arranged two vertical flats in his studio and placed them inside the variable niche. \u201cThis confinement seemed to comfort people, soothing them,\u201d Penn wrote. \u201cThe walls were a surface to lean on or push against. For me the picture possibilities were interesting, limiting the subjects\u2019 movement seemed to relieve me of part of the problem of holding on to them.\u201d Marcel Duchamp was among many who posed for full-length portraits in Penn\u2019s corner. During the 1910s this artist challenged the very definition of creativity by selecting common, mass-produced objects and presented these \u201creadymades\u201d as works of fine art. By 1948 Duchamp had become indispensable in the art circles of both Paris and New York art circles, but claimed to have abandoned art for chess.",
@@ -2196,7 +2306,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2016.031",
     "title": "Marcel Duchamp, New York",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2016.031/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2016.031/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499305"
   },
   {
     "annotation": "After profound experiences as a soldier in World War II, N. Jay Jaffee found solace in photography. Born and raised in Brooklyn, he was drafted into the Army in 1942, and became a squad leader in the 415th Infantry Regiment, the Timberwolves, a unit trained for night fighting. Late in 1944 the regiment was involved in the bloody Battle of the Scheldt, for which Jaffee and other regiment members were awarded the Bronze Star. Back in Brooklyn, he struggled with post traumatic stress disorder. Photography helped him concentrate, connect with people, and express his feelings. Some of Jaffee\u2019s street photographs convey despondency and dread. Other images demonstrate his acute perception, his skill at capturing a powerful moment, and his gift for storytelling. Jaffee was particularly sensitive to the expressive quality of posture. Even when photographing people from the back he could capture a relationship of affection and trust.",
@@ -2216,7 +2327,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1980.122.001.004",
     "title": "Learning to Skate, Livonia Avenue, East New York, Brooklyn",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1980.122.001.004/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1980.122.001.004/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499341"
   },
   {
     "annotation": "The tabloid photojournalist Arthur Fellig created sensational images of dramatic events in New York City under the pseudonym Weegee. He built a freelance career on sensational images that he could sell to tabloid newspapers and true-crime magazines. His methods prefigured the celebrity paparazzi of the 1950s, and his style contributed to the cinematic style of film noir. Weegee monitored the teletype\u2014and later the police radio\u2014and usually arrived first for urgent events around the city. He used a flash to shoot high-contrast images calculated for the heavy newspaper inking of tabloid presses. To get his photographs to the newspapers first, Weegee often developed his negatives in a makeshift darkroom in the trunk of his 1928 Ford sedan. He had a knack for ironic images, and those with a cruel twist. Typical of Weegee\u2019s work of the late 1930s, Tire Inspection is the image of a homeless panhandler, rubbing his feet as he settles for the night on a Hell\u2019s Kitchen pavement.",
@@ -2236,7 +2348,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1993.009.001",
     "title": "Tire Inspection",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1993.009.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1993.009.001/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499430"
   },
   {
     "annotation": "Before digital photography made it possible to merge images effortlessly, Jerry Uelsmann revived and updated the nineteenth-century craft of combination printing. Uelsmann experimented with different ways of combining their details in fantastic images influenced by Surrealism. He collected his own repertoire of original negatives, including thousands of images of landscapes, architecture, figures and foliage. In 1967 he outfitted a darkroom with seven enlargers that enabled him to align his negatives into one composite print. In this broad panoramic landscape the laws of physics seem no longer to apply. A leafy tree with its roots unfurled hovers above an island in a mountain lake. The island itself is airborne, and its underside is reflected in the glassy water. Close examination shows how Uelsmann created the background and floating island is a mirror image.",
@@ -2256,7 +2369,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2017.042.002",
     "title": "Untitled",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2017.042.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2017.042.002/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499448"
   },
   {
     "annotation": "Despite his wide mastery, Elliott Erwitt has described photography as craft as much as art. After serving in the Korean war he joined the Magnum photo agency and became a leading photojournalist. Among his many memorable news images are those of the Kitchen Debate between Richard Nixon and Nikita Khrushchev, and of the mourning First Lady at President Kennedy\u2019s funeral. Erwitt was a set photographer for Hollywood films like On the Waterfront and The Seven Year Itch. But dogs remained his favorite subject, and he has observed their personalities and exploits and around the world. \u201cIt\u2019s simple,\u201d Erwitt said. \u201cI like dogs. They\u2019re nice and they don\u2019t ask for prints.\u201d This unposed image of rural partners reflects his ability to encapsulate a complex relationship in a single, endearing image. Both farmer and hound tip their heads to shade their eyes and get a good look at the photographer. Somehow they seem more intelligent than they first appear.",
@@ -2276,7 +2390,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1994.028.004.047",
     "title": "South Carolina",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1994.028.004.047/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1994.028.004.047/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499465"
   },
   {
     "annotation": "In Paris, Hungarian-born Andr\u00e9 Kert\u00e9sz used the Leica miniature camera in the 1920s to create lyrical, typically French images for popular magazines of the day. He took his camera to uncommon places, and made candid exposures that helped viewers to recognize the miraculous in the commonplace. This unusual view from inside the mezzanine level of the Eiffel Tower exemplifies the originality of Kert\u00e9sz\u2019s vision. The portability of the miniature camera, and its fast exposure, enabled him to crouch, reach and lean, stretching his body to position the camera at odd angles for a fresh viewpoint. Kert\u00e9sz often shot multiple views of a single subject, and his sequencing of images were unprecedented in photojournalism. In the mid-1930s he associated with the Surrealists, and his photographs appeared in the magazines Bifur, Vari\u00e9t\u00e9s and Minotaure.",
@@ -2296,7 +2411,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1978.047",
     "title": "Eiffel Tower",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1978.047/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1978.047/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499492"
   },
   {
     "annotation": "After World War II, Diane and Allan Arbus opened a fashion photography studio in New York. She styled and arranged the images, and her husband made the photographs that appeared in magazines like Vogue and Glamour. In 1956, she left the business to concentrate on her own creative work. Working alone, she explored hidden corners of society to photograph subjects like transvestites, carnival performers, nudists and strippers. Aside from their place in society, Arbus was interested in their personalities and intimate relationships. She befriended her subjects and sometimes their exchange became as important to her as her photographs. Arbus often attempted to represent the association of couples and multiple siblings. For example, these sisters seem to confront us as one. Arbus brings us into the close proximity of their little bedroom. Her image seems more unsentimental observation rather than poetic documentation.",
@@ -2316,7 +2432,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1977.090",
     "title": "Triplets in Their Bedroom, N.J.",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1977.090/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1977.090/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499518"
   },
   {
     "annotation": "In 1930, Barbara Morgan met the dancer and choreographer Martha Graham. They became immediate friends, and agreed to work together on a book of dance photographs. Morgan watched and studied Graham\u2019s work, and then met her alone in an empty studio to capture selected movements on film. This is a moment from Graham\u2019s Lamentation, which she described as a \u201cDance of Sorrow\u2014the personification of grief itself.\u201d Through the entire piece she remained seated on a bench, a spotlight trained on her upper body. Only Graham\u2019s face, hands and feet protruded from her purple costume, an enveloping, tubular cowl of purple jersey fabric. The garment stretched as Graham moved her torso, arms and legs to the slow rhythm of the music. She took angular poses, revealing her form from inside the garment, extending its stretchy fabric into geometric shapes.",
@@ -2336,10 +2453,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2016.025",
     "title": "Martha Graham, Lamentation (oblique)",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2016.025/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2016.025/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499546"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:59:06",
     "dateModifiedInDynamo": "2021-02-11T11:59:06",
     "description": "",
@@ -2356,10 +2474,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2009.047.007",
     "title": "Sempervirens \"Stricta\"",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2009.047.007/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2009.047.007/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499568"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T13:05:53",
     "dateModifiedInDynamo": "2021-02-11T13:05:53",
     "description": "",
@@ -2376,10 +2495,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2011.015",
     "title": "Scanno",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2011.015/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2011.015/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499584"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:28:20",
     "dateModifiedInDynamo": "2021-02-11T11:28:20",
     "description": "",
@@ -2396,7 +2516,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1975.031.004",
     "title": "Dust Storm, Cimarron County, Oklahoma",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1975.031.004/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1975.031.004/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499603"
   },
   {
     "annotation": "After World War II, the victorious Allies divided Germany into four occupation zones. The capital city was dissected: West Berlin became a capitalist nation with a parliamentary government, while East Berlin was united to the USSR as a Communist country. Millions fled from the East threatening its economic stability. Thus, on August 31, 1961, East German and Soviet soldiers erected a guarded concrete barrier dividing Berlin. Weeks later, Dan Budnik arrived, on assignment from Magnum Photo Agency. He photographed the wire fences, concrete barriers, and guard posts. His moving photographs represent groups of Berliners gathering near the wall to wave at the loved ones they could only glimpse at a distance. This boy in West Berlin encapsulates the dilemma. He perches on a rickety tower of bricks to gaze through a hole in the wall. Budnik printed in grainy tones, like the concrete, shadowy factories and gray skies that portend a grim future.",
@@ -2416,7 +2537,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2015.056",
     "title": "Boy Peering through the Berlin Wall",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2015.056/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2015.056/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499684"
   },
   {
     "annotation": "Edward Weston was a pivotal figure in the transformation of American creative photography from the poetry of Pictorialism to the sharp detail of straight photography. Although he created soft-focus images in the 1910s, in 1923-26 when he worked in Mexico, the tropical sunshine and arid atmosphere led him to a style of sharp focus and precision. Weston exploited the limits of photographic technology, simultaneously to convey sculptural form and surface texture. This is apparent in this image of model Charis Wilson. Carefully framing the figure, Weston accentuated its sinuous outlines and plastic form. Most remarkable in its time, however, was the way that this photograph depicted texture, from the smooth contours of flesh to the granularity of sand.",
@@ -2436,10 +2558,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#1975.073",
     "title": "Nude on the Sand",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1975.073/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1975.073/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499711"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:55:17",
     "dateModifiedInDynamo": "2021-02-11T11:55:17",
     "description": "",
@@ -2456,10 +2579,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2004.007",
     "title": "Incinerated Soldier, Iraq-Kuwait Highway",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2004.007/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2004.007/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499790"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:59:44",
     "dateModifiedInDynamo": "2021-02-11T11:59:44",
     "description": "",
@@ -2476,7 +2600,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2009.047.042",
     "title": "The Stahl House, Los Angeles",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2009.047.042/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2009.047.042/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499826"
   },
   {
     "annotation": "When a colleague introduced the miniature camera and enlarger to Alfred Eisenstadt shortly after World War I, he immediately appreciated their possibilities. He became a freelance photojournalist, and earned a reputation for carrying just one small camera, and for his courteous bearing. Eisenstaedt\u2019s restraint and his ability to blend with his subjects is apparent in this famous photograph taken at the eighteenth-century La Scala opera house in Milan. He pictured its scale and opulence in a view that ranged from the main floor seats to the shaded loggione under the ceiling. The formal dress, the lights, and excited anticipation of an opening night are all captured in this image. In April 1936, Henry R. Luce invited Eisenstaedt to join the staff of the newly founded illustrated weekly LIFE magazine. Over the course of his career, the photographer covered over 2,500 assignments for the journal, and photographed 92 covers.",
@@ -2496,10 +2621,11 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2009.047.023",
     "title": "Premiere at La Scala, Milan",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2009.047.023/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2009.047.023/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499866"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2021-02-11T11:57:00",
     "dateModifiedInDynamo": "2021-02-11T11:57:00",
     "description": "",
@@ -2516,7 +2642,8 @@
     "SK": "USER#HBERTOLD#4314AB19-3EF5-4953-99D2-F54215E154B0#2007.020",
     "title": "Gertrude and Charles O\u2019Malley",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2007.020/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2007.020/manifest",
+    "migratedDate": "2021-07-16T09:00:35.499899"
   },
   {
     "bio": "",
@@ -2529,7 +2656,8 @@
     "portfolioUserId": "ashelto3",
     "primaryAffiliation": "staff",
     "SK": "USER#ASHELTO3",
-    "TYPE": "PortfolioUser"
+    "TYPE": "PortfolioUser",
+    "migratedDate": "2021-07-16T09:00:35.967299"
   },
   {
     "dateAddedToDynamo": "2020-12-10T14:06:41",
@@ -2549,10 +2677,11 @@
     "privacy": "public",
     "SK": "USER#ASHELTO3#DC496E00-1610-465B-9EEE-1203DC2E62FB",
     "title": "Stories of Power and Diversity: Inside Museums, Archives, and Collecting.",
-    "TYPE": "PortfolioCollection"
+    "TYPE": "PortfolioCollection",
+    "migratedDate": "2021-07-16T09:00:35.967323"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2020-12-10T14:08:40",
     "dateModifiedInDynamo": "2020-12-10T14:11:02",
     "description": "",
@@ -2569,10 +2698,11 @@
     "SK": "USER#ASHELTO3#DC496E00-1610-465B-9EEE-1203DC2E62FB#1996.043.002",
     "title": "Chapel of the Holy Child of Atocha, La Manga, New Mexico",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1996.043.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1996.043.002/manifest",
+    "migratedDate": "2021-07-16T09:00:36.201113"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2020-12-10T14:07:57",
     "dateModifiedInDynamo": "2020-12-10T14:11:02",
     "description": "",
@@ -2589,7 +2719,8 @@
     "SK": "USER#ASHELTO3#DC496E00-1610-465B-9EEE-1203DC2E62FB#1963.005.002",
     "title": "Okame",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1963.005.002/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1963.005.002/manifest",
+    "migratedDate": "2021-07-16T09:00:36.201136"
   },
   {
     "annotation": "This is a painting. ",
@@ -2609,10 +2740,11 @@
     "SK": "USER#ASHELTO3#DC496E00-1610-465B-9EEE-1203DC2E62FB#1967.030",
     "title": "Indian Encampment",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1967.030/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1967.030/manifest",
+    "migratedDate": "2021-07-16T09:00:36.201155"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2020-12-10T14:08:14",
     "dateModifiedInDynamo": "2020-12-10T14:11:01",
     "description": "",
@@ -2629,10 +2761,11 @@
     "SK": "USER#ASHELTO3#DC496E00-1610-465B-9EEE-1203DC2E62FB#1977.103.001",
     "title": "Navajo Woman, with Child and Lambs",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1977.103.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1977.103.001/manifest",
+    "migratedDate": "2021-07-16T09:00:36.201174"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2020-12-10T14:08:32",
     "dateModifiedInDynamo": "2020-12-10T14:11:01",
     "description": "",
@@ -2649,10 +2782,11 @@
     "SK": "USER#ASHELTO3#DC496E00-1610-465B-9EEE-1203DC2E62FB#1996.035.001",
     "title": "Hoe Line, Ferguson Prison, Huntsville, Texas from Conversations with the Dead",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1996.035.001/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1996.035.001/manifest",
+    "migratedDate": "2021-07-16T09:00:36.201193"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2020-12-10T14:08:49",
     "dateModifiedInDynamo": "2020-12-10T14:11:01",
     "description": "",
@@ -2669,10 +2803,11 @@
     "SK": "USER#ASHELTO3#DC496E00-1610-465B-9EEE-1203DC2E62FB#1998.055",
     "title": "Black Indian, Buffalo Soldiers",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1998.055/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1998.055/manifest",
+    "migratedDate": "2021-07-16T09:00:36.201211"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2020-12-10T14:09:06",
     "dateModifiedInDynamo": "2020-12-10T14:11:03",
     "description": "",
@@ -2689,10 +2824,11 @@
     "SK": "USER#ASHELTO3#DC496E00-1610-465B-9EEE-1203DC2E62FB#2014.056",
     "title": "Brenda Sitting on Her Bed, Ward 81, Oregon State Hospital, Salem",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2014.056/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2014.056/manifest",
+    "migratedDate": "2021-07-16T09:00:36.201229"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2020-12-10T14:08:58",
     "dateModifiedInDynamo": "2020-12-10T14:11:03",
     "description": "",
@@ -2709,10 +2845,11 @@
     "SK": "USER#ASHELTO3#DC496E00-1610-465B-9EEE-1203DC2E62FB#2002.012.013",
     "title": "A Quilter from Roll, Jordan, Roll",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/2002.012.013/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/2002.012.013/manifest",
+    "migratedDate": "2021-07-16T09:00:36.201247"
   },
   {
-    "annotation": "{{NULL}}",
+    "annotation": "",
     "dateAddedToDynamo": "2020-12-10T14:08:23",
     "dateModifiedInDynamo": "2020-12-10T14:11:03",
     "description": "",
@@ -2729,6 +2866,7 @@
     "SK": "USER#ASHELTO3#DC496E00-1610-465B-9EEE-1203DC2E62FB#1981.080.002.026",
     "title": "Peace Meals from A Harlem Document",
     "TYPE": "PortfolioItem",
-    "uri": "https://presentation-iiif.library.nd.edu/1981.080.002.026/manifest"
+    "uri": "https://presentation-iiif.library.nd.edu/1981.080.002.026/manifest",
+    "migratedDate": "2021-07-16T09:00:36.201266"
   }
 ]
