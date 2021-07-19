@@ -8,7 +8,6 @@ import sentry_sdk   # noqa: E402
 from dynamo_helpers import format_key_value, get_iso_date_as_string
 import datetime
 import json
-import io
 
 
 def query_dynamo_records(table_name: str, **kwargs) -> dict:
@@ -178,7 +177,7 @@ def capture_existing_collection_content(collections_of_interest_list: list, old_
 
 
 def save_collection_content_to_new_table(table_name: str, new_content_file_name: str):
-    with io.open(new_content_file_name, 'r', encoding='utf-8') as json_file:
+    with open(new_content_file_name, 'r', encoding='utf-8') as json_file:
         new_content_list = json.load(json_file)
 
     table = boto3.resource('dynamodb').Table(table_name)
