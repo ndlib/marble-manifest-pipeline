@@ -28,7 +28,6 @@ class FilesApi():
         self.start_time = time.time()
         self.table_name = self.config.get('website-metadata-tablename', '')
         self.resumption_filename = 'file_objects_list_partially_processed.json'
-        print("uncomment this code")
         if not self.event['local']:
             save_file_system_record(self.table_name, 'S3', 'Marble content bucket')
             save_file_system_record(self.table_name, 'S3', 'Multimedia bucket')
@@ -109,6 +108,9 @@ class FilesApi():
             my_json = dict(file_info)
             my_json['sequence'] = i
             my_json['id'] = my_json.get('key', '')
+            my_json['copyrightStatus'] = "Public domain"
+            if 'copyright' in my_json.get('key', '').lower():  # If the word "copyright" exists in the folder structure, this file is Copyrighted
+                my_json['copyrightStatus'] = "Copyright"
             if 'mediaGroupId' not in my_json and 'imageGroupId' not in my_json:
                 continue  # We must have either mediaGroupId or imageGroupId or we can't process this record.
             if 'mediaGroupId' in my_json:  # is_media_file(self.config.get('media-file-extensions', []), my_json.get('id')):
