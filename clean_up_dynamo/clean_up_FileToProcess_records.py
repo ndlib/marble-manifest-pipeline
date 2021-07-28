@@ -5,14 +5,12 @@ import boto3
 from boto3.dynamodb.conditions import Key, Attr
 from botocore.exceptions import ClientError
 import sentry_sdk   # noqa: E402
-from dynamo_helpers import format_key_value, get_iso_date_as_string
 from dynamo_query_functions import scan_dynamo_records
-import datetime
 import json
 import os
 
-
 s3 = boto3.resource('s3')
+
 
 def query_dynamo_records(table_name: str, **kwargs) -> dict:
     """ very generic dynamo query """
@@ -50,12 +48,11 @@ def capture_item_record_essentials(table_name: str) -> dict:
     kwargs['ProjectionExpression'] = 'PK, SK, #type, defaultFilePath'
     kwargs['ExpressionAttributeNames'] = {'#type': 'TYPE'}
     continued_count = 0
-    record_count = 0
     files_referenced = {}
     while True:
         results = scan_dynamo_records(table_name, **kwargs)
         for record in results.get('Items', []):
-            if record.get('defaultFilePath', '') and record.get('TYPE','') in ['Item', 'SupplementalData']:
+            if record.get('defaultFilePath', '') and record.get('TYPE', '') in ['Item', 'SupplementalData']:
                 if not record.get('defaultFilePath', '') in files_referenced:
                     files_referenced[record.get('defaultFilePath')] = []
                 files_referenced[record.get('defaultFilePath')].append(record.copy())
@@ -67,17 +64,17 @@ def capture_item_record_essentials(table_name: str) -> dict:
     return files_referenced
 
 
-def s3_file_exits(bucket_name: str, key:str) -> bool:
+def s3_file_exits(bucket_name: str, key: str) -> bool:
     if not bucket_name or not key:
         return False
     try:
-        s3_object = s3.Object(bucket_name, key).load()
-    except ClientError as ce:
+        s3.Object(bucket_name, key).load()
+    except ClientError as ce:  # noqa: F841
         return False
     return True
 
 
-def save_initial_data(table_name: str,  item_record_essentials_file_name: str, unprocessed_records_file_name: str):
+def save_initial_data(table_name: str, item_record_essentials_file_name: str, unprocessed_records_file_name: str):
     item_record_essentials = capture_item_record_essentials(table_name)
     with open(item_record_essentials_file_name, 'w') as output_file:
         json.dump(item_record_essentials, output_file, indent=2, default=str, sort_keys=True)
@@ -114,7 +111,7 @@ def clean_up_data(table_name, item_record_essentials_file_name: str, unprocessed
     print("records updated", i)
 
 
-def remove_default_file_path_from_dynamo_records(table_name: str, pk: str, sk:str):
+def remove_default_file_path_from_dynamo_records(table_name: str, pk: str, sk: str):
     table = boto3.resource('dynamodb').Table(table_name)
     table.update_item(
         Key={'PK': pk, 'SK': sk},
@@ -146,7 +143,7 @@ def test(identifier=""):
         that pointed to a now-obsolete location.  This checks each FileToProcess record on S3, verifies if the file exists,
         and if not, deletes the FileToProcess record, any possible associated Image record, and updates
         Item and SupplementalData records that are associated by removing the defaultFilePath node.
-        
+
         To use, first sign into aws-vault for testlibnd and run.  Verify results.  Then sign in to aws-vault for libnd and run. """
 
     testlibnd_tables = [
