@@ -122,7 +122,8 @@ class FilesApi():
             my_json['typeOfData'] = my_json.get('typeOfData', 'Marble content bucket')
             collection_list.append(my_json)
             my_json['storageSystem'] = my_json.get('storageSystem', 'S3')
-            my_json['sourceFilePath'] = my_json.get('path', '')
+            if 'sourceFilePath' not in my_json:
+                my_json['sourceFilePath'] = my_json.get('path', '')  # only add if this does not already exist
             if not self.config.get('local', False):
                 with self.table.batch_writer() as batch:
                     batch.put_item(Item=my_json)
