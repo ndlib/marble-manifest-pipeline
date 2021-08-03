@@ -104,8 +104,8 @@ regexps = {
     ],
     "ArchivesSpace": [
         r"([a-zA-Z]{3}_[0-9]{9})",
+        r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{3,4}-[0-9]{3})",
         r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{4})",
-        r"([a-zA-Z]{3}-[a-zA-Z]{3}_[0-9]{3}-[0-9]{3})",
         r"(^[a-zA-Z]{4}_[0-9]{4}-[0-9]{2})",
     ],
     "Curate": [
@@ -487,7 +487,7 @@ def test():
     # data = list_updated_files(config, config['marble-content-bucket'], 1000000)
     data = crawl_available_files(config, config['marble-content-bucket'])
     for id, value in data.items():
-        print("results =", id, value)
+        print("results =", id)
         # print(value)
 
     return
