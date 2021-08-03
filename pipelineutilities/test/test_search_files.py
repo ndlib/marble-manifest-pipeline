@@ -44,6 +44,7 @@ temp_ids_example = {
     # "https://rarebooks.nd.edu/digital/civil_war/diaries_journals/images/moore/MSN-CW_8010-00-cover2.150.jpg": "MSN-CW_8010",
     "https://marbleb-multimedia.library.nd.edu/Aleph/BOO_000297305/BOO_000297305_000001.tif": "BOO_000297305",  # noqa: #501
     "https://marbleb-multimedia.library.nd.edu/ArchivesSpace/MSSP_7000/MSSP_7000-02.tif": "MSSP_7000-02",  # noqa: #501
+    "https://marbleb-multimedia.library.nd.edu/ArchivesSpace/MSE-REE_0006/MSE-REE_0006-010.a.jpg": "MSE-REE_0006-010",  # noqa: #501
     "https://marbleb-multimedia.library.nd.edu/ArchivesSpace/MSH-LAT_001/MSH-LAT_001-107-0001.tif": "MSH-LAT_001-107",  # noqa: #501
     "https://marble-multimedia.library.nd.edu/public-access/media/MyAudioCollection/Example.mp3": "MyAudioCollection",
 }
