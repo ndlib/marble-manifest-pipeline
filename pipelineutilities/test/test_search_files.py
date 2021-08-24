@@ -47,6 +47,8 @@ temp_ids_example = {
     "https://marbleb-multimedia.library.nd.edu/ArchivesSpace/MSE-REE_0006/MSE-REE_0006-010.a.jpg": "MSE-REE_0006-010",  # noqa: #501
     "https://marbleb-multimedia.library.nd.edu/ArchivesSpace/MSN-COL_9101-1-B/MSN-COL_9101-1-B_236.tif": "MSN-COL_9101-1",  # noqa: #501
     "https://marbleb-multimedia.library.nd.edu/ArchivesSpace/MSE-IR_1037-B/MSE-IR_1037B-0001.tif": "MSE-IR_1037B-0001",  # noqa: #501
+    "https://marbleb-multimedia.library.nd.edu/ArchivesSpace/INQ_214a/INQ_214a-0001.tif": "INQ_214a",  # noqa: #501
+    "https://marbleb-multimedia.library.nd.edu/ArchivesSpace/INQ_214a/INQ_034-0034.tif": "INQ_034",  # noqa: #501
     "https://marbleb-multimedia.library.nd.edu/ArchivesSpace/MSH-LAT_001/MSH-LAT_001-107-0001.tif": "MSH-LAT_001-107",  # noqa: #501
     "https://marble-multimedia.library.nd.edu/public-access/media/MyAudioCollection/Example.mp3": "MyAudioCollection",
 }
