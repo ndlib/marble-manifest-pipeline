@@ -152,6 +152,15 @@
     "marble display name": "Dimensions",
     "display order": "7"
   },
+  "digitizationSource": {
+    "preferred name": "Digitization Source",
+    "required": "Optional",
+    "element": "dcterms:description",
+    "vra mapping": "",
+    "schema.org mapping": "funder",
+    "marble display name": "Digitization Source",
+    "display order": ""
+  },
   "dedication": {
     "preferred name": "Dedication",
     "required": "Optional",
