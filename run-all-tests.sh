@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 if [ -z "$1" ]
   then
     pip uninstall pipelineutilities
