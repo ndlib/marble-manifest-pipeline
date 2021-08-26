@@ -431,7 +431,7 @@ def determine_time_threshold_for_processing(time_in_min):
 def is_tracked_file(file):
     if file_should_be_skipped(file):
         return False
-    return re.match(r"^.*[.]((jpe?g)|(tif)|(pdf)|(wav)|(mp[34]))$", file, re.IGNORECASE)
+    return re.match(r"^.*[.]((jpe?g)|(tiff?)|(pdf)|(wav)|(mp[34]))$", file, re.IGNORECASE)
 
 
 def json_serial(obj):

@@ -77,9 +77,13 @@ valid_files = [
     'filename.150.jpg',
     'filename.150.jpeg',
     'filename.tif',
+    'filename.tiff',
     'filename.150.tif',
     'somepdf.something.pdf',
-    'filename/ending/with_resource.frk'
+    'filename/ending/with_resource.frk',
+    'movie.mp4',
+    'audio.mp3',
+    'audio2.wav'
 ]
 
 
@@ -119,7 +123,7 @@ class TestSearchFiles(unittest.TestCase):
             self.assertTrue(is_tracked_file(test))
 
     def test_is_tracked_file(self):
-        failed_tests = ['file/is/resource.frk/not_ok.jpg']
+        failed_tests = ['file/is/resource.frk/not_ok.jpg', 'also_invalid.randomextension']
         for test in failed_tests:
             self.assertFalse(is_tracked_file(test))
 
