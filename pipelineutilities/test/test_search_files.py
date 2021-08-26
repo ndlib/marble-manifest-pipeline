@@ -70,8 +70,7 @@ skipped_files = [
     'filename.100.jpg',
     'filename.072.jpg',
     'some/folder/with_resource.frk/file.jpg',
-    '_file_to_skip.jpg',
-    'example.someotherextension'
+    '_file_to_skip.jpg'
 ]
 
 valid_files = [
@@ -124,7 +123,7 @@ class TestSearchFiles(unittest.TestCase):
             self.assertTrue(is_tracked_file(test))
 
     def test_is_tracked_file(self):
-        failed_tests = ['file/is/resource.frk/not_ok.jpg']
+        failed_tests = ['file/is/resource.frk/not_ok.jpg', 'also_invalid.randomextension']
         for test in failed_tests:
             self.assertFalse(is_tracked_file(test))
 
