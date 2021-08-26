@@ -70,16 +70,21 @@ skipped_files = [
     'filename.100.jpg',
     'filename.072.jpg',
     'some/folder/with_resource.frk/file.jpg',
-    '_file_to_skip.jpg'
+    '_file_to_skip.jpg',
+    'example.someotherextension'
 ]
 
 valid_files = [
     'filename.150.jpg',
     'filename.150.jpeg',
     'filename.tif',
+    'filename.tiff',
     'filename.150.tif',
     'somepdf.something.pdf',
-    'filename/ending/with_resource.frk'
+    'filename/ending/with_resource.frk',
+    'movie.mp4',
+    'audio.mp3',
+    'audio2.wav'
 ]
 
 
