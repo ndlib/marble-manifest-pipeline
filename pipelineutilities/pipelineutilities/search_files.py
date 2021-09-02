@@ -109,7 +109,7 @@ regexps = {
         r"(^[a-zA-Z]{4}_[0-9]{4}-[0-9]{2})",
     ],
     "Curate": [
-        r"/([^/]*)/([^/]*)/[^/]*\.tif",
+        r"/([^/]*)/([^/]*)/[^/]*\.tiff?",
     ],
     "other": [
         r"([a-zA-Z]{3}_[0-9]{9})",
@@ -227,6 +227,7 @@ def make_label(url, id):
     label = url.replace(id, "")
     label = label.replace(".jpg", "")
     label = label.replace(".tif", "")
+    label = label.replace(".tiff", "")
     label = label.replace(".mp3", "")
     label = label.replace(".mp4", "")
     label = label.replace(".wav", "")
@@ -445,7 +446,7 @@ def json_serial(obj):
 def _get_mime_type_given_file_extension(file_extension: str) -> str:
     if not file_extension:
         return ""
-    if file_extension in ['.tif']:
+    if file_extension in ['.tif', '.tiff']:
         return 'image/tiff'
     elif file_extension in ['.pdf']:
         return 'application/pdf'
