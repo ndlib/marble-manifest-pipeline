@@ -59,7 +59,9 @@ class Test(unittest.TestCase):
         with open(local_folder + 'test/MSNEA8011_EAD.json', 'r') as input_source:
             expected_json = json.load(input_source)
         standard_json = self.fix_file_created_date(standard_json, expected_json["fileCreatedDate"])
-        self.assertEqual(expected_json, standard_json)
+        self.assertEqual(len(expected_json.keys()), len(standard_json.keys()))
+        for key, value in expected_json.items():
+            self.assertEqual(value, standard_json.get(key))
 
     def test_2_test_extracting_id(self):
         xml_record = ET.fromstring(self.xml)
