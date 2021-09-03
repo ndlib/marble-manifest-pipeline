@@ -61,7 +61,7 @@ class Test(unittest.TestCase):
         standard_json = self.fix_file_created_date(standard_json, expected_json["fileCreatedDate"])
         self.assertEqual(len(expected_json.keys()), len(standard_json.keys()))
         for key, value in expected_json.items():
-          self.assertEqual(value, standard_json.get(key))
+            self.assertEqual(value, standard_json.get(key))
 
     def test_2_test_extracting_id(self):
         xml_record = ET.fromstring(self.xml)

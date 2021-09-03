@@ -101,7 +101,7 @@ class createJsonFromXml():
                 else:
                     node.append(value_found)
         if array_to_string:
-          return "\n\n".join(node)
+            return "\n\n".join(node)
         return node
 
     def _read_xml_to_json_translation_control_file(self, filename: str) -> dict:
