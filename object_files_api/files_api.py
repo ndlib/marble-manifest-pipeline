@@ -103,6 +103,9 @@ class FilesApi():
         """ Loop through every file in a collection and save each record into dynamo """
         i = 0
         collection_list = []
+        object_group_ids = []
+        image_group_ids = []
+        media_group_ids = []
         for file_info in collection_json.get('files', []):
             i += 1
             my_json = dict(file_info)
@@ -134,31 +137,37 @@ class FilesApi():
                             file_to_process_json = add_file_to_process_keys(file_to_process_json)
                             batch.put_item(Item=file_to_process_json)
                             collection_list.append(file_to_process_json)
-                    if i == 1:  # Only insert Group records for the first record in each set
-                        if my_json.get('objectFileGroupId'):  # This will be removed once we transition to imageGroupId and mediaGroupId
-                            file_group_record = {'objectFileGroupId': my_json.get('objectFileGroupId')}
-                            file_group_record['storageSystem'] = my_json.get('storageSystem')
-                            file_group_record['typeOfData'] = my_json.get('typeOfData')
-                            file_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
-                            file_group_record = add_file_group_keys(file_group_record)
-                            batch.put_item(Item=file_group_record)
-                            collection_list.append(file_group_record)
-                        if my_json.get('imageGroupId'):
-                            image_group_record = {'imageGroupId': my_json.get('imageGroupId')}
-                            image_group_record['storageSystem'] = my_json.get('storageSystem')
-                            image_group_record['typeOfData'] = my_json.get('typeOfData')
-                            image_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
-                            image_group_record = add_image_group_keys(image_group_record)
-                            batch.put_item(Item=image_group_record)
-                            collection_list.append(image_group_record)
-                        if my_json.get('mediaGroupId'):
-                            media_group_record = {'mediaGroupId': my_json.get('mediaGroupId')}
-                            media_group_record['storageSystem'] = my_json.get('storageSystem')
-                            media_group_record['typeOfData'] = my_json.get('typeOfData')
-                            media_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
-                            media_group_record = add_media_group_keys(media_group_record)
-                            batch.put_item(Item=media_group_record)
-                            collection_list.append(media_group_record)
+                    # Only insert Group records once
+                    object_group_id = my_json.get('objectFileGroupId')
+                    if object_group_id and object_group_id not in object_group_ids:  # This will be removed once we transition to imageGroupId and mediaGroupId
+                        file_group_record = {'objectFileGroupId': object_group_id}
+                        file_group_record['storageSystem'] = my_json.get('storageSystem')
+                        file_group_record['typeOfData'] = my_json.get('typeOfData')
+                        file_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
+                        file_group_record = add_file_group_keys(file_group_record)
+                        batch.put_item(Item=file_group_record)
+                        collection_list.append(file_group_record)
+                        object_group_ids.append(object_group_id)
+                    image_group_id = my_json.get('imageGroupId')
+                    if image_group_id and image_group_id not in image_group_ids:
+                        image_group_record = {'imageGroupId': image_group_id}
+                        image_group_record['storageSystem'] = my_json.get('storageSystem')
+                        image_group_record['typeOfData'] = my_json.get('typeOfData')
+                        image_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
+                        image_group_record = add_image_group_keys(image_group_record)
+                        batch.put_item(Item=image_group_record)
+                        collection_list.append(image_group_record)
+                        image_group_ids.append(image_group_id)
+                    media_group_id = my_json.get('mediaGroupId')
+                    if media_group_id and media_group_id not in media_group_ids:
+                        media_group_record = {'mediaGroupId': media_group_id}
+                        media_group_record['storageSystem'] = my_json.get('storageSystem')
+                        media_group_record['typeOfData'] = my_json.get('typeOfData')
+                        media_group_record['dateAddedToDynamo'] = get_iso_date_as_string()
+                        media_group_record = add_media_group_keys(media_group_record)
+                        batch.put_item(Item=media_group_record)
+                        collection_list.append(media_group_record)
+                        media_group_ids.append(media_group_id)
         return collection_list
 
     def _cache_s3_call(self, file_name: str, objects: dict):
