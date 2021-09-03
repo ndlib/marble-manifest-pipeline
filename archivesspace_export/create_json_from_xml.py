@@ -83,6 +83,8 @@ class createJsonFromXml():
         exclude_pattern = field.get('excludePattern', '')
         format = field.get('format', 'array')
         node = []
+        # If the xpath is a p tag, we want to get ALL of them and then join them together
+        array_to_string = format == "text" and xpath.endswith('/p')
         for xml_item in xml.findall(xpath):
             value_found = ""
             if process_other_nodes > "":
@@ -94,10 +96,12 @@ class createJsonFromXml():
                     if value_found in node:
                         value_found = None
             if not(optional and value_found is None):
-                if format == "text":
+                if format == "text" and not array_to_string:
                     node = value_found  # redefine node as string here if needed
                 else:
                     node.append(value_found)
+        if array_to_string:
+          return "\n\n".join(node)
         return node
 
     def _read_xml_to_json_translation_control_file(self, filename: str) -> dict:
