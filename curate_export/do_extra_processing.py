@@ -37,7 +37,8 @@ def do_extra_processing(value: str or dict, extra_processing: str, json_field_de
         results = 'manifest'
         if 'items' in parameters_json:
             results = define_manifest_level(parameters_json['items'])
-
+    elif extra_processing == 'translate_work_type':
+        results = _translate_work_type(parameters_json)
     return results
 
 
@@ -101,7 +102,15 @@ def _format_creators_given_string(contributors_string: str) -> dict:
 
 
 def _pick_created_date(parameters_json: dict) -> str:
-    """ return first occurrance of: date, or created, or dateSubmitted """
+    """ Modified 9/28/21 to include additional logic based on collection.  Otherwise return first occurrance of: date, or created, or dateSubmitted """
+    if 'Notre Dame Commencement Program: ' in parameters_json.get('title', ''):
+        return parameters_json['title'].replace('Notre Dame Commencement Program: ', '')
+    part_of = parameters_json.get('partOf', '')
+    while isinstance(part_of, list):
+        part_of = part_of[0]
+    if 'qz20sq9094h' in part_of:  # Architectural Lantern Slides need a date of Circe 1910
+        if parameters_json.get('id', '') != 'qz20sq9094h':  # But we won't overwrite the date in the root record of that collection
+            return 'Circa 1910'
     return parameters_json.get('date', parameters_json.get('created', parameters_json.get('dateSubmitted', None)))
 
 
@@ -130,6 +139,15 @@ def _pick_repository(parameters_json: dict) -> str:
     if parameters_json.get('collectionId', '') == "qz20sq9094h":  # Architectural Lantern Slides return HESB
         return 'HESB'
     return 'UNDA'
+
+
+def _translate_work_type(parameters_json: dict) -> str:
+    """ translates workType based on level and value of "hasModel" (workType) """
+    if parameters_json.get('level', '') == 'manifest' and parameters_json.get('hasModel', '') == 'Image':
+        return 'photographs'
+    if parameters_json.get('hasModel', '') == 'LibraryCollection':
+        return 'Collection'
+    return parameters_json.get('hasModel', '')
 
 
 def define_manifest_level(items: list) -> str:

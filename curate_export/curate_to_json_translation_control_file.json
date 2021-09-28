@@ -21,9 +21,20 @@
 				"fields": ["title"],
 				"format": "text"
 			},
+			{
+				"label": "id",
+				"fields": ["id"],
+				"format": "text"
+			},
 			{ "label": "collectionId",
 				"fields": ["id"],
 				"format": "text"
+			},
+			{
+				"label": "partOf",
+				"fields": ["partOf"],
+				"optional": true,
+				"!format": "text"
 			},
 			{
 				"label": "repository",
@@ -33,10 +44,6 @@
 			},
 			{ "label": "parentId",
 				"constant": "root",
-				"format": "text"
-			},
-			{ "label": "id",
-				"fields": ["id"],
 				"format": "text"
 			},
 			{ "label": "creators",
@@ -108,7 +115,7 @@
 			},
 			{
 				"label": "createdDate",
-				"passLabels": [{"date": "date"}, {"created": "created"}, {"dateSubmitted": "dateSubmitted"}],
+				"passLabels": [{"date": "date"}, {"created": "created"}, {"dateSubmitted": "dateSubmitted"}, {"title": "title"}, {"partOf": "partOf"}, {"id": "id"}],
 				"extraProcessing": "pick_created_date",
 				"format": "text"
 			},
@@ -124,16 +131,22 @@
 				"format": "array"
 			},
 			{
-				"removeNodes": ["date", "created", "dateSubmitted", "placeOfCreation", "creator_administrative_unit", "permissions_use"]
+				"removeNodes": ["date", "created", "dateSubmitted", "placeOfCreation", "creator_administrative_unit", "permissions_use", "partOf"]
 			},
 			{ "label": "modifiedDate",
 				"fields": ["modified"],
 				"format": "text",
 				"datePattern": "%Y-%m-%d"
 			},
-			{ "label": "workType",
+			{
+				"label": "hasModel",
 				"fields": ["hasModel"],
-				"format": "text"
+				"format": "text",
+				"notes": "we will be passing this to _translate_work_type to determine the workType"
+			},
+			{ "!label": "workType",
+				"!fields": ["hasModel"],
+				"!format": "text"
 			},
 			{ "!label": "subjects",
 				"!fields": ["description"],
@@ -196,6 +209,16 @@
 				"extraProcessing": "define_level",
 				"passLabels": [{"items": "items"}],
 				"format": "text"
+			},
+			{
+				"label": "workType",
+				"note": "This must run after level and hasModel have been defined.",
+				"extraProcessing": "translate_work_type",
+				"passLabels": [{"level": "level", "hasModel": "hasModel"}],
+				"format": "text"
+			},
+			{
+				"removeNodes": ["hasModel"]
 			}
 		]
 	},
