@@ -39,8 +39,6 @@ def do_extra_processing(value: str or dict, extra_processing: str, json_field_de
             results = define_manifest_level(parameters_json['items'])
     elif extra_processing == 'translate_work_type':
         results = _translate_work_type(parameters_json)
-    elif extra_processing == 'define_collection_id':
-        results = _define_collection_id(parameters_json)
     return results
 
 
