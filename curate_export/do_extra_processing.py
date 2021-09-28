@@ -37,6 +37,8 @@ def do_extra_processing(value: str or dict, extra_processing: str, json_field_de
         results = 'manifest'
         if 'items' in parameters_json:
             results = define_manifest_level(parameters_json['items'])
+    elif extra_processing == 'translate_work_type':
+        results = _translate_work_type(parameters_json)
 
     return results
 
@@ -130,6 +132,15 @@ def _pick_repository(parameters_json: dict) -> str:
     if parameters_json.get('collectionId', '') == "qz20sq9094h":  # Architectural Lantern Slides return HESB
         return 'HESB'
     return 'UNDA'
+
+
+def _translate_work_type(parameters_json: dict) -> str:
+    """ translates workType based on level and value of "hasModel" (workType) """
+    if parameters_json.get('level', '') == 'manifest' and parameters_json.get('hasModel', '') == 'Image':
+        return 'photographs'
+    if parameters_json.get('hasModel', '') == 'LibraryCollection':
+        return 'Collection'
+    return parameters_json.get('hasModel', '')
 
 
 def define_manifest_level(items: list) -> str:

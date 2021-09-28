@@ -131,9 +131,15 @@
 				"format": "text",
 				"datePattern": "%Y-%m-%d"
 			},
-			{ "label": "workType",
+			{
+				"label": "hasModel",
 				"fields": ["hasModel"],
-				"format": "text"
+				"format": "text",
+				"notes": "we will be passing this to _translate_work_type to determine the workType"
+			},
+			{ "!label": "workType",
+				"!fields": ["hasModel"],
+				"!format": "text"
 			},
 			{ "!label": "subjects",
 				"!fields": ["description"],
@@ -196,6 +202,16 @@
 				"extraProcessing": "define_level",
 				"passLabels": [{"items": "items"}],
 				"format": "text"
+			},
+			{
+				"label": "workType",
+				"note": "This must run after level and hasModel have been defined.",
+				"extraProcessing": "translate_work_type",
+				"passLabels": [{"level": "level", "hasModel": "hasModel"}],
+				"format": "text"
+			},
+			{
+				"removeNodes": ["hasModel"]
 			}
 		]
 	},
