@@ -6,7 +6,7 @@ The University of Notre Dame’s commitment to diversity and inclusion arises fr
 
 We affirm the transcendent dignity and worth of every human person, from conception to natural death, regardless of race, nationality or ethnic group, religious tradition, gender, socioeconomic class, immigration status, sexual orientation, or anything else.
 
-We condemn harassment of any kind, and University policies proscribe it. We consciously create an environment of mutual respect, hospitality and warmth in which none are strangers and all may flourish.”  [Learn more about Diversity and Inclusion at Notre Dame.](https://diversity.nd.edu/together-at-notre-dame/#spirit)
+We condemn harassment of any kind, and University policies proscribe it. We consciously create an environment of mutual respect, hospitality and warmth in which none are strangers and all may flourish.  [Learn more about Diversity and Inclusion at Notre Dame.](https://diversity.nd.edu/together-at-notre-dame/#spirit)
 
 Examples of unacceptable behavior by participants include the use of sexual language or imagery, derogatory comments or personal attacks, trolling, public or private harassment, insults, or other unprofessional conduct.
 
