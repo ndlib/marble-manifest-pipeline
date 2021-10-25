@@ -81,7 +81,7 @@ def _update_publisher(parameters_json: dict) -> str:
         value = 'Architecture Library, Hesburgh Libraries'
         results["publisherName"] = value
         return results
-    if "zp38w953h0s" in part_of or parameters_json.get('id', '') == 'zp38w953h0s': # Commencement Programs return University Archives  
+    if "zp38w953h0s" in part_of or parameters_json.get('id', '') == 'zp38w953h0s':  # Commencement Programs return University Archives  
         value = 'University Archives, Hesburgh Libraries'
         results["publisherName"] = value
         return results
@@ -157,8 +157,8 @@ def _pick_access(parameters_json: dict) -> str:
     part_of = parameters_json.get('partOf', '')
     while isinstance(part_of, list):
         part_of = part_of[0]
-    if "zp38w953h0s" in part_of or parameters_json.get('id', '') == 'zp38w953h0s': # Commencement Programs        
-        return 'Permission to publish or publicly disseminate reproductions of any material obtained from the University Archives must be secured from the University Archives and any additional copyright owners prior to such use. Please see <a href="http://archives.nd.edu/about/useform.pdf">Conditions Governing Reproduction and Use of Material</a> for additional information'
+    if "zp38w953h0s" in part_of or parameters_json.get('id', '') == 'zp38w953h0s':  # Commencement Programs        
+        return 'Permission to publish or publicly disseminate reproductions of any material obtained from the University Archives must be secured from the University Archives and any additional copyright owners prior to such use. Please see <a href="http://archives.nd.edu/about/useform.pdf">Conditions Governing Reproduction and Use of Material</a> for additional information'  # noqa: E501
     return parameters_json.get('permissions_use', parameters_json.get('creator_administrative_unit', None))
 
 
@@ -177,7 +177,7 @@ def _translate_work_type(parameters_json: dict) -> str:
     part_of = parameters_json.get('partOf', '')
     while isinstance(part_of, list):
         part_of = part_of[0]
-    if "zp38w953h0s" in part_of and parameters_json.get('hasModel', '') == 'Document': # Commencement Programs
+    if "zp38w953h0s" in part_of and parameters_json.get('hasModel', '') == 'Document':  # Commencement Programs
         return 'program'
     if parameters_json.get('level', '') == 'manifest' and parameters_json.get('hasModel', '') == 'Image':
         return 'photographs'
