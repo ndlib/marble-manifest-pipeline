@@ -38,7 +38,7 @@
 			},
 			{
 				"label": "repository",
-				"passLabels": [{"collectionId": "collectionId"}],
+				"passLabels": [{"collectionId": "collectionId", "partOf": "partOf"}],
 				"extraProcessing": "pick_repository",
 				"format": "text"
 			},
@@ -56,14 +56,6 @@
 				"extraProcessing": "format_creators",
 				"format": "array"
 			},
-			{ "!label": "access",
-				"!fields": ["creator#administrative_unit"],
-				"!format": "text"
-			},
-			{ "!label": "physicalAccess",
-				"!fields": ["creator#administrative_unit"],
-				"!format": "text"
-			},
 			{ "label": "creator_administrative_unit",
 				"fields": ["creator#administrative_unit"],
 				"format": "text"
@@ -74,13 +66,13 @@
 			},
 			{
 				"label": "access",
-				"passLabels": [{"creator_administrative_unit": "creator_administrative_unit"}, {"permissions_use": "permissions_use"}],
+				"passLabels": [{"creator_administrative_unit": "creator_administrative_unit"}, {"permissions_use": "permissions_use"}, {"partOf": "partOf"}, {"id": "id"}],
 				"extraProcessing": "pick_access",
 				"format": "text"
 			},
 			{
 				"label": "physicalAccess",
-				"passLabels": [{"creator_administrative_unit": "creator_administrative_unit"}, {"permissions_use": "permissions_use"}],
+				"passLabels": [{"creator_administrative_unit": "creator_administrative_unit"}, {"permissions_use": "permissions_use"}, {"partOf": "partOf"}, {"id": "id"}],
 				"extraProcessing": "pick_access",
 				"format": "text"
 			},
@@ -130,9 +122,6 @@
 				"extraProcessing": "pick_geographic_location",
 				"format": "array"
 			},
-			{
-				"removeNodes": ["date", "created", "dateSubmitted", "placeOfCreation", "creator_administrative_unit", "permissions_use", "partOf"]
-			},
 			{ "label": "modifiedDate",
 				"fields": ["modified"],
 				"format": "text",
@@ -144,19 +133,6 @@
 				"format": "text",
 				"notes": "we will be passing this to _translate_work_type to determine the workType"
 			},
-			{ "!label": "workType",
-				"!fields": ["hasModel"],
-				"!format": "text"
-			},
-			{ "!label": "subjects",
-				"!fields": ["description"],
-				"!extraProcessing": "format_subjects",
-				"!format": "array"
-			},
-			{ "!label": "membersUrl",
-				"!fields": ["membersUrl"],
-				"!format": "text"
-			},
 			{ "label": "linkToSource",
 				"fields": ["requestUrl"],
 				"format": "text",
@@ -165,6 +141,12 @@
 			{ "label": "publisher",
 				"fields": ["creator#administrative_unit"],
 				"extraProcessing": "format_publisher",
+				"format": "text"
+			},
+			{
+				"label": "publisher",
+				"passLabels": [{"publisher": "publisher", "partOf": "partOf", "id": "id"}],
+				"extraProcessing": "update_publisher",
 				"format": "text"
 			},
 			{ "label": "languages",
@@ -214,11 +196,11 @@
 				"label": "workType",
 				"note": "This must run after level and hasModel have been defined.",
 				"extraProcessing": "translate_work_type",
-				"passLabels": [{"level": "level", "hasModel": "hasModel"}],
+				"passLabels": [{"level": "level", "hasModel": "hasModel", "partOf": "partOf"}],
 				"format": "text"
 			},
 			{
-				"removeNodes": ["hasModel"]
+				"removeNodes": ["hasModel", "date", "created", "dateSubmitted", "placeOfCreation", "creator_administrative_unit", "permissions_use", "partOf"]
 			}
 		]
 	},
