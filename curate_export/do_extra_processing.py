@@ -39,6 +39,8 @@ def do_extra_processing(value: str or dict, extra_processing: str, json_field_de
             results = define_manifest_level(parameters_json['items'])
     elif extra_processing == 'translate_work_type':
         results = _translate_work_type(parameters_json)
+    elif extra_processing == 'update_publisher':
+        results = _update_publisher(parameters_json)
     return results
 
 
@@ -61,8 +63,29 @@ def _format_publisher(value: str) -> dict:
             value = each_value
             break
     if value:
+        if value == 'University of Notre Dame::School of Architecture':
+            value = 'Architecture Library, Hesburgh Libraries'
         results["publisherName"] = value
     return results
+
+
+def _update_publisher(parameters_json: dict) -> str:
+    """ return 'Architecture Library, Hesburgh Libraries' for Architectural Lantern Slides,
+        'University Archives, Hesburgh Libraries for Commencement Programs,
+        else value from publisher """
+    results = {}
+    part_of = parameters_json.get('partOf', '')
+    while isinstance(part_of, list):
+        part_of = part_of[0]
+    if "qz20sq9094h" in part_of:  # Architectural Lantern Slides return Architecture Library
+        value = 'Architecture Library, Hesburgh Libraries'
+        results["publisherName"] = value
+        return results
+    if "zp38w953h0s" in part_of or parameters_json.get('id', '') == 'zp38w953h0s':  # Commencement Programs return University Archives  
+        value = 'University Archives, Hesburgh Libraries'
+        results["publisherName"] = value
+        return results
+    return parameters_json.get('publisher', '')
 
 
 def _format_creators(value: list) -> list:
@@ -131,18 +154,31 @@ def _pick_geographic_location(parameters_json: dict) -> list:
 
 def _pick_access(parameters_json: dict) -> str:
     """ return permissions_use if it exists, else "creator_administrative_unit, else none """
+    part_of = parameters_json.get('partOf', '')
+    while isinstance(part_of, list):
+        part_of = part_of[0]
+    if "zp38w953h0s" in part_of or parameters_json.get('id', '') == 'zp38w953h0s':  # Commencement Programs        
+        return 'Permission to publish or publicly disseminate reproductions of any material obtained from the University Archives must be secured from the University Archives and any additional copyright owners prior to such use. Please see <a href="http://archives.nd.edu/about/useform.pdf">Conditions Governing Reproduction and Use of Material</a> for additional information'  # noqa: E501
     return parameters_json.get('permissions_use', parameters_json.get('creator_administrative_unit', None))
 
 
 def _pick_repository(parameters_json: dict) -> str:
-    """ return HESB for Architectural Lantern Slides, UNDA """
-    if parameters_json.get('collectionId', '') == "qz20sq9094h":  # Architectural Lantern Slides return HESB
-        return 'HESB'
+    """ return ARCHT for Architectural Lantern Slides, else UNDA """
+    part_of = parameters_json.get('partOf', '')
+    while isinstance(part_of, list):
+        part_of = part_of[0]
+    if parameters_json.get('collectionId', '') == "qz20sq9094h" or "qz20sq9094h" in part_of:  # Architectural Lantern Slides return ARCHT
+        return 'ARCHT'
     return 'UNDA'
 
 
 def _translate_work_type(parameters_json: dict) -> str:
     """ translates workType based on level and value of "hasModel" (workType) """
+    part_of = parameters_json.get('partOf', '')
+    while isinstance(part_of, list):
+        part_of = part_of[0]
+    if "zp38w953h0s" in part_of and parameters_json.get('hasModel', '') == 'Document':  # Commencement Programs
+        return 'program'
     if parameters_json.get('level', '') == 'manifest' and parameters_json.get('hasModel', '') == 'Image':
         return 'photographs'
     if parameters_json.get('hasModel', '') == 'LibraryCollection':

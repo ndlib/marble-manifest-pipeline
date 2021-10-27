@@ -1,20 +1,20 @@
 {
-  "access": "University of Notre Dame::Hesburgh Libraries::University Archives",
+  "access": "Permission to publish or publicly disseminate reproductions of any material obtained from the University Archives must be secured from the University Archives and any additional copyright owners prior to such use. Please see <a href=\"http://archives.nd.edu/about/useform.pdf\">Conditions Governing Reproduction and Use of Material</a> for additional information",
   "apiVersion": 1,
   "bendoItem": "zp38w953h0s",
   "collectionId": "zp38w953h0s",
   "createdDate": "1845-",
   "description": "Programs for graduations at the University of Notre Dame. The number of commencements per year varies. The content of programs also varies, but they generally provide information about graduating students, speakers, related events and ceremonies. These are also available at: http://archives.nd.edu/Commencement/",
   "digitalAccess": "Regular",
-  "fileCreatedDate": "2021-09-28",
+  "fileCreatedDate": "2021-10-25",
   "id": "zp38w953h0s",
   "level": "manifest",
   "linkToSource": "https://curate.nd.edu/show/zp38w953h0s",
   "modifiedDate": "2018-11-16T00:00:00Z",
   "parentId": "root",
-  "physicalAccess": "University of Notre Dame::Hesburgh Libraries::University Archives",
+  "physicalAccess": "Permission to publish or publicly disseminate reproductions of any material obtained from the University Archives must be secured from the University Archives and any additional copyright owners prior to such use. Please see <a href=\"http://archives.nd.edu/about/useform.pdf\">Conditions Governing Reproduction and Use of Material</a> for additional information",
   "publisher": {
-    "publisherName": "University of Notre Dame::Hesburgh Libraries::University Archives"
+    "publisherName": "University Archives, Hesburgh Libraries"
   },
   "repository": "UNDA",
   "sequence": 1,

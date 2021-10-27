@@ -43,6 +43,7 @@ class HarvestOaiEads():
         user will pass: https://archivesspace.library.nd.edu/repositories/3/resources/1644
         we return: https://archivesspace.library.nd.edu/oai?verb=GetRecord&identifier=oai:und//repositories/3/resources/1644&metadataPrefix=oai_ead"""
         url = user_interface_url.replace("/repositories", "/oai?verb=GetRecord&identifier=oai:und//repositories") + "&metadataPrefix=oai_ead"
+        url = url.replace("archivesspace.library.nd.edu", "archivesspace-api.library.nd.edu")  # Added when we started hosting ArchivesSpace
         return url
 
     def _get_xml_string_given_oai_url(self, oai_url: str) -> str:

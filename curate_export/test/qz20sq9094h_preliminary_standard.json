@@ -12,7 +12,7 @@
   ],
   "description": "The University of Notre Dame's Architecture Library holds a set of about 4,500 \"lantern slides\" produced by the French company G. Massiot & cie. The collection is undated, but the photographs appear to have been taken between approximately 1870 and 1914, primarily between 1890 and 1910. Lantern slides were most popular, and often sold as pedagogical sets, in the early decades of the 20th century.\n\nEuropean architecture, with approximately 2,900 of the photographs, is the primary focus of the collection. Most come from France (~1,000) and Italy (~800); other countries are represented, but in significantly lower numbers. Asia, the Middle East, Africa, and the Americas combined are pictured in fewer than 500 slides. The remaining ~1,200 photographs represent paintings, sculpture, and decorative arts.\n\nIn 2007, the slides were cleaned and transferred to archivally-sound storage boxes. A selection of about 2,700 were scanned as 4800 DPI TIFFs, and lower-resolution versions were loaded into a Flickr collection. An image cataloger was hired to prepare records for each.\n\nAlthough detailed and modern images of many of these sites exist, the lantern slides present an historical look at the sites, including many bystanders and artifacts which were intentionally or unintentionally a part of the image. The Egyptian set includes images of workmen and bearers, in attire of the period and using tools of the time. Many European images include photographs of persons in attire of the period. Means of conveyance from ox- or horse-drawn wagon to automobiles and streetcars are in the background of some images. The lantern slides may therefore be of interest to a wider audience than architecture historians and students.\n\n**Arrangement:** The slides are arranged into country-level sub-collections based on notes taken from the original lantern slides. Because these images were created during the late 19th and early 20th century, the names of these countries reflects the countries and occupied colonial territories of the time. Collections include information about the 2017 name of the country as well as older place names. Images themselves generally have more modern location data, often including latitude and longitude, included.",
   "digitalAccess": "Regular",
-  "fileCreatedDate": "2021-09-28",
+  "fileCreatedDate": "2021-10-25",
   "id": "qz20sq9094h",
   "level": "manifest",
   "linkToSource": "https://curate.nd.edu/show/qz20sq9094h",
@@ -20,9 +20,9 @@
   "parentId": "root",
   "physicalAccess": "To view the physical lantern slide, please contact the Architecture Library to arrange an appointment.",
   "publisher": {
-    "publisherName": "University of Notre Dame::School of Architecture"
+    "publisherName": "Architecture Library, Hesburgh Libraries"
   },
-  "repository": "HESB",
+  "repository": "ARCHT",
   "sequence": 1,
   "sourceFilePath": "https://curate.nd.edu/api/items/download/r207tm73k57",
   "sourceSystem": "Curate",
