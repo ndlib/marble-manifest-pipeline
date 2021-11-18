@@ -41,12 +41,25 @@
 				"format": "text"
 			},
 			{
-				"label": "uniqueIdentifier",
+				"label": "primaryUniqueIdentifier",
 				"fields": ["852"],
 				"subfields": ["h"],
 				"specialSubfields": ["i"],
 				"ind1": ["0"],
 				"extraProcessing": "format_call_number",
+				"format": "text"
+			},
+			{
+				"label": "secondaryUniqueIdentifier",
+				"fields": ["592"],
+				"subfields": ["x"],
+				"format": "text"
+			},
+			{
+				"label": "uniqueIdentifier",
+				"externalProcess": "get_unique_identifier",
+				"passLabels": [{"primaryUniqueIdentifier": "primaryUniqueIdentifier", "secondaryUniqueIdentifier": "secondaryUniqueIdentifier"}
+				],
 				"format": "text"
 			},
 			{ "label": "creators",
@@ -149,7 +162,7 @@
 				"otherNodes": "publisher",
 				"format": "node"
 			},
-			{"removeNodes": ["batchModifiedDate", "manuallyModifiedDate"]},
+			{"removeNodes": ["batchModifiedDate", "manuallyModifiedDate", "primaryUniqueIdentifier", "secondaryUniqueIdentifier"]},
 			{ "label": "format",
 				"fields": ["300"],
 				"subfields": ["a"],

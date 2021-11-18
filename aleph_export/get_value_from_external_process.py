@@ -22,7 +22,16 @@ def get_value_from_external_process(json_node: dict, field: dict, schema_api_ver
         return_value = _define_digital_access(parameters_json.get("copyrightStatus", ""))
     elif external_process_name == 'find_latest_modified_date':
         return_value = find_latest_modified_date(parameters_json.get('batchModifiedDate'), parameters_json.get('manuallyModifiedDate'))
+    elif external_process_name == 'get_unique_identifier':
+        return_value = _get_unique_identifier(parameters_json.get('primaryUniqueIdentifier'), parameters_json.get('secondaryUniqueIdentifier'))
     return return_value
+
+
+def _get_unique_identifier(primary_unique_identifier: str, secondary_unique_identifier: str) -> str:
+    """ Return either primaryUniqueIdentifier or secondaryUniqueIdentifier """
+    if secondary_unique_identifier:
+        return secondary_unique_identifier
+    return primary_unique_identifier
 
 
 def _define_digital_access(copyrightStatus: str) -> str:
