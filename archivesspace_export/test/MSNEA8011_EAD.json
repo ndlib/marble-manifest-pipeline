@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "fileCreatedDate": "2021-03-19",
+  "fileCreatedDate": "2021-11-30",
   "sourceSystem": "ArchivesSpace",
   "sequence": 0,
   "collectionInformation": "Theophilus Parsons Journal",
@@ -63,26 +63,11 @@
       "sourceSystem": "ArchivesSpace",
       "repository": "RARE",
       "apiVersion": 1,
-      "fileCreatedDate": "2021-03-19",
+      "fileCreatedDate": "2021-11-30",
       "id": "aspace_8f5be6708c2e98e57a60eddf20e36679",
       "title": "Theophilus Parsons, Journal, vol. 1",
       "createdDate": "January 1819-December 1820",
       "uniqueIdentifier": "MSN/EA 8011-1-B",
-      "items": [
-        {
-          "collectionId": "MSNEA8011_EAD",
-          "sourceSystem": "ArchivesSpace",
-          "repository": "RARE",
-          "apiVersion": 1,
-          "fileCreatedDate": "2021-03-19",
-          "level": "file",
-          "thumbnail": true,
-          "description": "Theophilus Parsons, Journal, vol. 1",
-          "filePath": "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-1-B/images/MSN-EA_8011-01-B-000a.jpg",
-          "parentId": "aspace_8f5be6708c2e98e57a60eddf20e36679",
-          "id": "MSN-EA_8011-01-B-000a.jpg"
-        }
-      ],
       "level": "manifest"
     },
     {
@@ -91,26 +76,11 @@
       "sourceSystem": "ArchivesSpace",
       "repository": "RARE",
       "apiVersion": 1,
-      "fileCreatedDate": "2021-03-19",
+      "fileCreatedDate": "2021-11-30",
       "id": "aspace_5cc53e5bc083823390135923b389d00c",
       "title": "Theophilus Parsons, Journal, vol. 2",
       "createdDate": "January 1821-March 1823",
       "uniqueIdentifier": "MSN/EA 8011-2-B",
-      "items": [
-        {
-          "collectionId": "MSNEA8011_EAD",
-          "sourceSystem": "ArchivesSpace",
-          "repository": "RARE",
-          "apiVersion": 1,
-          "fileCreatedDate": "2021-03-19",
-          "level": "file",
-          "thumbnail": true,
-          "description": "Theophilius Parsons, Journal, vol. 2",
-          "filePath": "https://rarebooks.library.nd.edu/digital/bookreader/MSN-EA_8011-2-B/images/MSN-EA_8011-02-B-000a.jpg",
-          "parentId": "aspace_5cc53e5bc083823390135923b389d00c",
-          "id": "MSN-EA_8011-02-B-000a.jpg"
-        }
-      ],
       "level": "manifest"
     }
   ],
