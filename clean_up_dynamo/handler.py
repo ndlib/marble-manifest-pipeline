@@ -237,6 +237,36 @@ def delete_certain_image_records(table_name: str):
     return records_deleted
 
 
+def reset_file_to_process_records_to_reprocess_all_images(table_name: str) -> int:
+    """ Reset FileToProcess records, removing lastProcessedDate """
+    print("deleting FileToProcess records")
+    pk = 'FILETOPROCESS'
+    sk = 'FILEPATH#'
+    kwargs = {}
+    kwargs['KeyConditionExpression'] = Key('PK').eq(pk) & Key('SK').begins_with(sk)
+    kwargs['ProjectionExpression'] = 'PK, SK, dateLastProcessed, GSI2SK'
+    done = False
+    records_updated = 0
+    table = boto3.resource('dynamodb').Table(table_name)
+    while not done:
+        results = query_dynamo_records(table_name, **kwargs)
+        #  note:  because batch_writer only supports PutItem and DeleteItem, and does not support UpdateItem, we must use the table object instead of the batch writer object
+        for record in results.get('Items', []):
+            if record.get('GSI2SK', '') != 'DATELASTPROCESSED#':
+                table.update_item(
+                    Key={'PK': record.get('PK'), 'SK': record.get('SK')},
+                    UpdateExpression="set GSI2SK=:gsi2sk, dateLastProcessed=:dateLastProcessed",
+                    ExpressionAttributeValues={':gsi2sk': 'DATELASTPROCESSED#', ':dateLastProcessed': ''},
+                    ReturnValues="ALL_NEW"
+                )
+                records_updated += 1
+        if results.get('LastEvaluatedKey'):
+            kwargs['ExclusiveStartKey'] = results.get('LastEvaluatedKey')
+        else:
+            done = True
+    return records_updated
+
+
 def query_dynamo_records(table_name: str, **kwargs) -> dict:
     """ very generic dynamo query """
     response = {}
@@ -272,12 +302,9 @@ def test(identifier=""):
     # print(find_item_records_with_images('steve-manifest-websiteMetadata470E321C-1D6R3LX7EI284'))
     event = {}
     testlibnd_tables = [
-        'steve-manifest-websiteMetadata470E321C-1D6R3LX7EI284',
-        'jon-test-manifest-websiteMetadata470E321C-ZCSU70JC12I0',
-        'jon-prod-manifest-websiteMetadata470E321C-8NG755QB2S5I',
-        # 'mlk-manifest-websiteMetadata470E321C-EU6Z5BXP1WVB',
-        'sm-test-manifest-websiteMetadata470E321C-E5FXU8HUIWQG',
-        'sm-prod-manifest-websiteMetadata470E321C-HO7FZQXZXI8M',
+        'steve-manifest-websiteMetadata470E321C-67TJ4WN9G68J'
+        'sm-test-manifest-websiteMetadata470E321C-BGP52HX1S5IC',
+        'sm-prod-manifest-websiteMetadata470E321C-7145C85FIFTW'
         'testlib-prod-manifest-websiteMetadata470E321C-1XA9OOG7PJWEE',
         'testlib-test-manifest-websiteMetadata470E321C-1XQ2EFEWM3UXZ'
     ]
@@ -285,8 +312,8 @@ def test(identifier=""):
         'marbleb-prod-manifest-websiteMetadata470E321C-5EJSG31E16Z7',
         'marbleb-test-manifest-websiteMetadata470E321C-JJG277N1OMMC'
     ]
+    # tables_to_process = testlibnd_tables
     tables_to_process = libnd_tables
-    # tables_to_process = libnd_tables
 
     # event['website-metadata-tablename'] = 'steve-manifest-websiteMetadata470E321C-1D6R3LX7EI284'
     # event['website-metadata-tablename'] = 'marbleb-prod-manifest-websiteMetadata470E321C-5EJSG31E16Z7'
@@ -301,5 +328,5 @@ def test(identifier=""):
         # event['website-metadata-tablename'] = table_name
         # event = run(event, {})
         # print(table_name, event)
-        records_deleted = delete_certain_image_records(table_name)
-        print(table_name, " had ", records_deleted, "records deleted.")
+        records_processed = reset_file_to_process_records_to_reprocess_all_images(table_name)
+        print(table_name, " had ", records_processed, "records processed.")
