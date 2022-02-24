@@ -29,7 +29,7 @@ default_config = {
     "local-path": "please set me",
     "required-fields-by-source-system": {
         "EmbARK": {
-            "notify": ["vperdomo@nd.edu"],
+            "notify": ["vperdomo@nd.edu", "bhild@nd.edu"],
             "required-fields": {
                 "Title": "title",
                 "Creators": "creators",
@@ -38,7 +38,6 @@ default_config = {
                 "Medium": "medium",
                 "Unique identifier": "uniqueIdentifier",
                 "Repository": "repository",
-                "Subject": "subjects",
                 "Copyright Status": "copyrightStatus",
                 "Access": "access",
                 "Dimensions": "dimensions",
