@@ -56,9 +56,15 @@
 				"format": "text"
 			},
 			{
+				"label": "tertiaryUniqueIdentifier",
+				"fields": ["852"],
+				"subfields": ["j"],
+				"format": "text"
+			},
+			{
 				"label": "uniqueIdentifier",
 				"externalProcess": "get_unique_identifier",
-				"passLabels": [{"primaryUniqueIdentifier": "primaryUniqueIdentifier", "secondaryUniqueIdentifier": "secondaryUniqueIdentifier"}
+				"passLabels": [{"primaryUniqueIdentifier": "primaryUniqueIdentifier", "secondaryUniqueIdentifier": "secondaryUniqueIdentifier", "tertiaryUniqueIdentifier": "tertiaryUniqueIdentifier"}
 				],
 				"format": "text"
 			},
@@ -162,7 +168,7 @@
 				"otherNodes": "publisher",
 				"format": "node"
 			},
-			{"removeNodes": ["batchModifiedDate", "manuallyModifiedDate", "primaryUniqueIdentifier", "secondaryUniqueIdentifier"]},
+			{"removeNodes": ["batchModifiedDate", "manuallyModifiedDate", "primaryUniqueIdentifier", "secondaryUniqueIdentifier", "tertiaryUniqueIdentifier"]},
 			{ "label": "format",
 				"fields": ["300"],
 				"subfields": ["a"],
