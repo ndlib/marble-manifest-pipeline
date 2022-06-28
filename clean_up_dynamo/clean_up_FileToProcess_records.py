@@ -1,5 +1,6 @@
 """ handler """
 
+from base64 import b64encode
 import _set_path  # noqa
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
@@ -8,6 +9,7 @@ import sentry_sdk   # noqa: E402
 from dynamo_query_functions import scan_dynamo_records
 import json
 import os
+
 
 s3 = boto3.resource('s3')
 
@@ -133,6 +135,59 @@ def delete_dynamo_record(table_name: str, pk: str, sk: str) -> dict:
     return response
 
 
+def set_portfoliocollection_description(table_name: str) -> dict:
+    kwargs = {}
+    # kwargs['FilterExpression'] = Attr("PK").eq("PORTFOLIO")
+    kwargs['KeyConditionExpression'] = Key('PK').eq("PORTFOLIO")
+    kwargs['ProjectionExpression'] = 'PK, SK, #type, annotation, bio, description'
+    kwargs['ExpressionAttributeNames'] = {'#type': 'TYPE'}
+    records_updated = 0
+    table = boto3.resource('dynamodb').Table(table_name)
+    while True:
+        results = query_dynamo_records(table_name, **kwargs)
+        for record in results.get('Items', []):
+            if record.get('TYPE', '') in ['PortfolioCollection']:
+                print(record.get('PK'), record.get('SK'))
+                table.update_item(
+                    Key={'PK': record.get('PK'), 'SK': record.get('SK')},
+                    UpdateExpression="set description64 = :description64",
+                    ExpressionAttributeValues={':description64': get_base64_encoded_field_from_record(record, 'description')},
+                    ReturnValues='UPDATED_NEW',
+                )
+            if record.get('TYPE', '') in ['PortfolioUser']:
+                print(record.get('PK'), record.get('SK'))
+                table.update_item(
+                    Key={'PK': record.get('PK'), 'SK': record.get('SK')},
+                    UpdateExpression="set bio64 = :bio64",
+                    ExpressionAttributeValues={':bio64': get_base64_encoded_field_from_record(record, 'bio'), },
+                    ReturnValues='UPDATED_NEW',
+                )
+            if record.get('TYPE', '') in ['PortfolioItem']:
+                print(record.get('PK'), record.get('SK'))
+                table.update_item(
+                    Key={'PK': record.get('PK'), 'SK': record.get('SK')},
+                    UpdateExpression="set annotation64 = :annotation64, description64 = :description64",
+                    ExpressionAttributeValues={
+                        ':annotation64': get_base64_encoded_field_from_record(record, 'annotation'),
+                        ':description64': get_base64_encoded_field_from_record(record, 'description'),
+                    },
+                    ReturnValues='UPDATED_NEW',
+                )
+            records_updated = records_updated + 1
+        if results.get('LastEvaluatedKey'):
+            kwargs['ExclusiveStartKey'] = results.get('LastEvaluatedKey')
+        else:
+            break
+    return records_updated
+
+
+def get_base64_encoded_field_from_record(record, field_name):
+    base_value = record.get(field_name, '')
+    if base_value is None:
+        return ''
+    return str(b64encode(bytes(base_value, "utf-8")))[2:][:-1]
+
+
 # setup:
 # aws-vault exec testlibnd-superAdmin
 # python -c 'from clean_up_FileToProcess_records import *; test()'
@@ -147,14 +202,9 @@ def test(identifier=""):
         To use, first sign into aws-vault for testlibnd and run.  Verify results.  Then sign in to aws-vault for libnd and run. """
 
     testlibnd_tables = [
-        'steve-manifest-websiteMetadata470E321C-1D6R3LX7EI284',
-        'jon-test-manifest-websiteMetadata470E321C-ZCSU70JC12I0',
-        'jon-prod-manifest-websiteMetadata470E321C-8NG755QB2S5I',
-        'sm-test-manifest-websiteMetadata470E321C-E5FXU8HUIWQG',
-        'sm-prod-manifest-websiteMetadata470E321C-HO7FZQXZXI8M',
         'testlib-prod-manifest-websiteMetadata470E321C-1XA9OOG7PJWEE',
-        'testlib-test-manifest-websiteMetadata470E321C-1XQ2EFEWM3UXZ',
-        'mlk-manifest-websiteMetadata470E321C-1M04DW0EXCC91'
+        'sm-prod-manifest-websiteMetadata470E321C-7145C85FIFTW',
+        'sm-test-manifest-websiteMetadata470E321C-BGP52HX1S5IC'
     ]
     libnd_tables = [
         'marbleb-prod-manifest-websiteMetadata470E321C-5EJSG31E16Z7',
@@ -164,14 +214,17 @@ def test(identifier=""):
     print("vault =", os.environ.get('AWS_VAULT'))
     if os.environ.get('AWS_VAULT') == 'testlibnd-superAdmin':
         tables_to_process = testlibnd_tables
-        prefix = 'testlibnd_'
-    if os.environ.get('AWS_VAULT') == 'libnd-power-user':
+    if os.environ.get('AWS_VAULT') in ('libnd-power-user', 'libnd-superAdmin'):
         tables_to_process = libnd_tables
-        prefix = 'libnd_'
 
     for table_name in tables_to_process:
-        print("processing table ", table_name)
-        unprocessed_records_file_name = './clean_up_file_to_process_records/' + prefix + table_name + '_unprocessed_records.json'
-        item_record_essentials_file_name = './clean_up_file_to_process_records/' + prefix + table_name + '_item_record_essentials.json'
-        save_initial_data(table_name, item_record_essentials_file_name, unprocessed_records_file_name)
-        clean_up_data(table_name, item_record_essentials_file_name, unprocessed_records_file_name)
+        print("updating table ", table_name)
+        records_updated = set_portfoliocollection_description(table_name)
+        print(records_updated, 'in ', table_name)
+
+    # for table_name in tables_to_process:
+    #     print("processing table ", table_name)
+    #     unprocessed_records_file_name = './clean_up_file_to_process_records/' + prefix + table_name + '_unprocessed_records.json'
+    #     item_record_essentials_file_name = './clean_up_file_to_process_records/' + prefix + table_name + '_item_record_essentials.json'
+    #     save_initial_data(table_name, item_record_essentials_file_name, unprocessed_records_file_name)
+    #     clean_up_data(table_name, item_record_essentials_file_name, unprocessed_records_file_name)
