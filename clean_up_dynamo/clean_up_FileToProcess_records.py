@@ -1,6 +1,7 @@
 """ handler """
 
 from base64 import b64encode
+import urllib.parse
 import _set_path  # noqa
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
@@ -185,6 +186,7 @@ def get_base64_encoded_field_from_record(record, field_name):
     base_value = record.get(field_name, '')
     if base_value is None:
         return ''
+    base_value = urllib.parse.unquote(bytes(base_value, "utf-8"))
     return str(b64encode(bytes(base_value, "utf-8")))[2:][:-1]
 
 
