@@ -2,6 +2,12 @@
 For now until we figure something better out.
 
 ## Changing utilities
+Ensure the following dependencies are installed
+Run:
+`
+  pip install wheel boto3 sentry_sdk
+`
+
 At the root of pipelineutilities
 Run:
 `
