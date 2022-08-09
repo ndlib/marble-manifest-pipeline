@@ -85,8 +85,10 @@ def _init_sentry():
 
 # setup:
 # export SSM_KEY_BASE=/all/stacks/steve-manifest
+# libnd:  export SSM_KEY_BASE=/all/stacks/marbleb-prod-manifest
 # aws-vault exec testlibnd-superAdmin
 # python -c 'from handler import *; test()'
+
 def test():
     """ test exection """
     filename = 'event.json'
@@ -112,8 +114,9 @@ def test():
         # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/1644"]  # Irish Broadsides
         # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/2/resources/1652"]  # Collegiate Jazz Festival - These contain PDFs
         # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/2/resources/1652", "https://archivesspace.library.nd.edu/repositories/3/resources/1479"]
-        event['exportAllFilesFlag'] = True
-        event['forceSaveStandardJson'] = True
+        # event['ids'] = ["https://archivesspace.library.nd.edu/repositories/3/resources/2146"]
+        event['exportAllFilesFlag'] = False
+        event['forceSaveStandardJson'] = False
     event = run(event, {})
 
     if not event['archivesSpaceHarvestComplete']:
