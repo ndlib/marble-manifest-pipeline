@@ -99,7 +99,8 @@ class createJsonFromXml():
                 if format == "text" and not array_to_string:
                     node = value_found  # redefine node as string here if needed
                 else:
-                    node.append(value_found)
+                    if value_found is not None:
+                        node.append(value_found)
         if array_to_string:
             return "\n\n".join(node)
         return node
