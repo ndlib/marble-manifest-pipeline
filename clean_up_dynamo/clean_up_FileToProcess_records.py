@@ -190,6 +190,34 @@ def get_base64_encoded_field_from_record(record, field_name):
     return str(b64encode(bytes(base_value, "utf-8")))[2:][:-1]
 
 
+def blank_out_date_last_processed(table_name: str, sk_begins_with: str) -> dict:
+    """ An example of sk_begins_with: "FILEPATH#ALEPH/BOO_001748115" """
+    kwargs = {}
+    kwargs['KeyConditionExpression'] = Key('PK').eq("FILETOPROCESS") & Key('SK').begins_with(sk_begins_with)
+    kwargs['ProjectionExpression'] = 'PK, SK, #type, dateLastProcessed, GSI2SK'
+    kwargs['ExpressionAttributeNames'] = {'#type': 'TYPE'}
+    records_updated = 0
+    table = boto3.resource('dynamodb').Table(table_name)
+    while True:
+        results = query_dynamo_records(table_name, **kwargs)
+        for record in results.get('Items', []):
+            if record.get('TYPE', '') in ['FileToProcess']:
+                if record.get('SK') <= "FILEPATH#ALEPH/BOO_001748115/BOO_001748115_0552.TIF":  # only update records 1 through 0552
+                    print(record.get('PK'), record.get('SK'))
+                    table.update_item(
+                        Key={'PK': record.get('PK'), 'SK': record.get('SK')},
+                        UpdateExpression="set dateLastProcessed = :dateLastProcessed, GSI2SK = :GSI2SK",
+                        ExpressionAttributeValues={':dateLastProcessed': '', ':GSI2SK': 'DATELASTPROCESSED#'},
+                        ReturnValues='UPDATED_NEW',
+                    )
+                    records_updated = records_updated + 1
+        if results.get('LastEvaluatedKey'):
+            kwargs['ExclusiveStartKey'] = results.get('LastEvaluatedKey')
+        else:
+            break
+    return records_updated
+
+
 # setup:
 # aws-vault exec testlibnd-superAdmin
 # python -c 'from clean_up_FileToProcess_records import *; test()'
@@ -204,7 +232,6 @@ def test(identifier=""):
         To use, first sign into aws-vault for testlibnd and run.  Verify results.  Then sign in to aws-vault for libnd and run. """
 
     testlibnd_tables = [
-        'testlib-prod-manifest-websiteMetadata470E321C-1XA9OOG7PJWEE',
         'sm-prod-manifest-websiteMetadata470E321C-7145C85FIFTW',
         'sm-test-manifest-websiteMetadata470E321C-BGP52HX1S5IC'
     ]
@@ -221,7 +248,7 @@ def test(identifier=""):
 
     for table_name in tables_to_process:
         print("updating table ", table_name)
-        records_updated = set_portfoliocollection_description(table_name)
+        records_updated = blank_out_date_last_processed(table_name, "FILEPATH#ALEPH/BOO_001748115")
         print(records_updated, 'in ', table_name)
 
     # for table_name in tables_to_process:
