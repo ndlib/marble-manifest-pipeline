@@ -39,7 +39,7 @@ def _call_upload_file_to_s3(s3_bucket: str, s3_key: str, complete_source_path: s
     return success
 
 
-def _get_source_files_list(local_folder_path: str) -> [str]:
+def _get_source_files_list(local_folder_path: str):
     """
     :param local_folder_path:  Root folder for resources you want to list.
     :return: A [str] containing relative names of the files.
