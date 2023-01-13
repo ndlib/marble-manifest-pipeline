@@ -2,7 +2,7 @@
   "sourceSystem": "EmbARK",
   "title": "Coronation of the Virgin",
   "createdDate": "ca. 1460",
-  "workType": "Sculpture",
+  "workType": "Fine Arts",
   "medium": "gilt polychrome over wood",
   "uniqueIdentifier": "1934.007.001",
   "sequence": 0,
@@ -82,7 +82,7 @@
   "objectFileGroupId": "1934.007.001",
   "imageGroupId": "1934.007.001",
   "apiVersion": 1,
-  "fileCreatedDate": "2021-06-01",
+  "fileCreatedDate": "2023-01-13",
   "digitalAccess": "Regular",
   "items": [
     {
@@ -107,7 +107,7 @@
       "objectFileGroupId": "1934.007.001",
       "imageGroupId": "1934.007.001",
       "apiVersion": 1,
-      "fileCreatedDate": "2021-06-01",
+      "fileCreatedDate": "2023-01-13",
       "digitalAccess": "Regular",
       "iiifResourceId": "canvas/1934_007_001-v0003.tif"
     },
@@ -133,7 +133,7 @@
       "objectFileGroupId": "1934.007.001",
       "imageGroupId": "1934.007.001",
       "apiVersion": 1,
-      "fileCreatedDate": "2021-06-01",
+      "fileCreatedDate": "2023-01-13",
       "digitalAccess": "Regular",
       "iiifResourceId": "canvas/1934_007_001-v0001.tif"
     },
@@ -159,7 +159,7 @@
       "objectFileGroupId": "1934.007.001",
       "imageGroupId": "1934.007.001",
       "apiVersion": 1,
-      "fileCreatedDate": "2021-06-01",
+      "fileCreatedDate": "2023-01-13",
       "digitalAccess": "Regular",
       "iiifResourceId": "canvas/1934_007_001-v0002.tif"
     }

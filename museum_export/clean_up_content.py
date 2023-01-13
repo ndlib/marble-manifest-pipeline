@@ -108,9 +108,10 @@ class CleanUpContent():
 
     def _define_worktype(self, standard_json: dict) -> dict:
         """ Overwrite worktype if classification is Decorative Arts... """
-        classifiction = standard_json.get("classification", "")
-        if classifiction == "Decorative Arts, Craft, and Design":
-            standard_json['workType'] = classifiction
+        classification = standard_json.get("classification", "")
+        # if classification == "Decorative Arts, Craft, and Design":
+        if classification:  # Changed logic 2023-01-13 per Brittany Hild to just use classification if it exists
+            standard_json['workType'] = classification
         if "classification" in standard_json:
             del standard_json['classification']
         return standard_json

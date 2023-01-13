@@ -26,7 +26,7 @@ class Test(unittest.TestCase):
         self.assertEqual(fixed_object["workType"], "something")
         object["classification"] = "something_else"
         fixed_object = self.clean_up_content_class._define_worktype(object)
-        self.assertEqual(fixed_object["workType"], "something")
+        self.assertEqual(fixed_object["workType"], "something_else")
         self.assertFalse("classification" in fixed_object)
         object["classification"] = "Decorative Arts, Craft, and Design"
         fixed_object = self.clean_up_content_class._define_worktype(object)
