@@ -1,3 +1,5 @@
+# MARBLE-related
+# Archived 2023-05-12 sm
 # mellon-manifest-pipeline
 
 This repo contains code used to harvest metadata from source systems and load that into dynamoDB.  This code also finds files (images or media files) that will need to be processed, and loads references to those into dynamoDB.
